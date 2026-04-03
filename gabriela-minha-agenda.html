@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minha Agenda</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body{
+      font-family: Arial, sans-serif;
+      background-image: url("margaridas.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 18px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .card{
+      width: min(420px, 100%);
+      background: rgba(255,255,255,0.88);
+      border-radius: 22px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      padding: 22px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: calc(100vh - 36px);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .back{
+      border:none;
+      background: rgba(0,0,0,0.06);
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-size:14px;
+      font-family:'Poppins', sans-serif;
+    }
+
+    .title{
+      margin:0;
+      font-size:21px;
+      color:#3d6f4c;
+      font-weight:400;
+      font-family:'Poppins', sans-serif;
+      text-align:center;
+      flex:1;
+      white-space:nowrap;
+    }
+
+    .placeholder{
+      width:76px;
+    }
+
+    .infoBox{
+      background: rgba(255,255,255,0.72);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      text-align:center;
+    }
+
+    .infoTitle{
+      font-size:18px;
+      color:#3d6f4c;
+      margin-bottom:8px;
+      font-family:'Poppins', sans-serif;
+    }
+
+    .infoText{
+      font-size:14px;
+      color:#555;
+      line-height:1.7;
+      font-family:'Poppins', sans-serif;
+    }
+
+    .openBtn{
+      border:none;
+      cursor:pointer;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(61,111,76,0.14);
+      color:#2f5d3d;
+      font-size: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      font-family: 'Poppins', sans-serif;
+      width:100%;
+    }
+
+    .tipBox{
+      background: rgba(255,255,255,0.68);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      font-family:'Poppins', sans-serif;
+    }
+
+    .tipTitle{
+      font-size:14px;
+      color:#3d6f4c;
+      margin-bottom:8px;
+      text-align:center;
+    }
+
+    .tipText{
+      font-size:13px;
+      color:#555;
+      line-height:1.7;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="topbar">
+      <button class="back" onclick="location.href='agenda-menu.html'">← Voltar</button>
+      <h1 class="title">🗓️ Minha Agenda</h1>
+      <div class="placeholder"></div>
+    </div>
+
+    <div class="infoBox">
+      <div class="infoTitle">Seus compromissos em um só lugar</div>
+      <div class="infoText">
+        Aqui você pode abrir sua agenda do Google para visualizar
+        todos os seus compromissos, compromissos da semana e horários importantes.
+      </div>
+    </div>
+
+    <button class="openBtn" onclick="abrirAgenda()">
+      Abrir Google Agenda
+    </button>
+
+    <div class="tipBox">
+      <div class="tipTitle">🌼 Dica</div>
+      <div class="tipText">
+        Nesta primeira versão, o botão abre sua agenda principal do Google.
+        Depois podemos evoluir para mostrar compromissos do dia e da semana dentro do próprio app.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function abrirAgenda(){
+      window.open('https://calendar.google.com/calendar/u/0/r?pli=1', '_blank');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenda da Maya</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="https://accounts.google.com/gsi/client"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html, body{
+  margin:0;
+  padding:0;
+  font-family:'Poppins',sans-serif;
+  background:#f2f1ee;
+  color:#2f3a2f;
+}
+
+body{
+  display:flex;
+  justify-content:center;
+}
+
+.pagina{
+  width:100%;
+  max-width:420px;
+  min-height:100vh;
+  padding:14px;
+}
+
+.topo{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.botao-voltar{
+  border:none;
+  background:#e9e8e4;
+  border-radius:14px;
+  padding:8px 14px;
+  font-size:14px;
+  font-family:'Poppins',sans-serif;
+  cursor:pointer;
+  color:#3d3d3d;
+}
+
+.titulo{
+  flex:1;
+  text-align:center;
+  font-size:18px;
+  font-weight:600;
+  color:#2f4f2f;
+}
+
+.icone-topo{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#dce9d2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+}
+
+.card{
+  background:#fffdf8;
+  border-radius:18px;
+  padding:14px;
+  margin-bottom:14px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.06);
+  border:1px solid rgba(120,140,120,0.10);
+}
+
+.card-boasvindas{
+  background:linear-gradient(180deg,#eaf4df 0%, #e2efd6 100%);
+  text-align:center;
+  border:1px solid #cfdcbc;
+}
+
+.titulo-boasvindas{
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:4px;
+  color:#3d573a;
+}
+
+.texto-boasvindas{
+  font-size:13px;
+  line-height:1.35;
+  color:#4c5f49;
+}
+
+.status-box{
+  background:#eef7e8;
+  border:1px solid #cfe3c4;
+  color:#35512f;
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:14px;
+  font-weight:500;
+  margin-bottom:10px;
+}
+
+.info-texto{
+  font-size:13px;
+  color:#5b6158;
+  margin-bottom:6px;
+  word-break:break-word;
+}
+
+.subtitulo{
+  text-align:center;
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:12px;
+  color:#3f463d;
+}
+
+.botao-acao{
+  width:100%;
+  border:none;
+  border-radius:14px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  cursor:pointer;
+  font-family:'Poppins',sans-serif;
+  margin-bottom:10px;
+}
+
+.botao-esquerda{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-align:left;
+}
+
+.icone-botao{
+  width:42px;
+  height:42px;
+  min-width:42px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:19px;
+  color:#fff;
+}
+
+.botao-titulo{
+  font-size:15px;
+  font-weight:600;
+  line-height:1.15;
+}
+
+.botao-subtitulo{
+  font-size:12px;
+  opacity:0.86;
+  line-height:1.15;
+}
+
+.seta{
+  font-size:20px;
+  color:#4e5a4c;
+}
+
+.botao-google{
+  background:#eef5ff;
+  border:2px solid #9ec1f5;
+}
+
+.botao-google .icone-botao{
+  background:#2f7cf6;
+}
+
+.botao-google .botao-titulo,
+.botao-google .botao-subtitulo{
+  color:#284d89;
+}
+
+.botao-verde{
+  background:#edf8ea;
+  border:2px solid #abd59f;
+}
+
+.botao-verde .icone-botao{
+  background:#459b49;
+}
+
+.botao-verde .botao-titulo,
+.botao-verde .botao-subtitulo{
+  color:#2f6f35;
+}
+
+.botao-roxo{
+  background:#f5ebfb;
+  border:2px solid #cca8e9;
+}
+
+.botao-roxo .icone-botao{
+  background:#8e49c7;
+}
+
+.botao-roxo .botao-titulo,
+.botao-roxo .botao-subtitulo{
+  color:#663391;
+}
+
+.box-seguro{
+  background:#fff2df;
+  border:1px solid #ecd3aa;
+  color:#7a5a22;
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:12px;
+  line-height:1.35;
+  text-align:center;
+}
+
+.seletor-box{
+  margin-top:10px;
+}
+
+label{
+  display:block;
+  text-align:left;
+  font-size:13px;
+  font-weight:500;
+  color:#556054;
+  margin-bottom:6px;
+}
+
+select{
+  width:100%;
+  padding:11px 12px;
+  border-radius:12px;
+  border:1px solid #d8d8d8;
+  font-family:'Poppins',sans-serif;
+  font-size:14px;
+  background:#fff;
+  outline:none;
+}
+
+.eventos-titulo{
+  font-size:16px;
+  font-weight:600;
+  color:#344734;
+  margin:0 0 10px 0;
+}
+
+.lista-vazia{
+  font-size:13px;
+  color:#666;
+  text-align:center;
+  padding:8px 0 2px;
+}
+
+.evento{
+  border-radius:14px;
+  padding:12px;
+  margin-bottom:10px;
+  background:#fcfcfc;
+  border:2px solid #e6e6e6;
+  text-align:left;
+}
+
+.evento-topo{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:4px;
+}
+
+.evento-hora{
+  display:inline-block;
+  min-width:70px;
+  text-align:center;
+  font-size:12px;
+  font-weight:600;
+  color:#fff;
+  background:#6d7df0;
+  border-radius:8px;
+  padding:4px 8px;
+}
+
+.evento-status{
+  font-size:11px;
+  font-weight:600;
+  border-radius:999px;
+  padding:4px 8px;
+  background:#edf5ea;
+  color:#447342;
+  white-space:

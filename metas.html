@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+height: 100%;
+margin: 0;
+}
+
+body{
+font-family: Arial, sans-serif;
+background-image: url("margaridas.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+padding: 18px;
+box-sizing: border-box;
+overflow-y: auto;
+}
+
+.card{
+width: min(420px, 100%);
+background: rgba(255,255,255,0.88);
+border-radius: 22px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+padding: 22px;
+box-sizing: border-box;
+display: flex;
+flex-direction: column;
+gap: 18px;
+min-height: calc(100vh - 36px);
+}
+
+.topbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+}
+
+.back{
+border:none;
+background: rgba(0,0,0,0.06);
+padding: 10px 12px;
+border-radius: 14px;
+cursor:pointer;
+font-size:14px;
+flex: 0 0 auto;
+font-family:'Poppins', sans-serif;
+}
+
+.title{
+margin:0;
+font-size:22px;
+color:#3d6f4c;
+font-weight:400;
+font-family:'Poppins', sans-serif;
+text-align:center;
+flex:1;
+}
+
+.actionsTop{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.addBtn{
+border:none;
+background: rgba(61,111,76,0.12);
+color:#3d6f4c;
+width:42px;
+height:42px;
+border-radius:14px;
+font-size:24px;
+cursor:pointer;
+}
+
+.listBox{
+border-radius:16px;
+background: rgba(255,255,255,0.72);
+box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+padding:14px;
+}
+
+.subtitulo{
+font-size:14px;
+color:#3d6f4c;
+margin-bottom:8px;
+text-align:center;
+}
+
+.metaList{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:10px;
+}
+
+.metaItem{
+border:none;
+width:100%;
+background: rgba(255,255,255,0.8);
+border-radius:14px;
+padding:14px;
+text-align:center;
+cursor:pointer;
+}
+
+.metaNome{
+font-size:15px;
+font-weight:600;
+}
+
+.metaDescricao{
+margin-top:6px;
+font-size:12px;
+color:#555;
+}
+
+.metaInfo{
+margin-top:6px;
+font-size:12px;
+color:#555;
+}
+
+.metaActions{
+display:none;
+margin-top:10px;
+gap:8px;
+justify-content:center;
+}
+
+.metaActions.show{
+display:flex;
+}
+
+.actionBtn{
+border:none;
+padding:8px 12px;
+border-radius:10px;
+cursor:pointer;
+font-size:13px;
+}
+
+.primary{
+background:#d7e8db;
+}
+
+.danger{
+background:#f3d6d6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="topbar">
+<button class="back" onclick="voltarPagina()">← Voltar</button>
+<h1 class="title">🌸 Metas</h1>
+<div class="actionsTop">
+<button class="addBtn" onclick="abrirModal()">+</button>
+</div>
+</div>
+
+<div class="listBox">
+<div class="subtitulo">Metas cadastradas</div>
+<div id="listaMetas" class="metaList"></div>
+</div>
+
+<div class="listBox">
+<div class="subtitulo">Metas Realizadas</div>
+<div id="listaMetasRealizadas" class="metaList"></div>
+</div>
+
+</div>
+
+<script>
+const CHAVE_METAS = "metasGabriela";
+
+function voltarPagina(){
+const params = new URLSearchParams(window.location.search);
+const from = params.get("from");
+
+if(from === "index"){
+location.href = "index.html";
+} else {
+location.href = "index.html"; // fallback simplificado (já que pre-menu saiu)
+}
+}
+
+function ler(){
+return JSON.parse(localStorage.getItem(CHAVE_METAS)) || [];
+}
+
+function salvar(lista){
+localStorage.setItem(CHAVE_METAS, JSON.stringify(lista));
+}
+
+function gerarId(){
+return Date.now();
+}
+
+function abrirModal(){
+const nome = prompt("Nome da meta:");
+if(!nome) return;
+
+const lista = ler();
+lista.push({id:gerarId(), nome, realizada:false});
+salvar(lista);
+render();
+}
+
+function excluir(id){
+let lista = ler();
+lista = lista.filter(m => m.id !== id);
+salvar(lista);
+render();
+}
+
+function realizar(id){
+const lista = ler();
+const meta = lista.find(m => m.id === id);
+if(meta){
+meta.realizada = true;
+}
+salvar(lista);
+render();
+}
+
+function criarItem(meta){
+const div = document.createElement("div");
+div.className = "metaItem";
+
+div.innerHTML = `
+<div class="metaNome">${meta.nome}</div>
+<div class="metaActions">
+<button class="actionBtn primary">Realizada</button>
+<button class="actionBtn danger">Excluir</button>
+</div>
+`;
+
+const actions = div.querySelector(".metaActions");
+
+div.onclick = () => {
+actions.classList.toggle("show");
+};
+
+actions.children[0].onclick = (e)=>{
+e.stopPropagation();
+realizar(meta.id);
+};
+
+actions.children[1].onclick = (e)=>{
+e.stopPropagation();
+excluir(meta.id);
+};
+
+return div;
+}
+
+function render(){
+const lista = ler();
+
+const pendentes = lista.filter(m=>!m.realizada);
+const feitas = lista.filter(m=>m.realizada);
+
+const c1 = document.getElementById("listaMetas");
+const c2 = document.getElementById("listaMetasRealizadas");
+
+c1.innerHTML = "";
+c2.innerHTML = "";
+
+pendentes.forEach(m=>c1.appendChild(criarItem(m)));
+feitas.forEach(m=>c2.appendChild(criarItem(m)));
+}
+
+render();
+</script>
+
+</body>
+</html>

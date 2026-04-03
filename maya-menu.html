@@ -33,9 +33,8 @@
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 18px;
       min-height: calc(100vh - 36px);
-      justify-content: space-between;
     }
 
     .topbar{
@@ -64,6 +63,7 @@
       cursor: pointer;
       font-size: 14px;
       flex: 0 0 auto;
+      font-family: 'Poppins', sans-serif;
     }
 
     .ghost{
@@ -71,20 +71,11 @@
       flex: 0 0 auto;
     }
 
-    .centerArea{
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      gap: 18px;
-      flex: 1;
-    }
-
     .content{
       width: 100%;
       display:flex;
       flex-direction:column;
-      gap: 18px;
+      gap: 14px;
       align-items:center;
     }
 
@@ -99,39 +90,74 @@
       font-size: 16px;
       color:#2e3a46;
       text-align:center;
-    }
-
-    .rules{
-      border-radius: 16px;
-      background: rgba(255,255,255,0.70);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      padding: 14px;
-      color:#3a3a3a;
-      line-height: 1.55;
-      text-align: center;
-    }
-
-    .rulesTitle{
-      font-size: 14px;
-      color:#3d6f4c;
-      text-align:center;
-      margin-bottom: 8px;
       font-family: 'Poppins', sans-serif;
     }
 
-    .rulesMain{
+    .panel{
+      width: 100%;
+      display:none;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .panel.show{
+      display:flex;
+    }
+
+    .box{
+      border-radius: 16px;
+      background: rgba(255,255,255,0.72);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      padding: 16px;
+      color:#3a3a3a;
+      line-height: 1.7;
+      text-align: left;
+    }
+
+    .boxTitle{
+      font-size: 15px;
+      color:#3d6f4c;
+      text-align:left;
+      margin-bottom: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+    }
+
+    .boxText{
       font-size: 13px;
+      white-space: pre-line;
+      text-align:left;
     }
 
-    .rulesSmall{
-      font-size: 11px;
-      margin-top: 8px;
-    }
-
-    .hint{
-      font-size: 12px;
-      color: rgba(0,0,0,0.55);
+    .insideBtn{
+      width: 100%;
+      border:none;
+      cursor:pointer;
+      padding: 18px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.86);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      font-size: 15px;
+      color:#2e3a46;
       text-align:center;
+      margin-top: 2px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .miniPanel{
+      width: 100%;
+      display:none;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .miniPanel.show{
+      display:flex;
+    }
+
+    .alerta{
+      color:#b33434;
+      font-weight:600;
     }
   </style>
 </head>
@@ -139,28 +165,112 @@
 <body>
   <div class="card">
     <div class="topbar">
-      <button class="back" onclick="location.href='index.html'">← Voltar</button>
+      <button class="back" onclick="location.href='rotina.html'">← Voltar</button>
       <h1 class="title">🌼 Filhotinha Maya</h1>
       <div class="ghost"></div>
     </div>
 
-    <div class="centerArea">
-      <div class="content">
-        <button class="menuBtn" onclick="location.href='maya-rotina.html'">🌼 Rotina da Maya</button>
-        <button class="menuBtn" onclick="location.href='maya-pontuacao.html'">💰 Minha Pontuação / Premiação</button>
-      </div>
-    </div>
+    <div class="content">
+      <button class="menuBtn" onclick="location.href='maya-rotina.html'">🌼 Rotina da Maya</button>
 
-    <div>
-      <div class="rules">
-        <div class="rulesTitle">Regras</div>
-        <div class="rulesMain">Telas e Eletrônico somente nos períodos:</div>
-        <div class="rulesMain"><strong>Manhã:</strong> 09h às 11h</div>
-        <div class="rulesMain"><strong>Noite:</strong> 18:30h às 20:30h</div>
-        <div class="rulesSmall">Caso as regras sejam quebradas, você perde <strong>50% das moedas conquistadas no dia</strong>.</div>
+      <button class="menuBtn" onclick="location.href='maya-pontuacao.html'">
+        💰 Minha Pontuação
+      </button>
+
+      <button class="menuBtn" onclick="location.href='maya-premiacao.html'">
+        🏅 Premiação
+      </button>
+
+      <button class="menuBtn" onclick="location.href='maya-lista-de-desejos.html'">
+        🎁 Lista de Desejos
+      </button>
+
+      <button class="menuBtn" onclick="alternarRegras()">📜 Regras</button>
+
+      <div id="painelRegras" class="panel">
+        <div class="box">
+          <div class="boxTitle">📱 Regras de Uso de Telas</div>
+          <div class="boxText">🌞 Manhã: das 09h às 11h 
+🌙 Noite: das 18h30 às 20h30 
+
+✅ Seguiu as regras? 
+Você ganha mais pontos! 
+
+⛔ Não seguiu? 
+Você perde 50% dos pontos que conquistou no dia.</div>
+        </div>
+
+        <div class="box">
+          <div class="boxTitle">⭐ O que é uma Meta?</div>
+          <div class="boxText">Meta é algo que você decide conquistar — e você é capaz de chegar lá!</div>
+        </div>
+
+        <div class="box">
+          <div class="boxTitle">🎯 Seus Pontos</div>
+          <div class="boxText">Seus pontos mostram o quanto você já avançou.
+Com eles, você pode trocar por dinheiro e realizar desejos. 💰✨</div>
+        </div>
+
+        <div class="box">
+          <div class="boxTitle">📌 Como Usar seus Pontos</div>
+          <div class="boxText">Você pode trocar seus pontos por dinheiro e por desejos.
+
+💸Para trocar a Premiação por dinheiro:
+<span class="alerta">[precisa desenvolver o sistema]</span>
+
+🪄Para realizar desejos:
+Quando tiver o suficiente, é só clicar “Utilizar” no Desejo</div>
+        </div>
+
+        <div class="box">
+          <div class="boxTitle">🏆 Junte Mais Pontos</div>
+          <div class="boxText">Quer algo maior?
+Então continue juntando até chegar em 100% 📈</div>
+        </div>
+
+        <div class="box">
+          <div class="boxTitle">🔁 Importante Saber</div>
+          <div class="boxText">Quando você usa seus pontos, eles voltam para zero.
+Mas sempre que recomeçar, vai conquistar ainda mais 😄</div>
+        </div>
+
+        <button class="insideBtn" onclick="alternarFaixas()">🎯 Pontuação = Desejos + Premiação</button>
+
+        <div id="painelFaixas" class="miniPanel">
+          <div class="box">
+            <div class="boxText"><span class="alerta">[precisa desenvolver o sistema]</span>
+
+até 10,00
+
+de 10,01 até 25,00
+
+de 25,01 até 50,00
+
+de 50,01 até 75,00
+
+de 75,01 até 100,00
+
+de 100,01 até 200,00
+
+de 200,01 até 300,00
+
+de 300,01 até 400,00
+
+de 400,01 até 500,00</div>
+          </div>
+        </div>
       </div>
-      <div class="hint" style="margin-top:10px;">As moedas podem aumentar ou diminuir conforme o desempenho 🌼</div>
     </div>
   </div>
+
+  <script>
+    function alternarRegras() {
+      document.getElementById("painelRegras").classList.toggle("show");
+    }
+
+    function alternarFaixas() {
+      document.getElementById("painelFaixas").classList.toggle("show");
+    }
+  </script>
 </body>
 </html>

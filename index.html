@@ -14,24 +14,19 @@
 <link rel="apple-touch-icon" href="icon-512.png">
 
 <style>
-
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
-
-/* 🌸 FUNDO COM FLORES */
-background-image: url('margaridas.jpg');
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-
+background-image:url('margaridas.jpg');
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
 }
 
-/* CAMADA SUAVE POR CIMA */
 .overlay{
 background:rgba(255,255,255,0.9);
 padding:30px;
@@ -39,7 +34,6 @@ border-radius:24px;
 box-shadow:0 10px 25px rgba(0,0,0,0.15);
 text-align:center;
 width:280px;
-
 display:flex;
 flex-direction:column;
 gap:10px;
@@ -49,7 +43,7 @@ h1{
 color:#3d6f4c;
 font-weight:300;
 font-size:28px;
-letter-spacing: 1px;
+letter-spacing:1px;
 margin:0;
 line-height:1.2;
 }
@@ -68,17 +62,14 @@ cursor:pointer;
 transition:0.2s;
 box-shadow:0 4px 10px rgba(0,0,0,0.08);
 font-size:14px;
+border:none;
+font-family:'Poppins',sans-serif;
+background:#fff8e8;
 }
 
 .botao:hover{
 transform:scale(1.03);
 }
-
-/* CORES */
-.rotina{ background:#fff8e8; }
-.saude{ background:#fff8e8; }
-.alimentacao{ background:#fff8e8; }
-
 </style>
 </head>
 
@@ -89,17 +80,29 @@ transform:scale(1.03);
 <h1>Jardim da Rotina</h1>
 <div class="subtitulo">Florescendo hábitos com amor</div>
 
-<div class="botao rotina" onclick="location.href='rotina.html'">
+<button class="botao" onclick="location.href='rotina.html'">
 🌸 Rotina
-</div>
+</button>
 
-<div class="botao saude" onclick="location.href='saude.html'">
-🩺 Saúde
-</div>
+<button class="botao" onclick="location.href='agenda-menu.html'">
+📅 Agenda
+</button>
 
-<div class="botao alimentacao" onclick="location.href='alimentacao.html'">
+<button class="botao" onclick="location.href='alimentacao.html'">
 🥗 Alimentação
-</div>
+</button>
+
+<button class="botao" onclick="location.href='saude.html'">
+🩺 Saúde
+</button>
+
+<button class="botao" onclick="location.href='gabriela-criacao-artistica-projetos-sonhos.html?from=index'">
+💫 Projetos
+</button>
+
+<button class="botao" onclick="location.href='metas.html?from=index'">
+🎯 Metas
+</button>
 
 </div>
 
