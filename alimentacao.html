@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alimentação</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background:#f2ecdf;
+  display:flex;
+  justify-content:center;
+  min-height:100vh;
+  padding:36px 20px;
+}
+
+.container{
+  width:100%;
+  max-width:430px;
+}
+
+h1{
+  margin:4px 0 26px;
+  text-align:center;
+  color:#356b57;
+  font-size:32px;
+  font-weight:600;
+  line-height:1.2;
+}
+
+.botao{
+  width:100%;
+  background:#efe3c6;
+  border:none;
+  border-radius:16px;
+  min-height:48px;
+  padding:14px 18px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-family:'Poppins', sans-serif;
+  font-size:15px;
+  font-weight:400;
+  color:#000;
+  text-align:center;
+  cursor:pointer;
+  transition:transform 0.15s ease, opacity 0.15s ease;
+}
+
+.botao:hover{
+  transform:scale(1.01);
+}
+
+.botao:active{
+  transform:scale(0.99);
+}
+
+.icone{
+  font-size:14px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+}
+
+.texto{
+  line-height:1.2;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🥗 Alimentação</h1>
+
+  <button class="botao" type="button">
+    <span class="icone">🗓️</span>
+    <span class="texto">Cardápio</span>
+  </button>
+
+  <button class="botao" type="button" onclick="location.href='lista-de-mercado-alimentos.html'">
+    <span class="icone">🛒</span>
+    <span class="texto">Lista de Mercado</span>
+  </button>
+
+  <button class="botao" type="button">
+    <span class="icone">🍲</span>
+    <span class="texto">Receitas</span>
+  </button>
+
+  <button class="botao" type="button" onclick="location.href='lista-de-compras-alimentos.html'">
+    <span class="icone">🧺</span>
+    <span class="texto">Lista de Compras</span>
+  </button>
+
+  <button class="botao" type="button" onclick="location.href='index.html'">
+    <span class="texto">⬅ Voltar</span>
+  </button>
+
+</div>
+
+</body>
+</html>

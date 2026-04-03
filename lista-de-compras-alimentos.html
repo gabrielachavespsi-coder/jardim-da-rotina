@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Compras</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body{
+  font-family:'Poppins', sans-serif;
+  background-image:url("margaridas.jpg");
+  background-size:cover;
+  background-position:center;
+  margin:0;
+  display:flex;
+  justify-content:center;
+  padding:18px;
+  box-sizing:border-box;
+}
+
+.card{
+  width:min(420px,100%);
+  background:rgba(255,255,255,0.9);
+  border-radius:22px;
+  padding:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  box-sizing:border-box;
+  overflow:visible;
+}
+
+.topbar{
+  display:grid;
+  grid-template-columns:34px 1fr auto;
+  align-items:center;
+  gap:10px;
+}
+
+.topCenter{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-width:0;
+}
+
+.backBtn{
+  border:none;
+  background:rgba(61,111,76,0.12);
+  color:#3d6f4c;
+  width:34px;
+  height:34px;
+  border-radius:12px;
+  font-size:18px;
+  cursor:pointer;
+  line-height:1;
+  font-family:'Poppins', sans-serif;
+}
+
+.titleIcon{
+  font-size:18px;
+  line-height:1;
+  flex:0 0 auto;
+}
+
+.title{
+  font-size:18px;
+  color:#3d6f4c;
+  margin:0;
+  font-weight:400;
+  line-height:1.1;
+  white-space:nowrap;
+}
+
+.topActions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  justify-self:end;
+}
+
+.summaryBtn{
+  border:none;
+  background:rgba(61,111,76,0.12);
+  color:#3d6f4c;
+  border-radius:12px;
+  padding:9px 12px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:'Poppins', sans-serif;
+  white-space:nowrap;
+}
+
+.listBox{
+  background:rgba(255,255,255,0.72);
+  border-radius:16px;
+  padding:12px;
+  box-sizing:border-box;
+  overflow:visible;
+}
+
+.filtrosTopoLista{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.mesAnoAtualWrap,
+.multiFiltroWrap{
+  width:100%;
+}
+
+.mesAnoAtualSelect{
+  width:100%;
+  border:1px solid #b8d8bf;
+  background:#dff1df;
+  color:#3d6f4c;
+  border-radius:14px;
+  padding:10px 12px;
+  font-size:14px;
+  font-weight:500;
+  font-family:'Poppins', sans-serif;
+  box-sizing:border-box;
+  outline:none;
+}
+
+.multiFiltroWrap{
+  position:relative;
+  width:100%;
+  z-index:50;
+}
+
+.multiFiltroBtn{
+  width:100%;
+  border:1px solid #b8d8bf;
+  background:#dff1df;
+  color:#3d6f4c;
+  border-radius:14px;
+  padding:10px 38px 10px 12px;
+  font-size:13px;
+  font-weight:400;
+  font-family:'Poppins', sans-serif;
+  text-align:left;
+  cursor:pointer;
+  box-sizing:border-box;
+  position:relative;
+  min-height:42px;
+}
+
+.multiFiltroBtn::after{
+  content:"▾";
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:14px;
+  color:#3d6f4c;
+}
+
+.multiFiltroDropdown{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  margin-top:4px;
+  background:#dff1df;
+  border:1px solid #b8d8bf;
+  border-radius:14px;
+  padding:10px 12px;
+  box-sizing:border-box;
+  z-index:999;
+  box-shadow:0 8px 18px rgba(0,0,0,0.08);
+}
+
+.multiFiltroDropdown.show{
+  display:block;
+}
+
+.multiFiltroTopo{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-bottom:8px;
+  flex-wrap:wrap;
+}
+
+.multiFiltroLimpar,
+.multiFiltroMarcar{
+  border:none;
+  background:rgba(61,111,76,0.12);
+  color:#3d6f4c;
+  border-radius:10px;
+  padding:5px 10px;
+  font-size:11px;
+  font-family:'Poppins', sans-serif;
+  cursor:pointer;
+}
+
+.multiFiltroLista{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:8px 10px;
+  align-items:start;
+}
+
+.multiFiltroOption{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color:#3d6f4c;
+  padding:2px 0;
+  cursor:pointer;
+  line-height:1.1;
+  box-sizing:border-box;
+  min-width:0;
+}
+
+.multiFiltroOption input{
+  width:auto;
+  margin:0;
+  accent-color:#3d6f4c;
+  flex:0 0 auto;
+}
+
+.multiFiltroOption.linhaInteira{
+  grid-column:1 / -1;
+  white-space:nowrap;
+}
+
+.secaoLista + .secaoLista{
+  margin-top:14px;
+}
+
+.secaoTitulo{
+  text-align:center;
+  color:#3d6f4c;
+  font-size:14px;
+  font-weight:500;
+  margin-bottom:2px;
+}
+
+.secaoSubtitulo{
+  text-align:center;
+  color:#8aa08f;
+  font-size:11.5px;
+  font-weight:400;
+  margin:0 0 8px;
+  line-height:1.3;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  background:#fff;
+  border-radius:12px;
+  margin-top:10px;
+  cursor:pointer;
+  box-sizing:border-box;
+}
+
+.item.visualizacao{
+  cursor:default;
+}
+
+.itemTexto{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  flex:1;
+}
+
+.nome{
+  font-size:13px;
+  font-weight:600;
+  color:#5f5f5f;
+  line-height:1.4;
+  word-break:break-word;
+}
+
+.detalhe{
+  font-size:13px;
+  color:#5f5f5f;
+  margin-top:2px;
+  line-height:1.4;
+  word-break:break-word;
+}
+
+.check{
+  width:14px;
+  height:14px;
+  border:1.5px solid #3d6f4c;
+  border-radius:3px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  font-size:10px;
+}
+
+.check.ok{
+  background:#3d6f4c;
+  color:#fff;
+}
+
+.empty{
+  text-align:center;
+  color:#666;
+  font-size:13px;
+  padding:10px 0 4px;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  margin-top:2px;
+}
+
+.futureBtn{
+  border:none;
+  background:rgba(61,111,76,0.12);
+  color:#3d6f4c;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:11px;
+  cursor:pointer;
+  font-family:'Poppins', sans-serif;
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  box-sizing:border-box;
+  z-index:999;
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  max-height:calc(100vh - 32px);
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-sizing:border-box;
+  box-shadow:0 10px 30px rgba(0,0,0,0.22);
+}
+
+.modalHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:8px;
+}
+
+.modalTitle{
+  font-size:18px;
+  color:#3d6f4c;
+  margin:0;
+  font-weight:500;
+  line-height:1.3;
+}
+
+.dataHoraTopo{
+  font-size:11px;
+  color:#777;
+  text-align:right;
+  line-height:1.35;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:#444;
+}
+
+.infoLine{
+  font-size:15px;
+  color:#2e3a46;
+  font-weight:500;
+  line-height:1.4;
+}
+
+.row{
+  display:flex;
+  gap:8px;
+}
+
+.col{
+  flex:1;
+  min-width:0;
+}
+
+.modalBtns,
+.actionRow{
+  display:flex;
+  gap:8px;
+  margin-top:6px;
+}
+
+input, select{
+  padding:11px 12px;
+  border-radius:12px;
+  border:1px solid #d5d5d5;
+  font-size:14px;
+  font-family:'Poppins', sans-serif;
+  box-sizing:border-box;
+  width:100%;
+  outline:none;
+  background:#fff;
+}
+
+.modalBtns button,
+.actionRow button{
+  flex:1;
+  padding:11px 10px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:'Poppins', sans-serif;
+  font-size:14px;
+}
+
+.cancel{
+  background:#efefef;
+  color:#333;
+}
+
+.edit{
+  background:#ffe8aa;
+  color:#6b5800;
+}
+
+.save{
+  background:#3d6f4c;
+  color:white;
+}
+
+.danger{
+  background:#f5d7d7;
+  color:#8a3030;
+}
+
+.resumoFiltros{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.resumoFiltroBtn{
+  flex:1;
+  min-width:0;
+  border:none;
+  border-radius:12px;
+  padding:9px 10px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:'Poppins', sans-serif;
+  background:#efefef;
+  color:#555;
+}
+
+.resumoFiltroBtn.ativo{
+  background:rgba(61,111,76,0.15);
+  color:#2f5d3d;
+}
+
+.resumoMesSelect,
+.resumoSemanaSelect{
+  display:none;
+}
+
+.resumoMesSelect.show,
+.resumoSemanaSelect.show{
+  display:block;
+}
+
+.resumoLista{
+  max-height:320px;
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:4px;
+}
+
+.resumoItem{
+  background:#f8f8f8;
+  border-radius:12px;
+  padding:10px 12px;
+}
+
+.resumoLinha{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:nowrap;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
+.resumoNome{
+  font-size:13px;
+  font-weight:600;
+  color:#5f5f5f;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.resumoDetalheInline{
+  font-size:13px;
+  color:#5f5f5f;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="topbar">
+    <button class="backBtn" onclick="location.href='alimentacao.html'">←</button>
+
+    <div class="topCenter">
+      <span class="titleIcon">🧾</span>
+      <h1 class="title">Lista de Compras</h1>
+    </div>
+
+    <div class="topActions">
+      <button class="summaryBtn" onclick="abrirResumo()">Resumo</button>
+    </div>
+  </div>
+
+  <div class="listBox">
+    <div class="filtrosTopoLista">
+      <div class="mesAnoAtualWrap">
+        <select class="mesAnoAtualSelect" id="mesAnoParaComprar" onchange="aoTrocarMesParaComprar()"></select>
+      </div>
+
+      <div class="multiFiltroWrap" id="multiFiltroWrapParaComprar">
+        <button type="button" class="multiFiltroBtn" id="multiFiltroBtnParaComprar" onclick="toggleMultiFiltroDropdown('ParaComprar')">
+          Mês
+        </button>
+
+        <div class="multiFiltroDropdown" id="multiFiltroDropdownParaComprar">
+          <div class="multiFiltroTopo">
+            <button type="button" class="multiFiltroMarcar" onclick="marcarTodosFiltrosVisualizacao('ParaComprar')">
+              marcar tudo
+            </button>
+            <button type="button" class="multiFiltroLimpar" onclick="limparFiltrosVisualizacao('ParaComprar')">
+              limpar tudo
+            </button>
+          </div>
+
+          <div class="multiFiltroLista">
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="mes" checked onchange="atualizarMultiFiltro('ParaComprar')">
+              Mês
+            </label>
+
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="1" onchange="atualizarMultiFiltro('ParaComprar')">
+              1ª semana
+            </label>
+
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="2" onchange="atualizarMultiFiltro('ParaComprar')">
+              2ª semana
+            </label>
+
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="3" onchange="atualizarMultiFiltro('ParaComprar')">
+              3ª semana
+            </label>
+
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="4" onchange="atualizarMultiFiltro('ParaComprar')">
+              4ª semana
+            </label>
+
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="5" onchange="atualizarMultiFiltro('ParaComprar')">
+              5ª semana
+            </label>
+
+            <label class="multiFiltroOption linhaInteira">
+              <input type="checkbox" value="mes_todas" onchange="atualizarMultiFiltro('ParaComprar')">
+              Mês e todas as semanas
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="secaoLista" id="secaoParaComprarMes">
+      <div class="secaoTitulo">Alimentos para comprar</div>
+      <div class="secaoSubtitulo" id="tituloParaComprarMesPeriodo"></div>
+      <div id="listaParaComprarMes"></div>
+    </div>
+
+    <div class="secaoLista" id="secaoParaComprarSemana1" style="display:none;">
+      <div class="secaoTitulo">1ª semana</div>
+      <div class="secaoSubtitulo" id="tituloParaComprarSemana1Periodo"></div>
+      <div id="listaParaComprarSemana1"></div>
+    </div>
+
+    <div class="secaoLista" id="secaoParaComprarSemana2" style="display:none;">
+      <div class="secaoTitulo">2ª semana</div>
+      <div class="secaoSubtitulo" id="tituloParaComprarSemana2Periodo"></div>
+      <div id="listaParaComprarSemana2"></div>
+    </div>
+
+    <div class="secaoLista" id="secaoParaComprarSemana3" style="display:none;">
+      <div class="secaoTitulo">3ª semana</div>
+      <div class="secaoSubtitulo" id="tituloParaComprarSemana3Periodo"></div>
+      <div id="listaParaComprarSemana3"></div>
+    </div>
+
+    <div class="secaoLista" id="secaoParaComprarSemana4" style="display:none;">
+      <div class="secaoTitulo">4ª semana</div>
+      <div class="secaoSubtitulo" id="tituloParaComprarSemana4Periodo"></div>
+      <div id="listaParaComprarSemana4"></div>
+    </div>
+
+    <div class="secaoLista" id="secaoParaComprarSemana5" style="display:none;">
+      <div class="secaoTitulo">5ª semana</div>
+      <div class="secaoSubtitulo" id="tituloParaComprarSemana5Periodo"></div>
+      <div id="listaParaComprarSemana5"></div>
+    </div>
+  </div>
+
+  <div class="listBox">
+    <div class="filtrosTopoLista">
+      <div class="mesAnoAtualWrap">
+        <select class="mesAnoAtualSelect" id="mesAnoComprados" onchange="aoTrocarMesComprados()"></select>
+      </div>
+
+      <div class="multiFiltroWrap" id="multiFiltroWrapComprados">
+        <button type="button" class="multiFiltroBtn" id="multiFiltroBtnComprados" onclick="toggleMultiFiltroDropdown('Comprados')">
+          Mês
+        </button>
+
+        <div class="multiFiltroDropdown" id="multiFiltroDropdownComprados">
+          <div class="multiFiltroTopo">
+            <button type="button" class="multiFiltroMarcar" onclick="marcarTodosFiltrosVisualizacao('Comprados')">
+              marcar tudo
+            </button>
+            <button type="button" class="multiFiltroLimpar" onclick="limparFiltrosVisualizacao('Comprados')">
+              limpar tudo
+            </button>
+          </div>
+
+          <div class="multiFiltroLista">
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="mes" checked onchange="atualizarMultiFiltro('Comprados')">
+              Mês
+            </label>
+
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="1" onchange="atualizarMultiFiltro('Comprados')">
+              1ª semana
+            </label>
+
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="2" onchange="atualizarMultiFiltro('Comprados')">
+              2ª semana
+            </label>
+
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="3" onchange="atualizarMultiFiltro('Comprados')">
+              3ª semana
+            </label>
+
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="4" onchange="atualizarMultiFiltro('Comprados')">
+              4ª semana
+            </label>
+
+            <label class="multiFiltroOption">
+              <input type="checkbox" value="5" onchange="atualizarMultiFiltro('Comprados')">
+              5ª semana
+            </label>
+
+            <label class="multiFiltroOption linhaInteira">
+              <input type="checkbox" value="mes_todas" onchange="atualizarMultiFiltro('Comprados')">
+              Mês e todas as semanas
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="secaoLista" id="secaoCompradosMes">
+      <div class="secaoTitulo">Alimentos comprados</div>
+      <div class="secaoSubtitulo" id="tituloCompradosMesPeriodo"></div>
+      <div id="listaCompradosMes"></div>
+    </div>
+
+    <div class="secaoLista" id="secaoCompradosSemana1" style="display:none;">
+      <div class="secaoTitulo">1ª semana</div>
+      <div class="secaoSubtitulo" id="tituloCompradosSemana1Periodo"></div>
+      <div id="listaCompradosSemana1"></div>
+    </div>
+
+    <div class="secaoLista" id="secaoCompradosSemana2" style="display:none;">
+      <div class="secaoTitulo">2ª semana</div>
+      <div class="secaoSubtitulo" id="tituloCompradosSemana2Periodo"></div>
+      <div id="listaCompradosSemana2"></div>
+    </div>
+
+    <div class="secaoLista" id="secaoCompradosSemana3" style="display:none;">
+      <div class="secaoTitulo">3ª semana</div>
+      <div class="secaoSubtitulo" id="tituloCompradosSemana3Periodo"></div>
+      <div id="listaCompradosSemana3"></div>
+    </div>
+
+    <div class="secaoLista" id="secaoCompradosSemana4" style="display:none;">
+      <div class="secaoTitulo">4ª semana</div>
+      <div class="secaoSubtitulo" id="tituloCompradosSemana4Periodo"></div>
+      <div id="listaCompradosSemana4"></div>
+    </div>
+
+    <div class="secaoLista" id="secaoCompradosSemana5" style="display:none;">
+      <div class="secaoTitulo">5ª semana</div>
+      <div class="secaoSubtitulo" id="tituloCompradosSemana5Periodo"></div>
+      <div id="listaCompradosSemana5"></div>
+    </div>
+  </div>
+
+  <div class="footerMiniAction">
+    <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalCompra">
+  <div class="modal">
+    <div class="modalHeader">
+      <h2 class="modalTitle">Quantidade sendo comprada</h2>
+      <div class="dataHoraTopo" id="dataHoraCompra"></div>
+    </div>
+
+    <div class="field">
+      <div id="nomeCompraAtual" class="infoLine"></div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="field">
+          <label>Quantidade</label>
+          <select id="compraQuantidade">
+            <option value="">Selecione</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="field">
+          <label>Medida</label>
+          <select id="compraPeso">
+            <option value="">Selecione</option>
+            <option value="g">g</option>
+            <option value="kg">kg</option>
+            <option value="ml">ml</option>
+            <option value="L">L</option>
+            <option value="un">un</option>
+            <option value="dz">dz</option>
+            <option value="pct">pct</option>
+            <option value="cx">cx</option>
+            <option value="lata">lata</option>
+            <option value="garrafa">garrafa</option>
+            <option value="bandeja">bandeja</option>
+            <option value="sachê">sachê</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalCompra()">Cancelar</button>
+      <button class="save" onclick="confirmarCompra()">Ok</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalAcoesComprado">
+  <div class="modal" style="width:min(300px,100%);">
+    <h2 class="modalTitle">Alimento comprado</h2>
+
+    <div id="textoAcoesComprado" style="font-size:14px; color:#555; text-align:center; line-height:1.5;"></div>
+
+    <div class="actionRow">
+      <button class="edit" onclick="editarComprado()">Editar</button>
+      <button class="danger" onclick="excluirComprado()">Excluir</button>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalAcoesComprado()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalResumo">
+  <div class="modal">
+    <h2 class="modalTitle">Resumo de compras</h2>
+
+    <div class="resumoFiltros">
+      <button class="resumoFiltroBtn ativo" id="filtroResumoMes" onclick="aplicarFiltroResumo('mes')">Mês</button>
+      <button class="resumoFiltroBtn" id="filtroResumoSemana" onclick="aplicarFiltroResumo('semana')">Semana</button>
+    </div>
+
+    <div class="resumoMesSelect show" id="resumoMesSelectWrap">
+      <select id="resumoMesSelect" onchange="aoTrocarMesResumo()"></select>
+    </div>
+
+    <div class="resumoSemanaSelect" id="resumoSemanaSelectWrap">
+      <select id="resumoSemanaSelect" onchange="renderResumo()">
+        <option value="1">1ª semana</option>
+        <option value="2">2ª semana</option>
+        <option value="3">3ª semana</option>
+        <option value="4">4ª semana</option>
+        <option value="5">5ª semana</option>
+      </select>
+    </div>
+
+    <div id="resumoLista" class="resumoLista"></div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharResumo()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalFuturasEdicoes">
+  <div class="modal">
+    <h2 class="modalTitle">Futuras edições</h2>
+
+    <div class="field">
+      <label>Ideias de melhorias futuras</label>
+      <input id="futurasEdicoesTexto" type="text" placeholder="Escreva aqui suas ideias para melhorar essa tela...">
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CHAVE = "alimentos_lista_mercado";
+const CHAVE_HISTORICO_COMPRAS_MESES = "historico_lista_compras_meses";
+const CHAVE_ULTIMO_MES_VISTO_COMPRAS = "ultimo_mes_visto_lista_compras";
+const CHAVE_FUTURAS_EDICOES_LISTA_COMPRAS = "futuras_edicoes_lista_compras";
+
+let itemCompraAtualId = null;
+let itemCompradoSelecionadoId = null;
+let filtroResumoAtual = "mes";
+let mesParaComprarSelecionado = getMesKeyAtual();
+let mesCompradosSelecionado = getMesKeyAtual();
+
+function getDados(){
+  try{
+    return JSON.parse(localStorage.getItem(CHAVE)) || [];
+  }catch{
+    return [];
+  }
+}
+
+function salvarDados(dados){
+  localStorage.setItem(CHAVE, JSON.stringify(dados));
+}
+
+function getHistoricoMeses(){
+  try{
+    return JSON.parse(localStorage.getItem(CHAVE_HISTORICO_COMPRAS_MESES)) || [];
+  }catch{
+    return [];
+  }
+}
+
+function salvarHistoricoMeses(historico){
+  localStorage.setItem(CHAVE_HISTORICO_COMPRAS_MESES, JSON.stringify(historico));
+}
+
+function clonarDados(dados){
+  return JSON.parse(JSON.stringify(dados || []));
+}
+
+function getMesKeyAtual(data = new Date()){
+  const ano = data.getFullYear();
+  const mes = String(data.getMonth() + 1).padStart(2, "0");
+  return `${ano}-${mes}`;
+}
+
+function keyParaLabelMMYYYY(key){
+  const [ano, mes] = key.split("-");
+  return `${mes}/${ano}`;
+}
+
+function garantirHistoricoMensal(){
+  const mesAtual = getMesKeyAtual();
+  const ultimoMesVisto = localStorage.getItem(CHAVE_ULTIMO_MES_VISTO_COMPRAS);
+
+  if(!ultimoMesVisto){
+    localStorage.setItem(CHAVE_ULTIMO_MES_VISTO_COMPRAS, mesAtual);
+    return;
+  }
+
+  if(ultimoMesVisto !== mesAtual){
+    let historico = getHistoricoMeses();
+    const jaExiste = historico.some(item => item.monthKey === ultimoMesVisto);
+
+    if(!jaExiste){
+      historico.push({
+        monthKey: ultimoMesVisto,
+        monthLabel: keyParaLabelMMYYYY(ultimoMesVisto),
+        items: clonarDados(getDados()),
+        archivedAt: new Date().toISOString()
+      });
+    }
+
+    historico.sort((a,b) => b.monthKey.localeCompare(a.monthKey));
+    historico = historico.slice(0, 12);
+    salvarHistoricoMeses(historico);
+    localStorage.setItem(CHAVE_ULTIMO_MES_VISTO_COMPRAS, mesAtual);
+  }
+}
+
+function getOpcoesMesDisponiveis(){
+  const historico = getHistoricoMeses().sort((a,b) => b.monthKey.localeCompare(a.monthKey));
+  const mesAtual = getMesKeyAtual();
+
+  return [
+    { key: mesAtual, label: keyParaLabelMMYYYY(mesAtual) },
+    ...historico
+      .filter(item => item.monthKey !== mesAtual)
+      .map(item => ({ key: item.monthKey, label: item.monthLabel }))
+  ];
+}
+
+function montarSelectMes(idSelect, valorSelecionado){
+  const select = document.getElementById(idSelect);
+  const opcoes = getOpcoesMesDisponiveis();
+
+  select.innerHTML = opcoes.map(opcao =>
+    `<option value="${escapeHtml(opcao.key)}">${escapeHtml(opcao.label)}</option>`
+  ).join("");
+
+  if(opcoes.some(opcao => opcao.key === valorSelecionado)){
+    select.value = valorSelecionado;
+  }else if(opcoes.length){
+    select.value = opcoes[0].key;
+  }
+}
+
+function getDadosDoMesSelecionado(monthKey){
+  const mesAtual = getMesKeyAtual();
+
+  if(monthKey === mesAtual){
+    return getDados();
+  }
+
+  const historico = getHistoricoMeses();
+  const registro = historico.find(item => item.monthKey === monthKey);
+  return registro ? (registro.items || []) : [];
+}
+
+function aoTrocarMesParaComprar(){
+  mesParaComprarSelecionado = document.getElementById("mesAnoParaComprar").value;
+  renderParaComprar();
+}
+
+function aoTrocarMesComprados(){
+  mesCompradosSelecionado = document.getElementById("mesAnoComprados").value;
+  renderComprados();
+}
+
+function formatarDataHoraAgora(){
+  const agora = new Date();
+  const data = agora.toLocaleDateString("pt-BR");
+  const hora = agora.toLocaleTimeString("pt-BR", {hour:"2-digit", minute:"2-digit"});
+  return `${data} • ${hora}`;
+}
+
+function getNomeDiaSemanaSemFeira(data){
+  const dias = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+  return dias[data.getDay()];
+}
+
+function formatarDataDDMM(data){
+  const dia = String(data.getDate()).padStart(2, "0");
+  const mes = String(data.getMonth() + 1).padStart(2, "0");
+  return `${dia}/${mes}`;
+}
+
+function montarTextoPeriodoMes(monthKey){
+  const [ano, mes] = monthKey.split("-").map(Number);
+  const primeiroDia = new Date(ano, mes - 1, 1);
+  const ultimoDia = new Date(ano, mes, 0);
+  return `de ${formatarDataDDMM(primeiroDia)} (${getNomeDiaSemanaSemFeira(primeiroDia)}) a ${formatarDataDDMM(ultimoDia)} (${getNomeDiaSemanaSemFeira(ultimoDia)})`;
+}
+
+function getPeriodoSemanaDoMes(ano, mes, numeroSemana){
+  const ultimoDiaMes = new Date(ano, mes, 0);
+  const inicio = new Date(ano, mes - 1, 1 + ((numeroSemana - 1) * 7));
+  let fim = new Date(ano, mes - 1, 7 + ((numeroSemana - 1) * 7));
+
+  if(inicio > ultimoDiaMes){
+    return null;
+  }
+
+  if(fim > ultimoDiaMes){
+    fim = ultimoDiaMes;
+  }
+
+  return { inicio, fim };
+}
+
+function montarTextoPeriodoSemana(monthKey, numeroSemana){
+  const [ano, mes] = monthKey.split("-").map(Number);
+  const periodo = getPeriodoSemanaDoMes(ano, mes, numeroSemana);
+  if(!periodo) return "";
+  return `de ${formatarDataDDMM(periodo.inicio)} (${getNomeDiaSemanaSemFeira(periodo.inicio)}) a ${formatarDataDDMM(periodo.fim)} (${getNomeDiaSemanaSemFeira(periodo.fim)})`;
+}
+
+function itemEhMes(item){
+  return item.tipoFrequencia === "mes" || item.tipoFrequencia === "mes_todas_semanas";
+}
+
+function itemEstaNaSemana(item, numeroSemana){
+  if(item.tipoFrequencia === "mes_todas_semanas"){
+    return true;
+  }
+
+  return item.tipoFrequencia === "semanas"
+    && Array.isArray(item.semanasSelecionadas)
+    && item.semanasSelecionadas.includes(String(numeroSemana));
+}
+
+function escapeHtml(texto){
+  return String(texto ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function exibirOuOcultarSecao(id, exibir){
+  const el = document.getElementById(id);
+  if(el){
+    el.style.display = exibir ? "block" : "none";
+  }
+}
+
+function getFiltrosVisualizacaoSelecionados(tipo){
+  const valores = [...document.querySelectorAll(`#multiFiltroDropdown${tipo} input:checked`)]
+    .map(input => input.value);
+
+  return valores.length ? valores : ["mes"];
+}
+
+function toggleMultiFiltroDropdown(tipo){
+  document.getElementById(`multiFiltroDropdown${tipo}`).classList.toggle("show");
+}
+
+function atualizarMultiFiltro(tipo){
+  const selecionados = getFiltrosVisualizacaoSelecionados(tipo);
+  const botao = document.getElementById(`multiFiltroBtn${tipo}`);
+
+  const mapaLabels = {
+    mes: "Mês",
+    1: "1ª semana",
+    2: "2ª semana",
+    3: "3ª semana",
+    4: "4ª semana",
+    5: "5ª semana",
+    mes_todas: "Mês e todas as semanas"
+  };
+
+  botao.textContent = selecionados.length
+    ? selecionados.map(valor => mapaLabels[valor]).join(", ")
+    : "Selecionar";
+
+  if(tipo === "ParaComprar"){
+    renderParaComprar();
+  }else{
+    renderComprados();
+  }
+}
+
+function marcarTodosFiltrosVisualizacao(tipo){
+  document.querySelectorAll(`#multiFiltroDropdown${tipo} input[type="checkbox"]`).forEach(input => {
+    input.checked = true;
+  });
+
+  atualizarMultiFiltro(tipo);
+}
+
+function limparFiltrosVisualizacao(tipo){
+  document.querySelectorAll(`#multiFiltroDropdown${tipo} input[type="checkbox"]`).forEach(input => {
+    input.checked = false;
+  });
+
+  document.getElementById(`multiFiltroBtn${tipo}`).textContent = "Selecionar";
+
+  if(tipo === "ParaComprar"){
+    renderParaComprar();
+  }else{
+    renderComprados();
+  }
+}
+
+function abrirModalCompra(id, preenchimento = null){
+  if(mesParaComprarSelecionado !== getMesKeyAtual()){
+    alert("As compras dos meses anteriores ficam apenas para visualização.");
+    return;
+  }
+
+  const dados = getDados();
+  const item = dados.find(a => a.id === id);
+  if(!item) return;
+
+  itemCompraAtualId = id;
+  document.getElementById("nomeCompraAtual").textContent = item.nome || "";
+  document.getElementById("dataHoraCompra").textContent = formatarDataHoraAgora();
+  document.getElementById("compraQuantidade").value = preenchimento?.quantidade || "";
+  document.getElementById("compraPeso").value = preenchimento?.peso || item.pesoBase || "";
+  document.getElementById("modalCompra").classList.add("show");
+}
+
+function fecharModalCompra(){
+  document.getElementById("modalCompra").classList.remove("show");
+  itemCompraAtualId = null;
+}
+
+function confirmarCompra(){
+  if(itemCompraAtualId === null) return;
+
+  const quantidade = document.getElementById("compraQuantidade").value;
+  const peso = document.getElementById("compraPeso").value;
+
+  if(!quantidade){
+    alert("Selecione a quantidade.");
+    return;
+  }
+
+  const dados = getDados();
+  const index = dados.findIndex(item => item.id === itemCompraAtualId);
+  if(index === -1) return;
+
+  const agora = new Date();
+
+  dados[index].comprado = true;
+  dados[index].quantidadeComprada = quantidade;
+  dados[index].pesoComprado = peso;
+  dados[index].dataCompraISO = agora.toISOString();
+  dados[index].dataCompraTexto = agora.toLocaleDateString("pt-BR");
+
+  salvarDados(dados);
+  fecharModalCompra();
+  renderTudo();
+}
+
+function abrirAcoesComprado(id){
+  if(mesCompradosSelecionado !== getMesKeyAtual()){
+    alert("As compras dos meses anteriores ficam apenas para visualização.");
+    return;
+  }
+
+  const dados = getDados();
+  const item = dados.find(a => a.id === id);
+  if(!item) return;
+
+  itemCompradoSelecionadoId = id;
+  document.getElementById("textoAcoesComprado").innerHTML =
+    `<strong>${escapeHtml(item.nome)}</strong><br>Escolha uma opção.`;
+
+  document.getElementById("modalAcoesComprado").classList.add("show");
+}
+
+function fecharModalAcoesComprado(){
+  document.getElementById("modalAcoesComprado").classList.remove("show");
+  itemCompradoSelecionadoId = null;
+}
+
+function editarComprado(){
+  if(itemCompradoSelecionadoId === null) return;
+
+  const dados = getDados();
+  const item = dados.find(a => a.id === itemCompradoSelecionadoId);
+  if(!item) return;
+
+  fecharModalAcoesComprado();
+  abrirModalCompra(item.id, {
+    quantidade: item.quantidadeComprada || "",
+    peso: item.pesoComprado || item.pesoBase || ""
+  });
+}
+
+function excluirComprado(){
+  if(itemCompradoSelecionadoId === null) return;
+
+  const confirmar = confirm("Deseja excluir este alimento comprado?");
+  if(!confirmar) return;
+
+  let dados = getDados();
+  dados = dados.filter(item => item.id !== itemCompradoSelecionadoId);
+
+  salvarDados(dados);
+  fecharModalAcoesComprado();
+  renderTudo();
+}
+
+function montarTextoQuantidadePeso(item){
+  const quantidade = item.quantidadeComprada || "";
+  const peso = item.pesoComprado || item.pesoBase || "";
+  if(quantidade && peso){
+    return `Quantidade: ${escapeHtml(quantidade)} ${escapeHtml(peso)}`;
+  }
+  if(quantidade){
+    return `Quantidade: ${escapeHtml(quantidade)}`;
+  }
+  return `Quantidade: 0`;
+}
+
+function renderListaEm(containerId, dados, tipoLista, monthKey){
+  const lista = document.getElementById(containerId);
+  lista.innerHTML = "";
+
+  if(!dados.length){
+    lista.innerHTML = `<div class="empty">${
+      tipoLista === "comprados"
+        ? "Nenhum alimento comprado ainda."
+        : "Nenhum alimento para comprar ainda."
+    }</div>`;
+    return;
+  }
+
+  const visualizacaoHistorica = monthKey !== getMesKeyAtual();
+
+  dados.forEach(item => {
+    const quantidadePeso = item.quantidadeBase && item.pesoBase
+      ? `${escapeHtml(item.quantidadeBase)} ${escapeHtml(item.pesoBase)} • `
+      : "";
+
+    if(tipoLista === "comprados"){
+      const detalheCompra = `${montarTextoQuantidadePeso(item)} • ${escapeHtml(item.dataCompraTexto || "")}`;
+      lista.innerHTML += `
+        <div class="item ${visualizacaoHistorica ? 'visualizacao' : ''}" ${visualizacaoHistorica ? '' : `onclick="abrirAcoesComprado(${item.id})"`}>
+          <div class="itemTexto">
+            <div class="nome">${escapeHtml(item.nome)}</div>
+            <div class="detalhe">${detalheCompra}</div>
+          </div>
+          <div class="check ok">✓</div>
+        </div>
+      `;
+    }else{
+      const detalhe = `${quantidadePeso}R$ ${escapeHtml(item.preco || "0,00")} • ${escapeHtml(item.local || "")}`;
+      lista.innerHTML += `
+        <div class="item ${visualizacaoHistorica ? 'visualizacao' : ''}" ${visualizacaoHistorica ? '' : `onclick="abrirModalCompra(${item.id})"`}>
+          <div class="itemTexto">
+            <div class="nome">${escapeHtml(item.nome)}</div>
+            <div class="detalhe">${detalhe}</div>
+          </div>
+          <div class="check"></div>
+        </div>
+      `;
+    }
+  });
+}
+
+function renderParaComprar(){
+  montarSelectMes("mesAnoParaComprar", mesParaComprarSelecionado);
+  mesParaComprarSelecionado = document.getElementById("mesAnoParaComprar").value;
+
+  document.getElementById("tituloParaComprarMesPeriodo").textContent = montarTextoPeriodoMes(mesParaComprarSelecionado);
+  for(let semana = 1; semana <= 5; semana++){
+    document.getElementById(`tituloParaComprarSemana${semana}Periodo`).textContent = montarTextoPeriodoSemana(mesParaComprarSelecionado, semana);
+  }
+
+  const filtrosSelecionados = getFiltrosVisualizacaoSelecionados("ParaComprar");
+  const mostrarTodas = filtrosSelecionados.includes("mes_todas");
+  const dados = getDadosDoMesSelecionado(mesParaComprarSelecionado)
+    .filter(item => !item.comprado)
+    .sort((a,b) => (a.nome || "").localeCompare((b.nome || ""), "pt-BR", {sensitivity:"base"}));
+
+  exibirOuOcultarSecao("secaoParaComprarMes", mostrarTodas || filtrosSelecionados.includes("mes"));
+  exibirOuOcultarSecao("secaoParaComprarSemana1", mostrarTodas || filtrosSelecionados.includes("1"));
+  exibirOuOcultarSecao("secaoParaComprarSemana2", mostrarTodas || filtrosSelecionados.includes("2"));
+  exibirOuOcultarSecao("secaoParaComprarSemana3", mostrarTodas || filtrosSelecionados.includes("3"));
+  exibirOuOcultarSecao("secaoParaComprarSemana4", mostrarTodas || filtrosSelecionados.includes("4"));
+  exibirOuOcultarSecao("secaoParaComprarSemana5", mostrarTodas || filtrosSelecionados.includes("5"));
+
+  renderListaEm("listaParaComprarMes", dados.filter(item => itemEhMes(item)), "paraComprar", mesParaComprarSelecionado);
+  renderListaEm("listaParaComprarSemana1", dados.filter(item => itemEstaNaSemana(item, 1)), "paraComprar", mesParaComprarSelecionado);
+  renderListaEm("listaParaComprarSemana2", dados.filter(item => itemEstaNaSemana(item, 2)), "paraComprar", mesParaComprarSelecionado);
+  renderListaEm("listaParaComprarSemana3", dados.filter(item => itemEstaNaSemana(item, 3)), "paraComprar", mesParaComprarSelecionado);
+  renderListaEm("listaParaComprarSemana4", dados.filter(item => itemEstaNaSemana(item, 4)), "paraComprar", mesParaComprarSelecionado);
+  renderListaEm("listaParaComprarSemana5", dados.filter(item => itemEstaNaSemana(item, 5)), "paraComprar", mesParaComprarSelecionado);
+}
+
+function renderComprados(){
+  montarSelectMes("mesAnoComprados", mesCompradosSelecionado);
+  mesCompradosSelecionado = document.getElementById("mesAnoComprados").value;
+
+  document.getElementById("tituloCompradosMesPeriodo").textContent = montarTextoPeriodoMes(mesCompradosSelecionado);
+  for(let semana = 1; semana <= 5; semana++){
+    document.getElementById(`tituloCompradosSemana${semana}Periodo`).textContent = montarTextoPeriodoSemana(mesCompradosSelecionado, semana);
+  }
+
+  const filtrosSelecionados = getFiltrosVisualizacaoSelecionados("Comprados");
+  const mostrarTodas = filtrosSelecionados.includes("mes_todas");
+  const dados = getDadosDoMesSelecionado(mesCompradosSelecionado)
+    .filter(item => item.comprado)
+    .sort((a,b) => new Date(b.dataCompraISO || 0) - new Date(a.dataCompraISO || 0));
+
+  exibirOuOcultarSecao("secaoCompradosMes", mostrarTodas || filtrosSelecionados.includes("mes"));
+  exibirOuOcultarSecao("secaoCompradosSemana1", mostrarTodas || filtrosSelecionados.includes("1"));
+  exibirOuOcultarSecao("secaoCompradosSemana2", mostrarTodas || filtrosSelecionados.includes("2"));
+  exibirOuOcultarSecao("secaoCompradosSemana3", mostrarTodas || filtrosSelecionados.includes("3"));
+  exibirOuOcultarSecao("secaoCompradosSemana4", mostrarTodas || filtrosSelecionados.includes("4"));
+  exibirOuOcultarSecao("secaoCompradosSemana5", mostrarTodas || filtrosSelecionados.includes("5"));
+
+  renderListaEm("listaCompradosMes", dados.filter(item => itemEhMes(item)), "comprados", mesCompradosSelecionado);
+  renderListaEm("listaCompradosSemana1", dados.filter(item => itemEstaNaSemana(item, 1)), "comprados", mesCompradosSelecionado);
+  renderListaEm("listaCompradosSemana2", dados.filter(item => itemEstaNaSemana(item, 2)), "comprados", mesCompradosSelecionado);
+  renderListaEm("listaCompradosSemana3", dados.filter(item => itemEstaNaSemana(item, 3)), "comprados", mesCompradosSelecionado);
+  renderListaEm("listaCompradosSemana4", dados.filter(item => itemEstaNaSemana(item, 4)), "comprados", mesCompradosSelecionado);
+  renderListaEm("listaCompradosSemana5", dados.filter(item => itemEstaNaSemana(item, 5)), "comprados", mesCompradosSelecionado);
+}
+
+function montarSelectMesResumo(){
+  montarSelectMes("resumoMesSelect", document.getElementById("resumoMesSelect")?.value || getMesKeyAtual());
+}
+
+function getDadosDoMesResumoSelecionado(){
+  const keySelecionada = document.getElementById("resumoMesSelect").value;
+  return getDadosDoMesSelecionado(keySelecionada);
+}
+
+function dataEstaNaSemanaDoMes(data, numeroSemana){
+  if(!(data instanceof Date) || isNaN(data.getTime())) return false;
+  const dia = data.getDate();
+  const inicio = 1 + ((Number(numeroSemana) - 1) * 7);
+  const fim = 7 + ((Number(numeroSemana) - 1) * 7);
+  return dia >= inicio && dia <= fim;
+}
+
+function aplicarFiltroResumo(tipo){
+  filtroResumoAtual = tipo;
+
+  document.getElementById("filtroResumoMes").classList.remove("ativo");
+  document.getElementById("filtroResumoSemana").classList.remove("ativo");
+
+  const wrapMes = document.getElementById("resumoMesSelectWrap");
+  const wrapSemana = document.getElementById("resumoSemanaSelectWrap");
+
+  if(tipo === "mes"){
+    document.getElementById("filtroResumoMes").classList.add("ativo");
+    wrapMes.classList.add("show");
+    wrapSemana.classList.remove("show");
+  }else{
+    document.getElementById("filtroResumoSemana").classList.add("ativo");
+    wrapMes.classList.add("show");
+    wrapSemana.classList.add("show");
+  }
+
+  renderResumo();
+}
+
+function abrirResumo(){
+  montarSelectMesResumo();
+  document.getElementById("resumoSemanaSelect").value = "1";
+  aplicarFiltroResumo("mes");
+  document.getElementById("modalResumo").classList.add("show");
+}
+
+function fecharResumo(){
+  document.getElementById("modalResumo").classList.remove("show");
+}
+
+function aoTrocarMesResumo(){
+  renderResumo();
+}
+
+function renderResumo(){
+  let dados = getDadosDoMesResumoSelecionado()
+    .filter(item => item.comprado && item.dataCompraISO)
+    .sort((a,b) => new Date(b.dataCompraISO) - new Date(a.dataCompraISO));
+
+  const mesSelecionado = document.getElementById("resumoMesSelect").value;
+  const [anoSelecionado, mesSelecionadoNumero] = mesSelecionado.split("-").map(Number);
+
+  dados = dados.filter(item => {
+    const d = new Date(item.dataCompraISO);
+    return d.getFullYear() === anoSelecionado && (d.getMonth() + 1) === mesSelecionadoNumero;
+  });
+
+  if(filtroResumoAtual === "semana"){
+    const semanaSelecionada = document.getElementById("resumoSemanaSelect").value;
+    dados = dados.filter(item => {
+      const d = new Date(item.dataCompraISO);
+      return dataEstaNaSemanaDoMes(d, semanaSelecionada);
+    });
+  }
+
+  const container = document.getElementById("resumoLista");
+
+  if(!dados.length){
+    container.innerHTML = `<div class="empty">Nenhum alimento comprado nesse período.</div>`;
+    return;
+  }
+
+  container.innerHTML = dados.map(item => `
+    <div class="resumoItem">
+      <div class="resumoLinha">
+        <span class="resumoNome">${escapeHtml(item.nome)}</span>
+        <span class="resumoDetalheInline">${montarTextoQuantidadePeso(item)}</span>
+        <span class="resumoDetalheInline">${escapeHtml(item.dataCompraTexto || "")}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+function abrirModalFuturasEdicoes(){
+  document.getElementById("futurasEdicoesTexto").value =
+    localStorage.getItem(CHAVE_FUTURAS_EDICOES_LISTA_COMPRAS) || "";
+  document.getElementById("modalFuturasEdicoes").classList.add("show");
+}
+
+function fecharModalFuturasEdicoes(){
+  document.getElementById("modalFuturasEdicoes").classList.remove("show");
+}
+
+function salvarFuturasEdicoes(){
+  localStorage.setItem(
+    CHAVE_FUTURAS_EDICOES_LISTA_COMPRAS,
+    document.getElementById("futurasEdicoesTexto").value
+  );
+  fecharModalFuturasEdicoes();
+}
+
+function renderTudo(){
+  renderParaComprar();
+  renderComprados();
+}
+
+document.addEventListener("click", function(event){
+  ["ParaComprar", "Comprados"].forEach(tipo => {
+    const wrap = document.getElementById(`multiFiltroWrap${tipo}`);
+    const dropdown = document.getElementById(`multiFiltroDropdown${tipo}`);
+
+    if(wrap && dropdown && !wrap.contains(event.target)){
+      dropdown.classList.remove("show");
+    }
+  });
+});
+
+garantirHistoricoMensal();
+montarSelectMes("mesAnoParaComprar", mesParaComprarSelecionado);
+montarSelectMes("mesAnoComprados", mesCompradosSelecionado);
+atualizarMultiFiltro("ParaComprar");
+atualizarMultiFiltro("Comprados");
+renderTudo();
+</script>
+
+</body>
+</html>
