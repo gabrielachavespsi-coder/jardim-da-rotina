@@ -4,149 +4,877 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Autocuidado, Movimento e Silêncio</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-html,body{margin:0;padding:0;font-family:'Poppins',sans-serif;background:#f2f1ee;}
-body{display:flex;justify-content:center;}
-.pagina{width:100%;max-width:420px;min-height:100vh;padding:14px;box-sizing:border-box;}
-.topo{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-.botao-voltar{border:none;background:#e9e8e4;border-radius:14px;padding:8px 14px;font-size:15px;font-family:'Poppins',sans-serif;cursor:pointer;}
-.titulo{display:flex;align-items:center;gap:10px;font-size:19px;color:#3e6b5c;font-weight:400;}
-.caixa-grande{background:#f7f6f3;border-radius:22px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,0.05);}
-.lista{display:flex;flex-direction:column;gap:12px;}
-.tarefa{background:#ffffff;border:none;border-radius:18px;padding:16px;display:grid;grid-template-columns:40px 1fr 60px;align-items:center;box-shadow:0 4px 10px rgba(0,0,0,0.06);cursor:pointer;font-family:'Poppins',sans-serif;}
-.tarefa.feita{opacity:0.55;}
-.check{font-size:16px;visibility:hidden;}
-.tarefa.feita .check{visibility:visible;}
-.nome{text-align:center;font-size:15px;color:#6c757d;}
-.hora{text-align:right;font-size:12px;color:#b0b0b0;}
-.info{margin-top:20px;background:#efefec;border-radius:18px;padding:18px 16px 20px;text-align:center;}
-.info-titulo{font-size:13px;font-weight:400;color:#5a4635;margin-bottom:4px;line-height:1.4;}
-.info-data,.info-ultima{font-size:12px;color:#8c7a6a;line-height:1.4;}
-.info-ultima{margin-bottom:10px;}
-.info-flores{font-size:18px;line-height:1.2;margin-bottom:8px;word-spacing:2px;}
-.info-texto{font-size:12px;color:#8c7a6a;line-height:1.5;margin:0;}
-.info-texto-final{font-size:11px;color:#7a5f4d;line-height:1.5;margin-top:12px;}
+:root{
+  --verde-principal:#F2F7F1;
+  --verde-hover:#E8F1E6;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#6B6B6B;
+  --borda:#E3E5E1;
+
+  --fonte:'Poppins',sans-serif;
+
+  --titulo:20px;
+  --botao:15px;
+
+  --sombra-suave:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.modalHeader{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.fecharModal{
+  background:#E9ECE7;
+  border:none;
+  width:32px;
+  height:32px;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.configItem{
+  display:grid;
+  grid-template-columns:1fr 110px;
+  gap:8px;
+  align-items:center;
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:10px;
+}
+
+.configBotoes{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+}
+
+.configBotoes button{
+  border:none;
+  border-radius:10px;
+  padding:8px;
+  font-size:11px;
+  font-family:var(--fonte);
+  cursor:pointer;
+  background:#efefef;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html, body{
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:16px;
+}
+
+.pagina{
+  width:100%;
+  max-width:420px;
+}
+
+.card{
+  width:100%;
+  background:var(--card);
+  border-radius:24px;
+  padding:22px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.topo{
+  display:grid;
+  grid-template-columns:40px 1fr 58px;
+  align-items:start;
+  gap:8px;
+  margin-bottom:6px;
+}
+
+.botao-voltar{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  border-radius:12px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  padding:0;
+  transition:0.2s ease;
+}
+
+.botao-voltar:hover{
+  background:#dde3d9;
+}
+
+.botao-voltar span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  transform:translateY(-1px);
+}
+
+.topCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding-top:2px;
+}
+
+.titleIndex{
+  color:var(--texto-principal);
+  font-weight:500;
+  font-size:var(--titulo);
+  margin:0;
+  line-height:1.2;
+  text-align:center;
+}
+
+.subtitulo{
+  font-size:12px;
+  color:var(--texto-secundario);
+  margin-top:2px;
+  text-align:center;
+}
+
+.dataTopo{
+  min-height:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:flex-start;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:1px;
+}
+
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  white-space:nowrap;
+  margin-bottom:2px;
+}
+
+.dataTopoLinha{
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.caixa-grande{
+  background:#F7F8F6;
+  border:1px solid var(--borda);
+  border-radius:20px;
+  padding:14px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+.lista{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.tarefa{
+  width:100%;
+  background:var(--verde-principal);
+  border:none;
+  border-radius:18px;        /* ← igual autocuidado */
+
+  padding:12px 14px;         /* ← PRINCIPAL ajuste */
+  display:grid;
+  grid-template-columns:22px 1fr auto;  /* ← mais espaço */
+  align-items:flex-start;
+  gap:10px;                  /* ← mais respiro */
+
+  cursor:pointer;
+  font-family:var(--fonte);
+  transition:0.2s ease;
+}
+
+.tarefa:hover{
+  background:var(--verde-hover);
+}
+
+.tarefa.feita{
+  opacity:0.68;
+}
+
+.check{
+  font-size:13px;
+  line-height:1;
+  visibility:hidden;
+  align-self:start;
+  margin-top:4px;
+}
+
+.tarefa.feita .check{
+  visibility:visible;
+}
+
+.nome{
+  text-align:left;
+  font-size:14px;
+  color:var(--verde-texto);
+  line-height:1.6;
+  font-weight:400;
+  white-space:normal;
+}
+
+.grupo-titulo{
+  display:block;
+  margin-bottom:2px;
+  font-size:14px;
+  font-weight:400;
+  color:var(--verde-texto);
+  line-height:1.4;
+}
+
+.sublista-tarefa{
+  display:block;
+  margin-top:2px;
+  margin-left:12px;
+  font-size:12.5px;
+  line-height:1.45;
+  color:rgba(63,111,79,0.88);
+}
+
+.descricao-tarefa{
+  display:block;
+  margin-top:2px;
+  font-size:12px;
+  color:rgba(63,111,79,0.7);
+}
+
+.hora{
+  text-align:right;
+  font-size:12px;
+  color:rgba(63,111,79,0.72);
+  white-space:nowrap;
+  align-self:start;
+  margin-top:4px;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  margin-top:4px;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  transition:0.2s ease;
+}
+
+.futureBtn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:flex-start; /* ← AQUI */
+  padding:24px 16px;       /* ← AQUI */
+  z-index:999;
+  overflow-y:auto;         /* ← AQUI */
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  max-height:85vh;      /* ← IMPORTANTE */
+  overflow-y:auto;      /* ← IMPORTANTE */
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.modalTitle{
+  font-size:18px;
+  color:var(--texto-principal);
+  text-align:center;
+  font-weight:500;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+  font-family:var(--fonte);
+  font-weight:500;
+}
+
+textarea{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  height:260px;
+  resize:none;
+}
+
+textarea:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+}
+
+.modalBtns{
+  display:flex;
+  gap:8px;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:11px 12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:12.5px;
+  transition:0.2s ease;
+}
+
+.cancel{
+  background:#efefef;
+  color:#333;
+}
+
+.cancel:hover{
+  background:#e7e7e7;
+}
+
+.save{
+  background:var(--verde-escuro);
+  color:white;
+}
+
+.save:hover{
+  background:#4f8a4f;
+}
+
+@media (max-width: 390px){
+  body{
+    padding:14px;
+  }
+
+  .card{
+    padding:20px 14px 16px;
+  }
+
+  .titleIndex{
+    font-size:19px;
+  }
+
+  .topo{
+    grid-template-columns:40px 1fr 54px;
+  }
+
+  .horaTopo{
+    font-size:13px;
+  }
+
+  .dataTopoLinha{
+    font-size:10.5px;
+  }
+
+  .tarefa{
+    grid-template-columns:20px 1fr auto;
+    padding:12px 12px;
+    gap:8px;
+  }
+
+  .nome{
+    font-size:13.5px;
+  }
+
+  .grupo-titulo{
+    font-size:13.5px;
+  }
+
+  .sublista-tarefa{
+    font-size:12px;
+    margin-left:10px;
+  }
+
+  .hora{
+    font-size:11.5px;
+  }
+}
 </style>
 </head>
 <body>
+
 <div class="pagina">
-  <div class="topo">
-    <button class="botao-voltar" onclick="window.location.href='gabriela-menu.html'">← Voltar</button>
-    <div class="titulo">🌿 Autocuidado, Movimento e Silêncio</div>
-  </div>
+  <div class="card">
 
-  <div class="caixa-grande">
-    <div class="lista" id="lista-tarefas"></div>
+    <div class="topo">
+      <button class="botao-voltar" onclick="window.location.href='gabriela-menu.html'"><span>←</span></button>
 
-    <div class="info">
-      <div class="info-titulo" id="contador">Jardim do bloco • 0/13 concluídas</div>
-      <div class="info-data" id="data-bloco"></div>
-      <div class="info-ultima" id="ultima">Última marcação: --</div>
-      <div class="info-flores" id="jardim"></div>
-      <div class="info-texto">Toque numa tarefa para a flor abrir 🌸</div>
-      <div class="info-texto-final">Yoga aparece somente às terças e quintas.</div>
+      <div class="topCenter">
+        <h1 class="titleIndex">🌿 Gabriela</h1>
+        <p class="subtitulo">autocuidado, movimento e silêncio</p>
+      </div>
+
+      <div class="dataTopo" aria-label="Data e hora atuais">
+        <div id="linhaTempoHora" class="horaTopo"></div>
+        <div id="linhaTempoDia" class="dataTopoLinha"></div>
+        <div id="linhaTempoData" class="dataTopoLinha"></div>
+      </div>
     </div>
+
+    <div class="caixa-grande">
+      <div class="lista" id="lista-tarefas"></div>
+    </div>
+
+<div class="footerMiniAction">
+  <button class="futureBtn" onclick="abrirModalConfiguracao()">configuração</button>
+  <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+</div>
+
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalFuturasEdicoes">
+  <div class="modal">
+    <h2 class="modalTitle">Futuras edições</h2>
+
+    <div class="field">
+      <label>Ideias de melhorias futuras</label>
+      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalConfiguracao">
+  <div class="modal">
+
+    <div class="modalHeader">
+  <button class="fecharModal" onclick="fecharModalConfiguracao()">✕</button>
+</div>
+
+    <h2 class="modalTitle">Configuração da rotina</h2>
+
+    <div class="field">
+      <label>Nova tarefa</label>
+      <textarea id="novaTarefaTexto" style="height:70px;"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Descrição</label>
+      <textarea id="novaTarefaDescricao" style="height:70px;"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Horário</label>
+      <textarea id="novaTarefaHora" style="height:50px;" placeholder="Ex: 1030"></textarea>
+    </div>
+
+<div class="modalBtns">
+  <button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
+  <button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
+</div>
+
+<div id="listaConfigTarefas"></div>
+
   </div>
 </div>
 
 <script>
 const tarefasBloco = [
-{ nome:"🤸‍♀️ Movimentar o corpo na cama", hora:"05h" },
-{ nome:"🚽 Fazer xixi", hora:"05h" },
-{ nome:"👅 Raspar língua", hora:"05h" },
-{ nome:"🪥 Escovar os dentes", hora:"05h" },
-{ nome:"🚿 Lavar o rosto", hora:"05h" },
-{ nome:"🥛🍋 Copo d'água morna com limão", hora:"05h" },
-{ nome:"💊 Remédio tireoide", hora:"05h" },
-{ nome:"🪟🌿 Abrir a janela e ouvir a natureza", hora:"05h" },
-{ nome:"🚶 Caminhada de 10 a 20 min", hora:"05h30m" },
-{ nome:"💪 Calistenia de 10 a 30 min", hora:"05h30m" },
-{ nome:"🙏☀️ Yoga 3 rondas Saudação ao Sol", hora:"05h30m", dias:["2","4"] },
-{ nome:"🧘 Kriya / meditação", hora:"06h" },
-{ nome:"🚿 Banho", hora:"06h" }
+  { nome:"🤸‍♀️ Movimentar o corpo na cama", hora:"05h" },
+  {
+    nome:`<span class="grupo-titulo">🧼 Higiene matinal</span><span class="sublista-tarefa">🚽 Fazer xixi<br>👅 Raspar língua<br>🪥 Escovar os dentes<br>🚿 Lavar o rosto</span>`,
+    hora:"05h"
+  },
+  {
+    nome:`<span class="grupo-titulo">🌿 Cuidado inicial</span><span class="sublista-tarefa">🥛🍋 Copo d'água morna com limão<br>💊 Remédio da tireoide</span>`,
+    hora:"05h"
+  },
+  { nome:"🚶 Caminhada de 10 a 20 min", hora:"05h30m" },
+  { nome:"💪 Calistenia de 10 a 30 min", hora:"05h30m" },
+  { nome:"🙏☀️ Yoga 3 rondas Saudação ao Sol", hora:"05h30m", dias:["2","4"] },
+  { nome:"🧘 Kriya + Meditação", hora:"06h" },
+  { nome:"🚿 Banho", hora:"06h" }
 ];
 
 const chaveBase = "gabriela_autocuidado_movimento_silencio";
+const CHAVE_FUTURAS_EDICOES_AUTOCUIDADO = "futuras_edicoes_gabriela_autocuidado_movimento_silencio";
 
-function diaSemanaHoje(){ return String(new Date().getDay()); } // 0 dom, 1 seg, 2 ter...
+function pad2(numero){
+  return String(numero).padStart(2, "0");
+}
+
+function formatarSubtituloBotao(texto){
+  return String(texto || "").replace(/\s+e\s+/gi, " • ");
+}
+
+function atualizarLinhaTempo(){
+  const agora = new Date();
+  const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+  document.getElementById("linhaTempoHora").textContent = `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+  document.getElementById("linhaTempoDia").textContent = `• ${diasCurtos[agora.getDay()]}`;
+  document.getElementById("linhaTempoData").textContent = `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
+}
+
+function diaSemanaHoje(){
+  return String(new Date().getDay());
+}
+
+function getConfigTarefas(){
+  try{
+    const cfg = JSON.parse(localStorage.getItem("config_tarefas_autocuidado") || "{}");
+    if(!Array.isArray(cfg.custom)) cfg.custom = [];
+    if(!Array.isArray(cfg.removidas)) cfg.removidas = [];
+    return cfg;
+  }catch(e){
+    return { custom:[], removidas:[] };
+  }
+}
+
+function salvarConfigTarefas(cfg){
+  localStorage.setItem("config_tarefas_autocuidado", JSON.stringify(cfg));
+}
+
+function todasAsTarefas(){
+  const cfg = getConfigTarefas();
+
+  const base = tarefasBloco
+    .map((tarefa, index) => {
+      const id = `base_${index}`;
+      return {
+        ...tarefa,
+        id,
+        ...(cfg.editadas && cfg.editadas[id] ? cfg.editadas[id] : {})
+      };
+    })
+    .filter(tarefa => !cfg.removidas.includes(tarefa.id));
+
+  const custom = cfg.custom || [];
+
+  return [...base, ...custom];
+}
+
 function tarefasVisiveis(){
   const hoje = diaSemanaHoje();
-  return tarefasBloco.filter(t => !t.dias || t.dias.includes(hoje));
+  return todasAsTarefas().filter(t => !t.dias || t.dias.includes(hoje));
 }
+
 function chaveDoDia(){
   const hoje = new Date();
   const ano = hoje.getFullYear();
-  const mes = String(hoje.getMonth()+1).padStart(2,"0");
+  const mes = String(hoje.getMonth() + 1).padStart(2,"0");
   const dia = String(hoje.getDate()).padStart(2,"0");
   return `${chaveBase}_${ano}-${mes}-${dia}`;
 }
-function chaveUltimaMarcacao(){
-  const hoje = new Date();
-  const ano = hoje.getFullYear();
-  const mes = String(hoje.getMonth()+1).padStart(2,"0");
-  const dia = String(hoje.getDate()).padStart(2,"0");
-  return `${chaveBase}_ultima_${ano}-${mes}-${dia}`;
-}
+
 function obterEstado(){
   const visiveis = tarefasVisiveis();
   const salvo = localStorage.getItem(chaveDoDia());
+
   if(salvo){
-    const estado = JSON.parse(salvo);
-    if(estado.length === visiveis.length) return estado;
+    try{
+      const estado = JSON.parse(salvo);
+      if(Array.isArray(estado) && estado.length === visiveis.length){
+        return estado;
+      }
+    }catch(e){}
   }
+
   const estadoInicial = visiveis.map(() => false);
   localStorage.setItem(chaveDoDia(), JSON.stringify(estadoInicial));
   return estadoInicial;
 }
-function salvarEstado(estado){ localStorage.setItem(chaveDoDia(), JSON.stringify(estado)); }
-function salvarUltimaMarcacao(texto){ localStorage.setItem(chaveUltimaMarcacao(), texto); }
-function obterUltimaMarcacao(){ return localStorage.getItem(chaveUltimaMarcacao()) || "--"; }
-function formatarDataHoje(){
-  const hoje = new Date();
-  return `${String(hoje.getDate()).padStart(2,"0")}/${String(hoje.getMonth()+1).padStart(2,"0")}/${hoje.getFullYear()}`;
+
+function salvarEstado(estado){
+  localStorage.setItem(chaveDoDia(), JSON.stringify(estado));
 }
-function atualizarJardim(concluidas,total){
-  let jardim = "";
-  for(let i=0;i<total;i++){ jardim += i < concluidas ? "🌸 " : "🌱 "; }
-  document.getElementById("jardim").innerText = jardim.trim();
-}
-function atualizarResumo(){
-  const estado = obterEstado();
-  const total = tarefasVisiveis().length;
-  const concluidas = estado.filter(Boolean).length;
-  document.getElementById("contador").innerText = `Jardim do bloco • ${concluidas}/${total} concluídas`;
-  document.getElementById("ultima").innerText = `Última marcação: ${obterUltimaMarcacao()}`;
-  atualizarJardim(concluidas,total);
-}
+
 function alternarTarefa(indice){
   const estado = obterEstado();
   estado[indice] = !estado[indice];
   salvarEstado(estado);
-  const agora = new Date();
-  salvarUltimaMarcacao(`${String(agora.getHours()).padStart(2,"0")}:${String(agora.getMinutes()).padStart(2,"0")}`);
   renderizarTarefas();
-  atualizarResumo();
 }
+
 function renderizarTarefas(){
   const lista = document.getElementById("lista-tarefas");
   const visiveis = tarefasVisiveis();
   const estado = obterEstado();
+
   lista.innerHTML = "";
-  visiveis.forEach((tarefa,indice) => {
+
+  visiveis.forEach((tarefa, indice) => {
     const botao = document.createElement("button");
     botao.className = "tarefa" + (estado[indice] ? " feita" : "");
     botao.onclick = () => alternarTarefa(indice);
-    botao.innerHTML = `<span class="check">🌸</span><span class="nome">${tarefa.nome}</span><span class="hora">${tarefa.hora}</span>`;
+botao.innerHTML = `
+  <span class="check">✅</span>
+  <span class="nome">
+    ${formatarSubtituloBotao(tarefa.nome)}
+    ${tarefa.descricao ? `<span class="descricao-tarefa">${formatarSubtituloBotao(tarefa.descricao)}</span>` : ""}
+  </span>
+  <span class="hora">${tarefa.hora}</span>
+`;
     lista.appendChild(botao);
   });
 }
+
 function iniciarTela(){
-  document.getElementById("data-bloco").innerText = `Dia do bloco: ${formatarDataHoje()}`;
+  atualizarLinhaTempo();
   renderizarTarefas();
-  atualizarResumo();
 }
-window.addEventListener("load", iniciarTela);
+
+function abrirModalFuturasEdicoes(){
+  document.getElementById("futurasEdicoesTexto").value =
+    localStorage.getItem(CHAVE_FUTURAS_EDICOES_AUTOCUIDADO) || "";
+  document.getElementById("modalFuturasEdicoes").classList.add("show");
+}
+
+function fecharModalFuturasEdicoes(){
+  document.getElementById("modalFuturasEdicoes").classList.remove("show");
+}
+
+function salvarFuturasEdicoes(){
+  localStorage.setItem(
+    CHAVE_FUTURAS_EDICOES_AUTOCUIDADO,
+    document.getElementById("futurasEdicoesTexto").value
+  );
+  fecharModalFuturasEdicoes();
+}
+
+function abrirModalConfiguracao(){
+  document.getElementById("modalConfiguracao").classList.add("show");
+  renderizarListaConfiguracao();
+}
+
+function fecharModalConfiguracao(){
+  document.getElementById("modalConfiguracao").classList.remove("show");
+}
+
+function formatarHorarioRotina(valor){
+  const numeros = String(valor).replace(/\D/g,"").slice(0,4);
+  if(!numeros) return "";
+
+  const preenchido = numeros.padStart(4,"0");
+  return preenchido.slice(0,2)+"h"+preenchido.slice(2)+"m";
+}
+
+function adicionarTarefaConfiguracao(){
+  const nome = document.getElementById("novaTarefaTexto").value.trim();
+  const desc = document.getElementById("novaTarefaDescricao").value.trim();
+  const hora = formatarHorarioRotina(document.getElementById("novaTarefaHora").value);
+
+  if(!nome) return;
+
+  const cfg = getConfigTarefas();
+
+  cfg.custom.push({
+    id: `custom_${Date.now()}`,
+    nome: nome,
+    descricao: desc,
+    hora: hora
+  });
+
+  salvarConfigTarefas(cfg);
+
+  document.getElementById("novaTarefaTexto").value = "";
+  document.getElementById("novaTarefaDescricao").value = "";
+  document.getElementById("novaTarefaHora").value = "";
+
+  renderizarListaConfiguracao();
+  renderizarTarefas();
+}
+
+function renderizarListaConfiguracao(){
+  const lista = document.getElementById("listaConfigTarefas");
+  lista.innerHTML = "";
+
+  const tarefas = todasAsTarefas();
+
+  tarefas.forEach((tarefa) => {
+    const item = document.createElement("div");
+item.className = "configItem";
+
+    const texto = document.createElement("div");
+    texto.style.fontSize = "12px";
+    texto.textContent = `${String(tarefa.nome).replace(/<[^>]*>/g, "")} • ${tarefa.hora || ""}`;
+
+    const botoes = document.createElement("div");
+    botoes.className = "configBotoes";
+
+    const editar = document.createElement("button");
+    editar.textContent = "editar";
+    editar.onclick = () => editarTarefa(tarefa.id);
+
+    const excluir = document.createElement("button");
+    excluir.textContent = "retirar";
+    excluir.onclick = () => excluirTarefa(tarefa.id);
+
+    botoes.appendChild(editar);
+    botoes.appendChild(excluir);
+
+    item.appendChild(texto);
+    item.appendChild(botoes);
+    lista.appendChild(item);
+  });
+}
+
+function editarTarefa(id){
+  const senha = prompt("Digite a senha:");
+
+  if(senha !== "1234"){
+    alert("Senha incorreta");
+    return;
+  }
+
+  const cfg = getConfigTarefas();
+  const tarefas = todasAsTarefas();
+  const tarefa = tarefas.find(t => t.id === id);
+
+  if(!tarefa) return;
+
+  const novoNome = prompt("Novo nome:", String(tarefa.nome || "").replace(/<[^>]*>/g, ""));
+  if(novoNome === null) return;
+
+  const novaDescricao = prompt("Nova descrição:", tarefa.descricao || "");
+  if(novaDescricao === null) return;
+
+  const novaHora = prompt("Novo horário:", tarefa.hora || "");
+  if(novaHora === null) return;
+
+  if(id.startsWith("custom_")){
+    const itemCustom = cfg.custom.find(t => t.id === id);
+    if(itemCustom){
+      itemCustom.nome = novoNome;
+      itemCustom.descricao = novaDescricao;
+      itemCustom.hora = formatarHorarioRotina(novaHora);
+    }
+  }else{
+    if(!cfg.editadas) cfg.editadas = {};
+    cfg.editadas[id] = {
+      nome: novoNome,
+      descricao: novaDescricao,
+      hora: formatarHorarioRotina(novaHora)
+    };
+  }
+
+  salvarConfigTarefas(cfg);
+  renderizarTarefas();
+  renderizarListaConfiguracao();
+}
+
+function excluirTarefa(id){
+  const senha = prompt("Digite a senha:");
+
+  if(senha !== "1234"){
+    alert("Senha incorreta");
+    return;
+  }
+
+  const cfg = getConfigTarefas();
+
+  if(id.startsWith("custom_")){
+    cfg.custom = cfg.custom.filter(t => t.id !== id);
+  }else{
+    if(!Array.isArray(cfg.removidas)) cfg.removidas = [];
+    if(!cfg.removidas.includes(id)) cfg.removidas.push(id);
+  }
+
+  salvarConfigTarefas(cfg);
+  renderizarTarefas();
+  renderizarListaConfiguracao();
+}
+
+window.addEventListener("load", () => {
+  iniciarTela();
+  setInterval(atualizarLinhaTempo, 1000);
+});
+
+window.addEventListener("pageshow", () => {
+  atualizarLinhaTempo();
+  renderizarTarefas();
+});
+
+window.addEventListener("focus", () => {
+  atualizarLinhaTempo();
+  renderizarTarefas();
+});
+
+window.addEventListener("storage", () => {
+  renderizarTarefas();
+  atualizarLinhaTempo();
+});
 </script>
+
 </body>
 </html>

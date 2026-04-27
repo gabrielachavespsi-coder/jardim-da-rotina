@@ -1,306 +1,1228 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agenda da Maya</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Minha Agenda</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <script src="https://apis.google.com/js/api.js"></script>
 <script src="https://accounts.google.com/gsi/client"></script>
 
 <style>
-*{
-  box-sizing:border-box;
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#7A8178;
+  --borda:#E3E5E1;
+  --amarelo:#F6D76B;
+  --fonte:'Poppins',sans-serif;
+  --titulo:21px;
+  --sombra-suave:0 10px 30px rgba(63,111,79,0.08);
 }
 
-html, body{
-  margin:0;
-  padding:0;
-  font-family:'Poppins',sans-serif;
-  background:#f2f1ee;
-  color:#2f3a2f;
-}
+*{box-sizing:border-box;margin:0;padding:0;}
 
 body{
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
   display:flex;
   justify-content:center;
+  padding:20px 14px;
 }
 
-.pagina{
+.pagina{width:100%;max-width:420px;}
+
+.card{
   width:100%;
-  max-width:420px;
-  min-height:100vh;
-  padding:14px;
+  background:var(--card);
+  border-radius:28px;
+  padding:20px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  border:1px solid rgba(227,229,225,0.8);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
 }
 
 .topo{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  display:grid;
+  grid-template-columns:42px 1fr 64px;
+  align-items:start;
   gap:10px;
-  margin-bottom:14px;
 }
 
 .botao-voltar{
   border:none;
-  background:#e9e8e4;
+  background:#EEF1EC;
   border-radius:14px;
-  padding:8px 14px;
-  font-size:14px;
-  font-family:'Poppins',sans-serif;
+  width:42px;
+  height:42px;
   cursor:pointer;
-  color:#3d3d3d;
-}
-
-.titulo{
-  flex:1;
-  text-align:center;
   font-size:18px;
-  font-weight:600;
-  color:#2f4f2f;
+  font-family:var(--fonte);
+  color:var(--texto-principal);
 }
 
-.icone-topo{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:#dce9d2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:16px;
-}
+.topCenter{text-align:center;padding-top:3px;}
 
-.card{
-  background:#fffdf8;
-  border-radius:18px;
-  padding:14px;
-  margin-bottom:14px;
-  box-shadow:0 4px 14px rgba(0,0,0,0.06);
-  border:1px solid rgba(120,140,120,0.10);
-}
-
-.card-boasvindas{
-  background:linear-gradient(180deg,#eaf4df 0%, #e2efd6 100%);
-  text-align:center;
-  border:1px solid #cfdcbc;
-}
-
-.titulo-boasvindas{
-  font-size:15px;
-  font-weight:600;
-  margin-bottom:4px;
-  color:#3d573a;
-}
-
-.texto-boasvindas{
-  font-size:13px;
-  line-height:1.35;
-  color:#4c5f49;
-}
-
-.status-box{
-  background:#eef7e8;
-  border:1px solid #cfe3c4;
-  color:#35512f;
-  border-radius:12px;
-  padding:10px 12px;
-  font-size:14px;
-  font-weight:500;
-  margin-bottom:10px;
-}
-
-.info-texto{
-  font-size:13px;
-  color:#5b6158;
-  margin-bottom:6px;
-  word-break:break-word;
+.titleIndex{
+  font-size:var(--titulo);
+  font-weight:400;
+  line-height:1.15;
 }
 
 .subtitulo{
-  text-align:center;
-  font-size:15px;
-  font-weight:600;
-  margin-bottom:12px;
-  color:#3f463d;
+  font-size:12px;
+  color:var(--texto-secundario);
+  margin-top:3px;
 }
 
-.botao-acao{
-  width:100%;
-  border:none;
-  border-radius:14px;
+.dataTopo{
+  min-height:42px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:2px;
+}
+
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  margin-bottom:3px;
+}
+
+.dataTopoLinha{font-size:11px;white-space:nowrap;}
+
+.eventosBox{
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:16px;
   padding:14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  cursor:pointer;
-  font-family:'Poppins',sans-serif;
-  margin-bottom:10px;
+  text-align:center;
 }
 
-.botao-esquerda{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-align:left;
+.eventosTitulo{
+  font-size:14px;
+  color:var(--verde-texto);
+  margin-bottom:6px;
+  font-weight:500;
 }
 
-.icone-botao{
-  width:42px;
-  height:42px;
-  min-width:42px;
-  border-radius:12px;
+.botoesAgenda{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.botoesAgenda .botao{
+  min-height:46px;
+  padding:10px 8px;
+  border-radius:16px;
+  font-size:12px;
+  font-weight:400;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:19px;
-  color:#fff;
+  line-height:1.25;
 }
 
-.botao-titulo{
-  font-size:15px;
-  font-weight:600;
-  line-height:1.15;
-}
-
-.botao-subtitulo{
-  font-size:12px;
-  opacity:0.86;
-  line-height:1.15;
-}
-
-.seta{
-  font-size:20px;
-  color:#4e5a4c;
-}
-
-.botao-google{
-  background:#eef5ff;
-  border:2px solid #9ec1f5;
-}
-
-.botao-google .icone-botao{
-  background:#2f7cf6;
-}
-
-.botao-google .botao-titulo,
-.botao-google .botao-subtitulo{
-  color:#284d89;
-}
-
-.botao-verde{
-  background:#edf8ea;
-  border:2px solid #abd59f;
-}
-
-.botao-verde .icone-botao{
-  background:#459b49;
-}
-
-.botao-verde .botao-titulo,
-.botao-verde .botao-subtitulo{
-  color:#2f6f35;
-}
-
-.botao-roxo{
-  background:#f5ebfb;
-  border:2px solid #cca8e9;
-}
-
-.botao-roxo .icone-botao{
-  background:#8e49c7;
-}
-
-.botao-roxo .botao-titulo,
-.botao-roxo .botao-subtitulo{
-  color:#663391;
-}
-
-.box-seguro{
-  background:#fff2df;
-  border:1px solid #ecd3aa;
-  color:#7a5a22;
-  border-radius:12px;
-  padding:10px 12px;
-  font-size:12px;
-  line-height:1.35;
-  text-align:center;
-}
-
-.seletor-box{
-  margin-top:10px;
-}
-
-label{
-  display:block;
-  text-align:left;
-  font-size:13px;
-  font-weight:500;
-  color:#556054;
-  margin-bottom:6px;
-}
-
-select{
+.botao{
   width:100%;
-  padding:11px 12px;
-  border-radius:12px;
-  border:1px solid #d8d8d8;
-  font-family:'Poppins',sans-serif;
+  border:none;
+  border-radius:20px;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  padding:15px 14px;
   font-size:14px;
-  background:#fff;
-  outline:none;
-}
-
-.eventos-titulo{
-  font-size:16px;
-  font-weight:600;
-  color:#344734;
-  margin:0 0 10px 0;
-}
-
-.lista-vazia{
-  font-size:13px;
-  color:#666;
+  font-family:var(--fonte);
+  cursor:pointer;
+  transition:0.2s ease;
   text-align:center;
-  padding:8px 0 2px;
+}
+
+.botao:hover{background:var(--verde-hover);}
+
+.botao.secundario{
+  background:#EEF1EC;
+  color:var(--texto-secundario);
+}
+
+.botao.pequeno{
+  padding:11px 12px;
+  border-radius:14px;
+  font-size:12px;
+}
+
+.botoesPeriodo{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+}
+
+.botaoPeriodo{
+  border:none;
+  background:#EEF1EC;
+  color:var(--texto-secundario);
+  border-radius:14px;
+  padding:10px 8px;
+  font-size:12px;
+  font-family:var(--fonte);
+  cursor:pointer;
+}
+
+.botaoPeriodo.ativo{
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+}
+
+.listaEventos{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:8px;
 }
 
 .evento{
+  background:#FFFFFF;
+  border:1px solid var(--borda);
   border-radius:14px;
-  padding:12px;
-  margin-bottom:10px;
-  background:#fcfcfc;
-  border:2px solid #e6e6e6;
+  padding:10px 12px;
   text-align:left;
 }
 
-.evento-topo{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
+.evento.proximoDia{
+  border-color:#F0CC58;
+  background:#FFFDF2;
+  box-shadow:inset 0 -5px 0 rgba(246,215,107,0.55);
+}
+
+.evento.rotina{
+  background:#F9FBF8;
+}
+
+.evento.agenda{
+  border-left:5px solid var(--verde-escuro);
+  background:#FFFFFF;
+}
+
+.eventoHora{
+  font-size:11px;
+  color:var(--verde-texto);
+  font-weight:500;
   margin-bottom:4px;
 }
 
-.evento-hora{
-  display:inline-block;
-  min-width:70px;
-  text-align:center;
-  font-size:12px;
-  font-weight:600;
-  color:#fff;
-  background:#6d7df0;
-  border-radius:8px;
-  padding:4px 8px;
+.eventoTitulo{
+  font-size:13px;
+  color:var(--texto-principal);
+  line-height:1.35;
 }
 
-.evento-status{
+.eventoLocal{
   font-size:11px;
-  font-weight:600;
+  color:var(--texto-secundario);
+  margin-top:3px;
+  line-height:1.35;
+}
+
+.rotinaTag{
+  display:inline-block;
+  margin-top:6px;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
   border-radius:999px;
-  padding:4px 8px;
-  background:#edf5ea;
-  color:#447342;
-  white-space:
+  padding:3px 8px;
+  font-size:10px;
+}
+
+.listaVazia{
+  font-size:12px;
+  color:var(--texto-secundario);
+  line-height:1.5;
+  padding:6px 0;
+}
+
+.diaMesGrupo{
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:9px 10px;
+  text-align:left;
+}
+
+.diaMesTitulo{
+  font-size:11px;
+  color:var(--verde-texto);
+  font-weight:500;
+  margin-bottom:5px;
+}
+
+.eventoMesLinha{
+  font-size:11px;
+  color:var(--texto-principal);
+  line-height:1.45;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid rgba(227,229,225,0.75);
+}
+
+.eventoMesLinha.primeiroEventoMes{
+  margin-top:0;
+  padding-top:0;
+  border-top:none;
+}
+
+.eventoMesHora{
+  color:var(--verde-texto);
+  font-weight:500;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  margin-top:4px;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  z-index:999;
+}
+
+.modalOverlay.show{display:flex;}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.modalTitle{
+  text-align:center;
+  font-size:18px;
+  color:var(--texto-principal);
+  font-weight:500;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+}
+
+textarea{
+  width:100%;
+  height:220px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  padding:12px;
+  font-family:var(--fonte);
+  resize:none;
+}
+
+.modalBtns{
+  display:flex;
+  gap:8px;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:12px;
+  font-family:var(--fonte);
+  cursor:pointer;
+}
+
+.cancel{background:#efefef;color:#333;}
+.save{background:var(--verde-escuro);color:#fff;}
+
+@media print{
+  body{background:#fff;padding:0;}
+  .topo,.botoesAgenda,.footerMiniAction,.modalOverlay{display:none!important;}
+  .pagina{max-width:100%;padding:0;}
+  .card{box-shadow:none;border:none;border-radius:0;padding:12px;}
+  .eventosBox{border:none;background:#fff;padding:0;}
+}
+
+@media (max-width:390px){
+  body{padding:16px 12px;}
+  .card{padding:18px 14px 16px;}
+  .topo{grid-template-columns:40px 1fr 58px;}
+  .titleIndex{font-size:20px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="pagina">
+  <div class="card">
+
+    <div class="topo">
+      <button class="botao-voltar" onclick="location.href='agenda-menu.html'">←</button>
+
+      <div class="topCenter">
+        <div class="titleIndex">Minha Agenda</div>
+        <div class="subtitulo">seus compromissos em um só lugar</div>
+      </div>
+
+      <div class="dataTopo">
+        <div id="linhaTempoHora" class="horaTopo"></div>
+        <div id="linhaTempoDia" class="dataTopoLinha"></div>
+        <div id="linhaTempoData" class="dataTopoLinha"></div>
+      </div>
+    </div>
+
+    <div class="botoesPeriodo">
+      <button class="botaoPeriodo ativo" id="btnHoje" onclick="carregarPeriodo('hoje')">Hoje</button>
+      <button class="botaoPeriodo" id="btnSemana" onclick="carregarPeriodo('semana')">Semana</button>
+      <button class="botaoPeriodo" id="btnMes" onclick="carregarPeriodo('mes')">Mês</button>
+    </div>
+
+    <div class="eventosBox">
+      <div class="eventosTitulo" id="tituloEventos">Compromissos de hoje</div>
+      <div class="listaEventos" id="listaEventos">
+        <div class="listaVazia">Carregando compromissos e rotina...</div>
+      </div>
+    </div>
+
+    <div class="botoesAgenda">
+      <button class="botao" onclick="conectarGoogle()">🔐 Conectar agenda</button>
+      <button class="botao pequeno" onclick="atualizarEventos()">🔄 Atualizar compromissos</button>
+      <button class="botao pequeno" id="btnPdf" onclick="gerarPDF()">📄 Salvar em PDF</button>
+      <button class="botao secundario pequeno" onclick="abrirAgendaGeral()">Abrir Google Agenda</button>
+    </div>
+
+    <div class="footerMiniAction">
+      <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalFuturasEdicoes">
+  <div class="modal">
+    <div class="modalTitle">Futuras edições</div>
+
+    <div class="field">
+      <label>Ideias de melhorias futuras</label>
+      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalGrupoRotina">
+  <div class="modal">
+    <div class="modalTitle" id="modalGrupoRotinaTitulo">Rotina</div>
+
+    <div id="listaModalGrupoRotina" style="display:flex; flex-direction:column; gap:8px;"></div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalGrupoRotina()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalCriacaoArtisticaAgenda">
+  <div class="modal">
+    <div class="modalTitle">Criação artística de sonhos</div>
+
+    <div style="font-size:13px; color:var(--texto-secundario); text-align:center; line-height:1.5;">
+      Escolha o que deseja fazer agora.
+    </div>
+
+    <div class="modalBtns" style="flex-direction:column;">
+      <button class="botao pequeno" onclick="abrirProjetosPelaAgenda()">abrir projetos</button>
+      <button class="save" onclick="concluirCriacaoArtisticaPelaAgenda()">concluir tarefa</button>
+      <button class="cancel" onclick="fecharModalCriacaoArtisticaAgenda()">cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalPassatemposAgenda">
+  <div class="modal">
+    <div class="modalTitle">Passatempos Relaxantes</div>
+
+    <div style="font-size:13px; color:var(--texto-secundario); text-align:center; line-height:1.5;">
+      Escolha uma atividade antes de concluir essa tarefa.
+    </div>
+
+    <div class="modalBtns" style="flex-direction:column;">
+      <button class="save" onclick="abrirPassatemposPelaAgenda()">abrir página de passatempos</button>
+      <button class="cancel" onclick="fecharModalPassatemposAgenda()">cancelar</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const CHAVE_FUTURAS_EDICOES_MINHA_AGENDA = "futuras_edicoes_minha_agenda";
+
+const CLIENT_ID = "378836858096-2f5t7cg7qpjvc8jqgo284vv2e0teq5q3.apps.googleusercontent.com";
+const API_KEY = "AIzaSyAaIWEklGpnE0Ln7kwTWSWIp36vCEcEDfU";
+
+const DISCOVERY_DOC = "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
+const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+
+let tokenClient = null;
+let gapiIniciado = false;
+let gisIniciado = false;
+let periodoAtual = "hoje";
+let dataReferenciaAtual = new Date().toDateString();
+let eventosAgendaCache = [];
+let calendarioMayaId = "";
+
+function pad2(numero){
+  return String(numero).padStart(2, "0");
+}
+
+function atualizarLinhaTempo(){
+  const agora = new Date();
+  const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+  document.getElementById("linhaTempoHora").textContent =
+    `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+
+  document.getElementById("linhaTempoDia").textContent =
+    `• ${diasCurtos[agora.getDay()]}`;
+
+  document.getElementById("linhaTempoData").textContent =
+    `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
+
+  verificarViradaDoDia();
+}
+
+function verificarViradaDoDia(){
+  const hoje = new Date().toDateString();
+
+  if(hoje !== dataReferenciaAtual){
+    dataReferenciaAtual = hoje;
+    carregarPeriodo("hoje");
+  }
+}
+
+function gapiLoaded(){
+  gapi.load("client", async () => {
+    await gapi.client.init({
+      apiKey:API_KEY,
+      discoveryDocs:[DISCOVERY_DOC]
+    });
+
+    gapiIniciado = true;
+    tentarCarregarAutomaticamente();
+  });
+}
+
+function gisLoaded(){
+tokenClient = google.accounts.oauth2.initTokenClient({
+  client_id:CLIENT_ID,
+  scope:SCOPES,
+  hint:"maya.artizta@gmail.com",
+  callback:""
+});
+
+  gisIniciado = true;
+  tentarCarregarAutomaticamente();
+}
+
+function tentarCarregarAutomaticamente(){
+  if(!gapiIniciado || !gisIniciado || !tokenClient) return;
+
+  tokenClient.callback = async (resp) => {
+    if(resp && resp.error){
+      renderizarEventos([], periodoAtual);
+      return;
+    }
+
+    await carregarEventos(periodoAtual);
+  };
+
+  try{
+    tokenClient.requestAccessToken({prompt:""});
+  }catch(e){
+    renderizarEventos([], periodoAtual);
+  }
+}
+
+function conectarGoogle(){
+  if(!gapiIniciado || !gisIniciado || !tokenClient){
+    return;
+  }
+
+  tokenClient.callback = async (resp) => {
+    if(resp && resp.error){
+      renderizarEventos([], periodoAtual);
+      return;
+    }
+
+    await carregarEventos(periodoAtual);
+  };
+
+  tokenClient.requestAccessToken({prompt:"consent"});
+}
+
+function inicioFimPeriodo(periodo){
+  const agora = new Date();
+  let inicio;
+  let fim;
+
+  if(periodo === "hoje"){
+    inicio = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate(), 0,0,0);
+    fim = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate()+1, 0,0,0);
+  }
+
+  if(periodo === "semana"){
+    const diaSemana = agora.getDay();
+    const diferencaSegunda = diaSemana === 0 ? -6 : 1 - diaSemana;
+    inicio = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate()+diferencaSegunda, 0,0,0);
+    fim = new Date(inicio.getFullYear(), inicio.getMonth(), inicio.getDate()+7, 0,0,0);
+  }
+
+  if(periodo === "mes"){
+    inicio = new Date(agora.getFullYear(), agora.getMonth(), 1, 0,0,0);
+    fim = new Date(agora.getFullYear(), agora.getMonth()+1, 1, 0,0,0);
+  }
+
+  return {inicio,fim};
+}
+
+function tituloPeriodo(periodo){
+  if(periodo === "hoje") return "Compromissos de hoje";
+  if(periodo === "semana") return "Compromissos da semana";
+  return "Compromissos do mês";
+}
+
+function marcarBotaoPeriodo(periodo){
+  document.getElementById("btnHoje").classList.toggle("ativo", periodo === "hoje");
+  document.getElementById("btnSemana").classList.toggle("ativo", periodo === "semana");
+  document.getElementById("btnMes").classList.toggle("ativo", periodo === "mes");
+}
+
+async function carregarPeriodo(periodo){
+  periodoAtual = periodo;
+  marcarBotaoPeriodo(periodo);
+  document.getElementById("tituloEventos").textContent = tituloPeriodo(periodo);
+
+  if(!gapi.client.getToken()){
+    renderizarEventos([], periodo);
+    return;
+  }
+
+  await carregarEventos(periodo);
+}
+
+async function atualizarEventos(){
+  await carregarEventos(periodoAtual);
+}
+
+async function carregarEventos(periodo){
+  if(!gapi.client.getToken()){
+    renderizarEventos([], periodo);
+    return;
+  }
+
+  const {inicio,fim} = inicioFimPeriodo(periodo);
+
+  try{
+    const calendariosResponse = await gapi.client.calendar.calendarList.list({
+      minAccessRole:"reader",
+      showHidden:true
+    });
+
+const calendarios = (calendariosResponse.result.items || []).filter(calendario => {
+  const nome = (calendario.summary || "").toLowerCase();
+  return nome.includes("maya");
+});
+
+if(calendarios.length){
+  calendarioMayaId = calendarios[0].id;
+}
+    let todosEventos = [];
+
+    for(const calendario of calendarios){
+      try{
+        const resposta = await gapi.client.calendar.events.list({
+          calendarId:calendario.id,
+          timeMin:inicio.toISOString(),
+          timeMax:fim.toISOString(),
+          showDeleted:false,
+          singleEvents:true,
+          maxResults:100,
+          orderBy:"startTime"
+        });
+
+        const eventos = resposta.result.items || [];
+        eventos.forEach(evento => evento.nomeCalendario = calendario.summary || "Agenda");
+        todosEventos = todosEventos.concat(eventos);
+      }catch(e){}
+    }
+
+    todosEventos = todosEventos.filter(evento => {
+      const inicioEvento = new Date(evento.start.dateTime || evento.start.date);
+      return inicioEvento >= inicio && inicioEvento < fim;
+    });
+
+    todosEventos.sort((a,b) => {
+      return new Date(a.start.dateTime || a.start.date) - new Date(b.start.dateTime || b.start.date);
+    });
+
+    eventosAgendaCache = todosEventos;
+    renderizarEventos(todosEventos, periodo);
+  }catch(error){
+    renderizarEventos([], periodo);
+  }
+}
+
+function formatarHoraEvento(evento){
+  if(evento.start.date && !evento.start.dateTime) return "Dia todo";
+
+  const inicio = new Date(evento.start.dateTime);
+  const fim = new Date(evento.end.dateTime);
+
+  return `${pad2(inicio.getHours())}:${pad2(inicio.getMinutes())} - ${pad2(fim.getHours())}:${pad2(fim.getMinutes())}`;
+}
+
+function normalizarHora(horaTexto){
+  const limpo = String(horaTexto || "").toLowerCase().replace("m", "");
+  const partes = limpo.split("h");
+  const h = Number(partes[0] || 0);
+  const m = Number(partes[1] || 0);
+  const hoje = new Date();
+  return new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate(), h, m, 0);
+}
+
+function chaveDataHoje(chaveBase){
+  const h = new Date();
+  return `${chaveBase}_${h.getFullYear()}-${pad2(h.getMonth()+1)}-${pad2(h.getDate())}`;
+}
+
+function lerEstadoRotina(chaveBase, tamanho){
+  try{
+    const salvo = localStorage.getItem(chaveDataHoje(chaveBase));
+    if(!salvo) return Array(tamanho).fill(false);
+    const estado = JSON.parse(salvo);
+    return Array.isArray(estado) ? estado : Array(tamanho).fill(false);
+  }catch(e){
+    return Array(tamanho).fill(false);
+  }
+}
+
+function diaSemanaHoje(){
+  return String(new Date().getDay());
+}
+
+function obterRotinaDoDia(){
+  const STORAGE_MAYA = "jardim_rotina_maya_v8";
+
+  function obterStoreMaya(){
+    try{
+      return JSON.parse(localStorage.getItem(STORAGE_MAYA)) || { days:{} };
+    }catch(e){
+      return { days:{} };
+    }
+  }
+
+  function salvarStoreMaya(store){
+    localStorage.setItem(STORAGE_MAYA, JSON.stringify(store));
+  }
+
+  function chaveHojeMaya(){
+    const h = new Date();
+    return `${h.getFullYear()}-${pad2(h.getMonth()+1)}-${pad2(h.getDate())}`;
+  }
+
+  const hojeKey = chaveHojeMaya();
+  const storeMaya = obterStoreMaya();
+
+  if(!storeMaya.days) storeMaya.days = {};
+  if(!storeMaya.days[hojeKey]){
+    storeMaya.days[hojeKey] = {
+      done:{},
+      doneOrder:[],
+      calmActivities:[],
+      updatedAt:null,
+      completed:false,
+      completedAt:null,
+      validation:{ morningRule:null, nightRule:null }
+    };
+    salvarStoreMaya(storeMaya);
+  }
+
+  const estadoDia = storeMaya.days[hojeKey];
+
+  const rotinaMaya = [
+    {
+      bloco:"Rotina da manhã",
+      link:"maya-rotina.html#morning",
+      tarefas:[
+        { id:"m1_group", nome:"🧼 Higiene matinal — banheiro, dentes e rosto", hora:"08h00m" },
+        { id:"m4", nome:"💧 Beber água morna", hora:"08h12m" },
+        { id:"m5", nome:"🍽️ Café da manhã", hora:"08h20m" },
+        { id:"moment-play-screen", nome:"💚 Momento da Brincadeira, Jogos e Tela", hora:"09h" },
+        { id:"m5b", nome:"🎒 Arrumar a mochila da escola", hora:"10h50m" },
+        { id:"m6", nome:"🚿 Tomar banho", hora:"11h00m" },
+        { id:"m7", nome:"🍽️ Almoçar", hora:"11h20m" },
+        { id:"m8", nome:"🪥 Escovar os dentes", hora:"11h40m" },
+        { id:"m9", nome:"🏫 Ir para escola", hora:"12h30m" }
+      ]
+    },
+    {
+      bloco:"Rotina da noite",
+      link:"maya-rotina.html#night",
+      tarefas:[
+        { id:"n1", nome:"🚿 Tomar banho", hora:"18h00m" },
+        { id:"n2", nome:"🍽️ Jantar", hora:"18h20m" },
+        { id:"n2b", nome:"🪥 Escovar os dentes", hora:"18h32m" },
+        { id:"n3", nome:"📚 Fazer contrato de casa", hora:"18h40m" },
+        { id:"night-screen-time", nome:"🩵 Momento da Brincadeira, Jogos e Tela", hora:"18h30m" },
+        { id:"n4", nome:"🌙 Passatempos Relaxantes Sem Telas", hora:"20h30m" }
+      ]
+    }
+  ];
+
+  let rotina = [];
+
+  rotinaMaya.forEach(bloco => {
+    bloco.tarefas.forEach(tarefa => {
+      if(estadoDia.done && estadoDia.done[tarefa.id] === true) return;
+
+      rotina.push({
+        tipo:"rotina",
+        summary:tarefa.nome,
+        horaTexto:tarefa.hora,
+        inicio:normalizarHora(tarefa.hora),
+        bloco:bloco.bloco,
+        link:bloco.link,
+        chave:"maya_rotina",
+        indice:tarefa.id,
+        total:bloco.tarefas.length,
+        modo:"maya"
+      });
+    });
+  });
+
+  return rotina;
+}
+
+function concluirRotinaPelaAgenda(chaveBase, indice, total, modo){
+  if(modo === "maya"){
+    const STORAGE_MAYA = "jardim_rotina_maya_v8";
+
+    function obterStoreMaya(){
+      try{
+        return JSON.parse(localStorage.getItem(STORAGE_MAYA)) || { days:{} };
+      }catch(e){
+        return { days:{} };
+      }
+    }
+
+    const hoje = new Date();
+    const hojeKey = `${hoje.getFullYear()}-${pad2(hoje.getMonth()+1)}-${pad2(hoje.getDate())}`;
+    const storeMaya = obterStoreMaya();
+
+    if(!storeMaya.days) storeMaya.days = {};
+    if(!storeMaya.days[hojeKey]){
+      storeMaya.days[hojeKey] = {
+        done:{},
+        doneOrder:[],
+        calmActivities:[],
+        updatedAt:null,
+        completed:false,
+        completedAt:null,
+        validation:{ morningRule:null, nightRule:null }
+      };
+    }
+
+    storeMaya.days[hojeKey].done[indice] = true;
+
+    if(!storeMaya.days[hojeKey].doneOrder.includes(indice)){
+      storeMaya.days[hojeKey].doneOrder.push(indice);
+    }
+
+    storeMaya.days[hojeKey].updatedAt = Date.now();
+
+    localStorage.setItem(STORAGE_MAYA, JSON.stringify(storeMaya));
+
+    renderizarEventos(eventosAgendaCache, "hoje");
+    return;
+  }
+
+  let estado = lerEstadoRotina(chaveBase, total);
+
+  if(modo === "unico"){
+    estado = estado.map((_, i) => i === indice);
+  }else{
+    estado[indice] = true;
+  }
+
+  localStorage.setItem(chaveDataHoje(chaveBase), JSON.stringify(estado));
+
+  renderizarEventos(eventosAgendaCache, "hoje");
+}
+
+let grupoRotinaAtual = [];
+
+function agruparRotinaPorHorario(rotina){
+  const grupos = {};
+
+  rotina.forEach(item => {
+    const horaBase = String(item.horaTexto || "").split("h")[0].padStart(2, "0");
+    const chave = `${horaBase}h_${item.bloco}`;
+
+    if(!grupos[chave]){
+      grupos[chave] = {
+        tipo:"rotinaGrupo",
+        horaTexto:`${horaBase}h`,
+        inicio:new Date(item.inicio.getFullYear(), item.inicio.getMonth(), item.inicio.getDate(), Number(horaBase), 0, 0),
+        bloco:item.bloco,
+        link:item.link,
+        tarefas:[]
+      };
+    }
+
+    grupos[chave].tarefas.push(item);
+  });
+
+  return Object.values(grupos);
+}
+
+function abrirModalGrupoRotina(grupo){
+  grupoRotinaAtual = grupo.tarefas;
+
+  document.getElementById("modalGrupoRotinaTitulo").textContent =
+    `${grupo.horaTexto} • ${grupo.bloco}`;
+
+  const lista = document.getElementById("listaModalGrupoRotina");
+  lista.innerHTML = "";
+
+  grupo.tarefas.forEach(tarefa => {
+    const botao = document.createElement("button");
+    botao.className = "botao pequeno";
+    botao.textContent = tarefa.summary;
+
+botao.onclick = () => {
+  if(tarefa.summary.includes("Criação artística de sonhos")){
+    fecharModalGrupoRotina();
+    abrirModalCriacaoArtisticaAgenda(tarefa);
+    return;
+  }
+
+  if(tarefa.indice === "n4" || tarefa.summary.includes("Passatempos Relaxantes")){
+    fecharModalGrupoRotina();
+    abrirModalPassatemposAgenda(tarefa);
+    return;
+  }
+
+  concluirRotinaPelaAgenda(
+    tarefa.chave,
+    tarefa.indice,
+    tarefa.total,
+    tarefa.modo
+  );
+
+  fecharModalGrupoRotina();
+};
+
+    lista.appendChild(botao);
+  });
+
+  document.getElementById("modalGrupoRotina").classList.add("show");
+}
+
+function fecharModalGrupoRotina(){
+  grupoRotinaAtual = [];
+  document.getElementById("modalGrupoRotina").classList.remove("show");
+}
+
+let tarefaCriacaoArtisticaAgenda = null;
+
+function abrirModalCriacaoArtisticaAgenda(tarefa){
+  tarefaCriacaoArtisticaAgenda = tarefa;
+  document.getElementById("modalCriacaoArtisticaAgenda").classList.add("show");
+}
+
+function fecharModalCriacaoArtisticaAgenda(){
+  tarefaCriacaoArtisticaAgenda = null;
+  document.getElementById("modalCriacaoArtisticaAgenda").classList.remove("show");
+}
+
+let tarefaPassatemposAgenda = null;
+
+function abrirModalPassatemposAgenda(tarefa){
+  tarefaPassatemposAgenda = tarefa;
+  document.getElementById("modalPassatemposAgenda").classList.add("show");
+}
+
+function fecharModalPassatemposAgenda(){
+  tarefaPassatemposAgenda = null;
+  document.getElementById("modalPassatemposAgenda").classList.remove("show");
+}
+
+function abrirPassatemposPelaAgenda(){
+  localStorage.setItem("voltar_maya_passatempos", "gabriela-minha-agenda.html");
+  window.location.href = "maya-passatempos.html";
+}
+
+function abrirProjetosPelaAgenda(){
+  localStorage.setItem("voltar_projetos_gabriela", "gabriela-minha-agenda.html");
+  window.location.href = "gabriela-criacao-artistica-projetos-sonhos.html";
+}
+
+function concluirCriacaoArtisticaPelaAgenda(){
+  if(!tarefaCriacaoArtisticaAgenda) return;
+
+  concluirRotinaPelaAgenda(
+    tarefaCriacaoArtisticaAgenda.chave,
+    tarefaCriacaoArtisticaAgenda.indice,
+    tarefaCriacaoArtisticaAgenda.total,
+    tarefaCriacaoArtisticaAgenda.modo
+  );
+
+  fecharModalCriacaoArtisticaAgenda();
+}
+
+function limparEnderecoAteBairro(local){
+  const texto = String(local || "").trim();
+  if(!texto) return "";
+
+  let partes = texto
+    .split(",")
+    .map(parte => parte.trim())
+    .filter(Boolean)
+    .filter(parte => !/\b(brasil|brazil)\b/i.test(parte))
+    .filter(parte => !/\b\d{5}-?\d{3}\b/.test(parte));
+
+  if(partes.length >= 2){
+    return partes.slice(0, 2).join(", ");
+  }
+
+  return partes[0] || texto;
+}
+
+function converterEventoAgenda(evento){
+  const inicio = new Date(evento.start.dateTime || evento.start.date);
+  return {
+    tipo:"agenda",
+    summary:evento.summary || "Sem título",
+    location:limparEnderecoAteBairro(evento.location || ""),
+    horaTexto:formatarHoraEvento(evento),
+    inicio,
+    eventoOriginal:evento
+  };
+}
+
+function marcarProximoCompromissoDoDia(itens, periodo){
+  itens.forEach(item => item._proximoDoDia = false);
+
+  if(periodo !== "hoje") return;
+
+  const agora = new Date();
+
+  const proximos = itens
+    .filter(item => item.inicio >= agora)
+    .sort((a,b) => a.inicio - b.inicio);
+
+  if(proximos.length){
+    proximos[0]._proximoDoDia = true;
+  }
+}
+
+function renderizarEventos(eventosAgenda, periodo){
+  const lista = document.getElementById("listaEventos");
+  lista.innerHTML = "";
+
+  if(periodo === "hoje"){
+const rotina = obterRotinaDoDia();
+const agenda = eventosAgenda.map(converterEventoAgenda);
+const rotinaAgrupada = agruparRotinaPorHorario(rotina);
+const itens = agenda.concat(rotinaAgrupada).sort((a,b) => a.inicio - b.inicio);
+
+    marcarProximoCompromissoDoDia(itens, periodo);
+
+    if(!itens.length){
+      lista.innerHTML = `<div class="listaVazia">🌿 Dia tranquilo por aqui.</div>`;
+      return;
+    }
+
+    itens.forEach(item => {
+      const div = document.createElement("div");
+
+let classes = "evento";
+
+if(item.tipo === "agenda") classes += " agenda";
+if(item.tipo === "rotinaGrupo") classes += " rotina";
+if(item._proximoDoDia) classes += " proximoDia";
+
+      div.className = classes;
+
+if(item.tipo === "rotinaGrupo"){
+  div.className = "evento rotina" + (item._proximoDoDia ? " proximoDia" : "");
+
+  div.onclick = () => abrirModalGrupoRotina(item);
+
+  const nomes = item.tarefas.map(t => t.summary).join(" <br> ");
+
+  div.innerHTML = `
+    <div class="eventoHora">${item.horaTexto}</div>
+    <div class="eventoTitulo">${nomes}</div>
+    <div class="eventoLocal">Rotina • ${item.bloco}</div>
+    <span class="rotinaTag" onclick="event.stopPropagation(); location.href='${item.link}'" style="cursor:pointer;">abrir rotina</span>
+  `;
+}else{
+        div.innerHTML = `
+          <div class="eventoHora">${item.horaTexto}</div>
+          <div class="eventoTitulo">${item.summary}</div>
+          ${item.location ? `<div class="eventoLocal">${item.location}</div>` : ""}
+        `;
+      }
+
+      lista.appendChild(div);
+    });
+
+    return;
+  }
+
+  if(!eventosAgenda.length){
+    lista.innerHTML = `<div class="listaVazia">🌿 Dia tranquilo por aqui.</div>`;
+    return;
+  }
+
+  const grupos = {};
+
+  eventosAgenda.forEach(evento => {
+    const data = new Date(evento.start.dateTime || evento.start.date);
+    const chave = `${pad2(data.getDate())}/${pad2(data.getMonth()+1)}`;
+    if(!grupos[chave]) grupos[chave] = [];
+    grupos[chave].push(evento);
+  });
+
+  Object.entries(grupos).forEach(([data, eventosDia]) => {
+    const grupo = document.createElement("div");
+    grupo.className = "diaMesGrupo";
+
+    let html = `<div class="diaMesTitulo">${data}</div>`;
+
+eventosDia.forEach((evento, index) => {
+  html += `
+    <div class="eventoMesLinha ${index === 0 ? 'primeiroEventoMes' : ''}">
+      <span class="eventoMesHora">${formatarHoraEvento(evento)}</span> • ${evento.summary || "Sem título"}
+      ${evento.location ? `<div class="eventoLocal">${limparEnderecoAteBairro(evento.location)}</div>` : ""}
+    </div>
+  `;
+});
+
+    grupo.innerHTML = html;
+    lista.appendChild(grupo);
+  });
+}
+
+function gerarPDF(){
+  window.print();
+}
+
+function abrirAgendaGeral(){
+  if(calendarioMayaId){
+    window.open(
+      `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(calendarioMayaId)}`,
+      "_blank"
+    );
+    return;
+  }
+
+  window.open("https://calendar.google.com/calendar/r","_blank");
+}
+
+function abrirModalFuturasEdicoes(){
+const textoSalvo =
+  localStorage.getItem(CHAVE_FUTURAS_EDICOES_MINHA_AGENDA) ||
+  localStorage.getItem("futuras_edicoes_agenda_maya") ||
+  localStorage.getItem("futuras_edicoes_minha_agenda") ||
+  localStorage.getItem("futuras_edicoes_agenda") ||
+  "";
+
+document.getElementById("futurasEdicoesTexto").value = textoSalvo;
+  document.getElementById("modalFuturasEdicoes").classList.add("show");
+}
+
+function fecharModalFuturasEdicoes(){
+  document.getElementById("modalFuturasEdicoes").classList.remove("show");
+}
+
+function salvarFuturasEdicoes(){
+  localStorage.setItem(
+    CHAVE_FUTURAS_EDICOES_MINHA_AGENDA,
+    document.getElementById("futurasEdicoesTexto").value
+  );
+  fecharModalFuturasEdicoes();
+}
+
+window.addEventListener("load", () => {
+  atualizarLinhaTempo();
+  setInterval(atualizarLinhaTempo,1000);
+
+  document.getElementById("tituloEventos").textContent = tituloPeriodo(periodoAtual);
+  renderizarEventos([], "hoje");
+
+  gapiLoaded();
+  gisLoaded();
+});
+
+window.addEventListener("focus", () => {
+  verificarViradaDoDia();
+  if(periodoAtual === "hoje"){
+    renderizarEventos(eventosAgendaCache, "hoje");
+  }
+});
+
+window.addEventListener("storage", () => {
+  if(periodoAtual === "hoje"){
+    renderizarEventos(eventosAgendaCache, "hoje");
+  }
+});
+</script>
+
+</body>
+</html>

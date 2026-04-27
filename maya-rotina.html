@@ -5,285 +5,1087 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rotina da Maya</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    html, body { height: 100%; margin: 0; }
+    :root{
+      --verde-principal:#E6F2E5;
+      --verde-hover:#D6EAD4;
+      --verde-texto:#3F6F4F;
+      --verde-escuro:#5C9D5C;
+
+      --azul-principal:#EAF3F8;
+      --azul-hover:#DDEBF4;
+      --azul-texto:#5B7D92;
+
+      --rosa-principal:#F6E8EE;
+      --rosa-hover:#F1DDE6;
+      --rosa-texto:#986464;
+
+      --fundo:#F6F7F5;
+      --card:#FFFFFF;
+
+      --texto-principal:#2F2F2F;
+      --texto-secundario:#7A8178;
+      --borda:#E3E5E1;
+
+      --fonte:'Poppins',sans-serif;
+      --titulo:21px;
+      --sombra-suave:0 10px 30px rgba(63,111,79,0.08);
+      --sombra-mini:0 6px 14px rgba(63,111,79,0.08);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html, body{
+      width:100%;
+      min-height:100%;
+    }
 
     body{
-      font-family: Arial, sans-serif;
-      background-image: url("margaridas.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      font-family:var(--fonte);
+      background:var(--fundo);
+      color:var(--texto-principal);
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding:20px 14px 28px;
+    }
 
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 18px;
-      box-sizing: border-box;
-      overflow-y: auto;
+    .pagina{
+      width:100%;
+      max-width:420px;
     }
 
     .card{
-      width: min(420px, 100%);
-      background: rgba(255,255,255,0.88);
-      border-radius: 22px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      padding: 22px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+      width:100%;
+      background:var(--card);
+      border-radius:28px;
+      padding:20px 16px 18px;
+      box-shadow:var(--sombra-suave);
+      border:1px solid rgba(227,229,225,0.8);
+      display:flex;
+      flex-direction:column;
+      gap:14px;
     }
 
-    .topbar{
+    .topo{
+      display:grid;
+      grid-template-columns:42px 1fr 64px;
+      align-items:start;
+      gap:10px;
+      margin-bottom:2px;
+    }
+
+    .botao-voltar{
+      border:none;
+      background:#EEF1EC;
+      color:var(--texto-principal);
+      border-radius:14px;
+      width:42px;
+      height:42px;
+      cursor:pointer;
+      font-size:18px;
+      font-family:var(--fonte);
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap: 10px;
+      justify-content:center;
+      line-height:1;
+      padding:0;
+      transition:0.2s ease;
+      box-shadow:0 4px 10px rgba(0,0,0,0.04);
     }
 
-    .title{
-      margin: 0;
-      font-size: 21px;
-      color: #3d6f4c;
-      font-weight: 400;
-      font-family: 'Poppins', sans-serif;
+    .botao-voltar:hover{
+      background:#E4E8E1;
     }
 
-    .back{
-      border: none;
-      background: rgba(0,0,0,0.06);
-      padding: 10px 12px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-size: 14px;
+    .botao-voltar span{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      height:100%;
+      transform:translateY(-1px);
+    }
+
+    .topCenter{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      min-width:0;
+      padding-top:3px;
+    }
+
+    .titleIndex{
+      color:var(--texto-principal);
+      font-weight:400;
+      font-size:var(--titulo);
+      margin:0;
+      line-height:1.15;
+      text-align:center;
+      letter-spacing:0.1px;
+    }
+
+    .subtitulo{
+      font-size:12px;
+      color:var(--texto-secundario);
+      margin-top:3px;
+      text-align:center;
+      line-height:1.2;
+      font-weight:400;
+    }
+
+    .dataTopo{
+      min-height:42px;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      justify-content:flex-start;
+      text-align:right;
+      color:var(--texto-secundario);
+      line-height:1.1;
+      padding-top:2px;
+    }
+
+    .horaTopo{
+      font-size:14px;
+      color:var(--verde-texto);
+      font-weight:500;
+      white-space:nowrap;
+      margin-bottom:3px;
+    }
+
+    .dataTopoLinha{
+      font-size:11px;
+      white-space:nowrap;
     }
 
     .tabs{
       display:flex;
-      gap: 10px;
+      gap:10px;
       justify-content:center;
+      margin-top:2px;
     }
 
     .tab{
-      flex: 1;
-      border: none;
+      flex:1;
+      border:none;
       cursor:pointer;
-      padding: 12px 10px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.65);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      font-size: 15px;
+      padding:12px 10px;
+      border-radius:18px;
+      background:#EEF1EC;
+      color:#5B645C;
+      font-size:14px;
+      font-family:var(--fonte);
+      font-weight:400;
+      transition:0.2s ease;
+      text-align:center;
+      box-shadow:0 6px 14px rgba(0,0,0,0.04);
+    }
+
+    .tab:hover{
+      background:#E5EBE2;
     }
 
     .tab.active{
-      background: rgba(61,111,76,0.12);
-      outline: 2px solid rgba(61,111,76,0.22);
+      background:var(--verde-principal);
+      color:var(--verde-texto);
+      font-weight:500;
+    }
+
+    .regraHojeBox{
+      background:#F8FAF7;
+      border:1px solid var(--borda);
+      border-radius:16px;
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .regraHojeTitulo{
+      font-size:13px;
+      color:var(--verde-texto);
+      text-align:center;
+      font-weight:500;
+    }
+
+    .regraHojeData{
+      font-size:11px;
+      color:var(--texto-secundario);
+      text-align:center;
+      margin-top:-4px;
+    }
+
+    .regraHojeBtns{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+
+    .regraHojeBtn{
+      border:none;
+      border-radius:14px;
+      padding:10px 12px;
+      font-family:var(--fonte);
+      font-size:12px;
+      cursor:pointer;
+      transition:0.2s ease;
+    }
+
+    .regraHojeBtn.ok{
+      background:#E6F4E6;
+      color:#2F6A3B;
+    }
+
+    .regraHojeBtn.nao{
+      background:#FFF1F1;
+      color:#A04646;
     }
 
     .sectionTitle{
-      margin: 6px 0 0 0;
-      font-size: 14px;
-      color: rgba(0,0,0,0.55);
-      text-align: center;
+      display:none;
     }
 
     .warningBox{
-      font-size: 12px;
-      color: #6b4b00;
-      background: rgba(255,236,179,0.78);
-      border-radius: 12px;
-      padding: 10px;
+      font-size:12px;
+      color:#6b4b00;
+      background:rgba(255,236,179,0.72);
+      border-radius:18px;
+      padding:13px 12px;
       display:none;
       flex-direction:column;
       gap:8px;
+      line-height:1.5;
+      box-shadow:0 6px 14px rgba(0,0,0,0.04);
     }
 
     .warningBtn{
       border:none;
       cursor:pointer;
-      padding: 10px 10px;
-      border-radius: 12px;
-      background: rgba(107,75,0,0.12);
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(107,75,0,0.12);
       color:#5b4200;
-      font-size: 13px;
+      font-size:13px;
+      font-family:var(--fonte);
+      transition:0.2s ease;
+    }
+
+    .warningBtn:hover{
+      background:rgba(107,75,0,0.18);
     }
 
     .list{
       display:flex;
       flex-direction:column;
-      gap: 10px;
-      margin-top: 6px;
+      gap:12px;
+      margin-top:2px;
     }
 
     .item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      padding: 12px 12px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.7);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      width:100%;
+      border:none;
+      border-radius:20px;
+      background:#F4FBF3;
+      color:var(--verde-texto);
+      box-shadow:0 8px 18px rgba(63,111,79,0.07);
       cursor:pointer;
       user-select:none;
+      transition:0.2s ease;
+      padding:15px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .item:hover{
+      background:#EDF8EB;
     }
 
     .item.locked{
-      opacity: 0.65;
-      cursor: not-allowed;
+      opacity:0.68;
+      cursor:not-allowed;
     }
+
+.item.highlight-green,
+.item.highlight-blue,
+.item.highlight-red{
+  cursor:pointer;
+}
+
+    .item.highlight-green:hover{
+      background:var(--verde-hover);
+    }
+
+    .item.highlight-blue:hover{
+      background:var(--azul-hover);
+    }
+
+    .item.highlight-red:hover{
+      background:var(--rosa-hover);
+    }
+
+    .item.highlight-green{
+      background:var(--verde-principal);
+      color:var(--verde-texto);
+    }
+
+    .item.highlight-blue{
+      background:var(--azul-principal);
+      color:var(--azul-texto);
+    }
+
+    .item.highlight-red{
+      background:var(--rosa-principal);
+      color:var(--rosa-texto);
+    }
+
+    .item.done-color-red{ background:rgba(248,224,224,0.82); }
+    .item.done-color-orange{ background:rgba(251,236,216,0.82); }
+    .item.done-color-yellow{ background:rgba(250,246,214,0.82); }
+    .item.done-color-green{ background:rgba(223,241,224,0.82); }
+    .item.done-color-blue{ background:rgba(213,238,248,0.82); }
+    .item.done-color-indigo{ background:rgba(230,226,248,0.82); }
+    .item.done-color-violet{ background:rgba(240,227,247,0.82); }
 
     .left{
       display:flex;
+      flex-direction:column;
       align-items:center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .flower{
-      font-size: 20px;
-      width: 26px;
+      justify-content:center;
+      gap:4px;
+      width:100%;
+      min-width:0;
       text-align:center;
-      flex: 0 0 auto;
     }
 
-    .text{
-      font-size: 16px;
-      color: #2e3a46;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .buttonText,
+    .groupedTitle{
+      font-size:15px;
+      color:inherit;
+      line-height:1.35;
+      font-family:var(--fonte);
+      text-align:center;
+      white-space:normal;
+      font-weight:400;
     }
 
-    .time{
-      font-size: 12px;
-      color: rgba(0,0,0,0.45);
-      flex: 0 0 auto;
+    .buttonDesc{
+  font-size:11px;
+  color:rgba(63,111,79,0.74);
+  line-height:1.45;
+  text-align:center;
+  margin-top:2px;
+}
+
+    .groupedSubtasks{
+      margin-top:1px;
+      font-size:11px;
+      color:rgba(63,111,79,0.74);
+      line-height:1.45;
+      font-family:var(--fonte);
+      text-align:center;
+      white-space:normal;
+      max-width:95%;
     }
 
-    .done .text{
-      text-decoration: line-through;
-      color: rgba(46,58,70,0.55);
+    .groupedSubtasks.stack-lines{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .groupedSubtasks.stack-lines span{
+      display:block;
+    }
+
+    .highlight-blue .groupedSubtasks,
+    .highlight-blue .buttonTime,
+    .highlight-blue .buttonText{
+      color:var(--azul-texto);
+    }
+
+    .highlight-red .groupedSubtasks,
+    .highlight-red .buttonTime,
+    .highlight-red .buttonText{
+      color:var(--rosa-texto);
+    }
+
+    .buttonTime{
+      font-size:11px;
+      color:rgba(63,111,79,0.72);
+      line-height:1.35;
+      font-family:var(--fonte);
+      text-align:center;
+      white-space:normal;
+      transition:0.2s ease;
+      margin-top:1px;
+    }
+
+    .done .buttonText,
+    .done .groupedTitle{
+      color:rgba(63,111,79,0.82);
+    }
+
+    .done .groupedSubtasks,
+    .done .buttonTime{
+      color:rgba(63,111,79,0.66);
+    }
+
+    .specialTimeLine{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+      flex-wrap:wrap;
+      margin-top:1px;
+    }
+
+    .specialHeart{
+      font-size:10px;
+      line-height:1;
     }
 
     .progress{
-      margin-top: 4px;
-      padding: 12px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.65);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      margin-top:4px;
+      padding:4px 2px 0;
+      border-radius:16px;
       display:flex;
       flex-direction:column;
-      gap: 6px;
+      gap:3px;
       text-align:center;
+      font-family:var(--fonte);
+      background:transparent;
+      box-shadow:none;
     }
 
     .progressLine{
-      font-size: 14px;
-      color: rgba(0,0,0,0.7);
-    }
-
-    .garden{
-      font-size: 18px;
-      letter-spacing: 2px;
+      font-size:14px;
+      color:rgba(47,47,47,0.78);
+      line-height:1.2;
+      font-weight:400;
     }
 
     .hint{
-      font-size: 12px;
-      color: rgba(0,0,0,0.5);
+      font-size:11px;
+      color:rgba(47,47,47,0.48);
+      min-height:14px;
+      line-height:1.2;
+      margin-top:1px;
+    }
+
+    .garden{
+      font-size:18px;
+      letter-spacing:1px;
+      line-height:1.1;
+      margin-top:2px;
     }
 
     .completeBtn{
       border:none;
       cursor:pointer;
-      padding: 12px 10px;
-      border-radius: 14px;
-      background: rgba(61,111,76,0.14);
-      color:#2f5a3a;
-      font-size: 14px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      padding:12px 10px;
+      border-radius:16px;
+      background:var(--verde-principal);
+      color:var(--verde-texto);
+      font-size:14px;
+      box-shadow:0 8px 18px rgba(63,111,79,0.07);
       display:none;
+      font-family:var(--fonte);
+      transition:0.2s ease;
+      margin-top:8px;
+    }
+
+    .completeBtn:hover{
+      background:var(--verde-hover);
     }
 
     .statusBox{
-      font-size: 12px;
-      color: rgba(0,0,0,0.6);
-      background: rgba(255,255,255,0.55);
-      border-radius: 12px;
-      padding: 10px;
+      font-size:12px;
+      color:rgba(47,47,47,0.56);
+      background:transparent;
+      border-radius:12px;
+      padding:2px 4px 0;
+      font-family:var(--fonte);
+      margin-top:2px;
+      line-height:1.4;
+    }
+
+    .footerMiniAction{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      margin-top:4px;
+    }
+
+    .futureBtn{
+      border:none;
+      background:#E9ECE7;
+      color:var(--texto-secundario);
+      border-radius:12px;
+      padding:9px 14px;
+      font-size:12px;
+      cursor:pointer;
+      font-family:var(--fonte);
+      transition:0.2s ease;
+    }
+
+    .futureBtn:hover{
+      background:#dde3d9;
+      color:var(--texto-principal);
+    }
+
+    .soundToggleBtn{
+      border:none;
+      background:linear-gradient(180deg, #F3F8F2 0%, #EAF3E8 100%);
+      color:var(--verde-texto);
+      border-radius:14px;
+      padding:9px 14px;
+      font-size:11px;
+      cursor:pointer;
+      font-family:var(--fonte);
+      transition:0.2s ease;
+      min-width:88px;
+      box-shadow:var(--sombra-mini);
+      border:1px solid rgba(63,111,79,0.10);
+    }
+
+    .soundToggleBtn:hover{
+      background:linear-gradient(180deg, #EEF6EC 0%, #E3EFDF 100%);
+      color:#2F5A3D;
+      transform:translateY(-1px);
+    }
+
+    .soundToggleBtn.off{
+      background:linear-gradient(180deg, #F6F6F4 0%, #EFEFEA 100%);
+      color:#7D857C;
+      border:1px solid rgba(125,133,124,0.10);
+    }
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  z-index:999;
+  overflow-y:auto;
+}
+
+    .modalOverlay.show{
+      display:flex;
+    }
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  max-height:85vh;
+  overflow-y:auto;
+
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.18);
+    }
+
+    .modalHeader{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.fecharModal{
+  background:#E9ECE7;
+  border:none;
+  width:32px;
+  height:32px;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+  color:#333;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.2s ease;
+}
+
+.fecharModal:hover{
+  background:#dde3d9;
+}
+
+    .modalTitle{
+      font-size:18px;
+      color:var(--texto-principal);
+      text-align:center;
+      font-weight:500;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .field label{
+      font-size:13px;
+      color:var(--texto-principal);
+      font-family:var(--fonte);
+      font-weight:500;
+    }
+
+    textarea{
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--borda);
+      font-size:13px;
+      font-family:var(--fonte);
+      box-sizing:border-box;
+      width:100%;
+      height:260px;
+      resize:none;
+    }
+
+    textarea:focus{
+      border-color:var(--verde-escuro);
+      box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+    }
+
+    .modalBtns{
+      display:flex;
+      gap:8px;
+    }
+
+    .modalBtns button{
+      flex:1;
+      padding:11px 12px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      font-family:var(--fonte);
+      font-size:12.5px;
+      transition:0.2s ease;
+    }
+
+    .cancel{
+      background:#efefef;
+      color:#333;
+    }
+
+    .cancel:hover{
+      background:#e7e7e7;
+    }
+
+    .save{
+      background:var(--verde-escuro);
+      color:white;
+    }
+
+    .save:hover{
+      background:#4f8a4f;
+    }
+
+    @media (max-width:390px){
+      body{
+        padding:16px 12px 24px;
+      }
+
+      .card{
+        padding:18px 14px 16px;
+        border-radius:24px;
+      }
+
+      .titleIndex{
+        font-size:20px;
+      }
+
+      .topo{
+        grid-template-columns:40px 1fr 58px;
+      }
+
+      .horaTopo{
+        font-size:13px;
+      }
+
+      .dataTopoLinha{
+        font-size:10.5px;
+      }
+
+      .item{
+        padding:14px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="topbar">
-      <button class="back" onclick="location.href='maya-menu.html'">← Voltar</button>
-      <h1 class="title">🌼 Rotina da Maya</h1>
-      <span style="width:76px;"></span>
-    </div>
+  <div class="pagina">
+    <div class="card">
 
-    <div class="tabs">
-      <button id="tabMorning" class="tab active" onclick="setTab('morning')">☀️ Manhã</button>
-      <button id="tabNight" class="tab" onclick="setTab('night')">🌙 Noite</button>
-    </div>
+      <div class="topo">
+        <button class="botao-voltar" onclick="location.href='maya-menu.html'"><span>←</span></button>
 
-    <div id="warningBox" class="warningBox">
-      <div id="warningText"></div>
-      <button class="warningBtn" onclick="completePreviousDay()">✅ Concluir dia anterior</button>
-    </div>
+        <div class="topCenter">
+          <h1 class="titleIndex">🌿 Maya</h1>
+          <p class="subtitulo">seu jardim de rotina</p>
+        </div>
 
-    <div id="sectionTitle" class="sectionTitle"></div>
-    <div id="list" class="list"></div>
+        <div class="dataTopo" aria-label="Data e hora atuais">
+          <div id="linhaTempoHora" class="horaTopo"></div>
+          <div id="linhaTempoDia" class="dataTopoLinha"></div>
+          <div id="linhaTempoData" class="dataTopoLinha"></div>
+        </div>
+      </div>
 
-    <div class="progress">
-      <div class="progressLine" id="progressLine">Jardim de hoje</div>
-      <div class="hint" id="todayLine"></div>
-      <div class="hint" id="updatedLine"></div>
-      <div class="garden" id="garden">🌱🌱🌱🌱🌱🌱🌱</div>
-      <div class="hint" id="mainHint">Toque numa tarefa para a flor abrir 🌼</div>
+      <div class="tabs">
+        <button id="tabMorning" class="tab active" onclick="setTab('morning')">☀️ Manhã</button>
+        <button id="tabNight" class="tab" onclick="setTab('night')">🌓 Noite</button>
+      </div>
 
-      <button id="completeDayBtn" class="completeBtn" onclick="completeDay()">
-        ✅ Concluir o dia
-      </button>
+      <div id="regraHojeBox" class="regraHojeBox" style="display:none;">
+        <div id="regraHojeTitulo" class="regraHojeTitulo"></div>
+        <div id="regraHojeData" class="regraHojeData"></div>
 
-      <div id="statusBox" class="statusBox"></div>
+        <div class="regraHojeBtns">
+          <button class="regraHojeBtn ok" onclick="salvarRegraTelaHoje(true)">✅ Sim</button>
+          <button class="regraHojeBtn nao" onclick="salvarRegraTelaHoje(false)">❌ Não</button>
+        </div>
+      </div>
+
+      <div id="warningBox" class="warningBox">
+        <div id="warningText"></div>
+        <button class="warningBtn" onclick="completePreviousDay()">✅ Concluir dia anterior</button>
+      </div>
+
+      <div id="sectionTitle" class="sectionTitle"></div>
+      <div id="list" class="list"></div>
+
+      <div class="progress">
+        <div class="progressLine" id="progressLine">0 de 0 concluídas</div>
+        <div class="hint" id="mainHint">Toque numa tarefa para marcar</div>
+        <div class="garden" id="garden">🌧️🌧️🌧️🌧️🌧️🌧️</div>
+
+        <button id="completeDayBtn" class="completeBtn" onclick="completeDay()">
+          🕘 Concluir o dia
+        </button>
+
+        <div id="statusBox" class="statusBox"></div>
+      </div>
+
+      <div class="footerMiniAction">
+        <button id="soundToggleBtn" class="soundToggleBtn" onclick="toggleSomManual()">🔊 on</button>
+        <button class="futureBtn" onclick="abrirModalConfiguracao()">configuração</button>
+        <button class="futureBtn" onclick="abrirModalAnotacoes()">futuras edições</button>
+      </div>
+
     </div>
   </div>
 
+  <div class="modalOverlay" id="modalAnotacoes">
+    <div class="modal">
+      <h2 class="modalTitle">Futuras edições</h2>
+
+      <div class="field">
+        <label>Ideias de melhorias futuras</label>
+        <textarea id="anotacoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
+      </div>
+
+      <div class="modalBtns">
+        <button class="cancel" onclick="fecharModalAnotacoes()">Cancelar</button>
+        <button class="save" onclick="salvarAnotacoes()">Concluir</button>
+      </div>
+    </div>
+  </div>
+
+<div class="modalOverlay" id="modalConfiguracao">
+  <div class="modal">
+
+    <div class="modalHeader">
+      <button class="fecharModal" onclick="fecharModalConfiguracao()">✕</button>
+    </div>
+
+    <h2 class="modalTitle">Configuração da rotina</h2>
+
+<div class="field">
+  <label>Nova tarefa</label>
+  <textarea id="novaTarefaTexto" style="height:72px;" placeholder="Nome da tarefa"></textarea>
+</div>
+
+<div class="field">
+  <label>Descrição</label>
+  <textarea id="novaTarefaDescricao" style="height:72px;" placeholder="Descrição da tarefa"></textarea>
+</div>
+
+<div class="field">
+  <label>Horário</label>
+        <textarea id="novaTarefaHora" style="height:48px;" placeholder="Ex.: 09h30m"></textarea>
+      </div>
+
+      <div class="modalBtns">
+        <button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
+        <button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
+      </div>
+
+      <div id="listaConfigTarefas" style="display:flex; flex-direction:column; gap:8px; margin-top:4px;"></div>
+    </div>
+  </div>
+
+  <div class="modalOverlay" id="modalRegraTela">
+    <div class="modal">
+      <h2 class="modalTitle" id="modalRegraTelaTitulo">Regra de uso de tela</h2>
+
+      <div class="regraHojeBtns">
+        <button class="regraHojeBtn ok" onclick="salvarRegraTelaHoje(true)">✅ Sim</button>
+        <button class="regraHojeBtn nao" onclick="salvarRegraTelaHoje(false)">❌ Não</button>
+      </div>
+
+      <div class="modalBtns">
+        <button class="cancel" onclick="fecharModalRegraTela()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modalOverlay" id="modalPassatemposEscolhido">
+    <div class="modal">
+      <h2 class="modalTitle">Passatempos Relaxantes</h2>
+
+      <div class="modalBtns" style="flex-direction:column;">
+        <button class="save" onclick="abrirPaginaPassatemposEscolhido()">abrir página</button>
+        <button class="botao" onclick="desfazerSelecaoPassatempos()">desfazer seleção da tarefa</button>
+        <button class="cancel" onclick="fecharModalPassatemposEscolhido()">cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modalOverlay" id="modalMensagemImportanteMaya">
+    <div class="modal">
+      <h2 class="modalTitle">Mensagem Importante Maya</h2>
+      <div style="font-size:13px; color:var(--texto-secundario); text-align:center; line-height:1.6;">
+        <p style="margin:0 0 14px;">Ontem faltou você responder se respeitou as regras do uso de telas de manhã e de noite.</p>
+        <p style="margin:0;">Para liberar o dia de hoje, sua mamãe precisa liberar o acesso.</p>
+      </div>
+
+      <div class="modalBtns" style="margin-top:4px;">
+        <button class="save" onclick="liberarAcessoMayaComSenha()">liberar com senha</button>
+      </div>
+    </div>
+  </div>
+
+
+  <audio id="audioManha" loop preload="auto"></audio>
+  <audio id="audioNoite" loop preload="auto"></audio>
+
 <script>
+  const STORAGE_KEY = "jardim_rotina_maya_v8";
+  const CHAVE_FUTURAS_EDICOES_MAYA_ROTINA = "futuras_edicoes_maya_rotina";
+  const CHAVE_ANOTACOES_MAYA_ROTINA = CHAVE_FUTURAS_EDICOES_MAYA_ROTINA;
+  const CONFIG_SOM_KEY = "config_som_maya";
+  const REGRA_TELA_HOJE_KEY = "regra_tela_hoje_maya";
+  const CONFIG_TAREFAS_KEY = "config_tarefas_maya_rotina";
+
   const TASKS = {
     morning: {
-      title: "☀️ Manhã",
+      title: "",
       items: [
-        { id: "m1", time: "08:00", text: "Ir ao banheiro (xixi)" },
-        { id: "m2", time: "08:05", text: "Escovar os dentes" },
-        { id: "m3", time: "08:10", text: "Lavar o rosto" },
-        { id: "m4", time: "08:12", text: "Beber água morna" },
-        { id: "m5", time: "08:20", text: "Café da manhã perto da janela" },
-        { id: "m6", time: "11:00", text: "Tomar banho" },
-        { id: "m7", time: "11:20", text: "Almoçar" },
-        { id: "m8", time: "11:40", text: "Escovar os dentes" }
+        {
+          id: "m1_group",
+          time: "08h00m",
+          text: "Higiene matinal",
+          grouped: true,
+          subTasks: [
+            "Ir ao banheiro",
+            "Escovar os dentes",
+            "Lavar o rosto"
+          ]
+        },
+        { id: "m4", time: "08h12m", text: "Beber água morna" },
+        { id: "m5", time: "08h20m", text: "Café da manhã" },
+        { id: "moment-play-screen", type: "highlight-green", text: "Momento da Brincadeira, Jogos e Tela", subtext: "💚 de 09h às 11h 💚" },
+        {
+          id: "m5b",
+          time: "10h50m",
+          text: "Arrumar a mochila da escola",
+          grouped: true,
+          subTasks: [
+            "Livro, caderno, agenda e xuxa de cabelo"
+          ],
+          schoolDaysOnly: true
+        },
+        { id: "m6", time: "11h00m", text: "Tomar banho" },
+        {
+          id: "m7",
+          time: "11h20m",
+          text: "Almoçar",
+          grouped: true,
+          subTasks: [
+            "Sem tela",
+            "Beber pouco líquido"
+          ]
+        },
+        {
+          id: "m8",
+          time: "11h40m",
+          text: "Escovar os dentes",
+          grouped: true,
+          subTasks: [
+            "Com firmeza e gentileza",
+            "3 bochechos",
+            "1 gargarejo"
+          ]
+        },
+        {
+          id: "m9",
+          time: "12h30m",
+          text: "Ir para escola",
+          grouped: true,
+          dynamicSubTasks: true,
+          schoolDaysOnly: true
+        }
       ]
     },
     night: {
-      title: "🌙 Noite",
+      title: "",
       items: [
-        { id: "n1", time: "18:00", text: "Tomar banho" },
-        { id: "n2", time: "18:20", text: "Jantar" },
-        { id: "n3", time: "18:40", text: "Fazer contrato de casa", weekdaysOnly: true },
-        { id: "n4", time: "20:30", text: "Escolher 1 hora tranquila (quebra-cabeça, desenhar, colorir, ler histórias, atividade manual, conversar ou 15 min de filme calmo)" }
+        {
+          id: "n1",
+          time: "18h00m",
+          text: "Tomar banho",
+          grouped: true,
+          subTasks: [
+            "Roupa suja no lugar certo",
+            "Tênis no lugar"
+          ]
+        },
+        {
+          id: "n2",
+          time: "18h20m",
+          text: "Jantar",
+          grouped: true,
+          subTasks: [
+            "Sem tela",
+            "Beber pouco líquido"
+          ]
+        },
+        {
+          id: "n2b",
+          time: "18h32m",
+          text: "Escovar os dentes",
+          grouped: true,
+          subTasks: [
+            "Com firmeza e gentileza",
+            "3 bochechos",
+            "1 gargarejo"
+          ]
+        },
+        {
+          id: "n3",
+          time: "18h40m",
+          text: "Fazer contrato de casa",
+          grouped: true,
+          subTasks: [
+            "Com atenção e capricho",
+            "Ao terminar, guardar na mochila"
+          ],
+          schoolDaysOnly: true
+        },
+        { id: "night-screen-time", type: "highlight-blue", text: "Momento da Brincadeira, Jogos e Tela", subtext: "🩵 de 18h30 às 20h30 🩵" },
+        { id: "n4", time: "20h30m", text: "Passatempos Relaxantes Sem Telas", opensPage: true }
       ]
     }
   };
 
-  const STORAGE_KEY = "jardim_rotina_maya_v6";
+  const RAINBOW_CLASSES = [
+    "done-color-red",
+    "done-color-orange",
+    "done-color-yellow",
+    "done-color-green",
+    "done-color-blue",
+    "done-color-indigo",
+    "done-color-violet"
+  ];
+
   let currentTab = "morning";
   let store = loadStore();
   let cycleDayKey = getCycleDayKey();
+
+  const audioManha = document.getElementById("audioManha");
+  const audioNoite = document.getElementById("audioNoite");
+  let audioAtual = null;
+  let musicaLiberada = false;
+
+  function getConfigSomPadrao(){
+    return {
+      ativo: true,
+      manha: "wheels-audionautix-manha.mp3",
+      noite: "meditation-impromptu-03-kevin-macleod-noite.mp3",
+      volume: 0.35
+    };
+  }
+
+  function getConfigSomSalva(){
+    try{
+      return {
+        ...getConfigSomPadrao(),
+        ...(JSON.parse(localStorage.getItem(CONFIG_SOM_KEY)) || {})
+      };
+    }catch(e){
+      return getConfigSomPadrao();
+    }
+  }
+
+  function salvarConfigSom(config){
+    localStorage.setItem(CONFIG_SOM_KEY, JSON.stringify(config));
+  }
+
+  function atualizarBotaoSom(){
+    const btn = document.getElementById("soundToggleBtn");
+    const config = getConfigSomSalva();
+    btn.textContent = config.ativo ? "🔊 on" : "🔇 off";
+    btn.classList.toggle("off", !config.ativo);
+  }
+
+  function aplicarConfigNosAudios(){
+    const config = getConfigSomSalva();
+
+    audioManha.src = config.manha || "wheels-audionautix-manha.mp3";
+    audioNoite.src = config.noite || "meditation-impromptu-03-kevin-macleod-noite.mp3";
+
+    audioManha.volume = Number(config.volume ?? 0.35);
+    audioNoite.volume = Number(config.volume ?? 0.35);
+
+    audioManha.load();
+    audioNoite.load();
+
+    atualizarBotaoSom();
+    return config;
+  }
+
+  function toggleSomManual(){
+    const config = getConfigSomSalva();
+    config.ativo = !config.ativo;
+    salvarConfigSom(config);
+    aplicarConfigNosAudios();
+
+    if(config.ativo){
+      tocarAudioCorreto();
+    }else{
+      pararTodosAudios();
+      audioAtual = null;
+    }
+  }
 
   function pad(n){
     return String(n).padStart(2, "0");
@@ -297,9 +1099,8 @@
     return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
   }
 
-  function formatBRDateFromKey(key){
-    const [year, month, day] = key.split("-");
-    return `${day}/${month}/${year}`;
+  function dateToKey(date){
+    return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
   }
 
   function keyToDate(key){
@@ -307,14 +1108,15 @@
     return new Date(year, month - 1, day);
   }
 
-  function dateToKey(date){
-    return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
-  }
-
   function addDaysToKey(key, amount){
     const d = keyToDate(key);
     d.setDate(d.getDate() + amount);
     return dateToKey(d);
+  }
+
+  function formatBRDateFromKey(key){
+    const [year, month, day] = key.split("-");
+    return `${day}/${month}/${year}`;
   }
 
   function isWeekday(key){
@@ -324,22 +1126,215 @@
   }
 
   function getCycleDayKey(date = new Date()){
-    const d = new Date(date);
-    if (d.getHours() < 7){
-      d.setDate(d.getDate() - 1);
+    return dateToKey(date);
+  }
+
+  function getRegraTelaHojeStore(){
+    try{
+      return JSON.parse(localStorage.getItem(REGRA_TELA_HOJE_KEY)) || {};
+    }catch(e){
+      return {};
     }
-    return dateToKey(d);
+  }
+
+let regraTelaAtual = null;
+
+function abrirModalRegraTela(item){
+  if(bloquearPorPendenciaSeNecessario()) return;
+  if(isLocked()) return;
+
+  regraTelaAtual = item;
+
+  const titulo = document.getElementById("modalRegraTelaTitulo");
+
+  if(item.id === "moment-play-screen"){
+    titulo.textContent = "Você respeitou a regra de uso de tela entre 09h e 11h?";
+  }else{
+    titulo.textContent = "Você respeitou a regra de uso de tela entre 18h30m e 20h30m?";
+  }
+
+  document.getElementById("modalRegraTela").classList.add("show");
+}
+
+function fecharModalRegraTela(){
+  regraTelaAtual = null;
+  document.getElementById("modalRegraTela").classList.remove("show");
+}
+
+function salvarRegraTelaHoje(valor){
+  if(!regraTelaAtual) return;
+
+  const storeRegras = getRegraTelaHojeStore();
+  const key = dateToKey(new Date());
+
+  storeRegras[`${key}_${regraTelaAtual.id}`] = valor;
+  localStorage.setItem(REGRA_TELA_HOJE_KEY, JSON.stringify(storeRegras));
+
+  const ds = getDayState(key);
+  if(regraTelaAtual.id === "moment-play-screen"){
+    ds.validation.morningRule = valor;
+  }
+  if(regraTelaAtual.id === "night-screen-time"){
+    ds.validation.nightRule = valor;
+  }
+  ds.updatedAt = Date.now();
+  saveStore();
+
+  markDoneState(regraTelaAtual.id, true);
+
+  fecharModalRegraTela();
+  render();
+}
+
+  function atualizarStatusRegraHoje(){
+    const storeRegras = getRegraTelaHojeStore();
+    const hojeKey = getCycleDayKey(new Date());
+    const valor = storeRegras[hojeKey];
+    const el = document.getElementById("regraHojeStatus");
+
+    if(!el) return;
+
+    if(valor === true){
+      el.textContent = "Hoje você marcou que honrou a regra de uso de tela ✅";
+    }else if(valor === false){
+      el.textContent = "Hoje você marcou que não honrou a regra de uso de tela ❌";
+    }else{
+      el.textContent = "Você ainda não marcou a regra de hoje.";
+    }
+  }
+
+function atualizarExibicaoRegraHoje(){
+  const box = document.getElementById("regraHojeBox");
+  if(box) box.style.display = "none";
+}
+
+  function getEasterDate(year){
+    const a = year % 19;
+    const b = Math.floor(year / 100);
+    const c = year % 100;
+    const d = Math.floor(b / 4);
+    const e = b % 4;
+    const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3);
+    const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4);
+    const k = c % 4;
+    const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const month = Math.floor((h + l - 7 * m + 114) / 31);
+    const day = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(year, month - 1, day);
+  }
+
+  function getNationalHolidayKeys(year){
+    const easter = getEasterDate(year);
+    const goodFriday = new Date(easter);
+    goodFriday.setDate(easter.getDate() - 2);
+
+    const fixed = [
+      `${year}-01-01`,
+      `${year}-04-21`,
+      `${year}-05-01`,
+      `${year}-09-07`,
+      `${year}-10-12`,
+      `${year}-11-02`,
+      `${year}-11-15`,
+      `${year}-11-20`,
+      `${year}-12-25`
+    ];
+
+    const movable = [
+      dateToKey(goodFriday)
+    ];
+
+    return new Set([...fixed, ...movable]);
+  }
+
+  function isNationalHoliday(key){
+    const [year] = key.split("-").map(Number);
+    return getNationalHolidayKeys(year).has(key);
+  }
+
+  function isSchoolDay(key){
+    return isWeekday(key) && !isNationalHoliday(key);
+  }
+
+  function isTuesday(key){
+    return keyToDate(key).getDay() === 2;
+  }
+
+  function isThursday(key){
+    return keyToDate(key).getDay() === 4;
+  }
+
+  function isFriday(key){
+    return keyToDate(key).getDay() === 5;
+  }
+
+  function getOccurrenceInMonth(date){
+    return Math.floor((date.getDate() - 1) / 7) + 1;
+  }
+
+  function isSecondOrFourthWeekendOfMonth(key){
+    const date = keyToDate(key);
+    const day = date.getDay();
+    if(day !== 0 && day !== 6) return false;
+    const occurrence = getOccurrenceInMonth(date);
+    return occurrence === 2 || occurrence === 4;
+  }
+
+  function isFirstThirdOrFifthFridayOfMonth(key){
+    const date = keyToDate(key);
+    if(date.getDay() !== 5) return false;
+    const occurrence = getOccurrenceInMonth(date);
+    return occurrence === 1 || occurrence === 3 || occurrence === 5;
+  }
+
+  function getIrParaEscolaSubTasks(key){
+    const subtasks = [
+      "Aguardar na portaria às 12h30m"
+    ];
+
+    if(isTuesday(key) || isThursday(key)){
+      subtasks.push("Depois da escola, papai e Maya");
+    }
+
+    if(isFriday(key)){
+      subtasks.push("Hora extra de patins");
+
+      if(isFirstThirdOrFifthFridayOfMonth(key)){
+        subtasks.push("Hoje mamãe pega na escola");
+      }
+    }
+
+    if(isSecondOrFourthWeekendOfMonth(key)){
+      subtasks.push("Esse final de semana é com o papai");
+    }
+
+    return subtasks;
+  }
+
+  function getItemSubTasks(item, key){
+    if(item.dynamicSubTasks && item.id === "m9"){
+      return getIrParaEscolaSubTasks(key);
+    }
+    return item.subTasks || [];
+  }
+
+  function shouldStackSubTasks(item){
+    return item.id === "m9";
   }
 
   function loadStore(){
     try{
       const raw = localStorage.getItem(STORAGE_KEY);
-      if(!raw) return { days: {} };
+      if(!raw) return { days: {}, customCalmOptions: [] };
       const parsed = JSON.parse(raw);
       if(!parsed.days) parsed.days = {};
+      if(!Array.isArray(parsed.customCalmOptions)) parsed.customCalmOptions = [];
       return parsed;
     }catch(e){
-      return { days: {} };
+      return { days: {}, customCalmOptions: [] };
     }
   }
 
@@ -347,10 +1342,50 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
   }
 
+  function abrirModalAnotacoes(){
+    const chavesPossiveis = [
+      CHAVE_FUTURAS_EDICOES_MAYA_ROTINA,
+      "anotacoes_maya_rotina",
+      "futuras_edicoes_maya_rotina",
+      "futuras_edicoes_maya",
+      "maya_rotina_futuras_edicoes"
+    ];
+
+    let textoAtual = "";
+    for(const chave of chavesPossiveis){
+      const valor = localStorage.getItem(chave);
+      if(valor !== null && valor !== undefined && valor !== ""){
+        textoAtual = valor;
+        break;
+      }
+    }
+
+    document.getElementById("anotacoesTexto").value = textoAtual;
+    document.getElementById("modalAnotacoes").classList.add("show");
+  }
+
+  function fecharModalAnotacoes(){
+    document.getElementById("modalAnotacoes").classList.remove("show");
+  }
+
+  function salvarAnotacoes(){
+    const texto = document.getElementById("anotacoesTexto").value;
+
+    localStorage.setItem(CHAVE_FUTURAS_EDICOES_MAYA_ROTINA, texto);
+    localStorage.setItem("anotacoes_maya_rotina", texto);
+    localStorage.setItem("futuras_edicoes_maya_rotina", texto);
+    localStorage.setItem("futuras_edicoes_maya", texto);
+    localStorage.setItem("maya_rotina_futuras_edicoes", texto);
+
+    fecharModalAnotacoes();
+  }
+
   function getDayState(key){
     if(!store.days[key]){
       store.days[key] = {
         done: {},
+        doneOrder: [],
+        calmActivities: [],
         updatedAt: null,
         completed: false,
         completedAt: null,
@@ -359,15 +1394,26 @@
           nightRule: null
         }
       };
-      saveStore();
+    }
+
+    if(!store.days[key].done) store.days[key].done = {};
+    if(!Array.isArray(store.days[key].doneOrder)) store.days[key].doneOrder = [];
+    if(!Array.isArray(store.days[key].calmActivities)) store.days[key].calmActivities = [];
+
+    if(store.days[key].calmActivities.length > 0){
+      store.days[key].done["n4"] = true;
+
+      if(!store.days[key].doneOrder.includes("n4")){
+        store.days[key].doneOrder.push("n4");
+      }
     }
     if(!store.days[key].validation){
       store.days[key].validation = {
         morningRule: null,
         nightRule: null
       };
-      saveStore();
     }
+
     return store.days[key];
   }
 
@@ -390,14 +1436,340 @@
   function hasPendingPreviousDay(){
     const previousKey = getPreviousDayKey();
     if(!dayExists(previousKey)) return false;
-    return !getDayState(previousKey).completed;
+    const previousDay = getDayState(previousKey);
+    const regraPendente = previousDay.validation.morningRule === null || previousDay.validation.nightRule === null;
+    return regraPendente || !previousDay.completed;
+  }
+
+  function hasPendingPreviousScreenRules(){
+    const previousKey = getPreviousDayKey();
+    if(!dayExists(previousKey)) return false;
+    const previousDay = getDayState(previousKey);
+    return previousDay.validation.morningRule === null || previousDay.validation.nightRule === null;
+  }
+
+  function abrirModalMensagemImportanteMaya(){
+    document.getElementById("modalMensagemImportanteMaya").classList.add("show");
+  }
+
+  function fecharModalMensagemImportanteMaya(){
+    document.getElementById("modalMensagemImportanteMaya").classList.remove("show");
+  }
+
+  function senhaGabrielaValida(senhaDigitada){
+    const senhasPossiveis = [
+      localStorage.getItem("senha_gabriela"),
+      localStorage.getItem("senhaGabriela"),
+      localStorage.getItem("senha_mamae"),
+      localStorage.getItem("senha_mamae_gabriela"),
+      "1234"
+    ].filter(Boolean);
+
+    return senhasPossiveis.includes(String(senhaDigitada || "").trim());
+  }
+
+  function salvarRespostaTelaDia(dataKey, itemId, valor){
+    const storeRegras = getRegraTelaHojeStore();
+    storeRegras[`${dataKey}_${itemId}`] = valor;
+    localStorage.setItem(REGRA_TELA_HOJE_KEY, JSON.stringify(storeRegras));
+  }
+
+  function liberarAcessoMayaComSenha(){
+    const senha = prompt("Digite a senha da mamãe para liberar o acesso:");
+
+    if(!senhaGabrielaValida(senha)){
+      alert("Senha incorreta.");
+      return;
+    }
+
+    const previousKey = getPreviousDayKey();
+    const previousDay = getDayState(previousKey);
+
+    const respeitouManha = confirm("Ontem a Maya respeitou a regra de telas da manhã?\n\nOK = Sim\nCancelar = Não");
+    const respeitouNoite = confirm("Ontem a Maya respeitou a regra de telas da noite?\n\nOK = Sim\nCancelar = Não");
+
+    previousDay.validation.morningRule = respeitouManha;
+    previousDay.validation.nightRule = respeitouNoite;
+    previousDay.completed = true;
+    previousDay.completedAt = previousDay.completedAt || Date.now();
+    previousDay.updatedAt = Date.now();
+
+    salvarRespostaTelaDia(previousKey, "moment-play-screen", respeitouManha);
+    salvarRespostaTelaDia(previousKey, "night-screen-time", respeitouNoite);
+
+    saveStore();
+    fecharModalMensagemImportanteMaya();
+    render();
+  }
+
+  function getConfigTarefas(){
+    try{
+      const raw = localStorage.getItem(CONFIG_TAREFAS_KEY);
+      const cfg = raw ? JSON.parse(raw) : {};
+      if(!cfg.custom) cfg.custom = { morning: [], night: [] };
+      if(!Array.isArray(cfg.custom.morning)) cfg.custom.morning = [];
+      if(!Array.isArray(cfg.custom.night)) cfg.custom.night = [];
+if(!cfg.hidden) cfg.hidden = {};
+if(!cfg.editadas) cfg.editadas = {};
+return cfg;
+    }catch(e){
+      return { custom:{ morning:[], night:[] }, hidden:{} };
+    }
+  }
+
+  function salvarConfigTarefas(cfg){
+    localStorage.setItem(CONFIG_TAREFAS_KEY, JSON.stringify(cfg));
+  }
+
+function normalizarItemConfig(item){
+  return {
+    id: item.id,
+    time: item.time || item.hora || "",
+    text: item.text || item.nome || "Nova tarefa",
+    descricao: item.descricao || "",
+    custom: !!item.custom
+  };
+}
+
+function horaParaMinutos(hora){
+  const texto = String(hora || "").toLowerCase().trim();
+
+  const limpo = texto
+    .replace("h", ":")
+    .replace("m", "")
+    .replace(" ", "");
+
+  const partes = limpo.split(":");
+  const h = Number(partes[0] || 0);
+  const m = Number(partes[1] || 0);
+
+  return (h * 60) + m;
+}
+
+function formatarHorarioRotina(valor){
+  const numeros = String(valor || "").replace(/\D/g, "").slice(0, 4);
+
+  if(!numeros) return "";
+
+  const preenchido = numeros.padStart(4, "0");
+  const horas = preenchido.slice(0, 2);
+  const minutos = preenchido.slice(2, 4);
+
+  return `${horas}h${minutos}m`;
+}
+
+function obterItensBaseComConfig(tab){
+  const cfg = getConfigTarefas();
+
+  const base = TASKS[tab].items
+    .filter(item => !cfg.hidden[item.id])
+    .map(item => ({
+      ...item,
+      ...(cfg.editadas && cfg.editadas[item.id] ? cfg.editadas[item.id] : {})
+    }));
+
+  const extras = (cfg.custom[tab] || []).map(normalizarItemConfig);
+
+  return [...base, ...extras].sort((a,b) => {
+    return horaParaMinutos(a.time) - horaParaMinutos(b.time);
+  });
+}
+
+  function abrirModalConfiguracao(){
+    document.getElementById("novaTarefaTexto").value = "";
+    document.getElementById("novaTarefaHora").value = "";
+    renderizarListaConfiguracao();
+    document.getElementById("modalConfiguracao").classList.add("show");
+  }
+
+  function fecharModalConfiguracao(){
+    document.getElementById("modalConfiguracao").classList.remove("show");
+  }
+
+  function adicionarTarefaConfiguracao(){
+    const texto = document.getElementById("novaTarefaTexto").value.trim();
+const hora = formatarHorarioRotina(
+  document.getElementById("novaTarefaHora").value
+);
+
+    if(!texto){
+      alert("Escreva o nome da tarefa.");
+      return;
+    }
+
+    const cfg = getConfigTarefas();
+    const id = `custom_${currentTab}_${Date.now()}`;
+
+const descricao = document.getElementById("novaTarefaDescricao").value.trim();
+cfg.custom[currentTab].push({
+  id,
+  text: texto,
+  descricao: descricao,
+  time: hora,
+  custom: true
+});
+
+    salvarConfigTarefas(cfg);
+document.getElementById("novaTarefaTexto").value = "";
+document.getElementById("novaTarefaDescricao").value = ""; // 👈 FALTA ESSA
+document.getElementById("novaTarefaHora").value = "";
+renderizarListaConfiguracao();
+render();
+  }
+
+  function removerTarefaConfiguracao(id){
+    const senha = prompt("Digite a senha da mamãe para retirar essa tarefa:");
+
+    if(!senhaGabrielaValida(senha)){
+      alert("Senha incorreta.");
+      return;
+    }
+
+    const cfg = getConfigTarefas();
+    cfg.custom.morning = cfg.custom.morning.filter(item => item.id !== id);
+    cfg.custom.night = cfg.custom.night.filter(item => item.id !== id);
+    cfg.hidden[id] = true;
+    salvarConfigTarefas(cfg);
+
+    const ds = getDayState(cycleDayKey);
+    delete ds.done[id];
+    ds.doneOrder = ds.doneOrder.filter(item => item !== id);
+    saveStore();
+
+    renderizarListaConfiguracao();
+    render();
+  }
+
+function renderizarListaConfiguracao(){
+  const lista = document.getElementById("listaConfigTarefas");
+  const itens = getItemsForTab(currentTab, cycleDayKey);
+  lista.innerHTML = "";
+
+  itens.forEach(item => {
+    const linha = document.createElement("div");
+    linha.style.display = "grid";
+    linha.style.gridTemplateColumns = "1fr auto auto";
+    linha.style.gap = "6px";
+    linha.style.alignItems = "center";
+    linha.style.background = "#F8FAF7";
+    linha.style.border = "1px solid var(--borda)";
+    linha.style.borderRadius = "12px";
+    linha.style.padding = "9px 10px";
+
+    const nome = document.createElement("div");
+    nome.style.fontSize = "12px";
+    nome.style.color = "var(--texto-principal)";
+    nome.style.lineHeight = "1.35";
+    nome.textContent = `${item.text || item.nome}${item.time ? " • " + item.time : ""}`;
+
+    const btnEditar = document.createElement("button");
+    btnEditar.textContent = "editar";
+    btnEditar.className = "cancel";
+    btnEditar.style.border = "none";
+    btnEditar.style.borderRadius = "10px";
+    btnEditar.style.padding = "8px 10px";
+    btnEditar.style.cursor = "pointer";
+    btnEditar.style.fontFamily = "var(--fonte)";
+    btnEditar.style.fontSize = "11px";
+    btnEditar.onclick = () => editarTarefaConfiguracao(item.id);
+
+    const btnRetirar = document.createElement("button");
+    btnRetirar.textContent = "retirar";
+    btnRetirar.className = "cancel";
+    btnRetirar.style.border = "none";
+    btnRetirar.style.borderRadius = "10px";
+    btnRetirar.style.padding = "8px 10px";
+    btnRetirar.style.cursor = "pointer";
+    btnRetirar.style.fontFamily = "var(--fonte)";
+    btnRetirar.style.fontSize = "11px";
+    btnRetirar.onclick = () => removerTarefaConfiguracao(item.id);
+
+    linha.appendChild(nome);
+    linha.appendChild(btnEditar);
+    linha.appendChild(btnRetirar);
+    lista.appendChild(linha);
+  });
+}
+
+function editarTarefaConfiguracao(id){
+  const senha = prompt("Digite a senha da mamãe para editar essa tarefa:");
+
+  if(!senhaGabrielaValida(senha)){
+    alert("Senha incorreta.");
+    return;
+  }
+
+  const cfg = getConfigTarefas();
+
+  let item = null;
+  let origem = "base";
+
+  for(const periodo of ["morning", "night"]){
+    const encontradoCustom = (cfg.custom[periodo] || []).find(t => t.id === id);
+    if(encontradoCustom){
+      item = encontradoCustom;
+      origem = periodo;
+      break;
+    }
+  }
+
+  if(!item){
+    item = [...TASKS.morning.items, ...TASKS.night.items].find(t => t.id === id);
+  }
+
+  if(!item){
+    alert("Tarefa não encontrada.");
+    return;
+  }
+
+  const novoNome = prompt("Nome da tarefa:", item.text || item.nome || "");
+  if(novoNome === null) return;
+
+  const novaDescricao = prompt("Descrição da tarefa:", item.descricao || "");
+  if(novaDescricao === null) return;
+
+  const novoHorarioDigitado = prompt("Horário da tarefa:", item.time || "");
+  if(novoHorarioDigitado === null) return;
+
+  const novoHorario = formatarHorarioRotina(novoHorarioDigitado);
+
+  if(origem === "base"){
+    if(!cfg.editadas) cfg.editadas = {};
+
+    cfg.editadas[id] = {
+      text: novoNome.trim(),
+      descricao: novaDescricao.trim(),
+      time: novoHorario
+    };
+  }else{
+    item.text = novoNome.trim();
+    item.descricao = novaDescricao.trim();
+    item.time = novoHorario;
+  }
+
+  salvarConfigTarefas(cfg);
+  renderizarListaConfiguracao();
+  render();
+}
+
+  function bloquearPorPendenciaSeNecessario(){
+    if(hasPendingPreviousScreenRules()){
+      abrirModalMensagemImportanteMaya();
+      return true;
+    }
+    return false;
   }
 
   function getItemsForTab(tab, key){
-    return TASKS[tab].items.filter(item => {
+    return obterItensBaseComConfig(tab).filter(item => {
       if(item.weekdaysOnly && !isWeekday(key)) return false;
+      if(item.schoolDaysOnly && !isSchoolDay(key)) return false;
       return true;
     });
+  }
+
+  function getCountableItemsForTab(tab, key){
+    return getItemsForTab(tab, key);
   }
 
   function isDone(id){
@@ -405,16 +1777,90 @@
   }
 
   function isLocked(){
-    return !!getDayState(cycleDayKey).completed || hasPendingPreviousDay();
+    return !!getDayState(cycleDayKey).completed || hasPendingPreviousDay() || deveBloquearTelaAoEntrar();
+  }
+
+  function getPassatempoLabel(){
+    const ds = getDayState(cycleDayKey);
+    if(Array.isArray(ds.calmActivities) && ds.calmActivities.length){
+return `Escolhido: ${ds.calmActivities.join(" + ")}`;
+    }
+    return "Escolhido: em aberto";
+  }
+
+  function getCompletionColorClass(id){
+    const ds = getDayState(cycleDayKey);
+    const index = ds.doneOrder.indexOf(id);
+    if(index === -1) return "";
+    return RAINBOW_CLASSES[index % RAINBOW_CLASSES.length];
+  }
+
+  function markDoneState(id, done){
+    const ds = getDayState(cycleDayKey);
+
+    ds.done[id] = done;
+
+    if(done){
+      if(!ds.doneOrder.includes(id)){
+        ds.doneOrder.push(id);
+      }
+    }else{
+      ds.doneOrder = ds.doneOrder.filter(item => item !== id);
+    }
+
+    ds.updatedAt = Date.now();
+    saveStore();
   }
 
   function toggleDone(id){
+    if(bloquearPorPendenciaSeNecessario()) return;
     if(isLocked()) return;
 
     const ds = getDayState(cycleDayKey);
-    ds.done[id] = !ds.done[id];
+
+    if(id === "n4"){
+      const temPassatempo = Array.isArray(ds.calmActivities) && ds.calmActivities.length > 0;
+      if(temPassatempo){
+        abrirModalPassatemposEscolhido();
+      }else{
+        openPassatemposPage();
+      }
+      return;
+    }
+
+    const nextState = !ds.done[id];
+    markDoneState(id, nextState);
+    render();
+  }
+
+  function openPassatemposPage(){
+    if(bloquearPorPendenciaSeNecessario()) return;
+    if(isLocked()) return;
+    location.href = "maya-passatempos.html";
+  }
+
+  function abrirModalPassatemposEscolhido(){
+    if(bloquearPorPendenciaSeNecessario()) return;
+    if(isLocked()) return;
+    document.getElementById("modalPassatemposEscolhido").classList.add("show");
+  }
+
+  function fecharModalPassatemposEscolhido(){
+    document.getElementById("modalPassatemposEscolhido").classList.remove("show");
+  }
+
+  function abrirPaginaPassatemposEscolhido(){
+    location.href = "maya-passatempos.html";
+  }
+
+  function desfazerSelecaoPassatempos(){
+    const ds = getDayState(cycleDayKey);
+    ds.calmActivities = [];
+    ds.done["n4"] = false;
+    ds.doneOrder = ds.doneOrder.filter(item => item !== "n4");
     ds.updatedAt = Date.now();
     saveStore();
+    fecharModalPassatemposEscolhido();
     render();
   }
 
@@ -426,8 +1872,7 @@
   }
 
   function canCompleteDay(){
-    const now = getNow();
-    return now.getHours() >= 21;
+    return getNow().getHours() >= 21;
   }
 
   function completeDay(){
@@ -435,6 +1880,11 @@
     if(ds.completed) return;
     if(!canCompleteDay()) return;
     if(hasPendingPreviousDay()) return;
+
+    if(ds.validation.morningRule === null || ds.validation.nightRule === null){
+      abrirModalMensagemImportanteMaya();
+      return;
+    }
 
     ds.completed = true;
     ds.completedAt = Date.now();
@@ -449,6 +1899,10 @@
 
     const ds = getDayState(previousKey);
     if(ds.completed) return;
+    if(ds.validation.morningRule === null || ds.validation.nightRule === null){
+      abrirModalMensagemImportanteMaya();
+      return;
+    }
 
     ds.completed = true;
     ds.completedAt = Date.now();
@@ -457,8 +1911,104 @@
     render();
   }
 
+  function atualizarLinhaTempo(){
+    const agora = new Date();
+    const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+    document.getElementById("linhaTempoHora").textContent = `${pad(agora.getHours())}:${pad(agora.getMinutes())}`;
+    document.getElementById("linhaTempoDia").textContent = `• ${diasCurtos[agora.getDay()]}`;
+    document.getElementById("linhaTempoData").textContent = `• ${pad(agora.getDate())}/${pad(agora.getMonth()+1)}`;
+  }
+
+function shouldMoveHighlightToEnd(item){
+  return false;
+}
+
+  function orderItemsForRender(items){
+    const visibleQueue = [];
+    const movedHighlights = [];
+    const done = [];
+
+    items.forEach(item => {
+if(item.type){
+  if(isDone(item.id)){
+    done.push(item);
+  }else{
+    visibleQueue.push(item);
+  }
+  return;
+}
+
+      if(isDone(item.id)){
+        done.push(item);
+      }else{
+        visibleQueue.push(item);
+      }
+    });
+
+    done.sort((a, b) => {
+      const orderA = getDayState(cycleDayKey).doneOrder.indexOf(a.id);
+      const orderB = getDayState(cycleDayKey).doneOrder.indexOf(b.id);
+      return orderA - orderB;
+    });
+
+    return [...visibleQueue, ...done, ...movedHighlights];
+  }
+
+  function selecionarAudioPorHorario(){
+    const hora = new Date().getHours();
+    return hora >= 18 ? audioNoite : audioManha;
+  }
+
+  function pararTodosAudios(){
+    [audioManha, audioNoite].forEach(audio => {
+      audio.pause();
+      audio.currentTime = 0;
+    });
+  }
+
+  async function tocarAudioCorreto(){
+    const config = getConfigSomSalva();
+
+    if(!config.ativo){
+      pararTodosAudios();
+      audioAtual = null;
+      return;
+    }
+
+    const audioDesejado = selecionarAudioPorHorario();
+
+    audioManha.volume = Number(config.volume ?? 0.35);
+    audioNoite.volume = Number(config.volume ?? 0.35);
+
+    if(audioAtual !== audioDesejado){
+      pararTodosAudios();
+      audioAtual = audioDesejado;
+    }
+
+    try{
+      await audioAtual.play();
+      musicaLiberada = true;
+    }catch(e){
+    }
+  }
+
+  async function liberarMusica(){
+    aplicarConfigNosAudios();
+    await tocarAudioCorreto();
+  }
+
+
+function formatarSubtituloBotao(texto){
+  return String(texto || "")
+    .replace(/\s+e\s+/gi, " • ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
   function render(){
     refreshCycleDay();
+    atualizarExibicaoRegraHoje();
 
     document.getElementById("tabMorning").classList.toggle("active", currentTab === "morning");
     document.getElementById("tabNight").classList.toggle("active", currentTab === "night");
@@ -466,60 +2016,153 @@
     const list = document.getElementById("list");
     list.innerHTML = "";
 
-    const items = getItemsForTab(currentTab, cycleDayKey);
-    document.getElementById("sectionTitle").textContent = TASKS[currentTab].title;
+    const rawItems = getItemsForTab(currentTab, cycleDayKey);
+    const items = orderItemsForRender(rawItems);
+    const countableItems = getCountableItemsForTab(currentTab, cycleDayKey);
 
     items.forEach(it => {
       const row = document.createElement("div");
-      row.className = "item" + (isDone(it.id) ? " done" : "") + (isLocked() ? " locked" : "");
+
+if(it.type){
+  let classes = `item ${it.type}`;
+
+  if(isDone(it.id)){
+    classes += ` done ${getCompletionColorClass(it.id)}`;
+  }
+
+  row.className = classes;
+  row.onclick = () => abrirModalRegraTela(it);
+
+        const left = document.createElement("div");
+        left.className = "left";
+
+        const text = document.createElement("div");
+        text.className = "buttonText";
+        text.textContent = it.text;
+
+        const timeLine = document.createElement("div");
+        timeLine.className = "specialTimeLine";
+
+        const iconBefore = document.createElement("span");
+        iconBefore.className = "specialHeart";
+        iconBefore.textContent = it.id === "moment-play-screen" ? "💚" : "🩵";
+
+        const sub = document.createElement("span");
+        sub.className = "buttonTime";
+        sub.textContent = it.subtext;
+
+        const iconAfter = document.createElement("span");
+        iconAfter.className = "specialHeart";
+        iconAfter.textContent = it.id === "moment-play-screen" ? "💚" : "🩵";
+
+        timeLine.appendChild(iconBefore);
+        timeLine.appendChild(sub);
+        timeLine.appendChild(iconAfter);
+
+        left.appendChild(text);
+        left.appendChild(timeLine);
+        row.appendChild(left);
+        list.appendChild(row);
+        return;
+      }
+
+      let classes = "item";
+      if(isDone(it.id)){
+        classes += ` done ${getCompletionColorClass(it.id)}`;
+      }
+      if(isLocked()){
+        classes += " locked";
+      }
+      row.className = classes;
+
       row.onclick = () => toggleDone(it.id);
 
       const left = document.createElement("div");
       left.className = "left";
 
-      const flower = document.createElement("div");
-      flower.className = "flower";
-      flower.textContent = isDone(it.id) ? "🌸" : "🌼";
+      if(it.grouped){
+        const groupedTitle = document.createElement("div");
+        groupedTitle.className = "groupedTitle";
+        groupedTitle.textContent = it.text;
 
-      const text = document.createElement("div");
-      text.className = "text";
-      text.textContent = it.text;
+        const groupedSubtasks = document.createElement("div");
+        groupedSubtasks.className = "groupedSubtasks";
 
-      const time = document.createElement("div");
-      time.className = "time";
-      time.textContent = it.time;
+        const subtasks = getItemSubTasks(it, cycleDayKey);
 
-      left.appendChild(flower);
-      left.appendChild(text);
+        if(shouldStackSubTasks(it)){
+          groupedSubtasks.classList.add("stack-lines");
+          subtasks.forEach(texto => {
+            const linha = document.createElement("span");
+            linha.textContent = formatarSubtituloBotao(texto);
+            groupedSubtasks.appendChild(linha);
+          });
+        }else{
+          groupedSubtasks.textContent = subtasks.map(formatarSubtituloBotao).join(" • ");
+        }
+
+        const time = document.createElement("div");
+        time.className = "buttonTime";
+        time.textContent = it.time;
+
+        left.appendChild(groupedTitle);
+        left.appendChild(groupedSubtasks);
+        left.appendChild(time);
+      } else if(it.id === "n4"){
+        const title = document.createElement("div");
+        title.className = "buttonText";
+        title.textContent = "Passatempos Relaxantes Sem Telas";
+
+        const selectedLine = document.createElement("div");
+        selectedLine.className = "buttonTime";
+        selectedLine.textContent = getPassatempoLabel();
+
+        const time = document.createElement("div");
+        time.className = "buttonTime";
+        time.textContent = it.time;
+
+        left.appendChild(title);
+        left.appendChild(selectedLine);
+        left.appendChild(time);
+      } else {
+        const text = document.createElement("div");
+        text.className = "buttonText";
+        text.textContent = it.text;
+
+left.appendChild(text);
+
+if(it.descricao){
+  const desc = document.createElement("div");
+  desc.className = "buttonDesc";
+  desc.textContent = formatarSubtituloBotao(it.descricao);
+  left.appendChild(desc);
+}
+
+const time = document.createElement("div");
+time.className = "buttonTime";
+time.textContent = it.time;
+
+left.appendChild(time);
+      }
+
       row.appendChild(left);
-      row.appendChild(time);
-
       list.appendChild(row);
     });
 
-    const doneCount = items.filter(it => isDone(it.id)).length;
-    const total = items.length;
+    const doneCount = countableItems.filter(it => isDone(it.id)).length;
+    const total = countableItems.length;
 
-    document.getElementById("progressLine").textContent =
-      `Jardim de hoje • ${doneCount}/${total} concluídas`;
+    document.getElementById("progressLine").textContent = `${doneCount} de ${total} concluídas`;
+    document.getElementById("mainHint").textContent = "Toque numa tarefa para marcar";
 
-    const slots = Math.max(7, total);
-    let s = "";
-    for(let i = 0; i < slots; i++){
-      s += (i < doneCount) ? "🌼" : "🌱";
+    let garden = "";
+    for(let i = 0; i < total; i++){
+      garden += (i < doneCount) ? "🌈" : "🌧️";
     }
-    document.getElementById("garden").textContent = s;
+    document.getElementById("garden").textContent = garden;
 
     const ds = getDayState(cycleDayKey);
-
-    document.getElementById("todayLine").textContent =
-      `Dia da rotina: ${formatBRDateFromKey(cycleDayKey)}`;
-
-    document.getElementById("updatedLine").textContent =
-      ds.updatedAt ? `Última marcação: ${formatTime(new Date(ds.updatedAt))}` : `Ainda não marcou nada hoje`;
-
     const completeBtn = document.getElementById("completeDayBtn");
-    const mainHint = document.getElementById("mainHint");
     const statusBox = document.getElementById("statusBox");
     const warningBox = document.getElementById("warningBox");
     const warningText = document.getElementById("warningText");
@@ -527,12 +2170,22 @@
     if(hasPendingPreviousDay()){
       const previousKey = getPreviousDayKey();
       warningBox.style.display = "flex";
-      warningText.textContent =
-        `O dia anterior (${formatBRDateFromKey(previousKey)}) ainda não foi concluído. Para liberar o dia de hoje, conclua o anterior primeiro.`;
+      if(hasPendingPreviousScreenRules()){
+        warningText.innerHTML =
+          "<div>Ontem faltou você responder se respeitou as regras do uso de telas de manhã e de noite.</div><div style=\"margin-top:10px;\">Para liberar o dia de hoje, sua mamãe precisa liberar o acesso.</div>";
+        const btn = warningBox.querySelector(".warningBtn");
+        if(btn) btn.style.display = "none";
+        abrirModalMensagemImportanteMaya();
+      }else{
+        warningText.textContent =
+          `O dia anterior (${formatBRDateFromKey(previousKey)}) ainda não foi concluído. Para liberar o dia de hoje, conclua o anterior primeiro.`;
+        const btn = warningBox.querySelector(".warningBtn");
+        if(btn) btn.style.display = "block";
+      }
 
       completeBtn.style.display = "none";
-      mainHint.textContent = "Hoje está aguardando o fechamento do dia anterior 🌙";
-      statusBox.textContent = "Assim que o dia anterior for concluído, o dia atual será liberado.";
+      document.getElementById("mainHint").textContent = "";
+      statusBox.textContent = "";
       return;
     } else {
       warningBox.style.display = "none";
@@ -540,28 +2193,129 @@
 
     if(ds.completed){
       completeBtn.style.display = "none";
-      mainHint.textContent = "Dia concluído. A página ficará aguardando o próximo dia 🌙";
+      document.getElementById("mainHint").textContent = "Dia concluído.";
       statusBox.textContent =
-        `✅ Dia fechado às ${formatTime(new Date(ds.completedAt))}. Tudo será liberado novamente às 07h do próximo ciclo.`;
+        `✅ Dia fechado às ${formatTime(new Date(ds.completedAt))}.`;
     } else {
       if(canCompleteDay()){
         completeBtn.style.display = "block";
-        mainHint.textContent = "Agora já pode concluir o dia 🌼";
-        statusBox.textContent = "Depois de clicar em “Concluir o dia”, as tarefas ficam congeladas até 07h.";
+        document.getElementById("mainHint").textContent = "Toque numa tarefa para marcar";
+        statusBox.textContent = "Depois de clicar em “🕘 Concluir o dia”, as tarefas ficam congeladas até 07h.";
       } else {
         completeBtn.style.display = "none";
-        mainHint.textContent = "Toque numa tarefa para a flor abrir 🌼";
-        statusBox.textContent = "O botão “Concluir o dia” aparece somente a partir das 21h.";
+        document.getElementById("mainHint").textContent = "Toque numa tarefa para marcar";
+        statusBox.textContent = "O botão “🕘 Concluir o dia” aparece depois das 21h.";
       }
     }
   }
 
+
+
+  function deveBloquearTelaAoEntrar(){
+    const previousKey = getPreviousDayKey();
+
+    if(dayExists(previousKey)){
+      const previousDay = getDayState(previousKey);
+      const regraPendenteAnterior = previousDay.validation.morningRule === null || previousDay.validation.nightRule === null;
+      if(regraPendenteAnterior) return true;
+    }
+
+    return false;
+  }
+
+  function verificarBloqueioAoEntrar(){
+    if(deveBloquearTelaAoEntrar()){
+      abrirModalMensagemImportanteMaya();
+    }else{
+      fecharModalMensagemImportanteMaya();
+    }
+  }
+
+  window.addEventListener("load", () => {
+    aplicarConfigNosAudios();
+    atualizarLinhaTempo();
+    atualizarStatusRegraHoje();
+    atualizarExibicaoRegraHoje();
+    render();
+    setTimeout(verificarBloqueioAoEntrar, 80);
+    tocarAudioCorreto();
+    setInterval(atualizarLinhaTempo, 1000);
+  });
+
+  window.addEventListener("pageshow", () => {
+    aplicarConfigNosAudios();
+    atualizarLinhaTempo();
+    atualizarStatusRegraHoje();
+    atualizarExibicaoRegraHoje();
+    render();
+    setTimeout(verificarBloqueioAoEntrar, 80);
+    tocarAudioCorreto();
+  });
+
+  window.addEventListener("focus", () => {
+    aplicarConfigNosAudios();
+    atualizarLinhaTempo();
+    atualizarStatusRegraHoje();
+    atualizarExibicaoRegraHoje();
+    render();
+    setTimeout(verificarBloqueioAoEntrar, 80);
+    if(musicaLiberada){
+      tocarAudioCorreto();
+    }
+  });
+
+  window.addEventListener("storage", (event) => {
+    if(event.key === CONFIG_SOM_KEY){
+      aplicarConfigNosAudios();
+      if(musicaLiberada){
+        tocarAudioCorreto();
+      }
+    }
+    if(event.key === REGRA_TELA_HOJE_KEY){
+      atualizarStatusRegraHoje();
+    }
+    atualizarLinhaTempo();
+    render();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if(!document.hidden){
+      aplicarConfigNosAudios();
+      atualizarLinhaTempo();
+      atualizarStatusRegraHoje();
+      atualizarExibicaoRegraHoje();
+      render();
+      if(musicaLiberada){
+        tocarAudioCorreto();
+      }
+    }
+  });
+
+  window.addEventListener("hashchange", () => {
+    if(location.hash === "#night"){
+      currentTab = "night";
+    }else if(location.hash === "#morning"){
+      currentTab = "morning";
+    }
+    render();
+  });
+
+  if(location.hash === "#night"){
+    currentTab = "night";
+  }
+
   setInterval(() => {
     refreshCycleDay();
+    atualizarStatusRegraHoje();
+    atualizarExibicaoRegraHoje();
     render();
+    if(musicaLiberada){
+      tocarAudioCorreto();
+    }
   }, 30000);
 
-  render();
+  document.addEventListener("click", liberarMusica, { once:true });
+  document.addEventListener("touchstart", liberarMusica, { once:true });
 </script>
 </body>
 </html>

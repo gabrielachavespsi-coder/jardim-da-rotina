@@ -5,125 +5,1611 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Menu Gabriela</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-html,body{
-margin:0;
-padding:0;
-height:100%;
-font-family:'Poppins',sans-serif;
-background:#f2f1ee;
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#6B6B6B;
+  --borda:#E3E5E1;
+
+  --fonte:'Poppins',sans-serif;
+
+  --titulo:20px;
+  --botao:15px;
+
+  --sombra-suave:0 4px 12px rgba(0,0,0,0.05);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html, body{
+  width:100%;
+  min-height:100%;
 }
 
 body{
-display:flex;
-justify-content:center;
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
 }
 
-.container{
-width:100%;
-max-width:420px;
-padding:16px;
-box-sizing:border-box;
+.pagina{
+  width:100%;
+  max-width:420px;
+}
+
+.card{
+  width:100%;
+  background:var(--card);
+  border-radius:24px;
+  padding:22px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
 .topo{
-display:flex;
-align-items:center;
-gap:12px;
-margin-bottom:20px;
+  display:grid;
+  grid-template-columns:40px 1fr 58px;
+  align-items:start;
+  gap:8px;
+  margin-bottom:6px;
 }
 
 .botao-voltar{
-border:none;
-background:#e9e8e4;
-border-radius:14px;
-padding:8px 14px;
-font-size:15px;
-font-family:'Poppins',sans-serif;
-cursor:pointer;
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  border-radius:12px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  padding:0;
+  transition:0.2s ease;
 }
 
-.titulo{
-font-size:22px;
-color:#3e6b5c;
+.botao-voltar:hover{
+  background:#dde3d9;
+}
+
+.botao-voltar span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  transform:translateY(-1px);
+}
+
+.topCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding-top:2px;
+}
+
+.titleIndex{
+  color:var(--texto-principal);
+  font-weight:500;
+  font-size:var(--titulo);
+  margin:0;
+  line-height:1.2;
+  text-align:center;
+}
+
+.subtitulo{
+  font-size:12px;
+  color:var(--texto-secundario);
+  margin-top:2px;
+  text-align:center;
+}
+
+.dataTopo{
+  min-height:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:flex-start;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:1px;
+}
+
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  white-space:nowrap;
+  margin-bottom:2px;
+}
+
+.dataTopoLinha{
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.botoes-lista{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.botao-wrap{
+  position:relative;
+}
+
+.check-concluido{
+  position:absolute;
+  top:8px;
+  left:10px;
+  font-size:11px;
+  line-height:1;
+  z-index:2;
+  display:none;
+  pointer-events:none;
+}
+
+.botao-wrap.concluido .check-concluido{
+  display:block;
 }
 
 .botao{
-display:block;
-width:100%;
-background:#f7f6f3;
-border:none;
-border-radius:22px;
-padding:18px 16px;
-margin-bottom:14px;
-box-shadow:0 4px 12px rgba(0,0,0,0.05);
-cursor:pointer;
-font-family:'Poppins',sans-serif;
+  width:100%;
+  border:none;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-radius:16px;
+  padding:14px 16px;
+  font-size:var(--botao);
+  font-family:var(--fonte);
+  cursor:pointer;
+  transition:0.2s ease;
+  display:block;
+}
+
+.tarefa-bloco{
+  height:82px;
+  min-height:82px;
+  padding:10px 16px;
+
+  display:flex;
+  flex-direction:column;
+
+  justify-content:center;   /* centraliza vertical */
+  align-items:center;       /* centraliza horizontal */
+
+  text-align:center;        /* garante alinhamento do texto */
+}
+
+.botao:hover{
+  background:var(--verde-hover);
 }
 
 .nome-botao{
-font-size:17px;
-color:#5a4635;
-text-align:center;
+  font-size:14px;
+  color:var(--verde-texto);
+  text-align:center;
+  line-height:1.35;
+  font-weight:500;
+}
+
+.proxima-tarefa{
+  margin-top:2px;
+  font-size:11px;
+  color:rgba(63,111,79,0.72);
+  text-align:center;
+  line-height:1.35;
+  min-height:auto;
 }
 
 .alerta{
-margin-top:8px;
-font-size:12px;
-color:#8c7a6a;
-text-align:center;
-line-height:1.4;
-min-height:18px;
+  margin-top:2px;
+  font-size:11px;
+  color:rgba(63,111,79,0.72);
+  text-align:center;
+  line-height:1.35;
+  min-height:auto;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:4px;
+  flex-wrap:wrap;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  transition:0.2s ease;
+}
+
+.futureBtn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  z-index:999;
+  overflow-y:auto;
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  max-height:85vh;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+}
+
+.modalHeader{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.fecharModal{
+  background:#E9ECE7;
+  border:none;
+  width:32px;
+  height:32px;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+  color:#333;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.2s ease;
+}
+
+.fecharModal:hover{
+  background:#dde3d9;
+}
+
+.descricao-botao{
+  margin-top:4px;
+  font-size:12px;
+  color:rgba(63,111,79,0.74);
+  text-align:center;
+  line-height:1.35;
+}
+
+.modalTitle{
+  font-size:18px;
+  color:var(--texto-principal);
+  text-align:center;
+  font-weight:500;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+  font-family:var(--fonte);
+  font-weight:500;
+}
+
+textarea{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  height:260px;
+  resize:none;
+}
+
+textarea:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+}
+
+.modalBtns{
+  display:flex;
+  gap:8px;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:11px 12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:12.5px;
+  transition:0.2s ease;
+}
+
+.cancel{
+  background:#efefef;
+  color:#333;
+}
+
+.cancel:hover{
+  background:#e7e7e7;
+}
+
+.save{
+  background:var(--verde-escuro);
+  color:white;
+}
+
+.save:hover{
+  background:#4f8a4f;
+}
+
+@media (max-width: 390px){
+  body{
+    padding:14px;
+  }
+
+  .card{
+    padding:20px 14px 16px;
+  }
+
+  .titleIndex{
+    font-size:19px;
+  }
+
+  .botao{
+    padding:14px;
+  }
+
+  .topo{
+    grid-template-columns:40px 1fr 54px;
+  }
+
+  .horaTopo{
+    font-size:13px;
+  }
+
+  .dataTopoLinha{
+    font-size:10.5px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="pagina">
+  <div class="card">
 
-<div class="topo">
-<button class="botao-voltar" onclick="window.location.href='rotina.html'">← Voltar</button>
-<div class="titulo">🌸 Gabriela</div>
+    <div class="topo">
+      <button class="botao-voltar" onclick="window.location.href='index.html'"><span>←</span></button>
+
+      <div class="topCenter">
+        <h1 class="titleIndex">🌿 Gabriela</h1>
+        <p class="subtitulo">seu espaço de organização</p>
+      </div>
+
+      <div class="dataTopo" aria-label="Data e hora atuais">
+        <div id="linhaTempoHora" class="horaTopo"></div>
+        <div id="linhaTempoDia" class="dataTopoLinha"></div>
+        <div id="linhaTempoData" class="dataTopoLinha"></div>
+      </div>
+    </div>
+
+    <div id="botoesLista" class="botoes-lista">
+      <div class="botao-wrap" id="wrap-bloco1" data-bloco-id="bloco1">
+        <div class="check-concluido">✅</div>
+        <button class="botao" onclick="window.location.href='gabriela-autocuidado-movimento-silencio.html'">
+          <div class="nome-botao">🌿 Autocuidado, Movimento e Silêncio</div>
+          <div id="proxima-bloco1" class="proxima-tarefa"></div>
+          <div id="alerta-bloco1" class="alerta"></div>
+        </button>
+      </div>
+
+      <div class="botao-wrap" id="wrap-bloco2" data-bloco-id="bloco2">
+        <div class="check-concluido">✅</div>
+        <button class="botao" onclick="abrirBlocoMenu('bloco2','gabriela-manifestacao-criatividade.html')">
+          <div class="nome-botao">💫 Manifestação e Criatividade</div>
+          <div id="proxima-bloco2" class="proxima-tarefa"></div>
+          <div id="alerta-bloco2" class="alerta"></div>
+        </button>
+      </div>
+
+      <div class="botao-wrap" id="wrap-bloco4" data-bloco-id="bloco4">
+        <div class="check-concluido">✅</div>
+        <button class="botao" onclick="window.location.href='gabriela-alimentacao-preparar-sair.html'">
+          <div class="nome-botao">🍴 Alimentação e Preparar para Sair</div>
+          <div id="proxima-bloco4" class="proxima-tarefa"></div>
+          <div id="alerta-bloco4" class="alerta"></div>
+        </button>
+      </div>
+
+      <div class="botao-wrap" id="wrap-bloco6" data-bloco-id="bloco6">
+        <div class="check-concluido">✅</div>
+        <button class="botao" onclick="window.location.href='gabriela-estudo-organizacao-casa-dia.html'">
+          <div class="nome-botao">📚 Estudo, Organização da Casa e do Dia</div>
+          <div id="proxima-bloco6" class="proxima-tarefa"></div>
+          <div id="alerta-bloco6" class="alerta"></div>
+        </button>
+      </div>
+
+      <div class="botao-wrap" id="wrap-bloco7" data-bloco-id="bloco7">
+        <div class="check-concluido">✅</div>
+        <button class="botao" onclick="window.location.href='gabriela-desacelerar-autocuidado.html'">
+          <div class="nome-botao">🌙 Desacelerar e Autocuidado</div>
+          <div id="proxima-bloco7" class="proxima-tarefa"></div>
+          <div id="alerta-bloco7" class="alerta"></div>
+        </button>
+      </div>
+
+      <div class="botao-wrap" id="wrap-bloco8" data-bloco-id="bloco8">
+        <div class="check-concluido">✅</div>
+        <button class="botao" onclick="abrirBlocoMenu('bloco8','gabriela-passatempos.html')">
+          <div class="nome-botao">🃏 Passatempos Relaxantes</div>
+          <div id="proxima-bloco8" class="proxima-tarefa"></div>
+          <div id="alerta-bloco8" class="alerta"></div>
+        </button>
+      </div>
+    </div>
+
+    <div class="footerMiniAction">
+      <button class="futureBtn" onclick="abrirModalConfiguracao()">configuração</button>
+      <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+    </div>
+
+  </div>
 </div>
 
-<button class="botao" onclick="window.location.href='gabriela-autocuidado-movimento-silencio.html'">
-<div class="nome-botao">🌿 Autocuidado, Movimento e Silêncio</div>
-<div id="alerta-bloco1" class="alerta"></div>
-</button>
+<div class="modalOverlay" id="modalFuturasEdicoes">
+  <div class="modal">
+    <h2 class="modalTitle">Futuras edições</h2>
 
-<button class="botao" onclick="window.location.href='gabriela-manifestacao-criatividade.html'">
-<div class="nome-botao">💫 Manifestação e Criatividade</div>
-<div id="alerta-bloco2" class="alerta"></div>
-</button>
+    <div class="field">
+      <label>Ideias de melhorias futuras</label>
+      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
+    </div>
 
-<button class="botao" onclick="window.location.href='gabriela-alimentacao-preparar-sair.html'">
-<div class="nome-botao">🍴 Alimentação e Preparar para Sair</div>
-<div id="alerta-bloco4" class="alerta"></div>
-</button>
-
-<button class="botao" onclick="window.location.href='gabriela-estudo-organizacao-casa-dia.html'">
-<div class="nome-botao">📚 Estudo, Organização da Casa e do Dia</div>
-<div id="alerta-bloco6" class="alerta"></div>
-</button>
-
-<button class="botao" onclick="window.location.href='gabriela-desacelerar-autocuidado.html'">
-<div class="nome-botao">🌙 Desacelerar e Autocuidado</div>
-<div id="alerta-bloco7" class="alerta"></div>
-</button>
-
-<button class="botao" onclick="window.location.href='maya-passatempos.html?from=gabriela'">
-<div class="nome-botao">🃏 Passatempos Relaxantes</div>
-<div id="alerta-bloco8" class="alerta"></div>
-</button>
-
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+    </div>
+  </div>
 </div>
+
+
+<div class="modalOverlay" id="modalConfiguracao">
+  <div class="modal">
+    <div class="modalHeader">
+      <button class="fecharModal" onclick="fecharModalConfiguracao()">✕</button>
+    </div>
+
+    <h2 class="modalTitle">Configuração do menu</h2>
+
+    <div class="field">
+      <label>Nova tarefa</label>
+      <textarea id="novaTarefaTexto" style="height:72px;" placeholder="Nome da tarefa"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Descrição</label>
+      <textarea id="novaTarefaDescricao" style="height:72px;" placeholder="Descrição que aparecerá no botão"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Horário</label>
+      <textarea id="novaTarefaHora" style="height:48px;" placeholder="Digite só números. Ex.: 1030"></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
+      <button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
+    </div>
+
+    <div id="listaConfigTarefas" style="display:flex; flex-direction:column; gap:8px; margin-top:4px;"></div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalBlocoConcluido">
+  <div class="modal">
+    <h2 class="modalTitle" id="modalBlocoConcluidoTitulo">Tarefa concluída</h2>
+
+    <div class="modalBtns" style="flex-direction:column;">
+      <button class="save" onclick="abrirPaginaBlocoConcluido()">abrir página</button>
+      <button class="botao" onclick="desfazerSelecaoBlocoConcluido()">desfazer seleção da tarefa</button>
+      <button class="cancel" onclick="fecharModalBlocoConcluido()">cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalMensagemImportanteMaya">
+  <div class="modal">
+    <h2 class="modalTitle">Mensagem Importante Maya</h2>
+
+    <div style="font-size:13px; color:var(--texto-secundario); text-align:center; line-height:1.55;">
+      Ontem faltou você responder se respeitou as regras do uso de telas de manhã e de noite.<br>
+      Para liberar o dia de hoje, sua mamãe precisa liberar o acesso.
+    </div>
+
+    <div class="regraHojeBtns" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <button class="regraHojeBtn ok" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#E6F4E6; color:#2F6A3B;" onclick="responderRegraPendenteMaya('morningRule', true)">☀️ Manhã sim</button>
+      <button class="regraHojeBtn nao" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#FFF1F1; color:#A04646;" onclick="responderRegraPendenteMaya('morningRule', false)">☀️ Manhã não</button>
+      <button class="regraHojeBtn ok" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#E6F4E6; color:#2F6A3B;" onclick="responderRegraPendenteMaya('nightRule', true)">🌙 Noite sim</button>
+      <button class="regraHojeBtn nao" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#FFF1F1; color:#A04646;" onclick="responderRegraPendenteMaya('nightRule', false)">🌙 Noite não</button>
+    </div>
+
+    <div id="statusRegraPendenteMaya" style="font-size:12px; color:var(--texto-secundario); text-align:center; line-height:1.45;"></div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalMensagemImportanteMaya()">Responder depois</button>
+    </div>
+  </div>
+</div>
+
 
 <script>
-window.addEventListener("load", atualizarMenu);
-window.addEventListener("pageshow", atualizarMenu);
+const CHAVE_FUTURAS_EDICOES_GABRIELA_MENU = "futuras_edicoes_gabriela_menu";
+const CHAVE_HISTORICO_DIARIO = "historico_diario_gabriela_menu";
+const CHAVE_ULTIMA_DATA_ARQUIVADA = "historico_diario_gabriela_menu_ultima_data";
+const CHAVE_DATA_ABERTA = "historico_diario_gabriela_menu_data_aberta";
+const CHAVE_CONFIG_GABRIELA_MENU = "config_tarefas_gabriela_menu";
+const CHAVE_CUSTOM_GABRIELA_MENU_DIA = "gabriela_menu_custom";
+
+function pad2(numero){
+  return String(numero).padStart(2, "0");
+}
+
+function dataHojeISO(){
+  const h = new Date();
+  return `${h.getFullYear()}-${pad2(h.getMonth()+1)}-${pad2(h.getDate())}`;
+}
+
+function formatarHoraHHMM(date){
+  return `${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
+}
+
+function atualizarLinhaTempo(){
+  const agora = new Date();
+  const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+  const hora = `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+  const dia = `• ${diasCurtos[agora.getDay()]}`;
+  const data = `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
+
+  document.getElementById("linhaTempoHora").textContent = hora;
+  document.getElementById("linhaTempoDia").textContent = dia;
+  document.getElementById("linhaTempoData").textContent = data;
+}
+
+function abrirModalFuturasEdicoes(){
+  document.getElementById("futurasEdicoesTexto").value =
+    localStorage.getItem(CHAVE_FUTURAS_EDICOES_GABRIELA_MENU) ||
+    localStorage.getItem("anotacoes_gabriela_menu") ||
+    localStorage.getItem("gabriela_menu_futuras_edicoes") ||
+    "";
+  document.getElementById("modalFuturasEdicoes").classList.add("show");
+}
+
+function fecharModalFuturasEdicoes(){
+  document.getElementById("modalFuturasEdicoes").classList.remove("show");
+}
+
+function salvarFuturasEdicoes(){
+  const texto = document.getElementById("futurasEdicoesTexto").value;
+  localStorage.setItem(CHAVE_FUTURAS_EDICOES_GABRIELA_MENU, texto);
+  localStorage.setItem("anotacoes_gabriela_menu", texto);
+  localStorage.setItem("gabriela_menu_futuras_edicoes", texto);
+  fecharModalFuturasEdicoes();
+}
+
+function lerJsonSeguro(chave){
+  try{
+    const valor = localStorage.getItem(chave);
+    if(!valor) return null;
+    return JSON.parse(valor);
+  }catch(e){
+    return null;
+  }
+}
+
+function salvarJsonSeguro(chave, valor){
+  localStorage.setItem(chave, JSON.stringify(valor));
+}
+
+
+
+const STORAGE_MAYA_ROTINA = "jardim_rotina_maya_v8";
+const REGRA_TELA_HOJE_MAYA_KEY = "regra_tela_hoje_maya";
+let dataPendenteRegraMaya = null;
+
+function obterStoreMayaMenu(){
+  try{
+    return JSON.parse(localStorage.getItem(STORAGE_MAYA_ROTINA)) || { days:{} };
+  }catch(e){
+    return { days:{} };
+  }
+}
+
+function salvarStoreMayaMenu(storeMaya){
+  localStorage.setItem(STORAGE_MAYA_ROTINA, JSON.stringify(storeMaya));
+}
+
+function garantirDiaMayaMenu(storeMaya, key){
+  if(!storeMaya.days) storeMaya.days = {};
+  if(!storeMaya.days[key]){
+    storeMaya.days[key] = {
+      done:{},
+      doneOrder:[],
+      calmActivities:[],
+      updatedAt:null,
+      completed:false,
+      completedAt:null,
+      validation:{ morningRule:null, nightRule:null }
+    };
+  }
+  if(!storeMaya.days[key].validation){
+    storeMaya.days[key].validation = { morningRule:null, nightRule:null };
+  }
+  return storeMaya.days[key];
+}
+
+function buscarDataPendenteRegraMaya(){
+  const hoje = dataHojeISO();
+  const ontem = new Date();
+  ontem.setDate(ontem.getDate() - 1);
+  const ontemKey = `${ontem.getFullYear()}-${pad2(ontem.getMonth()+1)}-${pad2(ontem.getDate())}`;
+  const storeMaya = obterStoreMayaMenu();
+  if(!storeMaya.days || !storeMaya.days[ontemKey]) return null;
+  const dia = garantirDiaMayaMenu(storeMaya, ontemKey);
+  const pendente = dia.validation.morningRule === null || dia.validation.nightRule === null;
+  if(pendente && ontemKey !== hoje) return ontemKey;
+  return null;
+}
+
+function atualizarStatusRegraPendenteMaya(){
+  const status = document.getElementById("statusRegraPendenteMaya");
+  if(!status || !dataPendenteRegraMaya) return;
+  const storeMaya = obterStoreMayaMenu();
+  const dia = garantirDiaMayaMenu(storeMaya, dataPendenteRegraMaya);
+  const manha = dia.validation.morningRule === null ? "pendente" : (dia.validation.morningRule ? "sim" : "não");
+  const noite = dia.validation.nightRule === null ? "pendente" : (dia.validation.nightRule ? "sim" : "não");
+  status.textContent = `Manhã: ${manha} • Noite: ${noite}`;
+}
+
+function abrirModalMensagemImportanteMayaSeNecessario(){
+  dataPendenteRegraMaya = buscarDataPendenteRegraMaya();
+  if(dataPendenteRegraMaya){
+    atualizarStatusRegraPendenteMaya();
+    document.getElementById("modalMensagemImportanteMaya").classList.add("show");
+  }
+}
+
+function fecharModalMensagemImportanteMaya(){
+  document.getElementById("modalMensagemImportanteMaya").classList.remove("show");
+}
+
+function responderRegraPendenteMaya(campo, valor){
+  if(!dataPendenteRegraMaya) return;
+  const storeMaya = obterStoreMayaMenu();
+  const dia = garantirDiaMayaMenu(storeMaya, dataPendenteRegraMaya);
+  dia.validation[campo] = valor;
+  dia.updatedAt = Date.now();
+
+  if(dia.validation.morningRule !== null && dia.validation.nightRule !== null){
+    dia.completed = true;
+    dia.completedAt = Date.now();
+  }
+
+  salvarStoreMayaMenu(storeMaya);
+
+  const regras = lerJsonSeguro(REGRA_TELA_HOJE_MAYA_KEY) || {};
+  regras[`${dataPendenteRegraMaya}_${campo === "morningRule" ? "moment-play-screen" : "night-screen-time"}`] = valor;
+  localStorage.setItem(REGRA_TELA_HOJE_MAYA_KEY, JSON.stringify(regras));
+
+  atualizarStatusRegraPendenteMaya();
+
+  if(dia.validation.morningRule !== null && dia.validation.nightRule !== null){
+    fecharModalMensagemImportanteMaya();
+    dataPendenteRegraMaya = null;
+    atualizarMenu();
+  }
+}
+
+
+function senhaGabrielaValida(senhaDigitada){
+  const senhasPossiveis = [
+    localStorage.getItem("senha_gabriela"),
+    localStorage.getItem("senhaGabriela"),
+    localStorage.getItem("senha_mamae"),
+    localStorage.getItem("senha_mamae_gabriela"),
+    "1234"
+  ].filter(Boolean);
+
+  return senhasPossiveis.includes(String(senhaDigitada || "").trim());
+}
+
+function formatarHorarioRotina(valor){
+  const textoOriginal = String(valor || "").toLowerCase().trim();
+  if(!textoOriginal) return "";
+
+  let horas = "00";
+  let minutos = "00";
+
+  if(textoOriginal.includes("h")){
+    const partes = textoOriginal.split("h");
+    horas = String(partes[0] || "0").replace(/\D/g, "").padStart(2, "0").slice(-2);
+    minutos = String(partes[1] || "").replace(/\D/g, "").padEnd(2, "0").slice(0, 2) || "00";
+    return `${horas}h${minutos}m`;
+  }
+
+  if(textoOriginal.includes(":")){
+    const partes = textoOriginal.split(":");
+    horas = String(partes[0] || "0").replace(/\D/g, "").padStart(2, "0").slice(-2);
+    minutos = String(partes[1] || "0").replace(/\D/g, "").padEnd(2, "0").slice(0, 2);
+    return `${horas}h${minutos}m`;
+  }
+
+  const numeros = textoOriginal.replace(/\D/g, "").slice(0, 4);
+  if(!numeros) return "";
+
+  if(numeros.length <= 2){
+    horas = numeros.padStart(2, "0");
+    minutos = "00";
+  }else if(numeros.length === 3){
+    horas = numeros.slice(0, 1).padStart(2, "0");
+    minutos = numeros.slice(1, 3);
+  }else{
+    horas = numeros.slice(0, 2);
+    minutos = numeros.slice(2, 4);
+  }
+
+  return `${horas}h${minutos}m`;
+}
+
+function horaParaMinutos(hora){
+  const texto = String(hora || "").toLowerCase().trim();
+  const limpo = texto.replace("h", ":").replace("m", "").replace(" ", "");
+  const partes = limpo.split(":");
+  const h = Number(partes[0] || 0);
+  const m = Number(partes[1] || 0);
+  return (h * 60) + m;
+}
+
+function getConfigMenu(){
+  try{
+    const raw = localStorage.getItem(CHAVE_CONFIG_GABRIELA_MENU);
+    const cfg = raw ? JSON.parse(raw) : {};
+    if(!Array.isArray(cfg.custom)) cfg.custom = [];
+    if(!cfg.editadas) cfg.editadas = {};
+    if(!cfg.hidden) cfg.hidden = {};
+    return cfg;
+  }catch(e){
+    return { custom:[], editadas:{}, hidden:{} };
+  }
+}
+
+function salvarConfigMenu(cfg){
+  localStorage.setItem(CHAVE_CONFIG_GABRIELA_MENU, JSON.stringify(cfg));
+}
+
+function chaveCustomMenuDia(){
+  return `${CHAVE_CUSTOM_GABRIELA_MENU_DIA}_${dataHojeISO()}`;
+}
+
+function getCustomMenuEstado(){
+  return lerJsonSeguro(chaveCustomMenuDia()) || {};
+}
+
+function salvarCustomMenuEstado(estado){
+  salvarJsonSeguro(chaveCustomMenuDia(), estado);
+}
+
+function abrirModalConfiguracao(){
+  document.getElementById("novaTarefaTexto").value = "";
+  document.getElementById("novaTarefaDescricao").value = "";
+  document.getElementById("novaTarefaHora").value = "";
+  renderizarListaConfiguracao();
+  document.getElementById("modalConfiguracao").classList.add("show");
+}
+
+function fecharModalConfiguracao(){
+  document.getElementById("modalConfiguracao").classList.remove("show");
+}
+
+function adicionarTarefaConfiguracao(){
+  const texto = document.getElementById("novaTarefaTexto").value.trim();
+  const descricao = document.getElementById("novaTarefaDescricao").value.trim();
+  const hora = formatarHorarioRotina(document.getElementById("novaTarefaHora").value);
+
+  if(!texto){
+    alert("Escreva o nome da tarefa.");
+    return;
+  }
+
+  const cfg = getConfigMenu();
+  cfg.custom.push({
+    id:`custom_menu_${Date.now()}`,
+    text:texto,
+    descricao,
+    time:hora,
+    custom:true
+  });
+
+  salvarConfigMenu(cfg);
+  document.getElementById("novaTarefaTexto").value = "";
+  document.getElementById("novaTarefaDescricao").value = "";
+  document.getElementById("novaTarefaHora").value = "";
+  renderizarListaConfiguracao();
+  atualizarMenu();
+}
+
+function getItensConfiguracaoMenu(){
+  const cfg = getConfigMenu();
+
+  const base = BLOCOS.map(bloco => {
+    const titulo = document.querySelector(`#${bloco.wrapId} .nome-botao`)?.textContent?.trim() || bloco.id;
+    const editada = cfg.editadas[bloco.id] || {};
+    return {
+      id: bloco.id,
+      text: editada.text || titulo,
+      descricao: editada.descricao || "",
+      time: editada.time || "",
+      base:true,
+      hidden:false
+    };
+  });
+
+  const custom = cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .map(item => ({
+      id:item.id,
+      text:item.text || "Nova tarefa",
+      descricao:item.descricao || "",
+      time:item.time || "",
+      custom:true
+    }));
+
+  return [...base, ...custom].sort((a,b) => horaParaMinutos(a.time) - horaParaMinutos(b.time));
+}
+
+function renderizarListaConfiguracao(){
+  const lista = document.getElementById("listaConfigTarefas");
+  if(!lista) return;
+
+  lista.innerHTML = "";
+  getItensConfiguracaoMenu().forEach(item => {
+    const linha = document.createElement("div");
+    linha.style.display = "grid";
+    linha.style.gridTemplateColumns = "1fr auto auto";
+    linha.style.gap = "6px";
+    linha.style.alignItems = "center";
+    linha.style.background = "#F8FAF7";
+    linha.style.border = "1px solid var(--borda)";
+    linha.style.borderRadius = "12px";
+    linha.style.padding = "9px 10px";
+
+    const nome = document.createElement("div");
+    nome.style.fontSize = "12px";
+    nome.style.color = "var(--texto-principal)";
+    nome.style.lineHeight = "1.35";
+    nome.textContent = `${item.text}${item.time ? " • " + item.time : ""}`;
+
+    const btnEditar = document.createElement("button");
+    btnEditar.textContent = "editar";
+    btnEditar.className = "cancel";
+    btnEditar.style.border = "none";
+    btnEditar.style.borderRadius = "10px";
+    btnEditar.style.padding = "8px 10px";
+    btnEditar.style.cursor = "pointer";
+    btnEditar.style.fontFamily = "var(--fonte)";
+    btnEditar.style.fontSize = "11px";
+    btnEditar.onclick = () => editarTarefaConfiguracao(item.id);
+
+    const btnRetirar = document.createElement("button");
+    btnRetirar.textContent = "retirar";
+    btnRetirar.className = "cancel";
+    btnRetirar.style.border = "none";
+    btnRetirar.style.borderRadius = "10px";
+    btnRetirar.style.padding = "8px 10px";
+    btnRetirar.style.cursor = "pointer";
+    btnRetirar.style.fontFamily = "var(--fonte)";
+    btnRetirar.style.fontSize = "11px";
+    btnRetirar.onclick = () => removerTarefaConfiguracao(item.id);
+
+    linha.appendChild(nome);
+    linha.appendChild(btnEditar);
+    linha.appendChild(btnRetirar);
+    lista.appendChild(linha);
+  });
+}
+
+function editarTarefaConfiguracao(id){
+  const senha = prompt("Digite a senha da mamãe para editar essa tarefa:");
+  if(!senhaGabrielaValida(senha)){
+    alert("Senha incorreta.");
+    return;
+  }
+
+  const cfg = getConfigMenu();
+  const itemCustom = cfg.custom.find(item => item.id === id);
+  const itemBase = getItensConfiguracaoMenu().find(item => item.id === id);
+  const item = itemCustom || itemBase;
+
+  if(!item){
+    alert("Tarefa não encontrada.");
+    return;
+  }
+
+  const novoNome = prompt("Nome da tarefa:", item.text || "");
+  if(novoNome === null) return;
+
+  const novaDescricao = prompt("Descrição da tarefa:", item.descricao || "");
+  if(novaDescricao === null) return;
+
+  const novoHorarioDigitado = prompt("Horário da tarefa:", item.time || "");
+  if(novoHorarioDigitado === null) return;
+
+  const novoHorario = formatarHorarioRotina(novoHorarioDigitado);
+
+  if(itemCustom){
+    itemCustom.text = novoNome.trim();
+    itemCustom.descricao = novaDescricao.trim();
+    itemCustom.time = novoHorario;
+  }else{
+    cfg.editadas[id] = {
+      text: novoNome.trim(),
+      descricao: novaDescricao.trim(),
+      time: novoHorario
+    };
+  }
+
+  salvarConfigMenu(cfg);
+  renderizarListaConfiguracao();
+  atualizarMenu();
+}
+
+function removerTarefaConfiguracao(id){
+  const senha = prompt("Digite a senha da mamãe para retirar essa tarefa:");
+  if(!senhaGabrielaValida(senha)){
+    alert("Senha incorreta.");
+    return;
+  }
+
+  const cfg = getConfigMenu();
+  cfg.custom = cfg.custom.filter(item => item.id !== id);
+  cfg.hidden[id] = true;
+  salvarConfigMenu(cfg);
+
+  const estado = getCustomMenuEstado();
+  delete estado[id];
+  salvarCustomMenuEstado(estado);
+
+  renderizarListaConfiguracao();
+  atualizarMenu();
+}
+
+function aplicarEdicaoBlocoNoBotao(bloco){
+  const cfg = getConfigMenu();
+  const editada = cfg.editadas[bloco.id];
+  if(!editada) return;
+
+  const wrap = document.getElementById(bloco.wrapId);
+  if(!wrap) return;
+
+  const nome = wrap.querySelector(".nome-botao");
+  if(nome && editada.text) nome.textContent = editada.text;
+
+  let desc = wrap.querySelector(".descricao-botao");
+  if(editada.descricao){
+    if(!desc){
+      desc = document.createElement("div");
+      desc.className = "descricao-botao";
+      const proxima = wrap.querySelector(".proxima-tarefa");
+      if(proxima) proxima.parentNode.insertBefore(desc, proxima);
+    }
+    desc.textContent = editada.descricao;
+  }else if(desc){
+    desc.remove();
+  }
+}
+
+function renderizarTarefasPersonalizadasMenu(){
+  const lista = document.getElementById("botoesLista");
+  if(!lista) return;
+
+  lista.querySelectorAll(".botao-wrap.custom-menu").forEach(el => el.remove());
+
+  const cfg = getConfigMenu();
+  const estado = getCustomMenuEstado();
+
+  cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .sort((a,b) => horaParaMinutos(a.time) - horaParaMinutos(b.time))
+    .forEach(item => {
+      const wrap = document.createElement("div");
+      wrap.className = "botao-wrap custom-menu" + (estado[item.id] ? " concluido" : "");
+      wrap.dataset.blocoId = item.id;
+
+      const check = document.createElement("div");
+      check.className = "check-concluido";
+      check.textContent = "✅";
+
+      const btn = document.createElement("button");
+      btn.className = "botao tarefa-bloco";
+      btn.onclick = () => alternarTarefaPersonalizadaMenu(item.id);
+
+      const nome = document.createElement("div");
+      nome.className = "nome-botao";
+      nome.textContent = item.text || "Nova tarefa";
+
+      btn.appendChild(nome);
+
+      if(item.descricao){
+        const desc = document.createElement("div");
+        desc.className = "descricao-botao";
+        desc.textContent = item.descricao;
+        btn.appendChild(desc);
+      }
+
+      const proxima = document.createElement("div");
+      proxima.className = "proxima-tarefa";
+      proxima.textContent = item.time ? formatarHorarioRotina(item.time) : "";
+
+      const alerta = document.createElement("div");
+      alerta.className = "alerta";
+      alerta.textContent = "";
+
+      btn.appendChild(proxima);
+      btn.appendChild(alerta);
+      wrap.appendChild(check);
+      wrap.appendChild(btn);
+      lista.appendChild(wrap);
+    });
+}
+
+function alternarTarefaPersonalizadaMenu(id){
+  const estado = getCustomMenuEstado();
+  estado[id] = !estado[id];
+  salvarCustomMenuEstado(estado);
+  atualizarMenu();
+}
+
+function normalizarHorario(texto){
+  return formatarHorarioRotina(texto);
+}
+
+function tarefasAutocuidado(){
+  const hoje = String(new Date().getDay());
+  const base = [
+    { nome:"🤸‍♀️ Movimentar o corpo na cama", hora:"05h" },
+    {
+      nome:"🧼 Higiene matinal",
+      hora:"05h"
+    },
+    {
+      nome:"🌿 Cuidado inicial",
+      hora:"05h"
+    },
+    { nome:"🚶 Caminhada de 10 a 20 min", hora:"05h30m" },
+    { nome:"💪 Calistenia de 10 a 30 min", hora:"05h30m" },
+    { nome:"🙏☀️ Yoga 3 rondas Saudação ao Sol", hora:"05h30m", dias:["2","4"] },
+    { nome:"🧘 Kriya + Meditação", hora:"06h" },
+    { nome:"🚿 Banho", hora:"06h" }
+  ];
+  return base.filter(t => !t.dias || t.dias.includes(hoje));
+}
+
+function tarefasManifestacao(){
+  return [
+    { nome:"📝 Escrita criativa", hora:"07h" },
+    { nome:"🌿 Práticas de manifestação", hora:"07h" },
+    { nome:"🎨 Criação artística de sonhos", hora:"07h" }
+  ];
+}
+
+function tarefasAlimentacao(){
+  return [
+    { nome:"🍽️ Preparar refeições", hora:"09h" },
+    { nome:"🚿 Tomar banho", hora:"11h" },
+    { nome:"🍴 Almoçar", hora:"11h" },
+    { nome:"🪥 Escovar os dentes", hora:"11h" }
+  ];
+}
+
+function tarefasEstudo(){
+  return [
+    { nome:"📚 Estudar", hora:"18h30m" },
+    { nome:"🏡 Organizar a casa", hora:"19h30m" },
+    { nome:"🪴 Molhar plantas", hora:"19h30m" },
+    { nome:"🧊 Água no congelador", hora:"19h30m" },
+    { nome:"🎒 Arrumar roupa, bolsa ou mochila do dia seguinte", hora:"19h30m" },
+    { nome:"🧺 Organizar tarefas leves da casa", hora:"19h30m" }
+  ];
+}
+
+function tarefasDesacelerar(){
+  return [
+    { nome:"🌙 Ritual para desacelerar", hora:"20h" },
+    { nome:"💧 Beber água", hora:"20h" },
+    { nome:"🚿 Tomar banho morno", hora:"20h" },
+    { nome:"🪥 Higiene noturna", hora:"20h" },
+    { nome:"📱 Desligar celular, TV e tablet", hora:"20h" },
+    { nome:"🍲 Ceia da noite", hora:"20h" }
+  ];
+}
+
+function tarefasPassatemposMenu(){
+  return [
+    { nome:"Quebra-cabeça", hora:"20h30m" },
+    { nome:"Desenhar", hora:"20h30m" },
+    { nome:"Colorir", hora:"20h30m" },
+    { nome:"Ler histórias", hora:"20h30m" },
+    { nome:"Atividade manual", hora:"20h30m" },
+    { nome:"Conversar", hora:"20h30m" },
+    { nome:"30 min de um filme calmo", hora:"20h30m" },
+    { nome:"Outro passatempo", hora:"20h30m" }
+  ];
+}
+
+const BLOCOS = [
+  {
+    id:"bloco1",
+    wrapId:"wrap-bloco1",
+    proximaId:"proxima-bloco1",
+    alertaId:"alerta-bloco1",
+    chaveBase:"gabriela_autocuidado_movimento_silencio",
+    tarefasFn:tarefasAutocuidado,
+    tipo:"array_diario"
+  },
+{
+  id:"bloco2",
+  wrapId:"wrap-bloco2",
+  proximaId:"proxima-bloco2",
+  alertaId:"alerta-bloco2",
+  chaveBase:"gabriela_manifestacao_criatividade",
+  tarefasFn:tarefasManifestacao,
+  tipo:"selecao_unica_diaria"
+},
+  {
+    id:"bloco4",
+    wrapId:"wrap-bloco4",
+    proximaId:"proxima-bloco4",
+    alertaId:"alerta-bloco4",
+    chaveBase:"gabriela_alimentacao_preparar_sair",
+    tarefasFn:tarefasAlimentacao,
+    tipo:"array_diario"
+  },
+  {
+    id:"bloco6",
+    wrapId:"wrap-bloco6",
+    proximaId:"proxima-bloco6",
+    alertaId:"alerta-bloco6",
+    chaveBase:"gabriela_estudo_organizacao_casa_dia",
+    tarefasFn:tarefasEstudo,
+    tipo:"array_diario"
+  },
+  {
+    id:"bloco7",
+    wrapId:"wrap-bloco7",
+    proximaId:"proxima-bloco7",
+    alertaId:"alerta-bloco7",
+    chaveBase:"gabriela_desacelerar_autocuidado",
+    tarefasFn:tarefasDesacelerar,
+    tipo:"array_diario"
+  },
+  {
+    id:"bloco8",
+    wrapId:"wrap-bloco8",
+    proximaId:"proxima-bloco8",
+    alertaId:"alerta-bloco8",
+    chaveBase:"gabriela_passatempos",
+    tarefasFn:tarefasPassatemposMenu,
+    tipo:"selecao_unica_diaria"
+  }
+];
+
+function lerEstadoArrayDiario(chaveBase, total){
+  const chave = `${chaveBase}_${dataHojeISO()}`;
+  const salvo = lerJsonSeguro(chave);
+
+  if(Array.isArray(salvo)){
+    if(salvo.length === total) return salvo.map(Boolean);
+    if(salvo.length > total) return salvo.slice(0, total).map(Boolean);
+    if(salvo.length < total){
+      const preenchido = [...salvo.map(Boolean)];
+      while(preenchido.length < total) preenchido.push(false);
+      return preenchido;
+    }
+  }
+
+  return new Array(total).fill(false);
+}
+
+function lerEstadoSelecaoUnicaDiaria(chaveBase, total = 1){
+  const chave = `${chaveBase}_${dataHojeISO()}`;
+  const salvo = lerJsonSeguro(chave);
+
+  if(Array.isArray(salvo)){
+    const estado = salvo.map(Boolean);
+    while(estado.length < total) estado.push(false);
+    return estado.slice(0, total);
+  }
+
+  if(salvo && typeof salvo === "object"){
+    if(Array.isArray(salvo.estado)){
+      const estado = salvo.estado.map(Boolean);
+      while(estado.length < total) estado.push(false);
+      return estado.slice(0, total);
+    }
+    if(typeof salvo.indice === "number"){
+      return new Array(total).fill(false).map((_, i) => i === salvo.indice);
+    }
+  }
+
+  return new Array(total).fill(false);
+}
+
+function textoLimpoEscolha(texto){
+  return String(texto || "").replace(/^[^A-Za-zÀ-ÿ0-9]+\s*/g, "").trim();
+}
+
+function obterNomeEscolhaSalva(chaveBase, tarefas){
+  const data = dataHojeISO();
+  const chavesPossiveis = [
+    `${chaveBase}_escolha_${data}`,
+    `${chaveBase}_atividade_${data}`,
+    `${chaveBase}_nome_${data}`,
+    `${chaveBase}_selecionada_${data}`,
+    `${chaveBase}_${data}`
+  ];
+
+  for(const chave of chavesPossiveis){
+    const salvo = lerJsonSeguro(chave);
+
+    if(typeof salvo === "string" && salvo.trim()) return textoLimpoEscolha(salvo);
+
+    if(salvo && typeof salvo === "object" && !Array.isArray(salvo)){
+      const possivelNome = salvo.nome || salvo.atividade || salvo.escolha || salvo.selectedName || salvo.selectedLabel || salvo.titulo || salvo.texto;
+      if(possivelNome) return textoLimpoEscolha(possivelNome);
+      if(typeof salvo.indice === "number" && tarefas[salvo.indice]) return textoLimpoEscolha(tarefas[salvo.indice].nome);
+    }
+
+    if(Array.isArray(salvo)){
+      const indice = salvo.findIndex(Boolean);
+      if(indice >= 0 && tarefas[indice]) return textoLimpoEscolha(tarefas[indice].nome);
+    }
+  }
+  return "";
+}
+
+function obterResumoBloco(bloco){
+  const tarefas = bloco.tarefasFn();
+  const total = tarefas.length;
+
+  let estado = [];
+  if(bloco.tipo === "array_diario"){
+    estado = lerEstadoArrayDiario(bloco.chaveBase, total);
+  }else if(bloco.tipo === "selecao_unica_diaria"){
+    estado = lerEstadoSelecaoUnicaDiaria(bloco.chaveBase, total);
+  }else{
+    estado = new Array(total).fill(false);
+  }
+
+  const concluidas = estado.filter(Boolean).length;
+  const indiceProxima = estado.findIndex(item => !item);
+  const proxima = indiceProxima >= 0 ? tarefas[indiceProxima] : null;
+
+  return {
+    tarefas,
+    total,
+    concluidas,
+    proxima,
+    escolha: bloco.tipo === "selecao_unica_diaria" ? obterNomeEscolhaSalva(bloco.chaveBase, tarefas) : ""
+  };
+}
+
+function textoProximaTarefa(proxima){
+  if(!proxima) return "Tudo concluído";
+  const titulo = proxima.nome || proxima.titulo || "Próxima tarefa";
+  const hora = normalizarHorario(proxima.hora || proxima.horario || "");
+  return hora ? `${titulo} • ${hora}` : titulo;
+}
+
+function atualizarBloco(bloco){
+  const resumo = obterResumoBloco(bloco);
+
+  const elProxima = document.getElementById(bloco.proximaId);
+  const elAlerta = document.getElementById(bloco.alertaId);
+  const wrap = document.getElementById(bloco.wrapId);
+
+  if(elProxima){
+    if(bloco.tipo === "selecao_unica_diaria" && resumo.concluidas > 0){
+      elProxima.textContent = resumo.escolha ? `Escolhido: ${resumo.escolha}` : "Escolhido: atividade selecionada";
+    }else{
+      elProxima.textContent = textoProximaTarefa(resumo.proxima);
+    }
+  }
+if(elAlerta){
+  if(bloco.tipo === "selecao_unica_diaria"){
+    elAlerta.textContent = resumo.concluidas > 0
+      ? "1 escolha feita"
+      : "Escolher 1 opção";
+  }else{
+    elAlerta.textContent = `${resumo.concluidas} de ${resumo.total} concluídas`;
+  }
+}
+
+if(wrap){
+  const blocoConcluido = bloco.tipo === "selecao_unica_diaria"
+    ? resumo.concluidas > 0
+    : resumo.total > 0 && resumo.concluidas === resumo.total;
+
+  if(blocoConcluido){
+    wrap.classList.add("concluido");
+  }else{
+    wrap.classList.remove("concluido");
+  }
+}
+}
+
+function reordenarBotoes(){
+  const lista = document.getElementById("botoesLista");
+  const wraps = Array.from(lista.querySelectorAll(".botao-wrap"));
+
+  wraps.sort((a, b) => {
+    const aConcluido = a.classList.contains("concluido") ? 1 : 0;
+    const bConcluido = b.classList.contains("concluido") ? 1 : 0;
+    return aConcluido - bConcluido;
+  });
+
+  wraps.forEach(wrap => lista.appendChild(wrap));
+}
+
+function atualizarMenu(){
+  BLOCOS.forEach(bloco => {
+    aplicarEdicaoBlocoNoBotao(bloco);
+    atualizarBloco(bloco);
+  });
+  renderizarTarefasPersonalizadasMenu();
+  reordenarBotoes();
+}
+
+let blocoConcluidoAtual = null;
+
+function abrirBlocoMenu(idBloco, url){
+  const bloco = BLOCOS.find(b => b.id === idBloco);
+
+  if(!bloco){
+    window.location.href = url;
+    return;
+  }
+
+  const resumo = obterResumoBloco(bloco);
+  const estaConcluido = bloco.tipo === "selecao_unica_diaria" && resumo.concluidas > 0;
+
+  if(estaConcluido){
+    blocoConcluidoAtual = { bloco, url };
+    document.getElementById("modalBlocoConcluidoTitulo").textContent =
+      idBloco === "bloco2" ? "Manifestação e Criatividade" : "Passatempos Relaxantes";
+
+    document.getElementById("modalBlocoConcluido").classList.add("show");
+    return;
+  }
+
+  window.location.href = url;
+}
+
+function fecharModalBlocoConcluido(){
+  blocoConcluidoAtual = null;
+  document.getElementById("modalBlocoConcluido").classList.remove("show");
+}
+
+function abrirPaginaBlocoConcluido(){
+  if(!blocoConcluidoAtual) return;
+  window.location.href = blocoConcluidoAtual.url;
+}
+
+function desfazerSelecaoBlocoConcluido(){
+  if(!blocoConcluidoAtual) return;
+
+  const chave = `${blocoConcluidoAtual.bloco.chaveBase}_${dataHojeISO()}`;
+  localStorage.setItem(chave, JSON.stringify([false]));
+
+  fecharModalBlocoConcluido();
+  atualizarMenu();
+}
+
+function nomeDiaSemana(data){
+  const dias = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+  return dias[data.getDay()];
+}
+
+function formatarDataVisual(data){
+  return `${pad2(data.getDate())}/${pad2(data.getMonth()+1)}/${data.getFullYear()} • ${nomeDiaSemana(data)}`;
+}
+
+function gerarResumoDoDia(dataReferencia){
+  const dataISO = `${dataReferencia.getFullYear()}-${pad2(dataReferencia.getMonth()+1)}-${pad2(dataReferencia.getDate())}`;
+
+  const blocosResumo = BLOCOS.map((bloco) => {
+    const tarefas = bloco.tarefasFn();
+    const total = tarefas.length;
+
+    let estado = [];
+
+    if(bloco.tipo === "array_diario"){
+      const chave = `${bloco.chaveBase}_${dataISO}`;
+      const salvo = lerJsonSeguro(chave);
+      if(Array.isArray(salvo)){
+        estado = [...salvo.map(Boolean)];
+        while(estado.length < total) estado.push(false);
+        estado = estado.slice(0, total);
+      }else{
+        estado = new Array(total).fill(false);
+      }
+    }else if(bloco.tipo === "selecao_unica_diaria"){
+      const chave = `${bloco.chaveBase}_${dataISO}`;
+      const salvo = lerJsonSeguro(chave);
+      const algumaSelecionada = Array.isArray(salvo) ? salvo.some(Boolean) : false;
+      estado = [algumaSelecionada];
+    }
+
+    const concluidas = estado.filter(Boolean).length;
+
+    return {
+      id: bloco.id,
+      concluidas,
+      total,
+      restante: Math.max(total - concluidas, 0)
+    };
+  });
+
+  return {
+    data: dataISO,
+    dataVisual: formatarDataVisual(dataReferencia),
+    salvoEm: new Date().toISOString(),
+    totalConcluido: blocosResumo.reduce((s, b) => s + b.concluidas, 0),
+    totalTarefas: blocosResumo.reduce((s, b) => s + b.total, 0),
+    blocos: blocosResumo
+  };
+}
+
+function arquivarDiaSeNecessario(){
+  const hoje = new Date();
+  const hojeISO = dataHojeISO();
+  const ultimaDataArquivada = localStorage.getItem(CHAVE_ULTIMA_DATA_ARQUIVADA);
+  const dataAberta = localStorage.getItem(CHAVE_DATA_ABERTA);
+
+  if(!dataAberta){
+    localStorage.setItem(CHAVE_DATA_ABERTA, hojeISO);
+    return;
+  }
+
+  if(dataAberta === hojeISO) return;
+
+  if(ultimaDataArquivada === dataAberta){
+    localStorage.setItem(CHAVE_DATA_ABERTA, hojeISO);
+    return;
+  }
+
+  const partes = dataAberta.split("-");
+  const dataAnterior = new Date(Number(partes[0]), Number(partes[1]) - 1, Number(partes[2]));
+  const resumo = gerarResumoDoDia(dataAnterior);
+
+  const historico = lerJsonSeguro(CHAVE_HISTORICO_DIARIO) || [];
+  const semDuplicar = historico.filter(item => item.data !== resumo.data);
+  semDuplicar.push(resumo);
+  semDuplicar.sort((a, b) => a.data.localeCompare(b.data));
+
+  salvarJsonSeguro(CHAVE_HISTORICO_DIARIO, semDuplicar);
+  localStorage.setItem(CHAVE_ULTIMA_DATA_ARQUIVADA, dataAberta);
+  localStorage.setItem(CHAVE_DATA_ABERTA, hojeISO);
+}
+
+function agendarViradaDoDia(){
+  const agora = new Date();
+  const proximaVirada = new Date(
+    agora.getFullYear(),
+    agora.getMonth(),
+    agora.getDate() + 1,
+    0, 0, 2, 0
+  );
+
+  const ms = proximaVirada.getTime() - agora.getTime();
+
+  setTimeout(() => {
+    arquivarDiaSeNecessario();
+    atualizarLinhaTempo();
+    atualizarMenu();
+    agendarViradaDoDia();
+  }, ms);
+}
+
+window.addEventListener("load", () => {
+  atualizarLinhaTempo();
+  atualizarMenu();
+  arquivarDiaSeNecessario();
+  agendarViradaDoDia();
+  abrirModalMensagemImportanteMayaSeNecessario();
+  setInterval(atualizarLinhaTempo, 1000);
+});
+
+window.addEventListener("pageshow", () => {
+  arquivarDiaSeNecessario();
+  atualizarMenu();
+  atualizarLinhaTempo();
+  abrirModalMensagemImportanteMayaSeNecessario();
+});
+
+window.addEventListener("focus", () => {
+  arquivarDiaSeNecessario();
+  atualizarMenu();
+  atualizarLinhaTempo();
+  abrirModalMensagemImportanteMayaSeNecessario();
+});
+
+window.addEventListener("storage", () => {
+  atualizarMenu();
+  atualizarLinhaTempo();
+});
+
+document.addEventListener("visibilitychange", function(){
+  if(!document.hidden){
+    arquivarDiaSeNecessario();
+    atualizarMenu();
+    atualizarLinhaTempo();
+  }
+});
 </script>
 
 </body>

@@ -1,449 +1,1059 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pontuação da Maya</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pontuação da Maya</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    html, body { height: 100%; margin: 0; }
+<style>
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#6B6B6B;
+  --borda:#E3E5E1;
+  --fonte:'Poppins',sans-serif;
+  --titulo:20px;
+  --sombra-suave:0 4px 12px rgba(0,0,0,0.05);
+}
 
-    body{
-      font-family: Arial, sans-serif;
-      background-image: url("margaridas.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 18px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
+*{box-sizing:border-box;margin:0;padding:0;}
+html, body{width:100%;min-height:100%;}
 
-    .card{
-      width: min(420px, 100%);
-      background: rgba(255,255,255,0.88);
-      border-radius: 22px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      padding: 22px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+body{
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:16px;
+}
 
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
+.pagina{width:100%;max-width:420px;}
 
-    .title{
-      margin:0;
-      font-size:21px;
-      color:#3d6f4c;
-      font-weight:400;
-      font-family:'Poppins', sans-serif;
-    }
+.card{
+  width:100%;
+  background:var(--card);
+  border-radius:24px;
+  padding:22px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
 
-    .back{
-      border:none;
-      background: rgba(0,0,0,0.06);
-      padding: 10px 12px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+.topo{
+  display:grid;
+  grid-template-columns:40px 1fr 58px;
+  align-items:start;
+  gap:8px;
+  margin-bottom:6px;
+}
 
-    .hero{
-      border-radius: 16px;
-      background: rgba(255,255,255,0.72);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      padding: 16px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      text-align:center;
-    }
+.botao-voltar{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  border-radius:12px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .heroTitle{
-      font-size: 15px;
-      color:#3d6f4c;
-      font-family:'Poppins', sans-serif;
-    }
+.botao-voltar:hover{background:#dde3d9;}
+.botao-voltar span{transform:translateY(-1px);}
 
-    .heroMoney{
-      font-size: 28px;
-      color:#2e3a46;
-      font-weight: 700;
-    }
+.topCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding-top:2px;
+}
 
-    .heroHint{
-      font-size: 12px;
-      color: rgba(0,0,0,0.55);
-    }
+.titleIndex{
+  color:var(--texto-principal);
+  font-weight:500;
+  font-size:var(--titulo);
+  line-height:1.2;
+  text-align:center;
+}
 
-    .grid{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
+.subtitulo{
+  font-size:12px;
+  color:var(--texto-secundario);
+  margin-top:2px;
+  text-align:center;
+}
 
-    .box{
-      border-radius: 16px;
-      background: rgba(255,255,255,0.70);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      padding: 14px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
+.dataTopo{
+  min-height:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:1px;
+}
 
-    .boxTitle{
-      font-size: 14px;
-      color:#3d6f4c;
-      text-align:center;
-      font-family:'Poppins', sans-serif;
-    }
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  margin-bottom:2px;
+}
 
-    .line{
-      font-size: 13px;
-      color:#2e3a46;
-      line-height:1.45;
-    }
+.dataTopoLinha{font-size:11px;white-space:nowrap;}
 
-    .hint{
-      font-size: 12px;
-      color: rgba(0,0,0,0.55);
-    }
+.box{
+  border-radius:16px;
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  padding:14px;
+  color:var(--texto-principal);
+  line-height:1.6;
+}
 
-    .navRow{
-      display:flex;
-      gap:8px;
-    }
+.hero{text-align:center;}
 
-    .smallBtn{
-      flex:1;
-      border:none;
-      cursor:pointer;
-      padding: 10px;
-      border-radius: 12px;
-      background: rgba(0,0,0,0.06);
-      font-size: 13px;
-    }
+.heroTitle{
+  font-size:12px;
+  color:var(--texto-secundario);
+  margin-bottom:4px;
+}
 
-    .ruleRow{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      padding:10px;
-      border-radius:12px;
-      background: rgba(255,255,255,0.58);
-    }
+.heroMoney{
+  font-size:30px;
+  font-weight:600;
+  color:var(--verde-texto);
+  line-height:1.2;
+}
 
-    .choiceRow{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
+.boxTitle{
+  font-size:14px;
+  color:var(--verde-texto);
+  text-align:center;
+  margin-bottom:10px;
+  font-weight:500;
+}
 
-    .choiceBtn{
-      border:none;
-      cursor:pointer;
-      padding: 8px 10px;
-      border-radius: 10px;
-      background: rgba(61,111,76,0.10);
-      color:#2f5a3a;
-      font-size:12px;
-    }
-  </style>
+.line{
+  font-size:12.5px;
+  color:var(--texto-principal);
+  line-height:1.6;
+  text-align:center;
+}
+
+.hint{
+  font-size:11.5px;
+  color:var(--texto-secundario);
+  line-height:1.55;
+  margin-top:6px;
+  text-align:center;
+}
+
+.regrasResumo{
+  margin-top:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.regraMini{
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:10px 8px;
+  text-align:center;
+}
+
+.regraMiniNumero{
+  font-size:18px;
+  color:var(--verde-texto);
+  font-weight:600;
+  line-height:1.2;
+}
+
+.regraMiniTexto{
+  font-size:11px;
+  color:var(--texto-secundario);
+  line-height:1.35;
+  margin-top:2px;
+}
+
+.missaoCard{
+  background:linear-gradient(180deg, #F7F9FF 0%, #EEF2FF 100%);
+  border:1px solid #DEE4FF;
+  border-radius:18px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.missaoTopo{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+
+.missaoTitulo{
+  width:100%;
+  font-size:13.5px;
+  font-weight:600;
+  color:#394B8A;
+  text-align:center;
+  white-space:nowrap;
+}
+
+.missaoDestino{
+  font-size:11px;
+  color:#5A6798;
+  background:rgba(255,255,255,0.8);
+  border-radius:999px;
+  padding:5px 9px;
+}
+
+.missaoTexto{
+  font-size:12px;
+  color:#48526B;
+  line-height:1.5;
+  text-align:center;
+}
+
+.missaoLinha{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+}
+
+.missaoBarra{
+  width:100%;
+  height:10px;
+  border-radius:999px;
+  background:rgba(90,103,152,0.14);
+  overflow:hidden;
+}
+
+.missaoBarraFill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(90deg, #7D8BFF 0%, #A985FF 100%);
+}
+
+.missaoPct{
+  font-size:11px;
+  color:#5A6798;
+  white-space:nowrap;
+}
+
+.bonecaBtn{
+  border:none;
+  background:#E5EAFE;
+  color:#42528F;
+  border-radius:14px;
+  padding:10px 12px;
+  font-size:12px;
+  font-family:var(--fonte);
+}
+
+.conquistasCard{
+  background:#FFFDF5;
+  border:1px solid #F1E7BA;
+  border-radius:18px;
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.conquistasHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.conquistasTitulo{
+  font-size:14px;
+  color:#8C7232;
+  font-weight:600;
+}
+
+.medalhaStatus{
+  font-size:11px;
+  color:#8C7232;
+  background:rgba(255,255,255,0.85);
+  border-radius:999px;
+  padding:5px 9px;
+  white-space:nowrap;
+}
+
+.medalhaBox{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.medalhaIcone{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  background:#F4E8A8;
+  flex-shrink:0;
+}
+
+.medalhaIcone.bloqueada{
+  background:#EEEEEE;
+  filter:grayscale(1);
+  opacity:0.7;
+}
+
+.medalhaTexto{
+  font-size:12px;
+  color:#6B5A2A;
+  line-height:1.45;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:4px;
+  flex-wrap:wrap;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+}
+
+.futureBtn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:flex-start;
+  padding:24px 16px;
+  z-index:999;
+  overflow-y:auto;
+}
+
+.modalOverlay.show{display:flex;}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  max-height:85vh;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+}
+
+.modalTitle{
+  font-size:18px;
+  color:var(--texto-principal);
+  text-align:center;
+  font-weight:500;
+}
+
+.diretrizCards{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.diretrizCard{
+  border-radius:16px;
+  padding:12px;
+  border:1px solid var(--borda);
+  background:#F8FAF7;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.diretrizCard.verde{
+  background:#F2F8F0;
+  border-color:#D9EBD6;
+}
+
+.diretrizCard.amarelo{
+  background:#FFFDF5;
+  border-color:#F1E7BA;
+}
+
+.diretrizCard.azul{
+  background:#F3F7FF;
+  border-color:#DDE7FF;
+}
+
+.diretrizCard.rosa{
+  background:#FFF5F8;
+  border-color:#F4D7E2;
+}
+
+.diretrizCard.roxo{
+  background:#F8F4FF;
+  border-color:#E5D8FF;
+}
+
+.diretrizCardTitle{
+  font-size:13.5px;
+  font-weight:600;
+  color:var(--verde-texto);
+  line-height:1.35;
+}
+
+.diretrizLinha{
+  font-size:12px;
+  color:var(--texto-principal);
+  line-height:1.5;
+}
+
+.diretrizMini{
+  font-size:11.5px;
+  color:var(--texto-secundario);
+  line-height:1.45;
+  text-align:center;
+}
+
+.diretrizDestaque{
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,0.06);
+  border-radius:12px;
+  padding:9px 10px;
+  font-size:12px;
+  line-height:1.5;
+  text-align:center;
+}
+
+.diretrizGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.diretrizMiniBox{
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,0.06);
+  border-radius:12px;
+  padding:10px 8px;
+  text-align:center;
+  font-size:11.5px;
+  line-height:1.45;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+  font-weight:500;
+}
+
+textarea{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  height:260px;
+  resize:none;
+}
+
+textarea:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+}
+
+.modalBtns{
+  display:flex;
+  gap:8px;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:11px 12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:12.5px;
+}
+
+.cancel{background:#efefef;color:#333;}
+.save{background:var(--verde-escuro);color:white;}
+
+@media (max-width:390px){
+  body{padding:14px;}
+  .card{padding:20px 14px 16px;}
+  .titleIndex{font-size:19px;}
+  .topo{grid-template-columns:40px 1fr 54px;}
+  .horaTopo{font-size:13px;}
+  .dataTopoLinha{font-size:10.5px;}
+  .missaoTitulo{font-size:13px;}
+}
+</style>
 </head>
 
-<body>
-  <div class="card">
-    <div class="topbar">
-      <button class="back" onclick="location.href='maya-menu.html'">← Voltar</button>
-      <h1 class="title">💰 Pontuação da Maya</h1>
-      <span style="width:76px;"></span>
-    </div>
+<div id="cardPremiumDownload" style="position:fixed; left:-9999px; top:0; width:720px; background:#FFFFFF; padding:34px; font-family:'Poppins', sans-serif; color:#2F2F2F;">
+  
+  <div style="text-align:center; margin-bottom:24px;">
+    <div style="font-size:42px; font-weight:600; color:#7B45C8;">⭐ Pontuação</div>
+    <div style="font-size:18px; color:#6B6B6B;">Entenda como você ganha suas moedinhas todos os dias!</div>
+  </div>
 
-    <div class="hero">
-      <div class="heroTitle">Moedas acumuladas hoje</div>
-      <div class="heroMoney" id="todayMoneyBig">R$ 0,00</div>
-      <div class="heroHint">Esse valor pode mudar conforme a semana, o mês e a validação das regras.</div>
+  <div style="background:#F2F8F0; border:2px solid #D9EBD6; border-radius:24px; padding:22px; margin-bottom:18px;">
+    <div style="font-size:24px; font-weight:600; color:#3F6F4F;">💰 1. Como ganhar moedinhas</div>
+    <div style="background:white; border-radius:18px; padding:18px; margin-top:14px; font-size:20px; line-height:1.7;">
+      ✅ Cada tarefa concluída vale <strong style="color:#2F8F4E;">R$ 0,10</strong><br>
+      📱 Cada regra de tela respeitada vale <strong style="color:#2F8F4E;">R$ 0,20</strong>
     </div>
+    <div style="text-align:center; font-size:16px; color:#6B6B6B; margin-top:14px;">
+      Quanto mais você se dedica, mais você conquista 💛
+    </div>
+  </div>
 
-    <div class="grid">
-      <div class="box">
-        <div class="boxTitle">Resumo da pontuação</div>
-        <div class="line" id="todayLine"></div>
-        <div class="line" id="weekLine"></div>
-        <div class="line" id="monthLine"></div>
-        <div class="hint">Cada tarefa vale R$ 0,10. Se a semana ou o mês ficarem abaixo de 70%, perde 50% do acumulado daquele período.</div>
+  <div style="background:#FFFDF5; border:2px solid #F1E7BA; border-radius:24px; padding:22px; margin-bottom:18px;">
+    <div style="font-size:24px; font-weight:600; color:#9B6B12;">⚠️ 2. Regra importante do dia</div>
+    <div style="background:white; border-radius:18px; padding:18px; margin-top:14px; font-size:20px; line-height:1.7; text-align:center;">
+      Se você não respeitar uma regra de tela,<br>
+      perde <strong style="color:#E63946; font-size:24px;">50%</strong> das moedinhas do dia 💔
+    </div>
+  </div>
+
+  <div style="background:#F3F7FF; border:2px solid #DDE7FF; border-radius:24px; padding:22px; margin-bottom:18px;">
+    <div style="font-size:24px; font-weight:600; color:#2C6FD6;">📅 3. Seus dias</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px;">
+      <div style="background:white; border-radius:18px; padding:18px; text-align:center; font-size:18px; line-height:1.7;">
+        🌞 <strong>Dia útil</strong><br>
+        13 tarefas<br>
+        2 regras<br>
+        <strong style="color:#2C6FD6;">R$ 1,70</strong>
       </div>
-
-      <div class="box">
-        <div class="boxTitle">Somente mamãe</div>
-
-        <div class="navRow">
-          <button class="smallBtn" onclick="moveSelectedDay(-1)">← Dia anterior</button>
-          <button class="smallBtn" onclick="resetSelectedDayToCurrent()">Hoje</button>
-          <button class="smallBtn" onclick="moveSelectedDay(1)">Próximo dia →</button>
-        </div>
-
-        <div class="line" id="selectedDayLine"></div>
-        <div class="hint">Aqui você valida as regras da diversão e da brincadeira.</div>
-
-        <div class="ruleRow">
-          <div class="line"><strong>Regra da manhã (09h às 11h)</strong></div>
-          <div class="line" id="morningRuleStatus"></div>
-          <div class="choiceRow">
-            <button class="choiceBtn" onclick="setRule('morningRule', true)">Respeitou</button>
-            <button class="choiceBtn" onclick="setRule('morningRule', false)">Quebrou a regra</button>
-            <button class="choiceBtn" onclick="setRule('morningRule', null)">Limpar</button>
-          </div>
-        </div>
-
-        <div class="ruleRow">
-          <div class="line"><strong>Regra da noite (18:30h às 20:30h)</strong></div>
-          <div class="line" id="nightRuleStatus"></div>
-          <div class="choiceRow">
-            <button class="choiceBtn" onclick="setRule('nightRule', true)">Respeitou</button>
-            <button class="choiceBtn" onclick="setRule('nightRule', false)">Quebrou a regra</button>
-            <button class="choiceBtn" onclick="setRule('nightRule', null)">Limpar</button>
-          </div>
-        </div>
-
-        <div class="line" id="selectedDaySummaryTitle"></div>
-        <div class="line" id="selectedDaySummaryTasks"></div>
-        <div class="line" id="selectedDaySummaryMoney"></div>
-        <div class="hint">Se uma das regras for quebrada, o dia perde 50% das moedas.</div>
+      <div style="background:white; border-radius:18px; padding:18px; text-align:center; font-size:18px; line-height:1.7;">
+        🌈 <strong>Final de semana</strong><br>
+        10 tarefas<br>
+        2 regras<br>
+        <strong style="color:#7B45C8;">R$ 1,40</strong>
       </div>
     </div>
   </div>
 
+  <div style="background:#F2F8F0; border:2px solid #D9EBD6; border-radius:24px; padding:22px; margin-bottom:18px; text-align:center;">
+    <div style="font-size:24px; font-weight:600; color:#3F6F4F;">🏅 4. Bônus especial</div>
+    <div style="background:white; border-radius:18px; padding:18px; margin-top:14px; font-size:20px; line-height:1.7;">
+      Alcançou <strong>40 regras respeitadas</strong> no mês?<br>
+      🎁 Suas moedinhas <strong style="color:#2F8F4E; font-size:28px;">DOBRAM!</strong>
+    </div>
+    <div style="font-size:18px; color:#3F6F4F; margin-top:12px;">
+      Por exemplo: <strong>R$ 39,60 → R$ 79,20</strong>
+    </div>
+  </div>
+
+  <div style="background:#F8F4FF; border:2px solid #E5D8FF; border-radius:24px; padding:22px; margin-bottom:18px;">
+    <div style="font-size:24px; font-weight:600; color:#7B45C8;">🧮 5. Resumo do cálculo</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px;">
+      <div style="background:white; border-radius:18px; padding:16px; text-align:center; font-size:17px;">
+        Semana<br><strong>R$ 1,70 × 5</strong><br>= R$ 8,50
+      </div>
+      <div style="background:white; border-radius:18px; padding:16px; text-align:center; font-size:17px;">
+        Final de semana<br><strong>R$ 1,40 × 2</strong><br>= R$ 2,80
+      </div>
+    </div>
+    <div style="background:white; border-radius:18px; padding:18px; margin-top:14px; text-align:center; font-size:22px; color:#7B45C8;">
+      Total mensal possível: <strong>R$ 39,60</strong>
+    </div>
+  </div>
+
+  <div style="background:#FFF9E8; border:2px solid #F1E7BA; border-radius:24px; padding:18px; text-align:center; font-size:18px; line-height:1.6;">
+    💡 Lembre-se: faça suas tarefas, respeite os horários de tela, ganhe medalhas e avance na Missão Astronauta Maya 🚀
+  </div>
+
+  <div style="text-align:center; margin-top:20px; font-size:18px; color:#7B45C8;">
+    💜 Pequenas atitudes todos os dias, grandes conquistas sempre! ✨
+  </div>
+
+</div>
+
+<body>
+<div class="pagina">
+  <div class="card">
+
+    <div class="topo">
+      <button class="botao-voltar" onclick="location.href='maya-menu.html'"><span>←</span></button>
+
+      <div class="topCenter">
+        <h1 class="titleIndex">💰 Minha Pontuação</h1>
+        <div class="subtitulo">Você está construindo algo lindo 🌿</div>
+      </div>
+
+      <div class="dataTopo" aria-label="Data e hora atuais">
+        <div id="linhaTempoHora" class="horaTopo"></div>
+        <div id="linhaTempoDia" class="dataTopoLinha"></div>
+        <div id="linhaTempoData" class="dataTopoLinha"></div>
+      </div>
+    </div>
+
+    <div class="box hero">
+      <div class="heroTitle">Saldo</div>
+      <div class="heroMoney" id="todayMoneyBig">R$ 0,00</div>
+    </div>
+
+    <div class="box">
+      <div class="boxTitle">📊 Resumo da pontuação</div>
+      <div class="line" id="todayLine"></div>
+      <div class="line" id="weekLine"></div>
+      <div class="line" id="monthLine"></div>
+
+      <div class="hint">
+        Quando você não segue alguma regra, perde metade das moedinhas do dia e pode tentar fazer melhor no próximo dia.
+      </div>
+
+      <div class="regrasResumo">
+        <div class="regraMini">
+          <div class="regraMiniNumero" id="diasHonrou">0</div>
+          <div class="regraMiniTexto">dias honrou as regras</div>
+        </div>
+
+        <div class="regraMini">
+          <div class="regraMiniNumero" id="diasNaoHonrou">0</div>
+          <div class="regraMiniTexto">dias não honrou as regras</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="missaoCard">
+      <div class="missaoTopo">
+        <div class="missaoTitulo">🚀 Missão Especial da Astronauta Maya</div>
+        <div id="missaoDestino" class="missaoDestino">Próximo destino: Lua</div>
+      </div>
+
+      <div class="missaoTexto">
+        Maya parte da Terra e segue para a Lua. Depois, pode viajar para Marte, Júpiter, Saturno e além 🌍🌙🪐
+      </div>
+
+      <div class="missaoLinha">
+        <div class="missaoBarra">
+          <div id="missaoBarraFill" class="missaoBarraFill"></div>
+        </div>
+        <div id="missaoPct" class="missaoPct">0%</div>
+      </div>
+
+      <button class="bonecaBtn" type="button">👩‍🚀 Boneca personalizável em breve</button>
+    </div>
+
+    <div class="conquistasCard">
+      <div class="conquistasHeader">
+        <div class="conquistasTitulo">🏆 Coleção de Conquistas</div>
+        <div id="medalhaStatus" class="medalhaStatus">Ainda bloqueada</div>
+      </div>
+
+      <div class="medalhaBox">
+        <div id="medalhaIcone" class="medalhaIcone bloqueada">🏅</div>
+        <div id="medalhaTexto" class="medalhaTexto">
+          Medalha “Segui as Regras por 1 Dia” — desbloqueie ao completar 1 dia honrando as regras 🌟
+        </div>
+      </div>
+    </div>
+
+<div class="footerMiniAction">
+  <button class="futureBtn" onclick="abrirModalDiretrizes()">Como ganhar pontos 💰</button>
+  <button class="futureBtn" onclick="baixarCardJPEG()">📥 baixar card</button>
+  <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+</div>
+
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalDiretrizes">
+  <div class="modal">
+    <h2 class="modalTitle">Como ganhar pontos 💰</h2>
+
+    <div class="diretrizCards" id="cardDownload">
+
+      <div class="diretrizCard verde">
+        <div class="diretrizCardTitle">💰 1. Como ganhar moedinhas</div>
+        <div class="diretrizDestaque">
+          ✅ Cada tarefa concluída vale <strong>R$ 0,10</strong>
+        </div>
+        <div class="diretrizDestaque">
+          📱 Cada regra de tela respeitada vale <strong>R$ 0,20</strong>
+        </div>
+        <div class="diretrizMini">Quanto mais você se dedica, mais você conquista 💛</div>
+      </div>
+
+      <div class="diretrizCard amarelo">
+        <div class="diretrizCardTitle">⚠️ 2. Regra importante do dia</div>
+        <div class="diretrizLinha">
+          Se você não respeitar uma regra de tela, de manhã ou de noite:
+        </div>
+        <div class="diretrizDestaque">
+          💔 Você perde <strong>50%</strong> das moedinhas que conquistou naquele dia.
+        </div>
+      </div>
+
+      <div class="diretrizCard azul">
+        <div class="diretrizCardTitle">📅 3. Seus dias</div>
+        <div class="diretrizGrid">
+          <div class="diretrizMiniBox">
+            🌞 <strong>Dia útil</strong><br>
+            13 tarefas<br>
+            2 regras de tela
+          </div>
+          <div class="diretrizMiniBox">
+            🌈 <strong>Final de semana</strong><br>
+            10 tarefas<br>
+            2 regras de tela
+          </div>
+        </div>
+      </div>
+
+      <div class="diretrizCard rosa">
+        <div class="diretrizCardTitle">⭐ 4. Quanto você pode ganhar</div>
+        <div class="diretrizDestaque">
+          🌞 Dia útil perfeito: <strong>R$ 1,70</strong>
+        </div>
+        <div class="diretrizDestaque">
+          🌙 Final de semana perfeito: <strong>R$ 1,40</strong>
+        </div>
+      </div>
+
+      <div class="diretrizCard verde">
+        <div class="diretrizCardTitle">🏅 5. Bônus especial</div>
+        <div class="diretrizLinha">
+          Se você alcançar <strong>40 regras respeitadas no mês</strong>:
+        </div>
+        <div class="diretrizDestaque">
+          🎁 Suas moedinhas <strong>DOBRAM!</strong>
+        </div>
+        <div class="diretrizMini">
+          Por exemplo: R$ 39,60 → R$ 79,20
+        </div>
+      </div>
+
+      <div class="diretrizCard roxo">
+        <div class="diretrizCardTitle">🧮 6. Resumo do cálculo (100%)</div>
+        <div class="diretrizDestaque">
+          Semana: R$ 1,70 × 5 = <strong>R$ 8,50</strong>
+        </div>
+        <div class="diretrizDestaque">
+          Final de semana: R$ 1,40 × 2 = <strong>R$ 2,80</strong>
+        </div>
+        <div class="diretrizDestaque">
+          Total mensal possível: <strong>R$ 39,60</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalDiretrizes()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalFuturasEdicoes">
+  <div class="modal">
+    <h2 class="modalTitle">Futuras edições</h2>
+
+    <div class="field">
+      <label>Ideias de melhorias futuras</label>
+      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+
+
 <script>
-  const STORAGE_KEY = "jardim_rotina_maya_v6";
-  const TASK_VALUE_CENTS = 10;
-  const WEEK_TOTAL_TASKS = 82;
-  const MONTH_TOTAL_TASKS = 328;
+const STORAGE_KEY = "jardim_rotina_maya_v8";
+const REGRA_TELA_HOJE_KEY = "regra_tela_hoje_maya";
+const CHAVE_FUTURAS_EDICOES_MAYA_PONTUACAO = "futuras_edicoes_maya_pontuacao";
 
-  let store = loadStore();
-  let selectedDayKey = getCycleDayKey();
+function pad2(n){ return String(n).padStart(2,"0"); }
 
-  function pad(n){
-    return String(n).padStart(2, "0");
+function dateToKey(d){
+  return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+}
+
+function keyToDate(key){
+  const [y,m,d]=key.split("-").map(Number);
+  return new Date(y,m-1,d);
+}
+
+function getCycleDayKey(date = new Date()){
+  const d = new Date(date);
+  if(d.getHours() < 7) d.setDate(d.getDate()-1);
+  return dateToKey(d);
+}
+
+function formatMoney(v){
+  return Number(v || 0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+
+function loadStore(){
+  try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{days:{}}}
+  catch{return {days:{}}}
+}
+
+function getRegraStore(){
+  try{return JSON.parse(localStorage.getItem(REGRA_TELA_HOJE_KEY))||{}}
+  catch{return {}}
+}
+
+function getRegraDia(regraStore, key){
+  return {
+    manha: regraStore[`${key}_moment-play-screen`],
+    noite: regraStore[`${key}_night-screen-time`]
+  };
+}
+
+function contarTarefasConcluidas(day){
+  return Object.entries(day.done || {})
+    .filter(([id, valor]) =>
+      valor === true &&
+      id !== "moment-play-screen" &&
+      id !== "night-screen-time"
+    )
+    .length;
+}
+
+function calcularDia(dayData, regraDia){
+  let tarefas = contarTarefasConcluidas(dayData);
+  let valor = tarefas * 0.10;
+
+  let regraManha = regraDia?.manha === true;
+  let regraNoite = regraDia?.noite === true;
+
+  if(regraManha) valor += 0.20;
+  if(regraNoite) valor += 0.20;
+
+  if(regraDia && (regraDia.manha === false || regraDia.noite === false)){
+    valor = valor * 0.5;
   }
 
-  function formatMoneyFromCents(cents){
-    return (cents / 100).toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    });
-  }
+  let medalha = (regraManha && regraNoite);
 
-  function keyToDate(key){
-    const [year, month, day] = key.split("-").map(Number);
-    return new Date(year, month - 1, day);
-  }
+  return {valor, medalha};
+}
 
-  function dateToKey(date){
-    return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
-  }
+function render(){
+  const store = loadStore();
+  const regraStore = getRegraStore();
 
-  function addDaysToKey(key, amount){
-    const d = keyToDate(key);
-    d.setDate(d.getDate() + amount);
-    return dateToKey(d);
-  }
+  let todayKey = getCycleDayKey();
+  let todayData = store.days[todayKey] || {};
+  let regraHoje = getRegraDia(regraStore, todayKey);
+  let hojeCalc = calcularDia(todayData, regraHoje);
 
-  function formatBRDateFromKey(key){
-    const [year, month, day] = key.split("-");
-    return `${day}/${month}/${year}`;
-  }
+  let weekTotal = 0;
+  let monthTotal = 0;
+  let regrasRespeitadasMes = 0;
+  let regrasNaoRespeitadasMes = 0;
 
-  function getCycleDayKey(date = new Date()){
-    const d = new Date(date);
-    if (d.getHours() < 7){
-      d.setDate(d.getDate() - 1);
-    }
-    return dateToKey(d);
-  }
+  let tarefasSemana = 0;
+  let tarefasSemanaFeitas = 0;
+  let regrasSemanaTotal = 0;
+  let regrasSemanaOK = 0;
 
-  function loadStore(){
-    try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if(!raw) return { days: {} };
-      const parsed = JSON.parse(raw);
-      if(!parsed.days) parsed.days = {};
-      return parsed;
-    }catch(e){
-      return { days: {} };
-    }
-  }
+  let now = new Date();
+  let weekStart = new Date(now);
+  weekStart.setDate(now.getDate() - (now.getDay() || 7) + 1);
+  weekStart.setHours(0,0,0,0);
 
-  function saveStore(){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
-  }
+  Object.entries(store.days || {}).forEach(([key, day])=>{
+    let data = keyToDate(key);
+    let regraDia = getRegraDia(regraStore, key);
+    let calc = calcularDia(day, regraDia);
 
-  function getDayState(key){
-    if(!store.days[key]){
-      store.days[key] = {
-        done: {},
-        updatedAt: null,
-        completed: false,
-        completedAt: null,
-        validation: {
-          morningRule: null,
-          nightRule: null
-        }
-      };
-      saveStore();
-    }
-    if(!store.days[key].validation){
-      store.days[key].validation = {
-        morningRule: null,
-        nightRule: null
-      };
-      saveStore();
-    }
-    return store.days[key];
-  }
+    if(data.getMonth() === now.getMonth() && data.getFullYear() === now.getFullYear()){
+      monthTotal += calc.valor;
 
-  function countRawTasksForDay(key){
-    const ds = getDayState(key);
-    return Object.values(ds.done).filter(Boolean).length;
-  }
+      if(regraDia.manha === true) regrasRespeitadasMes++;
+      if(regraDia.noite === true) regrasRespeitadasMes++;
 
-  function getDayPenaltyMultiplier(key){
-    const validation = getDayState(key).validation || {};
-    if(validation.morningRule === false || validation.nightRule === false){
-      return 0.5;
-    }
-    return 1;
-  }
-
-  function countAdjustedTaskCreditsForDay(key){
-    return countRawTasksForDay(key) * getDayPenaltyMultiplier(key);
-  }
-
-  function getWeekStartKey(key){
-    const d = keyToDate(key);
-    const day = d.getDay();
-    const diff = day === 0 ? 6 : day - 1;
-    d.setDate(d.getDate() - diff);
-    return dateToKey(d);
-  }
-
-  function getMonthStartKey(key){
-    const d = keyToDate(key);
-    d.setDate(1);
-    return dateToKey(d);
-  }
-
-  function countAdjustedTasksInPeriod(startKey, endKey){
-    let total = 0;
-    let current = startKey;
-
-    while(current <= endKey){
-      total += countAdjustedTaskCreditsForDay(current);
-      current = addDaysToKey(current, 1);
+      if(regraDia.manha === false) regrasNaoRespeitadasMes++;
+      if(regraDia.noite === false) regrasNaoRespeitadasMes++;
     }
 
-    return total;
-  }
+    if(data >= weekStart){
+      weekTotal += calc.valor;
 
-  function calculatePeriodMoney(adjustedTasks, totalPossibleTasks){
-    const percent = totalPossibleTasks > 0 ? (adjustedTasks / totalPossibleTasks) * 100 : 0;
-    let cents = Math.round(adjustedTasks * TASK_VALUE_CENTS);
+      tarefasSemana += Object.keys(day.done || {})
+        .filter(id => id !== "moment-play-screen" && id !== "night-screen-time")
+        .length;
 
-    if(percent < 70){
-      cents = Math.round(cents * 0.5);
+      tarefasSemanaFeitas += contarTarefasConcluidas(day);
+
+      regrasSemanaTotal += 2;
+      if(regraDia.manha === true) regrasSemanaOK++;
+      if(regraDia.noite === true) regrasSemanaOK++;
     }
+  });
 
-    return {
-      percent: Math.floor(percent),
-      cents
-    };
-  }
+  let bonus = regrasRespeitadasMes >= 40;
+  let totalFinal = bonus ? monthTotal * 2 : monthTotal;
 
-  function moveSelectedDay(amount){
-    selectedDayKey = addDaysToKey(selectedDayKey, amount);
-    render();
-  }
+  let pctTarefas = tarefasSemana ? (tarefasSemanaFeitas / tarefasSemana)*100 : 0;
+  let pctRegras = regrasSemanaTotal ? (regrasSemanaOK / regrasSemanaTotal)*100 : 0;
+  let pctMissao = Math.min(Math.round((pctTarefas + pctRegras)/2),100);
 
-  function resetSelectedDayToCurrent(){
-    selectedDayKey = getCycleDayKey();
-    render();
-  }
+  document.getElementById("todayMoneyBig").textContent = formatMoney(hojeCalc.valor);
+  document.getElementById("todayLine").textContent = `Hoje: ${formatMoney(hojeCalc.valor)}`;
+  document.getElementById("weekLine").textContent = `Semana: ${formatMoney(weekTotal)}`;
+  document.getElementById("monthLine").textContent = `Mês: ${formatMoney(totalFinal)}`;
 
-  function setRule(ruleName, value){
-    const ds = getDayState(selectedDayKey);
-    ds.validation[ruleName] = value;
-    saveStore();
-    render();
-  }
+  document.getElementById("diasHonrou").textContent = regrasRespeitadasMes;
+  document.getElementById("diasNaoHonrou").textContent = regrasNaoRespeitadasMes;
 
-  function formatRuleValue(value){
-    if(value === true) return "Respeitou";
-    if(value === false) return "Quebrou a regra";
-    return "Ainda não validado";
-  }
+  document.getElementById("missaoBarraFill").style.width = pctMissao+"%";
+  document.getElementById("missaoPct").textContent = pctMissao+"%";
 
-  function render(){
-    const currentCycleDay = getCycleDayKey();
+  document.getElementById("medalhaStatus").textContent =
+    regrasRespeitadasMes >= 1 ? "Desbloqueada" : "Ainda bloqueada";
 
-    const todayAdjusted = countAdjustedTaskCreditsForDay(currentCycleDay);
-    const todayCents = Math.round(todayAdjusted * TASK_VALUE_CENTS);
+  document.getElementById("medalhaTexto").textContent =
+    `Você respeitou ${regrasRespeitadasMes} regras este mês 🌟`;
 
-    const weekStart = getWeekStartKey(currentCycleDay);
-    const monthStart = getMonthStartKey(currentCycleDay);
+  localStorage.setItem("mayaSaldoAtual", String(totalFinal));
+}
 
-    const weekAdjusted = countAdjustedTasksInPeriod(weekStart, currentCycleDay);
-    const monthAdjusted = countAdjustedTasksInPeriod(monthStart, currentCycleDay);
+function atualizarLinhaTempo(){
+  const a=new Date();
+  const dias=["dom","seg","ter","qua","qui","sex","sáb"];
+  document.getElementById("linhaTempoHora").textContent=`${pad2(a.getHours())}:${pad2(a.getMinutes())}`;
+  document.getElementById("linhaTempoDia").textContent=`• ${dias[a.getDay()]}`;
+  document.getElementById("linhaTempoData").textContent=`• ${pad2(a.getDate())}/${pad2(a.getMonth()+1)}`;
+}
 
-    const weekInfo = calculatePeriodMoney(weekAdjusted, WEEK_TOTAL_TASKS);
-    const monthInfo = calculatePeriodMoney(monthAdjusted, MONTH_TOTAL_TASKS);
+function abrirModalDiretrizes(){
+  document.getElementById("modalDiretrizes").classList.add("show");
+}
 
-    document.getElementById("todayMoneyBig").textContent = formatMoneyFromCents(todayCents);
+function fecharModalDiretrizes(){
+  document.getElementById("modalDiretrizes").classList.remove("show");
+}
 
-    document.getElementById("todayLine").textContent =
-      `Hoje: ${todayAdjusted.toFixed(1).replace(".0","")} tarefas equivalentes • ${formatMoneyFromCents(todayCents)}`;
+function abrirModalFuturasEdicoes(){
+  document.getElementById("futurasEdicoesTexto").value =
+    localStorage.getItem(CHAVE_FUTURAS_EDICOES_MAYA_PONTUACAO) || "";
+  document.getElementById("modalFuturasEdicoes").classList.add("show");
+}
 
-    document.getElementById("weekLine").textContent =
-      `Semana: ${weekAdjusted.toFixed(1).replace(".0","")}/${WEEK_TOTAL_TASKS} • ${weekInfo.percent}% • ${formatMoneyFromCents(weekInfo.cents)}`;
+function fecharModalFuturasEdicoes(){
+  document.getElementById("modalFuturasEdicoes").classList.remove("show");
+}
 
-    document.getElementById("monthLine").textContent =
-      `Mês: ${monthAdjusted.toFixed(1).replace(".0","")}/${MONTH_TOTAL_TASKS} • ${monthInfo.percent}% • ${formatMoneyFromCents(monthInfo.cents)}`;
+function salvarFuturasEdicoes(){
+  localStorage.setItem(
+    CHAVE_FUTURAS_EDICOES_MAYA_PONTUACAO,
+    document.getElementById("futurasEdicoesTexto").value
+  );
+  fecharModalFuturasEdicoes();
+}
 
-    const selectedState = getDayState(selectedDayKey);
-
-    document.getElementById("selectedDayLine").textContent =
-      `Dia selecionado: ${formatBRDateFromKey(selectedDayKey)}`;
-
-    document.getElementById("morningRuleStatus").textContent =
-      `Status: ${formatRuleValue(selectedState.validation.morningRule)}`;
-
-    document.getElementById("nightRuleStatus").textContent =
-      `Status: ${formatRuleValue(selectedState.validation.nightRule)}`;
-
-    const raw = countRawTasksForDay(selectedDayKey);
-    const adjusted = countAdjustedTaskCreditsForDay(selectedDayKey);
-    const cents = Math.round(adjusted * TASK_VALUE_CENTS);
-
-    document.getElementById("selectedDaySummaryTitle").textContent = "Resumo do dia:";
-    document.getElementById("selectedDaySummaryTasks").textContent =
-      `${raw} tarefas marcadas • ${adjusted.toFixed(1).replace(".0","")} tarefas equivalentes`;
-    document.getElementById("selectedDaySummaryMoney").textContent =
-      `${formatMoneyFromCents(cents)}`;
-  }
-
+window.addEventListener("load", () => {
+  atualizarLinhaTempo();
   render();
+  setInterval(atualizarLinhaTempo,1000);
+});
+
+window.addEventListener("pageshow", () => {
+  atualizarLinhaTempo();
+  render();
+});
+
+window.addEventListener("focus", () => {
+  atualizarLinhaTempo();
+  render();
+});
+
+window.addEventListener("storage", () => {
+  render();
+});
+
+function baixarCardJPEG(){
+  const modal = document.getElementById("modalDiretrizes");
+  const card = document.getElementById("cardDownload");
+
+  const estavaAberto = modal.classList.contains("show");
+
+  if(!estavaAberto){
+    modal.classList.add("show");
+  }
+
+  setTimeout(() => {
+    html2canvas(card, {
+      scale: 2,
+      backgroundColor: "#FFFFFF",
+      useCORS: true
+    }).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "pontuacao-maya.jpg";
+      link.href = canvas.toDataURL("image/jpeg", 0.95);
+      link.click();
+
+      if(!estavaAberto){
+        modal.classList.remove("show");
+      }
+    });
+  }, 300);
+}
+
 </script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
 </body>
 </html>

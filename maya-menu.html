@@ -1,276 +1,1836 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maya</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Maya</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    html, body { height: 100%; margin: 0; }
+<style>
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
 
-    body{
-      font-family: Arial, sans-serif;
-      background-image: url("margaridas.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 18px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
 
-    .card{
-      width: min(420px, 100%);
-      background: rgba(255,255,255,0.88);
-      border-radius: 22px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      padding: 22px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      min-height: calc(100vh - 36px);
-    }
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#6B6B6B;
+  --borda:#E3E5E1;
 
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-    }
+  --fonte:'Poppins',sans-serif;
 
-    .title{
-      margin: 0;
-      font-size: 22px;
-      color: #3d6f4c;
-      font-weight: 400;
-      font-family: 'Poppins', sans-serif;
-      text-align: center;
-      flex: 1;
-      line-height: 1.35;
-    }
+  --titulo:20px;
+  --botao:15px;
 
-    .back{
-      border: none;
-      background: rgba(0,0,0,0.06);
-      padding: 10px 12px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-size: 14px;
-      flex: 0 0 auto;
-      font-family: 'Poppins', sans-serif;
-    }
+  --sombra-suave:0 4px 12px rgba(0,0,0,0.05);
+}
 
-    .ghost{
-      width: 76px;
-      flex: 0 0 auto;
-    }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    .content{
-      width: 100%;
-      display:flex;
-      flex-direction:column;
-      gap: 14px;
-      align-items:center;
-    }
+html, body{
+  width:100%;
+  min-height:100%;
+}
 
-    .menuBtn{
-      width: 100%;
-      border:none;
-      cursor:pointer;
-      padding: 20px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.72);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      font-size: 16px;
-      color:#2e3a46;
-      text-align:center;
-      font-family: 'Poppins', sans-serif;
-    }
+body{
+  font-family:var(--fonte);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  transition:background 0.35s ease;
+}
 
-    .panel{
-      width: 100%;
-      display:none;
-      flex-direction:column;
-      gap:12px;
-    }
+body.tema-jardim{
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.7) 0 60px, transparent 61px),
+    linear-gradient(180deg, #F7FBF6 0%, #EEF7EC 55%, #E8F3E6 100%);
+}
 
-    .panel.show{
-      display:flex;
-    }
+body.tema-galaxia{
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 35%, rgba(255,255,255,0.16) 0 2px, transparent 3px),
+    radial-gradient(circle at 50% 80%, rgba(255,255,255,0.14) 0 2px, transparent 3px),
+    linear-gradient(180deg, #171A45 0%, #242A68 55%, #2E3A7D 100%);
+}
 
-    .box{
-      border-radius: 16px;
-      background: rgba(255,255,255,0.72);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      padding: 16px;
-      color:#3a3a3a;
-      line-height: 1.7;
-      text-align: left;
-    }
+body.tema-arcoiris{
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,0.55) 0 50px, transparent 51px),
+    linear-gradient(180deg, #FFF4F8 0%, #F7F6FF 30%, #EEF7FF 60%, #F6FFF1 100%);
+}
 
-    .boxTitle{
-      font-size: 15px;
-      color:#3d6f4c;
-      text-align:left;
-      margin-bottom: 10px;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
-    }
+body.tema-estrelas{
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,255,255,0.7) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 75% 28%, rgba(255,255,255,0.7) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 52% 75%, rgba(255,255,255,0.6) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 86% 62%, rgba(255,255,255,0.55) 0 1.5px, transparent 2px),
+    linear-gradient(180deg, #24344F 0%, #334B72 100%);
+}
 
-    .boxText{
-      font-size: 13px;
-      white-space: pre-line;
-      text-align:left;
-    }
+body.tema-ceu{
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255,255,255,0.75) 0 55px, transparent 56px),
+    radial-gradient(circle at 70% 30%, rgba(255,255,255,0.55) 0 70px, transparent 71px),
+    linear-gradient(180deg, #F1F8FF 0%, #E6F4FF 55%, #DFF0FF 100%);
+}
 
-    .insideBtn{
-      width: 100%;
-      border:none;
-      cursor:pointer;
-      padding: 18px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.86);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      font-size: 15px;
-      color:#2e3a46;
-      text-align:center;
-      margin-top: 2px;
-      font-family: 'Poppins', sans-serif;
-    }
+body.tema-sistema-solar{
+  background:
+    radial-gradient(circle at 78% 18%, rgba(255,221,130,0.95) 0 52px, rgba(255,221,130,0.35) 53px, transparent 70px),
+    radial-gradient(circle at 18% 72%, #4EA3FF 0 34px, #2E6CC9 35px, transparent 47px),
+    radial-gradient(circle at 16% 70%, rgba(111, 213, 144, 0.92) 0 12px, transparent 13px),
+    radial-gradient(circle at 20% 77%, rgba(111, 213, 144, 0.9) 0 10px, transparent 11px),
+    radial-gradient(circle at 61% 30%, rgba(255,255,255,0.75) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 72% 44%, rgba(255,255,255,0.75) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 42% 22%, rgba(255,255,255,0.7) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 30% 14%, rgba(255,255,255,0.7) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 84% 58%, rgba(255,255,255,0.6) 0 1.5px, transparent 2px),
+    linear-gradient(180deg, #101534 0%, #1E275A 55%, #27356F 100%);
+}
 
-    .miniPanel{
-      width: 100%;
-      display:none;
-      flex-direction:column;
-      gap:12px;
-    }
+.pagina{
+  width:100%;
+  max-width:420px;
+}
 
-    .miniPanel.show{
-      display:flex;
-    }
+.card{
+  width:100%;
+  background:rgba(255,255,255,0.96);
+  border-radius:24px;
+  padding:22px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  backdrop-filter:blur(2px);
+}
 
-    .alerta{
-      color:#b33434;
-      font-weight:600;
-    }
-  </style>
+.topo{
+  display:grid;
+  grid-template-columns:40px 1fr 58px;
+  align-items:start;
+  gap:8px;
+  margin-bottom:2px;
+}
+
+.botao-voltar{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  border-radius:12px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  padding:0;
+  transition:0.2s ease;
+}
+
+.botao-voltar:hover{
+  background:#dde3d9;
+}
+
+.botao-voltar span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  transform:translateY(-1px);
+}
+
+.topCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding-top:2px;
+}
+
+.titleIndex{
+  color:var(--texto-principal);
+  font-weight:500;
+  font-size:var(--titulo);
+  margin:0;
+  line-height:1.2;
+  text-align:center;
+}
+
+.subtitulo{
+  font-size:12px;
+  color:var(--texto-secundario);
+  margin-top:2px;
+  text-align:center;
+}
+
+.dataTopo{
+  min-height:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:flex-start;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:1px;
+}
+
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  white-space:nowrap;
+  margin-bottom:2px;
+}
+
+.dataTopoLinha{
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.botoes-lista{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.botao-wrap{
+  position:relative;
+}
+
+.botao{
+  width:100%;
+  min-height:92px;
+  border:none;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-radius:16px;
+  padding:14px 16px;
+  font-size:var(--botao);
+  font-family:var(--fonte);
+  cursor:pointer;
+  transition:0.2s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+}
+
+.botao:hover{
+  background:var(--verde-hover);
+}
+
+.nome-botao{
+  width:100%;
+  font-size:14px;
+  color:var(--verde-texto);
+  text-align:center;
+  line-height:1.35;
+  font-weight:500;
+  margin:0;
+}
+
+.proxima-tarefa{
+  width:100%;
+  margin-top:2px;
+  font-size:11px;
+  color:rgba(63,111,79,0.72);
+  text-align:center;
+  line-height:1.35;
+  min-height:0;
+}
+
+.horario-proxima{
+  width:100%;
+  margin-top:0;
+  font-size:11px;
+  color:rgba(63,111,79,0.75);
+  text-align:center;
+  line-height:1.35;
+  min-height:0;
+}
+
+.box{
+  border-radius:16px;
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  padding:14px;
+  color:var(--texto-principal);
+  line-height:1.6;
+}
+
+.boxTitle{
+  font-size:14px;
+  color:var(--verde-texto);
+  text-align:left;
+  margin-bottom:8px;
+  font-family:var(--fonte);
+  font-weight:500;
+}
+
+.boxText{
+  font-size:12.5px;
+  white-space:pre-line;
+  text-align:left;
+  color:var(--texto-principal);
+  line-height:1.65;
+}
+
+.insideBtn{
+  width:100%;
+  border:none;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-radius:16px;
+  padding:14px 16px;
+  font-size:14px;
+  font-family:var(--fonte);
+  cursor:pointer;
+  transition:0.2s ease;
+  display:block;
+}
+
+.insideBtn:hover{
+  background:var(--verde-hover);
+}
+
+.miniPanel{
+  display:none;
+  flex-direction:column;
+  gap:12px;
+}
+
+.miniPanel.show{
+  display:flex;
+}
+
+.alerta-vermelho{
+  color:#b33434;
+  font-weight:600;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:4px;
+  flex-wrap:wrap;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  transition:0.2s ease;
+}
+
+.futureBtn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  z-index:999;
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.modal{
+  background:#fff;
+  padding:16px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  max-height:calc(100vh - 32px);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+  overflow:hidden;
+}
+
+.modal.modalConfig{
+  width:min(340px, 100%);
+  max-height:calc(100vh - 32px);
+}
+
+.modalTopo{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:28px;
+  padding-right:0;
+}
+
+.modalTitle{
+  font-size:18px;
+  color:var(--texto-principal);
+  text-align:center;
+  font-weight:500;
+}
+
+.modalScroll{
+  flex:1;
+  min-height:0;
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding-right:2px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+  font-family:var(--fonte);
+  font-weight:500;
+}
+
+textarea,
+input[type="text"]{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+}
+
+textarea{
+  height:260px;
+  resize:none;
+}
+
+textarea:focus,
+input[type="text"]:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+  outline:none;
+}
+
+.modalBtns{
+  display:flex;
+  gap:8px;
+  margin-top:2px;
+  flex-shrink:0;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:11px 12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:12.5px;
+  transition:0.2s ease;
+}
+
+.cancel{
+  background:#efefef;
+  color:#333;
+}
+
+.cancel:hover{
+  background:#e7e7e7;
+}
+
+.save{
+  background:var(--verde-escuro);
+  color:white;
+}
+
+.save:hover{
+  background:#4f8a4f;
+}
+
+.somLinha{
+  display:grid;
+  grid-template-columns:1fr 46px;
+  gap:8px;
+  align-items:center;
+}
+
+.selectSom{
+  width:100%;
+  border:1px solid var(--borda);
+  background:#fff;
+  color:var(--texto-principal);
+  border-radius:14px;
+  padding:11px 12px;
+  font-size:13px;
+  font-family:var(--fonte);
+  outline:none;
+  min-width:0;
+}
+
+.botaoIconeSom{
+  width:46px;
+  height:44px;
+  border:1px solid var(--borda);
+  background:#F8FAF7;
+  color:var(--verde-texto);
+  border-radius:14px;
+  cursor:pointer;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.2s ease;
+}
+
+.botaoIconeSom:hover{
+  background:#EAF4E9;
+}
+
+.botaoIconeSom.desligado{
+  background:#F2F2F2;
+  color:#9A9A9A;
+}
+
+.rangeSom{
+  width:100%;
+  accent-color:var(--verde-escuro);
+  cursor:pointer;
+}
+
+.volumeValor{
+  margin-top:6px;
+  font-size:12px;
+  color:var(--texto-secundario);
+  text-align:center;
+}
+
+.missaoCard{
+  background:linear-gradient(180deg, #F7F9FF 0%, #EEF2FF 100%);
+  border:1px solid #DEE4FF;
+  border-radius:18px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.missaoTopo{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+
+.missaoTitulo{
+  width:100%;
+  font-size:13.5px;
+  font-weight:600;
+  color:#394B8A;
+  text-align:center;
+  white-space:nowrap;
+}
+
+.missaoDestino{
+  font-size:11px;
+  color:#5A6798;
+  background:rgba(255,255,255,0.8);
+  border-radius:999px;
+  padding:5px 9px;
+}
+
+.missaoTexto{
+  font-size:12px;
+  color:#48526B;
+  line-height:1.5;
+  text-align:center;
+}
+
+.missaoLinha{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+}
+
+.missaoBarra{
+  width:100%;
+  height:10px;
+  border-radius:999px;
+  background:rgba(90,103,152,0.14);
+  overflow:hidden;
+}
+
+.missaoBarraFill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(90deg, #7D8BFF 0%, #A985FF 100%);
+  transition:width 0.3s ease;
+}
+
+.missaoPct{
+  font-size:11px;
+  color:#5A6798;
+  white-space:nowrap;
+}
+
+.bonecaBtn{
+  border:none;
+  background:#E5EAFE;
+  color:#42528F;
+  border-radius:14px;
+  padding:10px 12px;
+  font-size:12px;
+  font-family:var(--fonte);
+}
+
+.conquistasCard{
+  background:#FFFDF5;
+  border:1px solid #F1E7BA;
+  border-radius:18px;
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.conquistasHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.conquistasTitulo{
+  font-size:14px;
+  color:#8C7232;
+  font-weight:600;
+}
+
+.medalhaStatus{
+  font-size:11px;
+  color:#8C7232;
+  background:rgba(255,255,255,0.85);
+  border-radius:999px;
+  padding:5px 9px;
+}
+
+.medalhaBox{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.medalhaIcone{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  background:#F4E8A8;
+  flex-shrink:0;
+}
+
+.medalhaIcone.bloqueada{
+  background:#EEEEEE;
+  filter:grayscale(1);
+  opacity:0.7;
+}
+
+.medalhaTexto{
+  font-size:12px;
+  color:#6B5A2A;
+  line-height:1.45;
+}
+
+.temaSugestaoBox{
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:16px;
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.temaSugestaoTexto{
+  font-size:12px;
+  color:var(--texto-secundario);
+  line-height:1.45;
+}
+
+.temaSugestaoBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+}
+
+.temaSugestaoBtn:hover{
+  background:#dde3d9;
+}
+
+
+
+.diretrizCards{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.diretrizCard{
+  border-radius:16px;
+  padding:12px;
+  border:1px solid var(--borda);
+  background:#F8FAF7;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.diretrizCard.verde{
+  background:#F2F8F0;
+  border-color:#D9EBD6;
+}
+
+.diretrizCard.amarelo{
+  background:#FFFDF5;
+  border-color:#F1E7BA;
+}
+
+.diretrizCard.azul{
+  background:#F3F7FF;
+  border-color:#DDE7FF;
+}
+
+.diretrizCard.rosa{
+  background:#FFF5F8;
+  border-color:#F4D7E2;
+}
+
+.diretrizCard.roxo{
+  background:#F8F4FF;
+  border-color:#E5D8FF;
+}
+
+.diretrizCardTitle{
+  font-size:13.5px;
+  font-weight:600;
+  color:var(--verde-texto);
+  line-height:1.35;
+  text-align:center;
+}
+
+.diretrizLinha{
+  font-size:12px;
+  color:var(--texto-principal);
+  line-height:1.5;
+  text-align:center;
+}
+
+.diretrizMini{
+  font-size:11.5px;
+  color:var(--texto-secundario);
+  line-height:1.45;
+  text-align:center;
+}
+
+.diretrizDestaque{
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,0.06);
+  border-radius:12px;
+  padding:9px 10px;
+  font-size:12px;
+  line-height:1.5;
+  text-align:center;
+}
+
+@media (max-width: 390px){
+  body{
+    padding:14px;
+  }
+
+  .card{
+    padding:20px 14px 16px;
+  }
+
+  .titleIndex{
+    font-size:19px;
+  }
+
+  .botao{
+    min-height:88px;
+  }
+
+  .topo{
+    grid-template-columns:40px 1fr 54px;
+  }
+
+  .horaTopo{
+    font-size:13px;
+  }
+
+  .dataTopoLinha{
+    font-size:10.5px;
+  }
+
+  .modal,
+  .modal.modalConfig{
+    width:min(100%, 340px);
+    max-height:calc(100vh - 24px);
+  }
+
+  .missaoTitulo{
+    font-size:13px;
+  }
+}
+</style>
 </head>
 
-<body>
+<body class="tema-jardim">
+
+<div class="pagina">
   <div class="card">
-    <div class="topbar">
-      <button class="back" onclick="location.href='rotina.html'">← Voltar</button>
-      <h1 class="title">🌼 Filhotinha Maya</h1>
-      <div class="ghost"></div>
-    </div>
 
-    <div class="content">
-      <button class="menuBtn" onclick="location.href='maya-rotina.html'">🌼 Rotina da Maya</button>
+    <div class="topo">
+      <button class="botao-voltar" onclick="window.location.href='index.html'"><span>←</span></button>
 
-      <button class="menuBtn" onclick="location.href='maya-pontuacao.html'">
-        💰 Minha Pontuação
-      </button>
+      <div class="topCenter">
+        <h1 class="titleIndex">🌼 Maya</h1>
+        <p class="subtitulo">seu espaço especial</p>
+      </div>
 
-      <button class="menuBtn" onclick="location.href='maya-premiacao.html'">
-        🏅 Premiação
-      </button>
-
-      <button class="menuBtn" onclick="location.href='maya-lista-de-desejos.html'">
-        🎁 Lista de Desejos
-      </button>
-
-      <button class="menuBtn" onclick="alternarRegras()">📜 Regras</button>
-
-      <div id="painelRegras" class="panel">
-        <div class="box">
-          <div class="boxTitle">📱 Regras de Uso de Telas</div>
-          <div class="boxText">🌞 Manhã: das 09h às 11h 
-🌙 Noite: das 18h30 às 20h30 
-
-✅ Seguiu as regras? 
-Você ganha mais pontos! 
-
-⛔ Não seguiu? 
-Você perde 50% dos pontos que conquistou no dia.</div>
-        </div>
-
-        <div class="box">
-          <div class="boxTitle">⭐ O que é uma Meta?</div>
-          <div class="boxText">Meta é algo que você decide conquistar — e você é capaz de chegar lá!</div>
-        </div>
-
-        <div class="box">
-          <div class="boxTitle">🎯 Seus Pontos</div>
-          <div class="boxText">Seus pontos mostram o quanto você já avançou.
-Com eles, você pode trocar por dinheiro e realizar desejos. 💰✨</div>
-        </div>
-
-        <div class="box">
-          <div class="boxTitle">📌 Como Usar seus Pontos</div>
-          <div class="boxText">Você pode trocar seus pontos por dinheiro e por desejos.
-
-💸Para trocar a Premiação por dinheiro:
-<span class="alerta">[precisa desenvolver o sistema]</span>
-
-🪄Para realizar desejos:
-Quando tiver o suficiente, é só clicar “Utilizar” no Desejo</div>
-        </div>
-
-        <div class="box">
-          <div class="boxTitle">🏆 Junte Mais Pontos</div>
-          <div class="boxText">Quer algo maior?
-Então continue juntando até chegar em 100% 📈</div>
-        </div>
-
-        <div class="box">
-          <div class="boxTitle">🔁 Importante Saber</div>
-          <div class="boxText">Quando você usa seus pontos, eles voltam para zero.
-Mas sempre que recomeçar, vai conquistar ainda mais 😄</div>
-        </div>
-
-        <button class="insideBtn" onclick="alternarFaixas()">🎯 Pontuação = Desejos + Premiação</button>
-
-        <div id="painelFaixas" class="miniPanel">
-          <div class="box">
-            <div class="boxText"><span class="alerta">[precisa desenvolver o sistema]</span>
-
-até 10,00
-
-de 10,01 até 25,00
-
-de 25,01 até 50,00
-
-de 50,01 até 75,00
-
-de 75,01 até 100,00
-
-de 100,01 até 200,00
-
-de 200,01 até 300,00
-
-de 300,01 até 400,00
-
-de 400,01 até 500,00</div>
-          </div>
-        </div>
+      <div class="dataTopo" aria-label="Data e hora atuais">
+        <div id="linhaTempoHora" class="horaTopo"></div>
+        <div id="linhaTempoDia" class="dataTopoLinha"></div>
+        <div id="linhaTempoData" class="dataTopoLinha"></div>
       </div>
     </div>
+
+    <div class="botoes-lista">
+
+      <div class="botao-wrap">
+        <button class="botao" onclick="window.location.href='maya-rotina.html'">
+          <div class="nome-botao">🌼 Rotina da Maya</div>
+          <div id="proximaRotinaNome" class="proxima-tarefa"></div>
+          <div id="proximaRotinaHora" class="horario-proxima"></div>
+        </button>
+      </div>
+
+      <div class="botao-wrap">
+        <button class="botao" onclick="window.location.href='maya-lista-de-desejos.html'">
+<div class="nome-botao">🎁 Lista de Desejos</div>
+<div class="proxima-tarefa">Cada conquista te aproxima dos seus sonhos 💫</div>
+          <div class="horario-proxima"></div>
+        </button>
+      </div>
+
+      <div class="botao-wrap">
+        <button class="botao" onclick="window.location.href='maya-pontuacao.html'">
+<div class="nome-botao">💰 Minha Pontuação</div>
+<div class="proxima-tarefa">Você está construindo algo lindo 🌿</div>
+          <div class="horario-proxima"></div>
+        </button>
+      </div>
+
+      <div class="botao-wrap">
+        <button class="botao" onclick="window.location.href='maya-premiacao.html'">
+          <div class="nome-botao">🏅 Premiação</div>
+          <div class="proxima-tarefa">Toda conquista pode virar presente</div>
+          <div class="horario-proxima"></div>
+        </button>
+      </div>
+
+      <div class="botao-wrap">
+        <button class="botao" onclick="abrirModalRegras()">
+          <div class="nome-botao">📜 Regras</div>
+          <div id="fraseRegras" class="proxima-tarefa">Combinados ajudam seu brilho a crescer</div>
+          <div id="regraMedalhaInfo" class="horario-proxima"></div>
+        </button>
+      </div>
+
+      <div class="botao-wrap">
+        <button class="botao" onclick="abrirModalConfigSom()">
+          <div class="nome-botao">⚙️ Configuração</div>
+          <div class="proxima-tarefa">ajuste de som, volume e tema</div>
+          <div class="horario-proxima"></div>
+        </button>
+      </div>
+      </div>
+
+    <div class="footerMiniAction">
+      <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+    </div>
+
   </div>
+</div>
 
-  <script>
-    function alternarRegras() {
-      document.getElementById("painelRegras").classList.toggle("show");
-    }
+<div class="modalOverlay" id="modalRegras">
+  <div class="modal">
+    <div class="modalTopo">
+      <h2 class="modalTitle">Regras do jogo 🎯</h2>
+    </div>
 
-    function alternarFaixas() {
-      document.getElementById("painelFaixas").classList.toggle("show");
+    <div class="modalScroll">
+      <div class="diretrizCards" id="cardRegrasDownload">
+
+        <div class="diretrizCard verde">
+          <div class="diretrizCardTitle">🌿 1. Como funciona</div>
+          <div class="diretrizDestaque">🌱 Rotina → você faz tarefas</div>
+          <div class="diretrizDestaque">📊 Pontuação → você ganha moedinhas</div>
+          <div class="diretrizDestaque">🎁 Premiação → você usa suas moedinhas</div>
+        </div>
+
+        <div class="diretrizCard amarelo">
+          <div class="diretrizCardTitle">📱 2. Regras de tela</div>
+          <div class="diretrizDestaque">🌞 Manhã: 09h às 11h</div>
+          <div class="diretrizDestaque">🌙 Noite: 18h30 às 20h30</div>
+        </div>
+
+        <div class="diretrizCard azul">
+          <div class="diretrizCardTitle">🎯 3. Regras do dia</div>
+          <div class="diretrizDestaque">✅ Seguiu as regras → ganha mais pontos</div>
+          <div class="diretrizDestaque">⛔ Não seguiu → perde metade dos pontos do dia</div>
+        </div>
+
+        <div class="diretrizCard roxo">
+          <div class="diretrizCardTitle">⭐ 4. O que é uma meta</div>
+          <div class="diretrizLinha">Meta é algo que você quer conquistar 💛</div>
+        </div>
+
+        <div class="diretrizCard rosa">
+          <div class="diretrizCardTitle">🎯 5. Pontuação = desejos + premiação</div>
+          <div class="diretrizDestaque">🎀 Você pode usar moedinhas para realizar desejos</div>
+          <div class="diretrizDestaque">💰 Você também pode usar como premiação em dinheiro</div>
+          <div class="diretrizMini">A troca sempre acontece com autorização da mamãe.</div>
+        </div>
+
+        <div class="diretrizCard verde">
+          <div class="diretrizCardTitle">🏆 6. Junte mais pontos</div>
+          <div class="diretrizLinha">Quer algo maior?</div>
+          <div class="diretrizDestaque">Continue juntando até alcançar seu objetivo 📈</div>
+        </div>
+
+        <div class="diretrizCard amarelo">
+          <div class="diretrizCardTitle">🔁 7. Importante saber</div>
+          <div class="diretrizDestaque">Quando você usa suas moedinhas, elas voltam para zero</div>
+          <div class="diretrizMini">Mas você pode conquistar tudo de novo 😄</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modalBtns">
+      <button class="save" onclick="fecharModalRegras()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalConfigSom">
+  <div class="modal modalConfig">
+    <div class="modalTopo">
+      <h2 class="modalTitle">Configuração</h2>
+    </div>
+
+    <div class="modalScroll">
+
+      <div class="field">
+        <label>Tema de fundo</label>
+        <select id="selectTemaFundo" class="selectSom">
+          <option value="tema-jardim">Jardim suave</option>
+          <option value="tema-galaxia">Galáxia</option>
+          <option value="tema-sistema-solar">Sistema solar com Terra</option>
+          <option value="tema-arcoiris">Arco-íris delicado</option>
+          <option value="tema-estrelas">Noite estrelada</option>
+          <option value="tema-ceu">Céu clarinho</option>
+        </select>
+      </div>
+
+      <div class="temaSugestaoBox">
+        <div class="field">
+          <label>Quero sugerir outro fundo</label>
+          <input type="text" id="nomeTemaSugerido" placeholder="Ex.: fundo com foguetes, fundo com flores lilás...">
+        </div>
+
+        <div class="temaSugestaoTexto">
+          Escreva aqui o nome do fundo que a Maya gostaria. Ao clicar no botão abaixo, a sugestão vai direto para futuras edições.
+        </div>
+
+        <button class="temaSugestaoBtn" type="button" onclick="enviarSugestaoTemaParaFuturasEdicoes()">
+          ✨ Enviar sugestão de fundo
+        </button>
+      </div>
+
+      <div class="field">
+        <label>Som do menu</label>
+        <div class="somLinha">
+          <select id="selectMenu" class="selectSom">
+            <option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
+            <option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
+            <option value="Blue-Moon-manha.mp3">Blue Moon</option>
+            <option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
+            <option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
+            <option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
+            <option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
+            <option value="nebula-the-grey-room-density-&-time.mp3">Nebula The Grey Room Density &amp; Time</option>
+            <option value="Magic Chime.mp3">Magic Chime</option>
+            <option value="Whistle toy.mp3">Whistle toy</option>
+            <option value="Pop.mp3">Pop</option>
+            <option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
+            <option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
+            <option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
+          </select>
+          <button id="toggleMenu" class="botaoIconeSom" onclick="toggleSomPagina('menu')" type="button">🔊</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Som de tarefa concluída</label>
+        <div class="somLinha">
+          <select id="selectTarefaConcluida" class="selectSom">
+            <option value="">Aguardando seus sons especiais</option>
+          </select>
+          <button id="toggleTarefaConcluida" class="botaoIconeSom" onclick="toggleSomPagina('tarefaConcluida')" type="button">🔊</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Som de bloco concluído</label>
+        <div class="somLinha">
+          <select id="selectBlocoConcluido" class="selectSom">
+            <option value="">Aguardando seus sons especiais</option>
+          </select>
+          <button id="toggleBlocoConcluido" class="botaoIconeSom" onclick="toggleSomPagina('blocoConcluido')" type="button">🔊</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Som de dia concluído</label>
+        <div class="somLinha">
+          <select id="selectDiaConcluido" class="selectSom">
+            <option value="">Aguardando seus sons especiais</option>
+          </select>
+          <button id="toggleDiaConcluido" class="botaoIconeSom" onclick="toggleSomPagina('diaConcluido')" type="button">🔊</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Som da rotina da manhã</label>
+        <div class="somLinha">
+          <select id="selectManha" class="selectSom">
+            <option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
+            <option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
+            <option value="Blue-Moon-manha.mp3">Blue Moon</option>
+            <option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
+            <option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
+            <option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
+            <option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
+            <option value="nebula-the-grey-room-density-&-time.mp3">Nebula The Grey Room Density &amp; Time</option>
+          </select>
+          <button id="toggleManha" class="botaoIconeSom" onclick="toggleSomPagina('manha')" type="button">🔊</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Som da rotina da noite</label>
+        <div class="somLinha">
+          <select id="selectNoite" class="selectSom">
+            <option value="meditation-impromptu-03-kevin-macleod-noite.mp3">Meditation Impromptu 03 - Kevin MacLeod</option>
+            <option value="a-quiet-thought-wayne-jones-noite.mp3">A Quiet Thought - Wayne Jones</option>
+            <option value="cylinder-five-chris-zabriskie-noite.mp3">Cylinder Five - Chris Zabriskie</option>
+            <option value="mesmerize-kevin-noite.mp3">Mesmerize - Kevin</option>
+            <option value="nebula-the-grey-room-density-&-time.mp3">Nebula The Grey Room Density &amp; Time</option>
+          </select>
+          <button id="toggleNoite" class="botaoIconeSom" onclick="toggleSomPagina('noite')" type="button">🔊</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Som da lista de desejos</label>
+        <div class="somLinha">
+          <select id="selectDesejos" class="selectSom">
+            <option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
+            <option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
+            <option value="Blue-Moon-manha.mp3">Blue Moon</option>
+            <option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
+            <option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
+            <option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
+            <option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
+            <option value="nebula-the-grey-room-density-&-time.mp3">Nebula The Grey Room Density &amp; Time</option>
+            <option value="Magic Chime.mp3">Magic Chime</option>
+            <option value="Whistle toy.mp3">Whistle toy</option>
+            <option value="Pop.mp3">Pop</option>
+            <option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
+            <option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
+            <option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
+          </select>
+          <button id="toggleDesejos" class="botaoIconeSom" onclick="toggleSomPagina('desejos')" type="button">🔊</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Som da premiação</label>
+        <div class="somLinha">
+          <select id="selectPremiacao" class="selectSom">
+            <option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
+            <option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
+            <option value="Blue-Moon-manha.mp3">Blue Moon</option>
+            <option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
+            <option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
+            <option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
+            <option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
+            <option value="nebula-the-grey-room-density-&-time.mp3">Nebula The Grey Room Density &amp; Time</option>
+            <option value="Magic Chime.mp3">Magic Chime</option>
+            <option value="Whistle toy.mp3">Whistle toy</option>
+            <option value="Pop.mp3">Pop</option>
+            <option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
+            <option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
+            <option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
+          </select>
+          <button id="togglePremiacao" class="botaoIconeSom" onclick="toggleSomPagina('premiacao')" type="button">🔊</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Volume</label>
+        <input type="range" id="volumeSom" class="rangeSom" min="0" max="1" step="0.05">
+        <div id="volumeValor" class="volumeValor">35%</div>
+      </div>
+
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalConfigSom()">Cancelar</button>
+      <button class="save" onclick="concluirModalConfigSom()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalFuturasEdicoes">
+  <div class="modal">
+    <h2 class="modalTitle">Futuras edições</h2>
+
+    <div class="field">
+      <label>Ideias de melhorias futuras</label>
+      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+<audio id="audioPreviewSom"></audio>
+
+<script>
+const CHAVE_FUTURAS_EDICOES_MAYA_MENU = "futuras_edicoes_maya_menu";
+const STORAGE_KEY = "jardim_rotina_maya_v8";
+const CONFIG_SOM_KEY = "config_som_maya";
+const REGRA_TELA_HOJE_KEY = "regra_tela_hoje_maya";
+
+const TASKS = {
+  morning: {
+    items: [
+      {
+        id: "m1_group",
+        time: "08h00m",
+        text: "Higiene matinal",
+        grouped: true,
+        subTasks: [
+          "Ir ao banheiro",
+          "Escovar os dentes",
+          "Lavar o rosto"
+        ]
+      },
+      { id: "m4", time: "08h12m", text: "Beber água morna" },
+      { id: "m5", time: "08h20m", text: "Café da manhã" },
+      { id: "m5b", time: "10h50m", text: "Arrumar a mochila da escola", grouped: true, subTasks: ["Livro, caderno, agenda e xuxa de cabelo"] },
+      { id: "m6", time: "11h00m", text: "Tomar banho" },
+      { id: "m7", time: "11h20m", text: "Almoçar", grouped: true, subTasks: ["Sem tela", "Beber pouco líquido"] },
+      { id: "m8", time: "11h40m", text: "Escovar os dentes", grouped: true, subTasks: ["Com firmeza e gentileza", "3 bochechos", "1 gargarejo"] },
+      { id: "m9", time: "12h30m", text: "Ir para escola", grouped: true, dynamicSubTasks: true }
+    ]
+  },
+  night: {
+    items: [
+      { id: "n1", time: "18h00m", text: "Tomar banho", grouped: true, subTasks: ["Roupa suja no lugar certo", "Tênis no lugar"] },
+      { id: "n2", time: "18h20m", text: "Jantar", grouped: true, subTasks: ["Sem tela", "Beber pouco líquido"] },
+      { id: "n2b", time: "18h32m", text: "Escovar os dentes", grouped: true, subTasks: ["Com firmeza e gentileza", "3 bochechos", "1 gargarejo"] },
+      { id: "n3", time: "18h40m", text: "Fazer contrato de casa", grouped: true, subTasks: ["Com atenção e capricho", "Ao terminar, guardar na mochila"], schoolDaysOnly: true },
+      { id: "n4", time: "20h30m", text: "Passatempos Relaxantes Sem Telas", opensPage: true }
+    ]
+  }
+};
+
+let configSomTemporario = null;
+const audioPreviewSom = document.getElementById("audioPreviewSom");
+let previewTimeoutSom = null;
+
+function pad2(numero){
+  return String(numero).padStart(2, "0");
+}
+
+function atualizarLinhaTempo(){
+  const agora = new Date();
+  const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+  document.getElementById("linhaTempoHora").textContent = `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+  document.getElementById("linhaTempoDia").textContent = `• ${diasCurtos[agora.getDay()]}`;
+  document.getElementById("linhaTempoData").textContent = `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
+}
+
+function dateToKey(date){
+  return `${date.getFullYear()}-${pad2(date.getMonth()+1)}-${pad2(date.getDate())}`;
+}
+
+function keyToDate(key){
+  const [year, month, day] = key.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+function addDaysToKey(key, amount){
+  const d = keyToDate(key);
+  d.setDate(d.getDate() + amount);
+  return dateToKey(d);
+}
+
+function isWeekday(key){
+  const d = keyToDate(key);
+  const day = d.getDay();
+  return day >= 1 && day <= 5;
+}
+
+function getCycleDayKey(date = new Date()){
+  const d = new Date(date);
+  if(d.getHours() < 7){
+    d.setDate(d.getDate() - 1);
+  }
+  return dateToKey(d);
+}
+
+function getMonthKeyParts(date = new Date()){
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth()
+  };
+}
+
+function getEasterDate(year){
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(year, month - 1, day);
+}
+
+function getNationalHolidayKeys(year){
+  const easter = getEasterDate(year);
+  const goodFriday = new Date(easter);
+  goodFriday.setDate(easter.getDate() - 2);
+
+  const fixed = [
+    `${year}-01-01`,
+    `${year}-04-21`,
+    `${year}-05-01`,
+    `${year}-09-07`,
+    `${year}-10-12`,
+    `${year}-11-02`,
+    `${year}-11-15`,
+    `${year}-11-20`,
+    `${year}-12-25`
+  ];
+
+  const movable = [
+    dateToKey(goodFriday)
+  ];
+
+  return new Set([...fixed, ...movable]);
+}
+
+function isNationalHoliday(key){
+  const [year] = key.split("-").map(Number);
+  return getNationalHolidayKeys(year).has(key);
+}
+
+function isSchoolDay(key){
+  return isWeekday(key) && !isNationalHoliday(key);
+}
+
+function isTuesday(key){
+  return keyToDate(key).getDay() === 2;
+}
+
+function isThursday(key){
+  return keyToDate(key).getDay() === 4;
+}
+
+function isFriday(key){
+  return keyToDate(key).getDay() === 5;
+}
+
+function getOccurrenceInMonth(date){
+  return Math.floor((date.getDate() - 1) / 7) + 1;
+}
+
+function isSecondOrFourthWeekendOfMonth(key){
+  const date = keyToDate(key);
+  const day = date.getDay();
+  if(day !== 0 && day !== 6) return false;
+  const occurrence = getOccurrenceInMonth(date);
+  return occurrence === 2 || occurrence === 4;
+}
+
+function isFirstThirdOrFifthFridayOfMonth(key){
+  const date = keyToDate(key);
+  if(date.getDay() !== 5) return false;
+  const occurrence = getOccurrenceInMonth(date);
+  return occurrence === 1 || occurrence === 3 || occurrence === 5;
+}
+
+function getIrParaEscolaSubTasks(key){
+  const subtasks = [
+    "Aguardar na portaria às 12h30m"
+  ];
+
+  if(isTuesday(key) || isThursday(key)){
+    subtasks.push("Tempo com o papai após a escola");
+  }
+
+  if(isFriday(key)){
+    subtasks.push("Hora Extra de Patins");
+
+    if(isFirstThirdOrFifthFridayOfMonth(key)){
+      subtasks.push("Mamãe pega na escola");
     }
-  </script>
+  }
+
+  if(isSecondOrFourthWeekendOfMonth(key)){
+    subtasks.push("Final de semana com o papai");
+  }
+
+  return subtasks;
+}
+
+function loadStore(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return { days:{}, customCalmOptions:[] };
+    const parsed = JSON.parse(raw);
+    if(!parsed.days) parsed.days = {};
+    if(!Array.isArray(parsed.customCalmOptions)) parsed.customCalmOptions = [];
+    return parsed;
+  }catch(e){
+    return { days:{}, customCalmOptions:[] };
+  }
+}
+
+function getDayState(store, key){
+  if(store.days && store.days[key]){
+    return store.days[key];
+  }
+
+  return {
+    done:{},
+    doneOrder:[],
+    calmActivities:[],
+    updatedAt:null,
+    completed:false,
+    completedAt:null,
+    validation:{
+      morningRule:null,
+      nightRule:null
+    }
+  };
+}
+
+function getItemsForTab(tab, key){
+  return TASKS[tab].items.filter(item => {
+    if(item.weekdaysOnly && !isWeekday(key)) return false;
+    if(item.schoolDaysOnly && !isSchoolDay(key)) return false;
+    return true;
+  });
+}
+
+function getAllCountableItemsForDay(key){
+  return [
+    ...getItemsForTab("morning", key),
+    ...getItemsForTab("night", key)
+  ];
+}
+
+function formatarNomeTarefaMenu(item){
+  if(item.id === "n4"){
+    return "Passatempos Relaxantes";
+  }
+  return item.text;
+}
+
+function obterProximaTarefaSincronizada(){
+  const agora = new Date();
+  const hojeKey = getCycleDayKey(agora);
+  const store = loadStore();
+  const dayState = getDayState(store, hojeKey);
+  const tarefasHoje = getAllCountableItemsForDay(hojeKey);
+
+  const proximaHoje = tarefasHoje.find(item => !dayState.done[item.id]);
+
+  if(proximaHoje){
+    return {
+      text: formatarNomeTarefaMenu(proximaHoje),
+      time: proximaHoje.time
+    };
+  }
+
+  const amanhaKey = addDaysToKey(hojeKey, 1);
+  const tarefasAmanha = getAllCountableItemsForDay(amanhaKey);
+
+  if(tarefasAmanha.length){
+    return {
+      text: formatarNomeTarefaMenu(tarefasAmanha[0]),
+      time: tarefasAmanha[0].time
+    };
+  }
+
+  return {
+    text: "Sem próxima tarefa",
+    time: ""
+  };
+}
+
+function atualizarProximaTarefaRotina(){
+  const proxima = obterProximaTarefaSincronizada();
+  document.getElementById("proximaRotinaNome").textContent = proxima.text;
+  document.getElementById("proximaRotinaHora").textContent = proxima.time;
+}
+
+function getRegraTelaHojeStore(){
+  try{
+    return JSON.parse(localStorage.getItem(REGRA_TELA_HOJE_KEY)) || {};
+  }catch(e){
+    return {};
+  }
+}
+
+function obterEstatisticasDoMes(){
+  const regraStore = getRegraTelaHojeStore();
+  const hoje = new Date();
+  const { year, month } = getMonthKeyParts(hoje);
+
+  let diasComRegrasCompletas = 0;
+
+  Object.entries(regraStore).forEach(([key, valor]) => {
+    const data = keyToDate(key);
+    if(data.getFullYear() !== year || data.getMonth() !== month) return;
+
+    if(valor === true){
+      diasComRegrasCompletas += 1;
+    }
+  });
+
+  return {
+    diasComRegrasCompletas
+  };
+}
+
+function atualizarPainelConquistas(){
+  const stats = obterEstatisticasDoMes();
+  const medalhaConquistada = stats.diasComRegrasCompletas >= 1;
+
+  document.getElementById("regraMedalhaInfo").textContent =
+    medalhaConquistada ? "🏅 Medalha do 1º dia seguindo as regras" : "Medalha esperando você";
+
+  document.getElementById("medalhaStatus").textContent =
+    medalhaConquistada ? "Desbloqueada" : "Ainda bloqueada";
+
+  const medalhaIcone = document.getElementById("medalhaIcone");
+  medalhaIcone.classList.toggle("bloqueada", !medalhaConquistada);
+
+  document.getElementById("medalhaTexto").textContent =
+    medalhaConquistada
+      ? "Você conquistou a medalha “Segui as Regras por 1 Dia”. Que orgulho, Maya! 🏅"
+      : "Medalha “Segui as Regras por 1 Dia” — desbloqueie ao completar 1 dia honrando as regras 🌟";
+
+  atualizarMissaoAstronauta();
+}
+
+function atualizarMissaoAstronauta(){
+  const regraStore = getRegraTelaHojeStore();
+  const hoje = new Date();
+  const { year, month } = getMonthKeyParts(hoje);
+
+  let progressoBase = 0;
+  Object.entries(regraStore).forEach(([key, valor]) => {
+    const data = keyToDate(key);
+    if(data.getFullYear() !== year || data.getMonth() !== month) return;
+    if(valor === true) progressoBase += 1;
+  });
+
+  progressoBase = Math.min(progressoBase, 30);
+  const percentual = Math.round((progressoBase / 30) * 100);
+
+  document.getElementById("missaoBarraFill").style.width = `${percentual}%`;
+  document.getElementById("missaoPct").textContent = `${percentual}%`;
+
+  let destino = "Lua";
+  if(percentual >= 20) destino = "Marte";
+  if(percentual >= 40) destino = "Júpiter";
+  if(percentual >= 60) destino = "Saturno";
+  if(percentual >= 80) destino = "Netuno";
+  if(percentual >= 95) destino = "Galáxia da Maya";
+
+  document.getElementById("missaoDestino").textContent = `Próximo destino: ${destino}`;
+}
+
+function abrirModalRegras(){
+  document.getElementById("modalRegras").classList.add("show");
+}
+
+function fecharModalRegras(){
+  document.getElementById("modalRegras").classList.remove("show");
+  const painelFaixas = document.getElementById("painelFaixas");
+  if(painelFaixas){ painelFaixas.classList.remove("show"); }
+}
+
+function alternarFaixas(){
+  document.getElementById("painelFaixas").classList.toggle("show");
+}
+
+function abrirModalFuturasEdicoes(){
+  document.getElementById("futurasEdicoesTexto").value =
+    localStorage.getItem(CHAVE_FUTURAS_EDICOES_MAYA_MENU) || "";
+  document.getElementById("modalFuturasEdicoes").classList.add("show");
+}
+
+function fecharModalFuturasEdicoes(){
+  document.getElementById("modalFuturasEdicoes").classList.remove("show");
+}
+
+function salvarFuturasEdicoes(){
+  localStorage.setItem(
+    CHAVE_FUTURAS_EDICOES_MAYA_MENU,
+    document.getElementById("futurasEdicoesTexto").value
+  );
+  fecharModalFuturasEdicoes();
+}
+
+function enviarSugestaoTemaParaFuturasEdicoes(){
+  const input = document.getElementById("nomeTemaSugerido");
+  const valor = input.value.trim();
+
+  if(!valor){
+    alert("Escreva primeiro o nome do fundo que a Maya gostaria.");
+    return;
+  }
+
+  const atual = localStorage.getItem(CHAVE_FUTURAS_EDICOES_MAYA_MENU) || "";
+  const textoNovo = `${atual ? atual + "\n\n" : ""}Sugestão de fundo da Maya: ${valor}`;
+  localStorage.setItem(CHAVE_FUTURAS_EDICOES_MAYA_MENU, textoNovo);
+
+  input.value = "";
+  fecharModalConfigSom();
+  abrirModalFuturasEdicoes();
+}
+
+function getConfigSomSalva(){
+  return JSON.parse(localStorage.getItem(CONFIG_SOM_KEY)) || {
+    temaFundo: "tema-jardim",
+
+    menuAtivo: true,
+    menu: "wheels-audionautix-manha.mp3",
+
+    tarefaConcluidaAtivo: false,
+    tarefaConcluida: "",
+
+    blocoConcluidoAtivo: false,
+    blocoConcluido: "",
+
+    diaConcluidoAtivo: false,
+    diaConcluido: "",
+
+    manhaAtivo: true,
+    manha: "wheels-audionautix-manha.mp3",
+
+    noiteAtivo: true,
+    noite: "meditation-impromptu-03-kevin-macleod-noite.mp3",
+
+    desejosAtivo: true,
+    desejos: "wheels-audionautix-manha.mp3",
+
+    premiacaoAtivo: true,
+    premiacao: "wheels-audionautix-manha.mp3",
+
+    volume: 0.35
+  };
+}
+
+function aplicarTema(nomeTema){
+  document.body.classList.remove(
+    "tema-jardim",
+    "tema-galaxia",
+    "tema-arcoiris",
+    "tema-estrelas",
+    "tema-ceu",
+    "tema-sistema-solar"
+  );
+
+  document.body.classList.add(nomeTema || "tema-jardim");
+}
+
+function abrirModalConfigSom(){
+  configSomTemporario = { ...getConfigSomSalva() };
+
+  document.getElementById("selectTemaFundo").value = configSomTemporario.temaFundo || "tema-jardim";
+  document.getElementById("selectMenu").value = configSomTemporario.menu;
+  document.getElementById("selectTarefaConcluida").value = configSomTemporario.tarefaConcluida || "";
+  document.getElementById("selectBlocoConcluido").value = configSomTemporario.blocoConcluido || "";
+  document.getElementById("selectDiaConcluido").value = configSomTemporario.diaConcluido || "";
+  document.getElementById("selectManha").value = configSomTemporario.manha;
+  document.getElementById("selectNoite").value = configSomTemporario.noite;
+  document.getElementById("selectDesejos").value = configSomTemporario.desejos;
+  document.getElementById("selectPremiacao").value = configSomTemporario.premiacao;
+  document.getElementById("volumeSom").value = configSomTemporario.volume;
+  document.getElementById("volumeValor").textContent = `${Math.round(configSomTemporario.volume * 100)}%`;
+
+  atualizarBotoesSomPaginas();
+  document.getElementById("modalConfigSom").classList.add("show");
+}
+
+function fecharModalConfigSom(){
+  pararPreviewSom();
+  aplicarTema(getConfigSomSalva().temaFundo || "tema-jardim");
+  document.getElementById("modalConfigSom").classList.remove("show");
+  configSomTemporario = null;
+}
+
+function concluirModalConfigSom(){
+  configSomTemporario.temaFundo = document.getElementById("selectTemaFundo").value;
+  configSomTemporario.menu = document.getElementById("selectMenu").value;
+  configSomTemporario.tarefaConcluida = document.getElementById("selectTarefaConcluida").value;
+  configSomTemporario.blocoConcluido = document.getElementById("selectBlocoConcluido").value;
+  configSomTemporario.diaConcluido = document.getElementById("selectDiaConcluido").value;
+  configSomTemporario.manha = document.getElementById("selectManha").value;
+  configSomTemporario.noite = document.getElementById("selectNoite").value;
+  configSomTemporario.desejos = document.getElementById("selectDesejos").value;
+  configSomTemporario.premiacao = document.getElementById("selectPremiacao").value;
+  configSomTemporario.volume = Number(document.getElementById("volumeSom").value);
+
+  localStorage.setItem(CONFIG_SOM_KEY, JSON.stringify(configSomTemporario));
+  aplicarTema(configSomTemporario.temaFundo);
+  pararPreviewSom();
+  fecharModalConfigSom();
+}
+
+function atualizarBotaoSomPagina(chave, elementoId){
+  const ligado = !!configSomTemporario[chave];
+  const botao = document.getElementById(elementoId);
+
+  botao.textContent = ligado ? "🔊" : "🔇";
+  botao.classList.toggle("desligado", !ligado);
+}
+
+function atualizarBotoesSomPaginas(){
+  atualizarBotaoSomPagina("menuAtivo", "toggleMenu");
+  atualizarBotaoSomPagina("tarefaConcluidaAtivo", "toggleTarefaConcluida");
+  atualizarBotaoSomPagina("blocoConcluidoAtivo", "toggleBlocoConcluido");
+  atualizarBotaoSomPagina("diaConcluidoAtivo", "toggleDiaConcluido");
+  atualizarBotaoSomPagina("manhaAtivo", "toggleManha");
+  atualizarBotaoSomPagina("noiteAtivo", "toggleNoite");
+  atualizarBotaoSomPagina("desejosAtivo", "toggleDesejos");
+  atualizarBotaoSomPagina("premiacaoAtivo", "togglePremiacao");
+}
+
+function toggleSomPagina(tipo){
+  if(!configSomTemporario) return;
+
+  const mapa = {
+    menu: ["menuAtivo", "toggleMenu"],
+    tarefaConcluida: ["tarefaConcluidaAtivo", "toggleTarefaConcluida"],
+    blocoConcluido: ["blocoConcluidoAtivo", "toggleBlocoConcluido"],
+    diaConcluido: ["diaConcluidoAtivo", "toggleDiaConcluido"],
+    manha: ["manhaAtivo", "toggleManha"],
+    noite: ["noiteAtivo", "toggleNoite"],
+    desejos: ["desejosAtivo", "toggleDesejos"],
+    premiacao: ["premiacaoAtivo", "togglePremiacao"]
+  };
+
+  const [chave, elementoId] = mapa[tipo];
+  configSomTemporario[chave] = !configSomTemporario[chave];
+  atualizarBotaoSomPagina(chave, elementoId);
+}
+
+function pararPreviewSom(){
+  if(previewTimeoutSom){
+    clearTimeout(previewTimeoutSom);
+    previewTimeoutSom = null;
+  }
+
+  audioPreviewSom.pause();
+  audioPreviewSom.currentTime = 0;
+  audioPreviewSom.removeAttribute("src");
+  audioPreviewSom.load();
+}
+
+function tocarPreviewSom(src){
+  if(!src) return;
+
+  pararPreviewSom();
+
+  audioPreviewSom.src = src;
+  audioPreviewSom.volume = Number(document.getElementById("volumeSom")?.value || 0.35);
+
+  audioPreviewSom.play().catch(() => {});
+
+  previewTimeoutSom = setTimeout(() => {
+    pararPreviewSom();
+  }, 5000);
+}
+
+document.getElementById("selectTemaFundo").addEventListener("change", () => {
+  aplicarTema(document.getElementById("selectTemaFundo").value);
+});
+
+document.getElementById("selectMenu").addEventListener("change", () => {
+  tocarPreviewSom(document.getElementById("selectMenu").value);
+});
+
+document.getElementById("selectTarefaConcluida").addEventListener("change", () => {
+  tocarPreviewSom(document.getElementById("selectTarefaConcluida").value);
+});
+
+document.getElementById("selectBlocoConcluido").addEventListener("change", () => {
+  tocarPreviewSom(document.getElementById("selectBlocoConcluido").value);
+});
+
+document.getElementById("selectDiaConcluido").addEventListener("change", () => {
+  tocarPreviewSom(document.getElementById("selectDiaConcluido").value);
+});
+
+document.getElementById("selectManha").addEventListener("change", () => {
+  tocarPreviewSom(document.getElementById("selectManha").value);
+});
+
+document.getElementById("selectNoite").addEventListener("change", () => {
+  tocarPreviewSom(document.getElementById("selectNoite").value);
+});
+
+document.getElementById("selectDesejos").addEventListener("change", () => {
+  tocarPreviewSom(document.getElementById("selectDesejos").value);
+});
+
+document.getElementById("selectPremiacao").addEventListener("change", () => {
+  tocarPreviewSom(document.getElementById("selectPremiacao").value);
+});
+
+document.getElementById("volumeSom").addEventListener("input", () => {
+  const volumeAtual = Number(document.getElementById("volumeSom").value);
+  document.getElementById("volumeValor").textContent =
+    `${Math.round(volumeAtual * 100)}%`;
+
+  audioPreviewSom.volume = volumeAtual;
+});
+
+function atualizarTela(){
+  atualizarLinhaTempo();
+  atualizarProximaTarefaRotina();
+  atualizarPainelConquistas();
+}
+
+window.addEventListener("load", () => {
+  aplicarTema(getConfigSomSalva().temaFundo || "tema-jardim");
+  atualizarTela();
+  setInterval(atualizarLinhaTempo, 1000);
+});
+
+window.addEventListener("pageshow", atualizarTela);
+window.addEventListener("focus", atualizarTela);
+
+window.addEventListener("storage", (event) => {
+  if(event.key === STORAGE_KEY || event.key === CONFIG_SOM_KEY || event.key === REGRA_TELA_HOJE_KEY){
+    aplicarTema(getConfigSomSalva().temaFundo || "tema-jardim");
+    atualizarTela();
+  }
+});
+
+document.addEventListener("visibilitychange", function(){
+  if(!document.hidden){
+    atualizarTela();
+  }
+});
+
+window.addEventListener("click", function(e){
+  const modalRegras = document.getElementById("modalRegras");
+  const modalConfigSom = document.getElementById("modalConfigSom");
+  const modalFuturasEdicoes = document.getElementById("modalFuturasEdicoes");
+
+  if(e.target === modalRegras){
+    fecharModalRegras();
+  }
+
+  if(e.target === modalConfigSom){
+    fecharModalConfigSom();
+  }
+
+  if(e.target === modalFuturasEdicoes){
+    fecharModalFuturasEdicoes();
+  }
+});
+</script>
+
 </body>
 </html>

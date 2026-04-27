@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Premiação da Maya</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#6B6B6B;
+  --borda:#E3E5E1;
+  --fonte:'Poppins',sans-serif;
+  --titulo:20px;
+  --sombra-suave:0 4px 12px rgba(0,0,0,0.05);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+html, body{
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:16px;
+}
+
+.pagina{
+  width:100%;
+  max-width:420px;
+}
+
+.card{
+  width:100%;
+  background:var(--card);
+  border-radius:24px;
+  padding:22px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.topo{
+  display:grid;
+  grid-template-columns:40px 1fr 58px;
+  align-items:start;
+  gap:8px;
+  margin-bottom:6px;
+}
+
+.botao-voltar{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  border-radius:12px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.botao-voltar:hover{
+  background:#dde3d9;
+}
+
+.botao-voltar span{
+  transform:translateY(-1px);
+}
+
+.topCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding-top:2px;
+}
+
+.titleIndex{
+  color:var(--texto-principal);
+  font-weight:500;
+  font-size:var(--titulo);
+  line-height:1.2;
+  text-align:center;
+}
+
+.subtitulo{
+  font-size:12px;
+  color:var(--texto-secundario);
+  margin-top:2px;
+  text-align:center;
+}
+
+.dataTopo{
+  min-height:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:1px;
+}
+
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  margin-bottom:2px;
+}
+
+.dataTopoLinha{
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.box{
+  border-radius:18px;
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.saldoBox{
+  text-align:center;
+  background:#F2F7F1;
+}
+
+.saldoLabel{
+  font-size:12px;
+  color:var(--texto-secundario);
+}
+
+.saldoValor{
+  font-size:30px;
+  font-weight:600;
+  color:var(--verde-texto);
+  line-height:1.2;
+}
+
+.boxTitle{
+  font-size:14px;
+  color:var(--verde-texto);
+  text-align:center;
+  font-weight:500;
+}
+
+.texto{
+  font-size:12.5px;
+  color:var(--texto-principal);
+  line-height:1.6;
+  text-align:center;
+}
+
+.miniTexto{
+  font-size:11.5px;
+  color:var(--texto-secundario);
+  line-height:1.55;
+  text-align:center;
+}
+
+.opcoes{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+
+.opcaoBtn{
+  width:100%;
+  border:none;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-radius:16px;
+  padding:13px 14px;
+  font-size:13px;
+  font-family:var(--fonte);
+  cursor:pointer;
+  line-height:1.45;
+}
+
+.opcaoBtn:hover{
+  background:var(--verde-hover);
+}
+
+.opcaoSub{
+  display:block;
+  margin-top:3px;
+  font-size:11.5px;
+  color:rgba(63,111,79,0.72);
+}
+
+.aviso{
+  background:#FFFDF5;
+  border:1px solid #F1E7BA;
+  color:#6B5A2A;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:4px;
+  flex-wrap:wrap;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+}
+
+.futureBtn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:flex-start;
+  padding:24px 16px;
+  z-index:999;
+  overflow-y:auto;
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  max-height:85vh;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+}
+
+.modalTitle{
+  font-size:18px;
+  color:var(--texto-principal);
+  text-align:center;
+  font-weight:500;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+  font-weight:500;
+}
+
+textarea{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  height:220px;
+  resize:none;
+}
+
+textarea:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+}
+
+.modalBtns{
+  display:flex;
+  gap:8px;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:11px 12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:12.5px;
+}
+
+.cancel{
+  background:#efefef;
+  color:#333;
+}
+
+.save{
+  background:var(--verde-escuro);
+  color:white;
+}
+
+
+.diretrizCards{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.diretrizCard{
+  border-radius:16px;
+  padding:12px;
+  border:1px solid var(--borda);
+  background:#F8FAF7;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.diretrizCard.verde{
+  background:#F2F8F0;
+  border-color:#D9EBD6;
+}
+
+.diretrizCard.amarelo{
+  background:#FFFDF5;
+  border-color:#F1E7BA;
+}
+
+.diretrizCard.azul{
+  background:#F3F7FF;
+  border-color:#DDE7FF;
+}
+
+.diretrizCard.rosa{
+  background:#FFF5F8;
+  border-color:#F4D7E2;
+}
+
+.diretrizCard.roxo{
+  background:#F8F4FF;
+  border-color:#E5D8FF;
+}
+
+.diretrizCardTitle{
+  font-size:13.5px;
+  font-weight:600;
+  color:var(--verde-texto);
+  line-height:1.35;
+}
+
+.diretrizLinha{
+  font-size:12px;
+  color:var(--texto-principal);
+  line-height:1.5;
+  text-align:center;
+}
+
+.diretrizMini{
+  font-size:11.5px;
+  color:var(--texto-secundario);
+  line-height:1.45;
+  text-align:center;
+}
+
+.diretrizDestaque{
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,0.06);
+  border-radius:12px;
+  padding:9px 10px;
+  font-size:12px;
+  line-height:1.5;
+  text-align:center;
+}
+
+@media (max-width:390px){
+  body{padding:14px;}
+  .card{padding:20px 14px 16px;}
+  .titleIndex{font-size:19px;}
+  .topo{grid-template-columns:40px 1fr 54px;}
+  .horaTopo{font-size:13px;}
+  .dataTopoLinha{font-size:10.5px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="pagina">
+  <div class="card">
+
+    <div class="topo">
+      <button class="botao-voltar" onclick="location.href='maya-menu.html'"><span>←</span></button>
+
+      <div class="topCenter">
+        <h1 class="titleIndex">🎁 Premiação da Maya</h1>
+        <p class="subtitulo">trocas, desejos e recompensas</p>
+      </div>
+
+      <div class="dataTopo">
+        <div id="linhaTempoHora" class="horaTopo"></div>
+        <div id="linhaTempoDia" class="dataTopoLinha"></div>
+        <div id="linhaTempoData" class="dataTopoLinha"></div>
+      </div>
+    </div>
+
+    <div class="box saldoBox">
+      <div class="saldoLabel">Saldo disponível</div>
+      <div class="saldoValor" id="saldoAtual">R$ 0,00</div>
+      <div class="miniTexto">Esse saldo vem da página Minha Pontuação.</div>
+    </div>
+
+    <div class="box">
+      <div class="boxTitle">🌟 Como Maya pode usar o saldo</div>
+      <div class="texto">
+        Maya pode trocar o saldo por desejos da lista de desejos ou por premiação em dinheiro.
+      </div>
+      <div class="miniTexto">
+        Ela também pode escolher não gastar agora e continuar acumulando para conquistar algo maior.
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="boxTitle">🎀 Opções de troca</div>
+
+      <div class="opcoes">
+        <button class="opcaoBtn" onclick="abrirListaDesejos()">
+          💫 Abrir Lista de Desejos
+          <span class="opcaoSub">Ver desejos cadastrados e escolher uma conquista futura</span>
+        </button>
+
+        <button class="opcaoBtn" onclick="abrirModalPremioDinheiro()">
+          💰 Premiação em dinheiro
+          <span class="opcaoSub">Registrar ideia de troca por dinheiro</span>
+        </button>
+
+        <button class="opcaoBtn" onclick="abrirModalAcumular()">
+          🐷 Continuar acumulando
+          <span class="opcaoSub">Guardar o saldo para uma recompensa maior</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="box aviso">
+      <div class="boxTitle" style="color:#8C7232;">⚠️ Sistema em desenvolvimento</div>
+      <div class="texto" style="color:#6B5A2A;">
+        A troca automática por desejo ou dinheiro ainda será desenvolvida. Por enquanto, esta página organiza o saldo e as regras da premiação.
+      </div>
+    </div>
+
+    <div class="footerMiniAction">
+      <button class="futureBtn" onclick="abrirModalDiretrizes()">Como uso o que ganhei? 🎁</button>
+      <button class="futureBtn" onclick="baixarCardJPEG()">📥 baixar card</button>
+      <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalDiretrizes">
+  <div class="modal">
+    <h2 class="modalTitle">Como uso o que ganhei? 🎁</h2>
+
+    <div class="diretrizCards" id="cardPremiacaoDownload">
+
+      <div class="diretrizCard verde">
+        <div class="diretrizCardTitle">🌟 1. Como usar suas moedinhas</div>
+        <div class="diretrizDestaque">
+          🎀 Realizar desejos
+        </div>
+        <div class="diretrizDestaque">
+          💰 Trocar por dinheiro
+        </div>
+        <div class="diretrizMini">Você escolhe como quer usar o que conquistou 💛</div>
+      </div>
+
+      <div class="diretrizCard amarelo">
+        <div class="diretrizCardTitle">🌱 2. Guardar moedinhas</div>
+        <div class="diretrizLinha">
+          Você pode guardar e juntar suas moedinhas para conquistar algo ainda mais especial 🌈✨
+        </div>
+      </div>
+
+      <div class="diretrizCard azul">
+        <div class="diretrizCardTitle">🗓️ 3. Quando usar</div>
+        <div class="diretrizDestaque">
+          As trocas acontecem entre os dias <strong>3 e 7 do mês</strong>
+        </div>
+        <div class="diretrizMini">Fique atenta às datas para planejar suas conquistas 💫</div>
+      </div>
+
+      <div class="diretrizCard roxo">
+        <div class="diretrizCardTitle">✨ 4. Suas escolhas</div>
+        <div class="diretrizDestaque">
+          🌟 Desejos maiores precisam de mais moedinhas
+        </div>
+        <div class="diretrizDestaque">
+          💖 Dinheiro pode ser guardado para conquistar no futuro
+        </div>
+        <div class="diretrizMini">Suas escolhas, seus sonhos, suas conquistas! ✨</div>
+      </div>
+
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalDiretrizes()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalPremioDinheiro">
+  <div class="modal">
+    <h2 class="modalTitle">Premiação em dinheiro</h2>
+
+    <div class="texto">
+      O saldo atual pode ser usado como referência para uma premiação em dinheiro.
+    </div>
+
+    <div class="box saldoBox">
+      <div class="saldoLabel">Saldo disponível</div>
+      <div class="saldoValor" id="saldoModalDinheiro">R$ 0,00</div>
+    </div>
+
+    <div class="miniTexto">
+      Depois vamos criar o sistema para registrar trocas, descontar saldo e guardar histórico.
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalPremioDinheiro()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalAcumular">
+  <div class="modal">
+    <h2 class="modalTitle">Continuar acumulando</h2>
+
+    <div class="texto">
+      Maya pode guardar o saldo e juntar para conquistar desejos maiores ou uma premiação maior no futuro.
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalAcumular()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalFuturasEdicoes">
+  <div class="modal">
+    <h2 class="modalTitle">Futuras edições</h2>
+
+    <div class="field">
+      <label>Ideias de melhorias futuras</label>
+      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CHAVE_FUTURAS_EDICOES = "futuras_edicoes_maya_premiacao";
+const CHAVE_SALDO_MAYA = "mayaSaldoAtual";
+
+function pad2(numero){
+  return String(numero).padStart(2, "0");
+}
+
+function atualizarLinhaTempo(){
+  const agora = new Date();
+  const dias = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+  document.getElementById("linhaTempoHora").textContent =
+    `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+
+  document.getElementById("linhaTempoDia").textContent =
+    `• ${dias[agora.getDay()]}`;
+
+  document.getElementById("linhaTempoData").textContent =
+    `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
+}
+
+function formatMoney(valor){
+  const numero = Number(valor || 0);
+
+  return numero.toLocaleString("pt-BR", {
+    style:"currency",
+    currency:"BRL"
+  });
+}
+
+function obterSaldoAtual(){
+  return Number(localStorage.getItem(CHAVE_SALDO_MAYA) || 0);
+}
+
+function atualizarSaldo(){
+  const saldo = obterSaldoAtual();
+
+  document.getElementById("saldoAtual").textContent = formatMoney(saldo);
+  document.getElementById("saldoModalDinheiro").textContent = formatMoney(saldo);
+}
+
+function abrirListaDesejos(){
+  location.href = "maya-lista-de-desejos.html";
+}
+
+function abrirModalDiretrizes(){
+  document.getElementById("modalDiretrizes").classList.add("show");
+}
+
+function fecharModalDiretrizes(){
+  document.getElementById("modalDiretrizes").classList.remove("show");
+}
+
+function abrirModalPremioDinheiro(){
+  atualizarSaldo();
+  document.getElementById("modalPremioDinheiro").classList.add("show");
+}
+
+function fecharModalPremioDinheiro(){
+  document.getElementById("modalPremioDinheiro").classList.remove("show");
+}
+
+function abrirModalAcumular(){
+  document.getElementById("modalAcumular").classList.add("show");
+}
+
+function fecharModalAcumular(){
+  document.getElementById("modalAcumular").classList.remove("show");
+}
+
+function abrirModalFuturasEdicoes(){
+  document.getElementById("futurasEdicoesTexto").value =
+    localStorage.getItem(CHAVE_FUTURAS_EDICOES) || "";
+
+  document.getElementById("modalFuturasEdicoes").classList.add("show");
+}
+
+function fecharModalFuturasEdicoes(){
+  document.getElementById("modalFuturasEdicoes").classList.remove("show");
+}
+
+function salvarFuturasEdicoes(){
+  localStorage.setItem(
+    CHAVE_FUTURAS_EDICOES,
+    document.getElementById("futurasEdicoesTexto").value
+  );
+
+  fecharModalFuturasEdicoes();
+}
+
+window.addEventListener("load", () => {
+  atualizarLinhaTempo();
+  atualizarSaldo();
+  setInterval(atualizarLinhaTempo, 1000);
+});
+
+window.addEventListener("pageshow", () => {
+  atualizarLinhaTempo();
+  atualizarSaldo();
+});
+
+window.addEventListener("focus", () => {
+  atualizarLinhaTempo();
+  atualizarSaldo();
+});
+
+window.addEventListener("storage", () => {
+  atualizarSaldo();
+});
+
+function baixarCardJPEG(){
+  const modal = document.getElementById("modalDiretrizes");
+  const card = document.getElementById("cardPremiacaoDownload");
+
+  const estavaAberto = modal.classList.contains("show");
+
+  if(!estavaAberto){
+    modal.classList.add("show");
+  }
+
+  setTimeout(() => {
+    html2canvas(card, {
+      scale: 2,
+      backgroundColor: "#FFFFFF",
+      useCORS: true
+    }).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "premiacao-maya.jpg";
+      link.href = canvas.toDataURL("image/jpeg", 0.95);
+      link.click();
+
+      if(!estavaAberto){
+        modal.classList.remove("show");
+      }
+    });
+  }, 300);
+}
+</script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+</body>
+</html>

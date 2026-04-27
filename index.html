@@ -7,104 +7,207 @@
 
 <title>Jardim da Rotina</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#f4f7f1">
-<link rel="apple-touch-icon" href="icon-512.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background-image:url('margaridas.jpg');
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
+html, body{
+  height:100%;
+  margin:0;
 }
 
+body{
+  font-family:'Poppins',sans-serif;
+  background-image:url('margaridas.jpg');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:18px;
+  box-sizing:border-box;
+}
+
+/* 🔒 TELA DE SENHA */
+#telaSenha{
+  position:fixed;
+  inset:0;
+  background:#F6F7F5;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+#telaSenha .box{
+  background:white;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:260px;
+  text-align:center;
+}
+
+#telaSenha input{
+  padding:10px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-family:Poppins;
+}
+
+#telaSenha button{
+  padding:10px;
+  border:none;
+  border-radius:12px;
+  background:#5C9D5C;
+  color:white;
+  cursor:pointer;
+  font-family:Poppins;
+}
+
+#erroSenha{
+  color:red;
+  font-size:12px;
+  display:none;
+}
+
+/* APP */
 .overlay{
-background:rgba(255,255,255,0.9);
-padding:30px;
-border-radius:24px;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
-text-align:center;
-width:280px;
-display:flex;
-flex-direction:column;
-gap:10px;
+  background:rgba(255,255,255,0.9);
+  padding:30px;
+  border-radius:24px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  text-align:center;
+  width:280px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
 h1{
-color:#3d6f4c;
-font-weight:300;
-font-size:28px;
-letter-spacing:1px;
-margin:0;
-line-height:1.2;
+  color:#3d6f4c;
+  font-weight:300;
+  font-size:28px;
+  margin:0;
 }
 
 .subtitulo{
-font-size:12px;
-color:#6f8a75;
-margin-top:2px;
-line-height:1.2;
+  font-size:12px;
+  color:#6f8a75;
 }
 
 .botao{
-padding:14px;
-border-radius:16px;
-cursor:pointer;
-transition:0.2s;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
-font-size:14px;
-border:none;
-font-family:'Poppins',sans-serif;
-background:#fff8e8;
+  padding:14px;
+  border-radius:16px;
+  cursor:pointer;
+  font-size:14px;
+  border:none;
+  background:#EDE4D3;
 }
 
-.botao:hover{
-transform:scale(1.03);
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.rotinaCard{
+  width:280px;
+  background:white;
+  border-radius:24px;
+  padding:16px;
+}
+
+.rotinaBotao{
+  border:none;
+  background:#EDE4D3;
+  border-radius:16px;
+  padding:14px;
+  width:100%;
+  margin-top:8px;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
+<!-- 🔒 SENHA -->
+<div id="telaSenha">
+  <div class="box">
+    <h2>🔒 Acesso</h2>
+    <input type="password" id="senhaInput" placeholder="Digite a senha">
+    <button onclick="verificarSenha()">Entrar</button>
+    <div id="erroSenha">Senha incorreta</div>
+  </div>
+</div>
+
+<!-- 🔓 APP -->
+<div id="appConteudo" style="display:none;">
+
 <div class="overlay">
 
-<h1>Jardim da Rotina</h1>
-<div class="subtitulo">Florescendo hábitos com amor</div>
+  <h1>Jardim da Rotina</h1>
+  <div class="subtitulo">Florescendo hábitos com amor</div>
 
-<button class="botao" onclick="location.href='rotina.html'">
-🌸 Rotina
-</button>
-
-<button class="botao" onclick="location.href='agenda-menu.html'">
-📅 Agenda
-</button>
-
-<button class="botao" onclick="location.href='alimentacao.html'">
-🥗 Alimentação
-</button>
-
-<button class="botao" onclick="location.href='saude.html'">
-🩺 Saúde
-</button>
-
-<button class="botao" onclick="location.href='gabriela-criacao-artistica-projetos-sonhos.html?from=index'">
-💫 Projetos
-</button>
-
-<button class="botao" onclick="location.href='metas.html?from=index'">
-🎯 Metas
-</button>
+  <button class="botao" onclick="abrirModalRotina()">🌸 Rotina</button>
+  <button class="botao" onclick="location.href='agenda-menu.html'">📅 Agenda</button>
+  <button class="botao" onclick="location.href='alimentacao.html'">🥗 Alimentação</button>
+  <button class="botao" onclick="location.href='saude.html'">🩺 Saúde</button>
+  <button class="botao" onclick="location.href='gabriela-criacao-artistica-projetos-sonhos.html'">💫 Projetos</button>
+  <button class="botao" onclick="location.href='metas.html'">🎯 Metas</button>
 
 </div>
+
+<!-- MODAL ROTINA -->
+<div class="modalOverlay" id="modalRotina">
+  <div class="rotinaCard">
+
+    <button onclick="fecharModalRotina()">←</button>
+
+    <h3>Rotina</h3>
+
+    <button class="rotinaBotao" onclick="location.href='maya-menu.html'">🌼 Maya</button>
+    <button class="rotinaBotao" onclick="location.href='gabriela-menu.html'">🌿 Gabriela</button>
+    <button class="rotinaBotao" onclick="location.href='beth-rotina.html'">🌷 Beth</button>
+
+  </div>
+</div>
+
+</div>
+
+<script>
+const SENHA = "270318";
+
+function verificarSenha(){
+  const input = document.getElementById("senhaInput").value;
+
+  if(input === SENHA){
+    document.getElementById("telaSenha").style.display = "none";
+    document.getElementById("appConteudo").style.display = "block";
+  }else{
+    document.getElementById("erroSenha").style.display = "block";
+  }
+}
+
+function abrirModalRotina(){
+  document.getElementById("modalRotina").classList.add("show");
+}
+
+function fecharModalRotina(){
+  document.getElementById("modalRotina").classList.remove("show");
+}
+</script>
 
 </body>
 </html>

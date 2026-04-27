@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Minha Agenda</title>
+<title>Agenda da Vovó Beth</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -272,8 +272,16 @@ body{
 .eventoMesLinha{
   font-size:11px;
   color:var(--texto-principal);
-  line-height:1.35;
-  margin-top:3px;
+  line-height:1.45;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid rgba(227,229,225,0.75);
+}
+
+.eventoMesLinha.primeiroEventoMes{
+  margin-top:0;
+  padding-top:0;
+  border-top:none;
 }
 
 .eventoMesHora{
@@ -392,8 +400,8 @@ textarea{
       <button class="botao-voltar" onclick="location.href='agenda-menu.html'">←</button>
 
       <div class="topCenter">
-        <div class="titleIndex">Minha Agenda</div>
-        <div class="subtitulo">seus compromissos em um só lugar</div>
+        <div class="titleIndex">Agenda da Vovó</div>
+        <div class="subtitulo">compromissos da Beth</div>
       </div>
 
       <div class="dataTopo">
@@ -474,6 +482,22 @@ textarea{
   </div>
 </div>
 
+<div class="modalOverlay" id="modalPassatemposAgenda">
+  <div class="modal">
+    <div class="modalTitle">Passatempos Relaxantes</div>
+
+    <div style="font-size:13px; color:var(--texto-secundario); text-align:center; line-height:1.5;">
+      Escolha uma atividade antes de concluir essa tarefa.
+    </div>
+
+    <div class="modalBtns" style="flex-direction:column;">
+      <button class="save" onclick="abrirPassatemposPelaAgenda()">abrir página de passatempos</button>
+      <button class="cancel" onclick="fecharModalPassatemposAgenda()">cancelar</button>
+    </div>
+  </div>
+</div>
+
+
 <script>
 const CHAVE_FUTURAS_EDICOES_MINHA_AGENDA = "futuras_edicoes_minha_agenda";
 
@@ -489,6 +513,7 @@ let gisIniciado = false;
 let periodoAtual = "hoje";
 let dataReferenciaAtual = new Date().toDateString();
 let eventosAgendaCache = [];
+let calendarioBethId = "";
 
 function pad2(numero){
   return String(numero).padStart(2, "0");
@@ -535,7 +560,7 @@ function gisLoaded(){
 tokenClient = google.accounts.oauth2.initTokenClient({
   client_id:CLIENT_ID,
   scope:SCOPES,
-  hint:"gabrielachaves.psi@gmail.com",
+  hint:"elisabethfranco71@gmail.com",
   callback:""
 });
 
@@ -647,7 +672,13 @@ async function carregarEventos(periodo){
       showHidden:true
     });
 
-    const calendarios = calendariosResponse.result.items || [];
+const calendarios = (calendariosResponse.result.items || []).filter(calendario => {
+  return calendario.accessRole === "owner" || calendario.accessRole === "writer" || calendario.accessRole === "reader";
+});
+
+if(calendarios.length){
+  calendarioBethId = calendarios[0].id;
+}
     let todosEventos = [];
 
     for(const calendario of calendarios){
@@ -723,135 +754,117 @@ function diaSemanaHoje(){
 }
 
 function obterRotinaDoDia(){
-  const hojeSemana = diaSemanaHoje();
+  const STORAGE_BETH = "jardim_rotina_beth_v1";
 
-  const blocos = [
+  function obterStoreBeth(){
+    try{
+      return JSON.parse(localStorage.getItem(STORAGE_BETH)) || { days:{}, rotina:[] };
+    }catch(e){
+      return { days:{}, rotina:[] };
+    }
+  }
+
+  function salvarStoreBeth(store){
+    localStorage.setItem(STORAGE_BETH, JSON.stringify(store));
+  }
+
+  function chaveHojeBeth(){
+    const h = new Date();
+    return `${h.getFullYear()}-${pad2(h.getMonth()+1)}-${pad2(h.getDate())}`;
+  }
+
+  const hojeKey = chaveHojeBeth();
+  const storeBeth = obterStoreBeth();
+
+  if(!storeBeth.days) storeBeth.days = {};
+  if(!Array.isArray(storeBeth.rotina)) storeBeth.rotina = [];
+
+  if(!storeBeth.days[hojeKey]){
+    storeBeth.days[hojeKey] = {
+      done:{},
+      doneOrder:[],
+      updatedAt:null,
+      completed:false,
+      completedAt:null
+    };
+    salvarStoreBeth(storeBeth);
+  }
+
+  const estadoDia = storeBeth.days[hojeKey];
+
+  const rotinaBeth = storeBeth.rotina.length ? storeBeth.rotina : [
     {
-      bloco:"Autocuidado, Movimento e Silêncio",
-      link:"gabriela-autocuidado-movimento-silencio.html",
-      chave:"gabriela_autocuidado_movimento_silencio",
-      modo:"normal",
-      tarefas:[
-        { nome:"🤸‍♀️ Movimentar o corpo na cama", hora:"05h" },
-        { nome:"🧼 Higiene matinal — fazer xixi, raspar língua, escovar os dentes e lavar o rosto", hora:"05h" },
-        { nome:"🌿 Cuidado inicial — água morna com limão e remédio da tireoide", hora:"05h" },
-        { nome:"🚶 Caminhada de 10 a 20 min", hora:"05h30m" },
-        { nome:"💪 Calistenia de 10 a 30 min", hora:"05h30m" },
-        { nome:"🙏☀️ Yoga 3 rondas Saudação ao Sol", hora:"05h30m", dias:["2","4"] },
-        { nome:"🧘 Kriya + Meditação", hora:"06h" },
-        { nome:"🚿 Banho", hora:"06h" }
-      ]
-    },
-    {
-      bloco:"Manifestação e Criatividade",
-      link:"gabriela-manifestacao-criatividade.html",
-      chave:"gabriela_manifestacao_criatividade",
-      modo:"unico",
-      tarefas:[
-        { nome:"📝 Escrita criativa", hora:"07h" },
-        { nome:"🌿 Práticas de manifestação — leitura, afirmações do dia e visualização", hora:"07h" },
-        { nome:"🎨 Criação artística de sonhos", hora:"07h" }
-      ]
-    },
-    {
-      bloco:"Projetos e Sonhos",
-      link:"gabriela-projetos.html",
-      chave:"gabriela_projetos",
-      modo:"normal",
-      tarefas:[
-        { nome:"Trabalhar nos projetos pessoais", hora:"08h" },
-        { nome:"Criar arte", hora:"08h" },
-        { nome:"Ficar próxima da janela", hora:"08h" }
-      ]
-    },
-    {
-      bloco:"Alimentação e Preparar para Sair",
-      link:"gabriela-alimentacao-preparar-sair.html",
-      chave:"gabriela_alimentacao_preparar_sair",
-      modo:"normal",
-      tarefas:[
-        { nome:"🍽️ Preparar refeições — almoço, lanche da tarde e escola, jantar e ceia", hora:"09h" },
-        { nome:"🚿 Tomar banho", hora:"11h" },
-        { nome:"🍴 Almoçar", hora:"11h" },
-        { nome:"🪥 Escovar os dentes", hora:"11h" }
-      ]
-    },
-    {
-      bloco:"Estudo, Organização da Casa e do Dia",
-      link:"gabriela-estudo-organizacao-casa-dia.html",
-      chave:"gabriela_estudo_organizacao_casa_dia",
-      modo:"normal",
-      tarefas:[
-        { nome:"📚 Estudar", hora:"18h30m" },
-        { nome:"🏡 Organizar a casa — sala, quarto, cantinho, roupa, lixo e louça", hora:"19h30m" },
-        { nome:"🪴 Molhar plantas", hora:"19h30m" },
-        { nome:"🧊 Água no congelador", hora:"19h30m" },
-        { nome:"🎒 Arrumar roupa, bolsa ou mochila do dia seguinte", hora:"19h30m" },
-        { nome:"🧺 Organizar tarefas leves da casa", hora:"19h30m" }
-      ]
-    },
-    {
-      bloco:"Desacelerar e Autocuidado",
-      link:"gabriela-desacelerar-autocuidado.html",
-      chave:"gabriela_desacelerar_autocuidado",
-      modo:"normal",
-      tarefas:[
-        { nome:"🌙 Ritual para desacelerar — música relaxante, luzes e massagem", hora:"20h" },
-        { nome:"💧 Beber água", hora:"20h" },
-        { nome:"🚿 Tomar banho morno", hora:"20h" },
-        { nome:"🪥 Higiene noturna — escovar os dentes e raspar a língua", hora:"20h" },
-        { nome:"📱 Desligar celular, TV e tablet", hora:"20h" },
-        { nome:"🍲 Ceia da noite", hora:"20h" }
-      ]
-    },
-    {
-      bloco:"Passatempos Relaxantes",
-      link:"gabriela-passatempos.html",
-      chave:"gabriela_passatempos",
-      modo:"unico",
-      tarefas:[
-        { nome:"🧩 Quebra-cabeça", hora:"20h30" },
-        { nome:"🎨 Desenhar", hora:"20h30" },
-        { nome:"🖍️ Colorir", hora:"20h30" },
-        { nome:"📚 Ler histórias", hora:"20h30" },
-        { nome:"✂️ Atividade manual", hora:"20h30" },
-        { nome:"💬 Conversar", hora:"20h30" },
-        { nome:"🧘 Yoga Nidra", hora:"20h30" }
-      ]
+      bloco:"Rotina da Beth",
+      link:"beth-rotina.html",
+      tarefas:[]
     }
   ];
 
   let rotina = [];
 
-  blocos.forEach(bloco => {
-    const tarefasVisiveis = bloco.tarefas.filter(t => !t.dias || t.dias.includes(hojeSemana));
-const estado = lerEstadoRotina(bloco.chave, tarefasVisiveis.length);
-
-if(bloco.modo === "unico" && estado.some(item => item === true)){
-  return;
-}
-
-tarefasVisiveis.forEach((tarefa, index) => {
-      if(estado[index] === true) return;
+  rotinaBeth.forEach(bloco => {
+    (bloco.tarefas || []).forEach(tarefa => {
+      if(estadoDia.done && estadoDia.done[tarefa.id] === true) return;
 
       rotina.push({
         tipo:"rotina",
-        summary:tarefa.nome,
-        horaTexto:tarefa.hora,
-        inicio:normalizarHora(tarefa.hora),
-        bloco:bloco.bloco,
-        link:bloco.link,
-        chave:bloco.chave,
-        indice:index,
-        total:tarefasVisiveis.length,
-        modo:bloco.modo
+        summary:tarefa.nome || tarefa.text || "Tarefa da Beth",
+        horaTexto:tarefa.hora || tarefa.time || "",
+        inicio:normalizarHora(tarefa.hora || tarefa.time || "00h00m"),
+        bloco:bloco.bloco || "Rotina da Beth",
+        link:bloco.link || "beth-rotina.html",
+        chave:"beth_rotina",
+        indice:tarefa.id,
+        total:(bloco.tarefas || []).length,
+        modo:"beth"
       });
     });
   });
 
   return rotina;
 }
+
 function concluirRotinaPelaAgenda(chaveBase, indice, total, modo){
+  if(modo === "beth"){
+    const STORAGE_BETH = "jardim_rotina_beth_v1";
+
+    function obterStoreBeth(){
+      try{
+        return JSON.parse(localStorage.getItem(STORAGE_BETH)) || { days:{}, rotina:[] };
+      }catch(e){
+        return { days:{}, rotina:[] };
+      }
+    }
+
+    const hoje = new Date();
+    const hojeKey = `${hoje.getFullYear()}-${pad2(hoje.getMonth()+1)}-${pad2(hoje.getDate())}`;
+    const storeBeth = obterStoreBeth();
+
+    if(!storeBeth.days) storeBeth.days = {};
+    if(!storeBeth.days[hojeKey]){
+      storeBeth.days[hojeKey] = {
+        done:{},
+        doneOrder:[],
+        updatedAt:null,
+        completed:false,
+        completedAt:null
+      };
+    }
+
+    storeBeth.days[hojeKey].done[indice] = true;
+
+    if(!storeBeth.days[hojeKey].doneOrder.includes(indice)){
+      storeBeth.days[hojeKey].doneOrder.push(indice);
+    }
+
+    storeBeth.days[hojeKey].updatedAt = Date.now();
+
+    localStorage.setItem(STORAGE_BETH, JSON.stringify(storeBeth));
+
+    renderizarEventos(eventosAgendaCache, "hoje");
+    return;
+  }
+
   let estado = lerEstadoRotina(chaveBase, total);
 
   if(modo === "unico"){
@@ -871,13 +884,14 @@ function agruparRotinaPorHorario(rotina){
   const grupos = {};
 
   rotina.forEach(item => {
-    const chave = `${item.horaTexto}_${item.bloco}`;
+    const horaBase = String(item.horaTexto || "").split("h")[0].padStart(2, "0");
+    const chave = `${horaBase}h_${item.bloco}`;
 
     if(!grupos[chave]){
       grupos[chave] = {
         tipo:"rotinaGrupo",
-        horaTexto:item.horaTexto,
-        inicio:item.inicio,
+        horaTexto:`${horaBase}h`,
+        inicio:new Date(item.inicio.getFullYear(), item.inicio.getMonth(), item.inicio.getDate(), Number(horaBase), 0, 0),
         bloco:item.bloco,
         link:item.link,
         tarefas:[]
@@ -908,6 +922,12 @@ botao.onclick = () => {
   if(tarefa.summary.includes("Criação artística de sonhos")){
     fecharModalGrupoRotina();
     abrirModalCriacaoArtisticaAgenda(tarefa);
+    return;
+  }
+
+  if(tarefa.indice === "n4" || tarefa.summary.includes("Passatempos Relaxantes")){
+    fecharModalGrupoRotina();
+    abrirModalPassatemposAgenda(tarefa);
     return;
   }
 
@@ -944,6 +964,23 @@ function fecharModalCriacaoArtisticaAgenda(){
   document.getElementById("modalCriacaoArtisticaAgenda").classList.remove("show");
 }
 
+let tarefaPassatemposAgenda = null;
+
+function abrirModalPassatemposAgenda(tarefa){
+  tarefaPassatemposAgenda = tarefa;
+  document.getElementById("modalPassatemposAgenda").classList.add("show");
+}
+
+function fecharModalPassatemposAgenda(){
+  tarefaPassatemposAgenda = null;
+  document.getElementById("modalPassatemposAgenda").classList.remove("show");
+}
+
+function abrirPassatemposPelaAgenda(){
+  localStorage.setItem("voltar_maya_passatempos", "gabriela-minha-agenda.html");
+  window.location.href = "maya-passatempos.html";
+}
+
 function abrirProjetosPelaAgenda(){
   localStorage.setItem("voltar_projetos_gabriela", "gabriela-minha-agenda.html");
   window.location.href = "gabriela-criacao-artistica-projetos-sonhos.html";
@@ -962,12 +999,30 @@ function concluirCriacaoArtisticaPelaAgenda(){
   fecharModalCriacaoArtisticaAgenda();
 }
 
+function limparEnderecoAteBairro(local){
+  const texto = String(local || "").trim();
+  if(!texto) return "";
+
+  let partes = texto
+    .split(",")
+    .map(parte => parte.trim())
+    .filter(Boolean)
+    .filter(parte => !/\b(brasil|brazil)\b/i.test(parte))
+    .filter(parte => !/\b\d{5}-?\d{3}\b/.test(parte));
+
+  if(partes.length >= 2){
+    return partes.slice(0, 2).join(", ");
+  }
+
+  return partes[0] || texto;
+}
+
 function converterEventoAgenda(evento){
   const inicio = new Date(evento.start.dateTime || evento.start.date);
   return {
     tipo:"agenda",
     summary:evento.summary || "Sem título",
-    location:evento.location || "",
+    location:limparEnderecoAteBairro(evento.location || ""),
     horaTexto:formatarHoraEvento(evento),
     inicio,
     eventoOriginal:evento
@@ -1003,7 +1058,7 @@ const itens = agenda.concat(rotinaAgrupada).sort((a,b) => a.inicio - b.inicio);
     marcarProximoCompromissoDoDia(itens, periodo);
 
     if(!itens.length){
-      lista.innerHTML = `<div class="listaVazia">Nenhum compromisso encontrado.</div>`;
+      lista.innerHTML = `<div class="listaVazia">🌿 Agenda tranquila por aqui.</div>`;
       return;
     }
 
@@ -1023,7 +1078,7 @@ if(item.tipo === "rotinaGrupo"){
 
   div.onclick = () => abrirModalGrupoRotina(item);
 
-  const nomes = item.tarefas.map(t => t.summary).join("<br>");
+  const nomes = item.tarefas.map(t => t.summary).join(" <br> ");
 
   div.innerHTML = `
     <div class="eventoHora">${item.horaTexto}</div>
@@ -1046,7 +1101,7 @@ if(item.tipo === "rotinaGrupo"){
   }
 
   if(!eventosAgenda.length){
-    lista.innerHTML = `<div class="listaVazia">Nenhum compromisso encontrado.</div>`;
+    lista.innerHTML = `<div class="listaVazia">🌿 Agenda tranquila por aqui.</div>`;
     return;
   }
 
@@ -1065,13 +1120,14 @@ if(item.tipo === "rotinaGrupo"){
 
     let html = `<div class="diaMesTitulo">${data}</div>`;
 
-    eventosDia.forEach(evento => {
-      html += `
-        <div class="eventoMesLinha">
-          <span class="eventoMesHora">${formatarHoraEvento(evento)}</span> • ${evento.summary || "Sem título"}
-        </div>
-      `;
-    });
+eventosDia.forEach((evento, index) => {
+  html += `
+    <div class="eventoMesLinha ${index === 0 ? 'primeiroEventoMes' : ''}">
+      <span class="eventoMesHora">${formatarHoraEvento(evento)}</span> • ${evento.summary || "Sem título"}
+      ${evento.location ? `<div class="eventoLocal">${limparEnderecoAteBairro(evento.location)}</div>` : ""}
+    </div>
+  `;
+});
 
     grupo.innerHTML = html;
     lista.appendChild(grupo);
@@ -1083,12 +1139,26 @@ function gerarPDF(){
 }
 
 function abrirAgendaGeral(){
-  window.open("https://calendar.google.com/calendar/u/0/r","_blank");
+  if(calendarioBethId){
+    window.open(
+      `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(calendarioBethId)}`,
+      "_blank"
+    );
+    return;
+  }
+
+  window.open("https://calendar.google.com/calendar/r","_blank");
 }
 
 function abrirModalFuturasEdicoes(){
-  document.getElementById("futurasEdicoesTexto").value =
-    localStorage.getItem(CHAVE_FUTURAS_EDICOES_MINHA_AGENDA) || "";
+const textoSalvo =
+  localStorage.getItem(CHAVE_FUTURAS_EDICOES_MINHA_AGENDA) ||
+  localStorage.getItem("futuras_edicoes_agenda_vovo_beth") ||
+  localStorage.getItem("futuras_edicoes_minha_agenda") ||
+  localStorage.getItem("futuras_edicoes_agenda") ||
+  "";
+
+document.getElementById("futurasEdicoesTexto").value = textoSalvo;
   document.getElementById("modalFuturasEdicoes").classList.add("show");
 }
 
