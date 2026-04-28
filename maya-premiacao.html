@@ -149,6 +149,21 @@ body{
   background:#F2F7F1;
 }
 
+.saldoCardInterno{
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:12px;
+}
+
+.saldoMedalhaBox{
+  background:#FFF8E1;
+  border:1.5px solid #EADCA6;
+}
+
+.saldoMedalhaBox .saldoValor{
+  color:#C69214;
+}
+
 .saldoLabel{
   font-size:12px;
   color:var(--texto-secundario);
@@ -216,6 +231,62 @@ body{
   background:#FFFDF5;
   border:1px solid #F1E7BA;
   color:#6B5A2A;
+}
+
+.resumoGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.resumoItem{
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:10px 8px;
+  text-align:center;
+}
+
+.resumoNumero{
+  display:block;
+  font-size:18px;
+  font-weight:600;
+  color:var(--verde-texto);
+  line-height:1.2;
+}
+
+.resumoLabel{
+  display:block;
+  font-size:10.5px;
+  color:var(--texto-secundario);
+  margin-top:3px;
+}
+
+.missaoBox{
+  background:#F3F7FF;
+  border-color:#DDE7FF;
+}
+
+.conquistaItem{
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:10px;
+  font-size:12px;
+  line-height:1.45;
+  color:var(--texto-principal);
+  text-align:center;
+}
+
+.historicoItem{
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:10px;
+  font-size:11.5px;
+  line-height:1.45;
+  color:var(--texto-secundario);
+  text-align:center;
 }
 
 .footerMiniAction{
@@ -290,7 +361,7 @@ body{
   font-weight:500;
 }
 
-textarea{
+input, textarea{
   padding:12px 14px;
   border-radius:12px;
   border:1px solid var(--borda);
@@ -298,11 +369,20 @@ textarea{
   font-family:var(--fonte);
   box-sizing:border-box;
   width:100%;
+}
+
+input{
+  text-align:center;
+}
+
+textarea{
   height:220px;
   resize:none;
 }
 
+input:focus,
 textarea:focus{
+  outline:none;
   border-color:var(--verde-escuro);
   box-shadow:0 0 0 3px rgba(127,183,126,0.12);
 }
@@ -331,7 +411,6 @@ textarea:focus{
   background:var(--verde-escuro);
   color:white;
 }
-
 
 .diretrizCards{
   display:flex;
@@ -436,19 +515,38 @@ textarea:focus{
       </div>
     </div>
 
-    <div class="box saldoBox">
-      <div class="saldoLabel">Saldo disponível</div>
-      <div class="saldoValor" id="saldoAtual">R$ 0,00</div>
-      <div class="miniTexto">Esse saldo vem da página Minha Pontuação.</div>
-    </div>
+<div class="box">
+  <div class="boxTitle">💰 Saldo Disponível para Troca</div>
+
+  <div class="saldoBox saldoCardInterno">
+    <div class="saldoLabel">Tarefas e Regras</div>
+    <div class="saldoValor" id="saldoAtual">R$ 0,00</div>
+  </div>
+
+  <div class="saldoBox saldoCardInterno saldoMedalhaBox">
+    <div class="saldoLabel">Medalha e Regra</div>
+    <div class="saldoValor" id="saldoMedalha">R$ 0,00</div>
+  </div>
+</div>
+
+    <div class="box">
+  <div class="boxTitle">🏅 Registro de Medalhas</div>
+
+  <div class="conquistaItem">
+    <strong>Medalha Play Conquistada:</strong><br>
+    🌟 Primeira regra respeitada
+  </div>
+
+  <div class="conquistaItem">
+    <strong>Prêmio:</strong><br>
+    💰 <span id="premioMedalha">R$ 0,00</span> em moedas de jogo de celular
+  </div>
+</div>
 
     <div class="box">
       <div class="boxTitle">🌟 Como Maya pode usar o saldo</div>
       <div class="texto">
-        Maya pode trocar o saldo por desejos da lista de desejos ou por premiação em dinheiro.
-      </div>
-      <div class="miniTexto">
-        Ela também pode escolher não gastar agora e continuar acumulando para conquistar algo maior.
+        As trocas acontecem entre os dias 3 e 7 do mês. Quando estivermos nesse período vamos te avisar para você realizar a sua escolha nos botões abaixo.
       </div>
     </div>
 
@@ -457,27 +555,40 @@ textarea:focus{
 
       <div class="opcoes">
         <button class="opcaoBtn" onclick="abrirListaDesejos()">
-          💫 Abrir Lista de Desejos
-          <span class="opcaoSub">Ver desejos cadastrados e escolher uma conquista futura</span>
+          💫 Ver Minha Lista de Desejos
+          <span class="opcaoSub">Ver desejos cadastrados para escolher</span>
         </button>
 
         <button class="opcaoBtn" onclick="abrirModalPremioDinheiro()">
           💰 Premiação em dinheiro
-          <span class="opcaoSub">Registrar ideia de troca por dinheiro</span>
+          <span class="opcaoSub">Escolher um valor para receber</span>
         </button>
 
         <button class="opcaoBtn" onclick="abrirModalAcumular()">
-          🐷 Continuar acumulando
+          🐷 Continuar juntando
           <span class="opcaoSub">Guardar o saldo para uma recompensa maior</span>
         </button>
       </div>
     </div>
 
-    <div class="box aviso">
-      <div class="boxTitle" style="color:#8C7232;">⚠️ Sistema em desenvolvimento</div>
-      <div class="texto" style="color:#6B5A2A;">
-        A troca automática por desejo ou dinheiro ainda será desenvolvida. Por enquanto, esta página organiza o saldo e as regras da premiação.
+    <div class="box missaoBox">
+      <div class="boxTitle">🚀 Missão da Maya</div>
+      <div class="texto" id="textoMissao">
+        Próximo destino: Lua 🌙
       </div>
+      <div class="miniTexto">
+        Cada regra respeitada ajuda a Maya a avançar na sua missão especial.
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="boxTitle">🏅 Coleção de Conquistas</div>
+      <div id="listaConquistas" class="diretrizCards"></div>
+    </div>
+
+    <div class="box">
+      <div class="boxTitle">📚 Histórico da Premiação</div>
+      <div id="historicoPremiacao" class="diretrizCards"></div>
     </div>
 
     <div class="footerMiniAction">
@@ -540,39 +651,76 @@ textarea:focus{
   </div>
 </div>
 
+<div class="modalOverlay" id="modalForaPeriodo">
+  <div class="modal">
+    <h2 class="modalTitle">Ainda não chegou o dia 💛</h2>
+
+    <div class="texto">
+      Na regra, a sua escolha pode ser feita entre os dias 03 e 07 de cada mês.
+      Estarei aqui te aguardando nesse período para trocar suas moedas por desejos,
+      prêmio em dinheiro ou juntar caso deseje. 🌟💰✨
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalForaPeriodo()">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <div class="modalOverlay" id="modalPremioDinheiro">
   <div class="modal">
     <h2 class="modalTitle">Premiação em dinheiro</h2>
 
-    <div class="texto">
-      O saldo atual pode ser usado como referência para uma premiação em dinheiro.
-    </div>
-
-    <div class="box saldoBox">
-      <div class="saldoLabel">Saldo disponível</div>
-      <div class="saldoValor" id="saldoModalDinheiro">R$ 0,00</div>
+    <div class="texto" id="textoPremioDinheiro">
+      Que bom te ver por aqui Maya!
     </div>
 
     <div class="miniTexto">
-      Depois vamos criar o sistema para registrar trocas, descontar saldo e guardar histórico.
+      Esse valor entra na sua conta em até 2 dias.
+    </div>
+
+    <div class="field">
+      <label>Valor que deseja retirar</label>
+      <input id="valorRetirada" type="number" min="0" step="0.01" placeholder="R$ 0,00" oninput="atualizarPreviaRetirada()">
+    </div>
+
+    <div class="diretrizDestaque" id="previsaoSaldo">
+      Se você retirar esse valor, o seu saldo será R$ 0,00.
     </div>
 
     <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalPremioDinheiro()">Fechar</button>
+      <button class="save" onclick="confirmarRetiradaDinheiro()">Confirmar</button>
+      <button class="cancel" onclick="fecharModalPremioDinheiro()">Cancelar</button>
     </div>
   </div>
 </div>
 
 <div class="modalOverlay" id="modalAcumular">
   <div class="modal">
-    <h2 class="modalTitle">Continuar acumulando</h2>
+    <h2 class="modalTitle">Continuar juntando 🌙</h2>
 
     <div class="texto">
-      Maya pode guardar o saldo e juntar para conquistar desejos maiores ou uma premiação maior no futuro.
+      Opa Maya! Estou vendo que você tem grandes sonhos para realizar hein!
+      Você confirma que deseja continuar juntando as moedas?
     </div>
 
     <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalAcumular()">Fechar</button>
+      <button class="save" onclick="confirmarContinuarJuntando()">Claro!</button>
+      <button class="cancel" onclick="fecharModalAcumular()">Ainda vou pensar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalMensagemFinal">
+  <div class="modal">
+    <h2 class="modalTitle" id="tituloMensagemFinal">Maravilha! 💫</h2>
+
+    <div class="texto" id="textoMensagemFinal">
+      Voltamos a nos ver em breve.
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalMensagemFinal()">Fechar</button>
     </div>
   </div>
 </div>
@@ -595,7 +743,14 @@ textarea:focus{
 
 <script>
 const CHAVE_FUTURAS_EDICOES = "futuras_edicoes_maya_premiacao";
+
 const CHAVE_SALDO_MAYA = "mayaSaldoAtual";
+const CHAVE_PONTOS_MAYA = "mayaTotalPontos";
+const CHAVE_REGRAS_SIM = "mayaRegrasRespeitadas";
+const CHAVE_REGRAS_NAO = "mayaRegrasNaoRespeitadas";
+
+const CHAVE_HISTORICO_PREMIACAO = "mayaHistoricoPremiacao";
+const CHAVE_RETIRADAS_PREMIACAO = "mayaRetiradasPremiacao";
 
 function pad2(numero){
   return String(numero).padStart(2, "0");
@@ -624,18 +779,176 @@ function formatMoney(valor){
   });
 }
 
+function obterNumero(chave){
+  const valor = Number(localStorage.getItem(chave) || 0);
+  return isNaN(valor) ? 0 : valor;
+}
+
+function salvarNumero(chave, valor){
+  localStorage.setItem(chave, Number(valor || 0).toFixed(2));
+}
+
 function obterSaldoAtual(){
-  return Number(localStorage.getItem(CHAVE_SALDO_MAYA) || 0);
+  return obterNumero(CHAVE_SALDO_MAYA);
+}
+
+function periodoTrocaAberto(){
+  const hoje = new Date();
+  const dia = hoje.getDate();
+  return dia >= 3 && dia <= 7;
 }
 
 function atualizarSaldo(){
   const saldo = obterSaldoAtual();
+  const pontos = obterNumero(CHAVE_PONTOS_MAYA);
+  const regrasSim = obterNumero(CHAVE_REGRAS_SIM);
+  const regrasNao = obterNumero(CHAVE_REGRAS_NAO);
 
   document.getElementById("saldoAtual").textContent = formatMoney(saldo);
-  document.getElementById("saldoModalDinheiro").textContent = formatMoney(saldo);
+  document.getElementById("saldoMedalha").textContent = formatMoney(saldo);
+  document.getElementById("premioMedalha").textContent = formatMoney(saldo);
+  document.getElementById("totalPontos").textContent = Math.round(pontos);
+  document.getElementById("totalMoedas").textContent = formatMoney(saldo);
+  document.getElementById("regrasSim").textContent = Math.round(regrasSim);
+  document.getElementById("regrasNao").textContent = Math.round(regrasNao);
+
+  atualizarMissao(regrasSim);
+  atualizarConquistas(regrasSim, regrasNao, pontos);
+  atualizarHistoricoPremiacao();
+}
+
+function atualizarMissao(regrasSim){
+  let texto = "Próximo destino: Lua 🌙";
+
+  if(regrasSim >= 10){
+    texto = "Você já saiu da Terra! Próximo destino: Lua 🌙";
+  }
+
+  if(regrasSim >= 20){
+    texto = "Missão linda! Agora Maya está indo para Marte 🚀";
+  }
+
+  if(regrasSim >= 40){
+    texto = "Uau! Maya virou uma exploradora das estrelas ⭐";
+  }
+
+  if(regrasSim >= 60){
+    texto = "Missão especial: galáxia dos grandes sonhos 🌌";
+  }
+
+  document.getElementById("textoMissao").textContent = texto;
+}
+
+function atualizarConquistas(regrasSim, regrasNao, pontos){
+  const area = document.getElementById("listaConquistas");
+  area.innerHTML = "";
+
+  const conquistas = [];
+
+  if(regrasSim >= 1){
+    conquistas.push("🏅 Primeira regra respeitada");
+  }
+
+  if(regrasSim >= 10){
+    conquistas.push("🌟 10 regras respeitadas");
+  }
+
+  if(regrasSim >= 20){
+    conquistas.push("🚀 Exploradora da rotina");
+  }
+
+  if(regrasSim >= 40){
+    conquistas.push("🌙 Missão especial da Maya");
+  }
+
+  if(pontos >= 50){
+    conquistas.push("💎 Guardiã dos pontos");
+  }
+
+  if(regrasNao === 0 && regrasSim > 0){
+    conquistas.push("✨ Caminho lindo nas regras");
+  }
+
+  if(conquistas.length === 0){
+    area.innerHTML = `
+      <div class="conquistaItem">
+        Ainda sem medalha por aqui. Continue juntando pontos e respeitando as regras para desbloquear conquistas 💛
+      </div>
+    `;
+    return;
+  }
+
+  conquistas.forEach(conquista => {
+    const div = document.createElement("div");
+    div.className = "conquistaItem";
+    div.textContent = conquista;
+    area.appendChild(div);
+  });
+}
+
+function obterHistoricoPremiacao(){
+  return JSON.parse(localStorage.getItem(CHAVE_HISTORICO_PREMIACAO) || "[]");
+}
+
+function salvarHistoricoPremiacao(tipo, descricao){
+  const historico = obterHistoricoPremiacao();
+
+  historico.push({
+    tipo,
+    descricao,
+    data:new Date().toLocaleDateString("pt-BR")
+  });
+
+  localStorage.setItem(CHAVE_HISTORICO_PREMIACAO, JSON.stringify(historico));
+  atualizarHistoricoPremiacao();
+}
+
+function atualizarHistoricoPremiacao(){
+  const area = document.getElementById("historicoPremiacao");
+  const historico = obterHistoricoPremiacao();
+
+  area.innerHTML = "";
+
+  if(historico.length === 0){
+    area.innerHTML = `
+      <div class="historicoItem">
+        Ainda não há registros de premiação.
+      </div>
+    `;
+    return;
+  }
+
+  historico.slice().reverse().forEach(item => {
+    const div = document.createElement("div");
+    div.className = "historicoItem";
+    div.innerHTML = `
+      <strong>${item.tipo}</strong><br>
+      ${item.data}<br>
+      ${item.descricao}
+    `;
+    area.appendChild(div);
+  });
+}
+
+function abrirModalForaPeriodo(){
+  document.getElementById("modalForaPeriodo").classList.add("show");
+}
+
+function fecharModalForaPeriodo(){
+  document.getElementById("modalForaPeriodo").classList.remove("show");
+}
+
+function podeUsarTroca(){
+  if(!periodoTrocaAberto()){
+    abrirModalForaPeriodo();
+    return false;
+  }
+
+  return true;
 }
 
 function abrirListaDesejos(){
+  if(!podeUsarTroca()) return;
   location.href = "maya-lista-de-desejos.html";
 }
 
@@ -648,7 +961,17 @@ function fecharModalDiretrizes(){
 }
 
 function abrirModalPremioDinheiro(){
-  atualizarSaldo();
+  if(!podeUsarTroca()) return;
+
+  const saldo = obterSaldoAtual();
+
+  document.getElementById("valorRetirada").value = "";
+  document.getElementById("textoPremioDinheiro").innerHTML =
+    `Que bom te ver por aqui Maya! Você tem <strong>${formatMoney(saldo)}</strong>, quanto você deseja retirar desse valor para você?`;
+
+  document.getElementById("previsaoSaldo").textContent =
+    `Se você retirar esse valor, o seu saldo será ${formatMoney(saldo)}.`;
+
   document.getElementById("modalPremioDinheiro").classList.add("show");
 }
 
@@ -656,12 +979,92 @@ function fecharModalPremioDinheiro(){
   document.getElementById("modalPremioDinheiro").classList.remove("show");
 }
 
+function atualizarPreviaRetirada(){
+  const saldo = obterSaldoAtual();
+  const valor = Number(document.getElementById("valorRetirada").value || 0);
+  const novoSaldo = Math.max(0, saldo - valor);
+
+  document.getElementById("previsaoSaldo").textContent =
+    `Se você retirar esse valor, o seu saldo será ${formatMoney(novoSaldo)}.`;
+}
+
+function confirmarRetiradaDinheiro(){
+  const saldo = obterSaldoAtual();
+  const valor = Number(document.getElementById("valorRetirada").value || 0);
+
+  if(valor <= 0){
+    mostrarMensagemFinal(
+      "Valor não informado 💛",
+      "Digite o valor que você deseja retirar para continuar."
+    );
+    return;
+  }
+
+  if(valor > saldo){
+    mostrarMensagemFinal(
+      "Ops, Maya 💛",
+      "Esse valor é maior do que o seu saldo disponível."
+    );
+    return;
+  }
+
+  const novoSaldo = saldo - valor;
+
+  salvarNumero(CHAVE_SALDO_MAYA, novoSaldo);
+
+  const retiradas = JSON.parse(localStorage.getItem(CHAVE_RETIRADAS_PREMIACAO) || "[]");
+  retiradas.push({
+    data:new Date().toLocaleDateString("pt-BR"),
+    valor,
+    saldoDepois:novoSaldo
+  });
+  localStorage.setItem(CHAVE_RETIRADAS_PREMIACAO, JSON.stringify(retiradas));
+
+  salvarHistoricoPremiacao(
+    "💰 Premiação em dinheiro",
+    `Maya retirou ${formatMoney(valor)}. Saldo depois da retirada: ${formatMoney(novoSaldo)}.`
+  );
+
+  fecharModalPremioDinheiro();
+  atualizarSaldo();
+
+  mostrarMensagemFinal(
+    "Combinado, Maya! 💰✨",
+    `Sua retirada de ${formatMoney(valor)} foi registrada. Esse valor entra na sua conta em até 2 dias.`
+  );
+}
+
 function abrirModalAcumular(){
+  if(!podeUsarTroca()) return;
   document.getElementById("modalAcumular").classList.add("show");
 }
 
 function fecharModalAcumular(){
   document.getElementById("modalAcumular").classList.remove("show");
+}
+
+function confirmarContinuarJuntando(){
+  salvarHistoricoPremiacao(
+    "🐷 Continuou juntando",
+    "Maya escolheu continuar juntando suas moedas para realizar sonhos maiores."
+  );
+
+  fecharModalAcumular();
+
+  mostrarMensagemFinal(
+    "Maravilha! 💫",
+    "Voltamos a nos ver em breve."
+  );
+}
+
+function mostrarMensagemFinal(titulo, texto){
+  document.getElementById("tituloMensagemFinal").textContent = titulo;
+  document.getElementById("textoMensagemFinal").textContent = texto;
+  document.getElementById("modalMensagemFinal").classList.add("show");
+}
+
+function fecharModalMensagemFinal(){
+  document.getElementById("modalMensagemFinal").classList.remove("show");
 }
 
 function abrirModalFuturasEdicoes(){
