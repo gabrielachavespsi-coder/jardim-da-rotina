@@ -35,7 +35,16 @@ body{font-family:var(--fonte);background:var(--fundo);color:var(--texto-principa
 
 .boxTitle{font-size:14px;color:var(--verde-texto);text-align:center;margin-bottom:10px;font-weight:500;}
 .resumoPontuacaoBox{background:linear-gradient(180deg,#F8FAF7 0%,#FFFFFF 100%);}
-.resumoHoje{background:#FFFFFF;border:1px solid var(--borda);box-shadow:0 2px 6px rgba(0,0,0,0.03);border-radius:16px;padding:12px 10px;margin-bottom:10px;text-align:center;}
+.resumoHoje{
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  box-shadow:0 2px 6px rgba(0,0,0,0.03);
+  border-radius:16px;
+  padding:12px 10px;
+  margin-top:10px;   /* 👈 ADICIONE ISSO */
+  margin-bottom:10px;
+  text-align:center;
+}
 .resumoHojeDuasColunas{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center;}
 .resumoColuna{text-align:center;}.resultadoDiaColuna{border-left:1px solid #D9EBD6;padding-left:10px;}
 .resumoLabel{
@@ -115,6 +124,12 @@ body{font-family:var(--fonte);background:var(--fundo);color:var(--texto-principa
   line-height:1.5;
 }
 
+.linhaBotoes{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+}
+
 .desafiosBox{
   margin-top:12px;
   background:#EEF6FF;
@@ -154,6 +169,10 @@ body{font-family:var(--fonte);background:var(--fundo);color:var(--texto-principa
 
 <div class="box resumoPontuacaoBox">
   <div class="boxTitle">🎯 Resumo da pontuação de Tarefas e Regras</div>
+    <div class="box hero saldoAmarelo">
+  <div class="heroTitle">💰 Saldo Total Acumulado de Tarefas até Hoje 💰</div>
+  <div class="heroMoney" id="todayMoneyBig">R$ 0,00</div>
+</div>
 
   <div class="resumoHoje resumoHojeDuasColunas">
     <div class="resumoColuna">
@@ -183,14 +202,17 @@ body{font-family:var(--fonte);background:var(--fundo);color:var(--texto-principa
     <div class="resumoValor" id="saldoAnteriorResumo">R$ 0,00</div>
   </div>
 </div>
-  <div class="box hero saldoAmarelo">
-  <div class="heroTitle">💰 Saldo Total Acumulado de Tarefas até Hoje 💰</div>
-  <div class="heroMoney" id="todayMoneyBig">R$ 0,00</div>
-</div>
 </div>
 
 <div class="box resumoPontuacaoBox">
   <div class="boxTitle">🏅 Resumo da pontuação Medalhas e Regras</div>
+  <div class="box hero saldoAmarelo resultadoMedalhasBox">
+  <div class="heroTitle">🏆 Resultado da Conquista de Medalhas 🏆</div>
+  <div class="heroMoney" id="resultadoMedalhaResumo">R$ 0,00</div>
+  <div class="resultadoMedalhaDetalhe" id="resultadoMedalhaDetalhe">
+    🌱 Continue respeitando as regras para conquistar sua primeira medalha!
+  </div>
+</div>
 
 <!-- CARD 1: Conquista -->
 <div class="medalhasHojeBox">
@@ -217,19 +239,15 @@ body{font-family:var(--fonte);background:var(--fundo);color:var(--texto-principa
     ...
   </div>
 </div>
-<div class="box hero saldoAmarelo resultadoMedalhasBox">
-  <div class="heroTitle">🏆 Resultado da Conquista de Medalhas</div>
-  <div class="heroMoney" id="resultadoMedalhaResumo">R$ 0,00</div>
-  <div class="resultadoMedalhaDetalhe" id="resultadoMedalhaDetalhe">
-    🌱 Continue respeitando as regras para conquistar sua primeira medalha!
-  </div>
-</div>
 
-</div>
-      <div class="alertaRegra"><div class="alertaTitulo">⚠️ Regra importante</div><div class="alertaTexto">Se você não segue alguma regra,<br>perde metade das moedinhas do dia 💛</div><div class="alertaMini">No dia seguinte você pode tentar fazer melhor ✨</div></div>
+      <div class="alertaRegra">
+        <div class="alertaTitulo">⚠️ Regra importante</div>
+        <div class="alertaTexto">Se você não segue alguma regra,<br>perde metade das moedinhas do dia 💛</div>
+        <div class="alertaMini">No dia seguinte você pode tentar fazer melhor ✨</div>
+      </div>
     </div>
 
-      <div class="desafiosBox">
+    <div class="desafiosBox">
   <div class="desafiosTitulo">🚀 Próximos Desafios</div>
 
   <div class="desafioItem">
@@ -238,12 +256,19 @@ body{font-family:var(--fonte);background:var(--fundo);color:var(--texto-principa
 </div>
 
 <div class="footerMiniAction">
-        <button class="futureBtn" onclick="abrirModalDiretrizes()">Como ganhar pontos 💰</button>
-        <button class="futureBtn" onclick="baixarCardJPEG()">📥 baixar card</button>
-        <button class="futureBtn" onclick="abrirModalHistorico()">Histórico</button>
-        <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
-      </div>
-    </div>
+
+  <div class="linhaBotoes">
+    <button class="futureBtn" onclick="abrirModalDiretrizes()">Como ganhar pontos 💰</button>
+    <button class="futureBtn" onclick="baixarCardJPEG()">📥 baixar card</button>
+  </div>
+
+  <div class="linhaBotoes">
+    <button class="futureBtn" onclick="abrirModalHistorico()">Histórico</button>
+    <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+  </div>
+
+</div>
+
   </div>
 </div>
 
@@ -374,7 +399,6 @@ let detalheMedalha = "";
 if(medalhas === 0){
   totalResultadoMedalha = 0;
 
-  detalheMedalha = "🌱 Continue respeitando as regras para conquistar sua primeira medalha!";
 }
 
 else if(medalhas < 6){
@@ -456,6 +480,63 @@ function fecharModalFuturasEdicoes(){document.getElementById("modalFuturasEdicoe
 function salvarFuturasEdicoes(){localStorage.setItem(CHAVE_FUTURAS_EDICOES_MAYA_PONTUACAO,document.getElementById("futurasEdicoesTexto").value);fecharModalFuturasEdicoes();}
 window.addEventListener("load",()=>{atualizarLinhaTempo();render();setInterval(atualizarLinhaTempo,1000);});window.addEventListener("pageshow",()=>{atualizarLinhaTempo();render();});window.addEventListener("focus",()=>{atualizarLinhaTempo();render();});window.addEventListener("storage",()=>{render();});
 function baixarCardJPEG(){const modal=document.getElementById("modalDiretrizes");const card=document.getElementById("cardDownload");const estavaAberto=modal.classList.contains("show");if(!estavaAberto)modal.classList.add("show");setTimeout(()=>{html2canvas(card,{scale:2,backgroundColor:"#FFFFFF",useCORS:true}).then(canvas=>{const link=document.createElement("a");link.download="pontuacao-maya.jpg";link.href=canvas.toDataURL("image/jpeg",0.95);link.click();if(!estavaAberto)modal.classList.remove("show");});},300);}
+function exportarBackupMaya(){
+  const dados = {};
+
+  for(let i = 0; i < localStorage.length; i++){
+    const chave = localStorage.key(i);
+    dados[chave] = localStorage.getItem(chave);
+  }
+
+  const arquivo = new Blob(
+    [JSON.stringify(dados, null, 2)],
+    { type: "application/json" }
+  );
+
+  const link = document.createElement("a");
+  const data = new Date().toISOString().slice(0,10);
+
+  link.href = URL.createObjectURL(arquivo);
+  link.download = `backup-maya-${data}.json`;
+  link.click();
+
+  URL.revokeObjectURL(link.href);
+}
+
+function abrirImportacaoBackup(){
+  document.getElementById("arquivoBackupMaya").click();
+}
+
+function importarBackupMaya(event){
+  const arquivo = event.target.files[0];
+
+  if(!arquivo) return;
+
+  const leitor = new FileReader();
+
+  leitor.onload = function(e){
+    try{
+      const dados = JSON.parse(e.target.result);
+
+Object.keys(dados).forEach(chave => {
+
+  // 👉 só importa dados da Maya
+  if(chave.includes("maya")){
+    localStorage.setItem(chave, dados[chave]);
+  }
+
+});
+
+      alert("Dados da Maya importados com sucesso! 💛");
+
+      location.reload();
+    }catch(erro){
+      alert("Não consegui importar esse arquivo. Verifique se é o backup correto.");
+    }
+  };
+
+  leitor.readAsText(arquivo);
+}
 </script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>

@@ -28,7 +28,6 @@ body{
   box-sizing:border-box;
 }
 
-/* 🔒 TELA DE SENHA */
 #telaSenha{
   position:fixed;
   inset:0;
@@ -39,11 +38,11 @@ body{
   z-index:9999;
 }
 
-#telaSenha .box{
+.senhaBox{
   background:white;
   padding:24px;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  border-radius:22px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.12);
   display:flex;
   flex-direction:column;
   gap:12px;
@@ -51,30 +50,35 @@ body{
   text-align:center;
 }
 
-#telaSenha input{
-  padding:10px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  font-family:Poppins;
+.senhaBox h2{
+  margin:0;
+  color:#3d6f4c;
+  font-weight:500;
 }
 
-#telaSenha button{
-  padding:10px;
+.senhaBox input{
+  padding:11px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-family:'Poppins',sans-serif;
+}
+
+.senhaBox button{
+  padding:11px;
   border:none;
   border-radius:12px;
   background:#5C9D5C;
   color:white;
+  font-family:'Poppins',sans-serif;
   cursor:pointer;
-  font-family:Poppins;
 }
 
 #erroSenha{
-  color:red;
+  color:#B94A48;
   font-size:12px;
   display:none;
 }
 
-/* APP */
 .overlay{
   background:rgba(255,255,255,0.9);
   padding:30px;
@@ -92,29 +96,42 @@ h1{
   font-weight:300;
   font-size:28px;
   margin:0;
+  line-height:1.2;
 }
 
 .subtitulo{
   font-size:12px;
   color:#6f8a75;
+  margin-top:2px;
+  line-height:1.2;
 }
 
 .botao{
   padding:14px;
   border-radius:16px;
   cursor:pointer;
+  transition:0.2s;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
   font-size:14px;
   border:none;
+  font-family:'Poppins',sans-serif;
   background:#EDE4D3;
+  width:100%;
+}
+
+.botao:hover{
+  transform:scale(1.03);
 }
 
 .modalOverlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.4);
+  background:rgba(0,0,0,0.38);
   display:none;
   justify-content:center;
   align-items:center;
+  padding:16px;
+  z-index:999;
 }
 
 .modalOverlay.show{
@@ -123,9 +140,61 @@ h1{
 
 .rotinaCard{
   width:280px;
-  background:white;
-  border-radius:24px;
-  padding:16px;
+  background:rgba(255,255,255,0.96);
+  border-radius:26px;
+  padding:18px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.20);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.rotinaTopo{
+  position:relative;
+  min-height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.rotinaVoltar{
+  position:absolute;
+  left:0;
+  top:0;
+  border:none;
+  background:#EEF1EC;
+  border-radius:12px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  font-size:16px;
+  font-family:'Poppins',sans-serif;
+  color:#2F2F2F;
+}
+
+.rotinaTituloArea{
+  text-align:center;
+  padding:0 42px;
+}
+
+.rotinaTitle{
+  font-size:21px;
+  font-weight:500;
+  color:#3d6f4c;
+  line-height:1.15;
+}
+
+.rotinaSub{
+  font-size:11.5px;
+  color:#6B6B6B;
+  margin-top:3px;
+  line-height:1.25;
+}
+
+.rotinaBotoes{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
 .rotinaBotao{
@@ -133,18 +202,27 @@ h1{
   background:#EDE4D3;
   border-radius:16px;
   padding:14px;
-  width:100%;
-  margin-top:8px;
+  font-size:14px;
   cursor:pointer;
+  color:#2F2F2F;
+  font-family:'Poppins',sans-serif;
+  width:100%;
+  transition:0.2s ease;
+  font-weight:400;
+  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+}
+
+.rotinaBotao:hover{
+  background:#D6EAD4;
+  transform:translateY(-1px);
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔒 SENHA -->
 <div id="telaSenha">
-  <div class="box">
+  <div class="senhaBox">
     <h2>🔒 Acesso</h2>
     <input type="password" id="senhaInput" placeholder="Digite a senha">
     <button onclick="verificarSenha()">Entrar</button>
@@ -152,52 +230,103 @@ h1{
   </div>
 </div>
 
-<!-- 🔓 APP -->
 <div id="appConteudo" style="display:none;">
 
-<div class="overlay">
-
-  <h1>Jardim da Rotina</h1>
-  <div class="subtitulo">Florescendo hábitos com amor</div>
-
-  <button class="botao" onclick="abrirModalRotina()">🌸 Rotina</button>
-  <button class="botao" onclick="location.href='agenda-menu.html'">📅 Agenda</button>
-  <button class="botao" onclick="location.href='alimentacao.html'">🥗 Alimentação</button>
-  <button class="botao" onclick="location.href='saude.html'">🩺 Saúde</button>
-  <button class="botao" onclick="location.href='gabriela-criacao-artistica-projetos-sonhos.html'">💫 Projetos</button>
-  <button class="botao" onclick="location.href='metas.html'">🎯 Metas</button>
-
-</div>
-
-<!-- MODAL ROTINA -->
-<div class="modalOverlay" id="modalRotina">
+  <div class="modalOverlay" id="modalBackupMaya">
   <div class="rotinaCard">
 
-    <button onclick="fecharModalRotina()">←</button>
+    <div class="rotinaTopo">
+      <button class="rotinaVoltar" onclick="fecharModalBackupMaya()">←</button>
 
-    <h3>Rotina</h3>
+      <div class="rotinaTituloArea">
+        <div class="rotinaTitle">Backup</div>
+        <div class="rotinaSub">exportar ou importar dados</div>
+      </div>
+    </div>
 
-    <button class="rotinaBotao" onclick="location.href='maya-menu.html'">🌼 Maya</button>
-    <button class="rotinaBotao" onclick="location.href='gabriela-menu.html'">🌿 Gabriela</button>
-    <button class="rotinaBotao" onclick="location.href='beth-rotina.html'">🌷 Beth</button>
+    <div class="rotinaBotoes">
+      <button class="rotinaBotao" onclick="exportarBackupMaya()">📤 Exportar dados</button>
+      <button class="rotinaBotao" onclick="abrirImportacaoBackup()">📥 Importar dados</button>
+
+      <input
+        type="file"
+        id="arquivoBackupMaya"
+        accept=".json"
+        style="display:none"
+        onchange="importarBackupMaya(event)"
+      >
+    </div>
 
   </div>
 </div>
+
+  <div class="overlay">
+
+    <h1>Jardim da Rotina</h1>
+    <div class="subtitulo">Florescendo hábitos com amor</div>
+
+    <button class="botao" onclick="abrirModalRotina()">🌸 Rotina</button>
+
+    <button class="botao" onclick="irPara('agenda-menu.html')">📅 Agenda</button>
+
+    <button class="botao" onclick="irPara('alimentacao.html')">🥗 Alimentação</button>
+
+    <button class="botao" onclick="irPara('saude.html')">🩺 Saúde</button>
+
+    <button class="botao" onclick="irPara('gabriela-criacao-artistica-projetos-sonhos.html?from=index')">💫 Projetos</button>
+
+    <button class="botao" onclick="irPara('metas.html?from=index')">🎯 Metas</button>
+
+    <button class="botao" onclick="abrirModalBackupMaya()">📦 Backup </button>
+
+  </div>
+
+  <div class="modalOverlay" id="modalRotina">
+    <div class="rotinaCard">
+
+      <div class="rotinaTopo">
+        <button class="rotinaVoltar" onclick="fecharModalRotina()">←</button>
+
+        <div class="rotinaTituloArea">
+          <div class="rotinaTitle">Rotina</div>
+          <div class="rotinaSub">escolha qual rotina deseja abrir</div>
+        </div>
+      </div>
+
+      <div class="rotinaBotoes">
+        <button class="rotinaBotao" onclick="irPara('maya-menu.html')">🌼 Maya</button>
+
+        <button class="rotinaBotao" onclick="irPara('gabriela-menu.html')">🌿 Gabriela</button>
+
+        <button class="rotinaBotao" onclick="irPara('beth-rotina.html')">🌷 Beth</button>
+      </div>
+
+    </div>
+  </div>
 
 </div>
 
 <script>
 const SENHA = "270318";
 
+function liberarApp(){
+  document.getElementById("telaSenha").style.display = "none";
+  document.getElementById("appConteudo").style.display = "block";
+}
+
 function verificarSenha(){
   const input = document.getElementById("senhaInput").value;
 
   if(input === SENHA){
-    document.getElementById("telaSenha").style.display = "none";
-    document.getElementById("appConteudo").style.display = "block";
+    localStorage.setItem("acesso_index_liberado", "true");
+    liberarApp();
   }else{
     document.getElementById("erroSenha").style.display = "block";
   }
+}
+
+function irPara(destino){
+  location.href = destino;
 }
 
 function abrirModalRotina(){
@@ -207,6 +336,109 @@ function abrirModalRotina(){
 function fecharModalRotina(){
   document.getElementById("modalRotina").classList.remove("show");
 }
+
+window.addEventListener("click", function(e){
+  const modal = document.getElementById("modalRotina");
+  if(e.target === modal){
+    fecharModalRotina();
+  }
+});
+
+document.addEventListener("keydown", function(e){
+  if(e.key === "Enter" && document.getElementById("telaSenha").style.display !== "none"){
+    verificarSenha();
+  }
+});
+
+window.addEventListener("load", function(){
+  if(localStorage.getItem("acesso_index_liberado") === "true"){
+    liberarApp();
+  }
+});
+
+const CHAVES_MAYA_BACKUP = [
+  "jardim_rotina_maya_v8",
+  "regra_tela_hoje_maya",
+  "config_tarefas_maya_rotina",
+
+  "mayaSaldoAtual",
+  "mayaSaldoMesAtual",
+  "mayaSaldoAnterior",
+  "mayaHistoricoPremiacao",
+
+  "mayaListaDesejos",
+  "mayaDesejosAtendidos",
+
+  "futuras_edicoes_maya_pontuacao",
+  "futuras_edicoes_maya_premiacao",
+  "futuras_edicoes_maya_lista_de_desejos",
+  "futuras_edicoes_maya_rotina"
+];
+
+function abrirModalBackupMaya(){
+  document.getElementById("modalBackupMaya").classList.add("show");
+}
+
+function fecharModalBackupMaya(){
+  document.getElementById("modalBackupMaya").classList.remove("show");
+}
+
+function exportarBackupMaya(){
+  const dados = {};
+
+  CHAVES_MAYA_BACKUP.forEach(chave => {
+    const valor = localStorage.getItem(chave);
+    if(valor !== null){
+      dados[chave] = valor;
+    }
+  });
+
+  const arquivo = new Blob(
+    [JSON.stringify(dados, null, 2)],
+    { type:"application/json" }
+  );
+
+  const link = document.createElement("a");
+  const data = new Date().toISOString().slice(0,10);
+
+  link.href = URL.createObjectURL(arquivo);
+  link.download = `backup-maya-${data}.json`;
+  link.click();
+
+  URL.revokeObjectURL(link.href);
+}
+
+function abrirImportacaoBackup(){
+  document.getElementById("arquivoBackupMaya").click();
+}
+
+function importarBackupMaya(event){
+  const arquivo = event.target.files[0];
+  if(!arquivo) return;
+
+  const leitor = new FileReader();
+
+  leitor.onload = function(e){
+    try{
+      const dados = JSON.parse(e.target.result);
+
+      Object.keys(dados).forEach(chave => {
+        if(CHAVES_MAYA_BACKUP.includes(chave)){
+          localStorage.setItem(chave, dados[chave]);
+        }
+      });
+
+      alert("Dados da Maya importados com sucesso! 💛");
+      location.reload();
+
+    }catch(erro){
+      alert("Não consegui importar esse arquivo. Verifique se é o backup correto.");
+    }
+  };
+
+  leitor.readAsText(arquivo);
+}
+
 </script>
 
 </body>
