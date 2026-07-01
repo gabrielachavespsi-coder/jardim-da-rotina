@@ -5,50 +5,489 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Saúde</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#6B6B6B;
+  --borda:#E3E5E1;
+
+  --fonte:'Poppins',sans-serif;
+
+  --titulo:20px;
+  --botao:15px;
+
+  --sombra-suave:0 4px 12px rgba(0,0,0,0.05);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html, body{
+  width:100%;
+  min-height:100%;
+}
+
 body{
-font-family:sans-serif;
-background:#f4f7f1;
-display:flex;
-justify-content:center;
-padding:20px;
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
 }
 
-.container{
-max-width:400px;
-width:100%;
+.pagina{
+  width:100%;
+  max-width:420px;
 }
 
-h1{
-text-align:center;
-color:#3d6f4c;
+.card{
+  width:100%;
+  background:var(--card);
+  border-radius:24px;
+  padding:22px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.topo{
+  display:grid;
+  grid-template-columns:40px 1fr 58px;
+  align-items:start;
+  gap:8px;
+  margin-bottom:6px;
+}
+
+.botao-voltar{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  border-radius:12px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  padding:0;
+  transition:0.2s ease;
+}
+
+.botao-voltar:hover{
+  background:#dde3d9;
+}
+
+.botao-voltar span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  transform:translateY(-1px);
+}
+
+.topCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding-top:2px;
+}
+
+.titleIndex{
+  color:var(--texto-principal);
+  font-weight:500;
+  font-size:var(--titulo);
+  margin:0;
+  line-height:1.2;
+  text-align:center;
+}
+
+.subtitulo{
+  font-size:11px;
+  color:var(--texto-secundario);
+  margin-top:2px;
+  text-align:center;
+  white-space:nowrap;
+}
+
+.dataTopo{
+  min-height:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:flex-start;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:1px;
+}
+
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  white-space:nowrap;
+  margin-bottom:2px;
+}
+
+.dataTopoLinha{
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.botoes-lista{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
 .botao{
-background:#e8fff4;
-padding:14px;
-border-radius:14px;
-margin-bottom:10px;
-text-align:center;
-cursor:pointer;
+  width:100%;
+  border:none;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-radius:16px;
+  padding:0 16px;
+  font-size:var(--botao);
+  font-family:var(--fonte);
+  cursor:pointer;
+  transition:0.2s ease;
+  min-height:84px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.botao:hover{
+  background:var(--verde-hover);
+}
+
+.conteudo-botao{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transform:translateY(1px);
+}
+
+.nome-botao{
+  font-size:14px;
+  color:var(--verde-texto);
+  text-align:center;
+  line-height:1.35;
+  font-weight:500;
+  margin:0;
+}
+
+.proxima-tarefa{
+  margin-top:4px;
+  font-size:11px;
+  color:rgba(63,111,79,0.72);
+  text-align:center;
+  line-height:1.3;
+  margin-bottom:0;
+}
+
+.horario-proxima{
+  display:none;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:4px;
+  flex-wrap:wrap;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  transition:0.2s ease;
+}
+
+.futureBtn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  z-index:999;
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+}
+
+.modalTitle{
+  font-size:18px;
+  color:var(--texto-principal);
+  text-align:center;
+  font-weight:500;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+  font-family:var(--fonte);
+  font-weight:500;
+}
+
+textarea{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  height:260px;
+  resize:none;
+}
+
+textarea:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+  outline:none;
+}
+
+.modalBtns{
+  display:flex;
+  gap:8px;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:11px 12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:12.5px;
+  transition:0.2s ease;
+}
+
+.cancel{
+  background:#efefef;
+  color:#333;
+}
+
+.cancel:hover{
+  background:#e7e7e7;
+}
+
+.save{
+  background:var(--verde-escuro);
+  color:white;
+}
+
+.save:hover{
+  background:#4f8a4f;
+}
+
+@media (max-width: 390px){
+  body{
+    padding:14px;
+  }
+
+  .card{
+    padding:20px 14px 16px;
+  }
+
+  .titleIndex{
+    font-size:19px;
+  }
+
+  .topo{
+    grid-template-columns:40px 1fr 54px;
+  }
+
+  .horaTopo{
+    font-size:13px;
+  }
+
+  .dataTopoLinha{
+    font-size:10.5px;
+  }
+
+  .subtitulo{
+    font-size:10.5px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="pagina">
+  <div class="card">
 
-<h1>🩺 Saúde</h1>
+    <div class="topo">
+      <button class="botao-voltar" onclick="location.href='index.html'"><span>←</span></button>
 
-<div class="botao">📅 Consultas</div>
-<div class="botao">💊 Remédios</div>
-<div class="botao">🧪 Exames</div>
-<div class="botao">📝 Histórico</div>
+      <div class="topCenter">
+        <h1 class="titleIndex">🩺 Saúde</h1>
+        <p class="subtitulo">Cuidar do seu Templo é um ato de Amor</p>
+      </div>
 
-<div class="botao" onclick="location.href='index.html'">⬅ Voltar</div>
+      <div class="dataTopo" aria-label="Data e hora atuais">
+        <div id="linhaTempoHora" class="horaTopo"></div>
+        <div id="linhaTempoDia" class="dataTopoLinha"></div>
+        <div id="linhaTempoData" class="dataTopoLinha"></div>
+      </div>
+    </div>
 
+    <div class="botoes-lista">
+
+      <button class="botao" type="button">
+        <div class="conteudo-botao">
+          <div class="nome-botao">📅 Consultas</div>
+          <div class="proxima-tarefa">acompanhar atendimentos</div>
+          <div class="horario-proxima"></div>
+        </div>
+      </button>
+
+      <button class="botao" type="button">
+        <div class="conteudo-botao">
+          <div class="nome-botao">💊 Remédios</div>
+          <div class="proxima-tarefa">organizar medicações</div>
+          <div class="horario-proxima"></div>
+        </div>
+      </button>
+
+      <button class="botao" type="button">
+        <div class="conteudo-botao">
+          <div class="nome-botao">🧪 Exames</div>
+          <div class="proxima-tarefa">guardar resultados</div>
+          <div class="horario-proxima"></div>
+        </div>
+      </button>
+
+      <button class="botao" type="button">
+        <div class="conteudo-botao">
+          <div class="nome-botao">📝 Histórico</div>
+          <div class="proxima-tarefa">registrar informações importantes</div>
+          <div class="horario-proxima"></div>
+        </div>
+      </button>
+
+    </div>
+
+    <div class="footerMiniAction">
+      <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+    </div>
+
+  </div>
 </div>
+
+<div class="modalOverlay" id="modalFuturasEdicoes">
+  <div class="modal">
+    <h2 class="modalTitle">Futuras edições</h2>
+
+    <div class="field">
+      <label>Ideias de melhorias futuras</label>
+      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CHAVE_FUTURAS_EDICOES = "futuras_edicoes_saude";
+
+function abrirModalFuturasEdicoes(){
+  document.getElementById("futurasEdicoesTexto").value =
+    localStorage.getItem(CHAVE_FUTURAS_EDICOES) || "";
+  document.getElementById("modalFuturasEdicoes").classList.add("show");
+}
+
+function fecharModalFuturasEdicoes(){
+  document.getElementById("modalFuturasEdicoes").classList.remove("show");
+}
+
+function salvarFuturasEdicoes(){
+  localStorage.setItem(
+    CHAVE_FUTURAS_EDICOES,
+    document.getElementById("futurasEdicoesTexto").value
+  );
+  fecharModalFuturasEdicoes();
+}
+
+function pad2(numero){
+  return String(numero).padStart(2, "0");
+}
+
+function atualizarLinhaTempo(){
+  const agora = new Date();
+  const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+  document.getElementById("linhaTempoHora").textContent = `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+  document.getElementById("linhaTempoDia").textContent = `• ${diasCurtos[agora.getDay()]}`;
+  document.getElementById("linhaTempoData").textContent = `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
+}
+
+window.addEventListener("load", () => {
+  atualizarLinhaTempo();
+  setInterval(atualizarLinhaTempo, 1000);
+});
+</script>
 
 </body>
 </html>

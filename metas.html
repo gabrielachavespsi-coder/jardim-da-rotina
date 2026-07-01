@@ -5,286 +5,1009 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Metas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-html, body {
-height: 100%;
-margin: 0;
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#6B6B6B;
+  --borda:#E3E5E1;
+
+  --fonte:'Poppins',sans-serif;
+
+  --titulo:20px;
+  --botao:15px;
+
+  --sombra-suave:0 4px 12px rgba(0,0,0,0.05);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html, body{
+  width:100%;
+  min-height:100%;
 }
 
 body{
-font-family: Arial, sans-serif;
-background-image: url("margaridas.jpg");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-display: flex;
-justify-content: center;
-align-items: flex-start;
-padding: 18px;
-box-sizing: border-box;
-overflow-y: auto;
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:16px;
+}
+
+.pagina{
+  width:100%;
+  max-width:420px;
 }
 
 .card{
-width: min(420px, 100%);
-background: rgba(255,255,255,0.88);
-border-radius: 22px;
-box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-padding: 22px;
-box-sizing: border-box;
-display: flex;
-flex-direction: column;
-gap: 18px;
-min-height: calc(100vh - 36px);
+  width:100%;
+  background:var(--card);
+  border-radius:24px;
+  padding:22px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-.topbar{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
+.topo{
+  display:grid;
+  grid-template-columns:40px 1fr 58px;
+  align-items:start;
+  gap:8px;
+  margin-bottom:6px;
 }
 
-.back{
-border:none;
-background: rgba(0,0,0,0.06);
-padding: 10px 12px;
-border-radius: 14px;
-cursor:pointer;
-font-size:14px;
-flex: 0 0 auto;
-font-family:'Poppins', sans-serif;
+.botao-voltar{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  border-radius:12px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  padding:0;
+  transition:0.2s ease;
 }
 
-.title{
-margin:0;
-font-size:22px;
-color:#3d6f4c;
-font-weight:400;
-font-family:'Poppins', sans-serif;
-text-align:center;
-flex:1;
+.botao-voltar:hover{
+  background:#dde3d9;
 }
 
-.actionsTop{
-display:flex;
-align-items:center;
-gap:8px;
+.botao-voltar span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  transform:translateY(-1px);
 }
 
-.addBtn{
-border:none;
-background: rgba(61,111,76,0.12);
-color:#3d6f4c;
-width:42px;
-height:42px;
-border-radius:14px;
-font-size:24px;
-cursor:pointer;
+.topCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding-top:2px;
 }
 
-.listBox{
-border-radius:16px;
-background: rgba(255,255,255,0.72);
-box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-padding:14px;
+.titleIndex{
+  color:var(--texto-principal);
+  font-weight:500;
+  font-size:var(--titulo);
+  margin:0;
+  line-height:1.2;
+  text-align:center;
 }
 
 .subtitulo{
-font-size:14px;
-color:#3d6f4c;
-margin-bottom:8px;
-text-align:center;
+  width:100%;
+  max-width:260px;
+  margin:2px auto 0;
+  font-size:12px;
+  color:var(--texto-secundario);
+  text-align:center;
+  line-height:1.35;
+  white-space:normal;
+}
+
+.dataTopo{
+  min-height:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:flex-start;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:1px;
+}
+
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  white-space:nowrap;
+  margin-bottom:2px;
+}
+
+.dataTopoLinha{
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.box{
+  border-radius:16px;
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+   padding:4px 6px 6px;
+  color:var(--texto-principal);
+  line-height:1.6;
+}
+
+.listHeader{
+  display:grid;
+  grid-template-columns:34px 1fr 34px;
+  align-items:center;
+  gap:8px;
+  margin-bottom:10px;
+}
+
+.listHeaderSpacer{
+  width:38px;
+  height:38px;
+}
+
+.boxTitle{
+  font-size:14px;
+  color:var(--verde-texto);
+  text-align:center;
+  margin-bottom:-4;
+  font-family:var(--fonte);
+  font-weight:500;
+}
+
+.addBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--verde-texto);
+  width:28px;
+  height:28px;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  transition:0.2s ease;
+}
+
+.addBtn:hover{
+  background:#dde3d9;
 }
 
 .metaList{
-display:flex;
-flex-direction:column;
-gap:10px;
-margin-top:10px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:12px;
 }
 
 .metaItem{
-border:none;
-width:100%;
-background: rgba(255,255,255,0.8);
-border-radius:14px;
-padding:14px;
-text-align:center;
-cursor:pointer;
+  border:none;
+  width:100%;
+  background:var(--verde-principal);
+  border-radius:16px;
+  padding:14px 16px;
+  text-align:center;
+  cursor:pointer;
+  box-sizing:border-box;
+  transition:0.2s ease;
+}
+
+.metaItem:hover{
+  background:var(--verde-hover);
 }
 
 .metaNome{
-font-size:15px;
-font-weight:600;
-}
-
-.metaDescricao{
-margin-top:6px;
-font-size:12px;
-color:#555;
-}
-
-.metaInfo{
-margin-top:6px;
-font-size:12px;
-color:#555;
+  font-size:14px;
+  font-family:var(--fonte);
+  font-weight:500;
+  color:var(--verde-texto);
+  line-height:1.4;
+  word-break:break-word;
 }
 
 .metaActions{
-display:none;
-margin-top:10px;
-gap:8px;
-justify-content:center;
+  display:none;
+  margin-top:12px;
+  gap:6px;
+  justify-content:flex-start;
+  flex-wrap:wrap;
 }
 
 .metaActions.show{
-display:flex;
+  display:flex;
 }
 
 .actionBtn{
-border:none;
-padding:8px 12px;
-border-radius:10px;
-cursor:pointer;
-font-size:13px;
+  border:none;
+  padding:6px 12px;
+  min-height:28px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:11px;
+  font-family:var(--fonte);
+  background:#ffffff;
+  color:var(--verde-texto);
+  transition:0.2s ease;
+  line-height:1.1;
 }
 
 .primary{
-background:#d7e8db;
+  background:rgba(255,255,255,0.96);
+  color:#2f5d3d;
 }
 
 .danger{
-background:#f3d6d6;
+  background:#f5d7d7;
+  color:#8a3030;
+}
+
+.empty{
+  font-size:12.5px;
+  color:var(--texto-secundario);
+  text-align:center;
+  padding:4px 0;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:4px;
+  flex-wrap:wrap;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  transition:0.2s ease;
+}
+
+.futureBtn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  z-index:999;
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+}
+
+.modalTitle{
+  font-size:18px;
+  color:var(--texto-principal);
+  text-align:center;
+  font-weight:500;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+  font-family:var(--fonte);
+  font-weight:500;
+}
+
+.field input,
+.field textarea{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  outline:none;
+  color:var(--texto-principal);
+  background:#fff;
+}
+
+.field textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+textarea{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  height:260px;
+  resize:none;
+}
+
+.field input:focus,
+.field textarea:focus,
+textarea:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+}
+
+.modalBtns{
+  display:flex;
+  gap:8px;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:11px 12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:12.5px;
+  transition:0.2s ease;
+}
+
+.cancel{
+  background:#efefef;
+  color:#333;
+}
+
+.cancel:hover{
+  background:#e7e7e7;
+}
+
+.save{
+  background:var(--verde-escuro);
+  color:white;
+}
+
+.save:hover{
+  background:#4f8a4f;
+}
+
+@media (max-width: 390px){
+  body{
+    padding:14px;
+  }
+
+  .card{
+    padding:20px 14px 16px;
+  }
+
+  .titleIndex{
+    font-size:19px;
+  }
+
+  .subtitulo{
+    font-size:12px;
+    max-width:240px;
+  }
+
+  .topo{
+    grid-template-columns:40px 1fr 54px;
+  }
+
+  .horaTopo{
+    font-size:13px;
+  }
+
+  .dataTopoLinha{
+    font-size:10.5px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="pagina">
+  <div class="card">
 
-<div class="topbar">
-<button class="back" onclick="voltarPagina()">← Voltar</button>
-<h1 class="title">🌸 Metas</h1>
-<div class="actionsTop">
-<button class="addBtn" onclick="abrirModal()">+</button>
-</div>
+    <div class="topo">
+      <button class="botao-voltar" onclick="voltarPagina()"><span>←</span></button>
+
+      <div class="topCenter">
+        <h1 class="titleIndex">🎯 Metas</h1>
+        <p class="subtitulo">
+          Quando se sonha grande<br>
+          a realidade aprende
+        </p>
+      </div>
+
+      <div class="dataTopo" aria-label="Data e hora atuais">
+        <div id="linhaTempoHora" class="horaTopo"></div>
+        <div id="linhaTempoDia" class="dataTopoLinha"></div>
+        <div id="linhaTempoData" class="dataTopoLinha"></div>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="listHeader">
+        <div class="listHeaderSpacer"></div>
+        <div class="boxTitle">💫 Metas cadastradas</div>
+        <button class="addBtn" onclick="abrirModal()">+</button>
+      </div>
+      <div id="listaMetas" class="metaList"></div>
+    </div>
+
+    <div class="box">
+      <div class="boxTitle">🌟 Metas Realizadas</div>
+      <div id="listaMetasRealizadas" class="metaList"></div>
+    </div>
+
+    <div class="footerMiniAction">
+      <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+    </div>
+
+  </div>
 </div>
 
-<div class="listBox">
-<div class="subtitulo">Metas cadastradas</div>
-<div id="listaMetas" class="metaList"></div>
+<div class="modalOverlay" id="modalMeta">
+  <div class="modal">
+    <h2 class="modalTitle" id="tituloModalMeta">Nova meta</h2>
+
+    <input type="hidden" id="campoMetaIdEdicao">
+
+    <div class="field">
+      <label for="campoMetaNome">Meta</label>
+      <input type="text" id="campoMetaNome" maxlength="100" placeholder="Ex.: Curso, viagem, projeto..." />
+    </div>
+
+    <div class="field">
+      <label for="campoMetaDescricao">Descrição</label>
+      <textarea id="campoMetaDescricao" placeholder="Escreva os detalhes da meta..."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="campoMetaLocal">Local (se tiver)</label>
+      <input type="text" id="campoMetaLocal" maxlength="100" placeholder="Ex.: Online, casa, trabalho..." />
+    </div>
+
+    <div class="field">
+      <label for="campoMetaData">Quero alcançar essa Meta até o dia</label>
+      <input type="date" id="campoMetaData" />
+    </div>
+
+    <div class="field">
+      <label for="campoMetaValor">Valor</label>
+      <input type="text" id="campoMetaValor" inputmode="numeric" placeholder="R$ 0,00" />
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModal()">Cancelar</button>
+      <button class="save" onclick="salvarMeta()">Concluir</button>
+    </div>
+  </div>
 </div>
 
-<div class="listBox">
-<div class="subtitulo">Metas Realizadas</div>
-<div id="listaMetasRealizadas" class="metaList"></div>
-</div>
+<div class="modalOverlay" id="modalFuturasEdicoes">
+  <div class="modal">
+    <h2 class="modalTitle">Futuras edições</h2>
 
+    <div class="field">
+      <label>Ideias de melhorias futuras</label>
+      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+    </div>
+  </div>
 </div>
 
 <script>
 const CHAVE_METAS = "metasGabriela";
+const CHAVE_FUTURAS_EDICOES_METAS = "futuras_edicoes_metas";
 
 function voltarPagina(){
-const params = new URLSearchParams(window.location.search);
-const from = params.get("from");
+  const params = new URLSearchParams(window.location.search);
+  const from = params.get("from");
 
-if(from === "index"){
-location.href = "index.html";
-} else {
-location.href = "index.html"; // fallback simplificado (já que pre-menu saiu)
-}
+  if(from === "index"){
+    location.href = "index.html";
+  } else {
+    location.href = "index.html";
+  }
 }
 
 function ler(){
-return JSON.parse(localStorage.getItem(CHAVE_METAS)) || [];
+  return JSON.parse(localStorage.getItem(CHAVE_METAS)) || [];
 }
 
 function salvar(lista){
-localStorage.setItem(CHAVE_METAS, JSON.stringify(lista));
+  localStorage.setItem(CHAVE_METAS, JSON.stringify(lista));
 }
 
 function gerarId(){
-return Date.now();
+  return "id_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
+}
+
+function formatarMoeda(numero) {
+  return Number(numero || 0).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+}
+
+function mascaraMoeda(input) {
+  let valor = input.value.replace(/\D/g, "");
+  valor = (Number(valor) / 100).toFixed(2) + "";
+  valor = valor.replace(".", ",");
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  input.value = "R$ " + valor;
+}
+
+function extrairNumeroMoeda(texto) {
+  if (!texto) return 0;
+  return Number(
+    texto.replace(/[R$\s.]/g, "").replace(",", ".")
+  ) || 0;
+}
+
+function formatarData(dataISO) {
+  if (!dataISO) return "—";
+  const [ano, mes, dia] = dataISO.split("-");
+  if (!ano || !mes || !dia) return "—";
+  return `${dia}/${mes}/${ano}`;
+}
+
+function dataHojeISO(){
+  const agora = new Date();
+  const ano = agora.getFullYear();
+  const mes = String(agora.getMonth() + 1).padStart(2, "0");
+  const dia = String(agora.getDate()).padStart(2, "0");
+  return `${ano}-${mes}-${dia}`;
 }
 
 function abrirModal(){
-const nome = prompt("Nome da meta:");
-if(!nome) return;
+  document.getElementById("campoMetaIdEdicao").value = "";
+  document.getElementById("tituloModalMeta").textContent = "Nova meta";
+  document.getElementById("campoMetaNome").value = "";
+  document.getElementById("campoMetaDescricao").value = "";
+  document.getElementById("campoMetaLocal").value = "";
+  document.getElementById("campoMetaData").value = "";
+  document.getElementById("campoMetaValor").value = "";
+  document.getElementById("modalMeta").classList.add("show");
+}
 
-const lista = ler();
-lista.push({id:gerarId(), nome, realizada:false});
-salvar(lista);
-render();
+function abrirModalEditar(id){
+  const lista = ler();
+  const meta = lista.find(m => m.id === id);
+  if(!meta) return;
+
+  document.getElementById("campoMetaIdEdicao").value = meta.id;
+  document.getElementById("tituloModalMeta").textContent = "Editar meta";
+  document.getElementById("campoMetaNome").value = meta.nome || "";
+  document.getElementById("campoMetaDescricao").value = meta.descricao || "";
+  document.getElementById("campoMetaLocal").value = meta.local || "";
+  document.getElementById("campoMetaData").value = meta.data || "";
+  document.getElementById("campoMetaValor").value = meta.valor ? formatarMoeda(meta.valor) : "";
+  document.getElementById("modalMeta").classList.add("show");
+}
+
+function fecharModal(){
+  document.getElementById("modalMeta").classList.remove("show");
+}
+
+function salvarMeta(){
+  const idEdicao = document.getElementById("campoMetaIdEdicao").value;
+  const nome = document.getElementById("campoMetaNome").value.trim();
+  const descricao = document.getElementById("campoMetaDescricao").value.trim();
+  const local = document.getElementById("campoMetaLocal").value.trim();
+  const data = document.getElementById("campoMetaData").value;
+  const valor = extrairNumeroMoeda(document.getElementById("campoMetaValor").value.trim());
+
+  if(!nome){
+    alert("Preencha o campo Meta.");
+    return;
+  }
+
+  const lista = ler();
+
+  if(idEdicao){
+    const meta = lista.find(m => m.id === idEdicao);
+    if(meta){
+      meta.nome = nome;
+      meta.descricao = descricao;
+      meta.local = local;
+      meta.data = data;
+      meta.valor = valor;
+    }
+  } else {
+    lista.push({
+      id:gerarId(),
+      nome,
+      descricao,
+      local,
+      data,
+      valor,
+      realizada:false,
+      dataRealizada:""
+    });
+  }
+
+  salvar(lista);
+  fecharModal();
+  render();
 }
 
 function excluir(id){
-let lista = ler();
-lista = lista.filter(m => m.id !== id);
-salvar(lista);
-render();
+  let lista = ler();
+  lista = lista.filter(m => m.id !== id);
+  salvar(lista);
+  render();
 }
 
 function realizar(id){
-const lista = ler();
-const meta = lista.find(m => m.id === id);
-if(meta){
-meta.realizada = true;
+  const lista = ler();
+  const meta = lista.find(m => m.id === id);
+  if(meta){
+    meta.realizada = true;
+    meta.dataRealizada = dataHojeISO();
+  }
+  salvar(lista);
+  render();
 }
-salvar(lista);
-render();
+
+function criarCardPendente(meta){
+  const div = document.createElement("div");
+  div.className = "metaItem";
+
+  const descricao = meta.descricao ? meta.descricao : "—";
+
+  div.innerHTML = `
+    <div class="metaNome" style="text-align:left;">
+      ${meta.nome}
+    </div>
+
+    <div style="
+      font-size:11.5px;
+      color:rgba(63,111,79,0.75);
+      text-align:left;
+      line-height:1.4;
+      margin-top:4px;
+      margin-bottom:8px;
+    ">
+      <strong>Descrição:</strong> ${descricao}
+    </div>
+
+    <div style="
+      margin-top:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      width:100%;
+    ">
+      <div style="
+        width:40px;
+    height:40px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+      ">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--verde-texto)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="3"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+      </div>
+
+      <div style="text-align:left;">
+        <div style="
+          font-size:11px;
+          line-height:1.2;
+          color:rgba(63,111,79,0.78);
+        ">
+          Alcançar a meta até:
+          <span style="
+            font-size:11px;
+            font-weight:500;
+            color:var(--verde-texto);
+          ">
+            ${meta.data ? formatarData(meta.data) : "—"}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="metaActions">
+      <button class="actionBtn primary">Realizada</button>
+      <button class="actionBtn">Editar</button>
+      <button class="actionBtn danger">Excluir</button>
+    </div>
+  `;
+
+  const actions = div.querySelector(".metaActions");
+
+  div.onclick = () => {
+    document.querySelectorAll(".metaActions.show").forEach(el => {
+      if(el !== actions) el.classList.remove("show");
+    });
+    actions.classList.toggle("show");
+  };
+
+  actions.children[0].onclick = (e)=>{
+    e.stopPropagation();
+    realizar(meta.id);
+  };
+
+  actions.children[1].onclick = (e)=>{
+    e.stopPropagation();
+    abrirModalEditar(meta.id);
+  };
+
+  actions.children[2].onclick = (e)=>{
+    e.stopPropagation();
+    excluir(meta.id);
+  };
+
+  return div;
 }
 
-function criarItem(meta){
-const div = document.createElement("div");
-div.className = "metaItem";
+function criarCardRealizada(meta){
+  const div = document.createElement("div");
+  div.className = "metaItem";
 
-div.innerHTML = `
-<div class="metaNome">${meta.nome}</div>
-<div class="metaActions">
-<button class="actionBtn primary">Realizada</button>
-<button class="actionBtn danger">Excluir</button>
-</div>
-`;
+  const descricao = meta.descricao ? meta.descricao : "—";
 
-const actions = div.querySelector(".metaActions");
+  div.innerHTML = `
+    <div class="metaNome" style="text-align:left;">
+      ${meta.nome}
+    </div>
 
-div.onclick = () => {
-actions.classList.toggle("show");
-};
+    <div style="
+      font-size:11.5px;
+      color:rgba(63,111,79,0.75);
+      text-align:left;
+      line-height:1.4;
+      margin-top:4px;
+      margin-bottom:8px;
+    ">
+      <strong>Descrição:</strong> ${descricao}
+    </div>
 
-actions.children[0].onclick = (e)=>{
-e.stopPropagation();
-realizar(meta.id);
-};
+    <div style="
+      margin-top:10px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      align-items:center;
+      justify-items:center;
+      text-align:center;
+    ">
+      <div style="
+        display:flex;
+        align-items:center;
+        gap:10px;
+        justify-content:center;
+        text-align:center;
+        width:100%;
+      ">
+        <div style="
+          width:40px;
+          height:40px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        ">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--verde-texto)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="3"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </div>
 
-actions.children[1].onclick = (e)=>{
-e.stopPropagation();
-excluir(meta.id);
-};
+        <div style="text-align:left;">
+          <div style="
+            font-size:11px;
+            line-height:1.2;
+            color:rgba(63,111,79,0.78);
+          ">
+            Alcançar a meta até:
+            <span style="
+              font-size:11px;
+              font-weight:500;
+              color:var(--verde-texto);
+            ">
+              ${meta.data ? formatarData(meta.data) : "—"}
+            </span>
+          </div>
+        </div>
+      </div>
 
-return div;
+      <div style="
+        display:flex;
+        align-items:center;
+        gap:10px;
+        justify-content:center;
+        text-align:center;
+        border-left:1px solid rgba(63,111,79,0.25);
+        padding-left:12px;
+        width:100%;
+      ">
+        <div style="
+          width:40px;
+          height:40px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        ">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--verde-texto)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="3"></rect>
+            <polyline points="9 13 12 16 17 11"></polyline>
+          </svg>
+        </div>
+
+        <div style="text-align:left;">
+          <div style="
+            font-size:11px;
+            line-height:1.2;
+            color:rgba(63,111,79,0.78);
+          ">
+            Alcançada em:
+            <span style="
+              font-size:11px;
+              font-weight:500;
+              color:var(--verde-texto);
+            ">
+              ${meta.dataRealizada ? formatarData(meta.dataRealizada) : "—"}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="metaActions">
+      <button class="actionBtn danger">Excluir</button>
+    </div>
+  `;
+
+  const actions = div.querySelector(".metaActions");
+
+  div.onclick = () => {
+    document.querySelectorAll(".metaActions.show").forEach(el => {
+      if(el !== actions) el.classList.remove("show");
+    });
+    actions.classList.toggle("show");
+  };
+
+  actions.children[0].onclick = (e)=>{
+    e.stopPropagation();
+    excluir(meta.id);
+  };
+
+  return div;
 }
 
 function render(){
-const lista = ler();
+  const lista = ler();
 
-const pendentes = lista.filter(m=>!m.realizada);
-const feitas = lista.filter(m=>m.realizada);
+  const pendentes = lista.filter(m=>!m.realizada);
+  const feitas = lista.filter(m=>m.realizada);
 
-const c1 = document.getElementById("listaMetas");
-const c2 = document.getElementById("listaMetasRealizadas");
+  const c1 = document.getElementById("listaMetas");
+  const c2 = document.getElementById("listaMetasRealizadas");
 
-c1.innerHTML = "";
-c2.innerHTML = "";
+  c1.innerHTML = "";
+  c2.innerHTML = "";
 
-pendentes.forEach(m=>c1.appendChild(criarItem(m)));
-feitas.forEach(m=>c2.appendChild(criarItem(m)));
+  if(!pendentes.length){
+    c1.innerHTML = `<div class="empty">Nenhuma meta cadastrada ainda.</div>`;
+  } else {
+    pendentes.forEach(m=>c1.appendChild(criarCardPendente(m)));
+  }
+
+  if(!feitas.length){
+    c2.innerHTML = `<div class="empty">Nenhuma meta realizada ainda.</div>`;
+  } else {
+    feitas.forEach(m=>c2.appendChild(criarCardRealizada(m)));
+  }
 }
+
+function abrirModalFuturasEdicoes(){
+  document.getElementById("futurasEdicoesTexto").value =
+    localStorage.getItem(CHAVE_FUTURAS_EDICOES_METAS) || "";
+  document.getElementById("modalFuturasEdicoes").classList.add("show");
+}
+
+function fecharModalFuturasEdicoes(){
+  document.getElementById("modalFuturasEdicoes").classList.remove("show");
+}
+
+function salvarFuturasEdicoes(){
+  localStorage.setItem(
+    CHAVE_FUTURAS_EDICOES_METAS,
+    document.getElementById("futurasEdicoesTexto").value
+  );
+  fecharModalFuturasEdicoes();
+}
+
+function pad2(numero){
+  return String(numero).padStart(2, "0");
+}
+
+function atualizarLinhaTempo(){
+  const agora = new Date();
+  const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+  document.getElementById("linhaTempoHora").textContent = `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+  document.getElementById("linhaTempoDia").textContent = `• ${diasCurtos[agora.getDay()]}`;
+  document.getElementById("linhaTempoData").textContent = `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
+}
+
+document.getElementById("campoMetaValor").addEventListener("input", function() {
+  mascaraMoeda(this);
+});
+
+window.addEventListener("load", () => {
+  atualizarLinhaTempo();
+  setInterval(atualizarLinhaTempo, 1000);
+});
 
 render();
 </script>
