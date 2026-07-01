@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarefa do Dia • Livro de Gaia</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#6B6B6B;
+  --borda:#E3E5E1;
+
+  --fonte:'Poppins',sans-serif;
+
+  --titulo:20px;
+  --botao:15px;
+
+  --sombra-suave:0 4px 12px rgba(0,0,0,0.05);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html, body{
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:16px;
+}
+
+.pagina{
+  width:100%;
+  max-width:420px;
+}
+
+.card{
+  width:100%;
+  background:var(--card);
+  border-radius:24px;
+  padding:22px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.topo{
+  display:grid;
+  grid-template-columns:40px 1fr 58px;
+  align-items:start;
+  gap:8px;
+  margin-bottom:6px;
+}
+
+.botao-voltar{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  border-radius:12px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  padding:0;
+  transition:0.2s ease;
+}
+
+.botao-voltar:hover{
+  background:#dde3d9;
+}
+
+.botao-voltar span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  transform:translateY(-1px);
+}
+
+.topCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding-top:2px;
+}
+
+.titleIndex{
+  color:var(--texto-principal);
+  font-weight:500;
+  font-size:var(--titulo);
+  margin:0;
+  line-height:1.2;
+  text-align:center;
+}
+
+.subtitulo{
+  font-size:11px;
+  color:var(--texto-secundario);
+  margin-top:2px;
+  text-align:center;
+  white-space:normal;
+  line-height:1.25;
+}
+
+.dataTopo{
+  min-height:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:flex-start;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:1px;
+}
+
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  white-space:nowrap;
+  margin-bottom:2px;
+}
+
+.dataTopoLinha{
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.botoes-lista{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.botao{
+  width:100%;
+  border:none;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-radius:16px;
+  padding:0 16px;
+  font-size:var(--botao);
+  font-family:var(--fonte);
+  cursor:pointer;
+  transition:0.2s ease;
+  min-height:84px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.botao:hover{
+  background:var(--verde-hover);
+}
+
+.conteudo-botao{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transform:translateY(1px);
+}
+
+.nome-botao{
+  font-size:14px;
+  color:var(--verde-texto);
+  text-align:center;
+  line-height:1.35;
+  font-weight:500;
+  margin:0;
+}
+
+.proxima-tarefa{
+  margin-top:4px;
+  font-size:11px;
+  color:rgba(63,111,79,0.72);
+  text-align:center;
+  line-height:1.3;
+  margin-bottom:0;
+}
+
+.infoBox{
+  width:100%;
+  background:var(--verde-principal);
+  border-radius:16px;
+  padding:18px 16px;
+  color:var(--verde-texto);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.infoEmoji{
+  font-size:34px;
+  line-height:1;
+}
+
+.infoTexto{
+  font-size:13px;
+  color:rgba(63,111,79,0.86);
+  line-height:1.65;
+}
+
+.infoTexto strong{
+  color:var(--verde-texto);
+  font-weight:500;
+}
+
+.infoMeta{
+  font-size:12px;
+  color:rgba(63,111,79,0.76);
+  line-height:1.4;
+}
+
+.statusBox{
+  width:100%;
+  background:var(--verde-escuro);
+  border-radius:16px;
+  padding:12px 14px;
+  color:white;
+  text-align:center;
+  font-size:13px;
+  line-height:1.4;
+}
+
+.tarefaCard{
+  border:none;
+  width:100%;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-radius:16px;
+  padding:20px 16px;
+  text-align:center;
+  cursor:pointer;
+  font-family:var(--fonte);
+  transition:0.2s ease;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.tarefaCard:hover{
+  background:var(--verde-hover);
+}
+
+.tarefaCard.feita{
+  background:#F3EAF0;
+}
+
+.tarefaEmoji{
+  font-size:38px;
+  line-height:1;
+}
+
+.tarefaNome{
+  font-size:17px;
+  color:var(--verde-texto);
+  font-weight:500;
+  line-height:1.35;
+}
+
+.tarefaDescricao{
+  font-size:12.5px;
+  color:rgba(63,111,79,0.80);
+  line-height:1.65;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:4px;
+  flex-wrap:wrap;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  transition:0.2s ease;
+}
+
+.futureBtn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:flex-start;
+  padding:16px;
+  overflow-y:auto;
+  z-index:999;
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  max-height:calc(100vh - 32px);
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+}
+
+.modalTitle{
+  font-size:18px;
+  color:var(--texto-principal);
+  text-align:center;
+  font-weight:500;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+  font-family:var(--fonte);
+  font-weight:500;
+}
+
+textarea{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  height:260px;
+  resize:none;
+  outline:none;
+}
+
+textarea:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+}
+
+.modalBtns{
+  display:flex;
+  gap:8px;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:11px 12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:12.5px;
+  transition:0.2s ease;
+}
+
+.cancel{
+  background:#efefef;
+  color:#333;
+}
+
+.cancel:hover{
+  background:#e7e7e7;
+}
+
+.save{
+  background:var(--verde-escuro);
+  color:white;
+}
+
+.save:hover{
+  background:#4f8a4f;
+}
+
+@media (max-width: 390px){
+  body{
+    padding:14px;
+  }
+
+  .card{
+    padding:20px 14px 16px;
+  }
+
+  .titleIndex{
+    font-size:19px;
+  }
+
+  .topo{
+    grid-template-columns:40px 1fr 54px;
+  }
+
+  .horaTopo{
+    font-size:13px;
+  }
+
+  .dataTopoLinha{
+    font-size:10.5px;
+  }
+
+  .subtitulo{
+    font-size:10.5px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="pagina">
+  <div class="card">
+
+<div class="topo">
+  <button class="botao-voltar" onclick="location.href='gabriela-projeto-livro-gaia.html'"><span>←</span></button>
+
+  <div class="topCenter">
+    <h1 class="titleIndex">📝 Tarefa do Dia</h1>
+    <p class="subtitulo">Livro de Gaia</p>
+  </div>
+
+  <div class="dataTopo" aria-label="Data e hora atuais">
+    <div id="linhaTempoHora" class="horaTopo"></div>
+    <div id="linhaTempoDia" class="dataTopoLinha"></div>
+    <div id="linhaTempoData" class="dataTopoLinha"></div>
+  </div>
+</div>
+<div class="infoBox">
+  <div class="infoTexto">
+    <strong id="dia-semana">Hoje é ...</strong>
+    <span class="infoMeta" id="data-hoje">--</span>
+  </div>
+</div>
+
+<button id="card-tarefa" class="tarefaCard" onclick="alternarTarefa()">
+  <span id="emoji-tarefa" class="tarefaEmoji">🌱</span>
+  <div id="nome-tarefa" class="tarefaNome">Carregando...</div>
+  <div id="descricao-tarefa" class="tarefaDescricao"></div>
+</button>
+
+<div class="statusBox" id="faixa-status">Toque para concluir a tarefa de hoje</div>
+
+<div class="infoBox">
+  <div class="infoTexto" id="tema-semana">Tema da semana: --</div>
+</div>
+<script>
+
+    const chaveBase = "gaia_tarefa_dia";
+
+    const tarefasPorDia = {
+      0: {
+        dia: "Domingo",
+        titulo: "Descanso, leitura leve ou contemplação",
+        descricao: "Dia para respirar, amadurecer ideias e olhar com carinho o caminho já percorrido no Livro de Gaia."
+      },
+      1: {
+        dia: "Segunda-feira",
+        titulo: "Escrita + ideias soltas, insights e conexões",
+        descricao: "Escolher um ponto importante do livro e escrever com liberdade, registrando também pensamentos, imagens e conexões."
+      },
+      2: {
+        dia: "Terça-feira",
+        titulo: "Escrita profunda",
+        descricao: "Aprofundar a escrita, desenvolver melhor o tema e dar mais corpo ao capítulo ou ao trecho do dia."
+      },
+      3: {
+        dia: "Quarta-feira",
+        titulo: "Escrita + ideias soltas, insights e conexões",
+        descricao: "Continuar construindo a escrita e ligar capítulos, reflexões, sentidos e imagens que surgirem."
+      },
+      4: {
+        dia: "Quinta-feira",
+        titulo: "Escrita com fluxo leve",
+        descricao: "Escrever com menos pressão, mantendo constância, sensibilidade e continuidade."
+      },
+      5: {
+        dia: "Sexta-feira",
+        titulo: "Fechamento da semana",
+        descricao: "Fechar a semana de escrita com revisão leve, recolhimento de ideias e amarração do que foi construído."
+      },
+      6: {
+        dia: "Sábado",
+        titulo: "Desenvolver ideias + revisão leve",
+        descricao: "Olhar anotações, organizar no Notion, revisar trechos e cultivar o material com leveza."
+      }
+    };
+
+    const temasSemanais = [
+      "Semana 1 • Escrever a estrutura do livro e adaptar ao seu documento.",
+      "Semana 2 • Curso de 90 minutos e preparação do terreno da escrita.",
+      "Semana 3 • Organização de rascunhos, ideias, insights e fechamento de ciclos.",
+      "Semana 4 • O Chamado • Gaia como organismo vivo e introdução sensível.",
+      "Semana 5 • Unidade Original • Pré-socráticos, povos originários, unidade e dualidade.",
+      "Semana 6 • Cosmos Vivo • Vedas, Tao e humano integrado ao todo.",
+      "Semana 7 • Antiguidade Clássica • Platão, Aristóteles e separação sutil.",
+      "Semana 8 • Estrutura e Razão • Ciência nascente e organização do mundo.",
+      "Semana 9 • Modernidade • Ciência mecanicista e natureza como objeto.",
+      "Semana 10 • Domínio e Controle • Industrialização e ruptura com Gaia.",
+      "Semana 11 • Romantismo • Natureza como refúgio e tentativa de retorno.",
+      "Semana 12 • Vanguardas • Arte como ruptura, crise e expressão.",
+      "Semana 13 • Existencialismo • Vazio, sentido e humano perdido.",
+      "Semana 14 • Ecologia e Gaia • Visão sistêmica e Terra organismo.",
+      "Semana 15 • InterSer e Consciência • Interdependência e reconexão.",
+      "Semana 16 • Antropoceno • Crise climática, colapso e regeneração.",
+      "Semana 17 • Escolha • Responsabilidade, mudança e futuro em aberto.",
+      "Semana 18 • Retorno • Reconexão profunda e humano como canal.",
+      "Semana 19 • Síntese • Integrar eras, ideias e sentidos.",
+      "Semana 20 • Fechamento • Revisão leve, ajustes finais e possível prólogo."
+    ];
+
+    function pad(n){
+      return String(n).padStart(2,"0");
+    }
+
+    function chaveDoDia(){
+      const h = new Date();
+      return `${chaveBase}_${h.getFullYear()}-${pad(h.getMonth()+1)}-${pad(h.getDate())}`;
+    }
+
+    function formatarDataHoje(){
+      const h = new Date();
+      return `${pad(h.getDate())}/${pad(h.getMonth()+1)}/${h.getFullYear()}`;
+    }
+
+    function obterEstado(){
+      return localStorage.getItem(chaveDoDia()) === "feito";
+    }
+
+    function salvarEstado(feito){
+      localStorage.setItem(chaveDoDia(), feito ? "feito" : "nao");
+    }
+
+    function obterSemanaDoProjeto(){
+      const inicio = new Date(2026, 2, 19);
+      const hoje = new Date();
+      const diffDias = Math.floor((hoje - inicio) / (1000 * 60 * 60 * 24));
+      if(diffDias < 0) return 1;
+      const semana = Math.floor(diffDias / 7) + 1;
+      return Math.min(20, semana);
+    }
+
+    function alternarTarefa(){
+      const novoEstado = !obterEstado();
+      salvarEstado(novoEstado);
+      renderizar();
+    }
+
+    function renderizar(){
+      const hoje = new Date();
+      const indiceDia = hoje.getDay();
+      const tarefa = tarefasPorDia[indiceDia];
+      const feito = obterEstado();
+      const semana = obterSemanaDoProjeto();
+
+      document.getElementById("dia-semana").innerText = `Hoje é ${tarefa.dia}`;
+      document.getElementById("data-hoje").innerText = `Data: ${formatarDataHoje()}`;
+      document.getElementById("nome-tarefa").innerText = tarefa.titulo;
+      document.getElementById("descricao-tarefa").innerText = tarefa.descricao;
+      document.getElementById("tema-semana").innerText = `Tema da semana: ${temasSemanais[semana - 1]}`;
+
+      const card = document.getElementById("card-tarefa");
+      const emoji = document.getElementById("emoji-tarefa");
+      const faixa = document.getElementById("faixa-status");
+
+      if(feito){
+        card.classList.add("feita");
+        emoji.innerText = "🌸";
+        faixa.innerText = "Tarefa do dia concluída com amor 🌸";
+      }else{
+        card.classList.remove("feita");
+        emoji.innerText = "🌱";
+        faixa.innerText = "Toque para concluir a tarefa de hoje";
+      }
+    }
+
+    window.addEventListener("load", renderizar);
+  
+
+function pad2(numero){
+  return String(numero).padStart(2, "0");
+}
+
+function atualizarLinhaTempo(){
+  const agora = new Date();
+  const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+  document.getElementById("linhaTempoHora").textContent = `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+  document.getElementById("linhaTempoDia").textContent = `• ${diasCurtos[agora.getDay()]}`;
+  document.getElementById("linhaTempoData").textContent = `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
+}
+
+window.addEventListener("load", () => {
+  atualizarLinhaTempo();
+  setInterval(atualizarLinhaTempo, 1000);
+});
+
+</script>
+  </div>
+</div>
+
+</body>
+</html>
