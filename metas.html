@@ -46,8 +46,9 @@ body{
   color:var(--texto-principal);
   display:flex;
   justify-content:center;
-  align-items:flex-start;
+  align-items:center;
   padding:16px;
+  overflow-y:auto;
 }
 
 .pagina{
@@ -163,7 +164,7 @@ body{
   border-radius:16px;
   background:#F8FAF7;
   border:1px solid var(--borda);
-   padding:4px 6px 6px;
+  padding:12px;
   color:var(--texto-principal);
   line-height:1.6;
 }
@@ -185,7 +186,7 @@ body{
   font-size:14px;
   color:var(--verde-texto);
   text-align:center;
-  margin-bottom:-4;
+  margin-bottom:0;
   font-family:var(--fonte);
   font-weight:500;
 }
@@ -317,9 +318,10 @@ body{
   background:rgba(0,0,0,0.35);
   display:none;
   justify-content:center;
-  align-items:center;
+  align-items:flex-start;
   padding:16px;
   z-index:999;
+  overflow-y:auto;
 }
 
 .modalOverlay.show{
@@ -335,6 +337,8 @@ body{
   flex-direction:column;
   gap:10px;
   box-shadow:0 10px 30px rgba(0,0,0,0.18);
+  max-height:calc(100vh - 32px);
+  overflow-y:auto;
 }
 
 .modalTitle{
@@ -374,7 +378,7 @@ body{
   resize:vertical;
 }
 
-textarea{
+#futurasEdicoesTexto{
   padding:12px 14px;
   border-radius:12px;
   border:1px solid var(--borda);
@@ -388,7 +392,7 @@ textarea{
 
 .field input:focus,
 .field textarea:focus,
-textarea:focus{
+#futurasEdicoesTexto:focus{
   border-color:var(--verde-escuro);
   box-shadow:0 0 0 3px rgba(127,183,126,0.12);
 }
