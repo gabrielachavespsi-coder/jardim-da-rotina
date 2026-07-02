@@ -519,6 +519,37 @@ input:focus, select:focus{
   margin-top:-4px;
 }
 
+
+/* Integração rápida com Remédios, Exames e Histórico */
+.consultaQuickActions{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+  margin-top:2px;
+}
+.consultaQuickBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--verde-texto);
+  border-radius:12px;
+  padding:9px 8px;
+  font-size:11.5px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  transition:0.2s ease;
+}
+.consultaQuickBtn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+.quickHint{
+  font-size:10.5px;
+  color:var(--texto-secundario);
+  line-height:1.35;
+  text-align:center;
+  margin-top:-2px;
+}
+
 </style>
 </head>
 <body>
@@ -587,6 +618,16 @@ input:focus, select:focus{
       <button type="button" class="dangerMini" onclick="excluirLocalSelecionado()">Excluir local</button>
     </div>
 <div class="field">
+      <label>Adicionar informações relacionadas</label>
+      <div class="consultaQuickActions">
+        <button type="button" class="consultaQuickBtn" onclick="abrirModalRemedioDaConsulta()">💊 Remédios</button>
+        <button type="button" class="consultaQuickBtn" onclick="abrirModalExameDaConsulta()">🧪 Exames</button>
+        <button type="button" class="consultaQuickBtn" onclick="abrirModalHistoricoDaConsulta()">📝 Histórico</button>
+      </div>
+      <div class="quickHint">Esses registros serão salvos nas páginas correspondentes, vinculados aos dados desta consulta.</div>
+    </div>
+
+    <div class="field">
       <label>Observações</label>
       <textarea id="observacoes" style="height:90px;" placeholder="Anote orientações, sintomas, retorno..."></textarea>
     </div>
@@ -623,6 +664,137 @@ input:focus, select:focus{
     <div class="modalBtns">
       <button class="cancel" onclick="fecharModalNovoLocal()">Cancelar</button>
       <button class="save" onclick="salvarNovoLocal()">Ok</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modalOverlay" id="modalRemedioConsulta">
+  <div class="modal">
+    <div class="modalHeader">
+      <button class="fecharModal" onclick="fecharModalRemedioDaConsulta()">✕</button>
+    </div>
+    <h2 class="modalTitle">Remédio relacionado</h2>
+
+    <div class="field">
+      <label>Remédio</label>
+      <input id="consultaRemedioNome" type="text" placeholder="Ex.: Dipirona, vitamina, antibiótico...">
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Dosagem</label>
+        <input id="consultaRemedioDosagem" type="text" placeholder="Ex.: 500mg">
+      </div>
+      <div class="field">
+        <label>Quantidade</label>
+        <input id="consultaRemedioQuantidade" type="text" placeholder="Ex.: 1 comp.">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Data de início</label>
+        <input id="consultaRemedioInicio" type="date">
+      </div>
+      <div class="field">
+        <label>Data de fim</label>
+        <input id="consultaRemedioFim" type="date">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Horário 1</label>
+        <input id="consultaRemedioHorario1" type="time">
+      </div>
+      <div class="field">
+        <label>Horário 2</label>
+        <input id="consultaRemedioHorario2" type="time">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Observações</label>
+      <textarea id="consultaRemedioObservacoes" style="height:80px;" placeholder="Orientações do profissional, cuidado, reação..."></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalRemedioDaConsulta()">Cancelar</button>
+      <button class="save" onclick="salvarRemedioDaConsulta()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalExameConsulta">
+  <div class="modal">
+    <div class="modalHeader">
+      <button class="fecharModal" onclick="fecharModalExameDaConsulta()">✕</button>
+    </div>
+    <h2 class="modalTitle">Exame relacionado</h2>
+
+    <div class="field">
+      <label>Exame</label>
+      <input id="consultaExameNome" type="text" placeholder="Ex.: Hemograma, ultrassom, raio-x...">
+    </div>
+
+    <div class="field">
+      <label>Data</label>
+      <input id="consultaExameData" type="date">
+    </div>
+
+    <div class="field">
+      <label>Local</label>
+      <input id="consultaExameLocal" type="text" placeholder="Clínica, laboratório, hospital...">
+    </div>
+
+    <div class="field">
+      <label>Resultado</label>
+      <input id="consultaExameResultado" type="text" placeholder="Pendente, normal, alterado...">
+    </div>
+
+    <div class="field">
+      <label>Observações</label>
+      <textarea id="consultaExameObservacoes" style="height:80px;" placeholder="Pedido médico, preparo, observações..."></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalExameDaConsulta()">Cancelar</button>
+      <button class="save" onclick="salvarExameDaConsulta()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalHistoricoConsulta">
+  <div class="modal">
+    <div class="modalHeader">
+      <button class="fecharModal" onclick="fecharModalHistoricoDaConsulta()">✕</button>
+    </div>
+    <h2 class="modalTitle">Histórico relacionado</h2>
+
+    <div class="field">
+      <label>Título</label>
+      <input id="consultaHistoricoTitulo" type="text" placeholder="Ex.: Orientação da consulta, sintoma, diagnóstico...">
+    </div>
+
+    <div class="field">
+      <label>Data</label>
+      <input id="consultaHistoricoData" type="date">
+    </div>
+
+    <div class="field">
+      <label>Categoria</label>
+      <input id="consultaHistoricoCategoria" type="text" placeholder="Ex.: Consulta, sintoma, diagnóstico, orientação...">
+    </div>
+
+    <div class="field">
+      <label>Descrição</label>
+      <textarea id="consultaHistoricoDescricao" style="height:100px;" placeholder="Informações importantes para guardar no histórico..."></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalHistoricoDaConsulta()">Cancelar</button>
+      <button class="save" onclick="salvarHistoricoDaConsulta()">Concluir</button>
     </div>
   </div>
 </div>
@@ -1245,6 +1417,179 @@ function renderizarLista(){
       <div class="registroDescricao">${escapeHtml(descricaoItem(item))}</div>
     </button>
   `).join("");
+}
+
+
+function getConsultaAtualParaVinculo(){
+  const item = editandoId ? getDados().find(registro => String(registro.id) === String(editandoId)) : null;
+  return {
+    id: editandoId || "consulta_em_edicao",
+    titulo: document.getElementById("titulo").value.trim() || (item && item.titulo) || "Consulta",
+    profissional: document.getElementById("profissional").value.trim() || (item && item.profissional) || "",
+    data: document.getElementById("data").value.trim() || (item && item.data) || dataHojeISO(),
+    hora: document.getElementById("hora").value.trim() || (item && item.hora) || "",
+    local: document.getElementById("local").value.trim() || (item && item.local) || ""
+  };
+}
+
+function textoVinculoConsulta(prefixo = "Vinculado à consulta"){
+  const c = getConsultaAtualParaVinculo();
+  const partes = [c.titulo, c.profissional, c.data ? formatarDataConsultaBR(c.data) : "", c.hora, c.local].filter(Boolean);
+  return `${prefixo}: ${partes.join(" • ")}`;
+}
+
+function lerArrayLocalStorage(chave){
+  try{
+    const valor = JSON.parse(localStorage.getItem(chave) || "[]");
+    return Array.isArray(valor) ? valor : [];
+  }catch(e){
+    return [];
+  }
+}
+
+function salvarArrayLocalStorage(chave, lista){
+  localStorage.setItem(chave, JSON.stringify(Array.isArray(lista) ? lista : []));
+}
+
+function salvarNomeEmLista(chave, nome){
+  const limpo = String(nome || "").trim();
+  if(!limpo) return;
+  const lista = lerArrayLocalStorage(chave);
+  if(!lista.some(item => String(item).toLowerCase() === limpo.toLowerCase())){
+    lista.push(limpo);
+    lista.sort((a,b) => String(a).localeCompare(String(b), "pt-BR", {sensitivity:"base"}));
+    salvarArrayLocalStorage(chave, lista);
+  }
+}
+
+function abrirModalRemedioDaConsulta(){
+  const c = getConsultaAtualParaVinculo();
+  document.getElementById("consultaRemedioNome").value = "";
+  document.getElementById("consultaRemedioDosagem").value = "";
+  document.getElementById("consultaRemedioQuantidade").value = "";
+  document.getElementById("consultaRemedioInicio").value = c.data || dataHojeISO();
+  document.getElementById("consultaRemedioFim").value = "";
+  document.getElementById("consultaRemedioHorario1").value = "";
+  document.getElementById("consultaRemedioHorario2").value = "";
+  document.getElementById("consultaRemedioObservacoes").value = textoVinculoConsulta("Remédio indicado/relacionado à consulta");
+  document.getElementById("modalRemedioConsulta").classList.add("show");
+}
+
+function fecharModalRemedioDaConsulta(){
+  document.getElementById("modalRemedioConsulta").classList.remove("show");
+}
+
+function salvarRemedioDaConsulta(){
+  const nome = document.getElementById("consultaRemedioNome").value.trim();
+  if(!nome){
+    alert("Preencha o nome do remédio.");
+    return;
+  }
+
+  const c = getConsultaAtualParaVinculo();
+  const dados = lerArrayLocalStorage("saude_remedios");
+  dados.push({
+    id: Date.now(),
+    nome,
+    dosagem: document.getElementById("consultaRemedioDosagem").value.trim(),
+    quantidade: document.getElementById("consultaRemedioQuantidade").value.trim(),
+    horarios: [
+      document.getElementById("consultaRemedioHorario1").value.trim(),
+      document.getElementById("consultaRemedioHorario2").value.trim()
+    ].filter(Boolean),
+    inicio: document.getElementById("consultaRemedioInicio").value.trim(),
+    fim: document.getElementById("consultaRemedioFim").value.trim(),
+    observacoes: document.getElementById("consultaRemedioObservacoes").value.trim(),
+    consultaId: c.id,
+    consultaTitulo: c.titulo,
+    consultaData: c.data,
+    origem: "consulta_saude",
+    atualizadoEm: new Date().toISOString()
+  });
+  salvarArrayLocalStorage("saude_remedios", dados);
+  salvarNomeEmLista("saude_remedios_base", nome);
+  fecharModalRemedioDaConsulta();
+  alert("Remédio salvo na página Remédios.");
+}
+
+function abrirModalExameDaConsulta(){
+  const c = getConsultaAtualParaVinculo();
+  document.getElementById("consultaExameNome").value = "";
+  document.getElementById("consultaExameData").value = c.data || dataHojeISO();
+  document.getElementById("consultaExameLocal").value = c.local || "";
+  document.getElementById("consultaExameResultado").value = "";
+  document.getElementById("consultaExameObservacoes").value = textoVinculoConsulta("Exame pedido/relacionado à consulta");
+  document.getElementById("modalExameConsulta").classList.add("show");
+}
+
+function fecharModalExameDaConsulta(){
+  document.getElementById("modalExameConsulta").classList.remove("show");
+}
+
+function salvarExameDaConsulta(){
+  const nome = document.getElementById("consultaExameNome").value.trim();
+  if(!nome){
+    alert("Preencha o nome do exame.");
+    return;
+  }
+
+  const c = getConsultaAtualParaVinculo();
+  const dados = lerArrayLocalStorage("saude_exames");
+  dados.push({
+    id: Date.now(),
+    nome,
+    data: document.getElementById("consultaExameData").value.trim(),
+    local: document.getElementById("consultaExameLocal").value.trim(),
+    resultado: document.getElementById("consultaExameResultado").value.trim(),
+    observacoes: document.getElementById("consultaExameObservacoes").value.trim(),
+    consultaId: c.id,
+    consultaTitulo: c.titulo,
+    consultaData: c.data,
+    origem: "consulta_saude",
+    atualizadoEm: new Date().toISOString()
+  });
+  salvarArrayLocalStorage("saude_exames", dados);
+  fecharModalExameDaConsulta();
+  alert("Exame salvo na página Exames.");
+}
+
+function abrirModalHistoricoDaConsulta(){
+  const c = getConsultaAtualParaVinculo();
+  document.getElementById("consultaHistoricoTitulo").value = c.titulo ? `Consulta: ${c.titulo}` : "Consulta";
+  document.getElementById("consultaHistoricoData").value = c.data || dataHojeISO();
+  document.getElementById("consultaHistoricoCategoria").value = "Consulta";
+  document.getElementById("consultaHistoricoDescricao").value = textoVinculoConsulta("Registro vinculado à consulta");
+  document.getElementById("modalHistoricoConsulta").classList.add("show");
+}
+
+function fecharModalHistoricoDaConsulta(){
+  document.getElementById("modalHistoricoConsulta").classList.remove("show");
+}
+
+function salvarHistoricoDaConsulta(){
+  const titulo = document.getElementById("consultaHistoricoTitulo").value.trim();
+  if(!titulo){
+    alert("Preencha o título do histórico.");
+    return;
+  }
+
+  const c = getConsultaAtualParaVinculo();
+  const dados = lerArrayLocalStorage("saude_historico");
+  dados.push({
+    id: Date.now(),
+    titulo,
+    data: document.getElementById("consultaHistoricoData").value.trim(),
+    categoria: document.getElementById("consultaHistoricoCategoria").value.trim(),
+    descricao: document.getElementById("consultaHistoricoDescricao").value.trim(),
+    consultaId: c.id,
+    consultaTitulo: c.titulo,
+    consultaData: c.data,
+    origem: "consulta_saude",
+    atualizadoEm: new Date().toISOString()
+  });
+  salvarArrayLocalStorage("saude_historico", dados);
+  fecharModalHistoricoDaConsulta();
+  alert("Histórico salvo na página Histórico.");
 }
 
 function abrirModalFuturasEdicoes(){
