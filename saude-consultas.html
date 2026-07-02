@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultas</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#6B6B6B;
+  --borda:#E3E5E1;
+
+  --fonte:'Poppins',sans-serif;
+
+  --titulo:20px;
+  --botao:15px;
+
+  --sombra-suave:0 4px 12px rgba(0,0,0,0.05);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html, body{
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+}
+
+.pagina{
+  width:100%;
+  max-width:420px;
+}
+
+.card{
+  width:100%;
+  background:var(--card);
+  border-radius:24px;
+  padding:22px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.topo{
+  display:grid;
+  grid-template-columns:40px 1fr 58px;
+  align-items:start;
+  gap:8px;
+  margin-bottom:6px;
+}
+
+.botao-voltar{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  border-radius:12px;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  padding:0;
+  transition:0.2s ease;
+}
+
+.botao-voltar:hover{
+  background:#dde3d9;
+}
+
+.botao-voltar span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  transform:translateY(-1px);
+}
+
+.topCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding-top:2px;
+}
+
+.titleIndex{
+  color:var(--texto-principal);
+  font-weight:500;
+  font-size:var(--titulo);
+  margin:0;
+  line-height:1.2;
+  text-align:center;
+}
+
+.subtitulo{
+  font-size:11px;
+  color:var(--texto-secundario);
+  margin-top:2px;
+  text-align:center;
+  white-space:nowrap;
+}
+
+.dataTopo{
+  min-height:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:flex-start;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:1px;
+}
+
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  white-space:nowrap;
+  margin-bottom:2px;
+}
+
+.dataTopoLinha{
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.botoes-lista{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.botao{
+  width:100%;
+  border:none;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-radius:16px;
+  padding:0 16px;
+  font-size:var(--botao);
+  font-family:var(--fonte);
+  cursor:pointer;
+  transition:0.2s ease;
+  min-height:84px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.botao:hover{
+  background:var(--verde-hover);
+}
+
+.conteudo-botao{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transform:translateY(1px);
+}
+
+.nome-botao{
+  font-size:14px;
+  color:var(--verde-texto);
+  text-align:center;
+  line-height:1.35;
+  font-weight:500;
+  margin:0;
+}
+
+.proxima-tarefa{
+  margin-top:4px;
+  font-size:11px;
+  color:rgba(63,111,79,0.72);
+  text-align:center;
+  line-height:1.3;
+  margin-bottom:0;
+}
+
+.horario-proxima{
+  display:none;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:4px;
+  flex-wrap:wrap;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  transition:0.2s ease;
+}
+
+.futureBtn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  z-index:999;
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+}
+
+.modalTitle{
+  font-size:18px;
+  color:var(--texto-principal);
+  text-align:center;
+  font-weight:500;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+  font-family:var(--fonte);
+  font-weight:500;
+}
+
+textarea{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  height:260px;
+  resize:none;
+}
+
+textarea:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+  outline:none;
+}
+
+.modalBtns{
+  display:flex;
+  gap:8px;
+}
+
+.modalBtns button{
+  flex:1;
+  padding:11px 12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:12.5px;
+  transition:0.2s ease;
+}
+
+.cancel{
+  background:#efefef;
+  color:#333;
+}
+
+.cancel:hover{
+  background:#e7e7e7;
+}
+
+.save{
+  background:var(--verde-escuro);
+  color:white;
+}
+
+.save:hover{
+  background:#4f8a4f;
+}
+
+@media (max-width: 390px){
+  body{
+    padding:14px;
+  }
+
+  .card{
+    padding:20px 14px 16px;
+  }
+
+  .titleIndex{
+    font-size:19px;
+  }
+
+  .topo{
+    grid-template-columns:40px 1fr 54px;
+  }
+
+  .horaTopo{
+    font-size:13px;
+  }
+
+  .dataTopoLinha{
+    font-size:10.5px;
+  }
+
+  .subtitulo{
+    font-size:10.5px;
+  }
+}
+
+
+.lista-registros{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.registro{
+  background:var(--verde-principal);
+  border:none;
+  border-radius:16px;
+  padding:13px 14px;
+  cursor:pointer;
+  transition:0.2s ease;
+  text-align:left;
+  font-family:var(--fonte);
+}
+.registro:hover{ background:var(--verde-hover); }
+.registroTitulo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  line-height:1.35;
+  text-align:center;
+}
+.registroDescricao{
+  margin-top:4px;
+  font-size:11px;
+  color:rgba(63,111,79,0.72);
+  line-height:1.35;
+  text-align:center;
+}
+.empty{
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:16px;
+  padding:16px 14px;
+  text-align:center;
+  color:var(--texto-secundario);
+  font-size:13px;
+  line-height:1.55;
+}
+input, select{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  outline:none;
+  color:var(--texto-principal);
+}
+input:focus, select:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+}
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.modalHeader{
+  display:flex;
+  justify-content:flex-end;
+}
+.fecharModal{
+  background:#E9ECE7;
+  border:none;
+  width:32px;
+  height:32px;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+  color:#333;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.addTopBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--verde-texto);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+}
+
+.selectActions{
+  display:flex;
+  gap:8px;
+}
+.selectActions button{
+  flex:1;
+  border:none;
+  border-radius:12px;
+  padding:8px 10px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:11.5px;
+  background:#E9ECE7;
+  color:var(--verde-texto);
+}
+.selectActions button.dangerMini{
+  background:#f5d7d7;
+  color:#8a3030;
+}
+
+.modal{
+  max-height:85vh;
+  overflow-y:auto;
+}
+
+
+.agendaActions{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.agendaStatus{
+  display:none;
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:10px 12px;
+  font-size:11.5px;
+  color:var(--texto-secundario);
+  line-height:1.45;
+  text-align:center;
+}
+.agendaStatus.show{
+  display:block;
+}
+.agendaStatus.ok{
+  color:var(--verde-texto);
+  background:#F2F7F1;
+}
+.agendaStatus.erro{
+  color:#8a3030;
+  background:#FFF1F1;
+  border-color:#f5d7d7;
+}
+.agendaMiniInfo{
+  font-size:10.5px;
+  color:var(--texto-secundario);
+  line-height:1.35;
+  text-align:center;
+  margin-top:-4px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="pagina">
+  <div class="card">
+    <div class="topo">
+      <button class="botao-voltar" onclick="location.href='saude.html'"><span>←</span></button>
+      <div class="topCenter">
+        <h1 class="titleIndex">📅 Consultas</h1>
+        <p class="subtitulo">acompanhar atendimentos</p>
+      </div>
+      <div class="dataTopo" aria-label="Data e hora atuais">
+        <div id="linhaTempoHora" class="horaTopo"></div>
+        <div id="linhaTempoDia" class="dataTopoLinha"></div>
+        <div id="linhaTempoData" class="dataTopoLinha"></div>
+      </div>
+    </div>
+
+    <div class="agendaActions">
+      <button class="addTopBtn" onclick="abrirModalNovo()">+ acrescentar</button>
+      <button class="addTopBtn" onclick="conectarGoogleAgenda()">Conectar Google Agenda</button>
+      <button class="addTopBtn" onclick="atualizarAgendaSaude()">Atualizar agenda</button>
+    </div>
+
+    <div id="statusAgendaSaude" class="agendaStatus"></div>
+    <div class="agendaMiniInfo">Filtro preparado para buscar apenas eventos da agenda Google chamada “Saúde”.</div>
+
+    <div id="listaRegistros" class="lista-registros"></div>
+
+    <div class="footerMiniAction">
+      <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalCadastro">
+  <div class="modal">
+    <div class="modalHeader">
+      <button class="fecharModal" onclick="fecharModalCadastro()">✕</button>
+    </div>
+    <h2 class="modalTitle" id="tituloCadastro">Novo registro</h2>
+    <div class="field">
+      <label>Consulta / Especialidade</label>
+      <input id="titulo" type="text" placeholder="Ex.: Endócrino, dentista, terapia">
+    </div>
+<div class="field">
+      <label>Profissional</label>
+      <select id="profissional"></select>
+    </div>
+    <div class="selectActions">
+      <button type="button" onclick="abrirModalNovoProfissional()">Novo profissional</button>
+      <button type="button" class="dangerMini" onclick="excluirProfissionalSelecionado()">Excluir profissional</button>
+    </div>
+<div class="field">
+      <label>Data</label>
+      <input id="data" type="date">
+    </div>
+<div class="field">
+      <label>Hora</label>
+      <input id="hora" type="time">
+    </div>
+<div class="field">
+      <label>Local</label>
+      <select id="local"></select>
+    </div>
+    <div class="selectActions">
+      <button type="button" onclick="abrirModalNovoLocal()">Novo local</button>
+      <button type="button" class="dangerMini" onclick="excluirLocalSelecionado()">Excluir local</button>
+    </div>
+<div class="field">
+      <label>Observações</label>
+      <textarea id="observacoes" style="height:90px;" placeholder="Anote orientações, sintomas, retorno..."></textarea>
+    </div>
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalCadastro()">Cancelar</button>
+      <button class="cancel" id="btnExcluir" onclick="excluirRegistroAtual()" style="display:none;">Excluir</button>
+      <button class="save" onclick="salvarCadastro()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modalOverlay" id="modalNovoProfissional">
+  <div class="modal" style="width:min(300px,100%);">
+    <h2 class="modalTitle">Novo profissional</h2>
+    <div class="field">
+      <label>Nome do profissional</label>
+      <input id="novoProfissionalInput" type="text" placeholder="Ex.: Dra. Ana, Endócrino, Clínica...">
+    </div>
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalNovoProfissional()">Cancelar</button>
+      <button class="save" onclick="salvarNovoProfissional()">Ok</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalNovoLocal">
+  <div class="modal" style="width:min(300px,100%);">
+    <h2 class="modalTitle">Novo local</h2>
+    <div class="field">
+      <label>Local da consulta</label>
+      <input id="novoLocalInput" type="text" placeholder="Ex.: SUS, clínica, online...">
+    </div>
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalNovoLocal()">Cancelar</button>
+      <button class="save" onclick="salvarNovoLocal()">Ok</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalFuturasEdicoes">
+  <div class="modal">
+    <h2 class="modalTitle">Futuras edições</h2>
+    <div class="field">
+      <label>Ideias de melhorias futuras</label>
+      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
+    </div>
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+const CHAVE_DADOS = "saude_consultas";
+const CHAVE_PROFISSIONAIS = "saude_consultas_profissionais";
+const CHAVE_LOCAIS = "saude_consultas_locais";
+const CHAVE_FUTURAS_EDICOES = "futuras_edicoes_saude_consultas";
+const NOME_AGENDA_SAUDE = "Saúde";
+const GOOGLE_CALENDAR_CLIENT_ID = "378836858096-21e955cs5no72h2b7idv7rpb91lt83pm.apps.googleusercontent.com";
+const GOOGLE_CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.readonly";
+const GOOGLE_TOKEN_SESSION_KEY = "saude_consultas_google_access_token";
+const GOOGLE_TOKEN_EXPIRA_KEY = "saude_consultas_google_access_token_expira";
+const CHAVE_ULTIMA_SINC_AGENDA_SAUDE = "saude_consultas_ultima_sincronizacao_agenda_saude";
+let editandoId = null;
+
+function getDados(){
+  try{ return JSON.parse(localStorage.getItem(CHAVE_DADOS)) || []; }
+  catch(e){ return []; }
+}
+
+function salvarDados(dados){
+  localStorage.setItem(CHAVE_DADOS, JSON.stringify(dados));
+}
+
+function getListaSalva(chave, padrao = []){
+  try{
+    const lista = JSON.parse(localStorage.getItem(chave));
+    if(Array.isArray(lista)) return lista;
+  }catch(e){}
+  localStorage.setItem(chave, JSON.stringify(padrao));
+  return padrao;
+}
+
+function salvarLista(chave, lista){
+  const unica = [...new Set((lista || []).map(item => String(item || "").trim()).filter(Boolean))]
+    .sort((a,b) => a.localeCompare(b, "pt-BR", {sensitivity:"base"}));
+  localStorage.setItem(chave, JSON.stringify(unica));
+  return unica;
+}
+
+function getProfissionais(){
+  const salvos = getListaSalva(CHAVE_PROFISSIONAIS, []);
+  const usados = getDados().map(item => item.profissional).filter(Boolean);
+  return salvarLista(CHAVE_PROFISSIONAIS, [...salvos, ...usados]);
+}
+
+function getLocais(){
+  const salvos = getListaSalva(CHAVE_LOCAIS, []);
+  const usados = getDados().map(item => item.local).filter(Boolean);
+  return salvarLista(CHAVE_LOCAIS, [...salvos, ...usados]);
+}
+
+function preencherSelect(id, lista, valorAtual = "", placeholder = "Selecione"){
+  const select = document.getElementById(id);
+  const valor = String(valorAtual || "").trim();
+  const opcoes = valor && !lista.includes(valor) ? [...lista, valor].sort((a,b)=>a.localeCompare(b,"pt-BR",{sensitivity:"base"})) : lista;
+
+  select.innerHTML = `<option value="">${escapeHtml(placeholder)}</option>` +
+    opcoes.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join("");
+  select.value = valor;
+}
+
+function preencherSelectProfissionais(valorAtual = ""){
+  preencherSelect("profissional", getProfissionais(), valorAtual, "Selecione ou cadastre");
+}
+
+function preencherSelectLocais(valorAtual = ""){
+  preencherSelect("local", getLocais(), valorAtual, "Selecione ou cadastre");
+}
+
+function abrirModalNovoProfissional(){
+  document.getElementById("novoProfissionalInput").value = "";
+  document.getElementById("modalNovoProfissional").classList.add("show");
+  setTimeout(() => document.getElementById("novoProfissionalInput").focus(), 80);
+}
+
+function fecharModalNovoProfissional(){
+  document.getElementById("modalNovoProfissional").classList.remove("show");
+}
+
+function salvarNovoProfissional(){
+  const input = document.getElementById("novoProfissionalInput");
+  const nome = input.value.trim();
+
+  if(!nome){
+    alert("Digite o nome do profissional.");
+    return;
+  }
+
+  const lista = salvarLista(CHAVE_PROFISSIONAIS, [...getProfissionais(), nome]);
+  preencherSelect("profissional", lista, nome, "Selecione ou cadastre");
+  fecharModalNovoProfissional();
+}
+
+function excluirProfissionalSelecionado(){
+  const select = document.getElementById("profissional");
+  const valor = select.value;
+
+  if(!valor){
+    alert("Selecione um profissional para excluir.");
+    return;
+  }
+
+  if(!confirm(`Deseja excluir "${valor}" da lista de profissionais?`)) return;
+
+  const lista = getProfissionais().filter(item => item.toLowerCase() !== valor.toLowerCase());
+  salvarLista(CHAVE_PROFISSIONAIS, lista);
+  preencherSelectProfissionais("");
+}
+
+function abrirModalNovoLocal(){
+  document.getElementById("novoLocalInput").value = "";
+  document.getElementById("modalNovoLocal").classList.add("show");
+  setTimeout(() => document.getElementById("novoLocalInput").focus(), 80);
+}
+
+function fecharModalNovoLocal(){
+  document.getElementById("modalNovoLocal").classList.remove("show");
+}
+
+function salvarNovoLocal(){
+  const input = document.getElementById("novoLocalInput");
+  const local = input.value.trim();
+
+  if(!local){
+    alert("Digite o local.");
+    return;
+  }
+
+  const lista = salvarLista(CHAVE_LOCAIS, [...getLocais(), local]);
+  preencherSelect("local", lista, local, "Selecione ou cadastre");
+  fecharModalNovoLocal();
+}
+
+function excluirLocalSelecionado(){
+  const select = document.getElementById("local");
+  const valor = select.value;
+
+  if(!valor){
+    alert("Selecione um local para excluir.");
+    return;
+  }
+
+  if(!confirm(`Deseja excluir "${valor}" da lista de locais?`)) return;
+
+  const lista = getLocais().filter(item => item.toLowerCase() !== valor.toLowerCase());
+  salvarLista(CHAVE_LOCAIS, lista);
+  preencherSelectLocais("");
+}
+
+function escapeHtml(texto){
+  return String(texto ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function descricaoItem(item){
+  const partes = [item.profissional, item.data, item.hora, item.local].filter(Boolean);
+  return partes.join(" • ") || (item.observacoes || "sem detalhes");
+}
+
+function abrirModalNovo(){
+  editandoId = null;
+  document.getElementById("tituloCadastro").textContent = "Novo registro";
+  document.getElementById("btnExcluir").style.display = "none";
+  document.getElementById("titulo").value = "";
+  preencherSelectProfissionais("");
+  document.getElementById("data").value = "";
+  document.getElementById("hora").value = "";
+  preencherSelectLocais("");
+  document.getElementById("observacoes").value = "";
+  document.getElementById("modalCadastro").classList.add("show");
+}
+
+function abrirModalEditar(id){
+  const item = getDados().find(registro => registro.id === id);
+  if(!item) return;
+  editandoId = id;
+  document.getElementById("tituloCadastro").textContent = "Editar registro";
+  document.getElementById("btnExcluir").style.display = "block";
+  document.getElementById("titulo").value = item.titulo || "";
+  preencherSelectProfissionais(item.profissional || "");
+  document.getElementById("data").value = item.data || "";
+  document.getElementById("hora").value = item.hora || "";
+  preencherSelectLocais(item.local || "");
+  document.getElementById("observacoes").value = item.observacoes || "";
+  document.getElementById("modalCadastro").classList.add("show");
+}
+
+function fecharModalCadastro(){
+  document.getElementById("modalCadastro").classList.remove("show");
+}
+
+function salvarCadastro(){
+  const item = {
+      id: editandoId || Date.now(),
+      titulo: document.getElementById("titulo").value.trim(),
+      profissional: document.getElementById("profissional").value.trim(),
+      data: document.getElementById("data").value.trim(),
+      hora: document.getElementById("hora").value.trim(),
+      local: document.getElementById("local").value.trim(),
+      observacoes: document.getElementById("observacoes").value.trim(),
+      atualizadoEm: new Date().toISOString()
+  };
+
+  if(!item.titulo){
+    alert("Preencha o campo principal.");
+    return;
+  }
+
+  let dados = getDados();
+
+  if(editandoId){
+    dados = dados.map(registro => registro.id === editandoId ? item : registro);
+  }else{
+    dados.push(item);
+  }
+
+  if(item.profissional){
+    salvarLista(CHAVE_PROFISSIONAIS, [...getProfissionais(), item.profissional]);
+  }
+  if(item.local){
+    salvarLista(CHAVE_LOCAIS, [...getLocais(), item.local]);
+  }
+
+  salvarDados(dados);
+  fecharModalCadastro();
+  renderizarLista();
+}
+
+function excluirRegistroAtual(){
+  if(!editandoId) return;
+  if(!confirm("Deseja excluir este registro?")) return;
+  const dados = getDados().filter(item => item.id !== editandoId);
+  salvarDados(dados);
+  fecharModalCadastro();
+  renderizarLista();
+}
+
+
+function normalizarTextoBusca(texto){
+  return String(texto || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function mostrarStatusAgenda(mensagem, tipo = ""){
+  const box = document.getElementById("statusAgendaSaude");
+  if(!box) return;
+  box.textContent = mensagem;
+  box.className = "agendaStatus show" + (tipo ? " " + tipo : "");
+}
+
+function eventoGoogleParaConsulta(evento){
+  const inicio = evento.start || {};
+  const dataHora = inicio.dateTime || inicio.date || "";
+  let data = "";
+  let hora = "";
+
+  if(dataHora){
+    data = String(dataHora).slice(0, 10);
+    if(String(dataHora).includes("T")){
+      hora = String(dataHora).split("T")[1].slice(0, 5);
+    }
+  }
+
+  const titulo = evento.summary || evento.titulo || evento.title || "Consulta";
+  const local = evento.location || evento.local || "";
+  const descricao = evento.description || evento.observacoes || "";
+
+  return {
+    id: `google_${evento.id || Date.now()}_${Math.random().toString(16).slice(2)}`,
+    googleEventId: evento.id || "",
+    origem: "google_calendar_saude",
+    titulo: titulo,
+    profissional: "",
+    data: data,
+    hora: hora,
+    local: local,
+    observacoes: descricao ? `Importado da agenda Saúde.\n\n${descricao}` : "Importado da agenda Saúde.",
+    atualizadoEm: new Date().toISOString()
+  };
+}
+
+function mesclarConsultasImportadas(eventos){
+  if(!Array.isArray(eventos) || !eventos.length) return 0;
+
+  let dados = getDados();
+  let importados = 0;
+
+  eventos.forEach(evento => {
+    const consulta = eventoGoogleParaConsulta(evento);
+    const jaExiste = consulta.googleEventId && dados.some(item => item.googleEventId === consulta.googleEventId);
+
+    if(jaExiste){
+      dados = dados.map(item => item.googleEventId === consulta.googleEventId
+        ? { ...item, ...consulta, id:item.id }
+        : item
+      );
+    }else{
+      dados.push(consulta);
+      importados++;
+    }
+
+    if(consulta.local){
+      salvarLista(CHAVE_LOCAIS, [...getLocais(), consulta.local]);
+    }
+  });
+
+  dados.sort((a,b) => {
+    const dataA = `${a.data || "9999-99-99"} ${a.hora || "99:99"}`;
+    const dataB = `${b.data || "9999-99-99"} ${b.hora || "99:99"}`;
+    return dataA.localeCompare(dataB);
+  });
+
+  salvarDados(dados);
+  localStorage.setItem(CHAVE_ULTIMA_SINC_AGENDA_SAUDE, new Date().toISOString());
+  renderizarLista();
+  preencherSelectLocais("");
+  return importados;
+}
+
+function extrairEventosDePossivelCache(valor){
+  if(!valor) return [];
+  let parsed = valor;
+  if(typeof valor === "string"){
+    try{ parsed = JSON.parse(valor); }catch(e){ return []; }
+  }
+
+  if(Array.isArray(parsed)) return parsed;
+  if(Array.isArray(parsed.events)) return parsed.events;
+  if(Array.isArray(parsed.items)) return parsed.items;
+  if(parsed.calendars && typeof parsed.calendars === "object"){
+    return Object.values(parsed.calendars).flatMap(cal => Array.isArray(cal.events) ? cal.events : []);
+  }
+  return [];
+}
+
+
+function tokenGoogleAgendaValido(){
+  const token = sessionStorage.getItem(GOOGLE_TOKEN_SESSION_KEY) || "";
+  const expiraEm = Number(sessionStorage.getItem(GOOGLE_TOKEN_EXPIRA_KEY) || 0);
+  if(!token || !expiraEm) return "";
+  if(Date.now() > expiraEm - 60000) return "";
+  return token;
+}
+
+function salvarTokenGoogleAgenda(token, expiresIn){
+  if(!token) return;
+  const segundos = Number(expiresIn || 3600);
+  sessionStorage.setItem(GOOGLE_TOKEN_SESSION_KEY, token);
+  sessionStorage.setItem(GOOGLE_TOKEN_EXPIRA_KEY, String(Date.now() + (segundos * 1000)));
+}
+
+function limparTokenGoogleAgenda(){
+  sessionStorage.removeItem(GOOGLE_TOKEN_SESSION_KEY);
+  sessionStorage.removeItem(GOOGLE_TOKEN_EXPIRA_KEY);
+}
+
+function conectarGoogleAgenda(modoSilencioso = false){
+  return new Promise((resolve, reject) => {
+    if(!window.google || !google.accounts || !google.accounts.oauth2){
+      const erro = "A biblioteca de login do Google ainda não carregou. Tente novamente em alguns segundos.";
+      mostrarStatusAgenda(erro, "erro");
+      reject(new Error(erro));
+      return;
+    }
+
+    const tokenAtual = tokenGoogleAgendaValido();
+    if(tokenAtual){
+      if(!modoSilencioso){
+        mostrarStatusAgenda("Google Agenda já está conectada. Agora clique em Atualizar agenda.", "ok");
+      }
+      resolve(tokenAtual);
+      return;
+    }
+
+    const tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: GOOGLE_CALENDAR_CLIENT_ID,
+      scope: GOOGLE_CALENDAR_SCOPE,
+      prompt: modoSilencioso ? "" : "consent",
+      callback: (resposta) => {
+        if(resposta && resposta.access_token){
+          salvarTokenGoogleAgenda(resposta.access_token, resposta.expires_in);
+          mostrarStatusAgenda("Google Agenda conectada. Agora vou buscar somente a agenda Saúde.", "ok");
+          resolve(resposta.access_token);
+        }else{
+          const erro = resposta && resposta.error ? resposta.error : "Autorização cancelada ou não concluída.";
+          mostrarStatusAgenda(erro, "erro");
+          reject(new Error(erro));
+        }
+      },
+      error_callback: (erro) => {
+        const mensagem = erro && erro.message ? erro.message : "Não foi possível conectar à Google Agenda.";
+        mostrarStatusAgenda(mensagem, "erro");
+        reject(new Error(mensagem));
+      }
+    });
+
+    tokenClient.requestAccessToken({ prompt: modoSilencioso ? "" : "consent" });
+  });
+}
+
+async function fetchGoogleCalendarApi(caminho, tentarReconectar = true){
+  let token = tokenGoogleAgendaValido();
+  if(!token){
+    token = await conectarGoogleAgenda(true);
+  }
+
+  const resposta = await fetch(`https://www.googleapis.com/calendar/v3/${caminho}`, {
+    headers:{ Authorization:`Bearer ${token}` }
+  });
+
+  if(resposta.status === 401 && tentarReconectar){
+    limparTokenGoogleAgenda();
+    await conectarGoogleAgenda(false);
+    return fetchGoogleCalendarApi(caminho, false);
+  }
+
+  if(!resposta.ok){
+    let mensagem = "Não consegui acessar a Google Agenda.";
+    try{
+      const erro = await resposta.json();
+      mensagem = erro?.error?.message || mensagem;
+    }catch(e){}
+    throw new Error(mensagem);
+  }
+
+  return resposta.json();
+}
+
+async function buscarEventosAgendaSaudeViaGoogleIdentity(){
+  const listaCalendarios = await fetchGoogleCalendarApi("users/me/calendarList");
+  const calendarios = listaCalendarios.items || [];
+  const calendarioSaude = calendarios.find(cal => normalizarTextoBusca(cal.summary) === normalizarTextoBusca(NOME_AGENDA_SAUDE));
+
+  if(!calendarioSaude){
+    throw new Error('Não encontrei uma agenda chamada "Saúde" no Google Calendar autorizado. Confira se essa agenda está marcada/visível nessa conta.');
+  }
+
+  const agora = new Date();
+  const inicio = new Date(agora);
+  inicio.setMonth(inicio.getMonth() - 2);
+  const fim = new Date(agora);
+  fim.setFullYear(fim.getFullYear() + 1);
+
+  const params = new URLSearchParams({
+    timeMin: inicio.toISOString(),
+    timeMax: fim.toISOString(),
+    singleEvents: "true",
+    orderBy: "startTime",
+    maxResults: "250"
+  });
+
+  const respostaEventos = await fetchGoogleCalendarApi(`calendars/${encodeURIComponent(calendarioSaude.id)}/events?${params.toString()}`);
+  return respostaEventos.items || [];
+}
+
+function buscarEventosAgendaSaudeEmCacheDoApp(){
+  const chavesPossiveis = [
+    "eventos_agenda_app",
+    "agenda_eventos_app",
+    "google_calendar_events",
+    "agenda_google_eventos",
+    "calendar_events",
+    "eventos_google_calendar",
+    "jardim_agenda_eventos"
+  ];
+
+  let encontrados = [];
+
+  chavesPossiveis.forEach(chave => {
+    const eventos = extrairEventosDePossivelCache(localStorage.getItem(chave));
+    eventos.forEach(evento => {
+      const nomeAgenda = evento.calendarName || evento.calendarSummary || evento.nomeAgenda || evento.agenda || evento.calendar || evento.calendario || "";
+      const calendarId = evento.calendarId || "";
+      const ehSaude = normalizarTextoBusca(nomeAgenda) === normalizarTextoBusca(NOME_AGENDA_SAUDE)
+        || normalizarTextoBusca(calendarId).includes(normalizarTextoBusca(NOME_AGENDA_SAUDE));
+      if(ehSaude) encontrados.push(evento);
+    });
+  });
+
+  return encontrados;
+}
+
+async function buscarEventosAgendaSaudeViaGapi(){
+  if(tokenGoogleAgendaValido() || (window.google && google.accounts && google.accounts.oauth2)){
+    return buscarEventosAgendaSaudeViaGoogleIdentity();
+  }
+
+  if(!window.gapi || !gapi.client || !gapi.client.calendar){
+    return null;
+  }
+
+  const listaCalendarios = await gapi.client.calendar.calendarList.list();
+  const calendarios = listaCalendarios?.result?.items || [];
+  const calendarioSaude = calendarios.find(cal => normalizarTextoBusca(cal.summary) === normalizarTextoBusca(NOME_AGENDA_SAUDE));
+
+  if(!calendarioSaude){
+    throw new Error('Não encontrei uma agenda chamada "Saúde" no Google Calendar autorizado.');
+  }
+
+  const agora = new Date();
+  const inicio = new Date(agora);
+  inicio.setMonth(inicio.getMonth() - 2);
+  const fim = new Date(agora);
+  fim.setFullYear(fim.getFullYear() + 1);
+
+  const respostaEventos = await gapi.client.calendar.events.list({
+    calendarId: calendarioSaude.id,
+    timeMin: inicio.toISOString(),
+    timeMax: fim.toISOString(),
+    singleEvents: true,
+    orderBy: "startTime",
+    maxResults: 250
+  });
+
+  return respostaEventos?.result?.items || [];
+}
+
+async function atualizarAgendaSaude(){
+  mostrarStatusAgenda('Buscando eventos da agenda “Saúde”…');
+
+  try{
+    const eventosGoogle = await buscarEventosAgendaSaudeViaGapi();
+
+    if(Array.isArray(eventosGoogle)){
+      const totalNovos = mesclarConsultasImportadas(eventosGoogle);
+      mostrarStatusAgenda(`Agenda Saúde atualizada. ${eventosGoogle.length} evento(s) encontrado(s). ${totalNovos} novo(s) registro(s) incluído(s).`, "ok");
+      return;
+    }
+
+    const eventosCache = buscarEventosAgendaSaudeEmCacheDoApp();
+    if(eventosCache.length){
+      const totalNovos = mesclarConsultasImportadas(eventosCache);
+      mostrarStatusAgenda(`Agenda Saúde atualizada pelo cache do app. ${eventosCache.length} evento(s) encontrado(s). ${totalNovos} novo(s) registro(s) incluído(s).`, "ok");
+      return;
+    }
+
+    mostrarStatusAgenda('Clique em “Conectar Google Agenda” para autorizar o acesso. Depois clique em “Atualizar agenda” para buscar somente eventos da agenda “Saúde”.', "erro");
+  }catch(erro){
+    mostrarStatusAgenda(erro.message || 'Não consegui atualizar a agenda Saúde agora.', "erro");
+  }
+}
+
+function renderizarLista(){
+  const lista = document.getElementById("listaRegistros");
+  const dados = getDados();
+
+  if(!dados.length){
+    lista.innerHTML = '<div class="empty">Nenhum registro cadastrado ainda.</div>';
+    return;
+  }
+
+  lista.innerHTML = dados.map(item => `
+    <button class="registro" onclick="abrirModalEditar(${item.id})">
+      <div class="registroTitulo">${escapeHtml(item.titulo)}</div>
+      <div class="registroDescricao">${escapeHtml(descricaoItem(item))}</div>
+    </button>
+  `).join("");
+}
+
+function abrirModalFuturasEdicoes(){
+  document.getElementById("futurasEdicoesTexto").value =
+    localStorage.getItem(CHAVE_FUTURAS_EDICOES) || "";
+  document.getElementById("modalFuturasEdicoes").classList.add("show");
+}
+
+function fecharModalFuturasEdicoes(){
+  document.getElementById("modalFuturasEdicoes").classList.remove("show");
+}
+
+function salvarFuturasEdicoes(){
+  localStorage.setItem(
+    CHAVE_FUTURAS_EDICOES,
+    document.getElementById("futurasEdicoesTexto").value
+  );
+  fecharModalFuturasEdicoes();
+}
+
+function pad2(numero){ return String(numero).padStart(2, "0"); }
+
+function atualizarLinhaTempo(){
+  const agora = new Date();
+  const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+  document.getElementById("linhaTempoHora").textContent = `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+  document.getElementById("linhaTempoDia").textContent = `• ${diasCurtos[agora.getDay()]}`;
+  document.getElementById("linhaTempoData").textContent = `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
+}
+
+window.addEventListener("load", () => {
+  atualizarLinhaTempo();
+  setInterval(atualizarLinhaTempo, 1000);
+  preencherSelectProfissionais("");
+  preencherSelectLocais("");
+  renderizarLista();
+});
+</script>
+</body>
+</html>
