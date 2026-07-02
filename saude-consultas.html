@@ -545,7 +545,7 @@ input:focus, select:focus{
     </div>
 
     <div id="statusAgendaSaude" class="agendaStatus"></div>
-    <div class="agendaMiniInfo">Filtro preparado para buscar apenas eventos da agenda Google chamada “Saúde”.</div>
+    <div class="agendaMiniInfo">Filtro preparado para buscar apenas eventos da agenda Google chamada “Saúde”, do dia atual até o último dia do próximo mês.</div>
 
     <div id="listaRegistros" class="lista-registros"></div>
 
@@ -802,8 +802,42 @@ function escapeHtml(texto){
     .replaceAll("'", "&#039;");
 }
 
+function dataConsultaParaComparacao(item){
+  return String(item && item.data ? item.data : "").slice(0, 10);
+}
+
+function dataHojeISO(){
+  const hoje = new Date();
+  return `${hoje.getFullYear()}-${pad2(hoje.getMonth()+1)}-${pad2(hoje.getDate())}`;
+}
+
+function dataFinalProximoMesISO(){
+  const hoje = new Date();
+  const ultimoDiaProximoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 2, 0);
+  return `${ultimoDiaProximoMes.getFullYear()}-${pad2(ultimoDiaProximoMes.getMonth()+1)}-${pad2(ultimoDiaProximoMes.getDate())}`;
+}
+
+function estaNoPeriodoVisivel(item){
+  const data = dataConsultaParaComparacao(item);
+  if(!data) return true;
+  return data >= dataHojeISO() && data <= dataFinalProximoMesISO();
+}
+
+function formatarDataConsultaBR(dataISO){
+  const texto = String(dataISO || "").slice(0, 10);
+  const partes = texto.split("-");
+  if(partes.length !== 3) return texto;
+  const ano = partes[0].slice(-2);
+  return `${partes[2]}/${partes[1]}/${ano}`;
+}
+
+function formatarPeriodoAgendaSaude(){
+  return `${formatarDataConsultaBR(dataHojeISO())} até ${formatarDataConsultaBR(dataFinalProximoMesISO())}`;
+}
+
 function descricaoItem(item){
-  const partes = [item.profissional, item.data, item.hora, item.local].filter(Boolean);
+  const dataFormatada = item.data ? formatarDataConsultaBR(item.data) : "";
+  const partes = [item.profissional, dataFormatada, item.hora, item.local].filter(Boolean);
   return partes.join(" • ") || (item.observacoes || "sem detalhes");
 }
 
@@ -821,7 +855,7 @@ function abrirModalNovo(){
 }
 
 function abrirModalEditar(id){
-  const item = getDados().find(registro => registro.id === id);
+  const item = getDados().find(registro => String(registro.id) === String(id));
   if(!item) return;
   editandoId = id;
   document.getElementById("tituloCadastro").textContent = "Editar registro";
@@ -859,7 +893,7 @@ function salvarCadastro(){
   let dados = getDados();
 
   if(editandoId){
-    dados = dados.map(registro => registro.id === editandoId ? item : registro);
+    dados = dados.map(registro => String(registro.id) === String(editandoId) ? item : registro);
   }else{
     dados.push(item);
   }
@@ -879,7 +913,7 @@ function salvarCadastro(){
 function excluirRegistroAtual(){
   if(!editandoId) return;
   if(!confirm("Deseja excluir este registro?")) return;
-  const dados = getDados().filter(item => item.id !== editandoId);
+  const dados = getDados().filter(item => String(item.id) !== String(editandoId));
   salvarDados(dados);
   fecharModalCadastro();
   renderizarLista();
@@ -1088,11 +1122,11 @@ async function buscarEventosAgendaSaudeViaGoogleIdentity(){
     throw new Error('Não encontrei uma agenda chamada "Saúde" no Google Calendar autorizado. Confira se essa agenda está marcada/visível nessa conta.');
   }
 
-  const agora = new Date();
-  const inicio = new Date(agora);
-  inicio.setMonth(inicio.getMonth() - 2);
-  const fim = new Date(agora);
-  fim.setFullYear(fim.getFullYear() + 1);
+  const inicio = new Date();
+  inicio.setHours(0, 0, 0, 0);
+
+  const fim = new Date(inicio.getFullYear(), inicio.getMonth() + 2, 0);
+  fim.setHours(23, 59, 59, 999);
 
   const params = new URLSearchParams({
     timeMin: inicio.toISOString(),
@@ -1150,11 +1184,11 @@ async function buscarEventosAgendaSaudeViaGapi(){
     throw new Error('Não encontrei uma agenda chamada "Saúde" no Google Calendar autorizado.');
   }
 
-  const agora = new Date();
-  const inicio = new Date(agora);
-  inicio.setMonth(inicio.getMonth() - 2);
-  const fim = new Date(agora);
-  fim.setFullYear(fim.getFullYear() + 1);
+  const inicio = new Date();
+  inicio.setHours(0, 0, 0, 0);
+
+  const fim = new Date(inicio.getFullYear(), inicio.getMonth() + 2, 0);
+  fim.setHours(23, 59, 59, 999);
 
   const respostaEventos = await gapi.client.calendar.events.list({
     calendarId: calendarioSaude.id,
@@ -1176,14 +1210,14 @@ async function atualizarAgendaSaude(){
 
     if(Array.isArray(eventosGoogle)){
       const totalNovos = mesclarConsultasImportadas(eventosGoogle);
-      mostrarStatusAgenda(`Agenda Saúde atualizada. ${eventosGoogle.length} evento(s) encontrado(s). ${totalNovos} novo(s) registro(s) incluído(s).`, "ok");
+      mostrarStatusAgenda(`Agenda Saúde atualizada. Período: ${formatarPeriodoAgendaSaude()}. ${eventosGoogle.length} evento(s) encontrado(s). ${totalNovos} novo(s) registro(s) incluído(s).`, "ok");
       return;
     }
 
     const eventosCache = buscarEventosAgendaSaudeEmCacheDoApp();
     if(eventosCache.length){
       const totalNovos = mesclarConsultasImportadas(eventosCache);
-      mostrarStatusAgenda(`Agenda Saúde atualizada pelo cache do app. ${eventosCache.length} evento(s) encontrado(s). ${totalNovos} novo(s) registro(s) incluído(s).`, "ok");
+      mostrarStatusAgenda(`Agenda Saúde atualizada pelo cache do app. Período: ${formatarPeriodoAgendaSaude()}. ${eventosCache.length} evento(s) encontrado(s). ${totalNovos} novo(s) registro(s) incluído(s).`, "ok");
       return;
     }
 
@@ -1195,15 +1229,21 @@ async function atualizarAgendaSaude(){
 
 function renderizarLista(){
   const lista = document.getElementById("listaRegistros");
-  const dados = getDados();
+  const dados = getDados()
+    .filter(estaNoPeriodoVisivel)
+    .sort((a,b) => {
+      const dataA = `${a.data || "9999-99-99"} ${a.hora || "99:99"}`;
+      const dataB = `${b.data || "9999-99-99"} ${b.hora || "99:99"}`;
+      return dataA.localeCompare(dataB);
+    });
 
   if(!dados.length){
-    lista.innerHTML = '<div class="empty">Nenhum registro cadastrado ainda.</div>';
+    lista.innerHTML = `<div class="empty">Nenhum registro cadastrado entre ${formatarPeriodoAgendaSaude()}.</div>`;
     return;
   }
 
   lista.innerHTML = dados.map(item => `
-    <button class="registro" onclick="abrirModalEditar(${item.id})">
+    <button class="registro" onclick="abrirModalEditar('${String(item.id).replaceAll("'", "\\'")}')">
       <div class="registroTitulo">${escapeHtml(item.titulo)}</div>
       <div class="registroDescricao">${escapeHtml(descricaoItem(item))}</div>
     </button>
