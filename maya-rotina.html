@@ -523,10 +523,12 @@
 
     .footerMiniAction{
       display:flex;
-      flex-direction:column;
+      flex-direction:row;
       align-items:center;
+      justify-content:center;
       gap:8px;
       margin-top:4px;
+      flex-wrap:wrap;
     }
 
     .futureBtn{
@@ -539,6 +541,7 @@
       cursor:pointer;
       font-family:var(--fonte);
       transition:0.2s ease;
+      white-space:nowrap;
     }
 
     .futureBtn:hover{
@@ -556,7 +559,9 @@
       cursor:pointer;
       font-family:var(--fonte);
       transition:0.2s ease;
-      min-width:88px;
+      min-width:auto;
+      padding-left:12px;
+      padding-right:12px;
       box-shadow:var(--sombra-mini);
       border:1px solid rgba(63,111,79,0.10);
     }
@@ -742,6 +747,95 @@
   box-shadow:0 0 0 3px rgba(127,183,126,0.12);
 }
 
+
+
+/* =========================================================
+   AJUSTE: SELETOR DA CONFIGURAÇÃO E EMOJIS NOS CAMPOS
+   ========================================================= */
+.opcoes-config-periodo{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:2px;
+}
+.opcaoConfigPeriodoBtn{
+  border:1px solid var(--borda);
+  background:#F8FAF7;
+  color:var(--texto-secundario);
+  border-radius:14px;
+  padding:10px 8px;
+  font-size:12px;
+  font-family:var(--fonte);
+  cursor:pointer;
+  line-height:1.35;
+  transition:0.2s ease;
+}
+.opcaoConfigPeriodoBtn.ativo{
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-color:var(--verde-hover);
+  box-shadow:0 3px 10px rgba(92,157,92,0.10);
+}
+.texto-ajuda-config{
+  font-size:10.5px;
+  color:var(--texto-secundario);
+  line-height:1.35;
+  text-align:center;
+}
+.labelComEmoji{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.emojiMiniBtn{
+  border:none;
+  background:#F2F7F1;
+  color:var(--verde-texto);
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:15px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.2s ease;
+}
+.emojiMiniBtn:hover{
+  background:var(--verde-hover);
+}
+.emojiPalette{
+  position:fixed;
+  display:none;
+  grid-template-columns:repeat(8, 1fr);
+  gap:5px;
+  width:min(320px, calc(100vw - 32px));
+  max-height:210px;
+  overflow-y:auto;
+  background:#fff;
+  border:1px solid var(--borda);
+  border-radius:16px;
+  padding:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.18);
+  z-index:2000;
+}
+.emojiPalette.show{
+  display:grid;
+}
+.emojiOpcao{
+  border:none;
+  background:#F8FAF7;
+  border-radius:9px;
+  height:30px;
+  font-size:16px;
+  cursor:pointer;
+}
+.emojiOpcao:hover{
+  background:var(--verde-principal);
+}
+
     @media (max-width:390px){
       body{
         padding:16px 12px 24px;
@@ -863,29 +957,44 @@
 
     <h2 class="modalTitle">Configuração da rotina</h2>
 
-<div class="field">
-  <label>Nova tarefa</label>
-  <textarea id="novaTarefaTexto" style="height:72px;" placeholder="Nome da tarefa"></textarea>
-</div>
-
-<div class="field">
-  <label>Descrição</label>
-  <textarea id="novaTarefaDescricao" style="height:72px;" placeholder="Descrição da tarefa"></textarea>
-</div>
-
-<div class="field">
-  <label>Horário</label>
-        <textarea id="novaTarefaHora" style="height:48px;" placeholder="Ex.: 09h30m"></textarea>
+    <div class="field" style="margin-top:2px;">
+      <label>Período da rotina</label>
+      <div class="opcoes-config-periodo">
+        <button id="opcaoConfigManha" class="opcaoConfigPeriodoBtn" type="button" onclick="definirPeriodoConfiguracao('morning')">☀️ Manhã</button>
+        <button id="opcaoConfigNoite" class="opcaoConfigPeriodoBtn" type="button" onclick="definirPeriodoConfiguracao('night')">🌓 Noite</button>
       </div>
-
-      <div class="modalBtns">
-        <button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
-        <button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
-      </div>
-
-      <div id="listaConfigTarefas" style="display:flex; flex-direction:column; gap:8px; margin-top:4px;"></div>
+      <div class="texto-ajuda-config">Escolha qual lista você quer ajustar sem precisar fechar a configuração.</div>
     </div>
+
+    <div class="field">
+      <label class="labelComEmoji">
+        <span>Nova tarefa</span>
+        <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('novaTarefaTexto')">😊</button>
+      </label>
+      <textarea id="novaTarefaTexto" style="height:72px;" placeholder="Nome da tarefa"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="labelComEmoji">
+        <span>Descrição</span>
+        <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('novaTarefaDescricao')">😊</button>
+      </label>
+      <textarea id="novaTarefaDescricao" style="height:72px;" placeholder="Descrição da tarefa"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Horário</label>
+      <textarea id="novaTarefaHora" style="height:48px;" placeholder="Ex.: 09h30m"></textarea>
+    </div>
+
+    <div class="modalBtns">
+      <button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
+      <button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
+    </div>
+
+    <div id="listaConfigTarefas" style="display:flex; flex-direction:column; gap:8px; margin-top:4px;"></div>
   </div>
+</div>
 
   <div class="modalOverlay" id="modalRegraTela">
     <div class="modal">
@@ -952,6 +1061,8 @@
 
   <audio id="audioManha" loop preload="auto"></audio>
   <audio id="audioNoite" loop preload="auto"></audio>
+
+<div id="emojiPalette" class="emojiPalette"></div>
 
 <script>
   const STORAGE_KEY = "jardim_rotina_maya_v8";
@@ -1668,10 +1779,86 @@ function obterItensBaseComConfig(tab){
   return todos.sort((a,b) => ordemFinal.indexOf(a.id) - ordemFinal.indexOf(b.id));
 }
 
-  function abrirModalConfiguracao(){
+  
+let periodoConfiguracaoAtual = "morning";
+
+function definirPeriodoConfiguracao(periodo){
+  periodoConfiguracaoAtual = periodo === "night" ? "night" : "morning";
+  renderizarOpcoesPeriodoConfiguracao();
+  renderizarListaConfiguracao();
+}
+
+function renderizarOpcoesPeriodoConfiguracao(){
+  const btnManha = document.getElementById("opcaoConfigManha");
+  const btnNoite = document.getElementById("opcaoConfigNoite");
+  if(btnManha) btnManha.classList.toggle("ativo", periodoConfiguracaoAtual === "morning");
+  if(btnNoite) btnNoite.classList.toggle("ativo", periodoConfiguracaoAtual === "night");
+}
+
+const EMOJIS_CONFIG_MAYA = [
+  "🌿","🌸","🌻","☀️","🌙","⭐","✨","💛",
+  "🩵","💚","💗","🧡","📚","🎒","🪥","🚿",
+  "🍽️","🥛","🧘","🎨","🎶","🧸","🧩","🃏",
+  "✅","💬","📖","📝","🏡","🧺","🌈","🪴"
+];
+let campoEmojiAtualMaya = null;
+
+function abrirEmojiPalette(campoId){
+  const campo = document.getElementById(campoId);
+  const palette = document.getElementById("emojiPalette");
+  if(!campo || !palette) return;
+
+  campoEmojiAtualMaya = campo;
+  palette.innerHTML = "";
+
+  EMOJIS_CONFIG_MAYA.forEach(emoji => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "emojiOpcao";
+    btn.textContent = emoji;
+    btn.onclick = () => inserirEmojiNoCampo(emoji);
+    palette.appendChild(btn);
+  });
+
+  const rect = campo.getBoundingClientRect();
+  palette.style.left = Math.max(16, Math.min(rect.left, window.innerWidth - 336)) + "px";
+  palette.style.top = Math.min(rect.bottom + 8, window.innerHeight - 230) + "px";
+  palette.classList.add("show");
+}
+
+function inserirEmojiNoCampo(emoji){
+  if(!campoEmojiAtualMaya) return;
+  const campo = campoEmojiAtualMaya;
+  const inicio = campo.selectionStart ?? campo.value.length;
+  const fim = campo.selectionEnd ?? campo.value.length;
+  const antes = campo.value.slice(0, inicio);
+  const depois = campo.value.slice(fim);
+  const separador = antes && !antes.endsWith(" ") && !antes.endsWith("\n") ? " " : "";
+  campo.value = antes + separador + emoji + " " + depois;
+  const pos = (antes + separador + emoji + " ").length;
+  campo.focus();
+  campo.setSelectionRange(pos, pos);
+  fecharEmojiPalette();
+}
+
+function fecharEmojiPalette(){
+  const palette = document.getElementById("emojiPalette");
+  if(palette) palette.classList.remove("show");
+}
+
+document.addEventListener("click", function(event){
+  const palette = document.getElementById("emojiPalette");
+  if(!palette || !palette.classList.contains("show")) return;
+  if(event.target.closest(".emojiPalette") || event.target.closest(".emojiMiniBtn")) return;
+  fecharEmojiPalette();
+});
+
+function abrirModalConfiguracao(){
+    periodoConfiguracaoAtual = currentTab === "night" ? "night" : "morning";
     document.getElementById("novaTarefaTexto").value = "";
     document.getElementById("novaTarefaDescricao").value = "";
     document.getElementById("novaTarefaHora").value = "";
+    renderizarOpcoesPeriodoConfiguracao();
     renderizarListaConfiguracao();
     document.getElementById("modalConfiguracao").classList.add("show");
   }
@@ -1692,10 +1879,10 @@ const hora = formatarHorarioRotina(
     }
 
     const cfg = getConfigTarefas();
-    const id = `custom_${currentTab}_${Date.now()}`;
+    const id = `custom_${periodoConfiguracaoAtual}_${Date.now()}`;
 
 const descricao = document.getElementById("novaTarefaDescricao").value.trim();
-cfg.custom[currentTab].push({
+cfg.custom[periodoConfiguracaoAtual].push({
   id,
   text: texto,
   descricao: descricao,
@@ -1704,8 +1891,8 @@ cfg.custom[currentTab].push({
 });
 
 if(!cfg.ordem) cfg.ordem = { morning: [], night: [] };
-if(!Array.isArray(cfg.ordem[currentTab])) cfg.ordem[currentTab] = [];
-cfg.ordem[currentTab].push(id);
+if(!Array.isArray(cfg.ordem[periodoConfiguracaoAtual])) cfg.ordem[periodoConfiguracaoAtual] = [];
+cfg.ordem[periodoConfiguracaoAtual].push(id);
 
     salvarConfigTarefas(cfg);
 document.getElementById("novaTarefaTexto").value = "";
@@ -1764,7 +1951,7 @@ render();
 
 function renderizarListaConfiguracao(){
   const lista = document.getElementById("listaConfigTarefas");
-  const itens = getItemsForTab(currentTab, cycleDayKey);
+  const itens = getItemsForTab(periodoConfiguracaoAtual, cycleDayKey);
   lista.innerHTML = "";
 
   itens.forEach((item, index) => {
@@ -1819,7 +2006,7 @@ function renderizarListaConfiguracao(){
 
 function moverTarefaConfiguracao(id, direcao){
   const cfg = getConfigTarefas();
-  const itens = getItemsForTab(currentTab, cycleDayKey);
+  const itens = getItemsForTab(periodoConfiguracaoAtual, cycleDayKey);
   const ids = itens.map(item => item.id);
   const index = ids.indexOf(id);
   const novoIndex = index + direcao;
@@ -1830,7 +2017,7 @@ function moverTarefaConfiguracao(id, direcao){
   ids.splice(novoIndex, 0, itemMovido);
 
   if(!cfg.ordem) cfg.ordem = { morning: [], night: [] };
-  cfg.ordem[currentTab] = ids;
+  cfg.ordem[periodoConfiguracaoAtual] = ids;
 
   salvarConfigTarefas(cfg);
   renderizarListaConfiguracao();
