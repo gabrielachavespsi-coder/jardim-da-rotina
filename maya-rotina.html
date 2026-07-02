@@ -698,6 +698,50 @@
       background:#4f8a4f;
     }
 
+
+.configActionsBtn{
+  border:none;
+  border-radius:10px;
+  padding:8px 9px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:11px;
+  transition:0.2s ease;
+  background:#efefef;
+  color:#333;
+}
+
+.configActionsBtn:hover{
+  background:#e7e7e7;
+}
+
+.configActionsBtn.move{
+  background:#E9ECE7;
+  color:var(--verde-texto);
+  min-width:32px;
+}
+
+.configActionsBtn.danger{
+  background:#f5d7d7;
+  color:#8a3030;
+}
+
+.campoSenha{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  outline:none;
+}
+
+.campoSenha:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+}
+
     @media (max-width:390px){
       body{
         padding:16px 12px 24px;
@@ -884,6 +928,27 @@
     </div>
   </div>
 
+
+
+  <div class="modalOverlay" id="modalSenhaExcluirTarefa">
+    <div class="modal">
+      <h2 class="modalTitle">Retirar tarefa</h2>
+
+      <div style="font-size:13px; color:var(--texto-secundario); text-align:center; line-height:1.6;">
+        Para retirar essa tarefa, digite a senha da mamãe.
+      </div>
+
+      <div class="field">
+        <label for="senhaExcluirTarefa">Senha</label>
+        <input id="senhaExcluirTarefa" class="campoSenha" type="password" inputmode="numeric" placeholder="Digite a senha" />
+      </div>
+
+      <div class="modalBtns">
+        <button class="cancel" onclick="fecharModalSenhaExcluirTarefa()">Cancelar</button>
+        <button class="save" onclick="confirmarExcluirTarefaConfiguracao()">Confirmar</button>
+      </div>
+    </div>
+  </div>
 
   <audio id="audioManha" loop preload="auto"></audio>
   <audio id="audioNoite" loop preload="auto"></audio>
@@ -1506,14 +1571,26 @@ function atualizarExibicaoRegraHoje(){
     try{
       const raw = localStorage.getItem(CONFIG_TAREFAS_KEY);
       const cfg = raw ? JSON.parse(raw) : {};
+
       if(!cfg.custom) cfg.custom = { morning: [], night: [] };
       if(!Array.isArray(cfg.custom.morning)) cfg.custom.morning = [];
       if(!Array.isArray(cfg.custom.night)) cfg.custom.night = [];
-if(!cfg.hidden) cfg.hidden = {};
-if(!cfg.editadas) cfg.editadas = {};
-return cfg;
+
+      if(!cfg.hidden) cfg.hidden = {};
+      if(!cfg.editadas) cfg.editadas = {};
+
+      if(!cfg.ordem) cfg.ordem = { morning: [], night: [] };
+      if(!Array.isArray(cfg.ordem.morning)) cfg.ordem.morning = [];
+      if(!Array.isArray(cfg.ordem.night)) cfg.ordem.night = [];
+
+      return cfg;
     }catch(e){
-      return { custom:{ morning:[], night:[] }, hidden:{} };
+      return {
+        custom:{ morning:[], night:[] },
+        hidden:{},
+        editadas:{},
+        ordem:{ morning:[], night:[] }
+      };
     }
   }
 
@@ -1569,14 +1646,31 @@ function obterItensBaseComConfig(tab){
     }));
 
   const extras = (cfg.custom[tab] || []).map(normalizarItemConfig);
+  const todos = [...base, ...extras];
 
-  return [...base, ...extras].sort((a,b) => {
-    return horaParaMinutos(a.time) - horaParaMinutos(b.time);
-  });
+  const ordemSalva = cfg.ordem && Array.isArray(cfg.ordem[tab]) ? cfg.ordem[tab] : [];
+  const idsAtuais = todos.map(item => item.id);
+
+  const ordemLimpa = ordemSalva.filter(id => idsAtuais.includes(id));
+  const idsNovos = todos
+    .filter(item => !ordemLimpa.includes(item.id))
+    .sort((a,b) => horaParaMinutos(a.time) - horaParaMinutos(b.time))
+    .map(item => item.id);
+
+  const ordemFinal = [...ordemLimpa, ...idsNovos];
+
+  if(JSON.stringify(ordemFinal) !== JSON.stringify(ordemSalva)){
+    if(!cfg.ordem) cfg.ordem = { morning: [], night: [] };
+    cfg.ordem[tab] = ordemFinal;
+    salvarConfigTarefas(cfg);
+  }
+
+  return todos.sort((a,b) => ordemFinal.indexOf(a.id) - ordemFinal.indexOf(b.id));
 }
 
   function abrirModalConfiguracao(){
     document.getElementById("novaTarefaTexto").value = "";
+    document.getElementById("novaTarefaDescricao").value = "";
     document.getElementById("novaTarefaHora").value = "";
     renderizarListaConfiguracao();
     document.getElementById("modalConfiguracao").classList.add("show");
@@ -1609,6 +1703,10 @@ cfg.custom[currentTab].push({
   custom: true
 });
 
+if(!cfg.ordem) cfg.ordem = { morning: [], night: [] };
+if(!Array.isArray(cfg.ordem[currentTab])) cfg.ordem[currentTab] = [];
+cfg.ordem[currentTab].push(id);
+
     salvarConfigTarefas(cfg);
 document.getElementById("novaTarefaTexto").value = "";
 document.getElementById("novaTarefaDescricao").value = ""; // 👈 FALTA ESSA
@@ -1617,18 +1715,41 @@ renderizarListaConfiguracao();
 render();
   }
 
+  let tarefaParaExcluirConfiguracao = null;
+
   function removerTarefaConfiguracao(id){
-    const senha = prompt("Digite a senha da mamãe para retirar essa tarefa:");
+    tarefaParaExcluirConfiguracao = id;
+    document.getElementById("senhaExcluirTarefa").value = "";
+    document.getElementById("modalSenhaExcluirTarefa").classList.add("show");
+    setTimeout(() => document.getElementById("senhaExcluirTarefa").focus(), 80);
+  }
+
+  function fecharModalSenhaExcluirTarefa(){
+    tarefaParaExcluirConfiguracao = null;
+    document.getElementById("modalSenhaExcluirTarefa").classList.remove("show");
+  }
+
+  function confirmarExcluirTarefaConfiguracao(){
+    const senha = document.getElementById("senhaExcluirTarefa").value;
 
     if(!senhaGabrielaValida(senha)){
       alert("Senha incorreta.");
       return;
     }
 
+    const id = tarefaParaExcluirConfiguracao;
+    if(!id) return;
+
     const cfg = getConfigTarefas();
     cfg.custom.morning = cfg.custom.morning.filter(item => item.id !== id);
     cfg.custom.night = cfg.custom.night.filter(item => item.id !== id);
     cfg.hidden[id] = true;
+
+    if(cfg.ordem){
+      cfg.ordem.morning = (cfg.ordem.morning || []).filter(itemId => itemId !== id);
+      cfg.ordem.night = (cfg.ordem.night || []).filter(itemId => itemId !== id);
+    }
+
     salvarConfigTarefas(cfg);
 
     const ds = getDayState(cycleDayKey);
@@ -1636,6 +1757,7 @@ render();
     ds.doneOrder = ds.doneOrder.filter(item => item !== id);
     saveStore();
 
+    fecharModalSenhaExcluirTarefa();
     renderizarListaConfiguracao();
     render();
   }
@@ -1645,10 +1767,10 @@ function renderizarListaConfiguracao(){
   const itens = getItemsForTab(currentTab, cycleDayKey);
   lista.innerHTML = "";
 
-  itens.forEach(item => {
+  itens.forEach((item, index) => {
     const linha = document.createElement("div");
     linha.style.display = "grid";
-    linha.style.gridTemplateColumns = "1fr auto auto";
+    linha.style.gridTemplateColumns = "1fr auto auto auto auto";
     linha.style.gap = "6px";
     linha.style.alignItems = "center";
     linha.style.background = "#F8FAF7";
@@ -1662,43 +1784,61 @@ function renderizarListaConfiguracao(){
     nome.style.lineHeight = "1.35";
     nome.textContent = `${item.text || item.nome}${item.time ? " • " + item.time : ""}`;
 
+    const btnSubir = document.createElement("button");
+    btnSubir.textContent = "↑";
+    btnSubir.className = "configActionsBtn move";
+    btnSubir.disabled = index === 0;
+    btnSubir.style.opacity = index === 0 ? "0.45" : "1";
+    btnSubir.onclick = () => moverTarefaConfiguracao(item.id, -1);
+
+    const btnDescer = document.createElement("button");
+    btnDescer.textContent = "↓";
+    btnDescer.className = "configActionsBtn move";
+    btnDescer.disabled = index === itens.length - 1;
+    btnDescer.style.opacity = index === itens.length - 1 ? "0.45" : "1";
+    btnDescer.onclick = () => moverTarefaConfiguracao(item.id, 1);
+
     const btnEditar = document.createElement("button");
     btnEditar.textContent = "editar";
-    btnEditar.className = "cancel";
-    btnEditar.style.border = "none";
-    btnEditar.style.borderRadius = "10px";
-    btnEditar.style.padding = "8px 10px";
-    btnEditar.style.cursor = "pointer";
-    btnEditar.style.fontFamily = "var(--fonte)";
-    btnEditar.style.fontSize = "11px";
+    btnEditar.className = "configActionsBtn";
     btnEditar.onclick = () => editarTarefaConfiguracao(item.id);
 
     const btnRetirar = document.createElement("button");
     btnRetirar.textContent = "retirar";
-    btnRetirar.className = "cancel";
-    btnRetirar.style.border = "none";
-    btnRetirar.style.borderRadius = "10px";
-    btnRetirar.style.padding = "8px 10px";
-    btnRetirar.style.cursor = "pointer";
-    btnRetirar.style.fontFamily = "var(--fonte)";
-    btnRetirar.style.fontSize = "11px";
+    btnRetirar.className = "configActionsBtn danger";
     btnRetirar.onclick = () => removerTarefaConfiguracao(item.id);
 
     linha.appendChild(nome);
+    linha.appendChild(btnSubir);
+    linha.appendChild(btnDescer);
     linha.appendChild(btnEditar);
     linha.appendChild(btnRetirar);
     lista.appendChild(linha);
   });
 }
 
+function moverTarefaConfiguracao(id, direcao){
+  const cfg = getConfigTarefas();
+  const itens = getItemsForTab(currentTab, cycleDayKey);
+  const ids = itens.map(item => item.id);
+  const index = ids.indexOf(id);
+  const novoIndex = index + direcao;
+
+  if(index < 0 || novoIndex < 0 || novoIndex >= ids.length) return;
+
+  const itemMovido = ids.splice(index, 1)[0];
+  ids.splice(novoIndex, 0, itemMovido);
+
+  if(!cfg.ordem) cfg.ordem = { morning: [], night: [] };
+  cfg.ordem[currentTab] = ids;
+
+  salvarConfigTarefas(cfg);
+  renderizarListaConfiguracao();
+  render();
+}
+
+
 function editarTarefaConfiguracao(id){
-  const senha = prompt("Digite a senha da mamãe para editar essa tarefa:");
-
-  if(!senhaGabrielaValida(senha)){
-    alert("Senha incorreta.");
-    return;
-  }
-
   const cfg = getConfigTarefas();
 
   let item = null;
@@ -1722,13 +1862,15 @@ function editarTarefaConfiguracao(id){
     return;
   }
 
-  const novoNome = prompt("Nome da tarefa:", item.text || item.nome || "");
+  const itemEditado = cfg.editadas && cfg.editadas[id] ? cfg.editadas[id] : item;
+
+  const novoNome = prompt("Nome da tarefa:", itemEditado.text || itemEditado.nome || "");
   if(novoNome === null) return;
 
-  const novaDescricao = prompt("Descrição da tarefa:", item.descricao || "");
+  const novaDescricao = prompt("Descrição da tarefa:", itemEditado.descricao || "");
   if(novaDescricao === null) return;
 
-  const novoHorarioDigitado = prompt("Horário da tarefa:", item.time || "");
+  const novoHorarioDigitado = prompt("Horário da tarefa:", itemEditado.time || "");
   if(novoHorarioDigitado === null) return;
 
   const novoHorario = formatarHorarioRotina(novoHorarioDigitado);
@@ -2232,6 +2374,13 @@ left.appendChild(time);
   }
 
   window.addEventListener("load", () => {
+    const campoHoraConfig = document.getElementById("novaTarefaHora");
+    if(campoHoraConfig){
+      campoHoraConfig.addEventListener("blur", () => {
+        campoHoraConfig.value = formatarHorarioRotina(campoHoraConfig.value);
+      });
+    }
+
     aplicarConfigNosAudios();
     atualizarLinhaTempo();
     atualizarStatusRegraHoje();

@@ -324,6 +324,23 @@ body{
   line-height:1.35;
 }
 
+.descricao-botao-linha{
+  display:block;
+  font-size:12px;
+  color:rgba(63,111,79,0.74);
+  text-align:center;
+  line-height:1.35;
+}
+.descricao-botao-linha.clicavel{
+  cursor:pointer;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+.descricao-botao-linha.clicavel:hover{
+  color:var(--verde-escuro);
+}
+
 .modalTitle{
   font-size:18px;
   color:var(--texto-principal);
@@ -395,6 +412,339 @@ textarea:focus{
   background:#4f8a4f;
 }
 
+
+.opcoes-visuais{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:2px;
+}
+
+.opcaoVisualBtn{
+  border:1px solid var(--borda);
+  background:#F8FAF7;
+  color:var(--texto-secundario);
+  border-radius:14px;
+  padding:10px 8px;
+  font-size:12px;
+  font-family:var(--fonte);
+  cursor:pointer;
+  line-height:1.35;
+  transition:0.2s ease;
+}
+
+.opcaoVisualBtn.ativo{
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-color:var(--verde-hover);
+  box-shadow:0 3px 10px rgba(92,157,92,0.10);
+}
+
+.horario-lista{
+  display:none;
+  flex-direction:column;
+  gap:14px;
+}
+
+.horario-grupo{
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  border-radius:20px;
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.horario-card{
+  width:100%;
+  border:none;
+  background:#F2F7F1;
+  color:var(--verde-texto);
+  border-radius:16px;
+  padding:13px 16px;
+  font-family:var(--fonte);
+  cursor:pointer;
+  transition:0.2s ease;
+  text-align:left;
+}
+
+.horario-card-inner{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:10px;
+  align-items:start;
+}
+
+.horario-conteudo{
+  min-width:0;
+}
+
+.horario-sublista{
+  margin-top:4px;
+  margin-left:18px;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+.horario-subitem{
+  font-size:12px;
+  line-height:1.35;
+  color:rgba(63,111,79,0.84);
+}
+
+
+.horario-linha-principal{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+}
+
+.horario-check{
+  width:15px;
+  height:15px;
+  min-width:15px;
+  border:1.5px solid rgba(63,111,79,0.45);
+  background:#FFFFFF;
+  border-radius:4px;
+  margin-top:2px;
+  padding:0;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  line-height:1;
+  color:var(--verde-texto);
+  font-family:var(--fonte);
+}
+
+.horario-check.marcado{
+  background:var(--verde-hover);
+  border-color:var(--verde-texto);
+}
+
+.horario-check.marcado::after{
+  content:"✓";
+  transform:translateY(-0.5px);
+}
+
+.horario-subitem{
+  display:flex;
+  align-items:flex-start;
+  gap:7px;
+}
+
+.horario-subitem-texto{
+  flex:1;
+}
+
+.horario-card:hover{
+  background:var(--verde-hover);
+}
+
+.horario-card.concluido{
+  opacity:0.72;
+}
+
+.horario-hora{
+  font-size:12px;
+  font-weight:500;
+  color:rgba(63,111,79,0.82);
+  white-space:nowrap;
+  padding-top:1px;
+}
+
+.horario-nome{
+  font-size:14px;
+  font-weight:500;
+  color:var(--verde-texto);
+  line-height:1.35;
+  word-break:normal;
+}
+
+.horario-bloco,
+.horario-status-linha,
+.horario-topo,
+.horario-status,
+.horario-faixa{
+  display:none;
+}
+
+.horario-vazio{
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:16px;
+  padding:16px 14px;
+  text-align:center;
+  color:var(--texto-secundario);
+  font-size:13px;
+  line-height:1.55;
+}
+
+
+#modalEditarTarefa{
+  z-index:1005;
+  background:rgba(0,0,0,0.22);
+}
+
+#modalEditarTarefa .modal{
+  width:min(340px, 100%);
+}
+
+.inputModal{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  height:46px;
+  outline:none;
+}
+
+.inputModal:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+}
+
+.status-edicao{
+  font-size:12px;
+  color:#A04646;
+  text-align:center;
+  min-height:16px;
+  line-height:1.35;
+}
+
+.texto-ajuda-config{
+  font-size:10.5px;
+  color:var(--texto-secundario);
+  line-height:1.35;
+  text-align:center;
+}
+
+
+.ordem-config-box{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:2px;
+}
+
+.ordem-topo{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.ordem-ajuda{
+  font-size:10.5px;
+  color:var(--texto-secundario);
+  line-height:1.35;
+}
+
+.ordem-auto-btn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:10px;
+  padding:8px 10px;
+  font-size:10.5px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  white-space:nowrap;
+}
+
+.ordem-auto-btn:hover{
+  background:#dde3d9;
+  color:var(--texto-principal);
+}
+
+.ordem-lista{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.ordem-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:12px;
+  padding:8px 9px;
+}
+
+.ordem-info{
+  min-width:0;
+  line-height:1.3;
+}
+
+.ordem-hora{
+  display:block;
+  font-size:10.5px;
+  color:rgba(63,111,79,0.74);
+  margin-bottom:2px;
+}
+
+.ordem-nome{
+  display:block;
+  font-size:11.5px;
+  color:var(--texto-principal);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.ordem-botoes{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px;
+}
+
+.ordem-botoes button{
+  width:30px;
+  height:30px;
+  border:none;
+  border-radius:9px;
+  background:#E9ECE7;
+  color:var(--texto-principal);
+  font-size:14px;
+  cursor:pointer;
+  font-family:var(--fonte);
+}
+
+.ordem-botoes button:disabled{
+  opacity:0.35;
+  cursor:not-allowed;
+}
+
+
+.campo-ajuda{
+  font-size:10.5px;
+  color:var(--texto-secundario);
+  line-height:1.35;
+  margin-top:-2px;
+}
+
+.horario-nome.clicavel,
+.horario-subitem-texto.clicavel{
+  cursor:pointer;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+
+.horario-subitem-texto.clicavel:hover,
+.horario-nome.clicavel:hover{
+  color:var(--verde-escuro);
+}
+
 @media (max-width: 390px){
   body{
     padding:14px;
@@ -424,6 +774,149 @@ textarea:focus{
     font-size:10.5px;
   }
 }
+
+
+/* =========================================================
+   AJUSTE: CARTELA DE EMOJIS, HORÁRIO AUTOMÁTICO E TOTAL DO BLOCO
+   ========================================================= */
+.labelComEmoji{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.emojiMiniBtn{
+  border:none;
+  background:#F2F7F1;
+  color:var(--verde-texto);
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:15px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.2s ease;
+}
+.emojiMiniBtn:hover{
+  background:var(--verde-hover);
+}
+.emojiPalette{
+  position:fixed;
+  display:none;
+  grid-template-columns:repeat(8, 1fr);
+  gap:5px;
+  width:min(320px, calc(100vw - 32px));
+  max-height:210px;
+  overflow-y:auto;
+  background:#fff;
+  border:1px solid var(--borda);
+  border-radius:16px;
+  padding:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.18);
+  z-index:2000;
+}
+.emojiPalette.show{
+  display:grid;
+}
+.emojiOpcao{
+  border:none;
+  background:#F8FAF7;
+  border-radius:9px;
+  height:30px;
+  font-size:16px;
+  cursor:pointer;
+}
+.emojiOpcao:hover{
+  background:var(--verde-principal);
+}
+.campo-ajuda-pequena{
+  font-size:10.5px;
+  color:var(--texto-secundario);
+  line-height:1.35;
+  margin-top:2px;
+}
+
+
+/* =========================================================
+   AJUSTE: DESCRIÇÃO MENOR E TAREFAS INTERNAS EM BLOCOS NOVOS
+   ========================================================= */
+.descricao-botao,
+.descricao-botao-linha{
+  font-size:11px !important;
+  line-height:1.35;
+}
+.modalTarefasCardOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  z-index:1200;
+}
+.modalTarefasCardOverlay.show{
+  display:flex;
+}
+.modalTarefasCard{
+  background:#fff;
+  width:min(340px, 100%);
+  max-height:85vh;
+  overflow-y:auto;
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.modalTarefasCardTitulo{
+  font-size:18px;
+  color:var(--texto-principal);
+  text-align:center;
+  font-weight:500;
+}
+.tarefasCardLista{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.tarefaCardLinha{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#F2F7F1;
+  border-radius:14px;
+  padding:10px 12px;
+  color:var(--verde-texto);
+  font-size:13px;
+  line-height:1.35;
+}
+.tarefaCardCheck{
+  width:16px;
+  height:16px;
+  min-width:16px;
+  border:1.5px solid rgba(63,111,79,0.45);
+  background:#fff;
+  border-radius:4px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  color:var(--verde-texto);
+}
+.tarefaCardCheck.marcado{
+  background:var(--verde-hover);
+  border-color:var(--verde-texto);
+}
+.tarefaCardCheck.marcado::after{
+  content:"✓";
+}
+
 </style>
 </head>
 
@@ -503,6 +996,8 @@ textarea:focus{
       </div>
     </div>
 
+    <div id="horarioLista" class="horario-lista"></div>
+
     <div class="footerMiniAction">
       <button class="futureBtn" onclick="abrirModalConfiguracao()">configuração</button>
       <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
@@ -536,14 +1031,41 @@ textarea:focus{
 
     <h2 class="modalTitle">Configuração do menu</h2>
 
+    <div class="field" style="margin-top:2px;">
+      <label>Visual das tarefas</label>
+      <div class="opcoes-visuais">
+        <button id="opcaoVisualBlocos" class="opcaoVisualBtn" type="button" onclick="definirVisualizacaoMenu('blocos')">
+          Em Blocos
+        </button>
+        <button id="opcaoVisualHorario" class="opcaoVisualBtn" type="button" onclick="definirVisualizacaoMenu('horario')">
+          Por horário
+        </button>
+      </div>
+      <div class="texto-ajuda-config">
+        A opção por horário mostra todos os compromissos do dia, um embaixo do outro, para ajudar você a seguir no seu ritmo cíclico.
+      </div>
+    </div>
+
     <div class="field">
       <label>Nova tarefa</label>
       <textarea id="novaTarefaTexto" style="height:72px;" placeholder="Nome da tarefa"></textarea>
     </div>
 
     <div class="field">
-      <label>Descrição</label>
-      <textarea id="novaTarefaDescricao" style="height:72px;" placeholder="Descrição que aparecerá no botão"></textarea>
+      <label>Emoji do título</label>
+      <input id="novaTarefaEmoji" class="inputModal" type="text" maxlength="4" placeholder="Opcional. Ex.: 🌿">
+    </div>
+
+    <div class="field">
+      <label>Página ao clicar no título/tarefa</label>
+      <input id="novaTarefaUrl" class="inputModal" type="text" placeholder="Opcional. Ex.: agenda.html">
+    </div>
+
+    <div class="field">
+      <label>Descrição / lista abaixo</label>
+      <textarea id="novaTarefaDescricao" style="height:72px;" placeholder="Uma atividade por linha. Ex.:
+Assinar documento
+Enviar comprovante => documentos.html"></textarea>
     </div>
 
     <div class="field">
@@ -557,6 +1079,45 @@ textarea:focus{
     </div>
 
     <div id="listaConfigTarefas" style="display:flex; flex-direction:column; gap:8px; margin-top:4px;"></div>
+
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalEditarTarefa">
+  <div class="modal">
+    <h2 class="modalTitle">Editar tarefa</h2>
+
+    <div class="field">
+      <label>Nome da tarefa</label>
+      <textarea id="editarTarefaNome" style="height:72px;" placeholder="Nome da tarefa"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Emoji do título</label>
+      <input id="editarTarefaEmoji" class="inputModal" type="text" maxlength="4" placeholder="Opcional. Ex.: 🌿">
+    </div>
+
+    <div class="field">
+      <label>Página ao clicar no título/tarefa</label>
+      <input id="editarTarefaUrl" class="inputModal" type="text" placeholder="Opcional. Ex.: agenda.html">
+    </div>
+
+    <div class="field">
+      <label>Descrição / lista abaixo</label>
+      <textarea id="editarTarefaDescricao" style="height:72px;" placeholder="Uma atividade por linha. Ex.: Enviar comprovante => comprovantes.html"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Horário</label>
+      <textarea id="editarTarefaHora" style="height:48px;" placeholder="Digite só números. Ex.: 1030"></textarea>
+    </div>
+
+    <div id="statusEditarTarefa" class="status-edicao"></div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalEditarTarefa()">cancelar</button>
+      <button class="save" onclick="salvarEdicaoTarefaConfiguracao()">concluir</button>
+    </div>
   </div>
 </div>
 
@@ -604,6 +1165,9 @@ const CHAVE_ULTIMA_DATA_ARQUIVADA = "historico_diario_gabriela_menu_ultima_data"
 const CHAVE_DATA_ABERTA = "historico_diario_gabriela_menu_data_aberta";
 const CHAVE_CONFIG_GABRIELA_MENU = "config_tarefas_gabriela_menu";
 const CHAVE_CUSTOM_GABRIELA_MENU_DIA = "gabriela_menu_custom";
+const CHAVE_VISUAL_GABRIELA_MENU = "visual_tarefas_gabriela_menu";
+const CHAVE_ORDEM_TAREFAS_GABRIELA_MENU = "ordem_tarefas_gabriela_menu";
+const CHAVE_SUBTAREFAS_HORARIO_GABRIELA_MENU = "subtarefas_horario_gabriela_menu";
 
 function pad2(numero){
   return String(numero).padStart(2, "0");
@@ -858,12 +1422,34 @@ function abrirModalConfiguracao(){
   document.getElementById("novaTarefaTexto").value = "";
   document.getElementById("novaTarefaDescricao").value = "";
   document.getElementById("novaTarefaHora").value = "";
+  renderizarOpcoesVisualizacaoMenu();
   renderizarListaConfiguracao();
+  renderizarListaOrdemTarefas();
   document.getElementById("modalConfiguracao").classList.add("show");
 }
 
 function fecharModalConfiguracao(){
   document.getElementById("modalConfiguracao").classList.remove("show");
+}
+
+function getVisualizacaoMenu(){
+  return localStorage.getItem(CHAVE_VISUAL_GABRIELA_MENU) || "blocos";
+}
+
+function definirVisualizacaoMenu(tipo){
+  const visual = tipo === "horario" ? "horario" : "blocos";
+  localStorage.setItem(CHAVE_VISUAL_GABRIELA_MENU, visual);
+  renderizarOpcoesVisualizacaoMenu();
+  aplicarVisualizacaoMenu();
+}
+
+function renderizarOpcoesVisualizacaoMenu(){
+  const visual = getVisualizacaoMenu();
+  const btnBlocos = document.getElementById("opcaoVisualBlocos");
+  const btnHorario = document.getElementById("opcaoVisualHorario");
+
+  if(btnBlocos) btnBlocos.classList.toggle("ativo", visual === "blocos");
+  if(btnHorario) btnHorario.classList.toggle("ativo", visual === "horario");
 }
 
 function adicionarTarefaConfiguracao(){
@@ -890,6 +1476,7 @@ function adicionarTarefaConfiguracao(){
   document.getElementById("novaTarefaDescricao").value = "";
   document.getElementById("novaTarefaHora").value = "";
   renderizarListaConfiguracao();
+  renderizarListaOrdemTarefas();
   atualizarMenu();
 }
 
@@ -899,11 +1486,17 @@ function getItensConfiguracaoMenu(){
   const base = BLOCOS.map(bloco => {
     const titulo = document.querySelector(`#${bloco.wrapId} .nome-botao`)?.textContent?.trim() || bloco.id;
     const editada = cfg.editadas[bloco.id] || {};
+    const tarefasDoBloco = typeof bloco.tarefasFn === "function" ? bloco.tarefasFn() : [];
+    const horaPadrao = tarefasDoBloco.length === 1 ? normalizarHorario(tarefasDoBloco[0].hora || tarefasDoBloco[0].horario || "") : "";
+    const descricaoPadrao = tarefasDoBloco.length === 1 && Array.isArray(tarefasDoBloco[0].subtarefas)
+      ? tarefasDoBloco[0].subtarefas.map(sub => limparNomeTarefaMenu(sub)).join("\n")
+      : "";
+
     return {
       id: bloco.id,
       text: editada.text || titulo,
-      descricao: editada.descricao || "",
-      time: editada.time || "",
+      descricao: editada.descricao || descricaoPadrao || "",
+      time: editada.time || horaPadrao || "",
       base:true,
       hidden:false
     };
@@ -914,7 +1507,7 @@ function getItensConfiguracaoMenu(){
     .map(item => ({
       id:item.id,
       text:item.text || "Nova tarefa",
-      descricao:item.descricao || "",
+      descricao:item.descricao || item.description || (Array.isArray(item.subtarefas) ? item.subtarefas.join("\n") : ""),
       time:item.time || "",
       custom:true
     }));
@@ -973,48 +1566,81 @@ function renderizarListaConfiguracao(){
   });
 }
 
+let tarefaEdicaoAtualId = null;
+
 function editarTarefaConfiguracao(id){
-  const senha = prompt("Digite a senha da mamãe para editar essa tarefa:");
-  if(!senhaGabrielaValida(senha)){
-    alert("Senha incorreta.");
-    return;
-  }
-
-  const cfg = getConfigMenu();
-  const itemCustom = cfg.custom.find(item => item.id === id);
-  const itemBase = getItensConfiguracaoMenu().find(item => item.id === id);
-  const item = itemCustom || itemBase;
-
+  const item = getItensConfiguracaoMenu().find(tarefa => tarefa.id === id);
   if(!item){
     alert("Tarefa não encontrada.");
     return;
   }
 
-  const novoNome = prompt("Nome da tarefa:", item.text || "");
-  if(novoNome === null) return;
+  tarefaEdicaoAtualId = id;
 
-  const novaDescricao = prompt("Descrição da tarefa:", item.descricao || "");
-  if(novaDescricao === null) return;
+  document.getElementById("editarTarefaSenha").value = "";
+  document.getElementById("editarTarefaNome").value = item.text || "";
+  document.getElementById("editarTarefaDescricao").value = montarDescricaoParaEdicao(item);
+  document.getElementById("editarTarefaHora").value = item.time || "";
+  document.getElementById("statusEditarTarefa").textContent = "";
 
-  const novoHorarioDigitado = prompt("Horário da tarefa:", item.time || "");
-  if(novoHorarioDigitado === null) return;
+  document.getElementById("modalEditarTarefa").classList.add("show");
 
-  const novoHorario = formatarHorarioRotina(novoHorarioDigitado);
+  setTimeout(() => {
+    const campoSenha = document.getElementById("editarTarefaSenha");
+    if(campoSenha) campoSenha.focus();
+  }, 80);
+}
+
+function fecharModalEditarTarefa(){
+  tarefaEdicaoAtualId = null;
+  document.getElementById("modalEditarTarefa").classList.remove("show");
+}
+
+function salvarEdicaoTarefaConfiguracao(){
+  if(!tarefaEdicaoAtualId) return;
+
+  const senha = document.getElementById("editarTarefaSenha").value;
+  const status = document.getElementById("statusEditarTarefa");
+
+  if(!senhaGabrielaValida(senha)){
+    status.textContent = "Senha incorreta.";
+    return;
+  }
+
+  const cfg = getConfigMenu();
+  const itemCustom = cfg.custom.find(item => item.id === tarefaEdicaoAtualId);
+  const itemBase = getItensConfiguracaoMenu().find(item => item.id === tarefaEdicaoAtualId);
+
+  if(!itemCustom && !itemBase){
+    status.textContent = "Tarefa não encontrada.";
+    return;
+  }
+
+  const novoNome = document.getElementById("editarTarefaNome").value.trim();
+  const novaDescricao = document.getElementById("editarTarefaDescricao").value.trim();
+  const novoHorario = formatarHorarioRotina(document.getElementById("editarTarefaHora").value);
+
+  if(!novoNome){
+    status.textContent = "Escreva o nome da tarefa.";
+    return;
+  }
 
   if(itemCustom){
-    itemCustom.text = novoNome.trim();
-    itemCustom.descricao = novaDescricao.trim();
+    itemCustom.text = novoNome;
+    itemCustom.descricao = novaDescricao;
     itemCustom.time = novoHorario;
   }else{
-    cfg.editadas[id] = {
-      text: novoNome.trim(),
-      descricao: novaDescricao.trim(),
+    cfg.editadas[tarefaEdicaoAtualId] = {
+      text: novoNome,
+      descricao: novaDescricao,
       time: novoHorario
     };
   }
 
   salvarConfigMenu(cfg);
+  fecharModalEditarTarefa();
   renderizarListaConfiguracao();
+  renderizarListaOrdemTarefas();
   atualizarMenu();
 }
 
@@ -1035,6 +1661,7 @@ function removerTarefaConfiguracao(id){
   salvarCustomMenuEstado(estado);
 
   renderizarListaConfiguracao();
+  renderizarListaOrdemTarefas();
   atualizarMenu();
 }
 
@@ -1128,77 +1755,239 @@ function normalizarHorario(texto){
   return formatarHorarioRotina(texto);
 }
 
-function tarefasAutocuidado(){
-  const hoje = String(new Date().getDay());
-  const base = [
-    { nome:"🤸‍♀️ Movimentar o corpo na cama", hora:"05h" },
-    {
-      nome:"🧼 Higiene matinal",
-      hora:"05h"
-    },
-    {
-      nome:"🌿 Cuidado inicial",
-      hora:"05h"
-    },
-    { nome:"🚶 Caminhada de 10 a 20 min", hora:"05h30m" },
-    { nome:"💪 Calistenia de 10 a 30 min", hora:"05h30m" },
-    { nome:"🙏☀️ Yoga 3 rondas Saudação ao Sol", hora:"05h30m", dias:["2","4"] },
-    { nome:"🧘 Kriya + Meditação", hora:"06h" },
-    { nome:"🚿 Banho", hora:"06h" }
-  ];
-  return base.filter(t => !t.dias || t.dias.includes(hoje));
+function limparNomeTarefaMenu(texto){
+  return String(texto || "")
+    .replace(/<br\s*\/?>/gi, " • ")
+    .replace(/<[^>]*>/g, "")
+    .replace(/\s+/g, " ")
+    .replace(/\s+•\s+/g, " • ")
+    .trim();
 }
 
-function tarefasManifestacao(){
-  return [
-    { nome:"📝 Escrita criativa", hora:"07h" },
-    { nome:"🌿 Práticas de manifestação", hora:"07h" },
-    { nome:"🎨 Criação artística de sonhos", hora:"07h" }
+function limparListaTarefaMenu(lista){
+  if(!Array.isArray(lista)) return [];
+  return lista.map(item => limparNomeTarefaMenu(item)).filter(Boolean);
+}
+
+function dividirDescricaoEmLista(texto){
+  return String(texto || "")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .split(/\n|;/)
+    .map(item => limparNomeTarefaMenu(item))
+    .filter(Boolean);
+}
+
+function montarDescricaoParaEdicao(item){
+  if(item && item.descricao) return String(item.descricao || "").trim();
+  if(item && Array.isArray(item.subtarefas) && item.subtarefas.length){
+    return item.subtarefas.map(sub => limparNomeTarefaMenu(sub)).join("\n");
+  }
+  if(item && Array.isArray(item.subtasks) && item.subtasks.length){
+    return item.subtasks.map(sub => limparNomeTarefaMenu(sub)).join("\n");
+  }
+  return "";
+}
+
+function getConfigPagina(chave){
+  try{
+    const cfg = JSON.parse(localStorage.getItem(chave) || "{}");
+    if(!Array.isArray(cfg.custom)) cfg.custom = [];
+    if(!Array.isArray(cfg.removidas)) cfg.removidas = [];
+    if(!cfg.editadas) cfg.editadas = {};
+    return cfg;
+  }catch(e){
+    return { custom:[], removidas:[], editadas:{} };
+  }
+}
+
+function normalizarItemPagina(item){
+  const descricaoOriginal = String(item.descricao || item.description || "").trim();
+  const subtarefasOriginais = limparListaTarefaMenu(item.subtarefas || item.subtasks || []);
+  const subtarefasDaDescricao = dividirDescricaoEmLista(descricaoOriginal);
+
+  return {
+    id:item.id,
+    nome:limparNomeTarefaMenu(item.nome || item.text || item.titulo || "Tarefa"),
+    descricao:descricaoOriginal,
+    subtarefas:subtarefasOriginais.length ? subtarefasOriginais : subtarefasDaDescricao,
+    hora:formatarHorarioRotina(item.hora || item.time || item.horario || ""),
+    dias:item.dias || null,
+    principal:!!item.principal
+  };
+}
+
+function aplicarConfigPagina(base, chaveConfig, filtrarDias = false){
+  const cfg = getConfigPagina(chaveConfig);
+  const hoje = String(new Date().getDay());
+
+  const baseNormalizada = base
+    .map((tarefa, index) => {
+      const id = tarefa.id || `base_${index}`;
+      const editada = cfg.editadas && cfg.editadas[id] ? cfg.editadas[id] : {};
+      return normalizarItemPagina({ ...tarefa, id, ...editada });
+    })
+    .filter(tarefa => !cfg.removidas.includes(tarefa.id));
+
+  const custom = (cfg.custom || [])
+    .filter(tarefa => !cfg.removidas.includes(tarefa.id))
+    .map(tarefa => normalizarItemPagina(tarefa));
+
+  const todas = [...baseNormalizada, ...custom];
+  return filtrarDias ? todas.filter(t => !t.dias || t.dias.includes(hoje)) : todas;
+}
+
+function tarefasAutocuidado(){
+  const base = [
+    {
+      id:"base_0",
+      nome:"🤸‍♀️ Movimentar o corpo na cama",
+      hora:"05h"
+    },
+    {
+      id:"base_1",
+      nome:"🧼 Higiene matinal",
+      subtarefas:[
+        "🚽 Fazer xixi",
+        "👅 Raspar a língua",
+        "🪥 Escovar os dentes",
+        "🚿 Lavar o rosto"
+      ],
+      hora:"05h"
+    },
+    {
+      id:"base_2",
+      nome:"🌿 Cuidado inicial",
+      subtarefas:[
+        "🥛🍋 Copo d’água morna com limão",
+        "💊 Remédio da tireoide"
+      ],
+      hora:"05h"
+    },
+    {
+      id:"base_3",
+      nome:"🚶‍♀️ Caminhada de 10 a 20 min",
+      hora:"05h30m"
+    },
+    {
+      id:"base_4",
+      nome:"💪 Calistenia de 10 a 30 min",
+      hora:"05h30m"
+    },
+    {
+      id:"base_5",
+      nome:"🙏☀️ Yoga — 3 rondas de Saudação ao Sol",
+      hora:"05h30m",
+      dias:["2","4"]
+    },
+    {
+      id:"base_6",
+      nome:"🧘 Kriya + Meditação",
+      hora:"06h"
+    },
+    {
+      id:"base_7",
+      nome:"🚿 Banho",
+      hora:"06h"
+    }
   ];
+  return aplicarConfigPagina(base, "config_tarefas_autocuidado", true);
+}
+
+
+function tarefasManifestacao(){
+  const base = [
+    { id:"base_0", nome:"📝 Escrita criativa", hora:"07h" },
+    {
+      id:"base_1",
+      nome:"🌿 Práticas de manifestação",
+      subtarefas:[
+        "📖 Leitura",
+        "💬 Afirmações do dia",
+        "🌈 Visualização"
+      ],
+      hora:"07h"
+    },
+    { id:"base_2", nome:"🎨 Criação artística de sonhos", hora:"07h", principal:true }
+  ];
+  return aplicarConfigPagina(base, "config_tarefas_manifestacao");
 }
 
 function tarefasAlimentacao(){
-  return [
-    { nome:"🍽️ Preparar refeições", hora:"09h" },
-    { nome:"🚿 Tomar banho", hora:"11h" },
-    { nome:"🍴 Almoçar", hora:"11h" },
-    { nome:"🪥 Escovar os dentes", hora:"11h" }
+  const base = [
+    {
+      id:"base_0",
+      nome:"🍽️ Preparar refeições",
+      subtarefas:[
+        "🍴 Almoço",
+        "🥪 Lanche da tarde • escola",
+        "🥗 Jantar",
+        "🍲 Ceia"
+      ],
+      hora:"09h"
+    },
+    { id:"base_1", nome:"🚿 Tomar banho", hora:"11h" },
+    { id:"base_2", nome:"🍴 Almoçar", hora:"11h" },
+    { id:"base_3", nome:"🪥 Escovar os dentes", hora:"11h" }
   ];
+  return aplicarConfigPagina(base, "config_tarefas_alimentacao");
 }
 
 function tarefasEstudo(){
-  return [
-    { nome:"📚 Estudar", hora:"18h30m" },
-    { nome:"🏡 Organizar a casa", hora:"19h30m" },
-    { nome:"🪴 Molhar plantas", hora:"19h30m" },
-    { nome:"🧊 Água no congelador", hora:"19h30m" },
-    { nome:"🎒 Arrumar roupa, bolsa ou mochila do dia seguinte", hora:"19h30m" },
-    { nome:"🧺 Organizar tarefas leves da casa", hora:"19h30m" }
+  const base = [
+    { id:"base_0", nome:"📚 Estudar", hora:"18h30m" },
+    {
+      id:"base_1",
+      nome:"🏡 Organizar a casa",
+      subtarefas:[
+        "🛋️ Arrumar sala, quarto e cantinho",
+        "👘 Tirar roupa do varal, dobrar • guardar",
+        "🗑️ Tirar o lixo",
+        "🍽️ Limpar louça da pia"
+      ],
+      hora:"19h30m"
+    },
+    { id:"base_2", nome:"🪴 Molhar plantas", hora:"19h30m" },
+    { id:"base_3", nome:"🧊 Água no congelador", hora:"19h30m" },
+    { id:"base_4", nome:"🎒 Arrumar roupa, bolsa ou mochila do dia seguinte", hora:"19h30m" },
+    { id:"base_5", nome:"🧺 Organizar tarefas leves da casa", hora:"19h30m" }
   ];
+  return aplicarConfigPagina(base, "config_tarefas_estudo");
 }
 
 function tarefasDesacelerar(){
-  return [
-    { nome:"🌙 Ritual para desacelerar", hora:"20h" },
-    { nome:"💧 Beber água", hora:"20h" },
-    { nome:"🚿 Tomar banho morno", hora:"20h" },
-    { nome:"🪥 Higiene noturna", hora:"20h" },
-    { nome:"📱 Desligar celular, TV e tablet", hora:"20h" },
-    { nome:"🍲 Ceia da noite", hora:"20h" }
+  const base = [
+    {
+      id:"base_0",
+      nome:"🌙 Ritual para desacelerar",
+      subtarefas:[
+        "🎶 Música relaxante",
+        "🕯️ Desligar luzes brancas",
+        "🦶 Massagem com óleo de gergelim"
+      ],
+      hora:"20h"
+    },
+    { id:"base_1", nome:"💧 Beber água", hora:"20h" },
+    { id:"base_2", nome:"🚿 Tomar banho morno", hora:"20h" },
+    {
+      id:"base_3",
+      nome:"🪥 Higiene noturna",
+      subtarefas:[
+        "🪥 Escovar os dentes",
+        "👅 Raspar a língua"
+      ],
+      hora:"20h"
+    },
+    { id:"base_4", nome:"📱 Desligar celular, TV e tablet", hora:"20h" },
+    { id:"base_5", nome:"🍲 Ceia da noite", hora:"20h" }
   ];
+  return aplicarConfigPagina(base, "config_tarefas_desacelerar");
 }
 
 function tarefasPassatemposMenu(){
-  return [
-    { nome:"Quebra-cabeça", hora:"20h30m" },
-    { nome:"Desenhar", hora:"20h30m" },
-    { nome:"Colorir", hora:"20h30m" },
-    { nome:"Ler histórias", hora:"20h30m" },
-    { nome:"Atividade manual", hora:"20h30m" },
-    { nome:"Conversar", hora:"20h30m" },
-    { nome:"30 min de um filme calmo", hora:"20h30m" },
-    { nome:"Outro passatempo", hora:"20h30m" }
+  const base = [
+    { id:"base_0", nome:"🃏 Passatempos Relaxantes", hora:"20h30m" }
   ];
+  return aplicarConfigPagina(base, "config_tarefas_passatempos_gabriela");
 }
 
 const BLOCOS = [
@@ -1258,6 +2047,435 @@ const BLOCOS = [
   }
 ];
 
+const URL_BLOCOS_GABRIELA_MENU = {
+  bloco1:"gabriela-autocuidado-movimento-silencio.html",
+  bloco2:"gabriela-manifestacao-criatividade.html",
+  bloco4:"gabriela-alimentacao-preparar-sair.html",
+  bloco6:"gabriela-estudo-organizacao-casa-dia.html",
+  bloco7:"gabriela-desacelerar-autocuidado.html",
+  bloco8:"gabriela-passatempos.html"
+};
+
+function nomeVisualDoBloco(bloco){
+  const wrap = document.getElementById(bloco.wrapId);
+  const nome = wrap?.querySelector(".nome-botao")?.textContent?.trim();
+  return nome || bloco.id;
+}
+
+function minutosAgora(){
+  const agora = new Date();
+  return (agora.getHours() * 60) + agora.getMinutes();
+}
+
+function inicioDaHoraAtualEmMinutos(){
+  const agora = new Date();
+  return agora.getHours() * 60;
+}
+
+function formatarFaixaHoraAtual(){
+  const agora = new Date();
+  const h = agora.getHours();
+  return `${pad2(h)}h00 a ${pad2(h)}h59`;
+}
+
+function tarefaNaHoraAtual(minutosTarefa, inicioHora){
+  if(Number.isNaN(minutosTarefa)) return false;
+  return minutosTarefa >= inicioHora && minutosTarefa < inicioHora + 60;
+}
+
+function obterTodasTarefasParaHorario(){
+  const itens = [];
+  const cfgMenu = getConfigMenu();
+
+  BLOCOS.forEach(bloco => {
+    const tarefas = bloco.tarefasFn();
+    const total = tarefas.length;
+    const edicaoDoBloco = cfgMenu.editadas && cfgMenu.editadas[bloco.id] ? cfgMenu.editadas[bloco.id] : {};
+    let estado = [];
+
+    if(bloco.tipo === "array_diario"){
+      estado = lerEstadoArrayDiario(bloco.chaveBase, total);
+    }else if(bloco.tipo === "selecao_unica_diaria"){
+      estado = lerEstadoSelecaoUnicaDiaria(bloco.chaveBase, total);
+    }else{
+      estado = new Array(total).fill(false);
+    }
+
+    tarefas.forEach((tarefa, indice) => {
+      const usarEdicaoDoBloco = total === 1;
+      const nomeEditado = usarEdicaoDoBloco && edicaoDoBloco.text ? edicaoDoBloco.text : (tarefa.nome || tarefa.titulo || "Tarefa");
+      const descricaoEditada = usarEdicaoDoBloco && edicaoDoBloco.descricao ? edicaoDoBloco.descricao : (tarefa.descricao || "");
+      const hora = normalizarHorario((usarEdicaoDoBloco && edicaoDoBloco.time ? edicaoDoBloco.time : "") || tarefa.hora || tarefa.horario || "");
+      if(!hora) return;
+
+      const subtarefasOriginais = limparListaTarefaMenu(tarefa.subtarefas || []);
+      const subtarefasDescricao = dividirDescricaoEmLista(descricaoEditada);
+
+      itens.push({
+        id:`${bloco.id}_${indice}`,
+        nome:limparNomeTarefaMenu(nomeEditado),
+        subtarefas:subtarefasDescricao.length ? subtarefasDescricao : subtarefasOriginais,
+        descricao:String(descricaoEditada || ""),
+        hora,
+        minutos:horaParaMinutos(hora),
+        blocoId:bloco.id,
+        blocoNome:nomeVisualDoBloco(bloco),
+        blocoTipo:bloco.tipo,
+        chaveBase:bloco.chaveBase,
+        indice,
+        total,
+        url:URL_BLOCOS_GABRIELA_MENU[bloco.id],
+        concluido:!!estado[indice],
+        custom:false
+      });
+    });
+  });
+
+  const cfg = getConfigMenu();
+  const estadoCustom = getCustomMenuEstado();
+
+  cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .forEach(item => {
+      const hora = normalizarHorario(item.time || "");
+      if(!hora) return;
+
+      itens.push({
+        id:item.id,
+        nome:limparNomeTarefaMenu(item.text || "Nova tarefa"),
+        descricao:String(item.descricao || ""),
+        subtarefas:dividirDescricaoEmLista(item.descricao || ""),
+        hora,
+        minutos:horaParaMinutos(hora),
+        blocoId:item.id,
+        blocoNome:"Tarefa personalizada",
+        blocoTipo:"custom",
+        chaveBase:"",
+        indice:0,
+        total:1,
+        url:"",
+        concluido:!!estadoCustom[item.id],
+        custom:true
+      });
+    });
+
+  return itens;
+}
+
+function getOrdemTarefasMenu(){
+  const ordem = lerJsonSeguro(CHAVE_ORDEM_TAREFAS_GABRIELA_MENU);
+  return Array.isArray(ordem) ? ordem : [];
+}
+
+function salvarOrdemTarefasMenu(ordem){
+  salvarJsonSeguro(CHAVE_ORDEM_TAREFAS_GABRIELA_MENU, ordem);
+}
+
+function ordenarTarefasPorHorarioPadrao(tarefas){
+  return [...tarefas].sort((a,b) => {
+    if(a.minutos !== b.minutos) return a.minutos - b.minutos;
+    return String(a.nome || "").localeCompare(String(b.nome || ""), "pt-BR");
+  });
+}
+
+function aplicarOrdemManualTarefas(tarefas){
+  const ordem = getOrdemTarefasMenu();
+  const baseOrdenada = ordenarTarefasPorHorarioPadrao(tarefas);
+
+  if(!ordem.length) return baseOrdenada;
+
+  const posicao = new Map(ordem.map((id, index) => [id, index]));
+  const conhecidos = baseOrdenada.filter(item => posicao.has(item.id));
+  const novos = baseOrdenada.filter(item => !posicao.has(item.id));
+
+  conhecidos.sort((a,b) => posicao.get(a.id) - posicao.get(b.id));
+  return [...conhecidos, ...novos];
+}
+
+function renderizarListaOrdemTarefas(){
+  const lista = document.getElementById("listaOrdemTarefas");
+  if(!lista) return;
+
+  const tarefas = aplicarOrdemManualTarefas(obterTodasTarefasParaHorario());
+  lista.innerHTML = "";
+
+  if(!tarefas.length){
+    const vazio = document.createElement("div");
+    vazio.className = "ordem-ajuda";
+    vazio.textContent = "Nenhuma tarefa com horário cadastrada.";
+    lista.appendChild(vazio);
+    return;
+  }
+
+  tarefas.forEach((item, index) => {
+    const linha = document.createElement("div");
+    linha.className = "ordem-item";
+
+    const info = document.createElement("div");
+    info.className = "ordem-info";
+
+    const hora = document.createElement("span");
+    hora.className = "ordem-hora";
+    hora.textContent = item.hora || "sem horário";
+
+    const nome = document.createElement("span");
+    nome.className = "ordem-nome";
+    nome.textContent = item.nome || "Tarefa";
+
+    info.appendChild(hora);
+    info.appendChild(nome);
+
+    const botoes = document.createElement("div");
+    botoes.className = "ordem-botoes";
+
+    const subir = document.createElement("button");
+    subir.type = "button";
+    subir.textContent = "↑";
+    subir.disabled = index === 0;
+    subir.onclick = () => moverTarefaNaOrdem(item.id, -1);
+
+    const descer = document.createElement("button");
+    descer.type = "button";
+    descer.textContent = "↓";
+    descer.disabled = index === tarefas.length - 1;
+    descer.onclick = () => moverTarefaNaOrdem(item.id, 1);
+
+    botoes.appendChild(subir);
+    botoes.appendChild(descer);
+
+    linha.appendChild(info);
+    linha.appendChild(botoes);
+    lista.appendChild(linha);
+  });
+}
+
+function moverTarefaNaOrdem(id, direcao){
+  const tarefas = aplicarOrdemManualTarefas(obterTodasTarefasParaHorario());
+  const ids = tarefas.map(item => item.id);
+  const atual = ids.indexOf(id);
+  const destino = atual + direcao;
+
+  if(atual < 0 || destino < 0 || destino >= ids.length) return;
+
+  const temp = ids[atual];
+  ids[atual] = ids[destino];
+  ids[destino] = temp;
+
+  salvarOrdemTarefasMenu(ids);
+  renderizarListaOrdemTarefas();
+  atualizarMenu();
+}
+
+function organizarTarefasPorHorarioAutomatico(){
+  localStorage.removeItem(CHAVE_ORDEM_TAREFAS_GABRIELA_MENU);
+  renderizarListaOrdemTarefas();
+  atualizarMenu();
+}
+
+
+function chaveSubtarefasHorarioHoje(){
+  return `${CHAVE_SUBTAREFAS_HORARIO_GABRIELA_MENU}_${dataHojeISO()}`;
+}
+
+function getEstadoSubtarefasHorario(){
+  return lerJsonSeguro(chaveSubtarefasHorarioHoje()) || {};
+}
+
+function salvarEstadoSubtarefasHorario(estado){
+  salvarJsonSeguro(chaveSubtarefasHorarioHoje(), estado || {});
+}
+
+function getSubtarefasMarcadas(item){
+  const estado = getEstadoSubtarefasHorario();
+  const lista = estado[item.id];
+  if(Array.isArray(lista)){
+    const ajustada = item.subtarefas.map((_, index) => !!lista[index]);
+    return ajustada;
+  }
+  return item.subtarefas.map(() => !!item.concluido);
+}
+
+function setEstadoTarefaHorario(item, valor){
+  if(item.custom){
+    const estado = getCustomMenuEstado();
+    estado[item.id] = !!valor;
+    salvarCustomMenuEstado(estado);
+    return;
+  }
+
+  const bloco = BLOCOS.find(b => b.id === item.blocoId);
+  if(!bloco) return;
+
+  const chave = `${bloco.chaveBase}_${dataHojeISO()}`;
+
+  if(bloco.tipo === "array_diario"){
+    const estado = lerEstadoArrayDiario(bloco.chaveBase, item.total || 1);
+    estado[item.indice] = !!valor;
+    salvarJsonSeguro(chave, estado);
+    return;
+  }
+
+  if(bloco.tipo === "selecao_unica_diaria"){
+    const estado = new Array(item.total || 1).fill(false);
+    estado[item.indice] = !!valor;
+    salvarJsonSeguro(chave, estado);
+  }
+}
+
+function alternarTarefaHorario(item){
+  setEstadoTarefaHorario(item, !item.concluido);
+  atualizarMenu();
+}
+
+function alternarSubtarefaHorario(item, indiceSub){
+  const estadoSub = getEstadoSubtarefasHorario();
+  const atual = getSubtarefasMarcadas(item);
+  atual[indiceSub] = !atual[indiceSub];
+  estadoSub[item.id] = atual;
+  salvarEstadoSubtarefasHorario(estadoSub);
+
+  const todasConcluidas = atual.length > 0 && atual.every(Boolean);
+  setEstadoTarefaHorario(item, todasConcluidas);
+  atualizarMenu();
+}
+
+function criarQuadradinhoHorario(marcado, aoClicar){
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "horario-check" + (marcado ? " marcado" : "");
+  btn.setAttribute("aria-label", marcado ? "marcar como não concluído" : "marcar como concluído");
+  btn.onclick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    aoClicar();
+  };
+  return btn;
+}
+
+function renderizarTarefasPorHorario(){
+  const listaHorario = document.getElementById("horarioLista");
+  if(!listaHorario) return;
+
+  listaHorario.innerHTML = "";
+
+  const tarefasOrdenadas = aplicarOrdemManualTarefas(obterTodasTarefasParaHorario());
+  const tarefas = [
+    ...tarefasOrdenadas.filter(item => !item.concluido),
+    ...tarefasOrdenadas.filter(item => item.concluido)
+  ];
+
+  if(tarefas.length === 0){
+    const vazio = document.createElement("div");
+    vazio.className = "horario-vazio";
+    vazio.innerHTML = "🌿 Nenhum compromisso cadastrado para hoje.<br><span style='font-size:12px;'>Você pode adicionar tarefas na configuração.</span>";
+    listaHorario.appendChild(vazio);
+    return;
+  }
+
+  let grupoAtual = null;
+  let ultimoBlocoId = null;
+
+  tarefas.forEach(item => {
+    if(item.blocoId !== ultimoBlocoId){
+      grupoAtual = document.createElement("div");
+      grupoAtual.className = "horario-grupo";
+      listaHorario.appendChild(grupoAtual);
+      ultimoBlocoId = item.blocoId;
+    }
+
+    const card = document.createElement("div");
+    card.className = "horario-card" + (item.concluido ? " concluido" : "");
+    card.setAttribute("role", "button");
+    card.tabIndex = 0;
+    card.onclick = () => {
+      if(item.custom){
+        alternarTarefaHorario(item);
+      }else if(item.url){
+        if(item.blocoId === "bloco2" || item.blocoId === "bloco8"){
+          abrirBlocoMenu(item.blocoId, item.url);
+        }else{
+          window.location.href = item.url;
+        }
+      }
+    };
+    card.onkeydown = (event) => {
+      if(event.key === "Enter" || event.key === " "){
+        event.preventDefault();
+        card.click();
+      }
+    };
+
+    const interno = document.createElement("div");
+    interno.className = "horario-card-inner";
+
+    const conteudo = document.createElement("div");
+    conteudo.className = "horario-conteudo";
+
+    const temSubtarefas = Array.isArray(item.subtarefas) && item.subtarefas.length > 0;
+
+    const linhaPrincipal = document.createElement("div");
+    linhaPrincipal.className = "horario-linha-principal";
+
+    if(!temSubtarefas){
+      linhaPrincipal.appendChild(criarQuadradinhoHorario(item.concluido, () => alternarTarefaHorario(item)));
+    }
+
+    const nome = document.createElement("div");
+    nome.className = "horario-nome";
+    nome.textContent = item.nome;
+    linhaPrincipal.appendChild(nome);
+    conteudo.appendChild(linhaPrincipal);
+
+    if(temSubtarefas){
+      const marcadas = getSubtarefasMarcadas(item);
+      const sublista = document.createElement("div");
+      sublista.className = "horario-sublista";
+
+      item.subtarefas.forEach((sub, indiceSub) => {
+        const linha = document.createElement("div");
+        linha.className = "horario-subitem";
+
+        linha.appendChild(criarQuadradinhoHorario(!!marcadas[indiceSub], () => alternarSubtarefaHorario(item, indiceSub)));
+
+        const texto = document.createElement("span");
+        texto.className = "horario-subitem-texto";
+        texto.textContent = sub;
+        linha.appendChild(texto);
+
+        sublista.appendChild(linha);
+      });
+      conteudo.appendChild(sublista);
+    }
+
+    const hora = document.createElement("div");
+    hora.className = "horario-hora";
+    hora.textContent = item.hora;
+
+    interno.appendChild(conteudo);
+    interno.appendChild(hora);
+    card.appendChild(interno);
+
+    grupoAtual.appendChild(card);
+  });
+}
+function aplicarVisualizacaoMenu(){
+  const visual = getVisualizacaoMenu();
+  const listaBlocos = document.getElementById("botoesLista");
+  const listaHorario = document.getElementById("horarioLista");
+
+  if(listaBlocos){
+    listaBlocos.style.display = visual === "horario" ? "none" : "flex";
+  }
+
+  if(listaHorario){
+    listaHorario.style.display = visual === "horario" ? "flex" : "none";
+  }
+
+  if(visual === "horario"){
+    renderizarTarefasPorHorario();
+  }
+}
+
 function lerEstadoArrayDiario(chaveBase, total){
   const chave = `${chaveBase}_${dataHojeISO()}`;
   const salvo = lerJsonSeguro(chave);
@@ -1280,6 +2498,10 @@ function lerEstadoSelecaoUnicaDiaria(chaveBase, total = 1){
   const salvo = lerJsonSeguro(chave);
 
   if(Array.isArray(salvo)){
+    if(total === 1){
+      return [salvo.some(Boolean)];
+    }
+
     const estado = salvo.map(Boolean);
     while(estado.length < total) estado.push(false);
     return estado.slice(0, total);
@@ -1422,6 +2644,7 @@ function atualizarMenu(){
   });
   renderizarTarefasPersonalizadasMenu();
   reordenarBotoes();
+  aplicarVisualizacaoMenu();
 }
 
 let blocoConcluidoAtual = null;
@@ -1575,6 +2798,2880 @@ function agendarViradaDoDia(){
   }, ms);
 }
 
+
+
+/* =========================================================
+   AJUSTE: CONFIGURAÇÃO SEPARADA PARA BLOCOS E POR HORÁRIO
+   ========================================================= */
+var CHAVE_CONFIG_HORARIO_GABRIELA_MENU_SEPARADA = "config_tarefas_horario_gabriela_menu";
+var CHAVE_CUSTOM_HORARIO_GABRIELA_MENU_DIA = "gabriela_menu_horario_custom";
+var CHAVE_ORDEM_BLOCOS_GABRIELA_MENU = "ordem_blocos_gabriela_menu";
+var tarefaEdicaoAtualModo = "blocos";
+
+function getModoConfiguracaoAtual(){
+  return getVisualizacaoMenu() === "horario" ? "horario" : "blocos";
+}
+
+function getConfigHorarioMenu(){
+  try{
+    const raw = localStorage.getItem(CHAVE_CONFIG_HORARIO_GABRIELA_MENU_SEPARADA);
+    const cfg = raw ? JSON.parse(raw) : {};
+    if(!Array.isArray(cfg.custom)) cfg.custom = [];
+    if(!cfg.editadas) cfg.editadas = {};
+    if(!cfg.hidden) cfg.hidden = {};
+    return cfg;
+  }catch(e){
+    return { custom:[], editadas:{}, hidden:{} };
+  }
+}
+
+function salvarConfigHorarioMenu(cfg){
+  localStorage.setItem(CHAVE_CONFIG_HORARIO_GABRIELA_MENU_SEPARADA, JSON.stringify(cfg));
+}
+
+function chaveCustomHorarioDia(){
+  return `${CHAVE_CUSTOM_HORARIO_GABRIELA_MENU_DIA}_${dataHojeISO()}`;
+}
+
+function getCustomHorarioEstado(){
+  return lerJsonSeguro(chaveCustomHorarioDia()) || {};
+}
+
+function salvarCustomHorarioEstado(estado){
+  salvarJsonSeguro(chaveCustomHorarioDia(), estado || {});
+}
+
+function getItensConfiguracaoBlocos(){
+  const cfg = getConfigMenu();
+
+  const base = BLOCOS.map(bloco => {
+    const titulo = document.querySelector(`#${bloco.wrapId} .nome-botao`)?.textContent?.trim() || bloco.id;
+    const editada = cfg.editadas[bloco.id] || {};
+
+    return {
+      id: bloco.id,
+      text: editada.text || titulo,
+      descricao: editada.descricao || "",
+      time: editada.time || "",
+      base:true,
+      hidden:false,
+      modo:"blocos"
+    };
+  }).filter(item => !cfg.hidden[item.id]);
+
+  const custom = cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .map(item => ({
+      id:item.id,
+      text:item.text || "Nova tarefa",
+      descricao:item.descricao || item.description || "",
+      time:item.time || "",
+      custom:true,
+      modo:"blocos"
+    }));
+
+  return [...base, ...custom];
+}
+
+function getItensHorarioBaseSemOrdem(){
+  const cfg = getConfigHorarioMenu();
+  const itens = [];
+
+  BLOCOS.forEach(bloco => {
+    const tarefas = typeof bloco.tarefasFn === "function" ? bloco.tarefasFn() : [];
+    tarefas.forEach((tarefa, indice) => {
+      const id = `${bloco.id}_${indice}`;
+      if(cfg.hidden[id]) return;
+
+      const editada = cfg.editadas[id] || {};
+      const subtarefasOriginais = limparListaTarefaMenu(tarefa.subtarefas || []);
+      const descricaoOriginal = subtarefasOriginais.length
+        ? subtarefasOriginais.join("\n")
+        : String(tarefa.descricao || "").trim();
+
+      itens.push({
+        id,
+        text: editada.text || limparNomeTarefaMenu(tarefa.nome || tarefa.titulo || "Tarefa"),
+        descricao: Object.prototype.hasOwnProperty.call(editada, "descricao") ? editada.descricao : descricaoOriginal,
+        time: editada.time || normalizarHorario(tarefa.hora || tarefa.horario || ""),
+        base:true,
+        modo:"horario",
+        blocoId:bloco.id,
+        indice
+      });
+    });
+  });
+
+  const custom = cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .map(item => ({
+      id:item.id,
+      text:item.text || "Nova tarefa",
+      descricao:item.descricao || item.description || "",
+      time:item.time || "",
+      custom:true,
+      modo:"horario"
+    }));
+
+  return [...itens, ...custom];
+}
+
+function getItensConfiguracaoHorario(){
+  return aplicarOrdemManualTarefas(getItensHorarioBaseSemOrdem().map(item => ({
+    ...item,
+    nome:item.text,
+    hora:item.time,
+    minutos:horaParaMinutos(item.time)
+  }))).map(item => ({
+    ...item,
+    text:item.text || item.nome,
+    time:item.time || item.hora,
+    modo:"horario"
+  }));
+}
+
+function getItensConfiguracaoAtuais(){
+  return getModoConfiguracaoAtual() === "horario"
+    ? getItensConfiguracaoHorario()
+    : aplicarOrdemManualBlocos(getItensConfiguracaoBlocos());
+}
+
+function atualizarTextosConfiguracaoPorModo(){
+  const modo = getModoConfiguracaoAtual();
+  const labelDescricao = document.querySelector('label[for="novaTarefaDescricao"]') || document.querySelector('#novaTarefaDescricao')?.closest('.field')?.querySelector('label');
+  const campoHora = document.getElementById("novaTarefaHora");
+  const ajuda = document.querySelector(".ordem-ajuda");
+  const botaoAuto = document.querySelector(".ordem-auto-btn");
+
+  if(labelDescricao){
+    labelDescricao.textContent = modo === "horario" ? "Descrição / lista abaixo" : "Descrição do bloco";
+  }
+  if(campoHora){
+    campoHora.placeholder = modo === "horario" ? "Digite só números. Ex.: 1030" : "Opcional. Ex.: 1030";
+  }
+  if(ajuda){
+    ajuda.textContent = modo === "horario"
+      ? "Use as setas para subir ou descer uma tarefa na visualização por horário."
+      : "Use as setas para mudar a ordem dos blocos no menu.";
+  }
+  if(botaoAuto){
+    botaoAuto.textContent = modo === "horario" ? "por horário" : "ordem original";
+  }
+}
+
+function renderizarPainelConfiguracao(){
+  renderizarOpcoesVisualizacaoMenu();
+  atualizarTextosConfiguracaoPorModo();
+  renderizarListaConfiguracao();
+  renderizarListaOrdemTarefas();
+}
+
+function abrirModalConfiguracao(){
+  document.getElementById("novaTarefaTexto").value = "";
+  document.getElementById("novaTarefaDescricao").value = "";
+  document.getElementById("novaTarefaHora").value = "";
+  renderizarPainelConfiguracao();
+  document.getElementById("modalConfiguracao").classList.add("show");
+}
+
+function definirVisualizacaoMenu(tipo){
+  const visual = tipo === "horario" ? "horario" : "blocos";
+  localStorage.setItem(CHAVE_VISUAL_GABRIELA_MENU, visual);
+  renderizarPainelConfiguracao();
+  aplicarVisualizacaoMenu();
+}
+
+function adicionarTarefaConfiguracao(){
+  const texto = document.getElementById("novaTarefaTexto").value.trim();
+  const descricao = document.getElementById("novaTarefaDescricao").value.trim();
+  const hora = formatarHorarioRotina(document.getElementById("novaTarefaHora").value);
+  const modo = getModoConfiguracaoAtual();
+
+  if(!texto){
+    alert("Escreva o nome da tarefa.");
+    return;
+  }
+
+  if(modo === "horario"){
+    const cfg = getConfigHorarioMenu();
+    cfg.custom.push({
+      id:`custom_horario_${Date.now()}`,
+      text:texto,
+      descricao,
+      time:hora,
+      custom:true
+    });
+    salvarConfigHorarioMenu(cfg);
+  }else{
+    const cfg = getConfigMenu();
+    cfg.custom.push({
+      id:`custom_menu_${Date.now()}`,
+      text:texto,
+      descricao,
+      time:hora,
+      custom:true
+    });
+    salvarConfigMenu(cfg);
+  }
+
+  document.getElementById("novaTarefaTexto").value = "";
+  document.getElementById("novaTarefaDescricao").value = "";
+  document.getElementById("novaTarefaHora").value = "";
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+}
+
+function renderizarListaConfiguracao(){
+  const lista = document.getElementById("listaConfigTarefas");
+  if(!lista) return;
+
+  const modo = getModoConfiguracaoAtual();
+  lista.innerHTML = "";
+
+  const tituloSecao = document.createElement("div");
+  tituloSecao.style.fontSize = "12px";
+  tituloSecao.style.color = "var(--texto-secundario)";
+  tituloSecao.style.lineHeight = "1.35";
+  tituloSecao.style.textAlign = "center";
+  tituloSecao.style.margin = "2px 0";
+  tituloSecao.textContent = modo === "horario"
+    ? "Editar, incluir ou retirar tarefas da visualização por horário."
+    : "Editar, incluir ou retirar blocos do menu principal.";
+  lista.appendChild(tituloSecao);
+
+  getItensConfiguracaoAtuais().forEach(item => {
+    const linha = document.createElement("div");
+    linha.style.display = "grid";
+    linha.style.gridTemplateColumns = "1fr auto auto";
+    linha.style.gap = "6px";
+    linha.style.alignItems = "center";
+    linha.style.background = "#F8FAF7";
+    linha.style.border = "1px solid var(--borda)";
+    linha.style.borderRadius = "12px";
+    linha.style.padding = "9px 10px";
+
+    const nome = document.createElement("div");
+    nome.style.fontSize = "12px";
+    nome.style.color = "var(--texto-principal)";
+    nome.style.lineHeight = "1.35";
+    nome.textContent = `${item.text || item.nome || "Tarefa"}${item.time ? " • " + item.time : ""}`;
+
+    const btnEditar = document.createElement("button");
+    btnEditar.textContent = "editar";
+    btnEditar.className = "cancel";
+    btnEditar.style.border = "none";
+    btnEditar.style.borderRadius = "10px";
+    btnEditar.style.padding = "8px 10px";
+    btnEditar.style.cursor = "pointer";
+    btnEditar.style.fontFamily = "var(--fonte)";
+    btnEditar.style.fontSize = "11px";
+    btnEditar.onclick = () => editarTarefaConfiguracao(item.id);
+
+    const btnRetirar = document.createElement("button");
+    btnRetirar.textContent = "retirar";
+    btnRetirar.className = "cancel";
+    btnRetirar.style.border = "none";
+    btnRetirar.style.borderRadius = "10px";
+    btnRetirar.style.padding = "8px 10px";
+    btnRetirar.style.cursor = "pointer";
+    btnRetirar.style.fontFamily = "var(--fonte)";
+    btnRetirar.style.fontSize = "11px";
+    btnRetirar.onclick = () => removerTarefaConfiguracao(item.id);
+
+    linha.appendChild(nome);
+    linha.appendChild(btnEditar);
+    linha.appendChild(btnRetirar);
+    lista.appendChild(linha);
+  });
+}
+
+function editarTarefaConfiguracao(id){
+  const item = getItensConfiguracaoAtuais().find(tarefa => tarefa.id === id);
+  if(!item){
+    alert("Tarefa não encontrada.");
+    return;
+  }
+
+  tarefaEdicaoAtualId = id;
+  tarefaEdicaoAtualModo = getModoConfiguracaoAtual();
+
+  document.getElementById("editarTarefaSenha").value = "";
+  document.getElementById("editarTarefaNome").value = item.text || item.nome || "";
+  document.getElementById("editarTarefaDescricao").value = montarDescricaoParaEdicao(item);
+  document.getElementById("editarTarefaHora").value = item.time || item.hora || "";
+  document.getElementById("statusEditarTarefa").textContent = "";
+
+  const labelDescricao = document.querySelector('#editarTarefaDescricao')?.closest('.field')?.querySelector('label');
+  if(labelDescricao){
+    labelDescricao.textContent = tarefaEdicaoAtualModo === "horario" ? "Descrição / lista abaixo" : "Descrição do bloco";
+  }
+
+  document.getElementById("modalEditarTarefa").classList.add("show");
+  setTimeout(() => {
+    const campoSenha = document.getElementById("editarTarefaSenha");
+    if(campoSenha) campoSenha.focus();
+  }, 80);
+}
+
+function salvarEdicaoTarefaConfiguracao(){
+  if(!tarefaEdicaoAtualId) return;
+
+  const senha = document.getElementById("editarTarefaSenha").value;
+  const status = document.getElementById("statusEditarTarefa");
+
+  if(!senhaGabrielaValida(senha)){
+    status.textContent = "Senha incorreta.";
+    return;
+  }
+
+  const modo = tarefaEdicaoAtualModo === "horario" ? "horario" : "blocos";
+  const cfg = modo === "horario" ? getConfigHorarioMenu() : getConfigMenu();
+  const itemCustom = cfg.custom.find(item => item.id === tarefaEdicaoAtualId);
+  const listaBase = modo === "horario" ? getItensConfiguracaoHorario() : getItensConfiguracaoBlocos();
+  const itemBase = listaBase.find(item => item.id === tarefaEdicaoAtualId);
+
+  if(!itemCustom && !itemBase){
+    status.textContent = "Tarefa não encontrada.";
+    return;
+  }
+
+  const novoNome = document.getElementById("editarTarefaNome").value.trim();
+  const novaDescricao = document.getElementById("editarTarefaDescricao").value.trim();
+  const novoHorarioDigitado = document.getElementById("editarTarefaHora").value;
+  const novoHorario = formatarHorarioRotina(novoHorarioDigitado);
+
+  if(!novoNome){
+    status.textContent = "Escreva o nome da tarefa.";
+    return;
+  }
+
+  if(itemCustom){
+    itemCustom.text = novoNome;
+    itemCustom.descricao = novaDescricao;
+    itemCustom.time = novoHorario;
+  }else{
+    cfg.editadas[tarefaEdicaoAtualId] = {
+      text: novoNome,
+      descricao: novaDescricao,
+      time: novoHorario || (itemBase ? (itemBase.time || itemBase.hora || "") : "")
+    };
+  }
+
+  if(modo === "horario"){
+    salvarConfigHorarioMenu(cfg);
+  }else{
+    salvarConfigMenu(cfg);
+  }
+
+  fecharModalEditarTarefa();
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+}
+
+function removerTarefaConfiguracao(id){
+  const senha = prompt("Digite a senha da mamãe para retirar essa tarefa:");
+  if(!senhaGabrielaValida(senha)){
+    alert("Senha incorreta.");
+    return;
+  }
+
+  const modo = getModoConfiguracaoAtual();
+
+  if(modo === "horario"){
+    const cfg = getConfigHorarioMenu();
+    cfg.custom = cfg.custom.filter(item => item.id !== id);
+    cfg.hidden[id] = true;
+    salvarConfigHorarioMenu(cfg);
+
+    const estado = getCustomHorarioEstado();
+    delete estado[id];
+    salvarCustomHorarioEstado(estado);
+  }else{
+    const cfg = getConfigMenu();
+    cfg.custom = cfg.custom.filter(item => item.id !== id);
+    cfg.hidden[id] = true;
+    salvarConfigMenu(cfg);
+
+    const estado = getCustomMenuEstado();
+    delete estado[id];
+    salvarCustomMenuEstado(estado);
+  }
+
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+}
+
+function obterTodasTarefasParaHorario(){
+  const itens = [];
+  const cfgHorario = getConfigHorarioMenu();
+
+  BLOCOS.forEach(bloco => {
+    const tarefas = bloco.tarefasFn();
+    const total = tarefas.length;
+    let estado = [];
+
+    if(bloco.tipo === "array_diario"){
+      estado = lerEstadoArrayDiario(bloco.chaveBase, total);
+    }else if(bloco.tipo === "selecao_unica_diaria"){
+      estado = lerEstadoSelecaoUnicaDiaria(bloco.chaveBase, total);
+    }else{
+      estado = new Array(total).fill(false);
+    }
+
+    tarefas.forEach((tarefa, indice) => {
+      const id = `${bloco.id}_${indice}`;
+      if(cfgHorario.hidden[id]) return;
+
+      const editada = cfgHorario.editadas[id] || {};
+      const nomeBase = limparNomeTarefaMenu(tarefa.nome || tarefa.titulo || "Tarefa");
+      const subtarefasOriginais = limparListaTarefaMenu(tarefa.subtarefas || []);
+      const descricaoBase = subtarefasOriginais.length
+        ? subtarefasOriginais.join("\n")
+        : String(tarefa.descricao || "").trim();
+      const descricaoFinal = Object.prototype.hasOwnProperty.call(editada, "descricao") ? editada.descricao : descricaoBase;
+      const hora = normalizarHorario(editada.time || tarefa.hora || tarefa.horario || "");
+      if(!hora) return;
+
+      itens.push({
+        id,
+        nome:editada.text || nomeBase,
+        subtarefas:dividirDescricaoEmLista(descricaoFinal),
+        descricao:String(descricaoFinal || ""),
+        hora,
+        minutos:horaParaMinutos(hora),
+        blocoId:bloco.id,
+        blocoNome:nomeVisualDoBloco(bloco),
+        blocoTipo:bloco.tipo,
+        chaveBase:bloco.chaveBase,
+        indice,
+        total,
+        url:URL_BLOCOS_GABRIELA_MENU[bloco.id],
+        concluido:!!estado[indice],
+        custom:false,
+        modo:"horario"
+      });
+    });
+  });
+
+  const estadoCustom = getCustomHorarioEstado();
+  cfgHorario.custom
+    .filter(item => !cfgHorario.hidden[item.id])
+    .forEach(item => {
+      const hora = normalizarHorario(item.time || "");
+      if(!hora) return;
+
+      itens.push({
+        id:item.id,
+        nome:limparNomeTarefaMenu(item.text || "Nova tarefa"),
+        descricao:String(item.descricao || ""),
+        subtarefas:dividirDescricaoEmLista(item.descricao || ""),
+        hora,
+        minutos:horaParaMinutos(hora),
+        blocoId:item.id,
+        blocoNome:"Tarefa por horário",
+        blocoTipo:"custom_horario",
+        chaveBase:"",
+        indice:0,
+        total:1,
+        url:"",
+        concluido:!!estadoCustom[item.id],
+        custom:true,
+        modo:"horario"
+      });
+    });
+
+  return itens;
+}
+
+function getOrdemBlocosMenu(){
+  const ordem = lerJsonSeguro(CHAVE_ORDEM_BLOCOS_GABRIELA_MENU);
+  return Array.isArray(ordem) ? ordem : [];
+}
+
+function salvarOrdemBlocosMenu(ordem){
+  salvarJsonSeguro(CHAVE_ORDEM_BLOCOS_GABRIELA_MENU, ordem);
+}
+
+function aplicarOrdemManualBlocos(itens){
+  const ordem = getOrdemBlocosMenu();
+  if(!ordem.length) return itens;
+  const posicao = new Map(ordem.map((id, index) => [id, index]));
+  const conhecidos = itens.filter(item => posicao.has(item.id));
+  const novos = itens.filter(item => !posicao.has(item.id));
+  conhecidos.sort((a,b) => posicao.get(a.id) - posicao.get(b.id));
+  return [...conhecidos, ...novos];
+}
+
+function renderizarListaOrdemTarefas(){
+  const lista = document.getElementById("listaOrdemTarefas");
+  if(!lista) return;
+
+  const modo = getModoConfiguracaoAtual();
+  const tarefas = modo === "horario"
+    ? aplicarOrdemManualTarefas(obterTodasTarefasParaHorario())
+    : aplicarOrdemManualBlocos(getItensConfiguracaoBlocos());
+
+  lista.innerHTML = "";
+
+  if(!tarefas.length){
+    const vazio = document.createElement("div");
+    vazio.className = "ordem-ajuda";
+    vazio.textContent = modo === "horario" ? "Nenhuma tarefa com horário cadastrada." : "Nenhum bloco cadastrado.";
+    lista.appendChild(vazio);
+    return;
+  }
+
+  tarefas.forEach((item, index) => {
+    const linha = document.createElement("div");
+    linha.className = "ordem-item";
+
+    const info = document.createElement("div");
+    info.className = "ordem-info";
+
+    const hora = document.createElement("span");
+    hora.className = "ordem-hora";
+    hora.textContent = modo === "horario" ? (item.hora || item.time || "sem horário") : "bloco";
+
+    const nome = document.createElement("span");
+    nome.className = "ordem-nome";
+    nome.textContent = item.nome || item.text || "Tarefa";
+
+    info.appendChild(hora);
+    info.appendChild(nome);
+
+    const botoes = document.createElement("div");
+    botoes.className = "ordem-botoes";
+
+    const subir = document.createElement("button");
+    subir.type = "button";
+    subir.textContent = "↑";
+    subir.disabled = index === 0;
+    subir.onclick = () => moverTarefaNaOrdem(item.id, -1);
+
+    const descer = document.createElement("button");
+    descer.type = "button";
+    descer.textContent = "↓";
+    descer.disabled = index === tarefas.length - 1;
+    descer.onclick = () => moverTarefaNaOrdem(item.id, 1);
+
+    botoes.appendChild(subir);
+    botoes.appendChild(descer);
+
+    linha.appendChild(info);
+    linha.appendChild(botoes);
+    lista.appendChild(linha);
+  });
+}
+
+function moverTarefaNaOrdem(id, direcao){
+  const modo = getModoConfiguracaoAtual();
+  const tarefas = modo === "horario"
+    ? aplicarOrdemManualTarefas(obterTodasTarefasParaHorario())
+    : aplicarOrdemManualBlocos(getItensConfiguracaoBlocos());
+
+  const ids = tarefas.map(item => item.id);
+  const atual = ids.indexOf(id);
+  const destino = atual + direcao;
+
+  if(atual < 0 || destino < 0 || destino >= ids.length) return;
+
+  const temp = ids[atual];
+  ids[atual] = ids[destino];
+  ids[destino] = temp;
+
+  if(modo === "horario"){
+    salvarOrdemTarefasMenu(ids);
+  }else{
+    salvarOrdemBlocosMenu(ids);
+  }
+
+  renderizarListaConfiguracao();
+  atualizarMenu();
+}
+
+function organizarTarefasPorHorarioAutomatico(){
+  const modo = getModoConfiguracaoAtual();
+  if(modo === "horario"){
+    localStorage.removeItem(CHAVE_ORDEM_TAREFAS_GABRIELA_MENU);
+  }else{
+    localStorage.removeItem(CHAVE_ORDEM_BLOCOS_GABRIELA_MENU);
+  }
+  renderizarListaConfiguracao();
+  atualizarMenu();
+}
+
+function setEstadoTarefaHorario(item, valor){
+  if(item.custom && item.modo === "horario"){
+    const estado = getCustomHorarioEstado();
+    estado[item.id] = !!valor;
+    salvarCustomHorarioEstado(estado);
+    return;
+  }
+
+  if(item.custom){
+    const estado = getCustomMenuEstado();
+    estado[item.id] = !!valor;
+    salvarCustomMenuEstado(estado);
+    return;
+  }
+
+  const bloco = BLOCOS.find(b => b.id === item.blocoId);
+  if(!bloco) return;
+
+  const chave = `${bloco.chaveBase}_${dataHojeISO()}`;
+
+  if(bloco.tipo === "array_diario"){
+    const estado = lerEstadoArrayDiario(bloco.chaveBase, item.total || 1);
+    estado[item.indice] = !!valor;
+    salvarJsonSeguro(chave, estado);
+    return;
+  }
+
+  if(bloco.tipo === "selecao_unica_diaria"){
+    const estado = new Array(item.total || 1).fill(false);
+    estado[item.indice] = !!valor;
+    salvarJsonSeguro(chave, estado);
+  }
+}
+
+function reordenarBotoes(){
+  const lista = document.getElementById("botoesLista");
+  if(!lista) return;
+
+  const ordem = getOrdemBlocosMenu();
+  const wraps = Array.from(lista.querySelectorAll(".botao-wrap"));
+  const posicao = new Map(ordem.map((id, index) => [id, index]));
+
+  wraps.sort((a, b) => {
+    const aConcluido = a.classList.contains("concluido") ? 1 : 0;
+    const bConcluido = b.classList.contains("concluido") ? 1 : 0;
+    if(aConcluido !== bConcluido) return aConcluido - bConcluido;
+
+    const aId = a.dataset.blocoId || a.id;
+    const bId = b.dataset.blocoId || b.id;
+    const aPos = posicao.has(aId) ? posicao.get(aId) : 9999;
+    const bPos = posicao.has(bId) ? posicao.get(bId) : 9999;
+    if(aPos !== bPos) return aPos - bPos;
+    return 0;
+  });
+
+  wraps.forEach(wrap => lista.appendChild(wrap));
+}
+
+
+
+/* =========================================================
+   AJUSTE: EMOJIS E PÁGINA DE DESTINO NO TÍTULO E NA LISTA
+   ========================================================= */
+function limparEmojiCampo(valor){
+  return String(valor || "").trim().slice(0, 4);
+}
+
+function limparUrlDestino(valor){
+  return String(valor || "").trim();
+}
+
+function aplicarEmojiNoTexto(emoji, texto){
+  const e = limparEmojiCampo(emoji);
+  const t = limparNomeTarefaMenu(texto || "");
+  if(!e) return t;
+  if(t.startsWith(e)) return t;
+  return `${e} ${t}`.trim();
+}
+
+function separarEmojiInicial(texto){
+  const t = String(texto || "").trim();
+  if(!t) return { emoji:"", texto:"" };
+  const partes = t.split(/\s+/);
+  const primeiro = partes[0] || "";
+  const pareceEmoji = /[^A-Za-zÀ-ÿ0-9]/.test(primeiro) && primeiro.length <= 4;
+  if(pareceEmoji && partes.length > 1){
+    return { emoji:primeiro, texto:partes.slice(1).join(" ").trim() };
+  }
+  return { emoji:"", texto:t };
+}
+
+function parseLinhaDescricaoComLink(linha){
+  let texto = String(linha || "").trim();
+  let url = "";
+
+  if(texto.includes("=>")){
+    const partes = texto.split("=>");
+    texto = partes.shift().trim();
+    url = partes.join("=>").trim();
+  }else if(texto.includes("|")){
+    const partes = texto.split("|");
+    texto = partes.shift().trim();
+    url = partes.join("|").trim();
+  }
+
+  return {
+    texto: limparNomeTarefaMenu(texto),
+    url: limparUrlDestino(url)
+  };
+}
+
+function parseDescricaoDetalhada(texto){
+  return String(texto || "")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .split(/\n|;/)
+    .map(parseLinhaDescricaoComLink)
+    .filter(item => item.texto);
+}
+
+function dividirDescricaoEmLista(texto){
+  return parseDescricaoDetalhada(texto).map(item => item.texto);
+}
+
+function abrirDestinoDaTarefa(url){
+  const destino = limparUrlDestino(url);
+  if(!destino) return false;
+  window.location.href = destino;
+  return true;
+}
+
+function getItensConfiguracaoBlocos(){
+  const cfg = getConfigMenu();
+
+  const base = BLOCOS.map(bloco => {
+    const titulo = document.querySelector(`#${bloco.wrapId} .nome-botao`)?.textContent?.trim() || bloco.id;
+    const editada = cfg.editadas[bloco.id] || {};
+
+    return {
+      id: bloco.id,
+      text: editada.text || titulo,
+      emoji: editada.emoji || "",
+      url: editada.url || "",
+      descricao: editada.descricao || "",
+      time: editada.time || "",
+      base:true,
+      hidden:false,
+      modo:"blocos"
+    };
+  }).filter(item => !cfg.hidden[item.id]);
+
+  const custom = cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .map(item => ({
+      id:item.id,
+      text:item.text || "Nova tarefa",
+      emoji:item.emoji || "",
+      url:item.url || "",
+      descricao:item.descricao || item.description || "",
+      time:item.time || "",
+      custom:true,
+      modo:"blocos"
+    }));
+
+  return [...base, ...custom];
+}
+
+function getItensHorarioBaseSemOrdem(){
+  const cfg = getConfigHorarioMenu();
+  const itens = [];
+
+  BLOCOS.forEach(bloco => {
+    const tarefas = typeof bloco.tarefasFn === "function" ? bloco.tarefasFn() : [];
+    tarefas.forEach((tarefa, indice) => {
+      const id = `${bloco.id}_${indice}`;
+      if(cfg.hidden[id]) return;
+
+      const editada = cfg.editadas[id] || {};
+      const subtarefasOriginais = limparListaTarefaMenu(tarefa.subtarefas || []);
+      const descricaoOriginal = subtarefasOriginais.length
+        ? subtarefasOriginais.join("\n")
+        : String(tarefa.descricao || "").trim();
+
+      itens.push({
+        id,
+        text: editada.text || limparNomeTarefaMenu(tarefa.nome || tarefa.titulo || "Tarefa"),
+        emoji: editada.emoji || "",
+        url: editada.url || "",
+        descricao: Object.prototype.hasOwnProperty.call(editada, "descricao") ? editada.descricao : descricaoOriginal,
+        time: editada.time || normalizarHorario(tarefa.hora || tarefa.horario || ""),
+        base:true,
+        modo:"horario",
+        blocoId:bloco.id,
+        indice
+      });
+    });
+  });
+
+  const custom = cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .map(item => ({
+      id:item.id,
+      text:item.text || "Nova tarefa",
+      emoji:item.emoji || "",
+      url:item.url || "",
+      descricao:item.descricao || item.description || "",
+      time:item.time || "",
+      custom:true,
+      modo:"horario"
+    }));
+
+  return [...itens, ...custom];
+}
+
+function abrirModalConfiguracao(){
+  document.getElementById("novaTarefaTexto").value = "";
+  if(document.getElementById("novaTarefaEmoji")) document.getElementById("novaTarefaEmoji").value = "";
+  if(document.getElementById("novaTarefaUrl")) document.getElementById("novaTarefaUrl").value = "";
+  document.getElementById("novaTarefaDescricao").value = "";
+  document.getElementById("novaTarefaHora").value = "";
+  renderizarPainelConfiguracao();
+  document.getElementById("modalConfiguracao").classList.add("show");
+}
+
+function adicionarTarefaConfiguracao(){
+  const texto = document.getElementById("novaTarefaTexto").value.trim();
+  const emoji = limparEmojiCampo(document.getElementById("novaTarefaEmoji")?.value || "");
+  const url = limparUrlDestino(document.getElementById("novaTarefaUrl")?.value || "");
+  const descricao = document.getElementById("novaTarefaDescricao").value.trim();
+  const hora = formatarHorarioRotina(document.getElementById("novaTarefaHora").value);
+  const modo = getModoConfiguracaoAtual();
+
+  if(!texto){
+    alert("Escreva o nome da tarefa.");
+    return;
+  }
+
+  const novoItem = {
+    id: modo === "horario" ? `custom_horario_${Date.now()}` : `custom_menu_${Date.now()}`,
+    text:texto,
+    emoji,
+    url,
+    descricao,
+    time:hora,
+    custom:true
+  };
+
+  if(modo === "horario"){
+    const cfg = getConfigHorarioMenu();
+    cfg.custom.push(novoItem);
+    salvarConfigHorarioMenu(cfg);
+  }else{
+    const cfg = getConfigMenu();
+    cfg.custom.push(novoItem);
+    salvarConfigMenu(cfg);
+  }
+
+  document.getElementById("novaTarefaTexto").value = "";
+  if(document.getElementById("novaTarefaEmoji")) document.getElementById("novaTarefaEmoji").value = "";
+  if(document.getElementById("novaTarefaUrl")) document.getElementById("novaTarefaUrl").value = "";
+  document.getElementById("novaTarefaDescricao").value = "";
+  document.getElementById("novaTarefaHora").value = "";
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+}
+
+function editarTarefaConfiguracao(id){
+  const item = getItensConfiguracaoAtuais().find(tarefa => tarefa.id === id);
+  if(!item){
+    alert("Tarefa não encontrada.");
+    return;
+  }
+
+  tarefaEdicaoAtualId = id;
+  tarefaEdicaoAtualModo = getModoConfiguracaoAtual();
+
+  const separado = separarEmojiInicial(item.text || item.nome || "");
+  document.getElementById("editarTarefaSenha").value = "";
+  document.getElementById("editarTarefaNome").value = separado.texto || item.text || item.nome || "";
+  if(document.getElementById("editarTarefaEmoji")) document.getElementById("editarTarefaEmoji").value = item.emoji || separado.emoji || "";
+  if(document.getElementById("editarTarefaUrl")) document.getElementById("editarTarefaUrl").value = item.url || "";
+  document.getElementById("editarTarefaDescricao").value = montarDescricaoParaEdicao(item);
+  document.getElementById("editarTarefaHora").value = item.time || item.hora || "";
+  document.getElementById("statusEditarTarefa").textContent = "";
+
+  const labelDescricao = document.querySelector('#editarTarefaDescricao')?.closest('.field')?.querySelector('label');
+  if(labelDescricao){
+    labelDescricao.textContent = tarefaEdicaoAtualModo === "horario" ? "Descrição / lista abaixo" : "Descrição do bloco";
+  }
+
+  document.getElementById("modalEditarTarefa").classList.add("show");
+  setTimeout(() => {
+    const campoSenha = document.getElementById("editarTarefaSenha");
+    if(campoSenha) campoSenha.focus();
+  }, 80);
+}
+
+function salvarEdicaoTarefaConfiguracao(){
+  if(!tarefaEdicaoAtualId) return;
+
+  const senha = document.getElementById("editarTarefaSenha").value;
+  const status = document.getElementById("statusEditarTarefa");
+
+  if(!senhaGabrielaValida(senha)){
+    status.textContent = "Senha incorreta.";
+    return;
+  }
+
+  const modo = tarefaEdicaoAtualModo === "horario" ? "horario" : "blocos";
+  const cfg = modo === "horario" ? getConfigHorarioMenu() : getConfigMenu();
+  const itemCustom = cfg.custom.find(item => item.id === tarefaEdicaoAtualId);
+  const listaBase = modo === "horario" ? getItensConfiguracaoHorario() : getItensConfiguracaoBlocos();
+  const itemBase = listaBase.find(item => item.id === tarefaEdicaoAtualId);
+
+  if(!itemCustom && !itemBase){
+    status.textContent = "Tarefa não encontrada.";
+    return;
+  }
+
+  const novoNome = document.getElementById("editarTarefaNome").value.trim();
+  const emoji = limparEmojiCampo(document.getElementById("editarTarefaEmoji")?.value || "");
+  const url = limparUrlDestino(document.getElementById("editarTarefaUrl")?.value || "");
+  const novaDescricao = document.getElementById("editarTarefaDescricao").value.trim();
+  const novoHorarioDigitado = document.getElementById("editarTarefaHora").value;
+  const novoHorario = formatarHorarioRotina(novoHorarioDigitado);
+
+  if(!novoNome){
+    status.textContent = "Escreva o nome da tarefa.";
+    return;
+  }
+
+  if(itemCustom){
+    itemCustom.text = novoNome;
+    itemCustom.emoji = emoji;
+    itemCustom.url = url;
+    itemCustom.descricao = novaDescricao;
+    itemCustom.time = novoHorario;
+  }else{
+    cfg.editadas[tarefaEdicaoAtualId] = {
+      text: novoNome,
+      emoji,
+      url,
+      descricao: novaDescricao,
+      time: novoHorario || (itemBase ? (itemBase.time || itemBase.hora || "") : "")
+    };
+  }
+
+  if(modo === "horario"){
+    salvarConfigHorarioMenu(cfg);
+  }else{
+    salvarConfigMenu(cfg);
+  }
+
+  fecharModalEditarTarefa();
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+}
+
+function aplicarEdicaoBlocoNoBotao(bloco){
+  const cfg = getConfigMenu();
+  const editada = cfg.editadas[bloco.id];
+  if(!editada) return;
+
+  const wrap = document.getElementById(bloco.wrapId);
+  if(!wrap) return;
+
+  const nome = wrap.querySelector(".nome-botao");
+  if(nome && (editada.text || editada.emoji)){
+    nome.textContent = aplicarEmojiNoTexto(editada.emoji, editada.text || nome.textContent);
+  }
+
+  const btn = wrap.querySelector("button.botao");
+  if(btn && editada.url){
+    btn.onclick = () => abrirDestinoDaTarefa(editada.url);
+  }
+
+  let desc = wrap.querySelector(".descricao-botao");
+  if(editada.descricao){
+    if(!desc){
+      desc = document.createElement("div");
+      desc.className = "descricao-botao";
+      const proxima = wrap.querySelector(".proxima-tarefa");
+      if(proxima) proxima.parentNode.insertBefore(desc, proxima);
+    }
+    desc.textContent = editada.descricao;
+  }else if(desc){
+    desc.remove();
+  }
+}
+
+function renderizarTarefasPersonalizadasMenu(){
+  const lista = document.getElementById("botoesLista");
+  if(!lista) return;
+
+  lista.querySelectorAll(".botao-wrap.custom-menu").forEach(el => el.remove());
+
+  const cfg = getConfigMenu();
+  const estado = getCustomMenuEstado();
+
+  cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .sort((a,b) => horaParaMinutos(a.time) - horaParaMinutos(b.time))
+    .forEach(item => {
+      const wrap = document.createElement("div");
+      wrap.className = "botao-wrap custom-menu" + (estado[item.id] ? " concluido" : "");
+      wrap.dataset.blocoId = item.id;
+
+      const check = document.createElement("div");
+      check.className = "check-concluido";
+      check.textContent = "✅";
+
+      const btn = document.createElement("button");
+      btn.className = "botao tarefa-bloco";
+      btn.onclick = () => item.url ? abrirDestinoDaTarefa(item.url) : alternarTarefaPersonalizadaMenu(item.id);
+
+      const nome = document.createElement("div");
+      nome.className = "nome-botao";
+      nome.textContent = aplicarEmojiNoTexto(item.emoji, item.text || "Nova tarefa");
+
+      btn.appendChild(nome);
+
+      if(item.descricao){
+        const desc = document.createElement("div");
+        desc.className = "descricao-botao";
+        desc.textContent = item.descricao;
+        btn.appendChild(desc);
+      }
+
+      const proxima = document.createElement("div");
+      proxima.className = "proxima-tarefa";
+      proxima.textContent = item.time ? formatarHorarioRotina(item.time) : "";
+
+      const alerta = document.createElement("div");
+      alerta.className = "alerta";
+      alerta.textContent = "";
+
+      btn.appendChild(proxima);
+      btn.appendChild(alerta);
+      wrap.appendChild(check);
+      wrap.appendChild(btn);
+      lista.appendChild(wrap);
+    });
+}
+
+function obterTodasTarefasParaHorario(){
+  const itens = [];
+  const cfgHorario = getConfigHorarioMenu();
+
+  BLOCOS.forEach(bloco => {
+    const tarefas = bloco.tarefasFn();
+    const total = tarefas.length;
+    let estado = [];
+
+    if(bloco.tipo === "array_diario"){
+      estado = lerEstadoArrayDiario(bloco.chaveBase, total);
+    }else if(bloco.tipo === "selecao_unica_diaria"){
+      estado = lerEstadoSelecaoUnicaDiaria(bloco.chaveBase, total);
+    }else{
+      estado = new Array(total).fill(false);
+    }
+
+    tarefas.forEach((tarefa, indice) => {
+      const id = `${bloco.id}_${indice}`;
+      if(cfgHorario.hidden[id]) return;
+
+      const editada = cfgHorario.editadas[id] || {};
+      const nomeBase = limparNomeTarefaMenu(tarefa.nome || tarefa.titulo || "Tarefa");
+      const subtarefasOriginais = limparListaTarefaMenu(tarefa.subtarefas || []);
+      const descricaoBase = subtarefasOriginais.length
+        ? subtarefasOriginais.join("\n")
+        : String(tarefa.descricao || "").trim();
+      const descricaoFinal = Object.prototype.hasOwnProperty.call(editada, "descricao") ? editada.descricao : descricaoBase;
+      const hora = normalizarHorario(editada.time || tarefa.hora || tarefa.horario || "");
+      if(!hora) return;
+
+      itens.push({
+        id,
+        nome:aplicarEmojiNoTexto(editada.emoji, editada.text || nomeBase),
+        emoji:editada.emoji || "",
+        url:editada.url || "",
+        subtarefas:parseDescricaoDetalhada(descricaoFinal),
+        descricao:String(descricaoFinal || ""),
+        hora,
+        minutos:horaParaMinutos(hora),
+        blocoId:bloco.id,
+        blocoNome:nomeVisualDoBloco(bloco),
+        blocoTipo:bloco.tipo,
+        chaveBase:bloco.chaveBase,
+        indice,
+        total,
+        urlPadrao:URL_BLOCOS_GABRIELA_MENU[bloco.id],
+        concluido:!!estado[indice],
+        custom:false,
+        modo:"horario"
+      });
+    });
+  });
+
+  const estadoCustom = getCustomHorarioEstado();
+  cfgHorario.custom
+    .filter(item => !cfgHorario.hidden[item.id])
+    .forEach(item => {
+      const hora = normalizarHorario(item.time || "");
+      if(!hora) return;
+
+      itens.push({
+        id:item.id,
+        nome:aplicarEmojiNoTexto(item.emoji, item.text || "Nova tarefa"),
+        emoji:item.emoji || "",
+        url:item.url || "",
+        descricao:String(item.descricao || ""),
+        subtarefas:parseDescricaoDetalhada(item.descricao || ""),
+        hora,
+        minutos:horaParaMinutos(hora),
+        blocoId:item.id,
+        blocoNome:"Tarefa por horário",
+        blocoTipo:"custom_horario",
+        chaveBase:"",
+        indice:0,
+        total:1,
+        urlPadrao:"",
+        concluido:!!estadoCustom[item.id],
+        custom:true,
+        modo:"horario"
+      });
+    });
+
+  return itens;
+}
+
+function renderizarTarefasPorHorario(){
+  const listaHorario = document.getElementById("horarioLista");
+  if(!listaHorario) return;
+
+  listaHorario.innerHTML = "";
+
+  const tarefasOrdenadas = aplicarOrdemManualTarefas(obterTodasTarefasParaHorario());
+  const tarefas = [
+    ...tarefasOrdenadas.filter(item => !item.concluido),
+    ...tarefasOrdenadas.filter(item => item.concluido)
+  ];
+
+  if(tarefas.length === 0){
+    const vazio = document.createElement("div");
+    vazio.className = "horario-vazio";
+    vazio.innerHTML = "🌿 Nenhum compromisso cadastrado para hoje.<br><span style='font-size:12px;'>Você pode adicionar tarefas na configuração.</span>";
+    listaHorario.appendChild(vazio);
+    return;
+  }
+
+  let grupoAtual = null;
+  let ultimoBlocoId = null;
+
+  tarefas.forEach(item => {
+    if(item.blocoId !== ultimoBlocoId){
+      grupoAtual = document.createElement("div");
+      grupoAtual.className = "horario-grupo";
+      listaHorario.appendChild(grupoAtual);
+      ultimoBlocoId = item.blocoId;
+    }
+
+    const card = document.createElement("div");
+    card.className = "horario-card" + (item.concluido ? " concluido" : "");
+    card.setAttribute("role", "button");
+    card.tabIndex = 0;
+    card.onclick = () => {
+      if(item.url){ abrirDestinoDaTarefa(item.url); return; }
+      if(item.custom){
+        alternarTarefaHorario(item);
+      }else if(item.urlPadrao){
+        if(item.blocoId === "bloco2" || item.blocoId === "bloco8"){
+          abrirBlocoMenu(item.blocoId, item.urlPadrao);
+        }else{
+          window.location.href = item.urlPadrao;
+        }
+      }
+    };
+    card.onkeydown = (event) => {
+      if(event.key === "Enter" || event.key === " "){
+        event.preventDefault();
+        card.click();
+      }
+    };
+
+    const interno = document.createElement("div");
+    interno.className = "horario-card-inner";
+
+    const conteudo = document.createElement("div");
+    conteudo.className = "horario-conteudo";
+
+    const temSubtarefas = Array.isArray(item.subtarefas) && item.subtarefas.length > 0;
+
+    const linhaPrincipal = document.createElement("div");
+    linhaPrincipal.className = "horario-linha-principal";
+
+    if(!temSubtarefas){
+      linhaPrincipal.appendChild(criarQuadradinhoHorario(item.concluido, () => alternarTarefaHorario(item)));
+    }
+
+    const nome = document.createElement("div");
+    nome.className = "horario-nome" + (item.url ? " clicavel" : "");
+    nome.textContent = item.nome;
+    nome.onclick = (event) => {
+      if(!item.url) return;
+      event.preventDefault();
+      event.stopPropagation();
+      abrirDestinoDaTarefa(item.url);
+    };
+    linhaPrincipal.appendChild(nome);
+    conteudo.appendChild(linhaPrincipal);
+
+    if(temSubtarefas){
+      const marcadas = getSubtarefasMarcadas({ ...item, subtarefas:item.subtarefas.map(sub => sub.texto) });
+      const sublista = document.createElement("div");
+      sublista.className = "horario-sublista";
+
+      item.subtarefas.forEach((sub, indiceSub) => {
+        const linha = document.createElement("div");
+        linha.className = "horario-subitem";
+
+        linha.appendChild(criarQuadradinhoHorario(!!marcadas[indiceSub], () => alternarSubtarefaHorario({ ...item, subtarefas:item.subtarefas.map(s => s.texto) }, indiceSub)));
+
+        const texto = document.createElement("span");
+        texto.className = "horario-subitem-texto" + (sub.url ? " clicavel" : "");
+        texto.textContent = sub.texto;
+        texto.onclick = (event) => {
+          if(!sub.url) return;
+          event.preventDefault();
+          event.stopPropagation();
+          abrirDestinoDaTarefa(sub.url);
+        };
+        linha.appendChild(texto);
+
+        sublista.appendChild(linha);
+      });
+      conteudo.appendChild(sublista);
+    }
+
+    const hora = document.createElement("div");
+    hora.className = "horario-hora";
+    hora.textContent = item.hora;
+
+    interno.appendChild(conteudo);
+    interno.appendChild(hora);
+    card.appendChild(interno);
+
+    grupoAtual.appendChild(card);
+  });
+}
+
+
+
+/* =========================================================
+   AJUSTE FINAL: CARTELA DE EMOJIS + HORÁRIO AUTOMÁTICO + TOTAL DO BLOCO
+   ========================================================= */
+var EMOJIS_JARDIM_ROTINA = [
+  "🌿","🌱","🍃","🌸","🌷","🌻","✨","⭐","💫","🌈","☀️","🌙","🕯️","🧘","🙏","💧",
+  "🚿","🪥","👅","🚽","🥛","🍋","💊","🚶","💪","📚","📝","📖","💬","🎨","🖍️","✂️",
+  "🍽️","🍴","🥪","🥗","🍲","🧺","🏡","🛋️","👘","🗑️","🧊","🪴","🎒","📱","🃏","🧩",
+  "🎶","🦶","💻","📄","📌","✅","🧡","💛","🩵","🪷","🧠","🧾","🗂️","🧼","🪞","🔔"
+];
+
+var campoEmojiAlvoAtual = null;
+
+function inserirTextoNoCampo(campo, texto){
+  if(!campo) return;
+  const inicio = campo.selectionStart || 0;
+  const fim = campo.selectionEnd || 0;
+  const valor = String(campo.value || "");
+  const antes = valor.slice(0, inicio);
+  const depois = valor.slice(fim);
+  const precisaEspacoAntes = antes && !/\s$/.test(antes) ? " " : "";
+  const precisaEspacoDepois = depois && !/^\s/.test(depois) ? " " : "";
+  campo.value = antes + precisaEspacoAntes + texto + precisaEspacoDepois + depois;
+  const pos = (antes + precisaEspacoAntes + texto + precisaEspacoDepois).length;
+  campo.focus();
+  campo.setSelectionRange(pos, pos);
+}
+
+function abrirCartelaEmoji(campo, botao){
+  campoEmojiAlvoAtual = campo;
+  let paleta = document.getElementById("emojiPaletteJardim");
+  if(!paleta){
+    paleta = document.createElement("div");
+    paleta.id = "emojiPaletteJardim";
+    paleta.className = "emojiPalette";
+    EMOJIS_JARDIM_ROTINA.forEach(emoji => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "emojiOpcao";
+      btn.textContent = emoji;
+      btn.onclick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        inserirTextoNoCampo(campoEmojiAlvoAtual, emoji);
+        fecharCartelaEmoji();
+      };
+      paleta.appendChild(btn);
+    });
+    document.body.appendChild(paleta);
+  }
+
+  const rect = botao.getBoundingClientRect();
+  paleta.style.top = Math.min(rect.bottom + 8, window.innerHeight - 230) + "px";
+  paleta.style.left = Math.max(16, Math.min(rect.left - 250, window.innerWidth - 336)) + "px";
+  paleta.classList.add("show");
+}
+
+function fecharCartelaEmoji(){
+  const paleta = document.getElementById("emojiPaletteJardim");
+  if(paleta) paleta.classList.remove("show");
+}
+
+document.addEventListener("click", function(event){
+  const paleta = document.getElementById("emojiPaletteJardim");
+  if(!paleta || !paleta.classList.contains("show")) return;
+  if(paleta.contains(event.target) || event.target.classList.contains("emojiMiniBtn")) return;
+  fecharCartelaEmoji();
+});
+
+function transformarLabelComEmoji(campoId, textoLabel){
+  const campo = document.getElementById(campoId);
+  if(!campo) return;
+  const field = campo.closest(".field");
+  if(!field || field.dataset.emojiPronto === "sim") return;
+  const label = field.querySelector("label");
+  if(!label) return;
+
+  label.innerHTML = "";
+  label.className = "labelComEmoji";
+
+  const span = document.createElement("span");
+  span.textContent = textoLabel;
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "emojiMiniBtn";
+  btn.title = "Escolher emoji";
+  btn.textContent = "😊";
+  btn.onclick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    abrirCartelaEmoji(campo, btn);
+  };
+
+  label.appendChild(span);
+  label.appendChild(btn);
+  field.dataset.emojiPronto = "sim";
+}
+
+function esconderCampoEmojiAntigo(id){
+  const campo = document.getElementById(id);
+  if(!campo) return;
+  const field = campo.closest(".field");
+  if(field) field.style.display = "none";
+}
+
+function garantirCampoTotalBloco(){
+  if(!document.getElementById("novaTarefaTotalBloco")){
+    const campoHora = document.getElementById("novaTarefaHora");
+    const fieldHora = campoHora ? campoHora.closest(".field") : null;
+    if(fieldHora){
+      const field = document.createElement("div");
+      field.className = "field campoTotalBloco";
+      field.innerHTML = `
+        <label>Total de tarefas para concluir o bloco</label>
+        <input id="novaTarefaTotalBloco" class="inputModal" type="number" min="1" inputmode="numeric" placeholder="Opcional. Ex.: 4">
+        <div class="campo-ajuda-pequena">Use somente no modo Em Blocos. Ex.: 0 de 4 concluídas.</div>
+      `;
+      fieldHora.parentNode.insertBefore(field, fieldHora.nextSibling);
+    }
+  }
+
+  if(!document.getElementById("editarTarefaTotalBloco")){
+    const campoHora = document.getElementById("editarTarefaHora");
+    const fieldHora = campoHora ? campoHora.closest(".field") : null;
+    if(fieldHora){
+      const field = document.createElement("div");
+      field.className = "field campoTotalBloco campoTotalBlocoEditar";
+      field.innerHTML = `
+        <label>Total de tarefas para concluir o bloco</label>
+        <input id="editarTarefaTotalBloco" class="inputModal" type="number" min="1" inputmode="numeric" placeholder="Opcional. Ex.: 4">
+      `;
+      fieldHora.parentNode.insertBefore(field, fieldHora.nextSibling);
+    }
+  }
+}
+
+function atualizarVisibilidadeCampoTotalBloco(){
+  const modo = getModoConfiguracaoAtual();
+  document.querySelectorAll(".campoTotalBloco").forEach(el => {
+    el.style.display = modo === "blocos" ? "flex" : "none";
+  });
+}
+
+function configurarCamposExtras(){
+  esconderCampoEmojiAntigo("novaTarefaEmoji");
+  esconderCampoEmojiAntigo("editarTarefaEmoji");
+  transformarLabelComEmoji("novaTarefaTexto", "Nova tarefa");
+  transformarLabelComEmoji("novaTarefaDescricao", getModoConfiguracaoAtual() === "horario" ? "Descrição / lista abaixo" : "Descrição do bloco");
+  transformarLabelComEmoji("editarTarefaNome", "Nome da tarefa");
+  transformarLabelComEmoji("editarTarefaDescricao", tarefaEdicaoAtualModo === "horario" ? "Descrição / lista abaixo" : "Descrição do bloco");
+  garantirCampoTotalBloco();
+  atualizarVisibilidadeCampoTotalBloco();
+  configurarFormatacaoAutomaticaHorario();
+}
+
+function formatarHorarioDigitadoAutomatico(valor, finalizar){
+  const texto = String(valor || "").toLowerCase().trim();
+  const numeros = texto.replace(/\D/g, "").slice(0, 4);
+  if(!numeros) return "";
+
+  if(!finalizar && numeros.length < 4){
+    return numeros;
+  }
+
+  let horas = "00";
+  let minutos = "00";
+
+  if(numeros.length <= 2){
+    horas = numeros.padStart(2, "0");
+    minutos = "00";
+  }else if(numeros.length === 3){
+    horas = numeros.slice(0, 1).padStart(2, "0");
+    minutos = numeros.slice(1, 3);
+  }else{
+    horas = numeros.slice(0, 2);
+    minutos = numeros.slice(2, 4);
+  }
+
+  return `${horas}h${minutos}m`;
+}
+
+function configurarCampoHorarioAuto(campo){
+  if(!campo || campo.dataset.horarioAuto === "sim") return;
+  campo.dataset.horarioAuto = "sim";
+  campo.addEventListener("input", () => {
+    const numeros = String(campo.value || "").replace(/\D/g, "").slice(0, 4);
+    if(numeros.length === 4){
+      campo.value = formatarHorarioDigitadoAutomatico(numeros, true);
+    }
+  });
+  campo.addEventListener("blur", () => {
+    campo.value = formatarHorarioDigitadoAutomatico(campo.value, true);
+  });
+}
+
+function configurarFormatacaoAutomaticaHorario(){
+  configurarCampoHorarioAuto(document.getElementById("novaTarefaHora"));
+  configurarCampoHorarioAuto(document.getElementById("editarTarefaHora"));
+}
+
+function numeroInteiroOuVazio(valor){
+  const n = parseInt(String(valor || "").replace(/\D/g, ""), 10);
+  return Number.isFinite(n) && n > 0 ? n : "";
+}
+
+/* Sobrescreve a formatação para sempre aparecer com h e m. */
+function formatarHorarioRotina(valor){
+  const textoOriginal = String(valor || "").toLowerCase().trim();
+  if(!textoOriginal) return "";
+
+  let horas = "00";
+  let minutos = "00";
+
+  if(textoOriginal.includes("h")){
+    const partes = textoOriginal.split("h");
+    horas = String(partes[0] || "0").replace(/\D/g, "").padStart(2, "0").slice(-2);
+    minutos = String(partes[1] || "").replace(/\D/g, "").padEnd(2, "0").slice(0, 2) || "00";
+    return `${horas}h${minutos}m`;
+  }
+
+  if(textoOriginal.includes(":")){
+    const partes = textoOriginal.split(":");
+    horas = String(partes[0] || "0").replace(/\D/g, "").padStart(2, "0").slice(-2);
+    minutos = String(partes[1] || "0").replace(/\D/g, "").padEnd(2, "0").slice(0, 2);
+    return `${horas}h${minutos}m`;
+  }
+
+  return formatarHorarioDigitadoAutomatico(textoOriginal, true);
+}
+
+function normalizarHorario(texto){
+  return formatarHorarioRotina(texto);
+}
+
+function getItensConfiguracaoBlocos(){
+  const cfg = getConfigMenu();
+
+  const base = BLOCOS.map(bloco => {
+    const titulo = document.querySelector(`#${bloco.wrapId} .nome-botao`)?.textContent?.trim() || bloco.id;
+    const editada = cfg.editadas[bloco.id] || {};
+
+    return {
+      id: bloco.id,
+      text: editada.text || titulo,
+      emoji: editada.emoji || "",
+      url: editada.url || "",
+      descricao: editada.descricao || "",
+      time: editada.time || "",
+      totalTarefas: editada.totalTarefas || "",
+      base:true,
+      hidden:false,
+      modo:"blocos"
+    };
+  }).filter(item => !cfg.hidden[item.id]);
+
+  const custom = cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .map(item => ({
+      id:item.id,
+      text:item.text || "Nova tarefa",
+      emoji:item.emoji || "",
+      url:item.url || "",
+      descricao:item.descricao || item.description || "",
+      time:item.time || "",
+      totalTarefas:item.totalTarefas || "",
+      custom:true,
+      modo:"blocos"
+    }));
+
+  return [...base, ...custom];
+}
+
+function atualizarTextosConfiguracaoPorModo(){
+  const modo = getModoConfiguracaoAtual();
+  const labelDescricao = document.querySelector('#novaTarefaDescricao')?.closest('.field')?.querySelector('label span')
+    || document.querySelector('#novaTarefaDescricao')?.closest('.field')?.querySelector('label');
+  const campoHora = document.getElementById("novaTarefaHora");
+  const ajuda = document.querySelector(".ordem-ajuda");
+  const botaoAuto = document.querySelector(".ordem-auto-btn");
+
+  if(labelDescricao){
+    labelDescricao.textContent = modo === "horario" ? "Descrição / lista abaixo" : "Descrição do bloco";
+  }
+  if(campoHora){
+    campoHora.placeholder = modo === "horario" ? "Digite só números. Ex.: 1030" : "Opcional. Ex.: 1030";
+  }
+  if(ajuda){
+    ajuda.textContent = modo === "horario"
+      ? "Use as setas para subir ou descer uma tarefa na visualização por horário."
+      : "Use as setas para mudar a ordem dos blocos no menu.";
+  }
+  if(botaoAuto){
+    botaoAuto.textContent = modo === "horario" ? "por horário" : "ordem original";
+  }
+  atualizarVisibilidadeCampoTotalBloco();
+}
+
+function renderizarPainelConfiguracao(){
+  configurarCamposExtras();
+  renderizarOpcoesVisualizacaoMenu();
+  atualizarTextosConfiguracaoPorModo();
+  renderizarListaConfiguracao();
+}
+
+function abrirModalConfiguracao(){
+  configurarCamposExtras();
+  document.getElementById("novaTarefaTexto").value = "";
+  if(document.getElementById("novaTarefaEmoji")) document.getElementById("novaTarefaEmoji").value = "";
+  if(document.getElementById("novaTarefaUrl")) document.getElementById("novaTarefaUrl").value = "";
+  document.getElementById("novaTarefaDescricao").value = "";
+  document.getElementById("novaTarefaHora").value = "";
+  if(document.getElementById("novaTarefaTotalBloco")) document.getElementById("novaTarefaTotalBloco").value = "";
+  renderizarPainelConfiguracao();
+  document.getElementById("modalConfiguracao").classList.add("show");
+}
+
+function definirVisualizacaoMenu(tipo){
+  const visual = tipo === "horario" ? "horario" : "blocos";
+  localStorage.setItem(CHAVE_VISUAL_GABRIELA_MENU, visual);
+  renderizarPainelConfiguracao();
+  aplicarVisualizacaoMenu();
+}
+
+function adicionarTarefaConfiguracao(){
+  const texto = document.getElementById("novaTarefaTexto").value.trim();
+  const emoji = limparEmojiCampo(document.getElementById("novaTarefaEmoji")?.value || "");
+  const url = limparUrlDestino(document.getElementById("novaTarefaUrl")?.value || "");
+  const descricao = document.getElementById("novaTarefaDescricao").value.trim();
+  const hora = formatarHorarioRotina(document.getElementById("novaTarefaHora").value);
+  const totalTarefas = numeroInteiroOuVazio(document.getElementById("novaTarefaTotalBloco")?.value || "");
+  const modo = getModoConfiguracaoAtual();
+
+  if(!texto){
+    alert("Escreva o nome da tarefa.");
+    return;
+  }
+
+  const novoItem = {
+    id: modo === "horario" ? `custom_horario_${Date.now()}` : `custom_menu_${Date.now()}`,
+    text:texto,
+    emoji,
+    url,
+    descricao,
+    time:hora,
+    custom:true
+  };
+
+  if(modo === "blocos" && totalTarefas){
+    novoItem.totalTarefas = totalTarefas;
+  }
+
+  if(modo === "horario"){
+    const cfg = getConfigHorarioMenu();
+    cfg.custom.push(novoItem);
+    salvarConfigHorarioMenu(cfg);
+  }else{
+    const cfg = getConfigMenu();
+    cfg.custom.push(novoItem);
+    salvarConfigMenu(cfg);
+  }
+
+  document.getElementById("novaTarefaTexto").value = "";
+  if(document.getElementById("novaTarefaEmoji")) document.getElementById("novaTarefaEmoji").value = "";
+  if(document.getElementById("novaTarefaUrl")) document.getElementById("novaTarefaUrl").value = "";
+  document.getElementById("novaTarefaDescricao").value = "";
+  document.getElementById("novaTarefaHora").value = "";
+  if(document.getElementById("novaTarefaTotalBloco")) document.getElementById("novaTarefaTotalBloco").value = "";
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+}
+
+function editarTarefaConfiguracao(id){
+  configurarCamposExtras();
+  const item = getItensConfiguracaoAtuais().find(tarefa => tarefa.id === id);
+  if(!item){
+    alert("Tarefa não encontrada.");
+    return;
+  }
+
+  tarefaEdicaoAtualId = id;
+  tarefaEdicaoAtualModo = getModoConfiguracaoAtual();
+
+  const separado = separarEmojiInicial(item.text || item.nome || "");
+  const nomeComEmoji = item.emoji ? aplicarEmojiNoTexto(item.emoji, separado.texto || item.text || item.nome || "") : (item.text || item.nome || "");
+
+  document.getElementById("editarTarefaSenha").value = "";
+  document.getElementById("editarTarefaNome").value = nomeComEmoji;
+  if(document.getElementById("editarTarefaEmoji")) document.getElementById("editarTarefaEmoji").value = "";
+  if(document.getElementById("editarTarefaUrl")) document.getElementById("editarTarefaUrl").value = item.url || "";
+  document.getElementById("editarTarefaDescricao").value = montarDescricaoParaEdicao(item);
+  document.getElementById("editarTarefaHora").value = item.time || item.hora || "";
+  if(document.getElementById("editarTarefaTotalBloco")) document.getElementById("editarTarefaTotalBloco").value = item.totalTarefas || "";
+  document.getElementById("statusEditarTarefa").textContent = "";
+
+  const labelDescricao = document.querySelector('#editarTarefaDescricao')?.closest('.field')?.querySelector('label span')
+    || document.querySelector('#editarTarefaDescricao')?.closest('.field')?.querySelector('label');
+  if(labelDescricao){
+    labelDescricao.textContent = tarefaEdicaoAtualModo === "horario" ? "Descrição / lista abaixo" : "Descrição do bloco";
+  }
+  atualizarVisibilidadeCampoTotalBloco();
+
+  document.getElementById("modalEditarTarefa").classList.add("show");
+  setTimeout(() => {
+    const campoSenha = document.getElementById("editarTarefaSenha");
+    if(campoSenha) campoSenha.focus();
+  }, 80);
+}
+
+function salvarEdicaoTarefaConfiguracao(){
+  if(!tarefaEdicaoAtualId) return;
+
+  const senha = document.getElementById("editarTarefaSenha").value;
+  const status = document.getElementById("statusEditarTarefa");
+
+  if(!senhaGabrielaValida(senha)){
+    status.textContent = "Senha incorreta.";
+    return;
+  }
+
+  const modo = tarefaEdicaoAtualModo === "horario" ? "horario" : "blocos";
+  const cfg = modo === "horario" ? getConfigHorarioMenu() : getConfigMenu();
+  const itemCustom = cfg.custom.find(item => item.id === tarefaEdicaoAtualId);
+  const listaBase = modo === "horario" ? getItensConfiguracaoHorario() : getItensConfiguracaoBlocos();
+  const itemBase = listaBase.find(item => item.id === tarefaEdicaoAtualId);
+
+  if(!itemCustom && !itemBase){
+    status.textContent = "Tarefa não encontrada.";
+    return;
+  }
+
+  const novoNome = document.getElementById("editarTarefaNome").value.trim();
+  const emoji = limparEmojiCampo(document.getElementById("editarTarefaEmoji")?.value || "");
+  const url = limparUrlDestino(document.getElementById("editarTarefaUrl")?.value || "");
+  const novaDescricao = document.getElementById("editarTarefaDescricao").value.trim();
+  const novoHorarioDigitado = document.getElementById("editarTarefaHora").value;
+  const novoHorario = formatarHorarioRotina(novoHorarioDigitado);
+  const totalTarefas = numeroInteiroOuVazio(document.getElementById("editarTarefaTotalBloco")?.value || "");
+
+  if(!novoNome){
+    status.textContent = "Escreva o nome da tarefa.";
+    return;
+  }
+
+  if(itemCustom){
+    itemCustom.text = novoNome;
+    itemCustom.emoji = emoji;
+    itemCustom.url = url;
+    itemCustom.descricao = novaDescricao;
+    itemCustom.time = novoHorario;
+    if(modo === "blocos") itemCustom.totalTarefas = totalTarefas;
+  }else{
+    const dados = {
+      text: novoNome,
+      emoji,
+      url,
+      descricao: novaDescricao,
+      time: novoHorario || (itemBase ? (itemBase.time || itemBase.hora || "") : "")
+    };
+    if(modo === "blocos") dados.totalTarefas = totalTarefas;
+    cfg.editadas[tarefaEdicaoAtualId] = dados;
+  }
+
+  if(modo === "horario"){
+    salvarConfigHorarioMenu(cfg);
+  }else{
+    salvarConfigMenu(cfg);
+  }
+
+  fecharModalEditarTarefa();
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+}
+
+function preencherDescricaoBotaoComLinks(desc, descricao, horario){
+  if(!desc) return;
+  desc.innerHTML = "";
+
+  const linhas = parseDescricaoDetalhada(descricao || "");
+
+  if(linhas.length){
+    linhas.forEach(item => {
+      const linha = document.createElement("span");
+      linha.className = "descricao-botao-linha" + (item.url ? " clicavel" : "");
+      linha.textContent = item.texto;
+      if(item.url){
+        linha.onclick = (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          abrirDestinoDaTarefa(item.url);
+        };
+      }
+      desc.appendChild(linha);
+    });
+  }
+
+  if(horario){
+    const linhaHora = document.createElement("span");
+    linhaHora.className = "descricao-botao-linha";
+    linhaHora.textContent = formatarHorarioRotina(horario);
+    desc.appendChild(linhaHora);
+  }
+}
+
+function aplicarEdicaoBlocoNoBotao(bloco){
+  const cfg = getConfigMenu();
+  const editada = cfg.editadas[bloco.id];
+  if(!editada) return;
+
+  const wrap = document.getElementById(bloco.wrapId);
+  if(!wrap) return;
+
+  const nome = wrap.querySelector(".nome-botao");
+  if(nome && (editada.text || editada.emoji)){
+    nome.textContent = aplicarEmojiNoTexto(editada.emoji, editada.text || nome.textContent);
+  }
+
+  const btn = wrap.querySelector("button.botao");
+  if(btn && editada.url){
+    btn.onclick = () => abrirDestinoDaTarefa(editada.url);
+  }
+
+  let desc = wrap.querySelector(".descricao-botao");
+  const temDescricaoOuHora = !!String(editada.descricao || "").trim() || !!String(editada.time || "").trim();
+
+  if(temDescricaoOuHora){
+    if(!desc){
+      desc = document.createElement("div");
+      desc.className = "descricao-botao";
+      const proxima = wrap.querySelector(".proxima-tarefa");
+      if(proxima) proxima.parentNode.insertBefore(desc, proxima);
+    }
+    preencherDescricaoBotaoComLinks(desc, editada.descricao || "", editada.time || "");
+  }else if(desc){
+    desc.remove();
+  }
+}
+
+function atualizarBloco(bloco){
+  const resumo = obterResumoBloco(bloco);
+  const cfg = getConfigMenu();
+  const editada = (cfg.editadas && cfg.editadas[bloco.id]) ? cfg.editadas[bloco.id] : {};
+  const totalConfigurado = numeroInteiroOuVazio(editada.totalTarefas) || resumo.total;
+
+  const elProxima = document.getElementById(bloco.proximaId);
+  const elAlerta = document.getElementById(bloco.alertaId);
+  const wrap = document.getElementById(bloco.wrapId);
+
+  if(elProxima){
+    if(bloco.tipo === "selecao_unica_diaria" && resumo.concluidas > 0){
+      elProxima.textContent = resumo.escolha ? `Escolhido: ${resumo.escolha}` : "Escolhido: atividade selecionada";
+    }else{
+      elProxima.textContent = textoProximaTarefa(resumo.proxima);
+    }
+  }
+
+  if(elAlerta){
+    if(bloco.tipo === "selecao_unica_diaria"){
+      elAlerta.textContent = resumo.concluidas > 0 ? "1 escolha feita" : "Escolher 1 opção";
+    }else{
+      const concluidasVisuais = Math.min(resumo.concluidas, Number(totalConfigurado || resumo.total));
+      elAlerta.textContent = `${concluidasVisuais} de ${totalConfigurado} concluídas`;
+    }
+  }
+
+  if(wrap){
+    const blocoConcluido = bloco.tipo === "selecao_unica_diaria"
+      ? resumo.concluidas > 0
+      : Number(totalConfigurado || 0) > 0 && resumo.concluidas >= Number(totalConfigurado);
+
+    if(blocoConcluido){
+      wrap.classList.add("concluido");
+    }else{
+      wrap.classList.remove("concluido");
+    }
+  }
+}
+
+function renderizarTarefasPersonalizadasMenu(){
+  const lista = document.getElementById("botoesLista");
+  if(!lista) return;
+
+  lista.querySelectorAll(".botao-wrap.custom-menu").forEach(el => el.remove());
+
+  const cfg = getConfigMenu();
+  const estado = getCustomMenuEstado();
+
+  cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .sort((a,b) => horaParaMinutos(a.time) - horaParaMinutos(b.time))
+    .forEach(item => {
+      const wrap = document.createElement("div");
+      wrap.className = "botao-wrap custom-menu" + (estado[item.id] ? " concluido" : "");
+      wrap.dataset.blocoId = item.id;
+
+      const check = document.createElement("div");
+      check.className = "check-concluido";
+      check.textContent = "✅";
+
+      const btn = document.createElement("button");
+      btn.className = "botao tarefa-bloco";
+      btn.onclick = () => item.url ? abrirDestinoDaTarefa(item.url) : alternarTarefaPersonalizadaMenu(item.id);
+
+      const nome = document.createElement("div");
+      nome.className = "nome-botao";
+      nome.textContent = aplicarEmojiNoTexto(item.emoji, item.text || "Nova tarefa");
+      btn.appendChild(nome);
+
+      if(item.descricao || item.time){
+        const desc = document.createElement("div");
+        desc.className = "descricao-botao";
+        preencherDescricaoBotaoComLinks(desc, item.descricao || "", item.time || "");
+        btn.appendChild(desc);
+      }
+
+      const total = numeroInteiroOuVazio(item.totalTarefas);
+      const proxima = document.createElement("div");
+      proxima.className = "proxima-tarefa";
+      proxima.textContent = "";
+
+      const alerta = document.createElement("div");
+      alerta.className = "alerta";
+      if(total){
+        alerta.textContent = estado[item.id] ? `${total} de ${total} concluídas` : `0 de ${total} concluídas`;
+      }else{
+        alerta.textContent = estado[item.id] ? "concluído" : "em aberto";
+      }
+
+      btn.appendChild(proxima);
+      btn.appendChild(alerta);
+      wrap.appendChild(check);
+      wrap.appendChild(btn);
+      lista.appendChild(wrap);
+    });
+}
+
+function renderizarListaConfiguracao(){
+  const lista = document.getElementById("listaConfigTarefas");
+  if(!lista) return;
+
+  const modo = getModoConfiguracaoAtual();
+  const itens = getItensConfiguracaoAtuais();
+  lista.innerHTML = "";
+
+  const tituloSecao = document.createElement("div");
+  tituloSecao.style.fontSize = "12px";
+  tituloSecao.style.color = "var(--texto-secundario)";
+  tituloSecao.style.lineHeight = "1.35";
+  tituloSecao.style.textAlign = "center";
+  tituloSecao.style.margin = "2px 0";
+  tituloSecao.textContent = modo === "horario"
+    ? "Editar, retirar ou organizar a ordem das tarefas por horário."
+    : "Editar, retirar ou organizar a ordem dos blocos do menu principal.";
+  lista.appendChild(tituloSecao);
+
+  itens.forEach((item, index) => {
+    const linha = document.createElement("div");
+    linha.style.display = "grid";
+    linha.style.gridTemplateColumns = "1fr auto auto auto auto";
+    linha.style.gap = "6px";
+    linha.style.alignItems = "center";
+    linha.style.background = "#F8FAF7";
+    linha.style.border = "1px solid var(--borda)";
+    linha.style.borderRadius = "12px";
+    linha.style.padding = "9px 10px";
+
+    const nome = document.createElement("div");
+    nome.style.fontSize = "12px";
+    nome.style.color = "var(--texto-principal)";
+    nome.style.lineHeight = "1.35";
+    nome.style.minWidth = "0";
+    nome.style.overflow = "hidden";
+    nome.style.textOverflow = "ellipsis";
+    const totalTexto = modo === "blocos" && item.totalTarefas ? ` • total: ${item.totalTarefas}` : "";
+    nome.textContent = `${item.text || item.nome || "Tarefa"}${item.time ? " • " + item.time : ""}${totalTexto}`;
+
+    function estilizarBotaoConfig(botao, tipo){
+      botao.type = "button";
+      botao.style.border = "none";
+      botao.style.borderRadius = "10px";
+      botao.style.padding = "8px 9px";
+      botao.style.cursor = "pointer";
+      botao.style.fontFamily = "var(--fonte)";
+      botao.style.fontSize = "11px";
+      botao.style.transition = "0.2s ease";
+      botao.style.background = tipo === "danger" ? "#f5d7d7" : "#efefef";
+      botao.style.color = tipo === "danger" ? "#8a3030" : "#333";
+    }
+
+    const btnSubir = document.createElement("button");
+    btnSubir.textContent = "↑";
+    estilizarBotaoConfig(btnSubir, "move");
+    btnSubir.style.background = "#E9ECE7";
+    btnSubir.style.color = "var(--verde-texto)";
+    btnSubir.disabled = index === 0;
+    btnSubir.style.opacity = index === 0 ? "0.35" : "1";
+    btnSubir.style.cursor = index === 0 ? "not-allowed" : "pointer";
+    btnSubir.onclick = () => moverTarefaNaOrdem(item.id, -1);
+
+    const btnDescer = document.createElement("button");
+    btnDescer.textContent = "↓";
+    estilizarBotaoConfig(btnDescer, "move");
+    btnDescer.style.background = "#E9ECE7";
+    btnDescer.style.color = "var(--verde-texto)";
+    btnDescer.disabled = index === itens.length - 1;
+    btnDescer.style.opacity = index === itens.length - 1 ? "0.35" : "1";
+    btnDescer.style.cursor = index === itens.length - 1 ? "not-allowed" : "pointer";
+    btnDescer.onclick = () => moverTarefaNaOrdem(item.id, 1);
+
+    const btnEditar = document.createElement("button");
+    btnEditar.textContent = "editar";
+    estilizarBotaoConfig(btnEditar);
+    btnEditar.onclick = () => editarTarefaConfiguracao(item.id);
+
+    const btnRetirar = document.createElement("button");
+    btnRetirar.textContent = "retirar";
+    estilizarBotaoConfig(btnRetirar, "danger");
+    btnRetirar.onclick = () => removerTarefaConfiguracao(item.id);
+
+    linha.appendChild(nome);
+    linha.appendChild(btnSubir);
+    linha.appendChild(btnDescer);
+    linha.appendChild(btnEditar);
+    linha.appendChild(btnRetirar);
+    lista.appendChild(linha);
+  });
+}
+
+
+function atualizarPlaceholdersDescricaoComLink(){
+  const novaDesc = document.getElementById("novaTarefaDescricao");
+  const editarDesc = document.getElementById("editarTarefaDescricao");
+  const exemplo = "Uma atividade por linha. Para link: Enviar comprovante => comprovantes.html";
+  if(novaDesc) novaDesc.placeholder = exemplo;
+  if(editarDesc) editarDesc.placeholder = exemplo;
+}
+
+const configurarCamposExtrasOriginalComLinks = configurarCamposExtras;
+configurarCamposExtras = function(){
+  configurarCamposExtrasOriginalComLinks();
+  atualizarPlaceholdersDescricaoComLink();
+};
+
+
+/* =========================================================
+   AJUSTE FINAL: TAREFAS INTERNAS PARA BLOCOS NOVOS
+   ========================================================= */
+const CHAVE_TAREFAS_INTERNAS_BLOCOS_DIA = "tarefas_internas_blocos_gabriela_menu";
+let blocoCustomAbertoId = null;
+
+function listaTarefasInternas(texto){
+  return String(texto || "")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .split(/\n|;/)
+    .map(item => limparNomeTarefaMenu(item))
+    .filter(Boolean);
+}
+
+function chaveTarefasInternasBlocosHoje(){
+  return `${CHAVE_TAREFAS_INTERNAS_BLOCOS_DIA}_${dataHojeISO()}`;
+}
+
+function getEstadoTarefasInternasBlocos(){
+  return lerJsonSeguro(chaveTarefasInternasBlocosHoje()) || {};
+}
+
+function salvarEstadoTarefasInternasBlocos(estado){
+  salvarJsonSeguro(chaveTarefasInternasBlocosHoje(), estado || {});
+}
+
+function estadoInternoDoBloco(item){
+  const tarefas = listaTarefasInternas(item.tarefasInternas || "");
+  const estado = getEstadoTarefasInternasBlocos();
+  const salvo = Array.isArray(estado[item.id]) ? estado[item.id] : [];
+  return tarefas.map((_, index) => !!salvo[index]);
+}
+
+function blocoCustomConcluido(item){
+  const tarefas = listaTarefasInternas(item.tarefasInternas || "");
+  if(!tarefas.length) return !!getCustomMenuEstado()[item.id];
+  const estado = estadoInternoDoBloco(item);
+  return estado.length > 0 && estado.every(Boolean);
+}
+
+function contagemTarefasInternas(item){
+  const tarefas = listaTarefasInternas(item.tarefasInternas || "");
+  if(!tarefas.length){
+    const total = numeroInteiroOuVazio(item.totalTarefas);
+    const feito = getCustomMenuEstado()[item.id] ? Number(total || 1) : 0;
+    return { feitas:feito, total:Number(total || 1) };
+  }
+  const estado = estadoInternoDoBloco(item);
+  return { feitas:estado.filter(Boolean).length, total:tarefas.length };
+}
+
+function garantirCampoTarefasInternasBloco(){
+  if(!document.getElementById("novaTarefaItensBloco")){
+    const campoTotal = document.getElementById("novaTarefaTotalBloco");
+    const fieldTotal = campoTotal ? campoTotal.closest(".field") : null;
+    if(fieldTotal){
+      const field = document.createElement("div");
+      field.className = "field campoTarefasInternasBloco";
+      field.innerHTML = `
+        <label class="labelComEmoji"><span>Tarefas novas desse card</span><button type="button" class="emojiMiniBtn">😊</button></label>
+        <textarea id="novaTarefaItensBloco" style="height:80px;" placeholder="Digite uma tarefa por linha. Ex.:\nArrumar documento\nEnviar comprovante"></textarea>
+        <div class="campo-ajuda-pequena">Usado nos blocos novos. Ao clicar no card, abre uma janela para marcar o que foi feito.</div>
+      `;
+      fieldTotal.parentNode.insertBefore(field, fieldTotal.nextSibling);
+      const botao = field.querySelector(".emojiMiniBtn");
+      const campo = field.querySelector("textarea");
+      botao.onclick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        abrirCartelaEmoji(campo, botao);
+      };
+    }
+  }
+
+  if(!document.getElementById("editarTarefaItensBloco")){
+    const campoTotal = document.getElementById("editarTarefaTotalBloco");
+    const fieldTotal = campoTotal ? campoTotal.closest(".field") : null;
+    if(fieldTotal){
+      const field = document.createElement("div");
+      field.className = "field campoTarefasInternasBloco campoTarefasInternasBlocoEditar";
+      field.innerHTML = `
+        <label class="labelComEmoji"><span>Tarefas novas desse card</span><button type="button" class="emojiMiniBtn">😊</button></label>
+        <textarea id="editarTarefaItensBloco" style="height:80px;" placeholder="Digite uma tarefa por linha"></textarea>
+      `;
+      fieldTotal.parentNode.insertBefore(field, fieldTotal.nextSibling);
+      const botao = field.querySelector(".emojiMiniBtn");
+      const campo = field.querySelector("textarea");
+      botao.onclick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        abrirCartelaEmoji(campo, botao);
+      };
+    }
+  }
+}
+
+function atualizarVisibilidadeTarefasInternasBloco(){
+  const modo = getModoConfiguracaoAtual();
+  document.querySelectorAll(".campoTarefasInternasBloco").forEach(el => {
+    el.style.display = modo === "blocos" ? "flex" : "none";
+  });
+}
+
+const configurarCamposExtrasAnteriorTarefasInternas = configurarCamposExtras;
+configurarCamposExtras = function(){
+  configurarCamposExtrasAnteriorTarefasInternas();
+  garantirCampoTarefasInternasBloco();
+  atualizarVisibilidadeTarefasInternasBloco();
+};
+
+const atualizarTextosConfiguracaoPorModoAnteriorTarefasInternas = atualizarTextosConfiguracaoPorModo;
+atualizarTextosConfiguracaoPorModo = function(){
+  atualizarTextosConfiguracaoPorModoAnteriorTarefasInternas();
+  atualizarVisibilidadeTarefasInternasBloco();
+};
+
+const getItensConfiguracaoBlocosAnteriorTarefasInternas = getItensConfiguracaoBlocos;
+getItensConfiguracaoBlocos = function(){
+  return getItensConfiguracaoBlocosAnteriorTarefasInternas().map(item => {
+    const cfg = getConfigMenu();
+    const custom = (cfg.custom || []).find(c => c.id === item.id);
+    const editada = cfg.editadas && cfg.editadas[item.id] ? cfg.editadas[item.id] : {};
+    return {
+      ...item,
+      tarefasInternas: Object.prototype.hasOwnProperty.call(editada, "tarefasInternas")
+        ? editada.tarefasInternas
+        : (custom && custom.tarefasInternas ? custom.tarefasInternas : (item.tarefasInternas || ""))
+    };
+  });
+};
+
+const abrirModalConfiguracaoAnteriorTarefasInternas = abrirModalConfiguracao;
+abrirModalConfiguracao = function(){
+  abrirModalConfiguracaoAnteriorTarefasInternas();
+  if(document.getElementById("novaTarefaItensBloco")) document.getElementById("novaTarefaItensBloco").value = "";
+};
+
+adicionarTarefaConfiguracao = function(){
+  const texto = document.getElementById("novaTarefaTexto").value.trim();
+  const emoji = limparEmojiCampo(document.getElementById("novaTarefaEmoji")?.value || "");
+  const url = limparUrlDestino(document.getElementById("novaTarefaUrl")?.value || "");
+  const descricao = document.getElementById("novaTarefaDescricao").value.trim();
+  const hora = formatarHorarioRotina(document.getElementById("novaTarefaHora").value);
+  const totalTarefas = numeroInteiroOuVazio(document.getElementById("novaTarefaTotalBloco")?.value || "");
+  const tarefasInternas = document.getElementById("novaTarefaItensBloco")?.value.trim() || "";
+  const modo = getModoConfiguracaoAtual();
+
+  if(!texto){
+    alert("Escreva o nome da tarefa.");
+    return;
+  }
+
+  const novoItem = {
+    id: modo === "horario" ? `custom_horario_${Date.now()}` : `custom_menu_${Date.now()}`,
+    text:texto,
+    emoji,
+    url,
+    descricao,
+    time:hora,
+    custom:true
+  };
+
+  if(modo === "blocos"){
+    if(totalTarefas) novoItem.totalTarefas = totalTarefas;
+    if(tarefasInternas) novoItem.tarefasInternas = tarefasInternas;
+  }
+
+  if(modo === "horario"){
+    const cfg = getConfigHorarioMenu();
+    cfg.custom.push(novoItem);
+    salvarConfigHorarioMenu(cfg);
+  }else{
+    const cfg = getConfigMenu();
+    cfg.custom.push(novoItem);
+    salvarConfigMenu(cfg);
+  }
+
+  document.getElementById("novaTarefaTexto").value = "";
+  if(document.getElementById("novaTarefaEmoji")) document.getElementById("novaTarefaEmoji").value = "";
+  if(document.getElementById("novaTarefaUrl")) document.getElementById("novaTarefaUrl").value = "";
+  document.getElementById("novaTarefaDescricao").value = "";
+  document.getElementById("novaTarefaHora").value = "";
+  if(document.getElementById("novaTarefaTotalBloco")) document.getElementById("novaTarefaTotalBloco").value = "";
+  if(document.getElementById("novaTarefaItensBloco")) document.getElementById("novaTarefaItensBloco").value = "";
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+};
+
+const editarTarefaConfiguracaoAnteriorTarefasInternas = editarTarefaConfiguracao;
+editarTarefaConfiguracao = function(id){
+  editarTarefaConfiguracaoAnteriorTarefasInternas(id);
+  const item = getItensConfiguracaoAtuais().find(tarefa => tarefa.id === id);
+  if(document.getElementById("editarTarefaItensBloco")){
+    document.getElementById("editarTarefaItensBloco").value = item && item.tarefasInternas ? item.tarefasInternas : "";
+  }
+  atualizarVisibilidadeTarefasInternasBloco();
+};
+
+salvarEdicaoTarefaConfiguracao = function(){
+  if(!tarefaEdicaoAtualId) return;
+
+  const senha = document.getElementById("editarTarefaSenha").value;
+  const status = document.getElementById("statusEditarTarefa");
+
+  if(!senhaGabrielaValida(senha)){
+    status.textContent = "Senha incorreta.";
+    return;
+  }
+
+  const modo = tarefaEdicaoAtualModo === "horario" ? "horario" : "blocos";
+  const cfg = modo === "horario" ? getConfigHorarioMenu() : getConfigMenu();
+  const itemCustom = cfg.custom.find(item => item.id === tarefaEdicaoAtualId);
+  const listaBase = modo === "horario" ? getItensConfiguracaoHorario() : getItensConfiguracaoBlocos();
+  const itemBase = listaBase.find(item => item.id === tarefaEdicaoAtualId);
+
+  if(!itemCustom && !itemBase){
+    status.textContent = "Tarefa não encontrada.";
+    return;
+  }
+
+  const novoNome = document.getElementById("editarTarefaNome").value.trim();
+  const emoji = limparEmojiCampo(document.getElementById("editarTarefaEmoji")?.value || "");
+  const url = limparUrlDestino(document.getElementById("editarTarefaUrl")?.value || "");
+  const novaDescricao = document.getElementById("editarTarefaDescricao").value.trim();
+  const novoHorarioDigitado = document.getElementById("editarTarefaHora").value;
+  const novoHorario = formatarHorarioRotina(novoHorarioDigitado);
+  const totalTarefas = numeroInteiroOuVazio(document.getElementById("editarTarefaTotalBloco")?.value || "");
+  const tarefasInternas = document.getElementById("editarTarefaItensBloco")?.value.trim() || "";
+
+  if(!novoNome){
+    status.textContent = "Escreva o nome da tarefa.";
+    return;
+  }
+
+  if(itemCustom){
+    itemCustom.text = novoNome;
+    itemCustom.emoji = emoji;
+    itemCustom.url = url;
+    itemCustom.descricao = novaDescricao;
+    itemCustom.time = novoHorario;
+    if(modo === "blocos"){
+      itemCustom.totalTarefas = totalTarefas;
+      itemCustom.tarefasInternas = tarefasInternas;
+    }
+  }else{
+    const dados = {
+      text: novoNome,
+      emoji,
+      url,
+      descricao: novaDescricao,
+      time: novoHorario || (itemBase ? (itemBase.time || itemBase.hora || "") : "")
+    };
+    if(modo === "blocos"){
+      dados.totalTarefas = totalTarefas;
+      dados.tarefasInternas = tarefasInternas;
+    }
+    cfg.editadas[tarefaEdicaoAtualId] = dados;
+  }
+
+  if(modo === "horario"){
+    salvarConfigHorarioMenu(cfg);
+  }else{
+    salvarConfigMenu(cfg);
+  }
+
+  fecharModalEditarTarefa();
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+};
+
+function abrirModalTarefasCard(itemId){
+  const cfg = getConfigMenu();
+  const item = (cfg.custom || []).find(t => t.id === itemId && !cfg.hidden[t.id]);
+  if(!item) return;
+  const tarefas = listaTarefasInternas(item.tarefasInternas || "");
+  if(!tarefas.length){
+    alternarTarefaPersonalizadaMenu(itemId);
+    return;
+  }
+
+  blocoCustomAbertoId = itemId;
+
+  let overlay = document.getElementById("modalTarefasCardCustom");
+  if(!overlay){
+    overlay = document.createElement("div");
+    overlay.id = "modalTarefasCardCustom";
+    overlay.className = "modalTarefasCardOverlay";
+    overlay.innerHTML = `
+      <div class="modalTarefasCard">
+        <h2 class="modalTarefasCardTitulo" id="modalTarefasCardTitulo"></h2>
+        <div class="tarefasCardLista" id="modalTarefasCardLista"></div>
+        <div class="modalBtns">
+          <button class="cancel" type="button" onclick="fecharModalTarefasCard()">cancelar</button>
+          <button class="save" type="button" onclick="fecharModalTarefasCard()">concluir</button>
+        </div>
+      </div>
+    `;
+    overlay.addEventListener("click", (event) => {
+      if(event.target === overlay) fecharModalTarefasCard();
+    });
+    document.body.appendChild(overlay);
+  }
+
+  document.getElementById("modalTarefasCardTitulo").textContent = aplicarEmojiNoTexto(item.emoji, item.text || "Tarefas");
+  const lista = document.getElementById("modalTarefasCardLista");
+  lista.innerHTML = "";
+
+  const estado = estadoInternoDoBloco(item);
+  tarefas.forEach((tarefa, index) => {
+    const linha = document.createElement("div");
+    linha.className = "tarefaCardLinha";
+
+    const check = document.createElement("button");
+    check.type = "button";
+    check.className = "tarefaCardCheck" + (estado[index] ? " marcado" : "");
+    check.onclick = () => alternarTarefaInternaCard(itemId, index);
+
+    const texto = document.createElement("span");
+    texto.textContent = tarefa;
+
+    linha.appendChild(check);
+    linha.appendChild(texto);
+    lista.appendChild(linha);
+  });
+
+  overlay.classList.add("show");
+}
+
+function fecharModalTarefasCard(){
+  const overlay = document.getElementById("modalTarefasCardCustom");
+  if(overlay) overlay.classList.remove("show");
+  blocoCustomAbertoId = null;
+}
+
+function alternarTarefaInternaCard(itemId, indice){
+  const cfg = getConfigMenu();
+  const item = (cfg.custom || []).find(t => t.id === itemId);
+  if(!item) return;
+  const tarefas = listaTarefasInternas(item.tarefasInternas || "");
+  const estado = getEstadoTarefasInternasBlocos();
+  const atual = Array.isArray(estado[itemId]) ? estado[itemId] : tarefas.map(() => false);
+  while(atual.length < tarefas.length) atual.push(false);
+  atual[indice] = !atual[indice];
+  estado[itemId] = atual.slice(0, tarefas.length);
+  salvarEstadoTarefasInternasBlocos(estado);
+
+  const estadoMenu = getCustomMenuEstado();
+  estadoMenu[itemId] = tarefas.length > 0 && estado[itemId].every(Boolean);
+  salvarCustomMenuEstado(estadoMenu);
+
+  abrirModalTarefasCard(itemId);
+  atualizarMenu();
+}
+
+renderizarTarefasPersonalizadasMenu = function(){
+  const lista = document.getElementById("botoesLista");
+  if(!lista) return;
+
+  lista.querySelectorAll(".botao-wrap.custom-menu").forEach(el => el.remove());
+
+  const cfg = getConfigMenu();
+
+  cfg.custom
+    .filter(item => !cfg.hidden[item.id])
+    .sort((a,b) => horaParaMinutos(a.time) - horaParaMinutos(b.time))
+    .forEach(item => {
+      const temTarefasInternas = listaTarefasInternas(item.tarefasInternas || "").length > 0;
+      const concluido = blocoCustomConcluido(item);
+
+      const wrap = document.createElement("div");
+      wrap.className = "botao-wrap custom-menu" + (concluido ? " concluido" : "");
+      wrap.dataset.blocoId = item.id;
+
+      const check = document.createElement("div");
+      check.className = "check-concluido";
+      check.textContent = "✅";
+
+      const btn = document.createElement("button");
+      btn.className = "botao tarefa-bloco";
+      btn.onclick = () => {
+        if(temTarefasInternas){
+          abrirModalTarefasCard(item.id);
+          return;
+        }
+        if(item.url){
+          abrirDestinoDaTarefa(item.url);
+          return;
+        }
+        alternarTarefaPersonalizadaMenu(item.id);
+      };
+
+      const nome = document.createElement("div");
+      nome.className = "nome-botao";
+      nome.textContent = aplicarEmojiNoTexto(item.emoji, item.text || "Nova tarefa");
+      btn.appendChild(nome);
+
+      if(item.descricao || item.time){
+        const desc = document.createElement("div");
+        desc.className = "descricao-botao";
+        preencherDescricaoBotaoComLinks(desc, item.descricao || "", item.time || "");
+        btn.appendChild(desc);
+      }
+
+      const proxima = document.createElement("div");
+      proxima.className = "proxima-tarefa";
+      proxima.textContent = "";
+
+      const alerta = document.createElement("div");
+      alerta.className = "alerta";
+      const contagem = contagemTarefasInternas(item);
+      alerta.textContent = `${contagem.feitas} de ${contagem.total} concluídas`;
+
+      btn.appendChild(proxima);
+      btn.appendChild(alerta);
+      wrap.appendChild(check);
+      wrap.appendChild(btn);
+      lista.appendChild(wrap);
+    });
+};
+
+const renderizarListaConfiguracaoAnteriorTarefasInternas = renderizarListaConfiguracao;
+renderizarListaConfiguracao = function(){
+  renderizarListaConfiguracaoAnteriorTarefasInternas();
+  const modo = getModoConfiguracaoAtual();
+  if(modo !== "blocos") return;
+  const lista = document.getElementById("listaConfigTarefas");
+  if(!lista) return;
+  const itens = getItensConfiguracaoAtuais();
+  Array.from(lista.children).forEach((linha, index) => {
+    if(index === 0) return;
+    const item = itens[index - 1];
+    if(!item || !item.tarefasInternas) return;
+    const nome = linha.firstChild;
+    if(nome && !nome.textContent.includes("tarefas:")){
+      const qtd = listaTarefasInternas(item.tarefasInternas).length;
+      if(qtd) nome.textContent += ` • tarefas: ${qtd}`;
+    }
+  });
+};
+
+
+
+/* =========================================================
+   AJUSTE FINAL SOLICITADO: SEM SENHA + LINKS EM CARDS
+   ========================================================= */
+
+/* Deixa a descrição do bloco menor e põe horário na mesma linha, separado por bolinha. */
+const estiloDescricaoFinal = document.createElement("style");
+estiloDescricaoFinal.textContent = `
+  .descricao-botao{
+    font-size:11px !important;
+    line-height:1.35 !important;
+  }
+  .descricao-botao-linha{
+    display:block;
+  }
+  .descricao-botao-linha.clicavel{
+    cursor:pointer;
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:3px;
+  }
+  .modalTarefasCardAbrirPagina{
+    border:none;
+    background:var(--verde-principal);
+    color:var(--verde-texto);
+    border-radius:12px;
+    padding:10px 12px;
+    font-size:12px;
+    font-family:var(--fonte);
+    cursor:pointer;
+    margin-bottom:8px;
+    width:100%;
+  }
+  .modalTarefasCardAbrirPagina:hover{
+    background:var(--verde-hover);
+  }
+  .tarefaCardTexto.clicavel{
+    cursor:pointer;
+    text-decoration:underline;
+    text-decoration-thickness:1px;
+    text-underline-offset:3px;
+  }
+`;
+document.head.appendChild(estiloDescricaoFinal);
+
+preencherDescricaoBotaoComLinks = function(desc, descricao, horario){
+  if(!desc) return;
+  desc.innerHTML = "";
+
+  const linhas = parseDescricaoDetalhada(descricao || "");
+  const horaFormatada = horario ? formatarHorarioRotina(horario) : "";
+
+  if(linhas.length){
+    linhas.forEach((item, index) => {
+      const linha = document.createElement("span");
+      linha.className = "descricao-botao-linha" + (item.url ? " clicavel" : "");
+      linha.textContent = item.texto + (index === linhas.length - 1 && horaFormatada ? ` • ${horaFormatada}` : "");
+      if(item.url){
+        linha.onclick = (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          abrirDestinoDaTarefa(item.url);
+        };
+      }
+      desc.appendChild(linha);
+    });
+    return;
+  }
+
+  if(horaFormatada){
+    const linhaHora = document.createElement("span");
+    linhaHora.className = "descricao-botao-linha";
+    linhaHora.textContent = horaFormatada;
+    desc.appendChild(linhaHora);
+  }
+};
+
+function parseTarefasInternasDetalhadas(texto){
+  return String(texto || "")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .split(/\n|;/)
+    .map(parseLinhaDescricaoComLink)
+    .filter(item => item.texto);
+}
+
+listaTarefasInternas = function(texto){
+  return parseTarefasInternasDetalhadas(texto).map(item => item.texto);
+};
+
+/* Editar sem pedir senha. */
+editarTarefaConfiguracao = function(id){
+  configurarCamposExtras();
+  const item = getItensConfiguracaoAtuais().find(tarefa => tarefa.id === id);
+  if(!item){
+    alert("Tarefa não encontrada.");
+    return;
+  }
+
+  tarefaEdicaoAtualId = id;
+  tarefaEdicaoAtualModo = getModoConfiguracaoAtual();
+
+  const separado = separarEmojiInicial(item.text || item.nome || "");
+  const nomeComEmoji = item.emoji ? aplicarEmojiNoTexto(item.emoji, separado.texto || item.text || item.nome || "") : (item.text || item.nome || "");
+
+  document.getElementById("editarTarefaNome").value = nomeComEmoji;
+  if(document.getElementById("editarTarefaEmoji")) document.getElementById("editarTarefaEmoji").value = "";
+  if(document.getElementById("editarTarefaUrl")) document.getElementById("editarTarefaUrl").value = item.url || "";
+  document.getElementById("editarTarefaDescricao").value = montarDescricaoParaEdicao(item);
+  document.getElementById("editarTarefaHora").value = item.time || item.hora || "";
+  if(document.getElementById("editarTarefaTotalBloco")) document.getElementById("editarTarefaTotalBloco").value = item.totalTarefas || "";
+  if(document.getElementById("editarTarefaItensBloco")) document.getElementById("editarTarefaItensBloco").value = item.tarefasInternas || "";
+  document.getElementById("statusEditarTarefa").textContent = "";
+
+  const labelDescricao = document.querySelector('#editarTarefaDescricao')?.closest('.field')?.querySelector('label span')
+    || document.querySelector('#editarTarefaDescricao')?.closest('.field')?.querySelector('label');
+  if(labelDescricao){
+    labelDescricao.textContent = tarefaEdicaoAtualModo === "horario" ? "Descrição / lista abaixo" : "Descrição do bloco";
+  }
+  atualizarVisibilidadeCampoTotalBloco();
+  if(typeof atualizarVisibilidadeTarefasInternasBloco === "function") atualizarVisibilidadeTarefasInternasBloco();
+
+  document.getElementById("modalEditarTarefa").classList.add("show");
+};
+
+/* Salvar edição sem senha. */
+salvarEdicaoTarefaConfiguracao = function(){
+  if(!tarefaEdicaoAtualId) return;
+
+  const status = document.getElementById("statusEditarTarefa");
+  const modo = tarefaEdicaoAtualModo === "horario" ? "horario" : "blocos";
+  const cfg = modo === "horario" ? getConfigHorarioMenu() : getConfigMenu();
+  const itemCustom = cfg.custom.find(item => item.id === tarefaEdicaoAtualId);
+  const listaBase = modo === "horario" ? getItensConfiguracaoHorario() : getItensConfiguracaoBlocos();
+  const itemBase = listaBase.find(item => item.id === tarefaEdicaoAtualId);
+
+  if(!itemCustom && !itemBase){
+    status.textContent = "Tarefa não encontrada.";
+    return;
+  }
+
+  const novoNome = document.getElementById("editarTarefaNome").value.trim();
+  const emoji = limparEmojiCampo(document.getElementById("editarTarefaEmoji")?.value || "");
+  const url = limparUrlDestino(document.getElementById("editarTarefaUrl")?.value || "");
+  const novaDescricao = document.getElementById("editarTarefaDescricao").value.trim();
+  const novoHorario = formatarHorarioRotina(document.getElementById("editarTarefaHora").value);
+  const totalTarefas = numeroInteiroOuVazio(document.getElementById("editarTarefaTotalBloco")?.value || "");
+  const tarefasInternas = document.getElementById("editarTarefaItensBloco")?.value.trim() || "";
+
+  if(!novoNome){
+    status.textContent = "Escreva o nome da tarefa.";
+    return;
+  }
+
+  if(itemCustom){
+    itemCustom.text = novoNome;
+    itemCustom.emoji = emoji;
+    itemCustom.url = url;
+    itemCustom.descricao = novaDescricao;
+    itemCustom.time = novoHorario;
+    if(modo === "blocos"){
+      itemCustom.totalTarefas = totalTarefas;
+      itemCustom.tarefasInternas = tarefasInternas;
+    }
+  }else{
+    const dados = {
+      text: novoNome,
+      emoji,
+      url,
+      descricao: novaDescricao,
+      time: novoHorario || (itemBase ? (itemBase.time || itemBase.hora || "") : "")
+    };
+    if(modo === "blocos"){
+      dados.totalTarefas = totalTarefas;
+      dados.tarefasInternas = tarefasInternas;
+    }
+    cfg.editadas[tarefaEdicaoAtualId] = dados;
+  }
+
+  if(modo === "horario"){
+    salvarConfigHorarioMenu(cfg);
+  }else{
+    salvarConfigMenu(cfg);
+  }
+
+  fecharModalEditarTarefa();
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+};
+
+/* Retirar tarefa sem pedir senha. */
+removerTarefaConfiguracao = function(id){
+  const modo = getModoConfiguracaoAtual();
+
+  if(modo === "horario"){
+    const cfg = getConfigHorarioMenu();
+    cfg.custom = cfg.custom.filter(item => item.id !== id);
+    cfg.hidden[id] = true;
+    salvarConfigHorarioMenu(cfg);
+
+    const estado = getCustomHorarioEstado();
+    delete estado[id];
+    salvarCustomHorarioEstado(estado);
+  }else{
+    const cfg = getConfigMenu();
+    cfg.custom = cfg.custom.filter(item => item.id !== id);
+    cfg.hidden[id] = true;
+    salvarConfigMenu(cfg);
+
+    const estado = getCustomMenuEstado();
+    delete estado[id];
+    salvarCustomMenuEstado(estado);
+  }
+
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+};
+
+/* No card com tarefas internas: abre a lista de seleção e, se houver link, mostra botão para abrir a página. */
+abrirModalTarefasCard = function(itemId){
+  const cfg = getConfigMenu();
+  const item = (cfg.custom || []).find(t => t.id === itemId && !cfg.hidden[t.id]);
+  if(!item) return;
+
+  const tarefasDetalhadas = parseTarefasInternasDetalhadas(item.tarefasInternas || "");
+  if(!tarefasDetalhadas.length){
+    if(item.url){
+      abrirDestinoDaTarefa(item.url);
+      return;
+    }
+    alternarTarefaPersonalizadaMenu(itemId);
+    return;
+  }
+
+  blocoCustomAbertoId = itemId;
+
+  let overlay = document.getElementById("modalTarefasCardCustom");
+  if(!overlay){
+    overlay = document.createElement("div");
+    overlay.id = "modalTarefasCardCustom";
+    overlay.className = "modalTarefasCardOverlay";
+    overlay.innerHTML = `
+      <div class="modalTarefasCard">
+        <h2 class="modalTarefasCardTitulo" id="modalTarefasCardTitulo"></h2>
+        <div id="modalTarefasCardLinkArea"></div>
+        <div class="tarefasCardLista" id="modalTarefasCardLista"></div>
+        <div class="modalBtns">
+          <button class="cancel" type="button" onclick="fecharModalTarefasCard()">cancelar</button>
+          <button class="save" type="button" onclick="fecharModalTarefasCard()">concluir</button>
+        </div>
+      </div>
+    `;
+    overlay.addEventListener("click", (event) => {
+      if(event.target === overlay) fecharModalTarefasCard();
+    });
+    document.body.appendChild(overlay);
+  }
+
+  document.getElementById("modalTarefasCardTitulo").textContent = aplicarEmojiNoTexto(item.emoji, item.text || "Tarefas");
+
+  const linkArea = document.getElementById("modalTarefasCardLinkArea");
+  linkArea.innerHTML = "";
+  if(item.url){
+    const abrir = document.createElement("button");
+    abrir.type = "button";
+    abrir.className = "modalTarefasCardAbrirPagina";
+    abrir.textContent = "abrir página do card";
+    abrir.onclick = () => abrirDestinoDaTarefa(item.url);
+    linkArea.appendChild(abrir);
+  }
+
+  const lista = document.getElementById("modalTarefasCardLista");
+  lista.innerHTML = "";
+
+  const estado = estadoInternoDoBloco(item);
+  tarefasDetalhadas.forEach((tarefa, index) => {
+    const linha = document.createElement("div");
+    linha.className = "tarefaCardLinha";
+
+    const check = document.createElement("button");
+    check.type = "button";
+    check.className = "tarefaCardCheck" + (estado[index] ? " marcado" : "");
+    check.onclick = () => alternarTarefaInternaCard(itemId, index);
+
+    const texto = document.createElement("span");
+    texto.className = "tarefaCardTexto" + (tarefa.url ? " clicavel" : "");
+    texto.textContent = tarefa.texto;
+    if(tarefa.url){
+      texto.onclick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        abrirDestinoDaTarefa(tarefa.url);
+      };
+    }
+
+    linha.appendChild(check);
+    linha.appendChild(texto);
+    lista.appendChild(linha);
+  });
+
+  overlay.classList.add("show");
+};
+
+
+
+/* =========================================================
+   AJUSTE: SENHA SOMENTE AO EXCLUIR TAREFA NA CONFIGURAÇÃO
+   ========================================================= */
+let tarefaExclusaoPendenteId = null;
+let tarefaExclusaoPendenteModo = "blocos";
+
+function ocultarSenhaDaJanelaDeEdicao(){
+  const campoSenha = document.getElementById("editarTarefaSenha");
+  if(campoSenha){
+    const field = campoSenha.closest(".field");
+    if(field) field.style.display = "none";
+    campoSenha.value = "";
+  }
+}
+
+function garantirModalSenhaExclusao(){
+  let overlay = document.getElementById("modalSenhaExclusaoTarefa");
+  if(overlay) return overlay;
+
+  overlay = document.createElement("div");
+  overlay.id = "modalSenhaExclusaoTarefa";
+  overlay.className = "modalOverlay";
+  overlay.innerHTML = `
+    <div class="modal">
+      <h2 class="modalTitle">Confirmar exclusão</h2>
+      <div class="field">
+        <label>Senha da mamãe</label>
+        <input id="senhaExcluirTarefaCampo" class="inputModal" type="password" placeholder="Digite a senha">
+      </div>
+      <div id="statusSenhaExcluirTarefa" class="status-edicao"></div>
+      <div class="modalBtns">
+        <button class="cancel" type="button" onclick="fecharModalSenhaExclusao()">cancelar</button>
+        <button class="save" type="button" onclick="confirmarExclusaoTarefaComSenha()">excluir</button>
+      </div>
+    </div>
+  `;
+
+  overlay.addEventListener("click", (event) => {
+    if(event.target === overlay) fecharModalSenhaExclusao();
+  });
+
+  document.body.appendChild(overlay);
+  return overlay;
+}
+
+function abrirModalSenhaExclusao(id){
+  tarefaExclusaoPendenteId = id;
+  tarefaExclusaoPendenteModo = getModoConfiguracaoAtual();
+
+  const overlay = garantirModalSenhaExclusao();
+  const campo = document.getElementById("senhaExcluirTarefaCampo");
+  const status = document.getElementById("statusSenhaExcluirTarefa");
+
+  if(campo) campo.value = "";
+  if(status) status.textContent = "";
+
+  overlay.classList.add("show");
+
+  setTimeout(() => {
+    if(campo) campo.focus();
+  }, 80);
+}
+
+function fecharModalSenhaExclusao(){
+  const overlay = document.getElementById("modalSenhaExclusaoTarefa");
+  if(overlay) overlay.classList.remove("show");
+  tarefaExclusaoPendenteId = null;
+}
+
+function executarExclusaoTarefa(id, modo){
+  if(modo === "horario"){
+    const cfg = getConfigHorarioMenu();
+    cfg.custom = cfg.custom.filter(item => item.id !== id);
+    cfg.hidden[id] = true;
+    salvarConfigHorarioMenu(cfg);
+
+    const estado = getCustomHorarioEstado();
+    delete estado[id];
+    salvarCustomHorarioEstado(estado);
+  }else{
+    const cfg = getConfigMenu();
+    cfg.custom = cfg.custom.filter(item => item.id !== id);
+    cfg.hidden[id] = true;
+    salvarConfigMenu(cfg);
+
+    const estado = getCustomMenuEstado();
+    delete estado[id];
+    salvarCustomMenuEstado(estado);
+  }
+
+  renderizarPainelConfiguracao();
+  atualizarMenu();
+}
+
+function confirmarExclusaoTarefaComSenha(){
+  const campo = document.getElementById("senhaExcluirTarefaCampo");
+  const status = document.getElementById("statusSenhaExcluirTarefa");
+  const senha = campo ? campo.value : "";
+
+  if(!senhaGabrielaValida(senha)){
+    if(status) status.textContent = "Senha incorreta.";
+    return;
+  }
+
+  const id = tarefaExclusaoPendenteId;
+  const modo = tarefaExclusaoPendenteModo;
+
+  if(!id){
+    if(status) status.textContent = "Tarefa não encontrada.";
+    return;
+  }
+
+  executarExclusaoTarefa(id, modo);
+  fecharModalSenhaExclusao();
+}
+
+/* Mantém edição sem senha, mas exige senha somente ao clicar em retirar/excluir. */
+removerTarefaConfiguracao = function(id){
+  abrirModalSenhaExclusao(id);
+};
+
+const editarTarefaConfiguracaoSemSenhaComCampoOculto = editarTarefaConfiguracao;
+editarTarefaConfiguracao = function(id){
+  editarTarefaConfiguracaoSemSenhaComCampoOculto(id);
+  ocultarSenhaDaJanelaDeEdicao();
+};
+
+window.addEventListener("load", ocultarSenhaDaJanelaDeEdicao);
+window.addEventListener("pageshow", ocultarSenhaDaJanelaDeEdicao);
+
+window.addEventListener("load", configurarCamposExtras);
+window.addEventListener("pageshow", configurarCamposExtras);
+
 window.addEventListener("load", () => {
   atualizarLinhaTempo();
   atualizarMenu();
@@ -1582,6 +5679,7 @@ window.addEventListener("load", () => {
   agendarViradaDoDia();
   abrirModalMensagemImportanteMayaSeNecessario();
   setInterval(atualizarLinhaTempo, 1000);
+  setInterval(atualizarMenu, 60000);
 });
 
 window.addEventListener("pageshow", () => {
