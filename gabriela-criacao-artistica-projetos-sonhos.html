@@ -246,9 +246,10 @@ body{
   background:rgba(0,0,0,0.35);
   display:none;
   justify-content:center;
-  align-items:center;
-  padding:16px;
+  align-items:flex-start;
+  padding:24px 16px;
   z-index:999;
+  overflow-y:auto;
 }
 
 .modalOverlay.show{
@@ -260,6 +261,8 @@ body{
   padding:18px;
   border-radius:20px;
   width:min(360px, 100%);
+  max-height:calc(100vh - 48px);
+  overflow-y:auto;
   display:flex;
   flex-direction:column;
   gap:10px;
@@ -338,6 +341,180 @@ textarea:focus{
   background:#4f8a4f;
 }
 
+
+
+.configActionsBtn{
+  border:none;
+  border-radius:10px;
+  padding:8px 9px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:11px;
+  transition:0.2s ease;
+  background:#efefef;
+  color:#333;
+}
+
+.configActionsBtn:hover{
+  background:#e7e7e7;
+}
+
+.configActionsBtn.move{
+  background:#E9ECE7;
+  color:var(--verde-texto);
+  min-width:32px;
+}
+
+.configActionsBtn.danger{
+  background:#f5d7d7;
+  color:#8a3030;
+}
+
+.configLinha{
+  display:grid;
+  grid-template-columns:1fr auto auto auto auto;
+  gap:6px;
+  align-items:center;
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:12px;
+  padding:9px 10px;
+}
+
+.configTextoProjeto{
+  min-width:0;
+  line-height:1.35;
+}
+
+.configNomeProjeto{
+  display:block;
+  font-size:12px;
+  color:var(--texto-principal);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.configDescricaoProjeto{
+  display:block;
+  font-size:10.5px;
+  color:var(--texto-secundario);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  margin-top:2px;
+}
+
+.inputModal{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  font-size:13px;
+  font-family:var(--fonte);
+  box-sizing:border-box;
+  width:100%;
+  height:46px;
+  outline:none;
+}
+
+.inputModal:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
+}
+
+.status-edicao{
+  font-size:12px;
+  color:#A04646;
+  text-align:center;
+  min-height:16px;
+  line-height:1.35;
+}
+
+.modalHeader{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.fecharModal{
+  background:#E9ECE7;
+  border:none;
+  width:32px;
+  height:32px;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+  color:#333;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.2s ease;
+}
+
+.fecharModal:hover{
+  background:#dde3d9;
+}
+
+
+.labelComEmoji{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.emojiMiniBtn{
+  border:none;
+  background:#F2F7F1;
+  color:var(--verde-texto);
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:15px;
+  font-family:var(--fonte);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.2s ease;
+}
+
+.emojiMiniBtn:hover{
+  background:var(--verde-hover);
+}
+
+.emojiPalette{
+  position:fixed;
+  display:none;
+  grid-template-columns:repeat(8, 1fr);
+  gap:5px;
+  width:min(320px, calc(100vw - 32px));
+  max-height:210px;
+  overflow-y:auto;
+  background:#fff;
+  border:1px solid var(--borda);
+  border-radius:16px;
+  padding:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.18);
+  z-index:2000;
+}
+
+.emojiPalette.show{
+  display:grid;
+}
+
+.emojiOpcao{
+  border:none;
+  background:#F8FAF7;
+  border-radius:9px;
+  height:30px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.emojiOpcao:hover{
+  background:var(--verde-principal);
+}
+
 @media (max-width: 390px){
   body{
     padding:14px;
@@ -390,7 +567,7 @@ textarea:focus{
       </div>
     </div>
 
-    <div class="botoes-lista">
+    <div class="botoes-lista" id="listaProjetos">
 
       <button class="botao" onclick="location.href='gabriela-projeto-app-jardim-da-rotina.html'">
         <div class="conteudo-botao">
@@ -427,6 +604,7 @@ textarea:focus{
     </div>
 
     <div class="footerMiniAction">
+      <button class="futureBtn" onclick="abrirModalConfiguracao()">configuração</button>
       <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
     </div>
 
@@ -447,9 +625,156 @@ textarea:focus{
       <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
     </div>
   </div>
+
 </div>
 
+<div class="modalOverlay" id="modalConfiguracao">
+  <div class="modal">
+    <div class="modalHeader">
+      <button class="fecharModal" onclick="fecharModalConfiguracao()">✕</button>
+    </div>
+
+    <h2 class="modalTitle">Configuração dos projetos</h2>
+
+    <div class="field">
+      <label class="labelComEmoji"><span>Nome do Projeto</span><button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('novoProjetoNome', this)">🌿</button></label>
+      <textarea id="novoProjetoNome" style="height:72px;" placeholder="Ex.: Projeto Cerâmica"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="labelComEmoji"><span>Breve descrição</span><button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('novoProjetoDescricao', this)">🌿</button></label>
+      <textarea id="novoProjetoDescricao" style="height:72px;" placeholder="Ex.: organizar ideias, referências e etapas"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Página ao clicar no projeto</label>
+      <input id="novoProjetoUrl" class="inputModal" type="text" placeholder="Opcional. Ex.: gabriela-projeto-novo.html">
+    </div>
+
+    <div class="modalBtns">
+      <button class="save" onclick="adicionarProjetoConfiguracao()">acrescentar</button>
+      <button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
+    </div>
+
+    <div id="listaConfigProjetos" style="display:flex; flex-direction:column; gap:8px; margin-top:4px;"></div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalEditarProjeto">
+  <div class="modal">
+    <h2 class="modalTitle">Editar projeto</h2>
+
+    <div class="field">
+      <label class="labelComEmoji"><span>Nome do Projeto</span><button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('editarProjetoNome', this)">🌿</button></label>
+      <textarea id="editarProjetoNome" style="height:72px;" placeholder="Nome do projeto"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="labelComEmoji"><span>Breve descrição</span><button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('editarProjetoDescricao', this)">🌿</button></label>
+      <textarea id="editarProjetoDescricao" style="height:72px;" placeholder="Breve descrição"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Página ao clicar no projeto</label>
+      <input id="editarProjetoUrl" class="inputModal" type="text" placeholder="Opcional. Ex.: gabriela-projeto-novo.html">
+    </div>
+
+    <div id="statusEditarProjeto" class="status-edicao"></div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalEditarProjeto()">cancelar</button>
+      <button class="save" onclick="salvarEdicaoProjetoConfiguracao()">concluir</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalSenhaExcluirProjeto">
+  <div class="modal">
+    <h2 class="modalTitle">Retirar projeto</h2>
+
+    <div style="font-size:13px; color:var(--texto-secundario); text-align:center; line-height:1.6;">
+      Para retirar esse projeto, digite a senha da mamãe.
+    </div>
+
+    <div class="field">
+      <label for="senhaExcluirProjeto">Senha</label>
+      <input id="senhaExcluirProjeto" class="inputModal" type="password" inputmode="numeric" placeholder="Digite a senha">
+    </div>
+
+    <div class="modalBtns">
+      <button class="cancel" onclick="fecharModalSenhaExcluirProjeto()">Cancelar</button>
+      <button class="save" onclick="confirmarExcluirProjetoConfiguracao()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="emojiPalette" class="emojiPalette" aria-label="Escolha um emoji"></div>
+
 <script>
+
+const EMOJIS_PROJETOS = [
+  "🌿","🌱","🍃","🌸","🌼","🌻","✨","💫",
+  "🎨","🖌️","🖍️","✏️","📝","📒","📗","📚",
+  "💡","🪷","🧘","🌙","☀️","🌈","🧵","🧶",
+  "📷","🎬","🎧","🎵","🛠️","🧩","💻","🪴",
+  "🕯️","🔮","🪽","💖","🤍","🧡","💛","💚"
+];
+let campoEmojiAtual = null;
+
+function montarEmojiPalette(){
+  const palette = document.getElementById("emojiPalette");
+  if(!palette || palette.dataset.montada === "sim") return;
+
+  palette.innerHTML = EMOJIS_PROJETOS.map(emoji =>
+    `<button class="emojiOpcao" type="button" onclick="inserirEmojiNoCampo('${emoji}')">${emoji}</button>`
+  ).join("");
+  palette.dataset.montada = "sim";
+}
+
+function abrirEmojiPalette(campoId, botao){
+  montarEmojiPalette();
+  campoEmojiAtual = campoId;
+
+  const palette = document.getElementById("emojiPalette");
+  const rect = botao.getBoundingClientRect();
+  const largura = Math.min(320, window.innerWidth - 32);
+  const esquerda = Math.min(Math.max(16, rect.right - largura), window.innerWidth - largura - 16);
+  const topo = Math.min(rect.bottom + 8, window.innerHeight - 230);
+
+  palette.style.width = `${largura}px`;
+  palette.style.left = `${esquerda}px`;
+  palette.style.top = `${Math.max(16, topo)}px`;
+  palette.classList.add("show");
+}
+
+function inserirEmojiNoCampo(emoji){
+  if(!campoEmojiAtual) return;
+  const campo = document.getElementById(campoEmojiAtual);
+  if(!campo) return;
+
+  const inicio = campo.selectionStart ?? campo.value.length;
+  const fim = campo.selectionEnd ?? campo.value.length;
+  const antes = campo.value.slice(0, inicio);
+  const depois = campo.value.slice(fim);
+  const espacoAntes = antes && !antes.endsWith(" ") && !antes.endsWith("\n") ? " " : "";
+  const espacoDepois = depois && !depois.startsWith(" ") && !depois.startsWith("\n") ? " " : "";
+
+  campo.value = `${antes}${espacoAntes}${emoji}${espacoDepois}${depois}`;
+  campo.focus();
+  const pos = (antes + espacoAntes + emoji + espacoDepois).length;
+  campo.setSelectionRange(pos, pos);
+
+  document.getElementById("emojiPalette").classList.remove("show");
+}
+
+document.addEventListener("click", function(event){
+  const palette = document.getElementById("emojiPalette");
+  if(!palette) return;
+  if(event.target.closest(".emojiMiniBtn") || event.target.closest("#emojiPalette")) return;
+  palette.classList.remove("show");
+});
+
 function voltarPagina(){
   const params = new URLSearchParams(window.location.search);
   const from = params.get("from");
@@ -462,6 +787,343 @@ function voltarPagina(){
 }
 
 const CHAVE_FUTURAS_EDICOES = "futuras_edicoes_projetos";
+
+const CHAVE_CONFIG_PROJETOS = "config_projetos_criacao_artistica";
+
+const PROJETOS_BASE = [
+  {
+    id:"base_0",
+    nome:"👩‍👧 Projeto App Jardim da Rotina",
+    descricao:"organizar ideias do aplicativo",
+    url:"gabriela-projeto-app-jardim-da-rotina.html"
+  },
+  {
+    id:"base_1",
+    nome:"📗 Projeto Livro de Gaia",
+    descricao:"guardar capítulos e inspirações",
+    url:"gabriela-projeto-livro-gaia.html"
+  },
+  {
+    id:"base_2",
+    nome:"🪷 Projeto Yoga",
+    descricao:"acompanhar práticas e estudos",
+    url:"gabriela-projeto-yoga.html"
+  },
+  {
+    id:"base_3",
+    nome:"💡 Projeto Who Am I",
+    descricao:"desenvolver identidade e expressão",
+    url:"gabriela-projeto-who-am-i.html"
+  }
+];
+
+function senhaGabrielaValida(senhaDigitada){
+  const senhasPossiveis = [
+    localStorage.getItem("senha_gabriela"),
+    localStorage.getItem("senhaGabriela"),
+    localStorage.getItem("senha_mamae"),
+    localStorage.getItem("senha_mamae_gabriela"),
+    "1234"
+  ].filter(Boolean);
+
+  return senhasPossiveis.includes(String(senhaDigitada || "").trim());
+}
+
+function getConfigProjetos(){
+  try{
+    const raw = localStorage.getItem(CHAVE_CONFIG_PROJETOS);
+    const cfg = raw ? JSON.parse(raw) : {};
+
+    if(!Array.isArray(cfg.custom)) cfg.custom = [];
+    if(!cfg.editadas) cfg.editadas = {};
+    if(!cfg.hidden) cfg.hidden = {};
+    if(!Array.isArray(cfg.ordem)) cfg.ordem = [];
+
+    return cfg;
+  }catch(e){
+    return { custom:[], editadas:{}, hidden:{}, ordem:[] };
+  }
+}
+
+function salvarConfigProjetos(cfg){
+  localStorage.setItem(CHAVE_CONFIG_PROJETOS, JSON.stringify(cfg));
+}
+
+function getProjetosConfigurados(){
+  const cfg = getConfigProjetos();
+
+  const base = PROJETOS_BASE
+    .filter(projeto => !cfg.hidden[projeto.id])
+    .map(projeto => ({
+      ...projeto,
+      ...(cfg.editadas && cfg.editadas[projeto.id] ? cfg.editadas[projeto.id] : {}),
+      base:true
+    }));
+
+  const custom = (cfg.custom || [])
+    .filter(projeto => !cfg.hidden[projeto.id])
+    .map(projeto => ({
+      id:projeto.id,
+      nome:projeto.nome || "Novo projeto",
+      descricao:projeto.descricao || "",
+      url:projeto.url || "",
+      custom:true
+    }));
+
+  const todos = [...base, ...custom];
+  const idsAtuais = todos.map(projeto => projeto.id);
+  const ordemLimpa = (cfg.ordem || []).filter(id => idsAtuais.includes(id));
+  const idsNovos = idsAtuais.filter(id => !ordemLimpa.includes(id));
+  const ordemFinal = [...ordemLimpa, ...idsNovos];
+
+  if(JSON.stringify(ordemFinal) !== JSON.stringify(cfg.ordem || [])){
+    cfg.ordem = ordemFinal;
+    salvarConfigProjetos(cfg);
+  }
+
+  return todos.sort((a,b) => ordemFinal.indexOf(a.id) - ordemFinal.indexOf(b.id));
+}
+
+function renderizarProjetos(){
+  const lista = document.getElementById("listaProjetos");
+  if(!lista) return;
+
+  const projetos = getProjetosConfigurados();
+
+  lista.innerHTML = projetos.map(projeto => `
+    <button class="botao" onclick="abrirProjeto('${escapeHtml(projeto.id)}')">
+      <div class="conteudo-botao">
+        <div class="nome-botao">${escapeHtml(projeto.nome || "Novo projeto")}</div>
+        ${projeto.descricao ? `<div class="proxima-tarefa">${escapeHtml(projeto.descricao)}</div>` : ""}
+        <div class="horario-proxima"></div>
+      </div>
+    </button>
+  `).join("");
+}
+
+function abrirProjeto(id){
+  const projeto = getProjetosConfigurados().find(item => item.id === id);
+  if(!projeto) return;
+
+  if(projeto.url){
+    location.href = projeto.url;
+    return;
+  }
+
+  alert("Esse projeto ainda não tem uma página vinculada. Você pode editar e preencher a página na configuração.");
+}
+
+function abrirModalConfiguracao(){
+  document.getElementById("novoProjetoNome").value = "";
+  document.getElementById("novoProjetoDescricao").value = "";
+  document.getElementById("novoProjetoUrl").value = "";
+  renderizarListaConfiguracaoProjetos();
+  document.getElementById("modalConfiguracao").classList.add("show");
+}
+
+function fecharModalConfiguracao(){
+  document.getElementById("modalConfiguracao").classList.remove("show");
+}
+
+function adicionarProjetoConfiguracao(){
+  const nome = document.getElementById("novoProjetoNome").value.trim();
+  const descricao = document.getElementById("novoProjetoDescricao").value.trim();
+  const url = document.getElementById("novoProjetoUrl").value.trim();
+
+  if(!nome){
+    alert("Escreva o nome do projeto.");
+    return;
+  }
+
+  const cfg = getConfigProjetos();
+  const id = `custom_projeto_${Date.now()}`;
+
+  cfg.custom.push({ id, nome, descricao, url, custom:true });
+  cfg.ordem.push(id);
+
+  salvarConfigProjetos(cfg);
+
+  document.getElementById("novoProjetoNome").value = "";
+  document.getElementById("novoProjetoDescricao").value = "";
+  document.getElementById("novoProjetoUrl").value = "";
+
+  renderizarListaConfiguracaoProjetos();
+  renderizarProjetos();
+}
+
+function renderizarListaConfiguracaoProjetos(){
+  const lista = document.getElementById("listaConfigProjetos");
+  if(!lista) return;
+
+  const projetos = getProjetosConfigurados();
+  lista.innerHTML = "";
+
+  projetos.forEach((projeto, index) => {
+    const linha = document.createElement("div");
+    linha.className = "configLinha";
+
+    const texto = document.createElement("div");
+    texto.className = "configTextoProjeto";
+
+    const nome = document.createElement("span");
+    nome.className = "configNomeProjeto";
+    nome.textContent = projeto.nome || "Novo projeto";
+
+    const descricao = document.createElement("span");
+    descricao.className = "configDescricaoProjeto";
+    descricao.textContent = projeto.descricao || "Sem descrição";
+
+    texto.appendChild(nome);
+    texto.appendChild(descricao);
+
+    const btnSubir = document.createElement("button");
+    btnSubir.textContent = "↑";
+    btnSubir.className = "configActionsBtn move";
+    btnSubir.disabled = index === 0;
+    btnSubir.style.opacity = index === 0 ? "0.45" : "1";
+    btnSubir.onclick = () => moverProjetoConfiguracao(projeto.id, -1);
+
+    const btnDescer = document.createElement("button");
+    btnDescer.textContent = "↓";
+    btnDescer.className = "configActionsBtn move";
+    btnDescer.disabled = index === projetos.length - 1;
+    btnDescer.style.opacity = index === projetos.length - 1 ? "0.45" : "1";
+    btnDescer.onclick = () => moverProjetoConfiguracao(projeto.id, 1);
+
+    const btnEditar = document.createElement("button");
+    btnEditar.textContent = "editar";
+    btnEditar.className = "configActionsBtn";
+    btnEditar.onclick = () => editarProjetoConfiguracao(projeto.id);
+
+    const btnRetirar = document.createElement("button");
+    btnRetirar.textContent = "retirar";
+    btnRetirar.className = "configActionsBtn danger";
+    btnRetirar.onclick = () => removerProjetoConfiguracao(projeto.id);
+
+    linha.appendChild(texto);
+    linha.appendChild(btnSubir);
+    linha.appendChild(btnDescer);
+    linha.appendChild(btnEditar);
+    linha.appendChild(btnRetirar);
+    lista.appendChild(linha);
+  });
+}
+
+function moverProjetoConfiguracao(id, direcao){
+  const cfg = getConfigProjetos();
+  const projetos = getProjetosConfigurados();
+  const ids = projetos.map(projeto => projeto.id);
+  const index = ids.indexOf(id);
+  const novoIndex = index + direcao;
+
+  if(index < 0 || novoIndex < 0 || novoIndex >= ids.length) return;
+
+  const itemMovido = ids.splice(index, 1)[0];
+  ids.splice(novoIndex, 0, itemMovido);
+  cfg.ordem = ids;
+
+  salvarConfigProjetos(cfg);
+  renderizarListaConfiguracaoProjetos();
+  renderizarProjetos();
+}
+
+let projetoEdicaoAtualId = null;
+
+function editarProjetoConfiguracao(id){
+  const projeto = getProjetosConfigurados().find(item => item.id === id);
+  if(!projeto){
+    alert("Projeto não encontrado.");
+    return;
+  }
+
+  projetoEdicaoAtualId = id;
+  document.getElementById("editarProjetoNome").value = projeto.nome || "";
+  document.getElementById("editarProjetoDescricao").value = projeto.descricao || "";
+  document.getElementById("editarProjetoUrl").value = projeto.url || "";
+  document.getElementById("statusEditarProjeto").textContent = "";
+  document.getElementById("modalEditarProjeto").classList.add("show");
+}
+
+function fecharModalEditarProjeto(){
+  projetoEdicaoAtualId = null;
+  document.getElementById("modalEditarProjeto").classList.remove("show");
+}
+
+function salvarEdicaoProjetoConfiguracao(){
+  if(!projetoEdicaoAtualId) return;
+
+  const nome = document.getElementById("editarProjetoNome").value.trim();
+  const descricao = document.getElementById("editarProjetoDescricao").value.trim();
+  const url = document.getElementById("editarProjetoUrl").value.trim();
+  const status = document.getElementById("statusEditarProjeto");
+
+  if(!nome){
+    status.textContent = "Escreva o nome do projeto.";
+    return;
+  }
+
+  const cfg = getConfigProjetos();
+  const custom = cfg.custom.find(item => item.id === projetoEdicaoAtualId);
+
+  if(custom){
+    custom.nome = nome;
+    custom.descricao = descricao;
+    custom.url = url;
+  }else{
+    cfg.editadas[projetoEdicaoAtualId] = { nome, descricao, url };
+  }
+
+  salvarConfigProjetos(cfg);
+  fecharModalEditarProjeto();
+  renderizarListaConfiguracaoProjetos();
+  renderizarProjetos();
+}
+
+let projetoParaExcluirConfiguracao = null;
+
+function removerProjetoConfiguracao(id){
+  projetoParaExcluirConfiguracao = id;
+  document.getElementById("senhaExcluirProjeto").value = "";
+  document.getElementById("modalSenhaExcluirProjeto").classList.add("show");
+  setTimeout(() => document.getElementById("senhaExcluirProjeto").focus(), 80);
+}
+
+function fecharModalSenhaExcluirProjeto(){
+  projetoParaExcluirConfiguracao = null;
+  document.getElementById("modalSenhaExcluirProjeto").classList.remove("show");
+}
+
+function confirmarExcluirProjetoConfiguracao(){
+  const senha = document.getElementById("senhaExcluirProjeto").value;
+
+  if(!senhaGabrielaValida(senha)){
+    alert("Senha incorreta.");
+    return;
+  }
+
+  const id = projetoParaExcluirConfiguracao;
+  if(!id) return;
+
+  const cfg = getConfigProjetos();
+  cfg.custom = cfg.custom.filter(item => item.id !== id);
+  cfg.hidden[id] = true;
+  cfg.ordem = (cfg.ordem || []).filter(itemId => itemId !== id);
+
+  salvarConfigProjetos(cfg);
+  fecharModalSenhaExcluirProjeto();
+  renderizarListaConfiguracaoProjetos();
+  renderizarProjetos();
+}
+
+function escapeHtml(texto){
+  return String(texto ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 
 function abrirModalFuturasEdicoes(){
   document.getElementById("futurasEdicoesTexto").value =
@@ -497,6 +1159,7 @@ function atualizarLinhaTempo(){
 window.addEventListener("load", () => {
   atualizarLinhaTempo();
   setInterval(atualizarLinhaTempo, 1000);
+  renderizarProjetos();
 });
 </script>
 
