@@ -1061,15 +1061,6 @@ body{
         </div>
       </section>
 
-      <button class="focoCard" onclick="irParaComSenha('gabriela-menu.html')">
-        <div class="iconeRedondo">🌱</div>
-        <div>
-          <h3>Foco de hoje</h3>
-          <p>Respire. Uma coisa de cada vez.<br>Você está fazendo o seu melhor.</p>
-        </div>
-        <div class="chevron">›</div>
-      </button>
-
       <section class="menuGrid">
 
         <button class="menuCard" onclick="abrirModalRotina()">
@@ -1336,6 +1327,8 @@ function fecharModalSenhaProtegida(){
   const modal = document.getElementById("modalSenhaProtegida");
   const erro = document.getElementById("senhaProtegidaErro");
 
+  const input = document.getElementById("senhaProtegidaInput");
+  if(input) input.value = "";
   if(erro) erro.style.display = "none";
   if(modal) modal.classList.remove("show");
 }
@@ -1422,6 +1415,8 @@ document.addEventListener("keydown", function(e){
 });
 
 window.addEventListener("load", function(){
+  localStorage.removeItem("acesso_index_liberado");
+  sessionStorage.removeItem("senha_index_liberada");
   liberarApp();
 });
 
@@ -1442,7 +1437,7 @@ const CHAVES_MAYA_BACKUP = [
   "futuras_edicoes_maya_premiacao",
   "futuras_edicoes_maya_lista_de_desejos",
   "futuras_edicoes_maya_rotina",
-  "anotacoes_importantes"
+  "jardim_anotacoes_importantes"
 ];
 
 function exportarBackupMaya(){
