@@ -10,67 +10,132 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-html, body{
-  height:100%;
+:root{
+  --fundo:#F6F8F3;
+  --fundo-card:#FFFFFF;
+  --verde-claro:#EAF3E8;
+  --verde-muito-claro:#F2F7F0;
+  --verde-salvia:#8DA77D;
+  --verde-salvia-escuro:#6F8D62;
+  --verde-texto:#3F6F4F;
+  --texto:#2F2F2F;
+  --texto-suave:#6F756C;
+  --borda:#DDE8D8;
+  --bege:#F3ECDD;
+  --sombra:0 10px 28px rgba(84,110,79,0.12);
+  --sombra-suave:0 5px 18px rgba(84,110,79,0.09);
+  --fonte:'Poppins',sans-serif;
+}
+
+*{
+  box-sizing:border-box;
   margin:0;
+  padding:0;
+}
+
+html, body{
+  width:100%;
+  min-height:100%;
 }
 
 body{
-  font-family:'Poppins',sans-serif;
-  background-image:url('margaridas.jpg');
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
+  font-family:var(--fonte);
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,0.95), transparent 34%),
+    radial-gradient(circle at top right, rgba(243,236,221,0.65), transparent 32%),
+    linear-gradient(180deg, #FAFBF7 0%, var(--fundo) 100%);
+  color:var(--texto);
   display:flex;
   justify-content:center;
-  align-items:center;
-  padding:18px;
-  box-sizing:border-box;
+  align-items:flex-start;
+  padding:16px;
 }
+
+/* =========================
+   TELA DE SENHA
+========================= */
 
 #telaSenha{
   position:fixed;
   inset:0;
-  background:#F6F7F5;
-  display:flex;
+  background:var(--fundo);
+  display:none;
   justify-content:center;
   align-items:center;
   z-index:9999;
+  padding:18px;
 }
 
 .senhaBox{
+  width:100%;
+  max-width:320px;
   background:white;
-  padding:24px;
-  border-radius:22px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.12);
+  padding:26px 22px;
+  border-radius:28px;
+  box-shadow:var(--sombra);
   display:flex;
   flex-direction:column;
-  gap:12px;
-  width:260px;
+  gap:13px;
   text-align:center;
+  border:1px solid rgba(221,232,216,0.85);
+}
+
+.senhaIcone{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:var(--verde-muito-claro);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 2px;
+  font-size:25px;
 }
 
 .senhaBox h2{
   margin:0;
-  color:#3d6f4c;
+  color:var(--verde-texto);
   font-weight:500;
+  font-size:22px;
+}
+
+.senhaBox p{
+  font-size:12.5px;
+  color:var(--texto-suave);
+  line-height:1.45;
 }
 
 .senhaBox input{
-  padding:11px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  font-family:'Poppins',sans-serif;
+  padding:13px 14px;
+  border-radius:15px;
+  border:1px solid var(--borda);
+  font-family:var(--fonte);
+  outline:none;
+  font-size:14px;
+  text-align:center;
+}
+
+.senhaBox input:focus{
+  border-color:var(--verde-salvia);
+  box-shadow:0 0 0 3px rgba(141,167,125,0.15);
 }
 
 .senhaBox button{
-  padding:11px;
+  padding:13px;
   border:none;
-  border-radius:12px;
-  background:#5C9D5C;
+  border-radius:16px;
+  background:var(--verde-salvia);
   color:white;
-  font-family:'Poppins',sans-serif;
+  font-family:var(--fonte);
   cursor:pointer;
+  font-size:14px;
+  font-weight:500;
+  transition:0.2s ease;
+}
+
+.senhaBox button:hover{
+  background:var(--verde-salvia-escuro);
+  transform:translateY(-1px);
 }
 
 #erroSenha{
@@ -79,54 +144,548 @@ body{
   display:none;
 }
 
-.overlay{
-  background:rgba(255,255,255,0.9);
-  padding:30px;
+/* =========================
+   APP
+========================= */
+
+#appConteudo{
+  width:100%;
+}
+
+.appShell{
+  width:100%;
+  max-width:420px;
+  min-height:calc(100vh - 32px);
+  margin:0 auto;
+  position:relative;
+  padding-bottom:88px;
+}
+
+.appCard{
+  width:100%;
+  background:rgba(255,255,255,0.72);
+  border:1px solid rgba(221,232,216,0.85);
+  border-radius:30px;
+  box-shadow:var(--sombra-suave);
+  padding:20px 16px 18px;
+  overflow:hidden;
+  position:relative;
+}
+
+.appCard::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-70px;
+  top:-55px;
+  background:rgba(232,243,226,0.8);
+  border-radius:50%;
+  z-index:0;
+}
+
+.appCard > *{
+  position:relative;
+  z-index:1;
+}
+
+/* =========================
+   TOPO
+========================= */
+
+.topoApp{
+  display:grid;
+  grid-template-columns:54px 1fr 46px;
+  gap:12px;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.logoBolinha,
+.notificacaoBolinha{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:white;
+  border:1px solid rgba(221,232,216,0.8);
+  box-shadow:0 6px 16px rgba(84,110,79,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--verde-texto);
+  font-size:22px;
+}
+
+.notificacaoBolinha{
+  cursor:pointer;
+  font-family:var(--fonte);
+}
+
+.tituloArea{
+  min-width:0;
+}
+
+.tituloApp{
+  font-size:29px;
+  font-weight:400;
+  color:#435F3E;
+  line-height:1.05;
+  letter-spacing:-0.5px;
+}
+
+.subtituloApp{
+  color:var(--texto-suave);
+  font-size:12.5px;
+  margin-top:4px;
+  line-height:1.35;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  display:grid;
+  grid-template-columns:1fr 120px;
+  gap:10px;
+  align-items:end;
+  margin-bottom:16px;
+}
+
+.heroTexto h2{
+  font-size:24px;
+  line-height:1.2;
+  font-weight:500;
+  color:var(--texto);
+  margin-bottom:9px;
+}
+
+.heroTexto h2 span{
+  color:var(--verde-salvia);
+}
+
+.heroTexto p{
+  color:var(--texto-suave);
+  font-size:15px;
+  line-height:1.55;
+}
+
+.ilustracaoJardim{
+  min-height:135px;
+  position:relative;
+}
+
+.vaso{
+  position:absolute;
+  right:26px;
+  bottom:0;
+  width:50px;
+  height:48px;
+  background:linear-gradient(180deg, #F8F0E1, #E8D8C0);
+  border-radius:8px 8px 16px 16px;
+  border:1px solid rgba(194,174,145,0.35);
+}
+
+.vaso::before{
+  content:"";
+  position:absolute;
+  left:-6px;
+  top:-5px;
+  width:62px;
+  height:10px;
+  border-radius:20px;
+  background:#F6EBD8;
+  border:1px solid rgba(194,174,145,0.22);
+}
+
+.regador{
+  position:absolute;
+  right:0;
+  bottom:4px;
+  width:54px;
+  height:42px;
+  border-radius:12px 12px 16px 16px;
+  background:#C8D7BD;
+  border:1px solid rgba(99,125,88,0.22);
+}
+
+.regador::before{
+  content:"";
+  position:absolute;
+  width:28px;
+  height:28px;
+  right:-16px;
+  top:5px;
+  border:5px solid #C8D7BD;
+  border-left:none;
+  border-radius:0 30px 30px 0;
+}
+
+.regador::after{
+  content:"♡";
+  position:absolute;
+  left:21px;
+  top:13px;
+  color:#F7E6DD;
+  font-size:14px;
+}
+
+.planta{
+  position:absolute;
+  right:42px;
+  bottom:45px;
+  width:70px;
+  height:90px;
+}
+
+.caule{
+  position:absolute;
+  left:35px;
+  bottom:0;
+  width:2px;
+  height:92px;
+  background:#8FA984;
+  transform:rotate(-8deg);
+  transform-origin:bottom;
+}
+
+.folha{
+  position:absolute;
+  width:24px;
+  height:13px;
+  background:#A8B99B;
+  border-radius:24px 2px 24px 2px;
+  opacity:0.82;
+}
+
+.f1{left:17px; bottom:20px; transform:rotate(32deg);}
+.f2{left:38px; bottom:31px; transform:rotate(-28deg);}
+.f3{left:11px; bottom:45px; transform:rotate(22deg);}
+.f4{left:43px; bottom:58px; transform:rotate(-22deg);}
+.f5{left:25px; bottom:76px; transform:rotate(18deg);}
+
+.florzinha{
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#F6F0DD;
+  box-shadow:
+    7px 1px 0 #F6F0DD,
+    3px -6px 0 #F6F0DD,
+    3px 6px 0 #F6F0DD;
+}
+
+.fl1{right:53px; bottom:118px;}
+.fl2{right:28px; bottom:97px; transform:scale(0.75);}
+
+/* =========================
+   FOCO DO DIA
+========================= */
+
+.focoCard{
+  width:100%;
+  background:rgba(242,247,240,0.92);
+  border:1px solid rgba(221,232,216,0.95);
   border-radius:24px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  padding:14px;
+  display:grid;
+  grid-template-columns:54px 1fr 22px;
+  gap:12px;
+  align-items:center;
+  margin-bottom:16px;
+  cursor:pointer;
+  font-family:var(--fonte);
+  text-align:left;
+}
+
+.iconeRedondo{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 5px 14px rgba(84,110,79,0.08);
+  color:var(--verde-salvia-escuro);
+  font-size:24px;
+}
+
+.focoCard h3{
+  font-size:15px;
+  color:var(--texto);
+  font-weight:600;
+  margin-bottom:2px;
+}
+
+.focoCard p{
+  color:var(--texto-suave);
+  font-size:12.5px;
+  line-height:1.4;
+}
+
+.chevron{
+  color:var(--verde-salvia-escuro);
+  font-size:24px;
+}
+
+/* =========================
+   GRID MENU
+========================= */
+
+.menuGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.menuCard{
+  min-height:152px;
+  border:none;
+  background:white;
+  border-radius:23px;
+  padding:14px 12px;
+  box-shadow:0 8px 18px rgba(84,110,79,0.08);
+  cursor:pointer;
+  font-family:var(--fonte);
+  text-align:left;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:0.2s ease;
+  color:var(--texto);
+  border:1px solid rgba(236,241,233,0.9);
+}
+
+.menuCard:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px rgba(84,110,79,0.13);
+}
+
+.menuCardTopo{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.menuIcone{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:var(--verde-salvia);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  flex-shrink:0;
+}
+
+.menuSeta{
+  color:#9CAF92;
+  font-size:22px;
+  line-height:1;
+  padding-top:8px;
+}
+
+.menuCard h3{
+  margin-top:12px;
+  font-size:16px;
+  line-height:1.2;
+  font-weight:500;
+  color:var(--texto);
+}
+
+.menuCard p{
+  margin-top:7px;
+  color:var(--texto-suave);
+  font-size:12px;
+  line-height:1.45;
+}
+
+.pill{
+  width:max-content;
+  max-width:100%;
+  background:#F2F4EF;
+  color:#5F6F5D;
+  border-radius:999px;
+  padding:6px 9px;
+  font-size:11px;
+  display:flex;
+  gap:6px;
+  align-items:center;
+  margin-top:10px;
+  white-space:nowrap;
+}
+
+.menuCardWide{
+  grid-column:1 / -1;
+  min-height:118px;
+  display:grid;
+  grid-template-columns:52px 1fr 22px;
+  align-items:center;
+  gap:12px;
+}
+
+.menuCardWide h3{
+  margin-top:0;
+}
+
+/* =========================
+   FRASE E AÇÕES
+========================= */
+
+.fraseBox{
+  background:rgba(234,243,232,0.75);
+  border:1px solid rgba(221,232,216,0.95);
+  border-radius:26px;
+  padding:18px 14px;
+  margin-top:2px;
+  overflow:hidden;
+  position:relative;
+}
+
+.fraseBox::after{
+  content:"♡";
+  position:absolute;
+  right:18px;
+  top:16px;
+  color:#9CAF92;
+  font-size:20px;
+  opacity:0.7;
+}
+
+.fraseLinha{
+  display:grid;
+  grid-template-columns:42px 1fr;
+  gap:10px;
+  align-items:center;
+  margin-bottom:16px;
+}
+
+.fraseCoracao{
+  color:var(--verde-salvia);
+  font-size:30px;
   text-align:center;
-  width:280px;
+}
+
+.fraseTexto{
+  color:var(--texto);
+  font-size:14px;
+  line-height:1.5;
+}
+
+.acoes{
   display:flex;
   flex-direction:column;
   gap:10px;
 }
 
-h1{
-  color:#3d6f4c;
-  font-weight:300;
-  font-size:28px;
-  margin:0;
-  line-height:1.2;
-}
-
-.subtitulo{
-  font-size:12px;
-  color:#6f8a75;
-  margin-top:2px;
-  line-height:1.2;
-}
-
-.botao{
-  padding:14px;
-  border-radius:16px;
-  cursor:pointer;
-  transition:0.2s;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  font-size:14px;
-  border:none;
-  font-family:'Poppins',sans-serif;
-  background:#EDE4D3;
+.botaoPrincipal,
+.botaoSecundario{
   width:100%;
+  min-height:48px;
+  border-radius:18px;
+  font-family:var(--fonte);
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+  transition:0.2s ease;
 }
 
-.botao:hover{
-  transform:scale(1.03);
+.botaoPrincipal{
+  border:none;
+  background:var(--verde-salvia);
+  color:white;
+  box-shadow:0 7px 15px rgba(111,141,98,0.20);
 }
+
+.botaoPrincipal:hover{
+  background:var(--verde-salvia-escuro);
+  transform:translateY(-1px);
+}
+
+.botaoSecundario{
+  border:1px solid var(--verde-salvia);
+  background:white;
+  color:var(--verde-salvia-escuro);
+}
+
+.botaoSecundario:hover{
+  background:var(--verde-muito-claro);
+}
+
+/* =========================
+   BARRA INFERIOR
+========================= */
+
+.bottomNav{
+  position:fixed;
+  left:50%;
+  bottom:14px;
+  transform:translateX(-50%);
+  width:min(420px, calc(100% - 28px));
+  background:rgba(255,255,255,0.96);
+  border:1px solid rgba(221,232,216,0.9);
+  border-radius:26px;
+  box-shadow:0 10px 28px rgba(84,110,79,0.14);
+  display:grid;
+  grid-template-columns:1fr 1fr 68px 1fr 1fr;
+  gap:2px;
+  align-items:center;
+  padding:9px 10px;
+  z-index:20;
+}
+
+.navItem{
+  border:none;
+  background:transparent;
+  font-family:var(--fonte);
+  color:#8C9288;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  font-size:10.5px;
+  cursor:pointer;
+}
+
+.navItem .navIcon{
+  font-size:20px;
+  line-height:1;
+}
+
+.navItem.ativo{
+  color:var(--verde-salvia-escuro);
+  font-weight:500;
+}
+
+.navPlus{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  border:none;
+  background:var(--verde-salvia);
+  color:white;
+  font-size:35px;
+  line-height:1;
+  margin:-22px auto 0;
+  box-shadow:0 10px 20px rgba(111,141,98,0.25);
+  cursor:pointer;
+}
+
+/* =========================
+   MODAIS
+========================= */
 
 .modalOverlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.38);
+  background:rgba(0,0,0,0.34);
   display:none;
   justify-content:center;
   align-items:center;
@@ -139,19 +698,21 @@ h1{
 }
 
 .rotinaCard{
-  width:280px;
-  background:rgba(255,255,255,0.96);
-  border-radius:26px;
+  width:100%;
+  max-width:330px;
+  background:rgba(255,255,255,0.98);
+  border-radius:28px;
   padding:18px;
-  box-shadow:0 12px 32px rgba(0,0,0,0.20);
+  box-shadow:0 14px 36px rgba(0,0,0,0.18);
   display:flex;
   flex-direction:column;
   gap:14px;
+  border:1px solid rgba(221,232,216,0.9);
 }
 
 .rotinaTopo{
   position:relative;
-  min-height:44px;
+  min-height:48px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -162,31 +723,31 @@ h1{
   left:0;
   top:0;
   border:none;
-  background:#EEF1EC;
-  border-radius:12px;
-  width:40px;
-  height:40px;
+  background:#EEF3EC;
+  border-radius:14px;
+  width:42px;
+  height:42px;
   cursor:pointer;
   font-size:16px;
-  font-family:'Poppins',sans-serif;
-  color:#2F2F2F;
+  font-family:var(--fonte);
+  color:var(--texto);
 }
 
 .rotinaTituloArea{
   text-align:center;
-  padding:0 42px;
+  padding:0 46px;
 }
 
 .rotinaTitle{
   font-size:21px;
   font-weight:500;
-  color:#3d6f4c;
+  color:var(--verde-texto);
   line-height:1.15;
 }
 
 .rotinaSub{
   font-size:11.5px;
-  color:#6B6B6B;
+  color:var(--texto-suave);
   margin-top:3px;
   line-height:1.25;
 }
@@ -199,23 +760,252 @@ h1{
 
 .rotinaBotao{
   border:none;
-  background:#EDE4D3;
-  border-radius:16px;
+  background:var(--verde-claro);
+  border-radius:18px;
   padding:14px;
   font-size:14px;
   cursor:pointer;
-  color:#2F2F2F;
-  font-family:'Poppins',sans-serif;
+  color:var(--verde-texto);
+  font-family:var(--fonte);
   width:100%;
   transition:0.2s ease;
-  font-weight:400;
-  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+  font-weight:500;
+  box-shadow:0 4px 10px rgba(84,110,79,0.06);
 }
 
 .rotinaBotao:hover{
-  background:#D6EAD4;
+  background:#DDEED9;
   transform:translateY(-1px);
 }
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width:390px){
+  body{
+    padding:12px;
+  }
+
+  .appShell{
+    min-height:calc(100vh - 24px);
+  }
+
+  .appCard{
+    padding:18px 13px 16px;
+    border-radius:28px;
+  }
+
+  .topoApp{
+    grid-template-columns:48px 1fr 42px;
+    gap:9px;
+  }
+
+  .logoBolinha,
+  .notificacaoBolinha{
+    width:42px;
+    height:42px;
+    font-size:20px;
+  }
+
+  .tituloApp{
+    font-size:25px;
+  }
+
+  .hero{
+    grid-template-columns:1fr 96px;
+  }
+
+  .heroTexto h2{
+    font-size:21px;
+  }
+
+  .heroTexto p{
+    font-size:13.5px;
+  }
+
+  .menuGrid{
+    gap:10px;
+  }
+
+  .menuCard{
+    min-height:148px;
+    padding:13px 11px;
+  }
+
+  .menuCard h3{
+    font-size:15px;
+  }
+
+  .menuCard p{
+    font-size:11.5px;
+  }
+
+  .bottomNav{
+    bottom:10px;
+    width:calc(100% - 22px);
+  }
+}
+
+@media (max-width:340px){
+  .menuGrid{
+    grid-template-columns:1fr;
+  }
+
+  .menuCardWide{
+    grid-column:auto;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+  }
+
+  .ilustracaoJardim{
+    display:none;
+  }
+}
+
+/* =========================
+   MODAL DE SENHA BONITO
+========================= */
+
+.senhaModalCard{
+  width:100%;
+  max-width:330px;
+  background:
+    radial-gradient(circle at 12% 15%, rgba(234,243,232,0.95) 0 44px, transparent 45px),
+    radial-gradient(circle at 90% 8%, rgba(243,236,221,0.78) 0 42px, transparent 43px),
+    rgba(255,255,255,0.98);
+  border:1px solid rgba(221,232,216,0.95);
+  border-radius:30px;
+  padding:20px 18px 18px;
+  box-shadow:0 18px 46px rgba(63,90,58,0.23);
+  display:flex;
+  flex-direction:column;
+  gap:13px;
+  text-align:center;
+}
+
+.senhaModalTopo{
+  display:grid;
+  grid-template-columns:48px 1fr 40px;
+  gap:9px;
+  align-items:center;
+}
+
+.senhaModalIcone{
+  width:48px;
+  height:48px;
+  border-radius:18px;
+  background:#EAF3E8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.75);
+}
+
+.senhaModalTituloBox{
+  min-width:0;
+}
+
+.senhaModalTitulo{
+  font-size:21px;
+  font-weight:600;
+  color:var(--verde-texto);
+  line-height:1.15;
+}
+
+.senhaModalSub{
+  margin-top:4px;
+  font-size:12px;
+  color:var(--texto-suave);
+  line-height:1.35;
+}
+
+.senhaModalFechar{
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:50%;
+  background:#F2F7F0;
+  color:var(--verde-texto);
+  font-family:var(--fonte);
+  font-size:22px;
+  cursor:pointer;
+  border:1px solid rgba(221,232,216,0.9);
+}
+
+.senhaModalTexto{
+  color:#4B5A50;
+  font-size:13px;
+  line-height:1.45;
+  margin-top:2px;
+}
+
+.senhaModalInput{
+  width:100%;
+  min-height:50px;
+  border-radius:18px;
+  border:1px solid var(--borda);
+  background:#FFFFFF;
+  padding:13px 14px;
+  font-family:var(--fonte);
+  font-size:18px;
+  text-align:center;
+  outline:none;
+  letter-spacing:3px;
+}
+
+.senhaModalInput:focus{
+  border-color:var(--verde-salvia);
+  box-shadow:0 0 0 4px rgba(141,167,125,0.16);
+}
+
+.senhaModalErro{
+  min-height:18px;
+  font-size:12px;
+  color:#B94A48;
+  display:none;
+}
+
+.senhaModalBtns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:2px;
+}
+
+.senhaModalBtns button{
+  border:none;
+  min-height:45px;
+  border-radius:17px;
+  font-family:var(--fonte);
+  font-size:13.5px;
+  font-weight:500;
+  cursor:pointer;
+}
+
+.senhaModalCancelar{
+  background:#F0F1EF;
+  color:#4D544D;
+}
+
+.senhaModalEntrar{
+  background:var(--verde-salvia);
+  color:#FFFFFF;
+  box-shadow:0 8px 16px rgba(111,141,98,0.19);
+}
+
+.senhaModalEntrar:hover{
+  background:var(--verde-salvia-escuro);
+}
+
+
+#modalSenhaProtegida{
+  z-index:1200;
+}
+
 </style>
 </head>
 
@@ -223,62 +1013,261 @@ h1{
 
 <div id="telaSenha">
   <div class="senhaBox">
-    <h2>🔒 Acesso</h2>
+    <div class="senhaIcone">🌿</div>
+    <h2>Jardim da Rotina</h2>
+    <p>Um espaço seguro para organizar o dia com leveza.</p>
     <input type="password" id="senhaInput" placeholder="Digite a senha">
     <button onclick="verificarSenha()">Entrar</button>
     <div id="erroSenha">Senha incorreta</div>
   </div>
 </div>
 
-<div id="appConteudo" style="display:none;">
+<div id="appConteudo" style="display:block;">
 
-  <div class="modalOverlay" id="modalBackupMaya">
-  <div class="rotinaCard">
+  <div class="appShell">
 
-    <div class="rotinaTopo">
-      <button class="rotinaVoltar" onclick="fecharModalBackupMaya()">←</button>
+    <main class="appCard">
 
-      <div class="rotinaTituloArea">
-        <div class="rotinaTitle">Backup</div>
-        <div class="rotinaSub">exportar ou importar dados</div>
-      </div>
-    </div>
+      <header class="topoApp">
+        <div class="logoBolinha">♧</div>
 
-    <div class="rotinaBotoes">
-      <button class="rotinaBotao" onclick="exportarBackupMaya()">📤 Exportar dados</button>
-      <button class="rotinaBotao" onclick="abrirImportacaoBackup()">📥 Importar dados</button>
+        <div class="tituloArea">
+          <h1 class="tituloApp">Jardim da Rotina</h1>
+          <div class="subtituloApp">Cuidar de você floresce tudo.</div>
+        </div>
 
-      <input
-        type="file"
-        id="arquivoBackupMaya"
-        accept=".json"
-        style="display:none"
-        onchange="importarBackupMaya(event)"
-      >
-    </div>
+        <button class="notificacaoBolinha" onclick="abrirModalBackupMaya()" title="Backup">⌂</button>
+      </header>
+
+      <section class="hero">
+        <div class="heroTexto">
+          <h2>Olá, você é incrível! <span>♥</span></h2>
+          <p>Pequenos passos, grandes flores.<br>Você não está sozinha.</p>
+        </div>
+
+        <div class="ilustracaoJardim" aria-hidden="true">
+          <div class="planta">
+            <span class="caule"></span>
+            <span class="folha f1"></span>
+            <span class="folha f2"></span>
+            <span class="folha f3"></span>
+            <span class="folha f4"></span>
+            <span class="folha f5"></span>
+          </div>
+          <span class="florzinha fl1"></span>
+          <span class="florzinha fl2"></span>
+          <div class="vaso"></div>
+          <div class="regador"></div>
+        </div>
+      </section>
+
+      <button class="focoCard" onclick="irParaComSenha('gabriela-menu.html')">
+        <div class="iconeRedondo">🌱</div>
+        <div>
+          <h3>Foco de hoje</h3>
+          <p>Respire. Uma coisa de cada vez.<br>Você está fazendo o seu melhor.</p>
+        </div>
+        <div class="chevron">›</div>
+      </button>
+
+      <section class="menuGrid">
+
+        <button class="menuCard" onclick="abrirModalRotina()">
+          <div>
+            <div class="menuCardTopo">
+              <div class="menuIcone">🌿</div>
+              <div class="menuSeta">›</div>
+            </div>
+            <h3>Rotina</h3>
+            <p>Rotinas da Maya, Gabriela e Beth em um só lugar.</p>
+          </div>
+          <div class="pill">● Em andamento</div>
+        </button>
+
+        <button class="menuCard" onclick="abrirModalAgenda()">
+          <div>
+            <div class="menuCardTopo">
+              <div class="menuIcone">📅</div>
+              <div class="menuSeta">›</div>
+            </div>
+            <h3>Agenda</h3>
+            <p>Compromissos, lembretes e organização do tempo.</p>
+          </div>
+          <div class="pill">✦ Ver agenda</div>
+        </button>
+
+        <button class="menuCard" onclick="irPara('alimentacao.html')">
+          <div>
+            <div class="menuCardTopo">
+              <div class="menuIcone">🥗</div>
+              <div class="menuSeta">›</div>
+            </div>
+            <h3>Alimentação</h3>
+            <p>Planejamento de refeições, mercado e cuidado diário.</p>
+          </div>
+          <div class="pill">🍃 Nutrir com leveza</div>
+        </button>
+
+        <button class="menuCard" onclick="irPara('saude.html')">
+          <div>
+            <div class="menuCardTopo">
+              <div class="menuIcone">✚</div>
+              <div class="menuSeta">›</div>
+            </div>
+            <h3>Saúde</h3>
+            <p>Remédios, consultas, exames e bem-estar familiar.</p>
+          </div>
+          <div class="pill">♡ Cuidado em dia</div>
+        </button>
+
+        <button class="menuCard" onclick="irParaComSenha('gabriela-criacao-artistica-projetos-sonhos.html?from=index')">
+          <div>
+            <div class="menuCardTopo">
+              <div class="menuIcone">💫</div>
+              <div class="menuSeta">›</div>
+            </div>
+            <h3>Projetos</h3>
+            <p>Sonhos, criações, ideias e caminhos em construção.</p>
+          </div>
+          <div class="pill">✧ Florescer ideias</div>
+        </button>
+
+        <button class="menuCard" onclick="irParaComSenha('metas.html?from=index')">
+          <div>
+            <div class="menuCardTopo">
+              <div class="menuIcone">🎯</div>
+              <div class="menuSeta">›</div>
+            </div>
+            <h3>Metas</h3>
+            <p>Objetivos, conquistas e próximos passos com clareza.</p>
+          </div>
+          <div class="pill">☆ Pequenos passos</div>
+        </button>
+
+      </section>
+
+      <section class="fraseBox">
+        <div class="fraseLinha">
+          <div class="fraseCoracao">♥</div>
+          <div class="fraseTexto">“Você não precisa ser perfeita para ser uma mãe incrível.”</div>
+        </div>
+
+        <div class="acoes">
+          <button class="botaoPrincipal" onclick="abrirModalRotina()">🌿 Planejar rotina</button>
+          <button class="botaoSecundario" onclick="irParaComSenha('gabriela-menu.html')">🍃 Momento de respiro</button>
+        </div>
+      </section>
+
+    </main>
 
   </div>
-</div>
 
-  <div class="overlay">
+  <nav class="bottomNav">
+    <button class="navItem ativo" onclick="irPara('index.html')">
+      <span class="navIcon">⌂</span>
+      <span>Início</span>
+    </button>
 
-    <h1>Jardim da Rotina</h1>
-    <div class="subtitulo">Florescendo hábitos com amor</div>
+    <button class="navItem" onclick="abrirModalRotina()">
+      <span class="navIcon">🍃</span>
+      <span>Rotina</span>
+    </button>
 
-    <button class="botao" onclick="abrirModalRotina()">🌸 Rotina</button>
+    <button class="navPlus" onclick="abrirModalRotina()">+</button>
 
-    <button class="botao" onclick="irPara('agenda-menu.html')">📅 Agenda</button>
+    <button class="navItem" onclick="irParaComSenha('anotacao.html')">
+      <span class="navIcon">✎</span>
+      <span>Anotações</span>
+    </button>
 
-    <button class="botao" onclick="irPara('alimentacao.html')">🥗 Alimentação</button>
+    <button class="navItem" onclick="irPara('gabriela-menu.html')">
+      <span class="navIcon">♡</span>
+      <span>Autocuidado</span>
+    </button>
 
-    <button class="botao" onclick="irPara('saude.html')">🩺 Saúde</button>
+  </nav>
 
-    <button class="botao" onclick="irPara('gabriela-criacao-artistica-projetos-sonhos.html?from=index')">💫 Projetos</button>
 
-    <button class="botao" onclick="irPara('metas.html?from=index')">🎯 Metas</button>
 
-    <button class="botao" onclick="abrirModalBackupMaya()">📦 Backup </button>
+  <div class="modalOverlay" id="modalAgenda">
+    <div class="rotinaCard">
 
+      <div class="rotinaTopo">
+        <button class="rotinaVoltar" onclick="fecharModalAgenda()">←</button>
+
+        <div class="rotinaTituloArea">
+          <div class="rotinaTitle">Agenda</div>
+          <div class="rotinaSub">escolha qual agenda deseja abrir</div>
+        </div>
+      </div>
+
+      <div class="rotinaBotoes">
+        <button class="rotinaBotao" onclick="irPara('agenda-maya.html')">🌼 Maya</button>
+        <button class="rotinaBotao" onclick="irParaComSenha('gabriela-minha-agenda.html')">🌿 Gabriela</button>
+        <button class="rotinaBotao" onclick="irPara('agenda-vovo-beth.html')">🌷 Beth</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modalOverlay" id="modalSenhaProtegida">
+    <div class="senhaModalCard">
+      <div class="senhaModalTopo">
+        <div class="senhaModalIcone">🔐</div>
+        <div class="senhaModalTituloBox">
+          <div class="senhaModalTitulo">Área protegida</div>
+          <div class="senhaModalSub">Digite a senha para continuar</div>
+        </div>
+        <button class="senhaModalFechar" type="button" onclick="fecharModalSenhaProtegida()">×</button>
+      </div>
+
+      <div class="senhaModalTexto" id="senhaModalTexto">
+        Esse espaço precisa da senha da Gabriela.
+      </div>
+
+      <input
+        type="password"
+        id="senhaProtegidaInput"
+        class="senhaModalInput"
+        placeholder="••••"
+        autocomplete="off"
+      >
+
+      <div id="senhaProtegidaErro" class="senhaModalErro">Senha incorreta. Tente novamente.</div>
+
+      <div class="senhaModalBtns">
+        <button class="senhaModalCancelar" type="button" onclick="fecharModalSenhaProtegida()">Cancelar</button>
+        <button class="senhaModalEntrar" type="button" onclick="confirmarSenhaProtegida()">Entrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modalOverlay" id="modalBackupMaya">
+    <div class="rotinaCard">
+
+      <div class="rotinaTopo">
+        <button class="rotinaVoltar" onclick="fecharModalBackupMaya()">←</button>
+
+        <div class="rotinaTituloArea">
+          <div class="rotinaTitle">Backup</div>
+          <div class="rotinaSub">exportar ou importar dados</div>
+        </div>
+      </div>
+
+      <div class="rotinaBotoes">
+        <button class="rotinaBotao" onclick="exportarBackupMaya()">📤 Exportar dados</button>
+        <button class="rotinaBotao" onclick="abrirImportacaoBackup()">📥 Importar dados</button>
+
+        <input
+          type="file"
+          id="arquivoBackupMaya"
+          accept=".json"
+          style="display:none"
+          onchange="importarBackupMaya(event)"
+        >
+      </div>
+
+    </div>
   </div>
 
   <div class="modalOverlay" id="modalRotina">
@@ -295,9 +1284,7 @@ h1{
 
       <div class="rotinaBotoes">
         <button class="rotinaBotao" onclick="irPara('maya-menu.html')">🌼 Maya</button>
-
-        <button class="rotinaBotao" onclick="irPara('gabriela-menu.html')">🌿 Gabriela</button>
-
+        <button class="rotinaBotao" onclick="irParaComSenha('gabriela-menu.html')">🌿 Gabriela</button>
         <button class="rotinaBotao" onclick="irPara('beth-rotina.html')">🌷 Beth</button>
       </div>
 
@@ -310,23 +1297,66 @@ h1{
 const SENHA = "1234";
 
 function liberarApp(){
-  document.getElementById("telaSenha").style.display = "none";
-  document.getElementById("appConteudo").style.display = "block";
+  const telaSenha = document.getElementById("telaSenha");
+  const appConteudo = document.getElementById("appConteudo");
+  if(telaSenha) telaSenha.style.display = "none";
+  if(appConteudo) appConteudo.style.display = "block";
 }
 
 function verificarSenha(){
-  const input = document.getElementById("senhaInput").value;
-
-  if(input === SENHA){
-    localStorage.setItem("acesso_index_liberado", "true");
-    liberarApp();
-  }else{
-    document.getElementById("erroSenha").style.display = "block";
-  }
+  liberarApp();
 }
 
 function irPara(destino){
   location.href = destino;
+}
+
+let destinoProtegidoPendente = "";
+
+function irParaComSenha(destino){
+  destinoProtegidoPendente = destino;
+  const input = document.getElementById("senhaProtegidaInput");
+  const erro = document.getElementById("senhaProtegidaErro");
+
+  fecharModalRotina();
+  fecharModalAgenda();
+
+  if(input) input.value = "";
+  if(erro) erro.style.display = "none";
+
+  document.getElementById("modalSenhaProtegida").classList.add("show");
+
+  setTimeout(() => {
+    if(input) input.focus();
+  }, 80);
+}
+
+function fecharModalSenhaProtegida(){
+  destinoProtegidoPendente = "";
+  const modal = document.getElementById("modalSenhaProtegida");
+  const erro = document.getElementById("senhaProtegidaErro");
+
+  if(erro) erro.style.display = "none";
+  if(modal) modal.classList.remove("show");
+}
+
+function confirmarSenhaProtegida(){
+  const input = document.getElementById("senhaProtegidaInput");
+  const erro = document.getElementById("senhaProtegidaErro");
+  const senhaDigitada = input ? input.value : "";
+
+  if(senhaDigitada === SENHA && destinoProtegidoPendente){
+    const destino = destinoProtegidoPendente;
+    fecharModalSenhaProtegida();
+    location.href = destino;
+    return;
+  }
+
+  if(erro) erro.style.display = "block";
+  if(input){
+    input.value = "";
+    input.focus();
+  }
 }
 
 function abrirModalRotina(){
@@ -337,23 +1367,62 @@ function fecharModalRotina(){
   document.getElementById("modalRotina").classList.remove("show");
 }
 
+function abrirModalAgenda(){
+  document.getElementById("modalAgenda").classList.add("show");
+}
+
+function fecharModalAgenda(){
+  document.getElementById("modalAgenda").classList.remove("show");
+}
+
+function abrirModalBackupMaya(){
+  document.getElementById("modalBackupMaya").classList.add("show");
+}
+
+function fecharModalBackupMaya(){
+  document.getElementById("modalBackupMaya").classList.remove("show");
+}
+
 window.addEventListener("click", function(e){
-  const modal = document.getElementById("modalRotina");
-  if(e.target === modal){
+  const modalRotina = document.getElementById("modalRotina");
+  const modalAgenda = document.getElementById("modalAgenda");
+  const modalBackup = document.getElementById("modalBackupMaya");
+  const modalSenhaProtegida = document.getElementById("modalSenhaProtegida");
+
+  if(e.target === modalRotina){
     fecharModalRotina();
+  }
+
+  if(e.target === modalAgenda){
+    fecharModalAgenda();
+  }
+
+  if(e.target === modalBackup){
+    fecharModalBackupMaya();
+  }
+
+  if(e.target === modalSenhaProtegida){
+    fecharModalSenhaProtegida();
   }
 });
 
 document.addEventListener("keydown", function(e){
-  if(e.key === "Enter" && document.getElementById("telaSenha").style.display !== "none"){
-    verificarSenha();
+  const modalSenhaProtegida = document.getElementById("modalSenhaProtegida");
+
+  if(e.key === "Enter" && modalSenhaProtegida && modalSenhaProtegida.classList.contains("show")){
+    confirmarSenhaProtegida();
+  }
+
+  if(e.key === "Escape"){
+    fecharModalRotina();
+    fecharModalAgenda();
+    fecharModalBackupMaya();
+    fecharModalSenhaProtegida();
   }
 });
 
 window.addEventListener("load", function(){
-  if(localStorage.getItem("acesso_index_liberado") === "true"){
-    liberarApp();
-  }
+  liberarApp();
 });
 
 const CHAVES_MAYA_BACKUP = [
@@ -372,16 +1441,9 @@ const CHAVES_MAYA_BACKUP = [
   "futuras_edicoes_maya_pontuacao",
   "futuras_edicoes_maya_premiacao",
   "futuras_edicoes_maya_lista_de_desejos",
-  "futuras_edicoes_maya_rotina"
+  "futuras_edicoes_maya_rotina",
+  "anotacoes_importantes"
 ];
-
-function abrirModalBackupMaya(){
-  document.getElementById("modalBackupMaya").classList.add("show");
-}
-
-function fecharModalBackupMaya(){
-  document.getElementById("modalBackupMaya").classList.remove("show");
-}
 
 function exportarBackupMaya(){
   const dados = {};
@@ -438,7 +1500,6 @@ function importarBackupMaya(event){
 
   leitor.readAsText(arquivo);
 }
-
 </script>
 
 </body>

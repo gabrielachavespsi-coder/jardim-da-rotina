@@ -1,1836 +1,2339 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu Maya</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rotina da Maya</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
-:root{
-  --verde-principal:#E6F2E5;
-  --verde-hover:#D6EAD4;
-  --verde-texto:#3F6F4F;
-  --verde-escuro:#5C9D5C;
-
-  --fundo:#F6F7F5;
-  --card:#FFFFFF;
-
-  --texto-principal:#2F2F2F;
-  --texto-secundario:#6B6B6B;
-  --borda:#E3E5E1;
-
-  --fonte:'Poppins',sans-serif;
-
-  --titulo:20px;
-  --botao:15px;
-
-  --sombra-suave:0 4px 12px rgba(0,0,0,0.05);
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html, body{
-  width:100%;
-  min-height:100%;
-}
-
-body{
-  font-family:var(--fonte);
-  color:var(--texto-principal);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:16px;
-  transition:background 0.35s ease;
-}
-
-body.tema-jardim{
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.7) 0 60px, transparent 61px),
-    linear-gradient(180deg, #F7FBF6 0%, #EEF7EC 55%, #E8F3E6 100%);
-}
-
-body.tema-galaxia{
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
-    radial-gradient(circle at 70% 35%, rgba(255,255,255,0.16) 0 2px, transparent 3px),
-    radial-gradient(circle at 50% 80%, rgba(255,255,255,0.14) 0 2px, transparent 3px),
-    linear-gradient(180deg, #171A45 0%, #242A68 55%, #2E3A7D 100%);
-}
-
-body.tema-arcoiris{
-  background:
-    radial-gradient(circle at 15% 20%, rgba(255,255,255,0.55) 0 50px, transparent 51px),
-    linear-gradient(180deg, #FFF4F8 0%, #F7F6FF 30%, #EEF7FF 60%, #F6FFF1 100%);
-}
-
-body.tema-estrelas{
-  background:
-    radial-gradient(circle at 12% 18%, rgba(255,255,255,0.7) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 75% 28%, rgba(255,255,255,0.7) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 52% 75%, rgba(255,255,255,0.6) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 86% 62%, rgba(255,255,255,0.55) 0 1.5px, transparent 2px),
-    linear-gradient(180deg, #24344F 0%, #334B72 100%);
-}
-
-body.tema-ceu{
-  background:
-    radial-gradient(circle at 20% 18%, rgba(255,255,255,0.75) 0 55px, transparent 56px),
-    radial-gradient(circle at 70% 30%, rgba(255,255,255,0.55) 0 70px, transparent 71px),
-    linear-gradient(180deg, #F1F8FF 0%, #E6F4FF 55%, #DFF0FF 100%);
-}
-
-body.tema-sistema-solar{
-  background:
-    radial-gradient(circle at 78% 18%, rgba(255,221,130,0.95) 0 52px, rgba(255,221,130,0.35) 53px, transparent 70px),
-    radial-gradient(circle at 18% 72%, #4EA3FF 0 34px, #2E6CC9 35px, transparent 47px),
-    radial-gradient(circle at 16% 70%, rgba(111, 213, 144, 0.92) 0 12px, transparent 13px),
-    radial-gradient(circle at 20% 77%, rgba(111, 213, 144, 0.9) 0 10px, transparent 11px),
-    radial-gradient(circle at 61% 30%, rgba(255,255,255,0.75) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 72% 44%, rgba(255,255,255,0.75) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 42% 22%, rgba(255,255,255,0.7) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 30% 14%, rgba(255,255,255,0.7) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 84% 58%, rgba(255,255,255,0.6) 0 1.5px, transparent 2px),
-    linear-gradient(180deg, #101534 0%, #1E275A 55%, #27356F 100%);
-}
-
-.pagina{
-  width:100%;
-  max-width:420px;
-}
-
-.card{
-  width:100%;
-  background:rgba(255,255,255,0.96);
-  border-radius:24px;
-  padding:22px 16px 18px;
-  box-shadow:var(--sombra-suave);
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  backdrop-filter:blur(2px);
-}
-
-.topo{
-  display:grid;
-  grid-template-columns:40px 1fr 58px;
-  align-items:start;
-  gap:8px;
-  margin-bottom:2px;
-}
-
-.botao-voltar{
-  border:none;
-  background:#E9ECE7;
-  color:var(--texto-principal);
-  border-radius:12px;
-  width:40px;
-  height:40px;
-  cursor:pointer;
-  font-size:18px;
-  font-family:var(--fonte);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  line-height:1;
-  padding:0;
-  transition:0.2s ease;
-}
-
-.botao-voltar:hover{
-  background:#dde3d9;
-}
-
-.botao-voltar span{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  height:100%;
-  transform:translateY(-1px);
-}
-
-.topCenter{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  min-width:0;
-  padding-top:2px;
-}
-
-.titleIndex{
-  color:var(--texto-principal);
-  font-weight:500;
-  font-size:var(--titulo);
-  margin:0;
-  line-height:1.2;
-  text-align:center;
-}
-
-.subtitulo{
-  font-size:12px;
-  color:var(--texto-secundario);
-  margin-top:2px;
-  text-align:center;
-}
-
-.dataTopo{
-  min-height:40px;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  justify-content:flex-start;
-  text-align:right;
-  color:var(--texto-secundario);
-  line-height:1.1;
-  padding-top:1px;
-}
-
-.horaTopo{
-  font-size:14px;
-  color:var(--verde-texto);
-  font-weight:500;
-  white-space:nowrap;
-  margin-bottom:2px;
-}
-
-.dataTopoLinha{
-  font-size:11px;
-  white-space:nowrap;
-}
-
-.botoes-lista{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.botao-wrap{
-  position:relative;
-}
-
-.botao{
-  width:100%;
-  min-height:92px;
-  border:none;
-  background:var(--verde-principal);
-  color:var(--verde-texto);
-  border-radius:16px;
-  padding:14px 16px;
-  font-size:var(--botao);
-  font-family:var(--fonte);
-  cursor:pointer;
-  transition:0.2s ease;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:3px;
-}
-
-.botao:hover{
-  background:var(--verde-hover);
-}
-
-.nome-botao{
-  width:100%;
-  font-size:14px;
-  color:var(--verde-texto);
-  text-align:center;
-  line-height:1.35;
-  font-weight:500;
-  margin:0;
-}
-
-.proxima-tarefa{
-  width:100%;
-  margin-top:2px;
-  font-size:11px;
-  color:rgba(63,111,79,0.72);
-  text-align:center;
-  line-height:1.35;
-  min-height:0;
-}
-
-.horario-proxima{
-  width:100%;
-  margin-top:0;
-  font-size:11px;
-  color:rgba(63,111,79,0.75);
-  text-align:center;
-  line-height:1.35;
-  min-height:0;
-}
-
-.box{
-  border-radius:16px;
-  background:#F8FAF7;
-  border:1px solid var(--borda);
-  padding:14px;
-  color:var(--texto-principal);
-  line-height:1.6;
-}
-
-.boxTitle{
-  font-size:14px;
-  color:var(--verde-texto);
-  text-align:left;
-  margin-bottom:8px;
-  font-family:var(--fonte);
-  font-weight:500;
-}
-
-.boxText{
-  font-size:12.5px;
-  white-space:pre-line;
-  text-align:left;
-  color:var(--texto-principal);
-  line-height:1.65;
-}
-
-.insideBtn{
-  width:100%;
-  border:none;
-  background:var(--verde-principal);
-  color:var(--verde-texto);
-  border-radius:16px;
-  padding:14px 16px;
-  font-size:14px;
-  font-family:var(--fonte);
-  cursor:pointer;
-  transition:0.2s ease;
-  display:block;
-}
-
-.insideBtn:hover{
-  background:var(--verde-hover);
-}
-
-.miniPanel{
-  display:none;
-  flex-direction:column;
-  gap:12px;
-}
-
-.miniPanel.show{
-  display:flex;
-}
-
-.alerta-vermelho{
-  color:#b33434;
-  font-weight:600;
-}
-
-.footerMiniAction{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin-top:4px;
-  flex-wrap:wrap;
-}
-
-.futureBtn{
-  border:none;
-  background:#E9ECE7;
-  color:var(--texto-secundario);
-  border-radius:12px;
-  padding:9px 14px;
-  font-size:12px;
-  cursor:pointer;
-  font-family:var(--fonte);
-  transition:0.2s ease;
-}
-
-.futureBtn:hover{
-  background:#dde3d9;
-  color:var(--texto-principal);
-}
-
-.modalOverlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.35);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:16px;
-  z-index:999;
-}
-
-.modalOverlay.show{
-  display:flex;
-}
-
-.modal{
-  background:#fff;
-  padding:16px;
-  border-radius:20px;
-  width:min(360px, 100%);
-  max-height:calc(100vh - 32px);
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.18);
-  overflow:hidden;
-}
-
-.modal.modalConfig{
-  width:min(340px, 100%);
-  max-height:calc(100vh - 32px);
-}
-
-.modalTopo{
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:28px;
-  padding-right:0;
-}
-
-.modalTitle{
-  font-size:18px;
-  color:var(--texto-principal);
-  text-align:center;
-  font-weight:500;
-}
-
-.modalScroll{
-  flex:1;
-  min-height:0;
-  overflow:auto;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  padding-right:2px;
-}
-
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.field label{
-  font-size:13px;
-  color:var(--texto-principal);
-  font-family:var(--fonte);
-  font-weight:500;
-}
-
-textarea,
-input[type="text"]{
-  padding:12px 14px;
-  border-radius:12px;
-  border:1px solid var(--borda);
-  font-size:13px;
-  font-family:var(--fonte);
-  box-sizing:border-box;
-  width:100%;
-}
-
-textarea{
-  height:260px;
-  resize:none;
-}
-
-textarea:focus,
-input[type="text"]:focus{
-  border-color:var(--verde-escuro);
-  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
-  outline:none;
-}
-
-.modalBtns{
-  display:flex;
-  gap:8px;
-  margin-top:2px;
-  flex-shrink:0;
-}
-
-.modalBtns button{
-  flex:1;
-  padding:11px 12px;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  font-family:var(--fonte);
-  font-size:12.5px;
-  transition:0.2s ease;
-}
-
-.cancel{
-  background:#efefef;
-  color:#333;
-}
-
-.cancel:hover{
-  background:#e7e7e7;
-}
-
-.save{
-  background:var(--verde-escuro);
-  color:white;
-}
-
-.save:hover{
-  background:#4f8a4f;
-}
-
-.somLinha{
-  display:grid;
-  grid-template-columns:1fr 46px;
-  gap:8px;
-  align-items:center;
-}
-
-.selectSom{
-  width:100%;
-  border:1px solid var(--borda);
-  background:#fff;
-  color:var(--texto-principal);
-  border-radius:14px;
-  padding:11px 12px;
-  font-size:13px;
-  font-family:var(--fonte);
-  outline:none;
-  min-width:0;
-}
-
-.botaoIconeSom{
-  width:46px;
-  height:44px;
-  border:1px solid var(--borda);
-  background:#F8FAF7;
-  color:var(--verde-texto);
-  border-radius:14px;
-  cursor:pointer;
-  font-size:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:0.2s ease;
-}
-
-.botaoIconeSom:hover{
-  background:#EAF4E9;
-}
-
-.botaoIconeSom.desligado{
-  background:#F2F2F2;
-  color:#9A9A9A;
-}
-
-.rangeSom{
-  width:100%;
-  accent-color:var(--verde-escuro);
-  cursor:pointer;
-}
-
-.volumeValor{
-  margin-top:6px;
-  font-size:12px;
-  color:var(--texto-secundario);
-  text-align:center;
-}
-
-.missaoCard{
-  background:linear-gradient(180deg, #F7F9FF 0%, #EEF2FF 100%);
-  border:1px solid #DEE4FF;
-  border-radius:18px;
-  padding:14px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.missaoTopo{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-}
-
-.missaoTitulo{
-  width:100%;
-  font-size:13.5px;
-  font-weight:600;
-  color:#394B8A;
-  text-align:center;
-  white-space:nowrap;
-}
-
-.missaoDestino{
-  font-size:11px;
-  color:#5A6798;
-  background:rgba(255,255,255,0.8);
-  border-radius:999px;
-  padding:5px 9px;
-}
-
-.missaoTexto{
-  font-size:12px;
-  color:#48526B;
-  line-height:1.5;
-  text-align:center;
-}
-
-.missaoLinha{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:8px;
-  align-items:center;
-}
-
-.missaoBarra{
-  width:100%;
-  height:10px;
-  border-radius:999px;
-  background:rgba(90,103,152,0.14);
-  overflow:hidden;
-}
-
-.missaoBarraFill{
-  height:100%;
-  width:0%;
-  border-radius:999px;
-  background:linear-gradient(90deg, #7D8BFF 0%, #A985FF 100%);
-  transition:width 0.3s ease;
-}
-
-.missaoPct{
-  font-size:11px;
-  color:#5A6798;
-  white-space:nowrap;
-}
-
-.bonecaBtn{
-  border:none;
-  background:#E5EAFE;
-  color:#42528F;
-  border-radius:14px;
-  padding:10px 12px;
-  font-size:12px;
-  font-family:var(--fonte);
-}
-
-.conquistasCard{
-  background:#FFFDF5;
-  border:1px solid #F1E7BA;
-  border-radius:18px;
-  padding:12px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.conquistasHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-}
-
-.conquistasTitulo{
-  font-size:14px;
-  color:#8C7232;
-  font-weight:600;
-}
-
-.medalhaStatus{
-  font-size:11px;
-  color:#8C7232;
-  background:rgba(255,255,255,0.85);
-  border-radius:999px;
-  padding:5px 9px;
-}
-
-.medalhaBox{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.medalhaIcone{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-  background:#F4E8A8;
-  flex-shrink:0;
-}
-
-.medalhaIcone.bloqueada{
-  background:#EEEEEE;
-  filter:grayscale(1);
-  opacity:0.7;
-}
-
-.medalhaTexto{
-  font-size:12px;
-  color:#6B5A2A;
-  line-height:1.45;
-}
-
-.temaSugestaoBox{
-  background:#F8FAF7;
-  border:1px solid var(--borda);
-  border-radius:16px;
-  padding:12px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.temaSugestaoTexto{
-  font-size:12px;
-  color:var(--texto-secundario);
-  line-height:1.45;
-}
-
-.temaSugestaoBtn{
-  border:none;
-  background:#E9ECE7;
-  color:var(--texto-principal);
-  border-radius:12px;
-  padding:10px 12px;
-  font-size:12px;
-  cursor:pointer;
-  font-family:var(--fonte);
-}
-
-.temaSugestaoBtn:hover{
-  background:#dde3d9;
-}
-
-
-
-.diretrizCards{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.diretrizCard{
-  border-radius:16px;
-  padding:12px;
-  border:1px solid var(--borda);
-  background:#F8FAF7;
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.diretrizCard.verde{
-  background:#F2F8F0;
-  border-color:#D9EBD6;
-}
-
-.diretrizCard.amarelo{
-  background:#FFFDF5;
-  border-color:#F1E7BA;
-}
-
-.diretrizCard.azul{
-  background:#F3F7FF;
-  border-color:#DDE7FF;
-}
-
-.diretrizCard.rosa{
-  background:#FFF5F8;
-  border-color:#F4D7E2;
-}
-
-.diretrizCard.roxo{
-  background:#F8F4FF;
-  border-color:#E5D8FF;
-}
-
-.diretrizCardTitle{
-  font-size:13.5px;
-  font-weight:600;
-  color:var(--verde-texto);
-  line-height:1.35;
-  text-align:center;
-}
-
-.diretrizLinha{
-  font-size:12px;
-  color:var(--texto-principal);
-  line-height:1.5;
-  text-align:center;
-}
-
-.diretrizMini{
-  font-size:11.5px;
-  color:var(--texto-secundario);
-  line-height:1.45;
-  text-align:center;
-}
-
-.diretrizDestaque{
-  background:#FFFFFF;
-  border:1px solid rgba(0,0,0,0.06);
-  border-radius:12px;
-  padding:9px 10px;
-  font-size:12px;
-  line-height:1.5;
-  text-align:center;
-}
-
-@media (max-width: 390px){
-  body{
-    padding:14px;
-  }
-
-  .card{
-    padding:20px 14px 16px;
-  }
-
-  .titleIndex{
-    font-size:19px;
-  }
-
-  .botao{
-    min-height:88px;
-  }
-
-  .topo{
-    grid-template-columns:40px 1fr 54px;
-  }
-
-  .horaTopo{
-    font-size:13px;
-  }
-
-  .dataTopoLinha{
-    font-size:10.5px;
-  }
-
-  .modal,
-  .modal.modalConfig{
-    width:min(100%, 340px);
-    max-height:calc(100vh - 24px);
-  }
-
-  .missaoTitulo{
-    font-size:13px;
-  }
-}
-</style>
+    :root{
+      --fundo:#F3FAFF;
+      --card:#FFFFFF;
+      --texto:#2F2F2F;
+      --texto-suave:#67747A;
+      --verde:#7FBC68;
+      --verde-suave:#EAF7E2;
+      --lilas:#E9DDF8;
+      --amarelo:#F9EDC7;
+      --rosa:#F8DCE7;
+      --azul:#DDEBFF;
+      --borda:#DCE8D9;
+      --sombra:0 10px 28px rgba(73, 112, 68, 0.10);
+      --fonte:'Poppins',sans-serif;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html, body{
+      width:100%;
+      min-height:100%;
+    }
+
+    body{
+      font-family:var(--fonte);
+      color:var(--texto);
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding:16px;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255,255,255,0.95) 0 55px, transparent 56px),
+        radial-gradient(circle at 84% 12%, rgba(255,255,255,0.92) 0 38px, transparent 39px),
+        linear-gradient(180deg, #DFF2FF 0%, #ECF9FF 52%, #F7FFF4 100%);
+    }
+
+    .pagina{
+      width:100%;
+      max-width:420px;
+    }
+
+    .card{
+      position:relative;
+      width:100%;
+      background:rgba(255,255,255,0.90);
+      border-radius:28px;
+      padding:18px 16px 18px;
+      box-shadow:var(--sombra);
+      overflow:hidden;
+      border:1px solid rgba(220,232,217,0.85);
+      backdrop-filter:blur(3px);
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:120px;
+      background:
+        radial-gradient(circle at 8% 85%, #FFB0C7 0 8px, transparent 9px),
+        radial-gradient(circle at 16% 87%, #FFD36E 0 6px, transparent 7px),
+        radial-gradient(circle at 24% 82%, #9AD97B 0 7px, transparent 8px),
+        radial-gradient(circle at 36% 88%, #FDB1D0 0 7px, transparent 8px),
+        radial-gradient(circle at 47% 80%, #FF7EA8 0 10px, transparent 11px),
+        radial-gradient(circle at 55% 87%, #7ED489 0 7px, transparent 8px),
+        radial-gradient(circle at 67% 84%, #F9C86A 0 7px, transparent 8px),
+        radial-gradient(circle at 79% 89%, #FFB1C6 0 7px, transparent 8px),
+        radial-gradient(circle at 89% 82%, #7ED489 0 8px, transparent 9px),
+        linear-gradient(180deg, rgba(198,234,180,0.15) 0%, rgba(170,222,135,0.28) 40%, rgba(140,204,96,0.58) 100%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .topo,
+    .boasVindasCard,
+    .botoes-lista,
+    .footerMiniAction{
+      position:relative;
+      z-index:1;
+    }
+
+    .topo{
+      display:grid;
+      grid-template-columns:42px 1fr 64px;
+      gap:8px;
+      align-items:start;
+      margin-bottom:14px;
+    }
+
+    .botao-voltar{
+      width:42px;
+      height:42px;
+      border:none;
+      border-radius:14px;
+      background:#F4FAF3;
+      color:#355B2F;
+      font-size:20px;
+      cursor:pointer;
+      box-shadow:0 6px 14px rgba(0,0,0,0.06);
+      font-family:var(--fonte);
+    }
+
+    .botao-voltar:hover{
+      background:#EAF7E2;
+    }
+
+    .topCenter{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding-top:3px;
+    }
+
+    .titleIndex{
+      font-size:22px;
+      font-weight:600;
+      color:#4E8F3A;
+      line-height:1.15;
+    }
+
+    .subtitulo{
+      font-size:12.5px;
+      color:#55705D;
+      margin-top:4px;
+      line-height:1.3;
+    }
+
+    .dataTopo{
+      text-align:right;
+      color:#4E5A60;
+      line-height:1.15;
+      padding-top:2px;
+    }
+
+    .horaTopo{
+      font-size:14px;
+      font-weight:600;
+      color:#356E33;
+      margin-bottom:3px;
+    }
+
+    .dataTopoLinha{
+      font-size:11px;
+      white-space:nowrap;
+    }
+
+    .boasVindasCard{
+      position:relative;
+      background:linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,250,242,0.95) 100%);
+      border-radius:22px;
+      padding:16px 16px 14px;
+      margin-bottom:14px;
+      border:1px solid rgba(233, 231, 212, 0.75);
+      box-shadow:0 8px 18px rgba(0,0,0,0.05);
+      overflow:hidden;
+      min-height:96px;
+    }
+
+    .boasVindasCard::after{
+      content:"";
+      position:absolute;
+      right:-6px;
+      bottom:0;
+      width:125px;
+      height:82px;
+      background:
+        radial-gradient(circle at 20% 65%, #FAD4E1 0 18px, transparent 19px),
+        radial-gradient(circle at 30% 18%, #A6DB84 0 8px, transparent 9px),
+        radial-gradient(circle at 58% 22%, #F7C86A 0 7px, transparent 8px),
+        radial-gradient(circle at 82% 30%, #F8A9C1 0 7px, transparent 8px);
+      opacity:0.85;
+      pointer-events:none;
+    }
+
+    .boasVindasTitulo{
+      font-size:16px;
+      font-weight:600;
+      color:#36583A;
+      margin-bottom:5px;
+    }
+
+    .boasVindasTexto{
+      font-size:13px;
+      color:#44555A;
+      line-height:1.5;
+      max-width:72%;
+    }
+
+    .mayaAvatar{
+      position:absolute;
+      right:10px;
+      bottom:2px;
+      font-size:54px;
+      line-height:1;
+      filter:drop-shadow(0 3px 3px rgba(0,0,0,0.08));
+    }
+
+    .botoes-lista{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .menuBtn{
+      width:100%;
+      border:none;
+      border-radius:24px;
+      padding:16px 16px;
+      text-align:left;
+      font-family:var(--fonte);
+      cursor:pointer;
+      display:grid;
+      grid-template-columns:58px 1fr 18px;
+      gap:14px;
+      align-items:center;
+      transition:0.2s ease;
+      box-shadow:0 8px 18px rgba(0,0,0,0.06);
+      border:1px solid rgba(255,255,255,0.65);
+    }
+
+    .menuBtn:hover{
+      transform:translateY(-1px);
+    }
+
+    .cor-verde{ background:var(--verde-suave); }
+    .cor-lilas{ background:var(--lilas); }
+    .cor-amarelo{ background:var(--amarelo); }
+    .cor-rosa{ background:var(--rosa); }
+    .cor-azul{ background:var(--azul); }
+
+    .iconeMenu{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,0.72);
+      font-size:31px;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.8);
+    }
+
+    .textoMenu{
+      min-width:0;
+    }
+
+    .tituloMenu{
+      font-size:15px;
+      font-weight:600;
+      color:#26342A;
+      line-height:1.25;
+      margin-bottom:3px;
+    }
+
+    .descricaoMenu{
+      font-size:12px;
+      color:#4C5B61;
+      line-height:1.45;
+    }
+
+    .setaMenu{
+      font-size:28px;
+      color:#7A6FA1;
+      line-height:1;
+      text-align:center;
+    }
+
+    .footerMiniAction{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      gap:10px;
+      padding-bottom:8px;
+      align-items:center;
+    }
+
+    .actionBtn{
+      border:none;
+      background:rgba(255,255,255,0.92);
+      border-radius:18px;
+      padding:14px 12px;
+      font-size:13px;
+      color:#4A5B50;
+      font-family:var(--fonte);
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(0,0,0,0.05);
+      border:1px solid rgba(217,230,214,0.95);
+      transition:0.2s ease;
+    }
+
+    .soundMiniBtn{
+      width:44px;
+      height:44px;
+      border:none;
+      border-radius:16px;
+      background:rgba(255,255,255,0.94);
+      color:#3F6F4F;
+      font-family:var(--fonte);
+      font-size:18px;
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(0,0,0,0.05);
+      border:1px solid rgba(217,230,214,0.95);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:0.2s ease;
+    }
+
+    .soundMiniBtn:hover{
+      background:#FFFFFF;
+      transform:translateY(-1px);
+    }
+
+    .soundMiniBtn.desligado{
+      background:rgba(242,242,242,0.92);
+      color:#9A9A9A;
+    }
+
+    .actionBtn:hover{
+      background:#FFFFFF;
+      transform:translateY(-1px);
+    }
+
+    .modalOverlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.35);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      padding:16px;
+      z-index:999;
+    }
+
+    .modalOverlay.show{
+      display:flex;
+    }
+
+    .modal{
+      width:min(360px, 100%);
+      background:#FFFFFF;
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 16px 40px rgba(0,0,0,0.20);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      max-height:88vh;
+      overflow-y:auto;
+    }
+
+    .modalHeader{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+
+    .modalTitle{
+      font-size:18px;
+      color:#355B2F;
+      font-weight:600;
+    }
+
+    .fecharModal{
+      border:none;
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      background:#EEF5EC;
+      cursor:pointer;
+      font-size:16px;
+      color:#355B2F;
+      font-family:var(--fonte);
+    }
+
+    .modalTexto{
+      font-size:13px;
+      color:#5D6A6B;
+      line-height:1.55;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .field label{
+      font-size:13px;
+      color:#314235;
+      font-weight:600;
+    }
+
+    .inputModal,
+    .textareaModal,
+    .selectModal{
+      width:100%;
+      border:1px solid #DCE8D9;
+      border-radius:14px;
+      padding:12px 14px;
+      font-size:13px;
+      font-family:var(--fonte);
+      outline:none;
+      background:#FFFFFF;
+    }
+
+    .textareaModal{
+      min-height:150px;
+      resize:none;
+    }
+
+    .inputModal:focus,
+    .textareaModal:focus,
+    .selectModal:focus{
+      border-color:#7FBC68;
+      box-shadow:0 0 0 3px rgba(127,188,104,0.14);
+    }
+
+    .temasGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+
+    .temaBtn{
+      border:none;
+      border-radius:14px;
+      padding:12px 10px;
+      background:#F4F8F3;
+      color:#3C5342;
+      cursor:pointer;
+      font-size:12.5px;
+      font-family:var(--fonte);
+      transition:0.2s ease;
+      border:1px solid #E3EDE1;
+    }
+
+    .temaBtn.ativo{
+      background:#EAF7E2;
+      color:#355B2F;
+      border-color:#BEE3B1;
+      font-weight:600;
+    }
+
+    .linhaSom{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:8px;
+      align-items:end;
+    }
+
+    .previewBtn{
+      border:none;
+      border-radius:14px;
+      padding:12px 14px;
+      background:#EEF5EC;
+      color:#355B2F;
+      cursor:pointer;
+      font-family:var(--fonte);
+      font-size:12px;
+      min-width:88px;
+    }
+
+    .checkLinha{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      color:#49575A;
+      line-height:1.45;
+    }
+
+    .modalBtns{
+      display:flex;
+      gap:8px;
+      margin-top:2px;
+    }
+
+    .modalBtns button{
+      flex:1;
+      border:none;
+      border-radius:14px;
+      padding:12px 12px;
+      font-family:var(--fonte);
+      font-size:13px;
+      cursor:pointer;
+      transition:0.2s ease;
+    }
+
+    .cancel{
+      background:#F0F0F0;
+      color:#444;
+    }
+
+    .save{
+      background:#7FBC68;
+      color:white;
+    }
+
+    .cancel:hover{ background:#E7E7E7; }
+    .save:hover{ background:#6FAA58; }
+
+    .statusMsg{
+      font-size:12px;
+      color:#507655;
+      text-align:center;
+      min-height:16px;
+    }
+
+    .tema-jardim{
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255,255,255,0.95) 0 55px, transparent 56px),
+        radial-gradient(circle at 84% 12%, rgba(255,255,255,0.92) 0 38px, transparent 39px),
+        linear-gradient(180deg, #DFF2FF 0%, #ECF9FF 52%, #F7FFF4 100%);
+    }
+
+    .tema-ceu{
+      background:
+        radial-gradient(circle at 18% 14%, rgba(255,255,255,0.95) 0 60px, transparent 61px),
+        radial-gradient(circle at 72% 18%, rgba(255,255,255,0.82) 0 50px, transparent 51px),
+        linear-gradient(180deg, #DCEFFF 0%, #EBF7FF 55%, #F8FFFD 100%);
+    }
+
+    .tema-arcoiris{
+      background:
+        radial-gradient(circle at 15% 12%, rgba(255,255,255,0.92) 0 48px, transparent 49px),
+        linear-gradient(180deg, #FFF4FA 0%, #F6F0FF 32%, #EEF6FF 64%, #F7FFE9 100%);
+    }
+
+    .tema-estrelas{
+      background:
+        radial-gradient(circle at 10% 18%, rgba(255,255,255,0.70) 0 2px, transparent 3px),
+        radial-gradient(circle at 30% 8%, rgba(255,255,255,0.70) 0 2px, transparent 3px),
+        radial-gradient(circle at 75% 20%, rgba(255,255,255,0.65) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 42%, rgba(255,255,255,0.60) 0 2px, transparent 3px),
+        linear-gradient(180deg, #2F4570 0%, #4A6691 100%);
+    }
+
+    .tema-estrelas .card{
+      background:rgba(255,255,255,0.94);
+    }
+
+    .tema-galaxia{
+      background:
+        radial-gradient(circle at 16% 10%, rgba(255,255,255,0.75) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 14%, rgba(255,255,255,0.65) 0 2px, transparent 3px),
+        radial-gradient(circle at 48% 30%, rgba(255,255,255,0.55) 0 2px, transparent 3px),
+        linear-gradient(180deg, #202859 0%, #33407B 52%, #47559A 100%);
+    }
+
+    .tema-galaxia .card{
+      background:rgba(255,255,255,0.95);
+    }
+
+    .tema-sistema-solar{
+      background:
+        radial-gradient(circle at 82% 16%, #FFD874 0 46px, rgba(255,216,116,0.30) 47px, transparent 65px),
+        radial-gradient(circle at 15% 80%, #57A5FF 0 24px, transparent 25px),
+        radial-gradient(circle at 10% 78%, #78D884 0 8px, transparent 9px),
+        linear-gradient(180deg, #1E285A 0%, #33468B 54%, #4A64A7 100%);
+    }
+
+    .tema-sistema-solar .card{
+      background:rgba(255,255,255,0.95);
+    }
+
+    @media (max-width:390px){
+      body{
+        padding:12px;
+      }
+
+      .card{
+        border-radius:24px;
+        padding:16px 14px 16px;
+      }
+
+      .topo{
+        grid-template-columns:40px 1fr 58px;
+      }
+
+      .titleIndex{
+        font-size:20px;
+      }
+
+      .boasVindasTexto{
+        max-width:70%;
+      }
+
+      .menuBtn{
+        grid-template-columns:54px 1fr 16px;
+        gap:12px;
+        padding:14px 14px;
+      }
+
+      .iconeMenu{
+        width:50px;
+        height:50px;
+        font-size:28px;
+      }
+
+      .footerMiniAction{
+        grid-template-columns:1fr auto 1fr;
+        gap:8px;
+      }
+
+      .soundMiniBtn{
+        width:42px;
+        height:42px;
+      }
+    }
+
+
+    /* FUNDO JARDIM DA MAYA - imagem dentro do card maior */
+    html{
+      min-height:100%;
+      background:#F3FAFF !important;
+    }
+
+    body,
+    body.tema-jardim,
+    body.tema-ceu,
+    body.tema-arcoiris,
+    body.tema-estrelas,
+    body.tema-galaxia,
+    body.tema-sistema-solar{
+      background:#F3FAFF !important;
+      background-image:none !important;
+      min-height:100vh;
+    }
+
+    .card{
+      min-height:calc(100vh - 32px);
+      background:
+        linear-gradient(rgba(255,255,255,0.16), rgba(255,255,255,0.16)),
+        url("fundo-jardim-maya.png") center top / cover no-repeat !important;
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+    }
+
+    .card::after{
+      display:none !important;
+    }
+
+    @media (max-width:430px){
+      .card{
+        min-height:calc(100vh - 24px);
+        background-position:center top !important;
+      }
+    }
+    /* Ajuste pedido: sem o card de boas-vindas; botões sobem com respiro */
+    .topo{
+      margin-bottom:22px !important;
+    }
+
+    .botoes-lista{
+      margin-top:0 !important;
+    }
+
+
+    /* Ajustes das janelas antigas preservadas */
+    .modalScroll{
+      flex:1;
+      min-height:0;
+      overflow:auto;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      padding-right:2px;
+    }
+
+    .modal.modalConfig{
+      width:min(340px, 100%);
+      max-height:calc(100vh - 32px);
+    }
+
+    .somLinha{
+      display:grid;
+      grid-template-columns:1fr 46px;
+      gap:8px;
+      align-items:center;
+    }
+
+    .selectSom{
+      width:100%;
+      border:1px solid var(--borda);
+      background:#fff;
+      color:var(--texto);
+      border-radius:14px;
+      padding:11px 12px;
+      font-size:13px;
+      font-family:var(--fonte);
+      outline:none;
+      min-width:0;
+    }
+
+    .botaoIconeSom{
+      width:46px;
+      height:44px;
+      border:1px solid var(--borda);
+      background:#F8FAF7;
+      color:#3F6F4F;
+      border-radius:14px;
+      cursor:pointer;
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:0.2s ease;
+    }
+
+    .botaoIconeSom:hover{ background:#EAF4E9; }
+    .botaoIconeSom.desligado{ background:#F2F2F2; color:#9A9A9A; }
+
+    .rangeSom{
+      width:100%;
+      accent-color:#5C9D5C;
+      cursor:pointer;
+    }
+
+    .volumeValor{
+      margin-top:6px;
+      font-size:12px;
+      color:#67747A;
+      text-align:center;
+    }
+
+    .temaSugestaoBox{
+      background:#F8FAF7;
+      border:1px solid var(--borda);
+      border-radius:16px;
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .temaSugestaoTexto{
+      font-size:12px;
+      color:#67747A;
+      line-height:1.45;
+    }
+
+    .temaSugestaoBtn{
+      border:none;
+      background:#E9ECE7;
+      color:#2F2F2F;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
+      cursor:pointer;
+      font-family:var(--fonte);
+    }
+
+    .diretrizCards{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .diretrizCard{
+      border-radius:16px;
+      padding:12px;
+      border:1px solid var(--borda);
+      background:#F8FAF7;
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+
+    .diretrizCard.verde{ background:#F2F8F0; border-color:#D9EBD6; }
+    .diretrizCard.amarelo{ background:#FFFDF5; border-color:#F1E7BA; }
+    .diretrizCard.azul{ background:#F3F7FF; border-color:#DDE7FF; }
+    .diretrizCard.rosa{ background:#FFF5F8; border-color:#F4D7E2; }
+    .diretrizCard.roxo{ background:#F8F4FF; border-color:#E5D8FF; }
+
+    .diretrizCardTitle{
+      font-size:13.5px;
+      font-weight:600;
+      color:#3F6F4F;
+      line-height:1.35;
+      text-align:center;
+    }
+
+    .diretrizLinha{
+      font-size:12px;
+      color:#2F2F2F;
+      line-height:1.5;
+      text-align:center;
+    }
+
+    .diretrizMini{
+      font-size:11.5px;
+      color:#67747A;
+      line-height:1.45;
+      text-align:center;
+    }
+
+    .diretrizDestaque{
+      background:#FFFFFF;
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:12px;
+      padding:9px 10px;
+      font-size:12px;
+      line-height:1.5;
+      text-align:center;
+    }
+
+    .opcoesEscolha{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .escolhaBtn{
+      width:100%;
+      border:none;
+      border-radius:18px;
+      padding:14px;
+      display:grid;
+      grid-template-columns:46px 1fr;
+      gap:12px;
+      align-items:center;
+      text-align:left;
+      cursor:pointer;
+      font-family:var(--fonte);
+      color:#2F2F2F;
+      border:1px solid rgba(255,255,255,0.78);
+      box-shadow:0 8px 18px rgba(0,0,0,0.05);
+    }
+
+    .escolhaPontuacao{ background:#E9DDF8; }
+    .escolhaPremiacao{ background:#F9EDC7; }
+
+    .escolhaIcone{
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.75);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:25px;
+    }
+
+    .escolhaBtn strong{
+      display:block;
+      font-size:14px;
+      margin-bottom:2px;
+    }
+
+    .escolhaBtn small{
+      display:block;
+      font-size:11.5px;
+      line-height:1.35;
+      color:#4C5B61;
+    }
+
+    input[type="text"]{
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--borda);
+      font-size:13px;
+      font-family:var(--fonte);
+      box-sizing:border-box;
+      width:100%;
+    }
+
+
+
+    /* JANELAS INFANTIS - REGRAS E CONFIGURAÇÃO */
+    .modalOverlay{
+      background:rgba(117, 153, 139, 0.32) !important;
+      backdrop-filter:blur(5px);
+      -webkit-backdrop-filter:blur(5px);
+    }
+
+    .modalKids{
+      width:min(392px, 100%) !important;
+      max-height:calc(100vh - 28px) !important;
+      padding:0 !important;
+      overflow:hidden !important;
+      border-radius:30px !important;
+      border:1px solid rgba(191, 222, 179, 0.92);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,251,240,0.96)),
+        radial-gradient(circle at 12% 16%, rgba(255,221,235,0.46) 0 42px, transparent 43px),
+        radial-gradient(circle at 88% 12%, rgba(213,239,255,0.55) 0 46px, transparent 47px);
+      box-shadow:0 20px 48px rgba(63,111,79,0.24) !important;
+    }
+
+    .modalKidsInner{
+      max-height:calc(100vh - 28px);
+      overflow-y:auto;
+      padding:22px 18px 18px;
+    }
+
+    .kidsHeader{
+      position:relative;
+      display:grid;
+      grid-template-columns:54px 1fr 44px;
+      gap:10px;
+      align-items:center;
+      margin-bottom:16px;
+    }
+
+    .kidsHeaderIcon{
+      width:54px;
+      height:54px;
+      border-radius:20px;
+      background:#EAF7E2;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:30px;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.8), 0 8px 18px rgba(73,112,68,0.10);
+    }
+
+    .kidsTitleBox{
+      text-align:center;
+      min-width:0;
+    }
+
+    .kidsTitle{
+      font-size:25px;
+      line-height:1.05;
+      color:#2E7A2F;
+      font-weight:700;
+      letter-spacing:-0.4px;
+      text-shadow:0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .kidsSubtitle{
+      font-size:13px;
+      color:#39484D;
+      line-height:1.45;
+      margin-top:7px;
+      font-weight:400;
+    }
+
+    .kidsClose{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid #D6E8CE;
+      background:#F4FAED;
+      color:#3F7B33;
+      font-size:24px;
+      line-height:1;
+      cursor:pointer;
+      font-family:var(--fonte);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 6px 14px rgba(73,112,68,0.10);
+    }
+
+    .kidsSection{
+      background:rgba(255,255,255,0.75);
+      border:1px solid rgba(218,232,204,0.98);
+      border-radius:25px;
+      padding:15px;
+      margin-bottom:13px;
+      box-shadow:0 8px 20px rgba(73,112,68,0.07);
+    }
+
+    .kidsSectionTitle{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:16px;
+      font-weight:700;
+      color:#2E6F2F;
+      margin-bottom:12px;
+    }
+
+    .stepsGrid{
+      display:grid;
+      grid-template-columns:1fr 24px 1fr 24px 1fr;
+      gap:6px;
+      align-items:center;
+    }
+
+    .stepCard{
+      min-height:126px;
+      border-radius:20px;
+      padding:12px 8px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:8px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,0.85);
+      box-shadow:0 8px 18px rgba(0,0,0,0.05);
+    }
+
+    .stepCard.verde{ background:#EEF8E5; }
+    .stepCard.amarelo{ background:#FFF5D8; }
+    .stepCard.rosa{ background:#FBE8F3; }
+
+    .stepIcon{
+      font-size:38px;
+      line-height:1;
+      filter:drop-shadow(0 3px 3px rgba(0,0,0,0.08));
+    }
+
+    .stepText{
+      font-size:11.6px;
+      color:#283235;
+      line-height:1.35;
+      font-weight:500;
+    }
+
+    .stepArrow{
+      color:#6DAA4F;
+      font-size:25px;
+      text-align:center;
+      font-weight:700;
+    }
+
+    .screenTimeGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .screenTimeCard{
+      border-radius:19px;
+      padding:13px 10px;
+      display:grid;
+      grid-template-columns:42px 1fr;
+      gap:9px;
+      align-items:center;
+      border:1px solid rgba(255,255,255,0.9);
+      box-shadow:0 8px 18px rgba(0,0,0,0.05);
+    }
+
+    .screenTimeCard.manha{ background:#FFF4D8; }
+    .screenTimeCard.noite{ background:#EAF5FF; }
+
+    .screenIcon{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.75);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:25px;
+    }
+
+    .screenLabel{
+      font-size:15px;
+      font-weight:700;
+      color:#273438;
+      line-height:1.1;
+    }
+
+    .screenHour{
+      margin-top:4px;
+      font-size:12px;
+      color:#39484D;
+      line-height:1.25;
+    }
+
+    .remindersGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:8px;
+    }
+
+    .reminderCard{
+      border-radius:18px;
+      padding:11px 8px;
+      min-height:112px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      gap:7px;
+      border:1px solid rgba(255,255,255,0.85);
+      box-shadow:0 7px 16px rgba(0,0,0,0.045);
+    }
+
+    .reminderCard.verde{ background:#EEF8E5; }
+    .reminderCard.rosa{ background:#FFE9E8; }
+    .reminderCard.amarelo{ background:#FFF4D8; }
+
+    .reminderIcon{
+      font-size:28px;
+      line-height:1;
+    }
+
+    .reminderText{
+      font-size:11.3px;
+      color:#2E3538;
+      line-height:1.35;
+      font-weight:500;
+    }
+
+    .kidsPrimaryBtn{
+      width:100%;
+      border:none;
+      border-radius:999px;
+      padding:15px 18px;
+      background:linear-gradient(180deg, #97CD47, #74AE32);
+      color:#fff;
+      font-family:var(--fonte);
+      font-size:18px;
+      font-weight:700;
+      box-shadow:0 9px 0 rgba(88,143,44,0.32), 0 14px 28px rgba(83,136,47,0.22);
+      cursor:pointer;
+      margin-top:4px;
+    }
+
+    .configOptionCard{
+      width:100%;
+      border:none;
+      border-radius:24px;
+      padding:14px;
+      display:grid;
+      grid-template-columns:72px 1fr 26px;
+      gap:13px;
+      align-items:center;
+      text-align:left;
+      font-family:var(--fonte);
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,0.9);
+      box-shadow:0 8px 20px rgba(0,0,0,0.055);
+      margin-bottom:10px;
+    }
+
+    .configOptionCard.fundo{ background:linear-gradient(180deg,#F3FAEA,#EFF8E5); }
+    .configOptionCard.sons{ background:linear-gradient(180deg,#F8ECFF,#F0E2FA); }
+    .configOptionCard.ideia{ background:linear-gradient(180deg,#FFF8DD,#FFF0C9); }
+    .configOptionCard.volume{ background:linear-gradient(180deg,#EAF7FF,#DFF1FF); cursor:default; }
+
+    .configBigIcon{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.72);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:36px;
+      border:1px solid rgba(255,255,255,0.9);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.7);
+      flex-shrink:0;
+    }
+
+    .configOptionTitle{
+      color:#2E6F2F;
+      font-weight:700;
+      font-size:17px;
+      line-height:1.2;
+      margin-bottom:4px;
+    }
+
+    .configOptionDesc{
+      color:#2F3D42;
+      font-size:12.7px;
+      line-height:1.35;
+    }
+
+    .configArrow{
+      color:#2E6F2F;
+      font-size:34px;
+      font-weight:700;
+      line-height:1;
+      text-align:right;
+    }
+
+    .kidsPanel{
+      display:none;
+      background:rgba(255,255,255,0.78);
+      border:1px solid #DCE8D9;
+      border-radius:22px;
+      padding:13px;
+      margin:-2px 0 12px;
+      box-shadow:0 7px 16px rgba(73,112,68,0.06);
+    }
+
+    .kidsPanel.show{
+      display:block;
+    }
+
+    .kidsPanel .field + .field{
+      margin-top:12px;
+    }
+
+    .kidsPanel label{
+      color:#2E6F2F;
+      font-weight:700;
+    }
+
+    .kidsHint{
+      font-size:12px;
+      color:#56666A;
+      line-height:1.45;
+      margin:8px 0 10px;
+    }
+
+    .kidsInlineBtn{
+      width:100%;
+      border:none;
+      border-radius:16px;
+      background:#EAF7E2;
+      color:#2E6F2F;
+      padding:12px 14px;
+      font-family:var(--fonte);
+      font-size:13px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .volumeRowKids{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      align-items:center;
+    }
+
+    .volumeRowKids .rangeSom{
+      height:32px;
+    }
+
+    .volumeRowKids .volumeValor{
+      font-size:20px;
+      font-weight:700;
+      color:#223033;
+      margin:0;
+      min-width:54px;
+      text-align:right;
+    }
+
+    @media (max-width:390px){
+      .modalKidsInner{ padding:18px 13px 14px; }
+      .kidsHeader{ grid-template-columns:46px 1fr 38px; gap:8px; }
+      .kidsHeaderIcon{ width:46px; height:46px; font-size:25px; border-radius:17px; }
+      .kidsClose{ width:38px; height:38px; font-size:22px; }
+      .kidsTitle{ font-size:22px; }
+      .kidsSubtitle{ font-size:12.2px; }
+      .stepsGrid{ grid-template-columns:1fr; }
+      .stepArrow{ transform:rotate(90deg); margin:-5px 0; }
+      .stepCard{ min-height:94px; }
+      .screenTimeGrid{ grid-template-columns:1fr; }
+      .remindersGrid{ grid-template-columns:1fr; }
+      .reminderCard{ min-height:82px; }
+      .configOptionCard{ grid-template-columns:60px 1fr 22px; padding:12px; }
+      .configBigIcon{ width:60px; height:60px; font-size:31px; }
+      .configOptionTitle{ font-size:16px; }
+    }
+
+
+    /* CORREÇÃO FINAL: impede que as janelas abram espremidas ou lado a lado no computador */
+    .modalOverlay{
+      position:fixed !important;
+      inset:0 !important;
+      width:100vw !important;
+      height:100vh !important;
+      display:none !important;
+      justify-content:center !important;
+      align-items:center !important;
+      padding:16px !important;
+      overflow:hidden !important;
+      z-index:9999 !important;
+    }
+
+    .modalOverlay.show{
+      display:flex !important;
+    }
+
+    .modal,
+    .modalKids,
+    .modalConfig{
+      width:min(392px, calc(100vw - 28px)) !important;
+      max-width:392px !important;
+      max-height:calc(100vh - 28px) !important;
+      overflow:hidden !important;
+      flex:none !important;
+    }
+
+    .modalKidsInner,
+    .modalScroll{
+      width:100% !important;
+      max-width:100% !important;
+      overflow-x:hidden !important;
+      overflow-y:auto !important;
+    }
+
+    .modalKids *,
+    .modalScroll *{
+      max-width:100%;
+    }
+
+    .diretrizCards,
+    .kidsPanel,
+    .opcoesEscolha{
+      width:100% !important;
+    }
+
+    .diretrizCards{
+      display:flex !important;
+      flex-direction:column !important;
+    }
+
+    .stepsGrid{
+      display:grid !important;
+      grid-template-columns:1fr !important;
+      gap:8px !important;
+    }
+
+    .stepArrow{
+      transform:rotate(90deg) !important;
+      margin:-6px 0 !important;
+    }
+
+    .screenTimeGrid,
+    .remindersGrid{
+      grid-template-columns:1fr !important;
+    }
+
+    .modalConfig .modalScroll,
+    .modalConfig .modalKidsInner{
+      display:block !important;
+    }
+
+    .somLinha{
+      display:grid !important;
+      grid-template-columns:minmax(0,1fr) 46px !important;
+      gap:8px !important;
+      width:100% !important;
+    }
+
+    .selectSom,
+    .selectModal,
+    input[type="text"],
+    textarea{
+      min-width:0 !important;
+      max-width:100% !important;
+    }
+
+
+
+    /* Ajustes finais: regras compactas + fundos funcionando dentro do card */
+    body.tema-jardim .card{
+      background:
+        linear-gradient(rgba(255,255,255,0.16), rgba(255,255,255,0.16)),
+        url("fundo-jardim-maya.png") center top / cover no-repeat !important;
+    }
+
+    body.tema-ceu .card{
+      background:
+        radial-gradient(circle at 16% 14%, rgba(255,255,255,0.96) 0 58px, transparent 59px),
+        radial-gradient(circle at 78% 22%, rgba(255,255,255,0.82) 0 48px, transparent 49px),
+        linear-gradient(180deg, #DFF3FF 0%, #EFFAFF 58%, #F8FFF7 100%) !important;
+    }
+
+    body.tema-arcoiris .card{
+      background:
+        radial-gradient(circle at 15% 12%, rgba(255,255,255,0.90) 0 46px, transparent 47px),
+        linear-gradient(180deg, #FFF0F7 0%, #F7F0FF 35%, #EDF7FF 68%, #F8FFE9 100%) !important;
+    }
+
+    body.tema-estrelas .card{
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255,255,255,0.80) 0 2px, transparent 3px),
+        radial-gradient(circle at 38% 10%, rgba(255,255,255,0.70) 0 2px, transparent 3px),
+        radial-gradient(circle at 78% 24%, rgba(255,255,255,0.72) 0 2px, transparent 3px),
+        radial-gradient(circle at 86% 54%, rgba(255,255,255,0.62) 0 2px, transparent 3px),
+        linear-gradient(180deg, #26385C 0%, #425F8E 100%) !important;
+    }
+
+    body.tema-galaxia .card{
+      background:
+        radial-gradient(circle at 18% 10%, rgba(255,255,255,0.85) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 18%, rgba(255,255,255,0.70) 0 2px, transparent 3px),
+        radial-gradient(circle at 48% 32%, rgba(255,255,255,0.55) 0 2px, transparent 3px),
+        linear-gradient(180deg, #202859 0%, #33407B 52%, #5262A8 100%) !important;
+    }
+
+    body.tema-sistema-solar .card{
+      background:
+        radial-gradient(circle at 82% 16%, #FFD874 0 46px, rgba(255,216,116,0.30) 47px, transparent 65px),
+        radial-gradient(circle at 15% 80%, #57A5FF 0 24px, transparent 25px),
+        radial-gradient(circle at 10% 78%, #78D884 0 8px, transparent 9px),
+        linear-gradient(180deg, #1E285A 0%, #33468B 54%, #4A64A7 100%) !important;
+    }
+
+    .regrasCompactas{
+      padding:18px 15px 15px !important;
+    }
+
+    .regrasCompactas .kidsHeader{
+      margin-bottom:10px !important;
+    }
+
+    .regrasCompactas .kidsTitle{
+      font-size:23px !important;
+    }
+
+    .regrasCompactas .kidsSubtitle{
+      font-size:12.2px !important;
+      margin-top:4px !important;
+    }
+
+    .regrasSecao.compacta{
+      border-radius:20px !important;
+      padding:10px !important;
+      margin-bottom:8px !important;
+      box-shadow:0 5px 14px rgba(73,112,68,0.055) !important;
+    }
+
+    .regrasSecao .kidsSectionTitle{
+      font-size:13.6px !important;
+      margin-bottom:8px !important;
+      line-height:1.25 !important;
+      gap:5px !important;
+    }
+
+    .tituloUmaLinha{
+      white-space:nowrap !important;
+      font-size:12.5px !important;
+      letter-spacing:-0.2px;
+    }
+
+    .regrasPassos{
+      grid-template-columns:1fr 15px 1fr 15px 1fr !important;
+      gap:4px !important;
+    }
+
+    .regrasPassos .stepCard{
+      min-height:72px !important;
+      padding:8px 5px !important;
+      border-radius:16px !important;
+      gap:4px !important;
+    }
+
+    .regrasPassos .stepIcon{
+      font-size:27px !important;
+    }
+
+    .regrasPassos .stepText{
+      font-size:10.4px !important;
+      line-height:1.2 !important;
+    }
+
+    .regrasPassos .stepArrow{
+      font-size:20px !important;
+      transform:none !important;
+      margin:0 !important;
+    }
+
+    .regrasHorarios{
+      grid-template-columns:1fr 1fr !important;
+      gap:7px !important;
+    }
+
+    .regrasHorarios .screenTimeCard{
+      padding:8px !important;
+      border-radius:15px !important;
+      grid-template-columns:32px 1fr !important;
+      gap:7px !important;
+    }
+
+    .regrasHorarios .screenIcon{
+      width:32px !important;
+      height:32px !important;
+      font-size:19px !important;
+    }
+
+    .regrasHorarios .screenLabel{
+      font-size:13px !important;
+    }
+
+    .regrasHorarios .screenHour{
+      font-size:10.8px !important;
+      margin-top:2px !important;
+    }
+
+    .regrasLembretes{
+      grid-template-columns:1fr 1fr 1fr !important;
+      gap:6px !important;
+    }
+
+    .regrasLembretes .reminderCard{
+      min-height:70px !important;
+      padding:7px 5px !important;
+      border-radius:15px !important;
+      gap:4px !important;
+    }
+
+    .regrasLembretes .reminderIcon{
+      font-size:22px !important;
+    }
+
+    .regrasLembretes .reminderText{
+      font-size:9.8px !important;
+      line-height:1.24 !important;
+    }
+
+    .regraLinhaUnica{
+      border-radius:14px;
+      padding:8px 9px;
+      font-size:11.2px;
+      line-height:1.32;
+      color:#283235;
+      text-align:center;
+      border:1px solid rgba(255,255,255,0.86);
+      background:#fff;
+    }
+
+    .regraLinhaUnica.verde{ background:#EEF8E5; }
+    .regraLinhaUnica.amarelo{ background:#FFF4D8; }
+    .regraLinhaUnica.rosa{ background:#FFE9F2; }
+    .regraLinhaUnica.roxo{ background:#F2EAFF; }
+
+    .regraMiniGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:6px;
+    }
+
+    .regraObs{
+      margin-top:6px;
+      font-size:10.2px;
+      color:#617074;
+      text-align:center;
+      line-height:1.3;
+    }
+
+    .regrasCompactas .kidsPrimaryBtn{
+      padding:12px 16px !important;
+      font-size:16px !important;
+      margin-top:6px !important;
+      box-shadow:0 7px 0 rgba(88,143,44,0.28), 0 10px 20px rgba(83,136,47,0.18) !important;
+    }
+
+    @media (max-width:390px){
+      .regrasCompactas{ padding:16px 12px 13px !important; }
+      .tituloUmaLinha{ white-space:normal !important; font-size:12.6px !important; }
+      .regrasPassos{ grid-template-columns:1fr !important; }
+      .regrasPassos .stepArrow{ transform:rotate(90deg) !important; margin:-8px 0 !important; }
+      .regrasHorarios, .regrasLembretes, .regraMiniGrid{ grid-template-columns:1fr !important; }
+    }
+
+  
+
+    /* Ajuste final: configuração inicia fechada + botões mais compactos */
+    #modalConfigSom .kidsPanel{
+      display:none !important;
+    }
+
+    #modalConfigSom .kidsPanel.show{
+      display:block !important;
+    }
+
+    .configOptionCard{
+      min-height:70px !important;
+      padding:10px 12px !important;
+      border-radius:20px !important;
+      grid-template-columns:54px 1fr 20px !important;
+      gap:10px !important;
+      margin-bottom:8px !important;
+    }
+
+    .configBigIcon{
+      width:52px !important;
+      height:52px !important;
+      font-size:27px !important;
+    }
+
+    .configOptionTitle{
+      font-size:15px !important;
+      margin-bottom:2px !important;
+    }
+
+    .configOptionDesc{
+      font-size:11.3px !important;
+      line-height:1.28 !important;
+    }
+
+    .configArrow{
+      font-size:27px !important;
+    }
+
+    #modalConfigSom .kidsPrimaryBtn{
+      padding:10px 14px !important;
+      font-size:14px !important;
+      border-radius:22px !important;
+      margin-top:2px !important;
+      box-shadow:0 5px 0 rgba(88,143,44,0.25), 0 8px 16px rgba(83,136,47,0.16) !important;
+    }
+
+
+  </style>
 </head>
-
 <body class="tema-jardim">
-
 <div class="pagina">
-  <div class="card">
-
-    <div class="topo">
-      <button class="botao-voltar" onclick="window.location.href='index.html'"><span>←</span></button>
-
-      <div class="topCenter">
-        <h1 class="titleIndex">🌼 Maya</h1>
-        <p class="subtitulo">seu espaço especial</p>
-      </div>
-
-      <div class="dataTopo" aria-label="Data e hora atuais">
-        <div id="linhaTempoHora" class="horaTopo"></div>
-        <div id="linhaTempoDia" class="dataTopoLinha"></div>
-        <div id="linhaTempoData" class="dataTopoLinha"></div>
-      </div>
-    </div>
-
-    <div class="botoes-lista">
-
-      <div class="botao-wrap">
-        <button class="botao" onclick="window.location.href='maya-rotina.html'">
-          <div class="nome-botao">🌼 Rotina da Maya</div>
-          <div id="proximaRotinaNome" class="proxima-tarefa"></div>
-          <div id="proximaRotinaHora" class="horario-proxima"></div>
-        </button>
-      </div>
-
-      <div class="botao-wrap">
-        <button class="botao" onclick="window.location.href='maya-lista-de-desejos.html'">
-<div class="nome-botao">🎁 Lista de Desejos</div>
-<div class="proxima-tarefa">Cada conquista te aproxima dos seus sonhos 💫</div>
-          <div class="horario-proxima"></div>
-        </button>
-      </div>
-
-      <div class="botao-wrap">
-        <button class="botao" onclick="window.location.href='maya-pontuacao.html'">
-<div class="nome-botao">💰 Minha Pontuação</div>
-<div class="proxima-tarefa">Você está construindo algo lindo 🌿</div>
-          <div class="horario-proxima"></div>
-        </button>
-      </div>
-
-      <div class="botao-wrap">
-        <button class="botao" onclick="window.location.href='maya-premiacao.html'">
-          <div class="nome-botao">🏅 Premiação</div>
-          <div class="proxima-tarefa">Toda conquista pode virar presente</div>
-          <div class="horario-proxima"></div>
-        </button>
-      </div>
-
-      <div class="botao-wrap">
-        <button class="botao" onclick="abrirModalRegras()">
-          <div class="nome-botao">📜 Regras</div>
-          <div id="fraseRegras" class="proxima-tarefa">Combinados ajudam seu brilho a crescer</div>
-          <div id="regraMedalhaInfo" class="horario-proxima"></div>
-        </button>
-      </div>
-
-      <div class="botao-wrap">
-        <button class="botao" onclick="abrirModalConfigSom()">
-          <div class="nome-botao">⚙️ Configuração</div>
-          <div class="proxima-tarefa">ajuste de som, volume e tema</div>
-          <div class="horario-proxima"></div>
-        </button>
-      </div>
-      </div>
-
-    <div class="footerMiniAction">
-      <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
-    </div>
-
-  </div>
+<div class="card">
+<div class="topo">
+<button class="botao-voltar" onclick="window.location.href='index.html'">←</button>
+<div class="topCenter">
+<h1 class="titleIndex">Rotina da Maya</h1>
+<p class="subtitulo">pequenos passos, grandes conquistas</p>
 </div>
-
+<div aria-label="Data e hora atuais" class="dataTopo">
+<div class="horaTopo" id="linhaTempoHora"></div>
+<div class="dataTopoLinha" id="linhaTempoData1"></div>
+<div class="dataTopoLinha" id="linhaTempoData2"></div>
+</div>
+</div>
+<div class="botoes-lista">
+<button class="menuBtn cor-verde" onclick="window.location.href='maya-rotina.html'">
+<div class="iconeMenu">📅</div>
+<div class="textoMenu">
+<div class="tituloMenu">Minha rotina de hoje</div>
+<div class="descricaoMenu">Vamos ver o que temos para fazer?</div>
+</div>
+<div class="setaMenu">›</div>
+</button>
+<button class="menuBtn cor-lilas" onclick="abrirModalPontuacaoPremiacao()">
+<div class="iconeMenu">⭐</div>
+<div class="textoMenu">
+<div class="tituloMenu">Pontuação e Premiação</div>
+<div class="descricaoMenu">Escolha entre pontuação ou premiação</div>
+</div>
+<div class="setaMenu">›</div>
+</button>
+<button class="menuBtn cor-rosa" onclick="window.location.href='maya-lista-de-desejos.html'">
+<div class="iconeMenu">🎁</div>
+<div class="textoMenu">
+<div class="tituloMenu">Meus desejos</div>
+<div class="descricaoMenu">Seus sonhos e desejos para trocar</div>
+</div>
+<div class="setaMenu">›</div>
+</button>
+<button class="menuBtn cor-azul" onclick="abrirModalRegras()">
+<div class="iconeMenu">📋</div>
+<div class="textoMenu">
+<div class="tituloMenu">Regras</div>
+<div class="descricaoMenu">Veja as regras combinadas</div>
+</div>
+<div class="setaMenu">›</div>
+</button>
+</div>
+<div class="footerMiniAction">
+<button class="actionBtn" onclick="abrirModalConfigSom()">⚙️ Configuração</button>
+<button aria-label="Habilitar ou desabilitar som desta página" class="soundMiniBtn" id="botaoSomMenuRodape" onclick="alternarSomMenuRodape()" title="Som desta página" type="button">🔊</button>
+<button class="actionBtn" onclick="abrirModalFuturasEdicoes()">🗓️ Futuras edições</button>
+</div>
+</div>
+</div>
+<!-- Modal Pontuação e Premiação -->
+<div class="modalOverlay" id="modalPontuacaoPremiacao">
+<div class="modal">
+<div class="modalHeader">
+<div class="modalTitle">Pontuação e Premiação</div>
+<button class="fecharModal" onclick="fecharModalPontuacaoPremiacao()">✕</button>
+</div>
+<div class="modalTexto">
+        Escolha qual página você quer abrir agora.
+      </div>
+<div class="opcoesEscolha">
+<button class="escolhaBtn escolhaPontuacao" onclick="window.location.href='maya-pontuacao.html'">
+<span class="escolhaIcone">⭐</span>
+<span>
+<strong>Pontuação</strong>
+<small>Ver pontos, regras e resultado do dia</small>
+</span>
+</button>
+<button class="escolhaBtn escolhaPremiacao" onclick="window.location.href='maya-premiacao.html'">
+<span class="escolhaIcone">🎁</span>
+<span>
+<strong>Premiação</strong>
+<small>Ver saldo, trocas e conquistas</small>
+</span>
+</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalRegras">
-  <div class="modal">
-    <div class="modalTopo">
-      <h2 class="modalTitle">Regras do jogo 🎯</h2>
-    </div>
-
-    <div class="modalScroll">
-      <div class="diretrizCards" id="cardRegrasDownload">
-
-        <div class="diretrizCard verde">
-          <div class="diretrizCardTitle">🌿 1. Como funciona</div>
-          <div class="diretrizDestaque">🌱 Rotina → você faz tarefas</div>
-          <div class="diretrizDestaque">📊 Pontuação → você ganha moedinhas</div>
-          <div class="diretrizDestaque">🎁 Premiação → você usa suas moedinhas</div>
-        </div>
-
-        <div class="diretrizCard amarelo">
-          <div class="diretrizCardTitle">📱 2. Regras de tela</div>
-          <div class="diretrizDestaque">🌞 Manhã: 09h às 11h</div>
-          <div class="diretrizDestaque">🌙 Noite: 18h30 às 20h30</div>
-        </div>
-
-        <div class="diretrizCard azul">
-          <div class="diretrizCardTitle">🎯 3. Regras do dia</div>
-          <div class="diretrizDestaque">✅ Seguiu as regras → ganha mais pontos</div>
-          <div class="diretrizDestaque">⛔ Não seguiu → perde metade dos pontos do dia</div>
-        </div>
-
-        <div class="diretrizCard roxo">
-          <div class="diretrizCardTitle">⭐ 4. O que é uma meta</div>
-          <div class="diretrizLinha">Meta é algo que você quer conquistar 💛</div>
-        </div>
-
-        <div class="diretrizCard rosa">
-          <div class="diretrizCardTitle">🎯 5. Pontuação = desejos + premiação</div>
-          <div class="diretrizDestaque">🎀 Você pode usar moedinhas para realizar desejos</div>
-          <div class="diretrizDestaque">💰 Você também pode usar como premiação em dinheiro</div>
-          <div class="diretrizMini">A troca sempre acontece com autorização da mamãe.</div>
-        </div>
-
-        <div class="diretrizCard verde">
-          <div class="diretrizCardTitle">🏆 6. Junte mais pontos</div>
-          <div class="diretrizLinha">Quer algo maior?</div>
-          <div class="diretrizDestaque">Continue juntando até alcançar seu objetivo 📈</div>
-        </div>
-
-        <div class="diretrizCard amarelo">
-          <div class="diretrizCardTitle">🔁 7. Importante saber</div>
-          <div class="diretrizDestaque">Quando você usa suas moedinhas, elas voltam para zero</div>
-          <div class="diretrizMini">Mas você pode conquistar tudo de novo 😄</div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="modalBtns">
-      <button class="save" onclick="fecharModalRegras()">Fechar</button>
-    </div>
-  </div>
+<div class="modal modalKids">
+<div class="modalKidsInner regrasCompactas">
+<div class="kidsHeader">
+<div class="kidsHeaderIcon">🌿</div>
+<div class="kidsTitleBox">
+<div class="kidsTitle">Regras da Rotina</div>
+<div class="kidsSubtitle">Vamos brincar do jeito certo! 💚</div>
 </div>
-
+<button aria-label="Fechar" class="kidsClose" onclick="fecharModalRegras()">×</button>
+</div>
+<div class="kidsSection regrasSecao compacta">
+<div class="kidsSectionTitle">🌼 Como funciona?</div>
+<div class="stepsGrid regrasPassos">
+<div class="stepCard verde">
+<div class="stepIcon">🌱</div>
+<div class="stepText">1. Faço minhas tarefas</div>
+</div>
+<div class="stepArrow">›</div>
+<div class="stepCard amarelo">
+<div class="stepIcon">⭐</div>
+<div class="stepText">2. Ganho pontos</div>
+</div>
+<div class="stepArrow">›</div>
+<div class="stepCard rosa">
+<div class="stepIcon">🎁</div>
+<div class="stepText">3. Troco por prêmios</div>
+</div>
+</div>
+</div>
+<div class="kidsSection regrasSecao compacta">
+<div class="kidsSectionTitle tituloUmaLinha">☀️ Horário das telas (tv, celular e tablet)</div>
+<div class="screenTimeGrid regrasHorarios">
+<div class="screenTimeCard manha">
+<div class="screenIcon">☀️</div>
+<div>
+<div class="screenLabel">Manhã</div>
+<div class="screenHour">09:00 às 11:00</div>
+</div>
+</div>
+<div class="screenTimeCard noite">
+<div class="screenIcon">🌙</div>
+<div>
+<div class="screenLabel">Noite</div>
+<div class="screenHour">18:30 às 20:30</div>
+</div>
+</div>
+</div>
+</div>
+<div class="kidsSection regrasSecao compacta">
+<div class="kidsSectionTitle">💗 Lembretes importantes</div>
+<div class="remindersGrid regrasLembretes">
+<div class="reminderCard verde">
+<div class="reminderIcon">😊</div>
+<div class="reminderText">Seguiu as regras?<br/>Ganha mais pontos!</div>
+</div>
+<div class="reminderCard rosa">
+<div class="reminderIcon">😟</div>
+<div class="reminderText">Não seguiu?<br/>Ganha só metade.</div>
+</div>
+<div class="reminderCard amarelo">
+<div class="reminderIcon">🏆</div>
+<div class="reminderText">Quanto mais juntar,<br/>mais legal será o prêmio!</div>
+</div>
+</div>
+</div>
+<div class="kidsSection regrasSecao compacta">
+<div class="kidsSectionTitle">⭐ 4. O que é uma meta</div>
+<div class="regraLinhaUnica roxo">Meta é algo que você quer conquistar 💛</div>
+</div>
+<div class="kidsSection regrasSecao compacta">
+<div class="kidsSectionTitle">🎯 5. Pontuação = desejos + premiação</div>
+<div class="regraMiniGrid">
+<div class="regraLinhaUnica rosa">🎀 Use pontos para realizar desejos</div>
+<div class="regraLinhaUnica amarelo">💰 Use pontos como premiação em dinheiro</div>
+</div>
+<div class="regraObs">A troca sempre acontece com autorização da mamãe.</div>
+</div>
+<div class="kidsSection regrasSecao compacta">
+<div class="kidsSectionTitle">🏆 6. Junte mais pontos</div>
+<div class="regraLinhaUnica verde">Quer algo maior? Continue juntando até alcançar seu objetivo 📈</div>
+</div>
+<div class="kidsSection regrasSecao compacta">
+<div class="kidsSectionTitle">🔁 7. Importante saber</div>
+<div class="regraLinhaUnica amarelo">Quando você usa seus pontos, eles voltam para zero.</div>
+<div class="regraObs">Mas você pode conquistar tudo de novo 😄</div>
+</div>
+<button class="kidsPrimaryBtn" onclick="fecharModalRegras()">✅ Entendi!</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalConfigSom">
-  <div class="modal modalConfig">
-    <div class="modalTopo">
-      <h2 class="modalTitle">Configuração</h2>
-    </div>
-
-    <div class="modalScroll">
-
-      <div class="field">
-        <label>Tema de fundo</label>
-        <select id="selectTemaFundo" class="selectSom">
-          <option value="tema-jardim">Jardim suave</option>
-          <option value="tema-galaxia">Galáxia</option>
-          <option value="tema-sistema-solar">Sistema solar com Terra</option>
-          <option value="tema-arcoiris">Arco-íris delicado</option>
-          <option value="tema-estrelas">Noite estrelada</option>
-          <option value="tema-ceu">Céu clarinho</option>
-        </select>
-      </div>
-
-      <div class="temaSugestaoBox">
-        <div class="field">
-          <label>Quero sugerir outro fundo</label>
-          <input type="text" id="nomeTemaSugerido" placeholder="Ex.: fundo com foguetes, fundo com flores lilás...">
-        </div>
-
-        <div class="temaSugestaoTexto">
-          Escreva aqui o nome do fundo que a Maya gostaria. Ao clicar no botão abaixo, a sugestão vai direto para futuras edições.
-        </div>
-
-        <button class="temaSugestaoBtn" type="button" onclick="enviarSugestaoTemaParaFuturasEdicoes()">
-          ✨ Enviar sugestão de fundo
-        </button>
-      </div>
-
-      <div class="field">
-        <label>Som do menu</label>
-        <div class="somLinha">
-          <select id="selectMenu" class="selectSom">
-            <option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
-            <option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
-            <option value="Blue-Moon-manha.mp3">Blue Moon</option>
-            <option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
-            <option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
-            <option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
-            <option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
-            <option value="nebula-the-grey-room-density-&-time.mp3">Nebula The Grey Room Density &amp; Time</option>
-            <option value="Magic Chime.mp3">Magic Chime</option>
-            <option value="Whistle toy.mp3">Whistle toy</option>
-            <option value="Pop.mp3">Pop</option>
-            <option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
-            <option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
-            <option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
-          </select>
-          <button id="toggleMenu" class="botaoIconeSom" onclick="toggleSomPagina('menu')" type="button">🔊</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Som de tarefa concluída</label>
-        <div class="somLinha">
-          <select id="selectTarefaConcluida" class="selectSom">
-            <option value="">Aguardando seus sons especiais</option>
-          </select>
-          <button id="toggleTarefaConcluida" class="botaoIconeSom" onclick="toggleSomPagina('tarefaConcluida')" type="button">🔊</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Som de bloco concluído</label>
-        <div class="somLinha">
-          <select id="selectBlocoConcluido" class="selectSom">
-            <option value="">Aguardando seus sons especiais</option>
-          </select>
-          <button id="toggleBlocoConcluido" class="botaoIconeSom" onclick="toggleSomPagina('blocoConcluido')" type="button">🔊</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Som de dia concluído</label>
-        <div class="somLinha">
-          <select id="selectDiaConcluido" class="selectSom">
-            <option value="">Aguardando seus sons especiais</option>
-          </select>
-          <button id="toggleDiaConcluido" class="botaoIconeSom" onclick="toggleSomPagina('diaConcluido')" type="button">🔊</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Som da rotina da manhã</label>
-        <div class="somLinha">
-          <select id="selectManha" class="selectSom">
-            <option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
-            <option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
-            <option value="Blue-Moon-manha.mp3">Blue Moon</option>
-            <option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
-            <option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
-            <option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
-            <option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
-            <option value="nebula-the-grey-room-density-&-time.mp3">Nebula The Grey Room Density &amp; Time</option>
-          </select>
-          <button id="toggleManha" class="botaoIconeSom" onclick="toggleSomPagina('manha')" type="button">🔊</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Som da rotina da noite</label>
-        <div class="somLinha">
-          <select id="selectNoite" class="selectSom">
-            <option value="meditation-impromptu-03-kevin-macleod-noite.mp3">Meditation Impromptu 03 - Kevin MacLeod</option>
-            <option value="a-quiet-thought-wayne-jones-noite.mp3">A Quiet Thought - Wayne Jones</option>
-            <option value="cylinder-five-chris-zabriskie-noite.mp3">Cylinder Five - Chris Zabriskie</option>
-            <option value="mesmerize-kevin-noite.mp3">Mesmerize - Kevin</option>
-            <option value="nebula-the-grey-room-density-&-time.mp3">Nebula The Grey Room Density &amp; Time</option>
-          </select>
-          <button id="toggleNoite" class="botaoIconeSom" onclick="toggleSomPagina('noite')" type="button">🔊</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Som da lista de desejos</label>
-        <div class="somLinha">
-          <select id="selectDesejos" class="selectSom">
-            <option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
-            <option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
-            <option value="Blue-Moon-manha.mp3">Blue Moon</option>
-            <option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
-            <option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
-            <option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
-            <option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
-            <option value="nebula-the-grey-room-density-&-time.mp3">Nebula The Grey Room Density &amp; Time</option>
-            <option value="Magic Chime.mp3">Magic Chime</option>
-            <option value="Whistle toy.mp3">Whistle toy</option>
-            <option value="Pop.mp3">Pop</option>
-            <option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
-            <option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
-            <option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
-          </select>
-          <button id="toggleDesejos" class="botaoIconeSom" onclick="toggleSomPagina('desejos')" type="button">🔊</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Som da premiação</label>
-        <div class="somLinha">
-          <select id="selectPremiacao" class="selectSom">
-            <option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
-            <option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
-            <option value="Blue-Moon-manha.mp3">Blue Moon</option>
-            <option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
-            <option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
-            <option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
-            <option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
-            <option value="nebula-the-grey-room-density-&-time.mp3">Nebula The Grey Room Density &amp; Time</option>
-            <option value="Magic Chime.mp3">Magic Chime</option>
-            <option value="Whistle toy.mp3">Whistle toy</option>
-            <option value="Pop.mp3">Pop</option>
-            <option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
-            <option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
-            <option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
-          </select>
-          <button id="togglePremiacao" class="botaoIconeSom" onclick="toggleSomPagina('premiacao')" type="button">🔊</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Volume</label>
-        <input type="range" id="volumeSom" class="rangeSom" min="0" max="1" step="0.05">
-        <div id="volumeValor" class="volumeValor">35%</div>
-      </div>
-
-    </div>
-
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalConfigSom()">Cancelar</button>
-      <button class="save" onclick="concluirModalConfigSom()">Concluir</button>
-    </div>
-  </div>
+<div class="modal modalKids modalConfig">
+<div class="modalKidsInner">
+<div class="kidsHeader">
+<div class="kidsHeaderIcon">⚙️</div>
+<div class="kidsTitleBox">
+<div class="kidsTitle">Configuração</div>
+<div class="kidsSubtitle">Escolha o que você quer mudar no seu cantinho!</div>
+</div>
+<button aria-label="Fechar" class="kidsClose" onclick="fecharModalConfigSom()">×</button>
+</div>
+<button class="configOptionCard fundo" onclick="togglePainelConfig('painelFundo')" type="button">
+<div class="configBigIcon">🌳</div>
+<div>
+<div class="configOptionTitle">Meu fundo</div>
+<div class="configOptionDesc">Escolha o cenário que mais combina com você.</div>
+</div>
+<div class="configArrow">›</div>
+</button>
+<div class="kidsPanel" id="painelFundo">
+<div class="field">
+<label>Tema de fundo</label>
+<select class="selectSom" id="selectTemaFundo">
+<option value="tema-jardim">Jardim suave</option>
+<option value="tema-galaxia">Galáxia</option>
+<option value="tema-sistema-solar">Sistema solar com Terra</option>
+<option value="tema-arcoiris">Arco-íris delicado</option>
+<option value="tema-estrelas">Noite estrelada</option>
+<option value="tema-ceu">Céu clarinho</option>
+</select>
+</div>
+</div>
+<button class="configOptionCard sons" onclick="togglePainelConfig('painelSons')" type="button">
+<div class="configBigIcon">🎵</div>
+<div>
+<div class="configOptionTitle">Sons</div>
+<div class="configOptionDesc">Configure as músicas e os efeitos sonoros.</div>
+</div>
+<div class="configArrow">›</div>
+</button>
+<div class="kidsPanel" id="painelSons">
+<div class="field">
+<label>Som do menu</label>
+<div class="somLinha">
+<select class="selectSom" id="selectMenu">
+<option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
+<option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
+<option value="Blue-Moon-manha.mp3">Blue Moon</option>
+<option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
+<option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
+<option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
+<option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
+<option value="nebula-the-grey-room-density-&amp;-time.mp3">Nebula The Grey Room Density &amp; Time</option>
+<option value="Magic Chime.mp3">Magic Chime</option>
+<option value="Whistle toy.mp3">Whistle toy</option>
+<option value="Pop.mp3">Pop</option>
+<option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
+<option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
+<option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
+</select>
+<button class="botaoIconeSom" id="toggleMenu" onclick="toggleSomPagina('menu')" type="button">🔊</button>
+</div>
 </div>
 
+
+
+<div class="field">
+<label>Som da lista de desejos</label>
+<div class="somLinha">
+<select class="selectSom" id="selectDesejos">
+<option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
+<option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
+<option value="Blue-Moon-manha.mp3">Blue Moon</option>
+<option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
+<option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
+<option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
+<option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
+<option value="nebula-the-grey-room-density-&amp;-time.mp3">Nebula The Grey Room Density &amp; Time</option>
+<option value="Magic Chime.mp3">Magic Chime</option>
+<option value="Whistle toy.mp3">Whistle toy</option>
+<option value="Pop.mp3">Pop</option>
+<option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
+<option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
+<option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
+</select>
+<button class="botaoIconeSom" id="toggleDesejos" onclick="toggleSomPagina('desejos')" type="button">🔊</button>
+</div>
+</div>
+<div class="field">
+<label>Som da premiação</label>
+<div class="somLinha">
+<select class="selectSom" id="selectPremiacao">
+<option value="wheels-audionautix-manha.mp3">Wheels - Audionautix</option>
+<option value="Walk-In-The-Park-Full-Audionautix-manha.mp3">Walk In The Park - Audionautix</option>
+<option value="Blue-Moon-manha.mp3">Blue Moon</option>
+<option value="jomon-grove-the-mini-vandals-manha.mp3">Jomon Grove - The Mini Vandals</option>
+<option value="city-lights-patrick-patrikios-manha.mp3">City Lights - Patrick Patrikios</option>
+<option value="river-meditation-audionautix-manha.mp3">River Meditation - Audionautix</option>
+<option value="marty-gots-a-plan-kevin-macleod-manha.mp3">Marty Gots A Plan - Kevin MacLeod</option>
+<option value="nebula-the-grey-room-density-&amp;-time.mp3">Nebula The Grey Room Density &amp; Time</option>
+<option value="Magic Chime.mp3">Magic Chime</option>
+<option value="Whistle toy.mp3">Whistle toy</option>
+<option value="Pop.mp3">Pop</option>
+<option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
+<option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
+<option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
+</select>
+<button class="botaoIconeSom" id="togglePremiacao" onclick="toggleSomPagina('premiacao')" type="button">🔊</button>
+</div>
+</div>
+</div>
+<button class="configOptionCard ideia" onclick="togglePainelConfig('painelIdeiaFundo')" type="button">
+<div class="configBigIcon">💡</div>
+<div>
+<div class="configOptionTitle">Quero um novo fundo</div>
+<div class="configOptionDesc">Conte sua ideia de cenário para a gente!</div>
+</div>
+<div class="configArrow">›</div>
+</button>
+<div class="kidsPanel" id="painelIdeiaFundo">
+<div class="field">
+<label>Qual cenário você quer?</label>
+<input id="nomeTemaSugerido" placeholder="Ex.: jardim com borboletas, estrelas, praia..." type="text"/>
+</div>
+<div class="kidsHint">Escreva a ideia da Maya. Ela vai direto para futuras edições.</div>
+<button class="kidsInlineBtn" onclick="enviarSugestaoTemaParaFuturasEdicoes()" type="button">✨ Enviar minha ideia</button>
+</div>
+<div class="configOptionCard volume">
+<div class="configBigIcon">🔊</div>
+<div>
+<div class="configOptionTitle">Volume geral</div>
+<div class="volumeRowKids">
+<input class="rangeSom" id="volumeSom" max="1" min="0" step="0.05" type="range"/>
+<div class="volumeValor" id="volumeValor">35%</div>
+</div>
+</div>
+<div></div>
+</div>
+<button class="kidsPrimaryBtn" onclick="concluirModalConfigSom()">💾 Salvar alterações</button>
+</div>
+</div>
+</div>
+<!-- Modal Futuras Edições -->
 <div class="modalOverlay" id="modalFuturasEdicoes">
-  <div class="modal">
-    <h2 class="modalTitle">Futuras edições</h2>
-
-    <div class="field">
-      <label>Ideias de melhorias futuras</label>
-      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
-    </div>
-
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
-      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
-    </div>
-  </div>
+<div class="modal">
+<div class="modalHeader">
+<div class="modalTitle">Futuras edições</div>
+<button class="fecharModal" onclick="fecharModalFuturasEdicoes()">✕</button>
 </div>
-
+<div class="field">
+<label>Ideias para melhorar essa tela</label>
+<textarea class="textareaModal" id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias..."></textarea>
+</div>
+<div class="statusMsg" id="statusFuturasEdicoes"></div>
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+<button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+</div>
+</div>
+</div>
 <audio id="audioPreviewSom"></audio>
-
 <script>
-const CHAVE_FUTURAS_EDICOES_MAYA_MENU = "futuras_edicoes_maya_menu";
-const STORAGE_KEY = "jardim_rotina_maya_v8";
-const CONFIG_SOM_KEY = "config_som_maya";
-const REGRA_TELA_HOJE_KEY = "regra_tela_hoje_maya";
+    const CHAVE_FUTURAS_EDICOES_MAYA_MENU = "futuras_edicoes_maya_menu";
+    const CONFIG_SOM_KEY = "config_som_maya";
 
-const TASKS = {
-  morning: {
-    items: [
-      {
-        id: "m1_group",
-        time: "08h00m",
-        text: "Higiene matinal",
-        grouped: true,
-        subTasks: [
-          "Ir ao banheiro",
-          "Escovar os dentes",
-          "Lavar o rosto"
-        ]
-      },
-      { id: "m4", time: "08h12m", text: "Beber água morna" },
-      { id: "m5", time: "08h20m", text: "Café da manhã" },
-      { id: "m5b", time: "10h50m", text: "Arrumar a mochila da escola", grouped: true, subTasks: ["Livro, caderno, agenda e xuxa de cabelo"] },
-      { id: "m6", time: "11h00m", text: "Tomar banho" },
-      { id: "m7", time: "11h20m", text: "Almoçar", grouped: true, subTasks: ["Sem tela", "Beber pouco líquido"] },
-      { id: "m8", time: "11h40m", text: "Escovar os dentes", grouped: true, subTasks: ["Com firmeza e gentileza", "3 bochechos", "1 gargarejo"] },
-      { id: "m9", time: "12h30m", text: "Ir para escola", grouped: true, dynamicSubTasks: true }
-    ]
-  },
-  night: {
-    items: [
-      { id: "n1", time: "18h00m", text: "Tomar banho", grouped: true, subTasks: ["Roupa suja no lugar certo", "Tênis no lugar"] },
-      { id: "n2", time: "18h20m", text: "Jantar", grouped: true, subTasks: ["Sem tela", "Beber pouco líquido"] },
-      { id: "n2b", time: "18h32m", text: "Escovar os dentes", grouped: true, subTasks: ["Com firmeza e gentileza", "3 bochechos", "1 gargarejo"] },
-      { id: "n3", time: "18h40m", text: "Fazer contrato de casa", grouped: true, subTasks: ["Com atenção e capricho", "Ao terminar, guardar na mochila"], schoolDaysOnly: true },
-      { id: "n4", time: "20h30m", text: "Passatempos Relaxantes Sem Telas", opensPage: true }
-    ]
-  }
-};
+    let configSomTemporario = null;
+    let previewTimeoutSom = null;
 
-let configSomTemporario = null;
-const audioPreviewSom = document.getElementById("audioPreviewSom");
-let previewTimeoutSom = null;
-
-function pad2(numero){
-  return String(numero).padStart(2, "0");
-}
-
-function atualizarLinhaTempo(){
-  const agora = new Date();
-  const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
-
-  document.getElementById("linhaTempoHora").textContent = `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
-  document.getElementById("linhaTempoDia").textContent = `• ${diasCurtos[agora.getDay()]}`;
-  document.getElementById("linhaTempoData").textContent = `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
-}
-
-function dateToKey(date){
-  return `${date.getFullYear()}-${pad2(date.getMonth()+1)}-${pad2(date.getDate())}`;
-}
-
-function keyToDate(key){
-  const [year, month, day] = key.split("-").map(Number);
-  return new Date(year, month - 1, day);
-}
-
-function addDaysToKey(key, amount){
-  const d = keyToDate(key);
-  d.setDate(d.getDate() + amount);
-  return dateToKey(d);
-}
-
-function isWeekday(key){
-  const d = keyToDate(key);
-  const day = d.getDay();
-  return day >= 1 && day <= 5;
-}
-
-function getCycleDayKey(date = new Date()){
-  const d = new Date(date);
-  if(d.getHours() < 7){
-    d.setDate(d.getDate() - 1);
-  }
-  return dateToKey(d);
-}
-
-function getMonthKeyParts(date = new Date()){
-  return {
-    year: date.getFullYear(),
-    month: date.getMonth()
-  };
-}
-
-function getEasterDate(year){
-  const a = year % 19;
-  const b = Math.floor(year / 100);
-  const c = year % 100;
-  const d = Math.floor(b / 4);
-  const e = b % 4;
-  const f = Math.floor((b + 8) / 25);
-  const g = Math.floor((b - f + 1) / 3);
-  const h = (19 * a + b - d - g + 15) % 30;
-  const i = Math.floor(c / 4);
-  const k = c % 4;
-  const l = (32 + 2 * e + 2 * i - h - k) % 7;
-  const m = Math.floor((a + 11 * h + 22 * l) / 451);
-  const month = Math.floor((h + l - 7 * m + 114) / 31);
-  const day = ((h + l - 7 * m + 114) % 31) + 1;
-  return new Date(year, month - 1, day);
-}
-
-function getNationalHolidayKeys(year){
-  const easter = getEasterDate(year);
-  const goodFriday = new Date(easter);
-  goodFriday.setDate(easter.getDate() - 2);
-
-  const fixed = [
-    `${year}-01-01`,
-    `${year}-04-21`,
-    `${year}-05-01`,
-    `${year}-09-07`,
-    `${year}-10-12`,
-    `${year}-11-02`,
-    `${year}-11-15`,
-    `${year}-11-20`,
-    `${year}-12-25`
-  ];
-
-  const movable = [
-    dateToKey(goodFriday)
-  ];
-
-  return new Set([...fixed, ...movable]);
-}
-
-function isNationalHoliday(key){
-  const [year] = key.split("-").map(Number);
-  return getNationalHolidayKeys(year).has(key);
-}
-
-function isSchoolDay(key){
-  return isWeekday(key) && !isNationalHoliday(key);
-}
-
-function isTuesday(key){
-  return keyToDate(key).getDay() === 2;
-}
-
-function isThursday(key){
-  return keyToDate(key).getDay() === 4;
-}
-
-function isFriday(key){
-  return keyToDate(key).getDay() === 5;
-}
-
-function getOccurrenceInMonth(date){
-  return Math.floor((date.getDate() - 1) / 7) + 1;
-}
-
-function isSecondOrFourthWeekendOfMonth(key){
-  const date = keyToDate(key);
-  const day = date.getDay();
-  if(day !== 0 && day !== 6) return false;
-  const occurrence = getOccurrenceInMonth(date);
-  return occurrence === 2 || occurrence === 4;
-}
-
-function isFirstThirdOrFifthFridayOfMonth(key){
-  const date = keyToDate(key);
-  if(date.getDay() !== 5) return false;
-  const occurrence = getOccurrenceInMonth(date);
-  return occurrence === 1 || occurrence === 3 || occurrence === 5;
-}
-
-function getIrParaEscolaSubTasks(key){
-  const subtasks = [
-    "Aguardar na portaria às 12h30m"
-  ];
-
-  if(isTuesday(key) || isThursday(key)){
-    subtasks.push("Tempo com o papai após a escola");
-  }
-
-  if(isFriday(key)){
-    subtasks.push("Hora Extra de Patins");
-
-    if(isFirstThirdOrFifthFridayOfMonth(key)){
-      subtasks.push("Mamãe pega na escola");
+    function pad2(n){
+      return String(n).padStart(2, "0");
     }
-  }
 
-  if(isSecondOrFourthWeekendOfMonth(key)){
-    subtasks.push("Final de semana com o papai");
-  }
+    function atualizarLinhaTempo(){
+      const agora = new Date();
+      const diasSemana = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+      const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
 
-  return subtasks;
-}
-
-function loadStore(){
-  try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw) return { days:{}, customCalmOptions:[] };
-    const parsed = JSON.parse(raw);
-    if(!parsed.days) parsed.days = {};
-    if(!Array.isArray(parsed.customCalmOptions)) parsed.customCalmOptions = [];
-    return parsed;
-  }catch(e){
-    return { days:{}, customCalmOptions:[] };
-  }
-}
-
-function getDayState(store, key){
-  if(store.days && store.days[key]){
-    return store.days[key];
-  }
-
-  return {
-    done:{},
-    doneOrder:[],
-    calmActivities:[],
-    updatedAt:null,
-    completed:false,
-    completedAt:null,
-    validation:{
-      morningRule:null,
-      nightRule:null
+      document.getElementById("linhaTempoHora").textContent = `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+      document.getElementById("linhaTempoData1").textContent = `${pad2(agora.getDate())} ${meses[agora.getMonth()]}`;
+      document.getElementById("linhaTempoData2").textContent = diasSemana[agora.getDay()];
     }
-  };
-}
 
-function getItemsForTab(tab, key){
-  return TASKS[tab].items.filter(item => {
-    if(item.weekdaysOnly && !isWeekday(key)) return false;
-    if(item.schoolDaysOnly && !isSchoolDay(key)) return false;
-    return true;
-  });
-}
 
-function getAllCountableItemsForDay(key){
-  return [
-    ...getItemsForTab("morning", key),
-    ...getItemsForTab("night", key)
-  ];
-}
-
-function formatarNomeTarefaMenu(item){
-  if(item.id === "n4"){
-    return "Passatempos Relaxantes";
-  }
-  return item.text;
-}
-
-function obterProximaTarefaSincronizada(){
-  const agora = new Date();
-  const hojeKey = getCycleDayKey(agora);
-  const store = loadStore();
-  const dayState = getDayState(store, hojeKey);
-  const tarefasHoje = getAllCountableItemsForDay(hojeKey);
-
-  const proximaHoje = tarefasHoje.find(item => !dayState.done[item.id]);
-
-  if(proximaHoje){
-    return {
-      text: formatarNomeTarefaMenu(proximaHoje),
-      time: proximaHoje.time
-    };
-  }
-
-  const amanhaKey = addDaysToKey(hojeKey, 1);
-  const tarefasAmanha = getAllCountableItemsForDay(amanhaKey);
-
-  if(tarefasAmanha.length){
-    return {
-      text: formatarNomeTarefaMenu(tarefasAmanha[0]),
-      time: tarefasAmanha[0].time
-    };
-  }
-
-  return {
-    text: "Sem próxima tarefa",
-    time: ""
-  };
-}
-
-function atualizarProximaTarefaRotina(){
-  const proxima = obterProximaTarefaSincronizada();
-  document.getElementById("proximaRotinaNome").textContent = proxima.text;
-  document.getElementById("proximaRotinaHora").textContent = proxima.time;
-}
-
-function getRegraTelaHojeStore(){
-  try{
-    return JSON.parse(localStorage.getItem(REGRA_TELA_HOJE_KEY)) || {};
-  }catch(e){
-    return {};
-  }
-}
-
-function obterEstatisticasDoMes(){
-  const regraStore = getRegraTelaHojeStore();
-  const hoje = new Date();
-  const { year, month } = getMonthKeyParts(hoje);
-
-  let diasComRegrasCompletas = 0;
-
-  Object.entries(regraStore).forEach(([key, valor]) => {
-    const data = keyToDate(key);
-    if(data.getFullYear() !== year || data.getMonth() !== month) return;
-
-    if(valor === true){
-      diasComRegrasCompletas += 1;
+    function fecharTodosOsModais(){
+      document.querySelectorAll(".modalOverlay.show").forEach(modal => modal.classList.remove("show"));
     }
-  });
-
-  return {
-    diasComRegrasCompletas
-  };
-}
-
-function atualizarPainelConquistas(){
-  const stats = obterEstatisticasDoMes();
-  const medalhaConquistada = stats.diasComRegrasCompletas >= 1;
-
-  document.getElementById("regraMedalhaInfo").textContent =
-    medalhaConquistada ? "🏅 Medalha do 1º dia seguindo as regras" : "Medalha esperando você";
-
-  document.getElementById("medalhaStatus").textContent =
-    medalhaConquistada ? "Desbloqueada" : "Ainda bloqueada";
-
-  const medalhaIcone = document.getElementById("medalhaIcone");
-  medalhaIcone.classList.toggle("bloqueada", !medalhaConquistada);
-
-  document.getElementById("medalhaTexto").textContent =
-    medalhaConquistada
-      ? "Você conquistou a medalha “Segui as Regras por 1 Dia”. Que orgulho, Maya! 🏅"
-      : "Medalha “Segui as Regras por 1 Dia” — desbloqueie ao completar 1 dia honrando as regras 🌟";
-
-  atualizarMissaoAstronauta();
-}
-
-function atualizarMissaoAstronauta(){
-  const regraStore = getRegraTelaHojeStore();
-  const hoje = new Date();
-  const { year, month } = getMonthKeyParts(hoje);
-
-  let progressoBase = 0;
-  Object.entries(regraStore).forEach(([key, valor]) => {
-    const data = keyToDate(key);
-    if(data.getFullYear() !== year || data.getMonth() !== month) return;
-    if(valor === true) progressoBase += 1;
-  });
-
-  progressoBase = Math.min(progressoBase, 30);
-  const percentual = Math.round((progressoBase / 30) * 100);
-
-  document.getElementById("missaoBarraFill").style.width = `${percentual}%`;
-  document.getElementById("missaoPct").textContent = `${percentual}%`;
-
-  let destino = "Lua";
-  if(percentual >= 20) destino = "Marte";
-  if(percentual >= 40) destino = "Júpiter";
-  if(percentual >= 60) destino = "Saturno";
-  if(percentual >= 80) destino = "Netuno";
-  if(percentual >= 95) destino = "Galáxia da Maya";
-
-  document.getElementById("missaoDestino").textContent = `Próximo destino: ${destino}`;
-}
-
-function abrirModalRegras(){
-  document.getElementById("modalRegras").classList.add("show");
-}
-
-function fecharModalRegras(){
-  document.getElementById("modalRegras").classList.remove("show");
-  const painelFaixas = document.getElementById("painelFaixas");
-  if(painelFaixas){ painelFaixas.classList.remove("show"); }
-}
-
-function alternarFaixas(){
-  document.getElementById("painelFaixas").classList.toggle("show");
-}
-
-function abrirModalFuturasEdicoes(){
-  document.getElementById("futurasEdicoesTexto").value =
-    localStorage.getItem(CHAVE_FUTURAS_EDICOES_MAYA_MENU) || "";
-  document.getElementById("modalFuturasEdicoes").classList.add("show");
-}
-
-function fecharModalFuturasEdicoes(){
-  document.getElementById("modalFuturasEdicoes").classList.remove("show");
-}
-
-function salvarFuturasEdicoes(){
-  localStorage.setItem(
-    CHAVE_FUTURAS_EDICOES_MAYA_MENU,
-    document.getElementById("futurasEdicoesTexto").value
-  );
-  fecharModalFuturasEdicoes();
-}
-
-function enviarSugestaoTemaParaFuturasEdicoes(){
-  const input = document.getElementById("nomeTemaSugerido");
-  const valor = input.value.trim();
-
-  if(!valor){
-    alert("Escreva primeiro o nome do fundo que a Maya gostaria.");
-    return;
-  }
-
-  const atual = localStorage.getItem(CHAVE_FUTURAS_EDICOES_MAYA_MENU) || "";
-  const textoNovo = `${atual ? atual + "\n\n" : ""}Sugestão de fundo da Maya: ${valor}`;
-  localStorage.setItem(CHAVE_FUTURAS_EDICOES_MAYA_MENU, textoNovo);
-
-  input.value = "";
-  fecharModalConfigSom();
-  abrirModalFuturasEdicoes();
-}
-
-function getConfigSomSalva(){
-  return JSON.parse(localStorage.getItem(CONFIG_SOM_KEY)) || {
-    temaFundo: "tema-jardim",
-
-    menuAtivo: true,
-    menu: "wheels-audionautix-manha.mp3",
-
-    tarefaConcluidaAtivo: false,
-    tarefaConcluida: "",
-
-    blocoConcluidoAtivo: false,
-    blocoConcluido: "",
-
-    diaConcluidoAtivo: false,
-    diaConcluido: "",
-
-    manhaAtivo: true,
-    manha: "wheels-audionautix-manha.mp3",
-
-    noiteAtivo: true,
-    noite: "meditation-impromptu-03-kevin-macleod-noite.mp3",
-
-    desejosAtivo: true,
-    desejos: "wheels-audionautix-manha.mp3",
-
-    premiacaoAtivo: true,
-    premiacao: "wheels-audionautix-manha.mp3",
-
-    volume: 0.35
-  };
-}
-
-function aplicarTema(nomeTema){
-  document.body.classList.remove(
-    "tema-jardim",
-    "tema-galaxia",
-    "tema-arcoiris",
-    "tema-estrelas",
-    "tema-ceu",
-    "tema-sistema-solar"
-  );
-
-  document.body.classList.add(nomeTema || "tema-jardim");
-}
-
-function abrirModalConfigSom(){
-  configSomTemporario = { ...getConfigSomSalva() };
-
-  document.getElementById("selectTemaFundo").value = configSomTemporario.temaFundo || "tema-jardim";
-  document.getElementById("selectMenu").value = configSomTemporario.menu;
-  document.getElementById("selectTarefaConcluida").value = configSomTemporario.tarefaConcluida || "";
-  document.getElementById("selectBlocoConcluido").value = configSomTemporario.blocoConcluido || "";
-  document.getElementById("selectDiaConcluido").value = configSomTemporario.diaConcluido || "";
-  document.getElementById("selectManha").value = configSomTemporario.manha;
-  document.getElementById("selectNoite").value = configSomTemporario.noite;
-  document.getElementById("selectDesejos").value = configSomTemporario.desejos;
-  document.getElementById("selectPremiacao").value = configSomTemporario.premiacao;
-  document.getElementById("volumeSom").value = configSomTemporario.volume;
-  document.getElementById("volumeValor").textContent = `${Math.round(configSomTemporario.volume * 100)}%`;
-
-  atualizarBotoesSomPaginas();
-  document.getElementById("modalConfigSom").classList.add("show");
-}
-
-function fecharModalConfigSom(){
-  pararPreviewSom();
-  aplicarTema(getConfigSomSalva().temaFundo || "tema-jardim");
-  document.getElementById("modalConfigSom").classList.remove("show");
-  configSomTemporario = null;
-}
-
-function concluirModalConfigSom(){
-  configSomTemporario.temaFundo = document.getElementById("selectTemaFundo").value;
-  configSomTemporario.menu = document.getElementById("selectMenu").value;
-  configSomTemporario.tarefaConcluida = document.getElementById("selectTarefaConcluida").value;
-  configSomTemporario.blocoConcluido = document.getElementById("selectBlocoConcluido").value;
-  configSomTemporario.diaConcluido = document.getElementById("selectDiaConcluido").value;
-  configSomTemporario.manha = document.getElementById("selectManha").value;
-  configSomTemporario.noite = document.getElementById("selectNoite").value;
-  configSomTemporario.desejos = document.getElementById("selectDesejos").value;
-  configSomTemporario.premiacao = document.getElementById("selectPremiacao").value;
-  configSomTemporario.volume = Number(document.getElementById("volumeSom").value);
-
-  localStorage.setItem(CONFIG_SOM_KEY, JSON.stringify(configSomTemporario));
-  aplicarTema(configSomTemporario.temaFundo);
-  pararPreviewSom();
-  fecharModalConfigSom();
-}
-
-function atualizarBotaoSomPagina(chave, elementoId){
-  const ligado = !!configSomTemporario[chave];
-  const botao = document.getElementById(elementoId);
-
-  botao.textContent = ligado ? "🔊" : "🔇";
-  botao.classList.toggle("desligado", !ligado);
-}
-
-function atualizarBotoesSomPaginas(){
-  atualizarBotaoSomPagina("menuAtivo", "toggleMenu");
-  atualizarBotaoSomPagina("tarefaConcluidaAtivo", "toggleTarefaConcluida");
-  atualizarBotaoSomPagina("blocoConcluidoAtivo", "toggleBlocoConcluido");
-  atualizarBotaoSomPagina("diaConcluidoAtivo", "toggleDiaConcluido");
-  atualizarBotaoSomPagina("manhaAtivo", "toggleManha");
-  atualizarBotaoSomPagina("noiteAtivo", "toggleNoite");
-  atualizarBotaoSomPagina("desejosAtivo", "toggleDesejos");
-  atualizarBotaoSomPagina("premiacaoAtivo", "togglePremiacao");
-}
-
-function toggleSomPagina(tipo){
-  if(!configSomTemporario) return;
-
-  const mapa = {
-    menu: ["menuAtivo", "toggleMenu"],
-    tarefaConcluida: ["tarefaConcluidaAtivo", "toggleTarefaConcluida"],
-    blocoConcluido: ["blocoConcluidoAtivo", "toggleBlocoConcluido"],
-    diaConcluido: ["diaConcluidoAtivo", "toggleDiaConcluido"],
-    manha: ["manhaAtivo", "toggleManha"],
-    noite: ["noiteAtivo", "toggleNoite"],
-    desejos: ["desejosAtivo", "toggleDesejos"],
-    premiacao: ["premiacaoAtivo", "togglePremiacao"]
-  };
-
-  const [chave, elementoId] = mapa[tipo];
-  configSomTemporario[chave] = !configSomTemporario[chave];
-  atualizarBotaoSomPagina(chave, elementoId);
-}
-
-function pararPreviewSom(){
-  if(previewTimeoutSom){
-    clearTimeout(previewTimeoutSom);
-    previewTimeoutSom = null;
-  }
-
-  audioPreviewSom.pause();
-  audioPreviewSom.currentTime = 0;
-  audioPreviewSom.removeAttribute("src");
-  audioPreviewSom.load();
-}
-
-function tocarPreviewSom(src){
-  if(!src) return;
-
-  pararPreviewSom();
-
-  audioPreviewSom.src = src;
-  audioPreviewSom.volume = Number(document.getElementById("volumeSom")?.value || 0.35);
-
-  audioPreviewSom.play().catch(() => {});
-
-  previewTimeoutSom = setTimeout(() => {
-    pararPreviewSom();
-  }, 5000);
-}
-
-document.getElementById("selectTemaFundo").addEventListener("change", () => {
-  aplicarTema(document.getElementById("selectTemaFundo").value);
-});
-
-document.getElementById("selectMenu").addEventListener("change", () => {
-  tocarPreviewSom(document.getElementById("selectMenu").value);
-});
-
-document.getElementById("selectTarefaConcluida").addEventListener("change", () => {
-  tocarPreviewSom(document.getElementById("selectTarefaConcluida").value);
-});
-
-document.getElementById("selectBlocoConcluido").addEventListener("change", () => {
-  tocarPreviewSom(document.getElementById("selectBlocoConcluido").value);
-});
-
-document.getElementById("selectDiaConcluido").addEventListener("change", () => {
-  tocarPreviewSom(document.getElementById("selectDiaConcluido").value);
-});
-
-document.getElementById("selectManha").addEventListener("change", () => {
-  tocarPreviewSom(document.getElementById("selectManha").value);
-});
-
-document.getElementById("selectNoite").addEventListener("change", () => {
-  tocarPreviewSom(document.getElementById("selectNoite").value);
-});
-
-document.getElementById("selectDesejos").addEventListener("change", () => {
-  tocarPreviewSom(document.getElementById("selectDesejos").value);
-});
-
-document.getElementById("selectPremiacao").addEventListener("change", () => {
-  tocarPreviewSom(document.getElementById("selectPremiacao").value);
-});
-
-document.getElementById("volumeSom").addEventListener("input", () => {
-  const volumeAtual = Number(document.getElementById("volumeSom").value);
-  document.getElementById("volumeValor").textContent =
-    `${Math.round(volumeAtual * 100)}%`;
-
-  audioPreviewSom.volume = volumeAtual;
-});
-
-function atualizarTela(){
-  atualizarLinhaTempo();
-  atualizarProximaTarefaRotina();
-  atualizarPainelConquistas();
-}
-
-window.addEventListener("load", () => {
-  aplicarTema(getConfigSomSalva().temaFundo || "tema-jardim");
-  atualizarTela();
-  setInterval(atualizarLinhaTempo, 1000);
-});
-
-window.addEventListener("pageshow", atualizarTela);
-window.addEventListener("focus", atualizarTela);
-
-window.addEventListener("storage", (event) => {
-  if(event.key === STORAGE_KEY || event.key === CONFIG_SOM_KEY || event.key === REGRA_TELA_HOJE_KEY){
-    aplicarTema(getConfigSomSalva().temaFundo || "tema-jardim");
-    atualizarTela();
-  }
-});
-
-document.addEventListener("visibilitychange", function(){
-  if(!document.hidden){
-    atualizarTela();
-  }
-});
-
-window.addEventListener("click", function(e){
-  const modalRegras = document.getElementById("modalRegras");
-  const modalConfigSom = document.getElementById("modalConfigSom");
-  const modalFuturasEdicoes = document.getElementById("modalFuturasEdicoes");
-
-  if(e.target === modalRegras){
-    fecharModalRegras();
-  }
-
-  if(e.target === modalConfigSom){
-    fecharModalConfigSom();
-  }
-
-  if(e.target === modalFuturasEdicoes){
-    fecharModalFuturasEdicoes();
-  }
-});
-</script>
 
+    function abrirModalPontuacaoPremiacao(){
+      fecharTodosOsModais();
+      document.getElementById("modalPontuacaoPremiacao").classList.add("show");
+    }
+
+    function fecharModalPontuacaoPremiacao(){
+      document.getElementById("modalPontuacaoPremiacao").classList.remove("show");
+    }
+
+    function abrirModalRegras(){
+      fecharTodosOsModais();
+      document.getElementById("modalRegras").classList.add("show");
+    }
+
+    function fecharModalRegras(){
+      document.getElementById("modalRegras").classList.remove("show");
+    }
+
+    function abrirModalFuturasEdicoes(){
+      fecharTodosOsModais();
+      document.getElementById("futurasEdicoesTexto").value =
+        localStorage.getItem(CHAVE_FUTURAS_EDICOES_MAYA_MENU) || "";
+      document.getElementById("statusFuturasEdicoes").textContent = "";
+      document.getElementById("modalFuturasEdicoes").classList.add("show");
+    }
+
+    function fecharModalFuturasEdicoes(){
+      document.getElementById("modalFuturasEdicoes").classList.remove("show");
+    }
+
+    function salvarFuturasEdicoes(){
+      localStorage.setItem(
+        CHAVE_FUTURAS_EDICOES_MAYA_MENU,
+        document.getElementById("futurasEdicoesTexto").value
+      );
+      document.getElementById("statusFuturasEdicoes").textContent = "Anotação salva ✨";
+      setTimeout(fecharModalFuturasEdicoes, 700);
+    }
+
+    function enviarSugestaoTemaParaFuturasEdicoes(){
+      const input = document.getElementById("nomeTemaSugerido");
+      const valor = input.value.trim();
+
+      if(!valor){
+        alert("Escreva primeiro o nome do fundo que a Maya gostaria.");
+        return;
+      }
+
+      const atual = localStorage.getItem(CHAVE_FUTURAS_EDICOES_MAYA_MENU) || "";
+      const textoNovo = `${atual ? atual + "\n\n" : ""}Sugestão de fundo da Maya: ${valor}`;
+      localStorage.setItem(CHAVE_FUTURAS_EDICOES_MAYA_MENU, textoNovo);
+
+      input.value = "";
+      fecharModalConfigSom();
+      abrirModalFuturasEdicoes();
+    }
+
+    function getConfigSomSalva(){
+      try{
+        return JSON.parse(localStorage.getItem(CONFIG_SOM_KEY)) || getConfigSomPadrao();
+      }catch(e){
+        return getConfigSomPadrao();
+      }
+    }
+
+    function getConfigSomPadrao(){
+      return {
+        temaFundo: "tema-jardim",
+        menuAtivo: true,
+        menu: "wheels-audionautix-manha.mp3",
+        tarefaConcluidaAtivo: false,
+        tarefaConcluida: "",
+        blocoConcluidoAtivo: false,
+        blocoConcluido: "",
+        diaConcluidoAtivo: false,
+        diaConcluido: "",
+        manhaAtivo: true,
+        manha: "wheels-audionautix-manha.mp3",
+        noiteAtivo: true,
+        noite: "meditation-impromptu-03-kevin-macleod-noite.mp3",
+        desejosAtivo: true,
+        desejos: "wheels-audionautix-manha.mp3",
+        premiacaoAtivo: true,
+        premiacao: "wheels-audionautix-manha.mp3",
+        volume: 0.35
+      };
+    }
+
+    function aplicarTema(nomeTema){
+      const tema = nomeTema || "tema-jardim";
+      document.body.classList.remove(
+        "tema-jardim",
+        "tema-galaxia",
+        "tema-arcoiris",
+        "tema-estrelas",
+        "tema-ceu",
+        "tema-sistema-solar"
+      );
+      document.body.classList.add(tema);
+
+      if(configSomTemporario){
+        configSomTemporario.temaFundo = tema;
+      }
+    }
+
+    function abrirModalConfigSom(){
+      fecharTodosOsModais();
+      configSomTemporario = { ...getConfigSomPadrao(), ...getConfigSomSalva() };
+
+      document.getElementById("selectTemaFundo").value = configSomTemporario.temaFundo || "tema-jardim";
+      document.getElementById("selectMenu").value = configSomTemporario.menu;
+      document.getElementById("selectDesejos").value = configSomTemporario.desejos;
+      document.getElementById("selectPremiacao").value = configSomTemporario.premiacao;
+      document.getElementById("volumeSom").value = configSomTemporario.volume;
+      document.getElementById("volumeValor").textContent = `${Math.round(configSomTemporario.volume * 100)}%`;
+
+      atualizarBotoesSomPaginas();
+      document.querySelectorAll("#modalConfigSom .kidsPanel.show").forEach(painel => painel.classList.remove("show"));
+      document.getElementById("modalConfigSom").classList.add("show");
+    }
+
+    function fecharModalConfigSom(){
+      pararPreviewSom();
+      aplicarTema(getConfigSomSalva().temaFundo || "tema-jardim");
+      document.getElementById("modalConfigSom").classList.remove("show");
+      configSomTemporario = null;
+      atualizarBotaoSomMenuRodape();
+
+      // Depois que a janela fecha, tenta tocar imediatamente dentro do mesmo clique.
+      // Isso aumenta a chance de o Chrome permitir o áudio.
+      if(getConfigSomSalva().menuAtivo){
+        tocarSomMenuAgora();
+      }
+    }
+
+    function concluirModalConfigSom(){
+      if(!configSomTemporario) configSomTemporario = getConfigSomPadrao();
+
+      configSomTemporario.temaFundo = document.getElementById("selectTemaFundo").value;
+      configSomTemporario.menu = document.getElementById("selectMenu").value;
+      configSomTemporario.desejos = document.getElementById("selectDesejos").value;
+      configSomTemporario.premiacao = document.getElementById("selectPremiacao").value;
+      configSomTemporario.volume = Number(document.getElementById("volumeSom").value);
+
+      localStorage.setItem(CONFIG_SOM_KEY, JSON.stringify(configSomTemporario));
+      aplicarTema(configSomTemporario.temaFundo);
+      atualizarBotaoSomMenuRodape();
+      fecharModalConfigSom();
+    }
+
+    function atualizarBotaoSomPagina(chave, elementoId){
+      const botao = document.getElementById(elementoId);
+      if(!botao) return;
+      const ligado = !!configSomTemporario[chave];
+      botao.textContent = ligado ? "🔊" : "🔇";
+      botao.classList.toggle("desligado", !ligado);
+    }
+
+    function atualizarBotoesSomPaginas(){
+      atualizarBotaoSomPagina("menuAtivo", "toggleMenu");
+      atualizarBotaoSomPagina("desejosAtivo", "toggleDesejos");
+      atualizarBotaoSomPagina("premiacaoAtivo", "togglePremiacao");
+    }
+
+    function toggleSomPagina(tipo){
+      if(!configSomTemporario) return;
+
+      const mapa = {
+        menu: ["menuAtivo", "toggleMenu"],
+        desejos: ["desejosAtivo", "toggleDesejos"],
+        premiacao: ["premiacaoAtivo", "togglePremiacao"]
+      };
+
+      if(!mapa[tipo]) return;
+      if(!mapa[tipo]) return;
+      const [chave, elementoId] = mapa[tipo];
+      configSomTemporario[chave] = !configSomTemporario[chave];
+      atualizarBotaoSomPagina(chave, elementoId);
+
+      if(configSomTemporario[chave]){
+        const selectPorTipo = {
+          menu: "selectMenu",
+          desejos: "selectDesejos",
+          premiacao: "selectPremiacao"
+        };
+        const selectId = selectPorTipo[tipo];
+        const src = document.getElementById(selectId)?.value || "";
+        tocarPreviewSom(src);
+      }else{
+        pararPreviewSom();
+      }
+    }
+
+    function pararPreviewSom(){
+      const audioPreviewSom = document.getElementById("audioPreviewSom");
+
+      if(previewTimeoutSom){
+        clearTimeout(previewTimeoutSom);
+        previewTimeoutSom = null;
+      }
+
+      audioPreviewSom.pause();
+      audioPreviewSom.currentTime = 0;
+      audioPreviewSom.removeAttribute("src");
+      audioPreviewSom.load();
+    }
+
+    function tocarPreviewSom(src){
+      if(!src) return;
+      const audioPreviewSom = document.getElementById("audioPreviewSom");
+
+      pararPreviewSom();
+
+      audioPreviewSom.src = src;
+      audioPreviewSom.volume = Number(document.getElementById("volumeSom")?.value || 0.35);
+      audioPreviewSom.play().catch(() => {});
+
+      previewTimeoutSom = setTimeout(pararPreviewSom, 5000);
+    }
+
+    function ligarEventosConfiguracao(){
+      const porId = id => document.getElementById(id);
+
+      porId("selectTemaFundo").addEventListener("change", () => {
+        aplicarTema(porId("selectTemaFundo").value);
+      });
+
+      [
+        "selectMenu",
+        "selectDesejos",
+        "selectPremiacao"
+      ].forEach(id => {
+        porId(id).addEventListener("change", () => tocarPreviewSom(porId(id).value));
+      });
+
+      porId("volumeSom").addEventListener("input", () => {
+        const volumeAtual = Number(porId("volumeSom").value);
+        porId("volumeValor").textContent = `${Math.round(volumeAtual * 100)}%`;
+        document.getElementById("audioPreviewSom").volume = volumeAtual;
+      });
+    }
+
+
+    function togglePainelConfig(id){
+      const painel = document.getElementById(id);
+      if(!painel) return;
+
+      const vaiAbrir = !painel.classList.contains("show");
+      document.querySelectorAll("#modalConfigSom .kidsPanel.show").forEach(item => item.classList.remove("show"));
+
+      if(vaiAbrir){
+        painel.classList.add("show");
+      }
+    }
+
+
+    function salvarConfigSomAtualizada(config){
+      localStorage.setItem(CONFIG_SOM_KEY, JSON.stringify({ ...getConfigSomPadrao(), ...config }));
+    }
+
+    function atualizarBotaoSomMenuRodape(){
+      const botao = document.getElementById("botaoSomMenuRodape");
+      if(!botao) return;
+
+      const config = getConfigSomSalva();
+      const ligado = !!config.menuAtivo;
+      botao.textContent = ligado ? "🔊" : "🔇";
+      botao.classList.toggle("desligado", !ligado);
+      botao.setAttribute("aria-label", ligado ? "Desabilitar som desta página" : "Habilitar som desta página");
+      botao.title = ligado ? "Som desta página ligado" : "Som desta página desligado";
+    }
+
+    function tocarSomMenuAgora(){
+      const config = getConfigSomSalva();
+      if(!config.menuAtivo || !config.menu) return Promise.resolve(false);
+
+      const audioPreviewSom = document.getElementById("audioPreviewSom");
+      pararPreviewSom();
+      audioPreviewSom.src = config.menu;
+      audioPreviewSom.volume = Number(config.volume || 0.35);
+
+      return audioPreviewSom.play()
+        .then(() => {
+          somMenuJaTentouTocar = true;
+          previewTimeoutSom = setTimeout(pararPreviewSom, 5000);
+          return true;
+        })
+        .catch(() => {
+          // O navegador pode bloquear som sem interação. Nesse caso, tentamos de novo no próximo toque/clique.
+          somMenuJaTentouTocar = false;
+          return false;
+        });
+    }
+
+    function alternarSomMenuRodape(){
+      const config = getConfigSomSalva();
+      config.menuAtivo = !config.menuAtivo;
+      salvarConfigSomAtualizada(config);
+      atualizarBotaoSomMenuRodape();
+
+      if(config.menuAtivo){
+        tocarSomMenuAgora();
+      }else{
+        pararPreviewSom();
+      }
+    }
+
+    let somMenuJaTentouTocar = false;
+
+    function tocarSomMenuAposPrimeiroToque(){
+      if(somMenuJaTentouTocar) return;
+      tocarSomMenuAgora();
+    }
+
+    function prepararSomMenuComInteracao(){
+      // Navegadores bloqueiam áudio automático ao abrir a página.
+      // Então o som é iniciado na primeira interação real com a tela.
+      document.addEventListener("pointerdown", tocarSomMenuAposPrimeiroToque, { capture:true });
+      document.addEventListener("mousedown", tocarSomMenuAposPrimeiroToque, { capture:true });
+      document.addEventListener("touchend", tocarSomMenuAposPrimeiroToque, { capture:true });
+      document.addEventListener("click", tocarSomMenuAposPrimeiroToque, { capture:true });
+      document.addEventListener("keydown", tocarSomMenuAposPrimeiroToque, { capture:true });
+    }
+
+    window.addEventListener("click", function(e){
+      const modalPontuacaoPremiacao = document.getElementById("modalPontuacaoPremiacao");
+      const modalRegras = document.getElementById("modalRegras");
+      const modalConfigSom = document.getElementById("modalConfigSom");
+      const modalFuturasEdicoes = document.getElementById("modalFuturasEdicoes");
+
+      if(e.target === modalPontuacaoPremiacao) fecharModalPontuacaoPremiacao();
+      if(e.target === modalRegras) fecharModalRegras();
+      if(e.target === modalConfigSom) fecharModalConfigSom();
+      if(e.target === modalFuturasEdicoes) fecharModalFuturasEdicoes();
+    });
+
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape"){
+        fecharModalPontuacaoPremiacao();
+        fecharModalRegras();
+        fecharModalConfigSom();
+        fecharModalFuturasEdicoes();
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      atualizarLinhaTempo();
+      setInterval(atualizarLinhaTempo, 1000 * 30);
+      aplicarTema(getConfigSomSalva().temaFundo || "tema-jardim");
+      atualizarBotaoSomMenuRodape();
+      ligarEventosConfiguracao();
+
+      // O Chrome só permite áudio depois de alguma interação da pessoa.
+      // A página tenta tocar ao abrir, mas se o navegador bloquear, toca no primeiro toque/clique/tecla.
+      tocarSomMenuAgora();
+      prepararSomMenuComInteracao();
+    });
+  </script>
 </body>
 </html>

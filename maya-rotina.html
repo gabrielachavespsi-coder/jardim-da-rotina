@@ -866,7 +866,1360 @@
         padding:14px;
       }
     }
-  </style>
+  
+
+/* =========================================================
+   VISUAL SYSTEM JARDIM DA ROTINA - alinhado ao maya-menu.html
+   ========================================================= */
+html{
+  min-height:100%;
+  background:#F3FAFF !important;
+}
+
+body{
+  font-family:var(--fonte);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:16px;
+  min-height:100vh;
+  background:#F3FAFF !important;
+}
+
+.pagina{
+  width:100%;
+  max-width:420px;
+}
+
+.card{
+  position:relative;
+  width:100%;
+  min-height:calc(100vh - 32px);
+  border-radius:28px;
+  padding:18px 16px 18px;
+  overflow:hidden;
+  border:1px solid rgba(220,232,217,0.85);
+  box-shadow:0 10px 28px rgba(73, 112, 68, 0.10);
+  background:
+    linear-gradient(rgba(255,255,255,0.16), rgba(255,255,255,0.16)),
+    url("fundo-jardim-maya.png") center top / cover no-repeat !important;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  gap:12px;
+}
+
+.card::after{
+  content:none !important;
+  display:none !important;
+}
+
+.topo,
+.tabs,
+.regraHojeBox,
+.warningBox,
+.list,
+.progress,
+.footerMiniAction{
+  position:relative;
+  z-index:1;
+}
+
+.topo{
+  display:grid;
+  grid-template-columns:42px 1fr 64px;
+  gap:8px;
+  align-items:start;
+  margin-bottom:10px;
+}
+
+.botao-voltar{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:14px;
+  background:#F4FAF3;
+  color:#355B2F;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,0.06);
+  font-family:var(--fonte);
+}
+
+.botao-voltar:hover{
+  background:#EAF7E2;
+}
+
+.topCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding-top:3px;
+}
+
+.titleIndex{
+  font-size:22px;
+  font-weight:600;
+  color:#4E8F3A;
+  line-height:1.15;
+  letter-spacing:0;
+}
+
+.subtitulo{
+  font-size:12.5px;
+  color:#55705D;
+  margin-top:4px;
+  line-height:1.3;
+}
+
+.dataTopo{
+  text-align:right;
+  color:#4E5A60;
+  line-height:1.15;
+  padding-top:2px;
+}
+
+.horaTopo{
+  font-size:14px;
+  font-weight:600;
+  color:#356E33;
+  margin-bottom:3px;
+}
+
+.dataTopoLinha{
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:6px 0 2px;
+}
+
+.tab{
+  border:none;
+  border-radius:20px;
+  padding:13px 12px;
+  background:rgba(255,255,255,0.90);
+  color:#4A5B50;
+  font-size:14px;
+  font-family:var(--fonte);
+  box-shadow:0 8px 18px rgba(0,0,0,0.05);
+  border:1px solid rgba(217,230,214,0.95);
+  cursor:pointer;
+  transition:0.2s ease;
+}
+
+.tab:hover{
+  background:#FFFFFF;
+  transform:translateY(-1px);
+}
+
+.tab.active{
+  background:#EAF7E2;
+  color:#3F6F4F;
+  font-weight:600;
+  border-color:#BEE3B1;
+}
+
+.regraHojeBox{
+  background:rgba(255,255,255,0.90);
+  border:1px solid rgba(217,230,214,0.95);
+  border-radius:22px;
+  padding:13px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.05);
+}
+
+.regraHojeTitulo{
+  color:#355B2F;
+  font-size:13.5px;
+  font-weight:600;
+}
+
+.regraHojeData{
+  color:#67747A;
+}
+
+.regraHojeBtn{
+  border-radius:16px;
+  padding:11px 12px;
+  font-weight:500;
+}
+
+.regraHojeBtn.ok{
+  background:#EAF7E2;
+  color:#356E33;
+}
+
+.regraHojeBtn.nao{
+  background:#F8DCE7;
+  color:#8A4E63;
+}
+
+.warningBox{
+  border-radius:22px;
+  background:rgba(255,245,216,0.92);
+  border:1px solid rgba(241,231,186,0.95);
+  box-shadow:0 8px 18px rgba(0,0,0,0.05);
+}
+
+.list{
+  gap:11px;
+}
+
+.item{
+  border:none;
+  border-radius:24px;
+  padding:15px 16px;
+  min-height:74px;
+  background:#EAF7E2;
+  color:#26342A;
+  box-shadow:0 8px 18px rgba(0,0,0,0.06);
+  border:1px solid rgba(255,255,255,0.65);
+  transition:0.2s ease;
+}
+
+.item:hover{
+  transform:translateY(-1px);
+  background:#EAF7E2;
+}
+
+.item.highlight-green{
+  background:#EAF7E2;
+  color:#26342A;
+}
+
+.item.highlight-blue{
+  background:#DDEBFF;
+  color:#26342A;
+}
+
+.item.highlight-red{
+  background:#F8DCE7;
+  color:#26342A;
+}
+
+.item.done{
+  opacity:0.76;
+  filter:saturate(0.88);
+}
+
+.item.done-color-red,
+.item.done-color-orange,
+.item.done-color-yellow,
+.item.done-color-green,
+.item.done-color-blue,
+.item.done-color-indigo,
+.item.done-color-violet{
+  background:rgba(255,255,255,0.76);
+  color:#5F6A61;
+  border:1px solid rgba(217,230,214,0.95);
+}
+
+.buttonText,
+.groupedTitle{
+  font-size:15px;
+  font-weight:600;
+  color:inherit;
+  line-height:1.28;
+}
+
+.buttonDesc,
+.groupedSubtasks,
+.buttonTime{
+  font-size:11.6px;
+  color:rgba(76,91,97,0.86);
+  line-height:1.38;
+}
+
+.highlight-blue .groupedSubtasks,
+.highlight-blue .buttonTime,
+.highlight-blue .buttonText,
+.highlight-red .groupedSubtasks,
+.highlight-red .buttonTime,
+.highlight-red .buttonText{
+  color:inherit;
+}
+
+.highlight-blue .buttonDesc,
+.highlight-blue .groupedSubtasks,
+.highlight-blue .buttonTime,
+.highlight-red .buttonDesc,
+.highlight-red .groupedSubtasks,
+.highlight-red .buttonTime{
+  color:rgba(76,91,97,0.86);
+}
+
+.progress{
+  margin-top:4px;
+  padding:12px 12px 10px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.86);
+  border:1px solid rgba(217,230,214,0.95);
+  box-shadow:0 8px 18px rgba(0,0,0,0.05);
+}
+
+.progressLine{
+  font-size:14px;
+  color:#355B2F;
+  font-weight:600;
+}
+
+.hint{
+  color:#67747A;
+}
+
+.garden{
+  font-size:18px;
+  margin-top:2px;
+}
+
+.completeBtn{
+  border-radius:18px;
+  background:#7FBC68;
+  color:#fff;
+  font-weight:600;
+  box-shadow:0 8px 18px rgba(0,0,0,0.06);
+}
+
+.completeBtn:hover{
+  background:#6FAA58;
+}
+
+.statusBox{
+  color:#67747A;
+}
+
+.footerMiniAction{
+  display:grid;
+  grid-template-columns:auto 1fr 1fr;
+  gap:10px;
+  margin-top:2px;
+  align-items:center;
+}
+
+.futureBtn,
+.soundToggleBtn{
+  border:none;
+  background:rgba(255,255,255,0.92);
+  border-radius:18px;
+  padding:13px 12px;
+  font-size:13px;
+  color:#4A5B50;
+  font-family:var(--fonte);
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(0,0,0,0.05);
+  border:1px solid rgba(217,230,214,0.95);
+  transition:0.2s ease;
+}
+
+.soundToggleBtn{
+  min-width:54px;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.futureBtn:hover,
+.soundToggleBtn:hover{
+  background:#FFFFFF;
+  transform:translateY(-1px);
+}
+
+.soundToggleBtn.off{
+  background:rgba(242,242,242,0.92);
+  color:#9A9A9A;
+}
+
+.modalOverlay{
+  background:rgba(117, 153, 139, 0.32) !important;
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+
+.modal{
+  border-radius:24px;
+  border:1px solid rgba(191, 222, 179, 0.92);
+  box-shadow:0 20px 48px rgba(63,111,79,0.24);
+}
+
+.modalTitle{
+  color:#355B2F;
+  font-weight:600;
+}
+
+.fecharModal{
+  background:#EEF5EC;
+  color:#355B2F;
+  border-radius:12px;
+}
+
+.configActionsBtn,
+.opcaoConfigPeriodoBtn,
+.emojiMiniBtn{
+  border-radius:14px;
+}
+
+@media (max-width:430px){
+  body{
+    padding:12px;
+  }
+
+  .card{
+    min-height:calc(100vh - 24px);
+    border-radius:24px;
+    padding:16px 14px 16px;
+    background-position:center top !important;
+  }
+
+  .topo{
+    grid-template-columns:40px 1fr 58px;
+  }
+
+  .titleIndex{
+    font-size:20px;
+  }
+
+  .tabs{
+    gap:8px;
+  }
+
+  .item{
+    border-radius:22px;
+    padding:14px;
+    min-height:72px;
+  }
+
+  .footerMiniAction{
+    grid-template-columns:auto 1fr 1fr;
+    gap:8px;
+  }
+
+  .futureBtn,
+  .soundToggleBtn{
+    font-size:12px;
+    padding:12px 10px;
+  }
+}
+
+
+
+/* =========================================================
+   AJUSTE EXTRA: cards da rotina mais próximos do maya-menu.html
+   ========================================================= */
+.tabs{
+  margin-top:2px !important;
+  margin-bottom:10px !important;
+}
+
+.tab{
+  min-height:58px !important;
+  border-radius:22px !important;
+  font-weight:600 !important;
+  box-shadow:0 8px 18px rgba(0,0,0,0.06) !important;
+}
+
+.tab.active{
+  background:#EAF7E2 !important;
+  border-color:rgba(255,255,255,0.65) !important;
+}
+
+.list{
+  gap:12px !important;
+}
+
+.item{
+  width:100% !important;
+  border:none !important;
+  border-radius:24px !important;
+  padding:14px 14px !important;
+  text-align:left !important;
+  font-family:var(--fonte) !important;
+  cursor:pointer !important;
+  display:grid !important;
+  grid-template-columns:54px 1fr 18px !important;
+  gap:13px !important;
+  align-items:center !important;
+  justify-content:initial !important;
+  min-height:86px !important;
+  transition:0.2s ease !important;
+  box-shadow:0 8px 18px rgba(0,0,0,0.06) !important;
+  border:1px solid rgba(255,255,255,0.65) !important;
+}
+
+.item:nth-child(5n+1){ background:#EAF7E2 !important; }
+.item:nth-child(5n+2){ background:#E9DDF8 !important; }
+.item:nth-child(5n+3){ background:#F9EDC7 !important; }
+.item:nth-child(5n+4){ background:#F8DCE7 !important; }
+.item:nth-child(5n+5){ background:#DDEBFF !important; }
+
+.item.highlight-green{ background:#EAF7E2 !important; }
+.item.highlight-blue{ background:#DDEBFF !important; }
+.item.highlight-red{ background:#F8DCE7 !important; }
+
+.item:hover{
+  transform:translateY(-1px) !important;
+}
+
+.taskIcon{
+  width:54px;
+  height:54px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.72);
+  font-size:29px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.8);
+}
+
+.taskSeta{
+  font-size:26px;
+  color:#7A6FA1;
+  line-height:1;
+  text-align:center;
+  font-weight:600;
+}
+
+.item.done .taskSeta{
+  color:#4E8F3A;
+}
+
+.left{
+  min-width:0 !important;
+  align-items:flex-start !important;
+  justify-content:center !important;
+  text-align:left !important;
+  gap:3px !important;
+}
+
+.buttonText,
+.groupedTitle{
+  width:100%;
+  font-size:15px !important;
+  font-weight:600 !important;
+  color:#26342A !important;
+  text-align:left !important;
+  line-height:1.25 !important;
+}
+
+.buttonDesc,
+.groupedSubtasks,
+.buttonTime{
+  width:100%;
+  font-size:11.8px !important;
+  color:#4C5B61 !important;
+  line-height:1.42 !important;
+  text-align:left !important;
+}
+
+.groupedSubtasks.stack-lines{
+  align-items:flex-start !important;
+}
+
+.specialTimeLine{
+  width:100%;
+  justify-content:flex-start !important;
+}
+
+.item.done{
+  opacity:0.78 !important;
+  filter:saturate(0.86) !important;
+  background:rgba(255,255,255,0.80) !important;
+}
+
+.progress{
+  margin-top:2px !important;
+  padding:13px 14px 12px !important;
+  border-radius:24px !important;
+  background:rgba(255,255,255,0.88) !important;
+}
+
+.footerMiniAction{
+  display:grid !important;
+  grid-template-columns:auto 1fr 1fr !important;
+  gap:10px !important;
+}
+
+@media (max-width:430px){
+  .item{
+    grid-template-columns:50px 1fr 16px !important;
+    gap:12px !important;
+    min-height:82px !important;
+    padding:13px 13px !important;
+  }
+
+  .taskIcon{
+    width:50px;
+    height:50px;
+    font-size:27px;
+  }
+
+  .taskSeta{
+    font-size:24px;
+  }
+}
+
+
+
+/* =========================================================
+   REFINO VISUAL V2 - rotina mais parecida com maya-menu.html
+   ========================================================= */
+body{
+  background:#F3FAFF !important;
+}
+
+.card{
+  background:
+    linear-gradient(rgba(255,255,255,0.14), rgba(255,255,255,0.14)),
+    url("fundo-jardim-maya.png") center top / cover no-repeat,
+    radial-gradient(circle at 83% 7%, rgba(255,216,68,0.52) 0 44px, transparent 45px),
+    radial-gradient(circle at 22% 13%, rgba(255,255,255,0.82) 0 70px, transparent 72px),
+    radial-gradient(circle at 55% 34%, rgba(255,255,255,0.72) 0 58px, transparent 60px),
+    linear-gradient(180deg, #DFF2FF 0%, #F5FBFC 48%, #F7FFF2 100%) !important;
+  box-shadow:0 12px 32px rgba(73,112,68,0.13) !important;
+}
+
+.topo{
+  margin-bottom:16px !important;
+}
+
+.tabs{
+  margin:0 0 14px !important;
+  gap:11px !important;
+}
+
+.tab{
+  min-height:58px !important;
+  border-radius:22px !important;
+  padding:12px 14px !important;
+  background:rgba(255,255,255,0.90) !important;
+  color:#4A5B50 !important;
+  box-shadow:0 8px 18px rgba(0,0,0,0.055) !important;
+  border:1px solid rgba(217,230,214,0.92) !important;
+  font-size:15px !important;
+}
+
+.tab.active{
+  background:#EAF7E2 !important;
+  color:#2F6E3E !important;
+  border-color:rgba(255,255,255,0.70) !important;
+}
+
+.list{
+  gap:12px !important;
+}
+
+.item{
+  min-height:76px !important;
+  padding:12px 14px !important;
+  grid-template-columns:52px 1fr 18px !important;
+  gap:13px !important;
+  border-radius:24px !important;
+  box-shadow:0 8px 18px rgba(0,0,0,0.055) !important;
+  border:1px solid rgba(255,255,255,0.72) !important;
+}
+
+.taskIcon{
+  width:52px !important;
+  height:52px !important;
+  border-radius:17px !important;
+  font-size:28px !important;
+  background:rgba(255,255,255,0.78) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.88) !important;
+}
+
+.buttonText,
+.groupedTitle{
+  font-size:14.7px !important;
+  line-height:1.22 !important;
+  font-weight:650 !important;
+  margin-bottom:1px !important;
+}
+
+.buttonDesc,
+.groupedSubtasks,
+.buttonTime{
+  font-size:11.2px !important;
+  line-height:1.34 !important;
+}
+
+.buttonTime{
+  margin-top:1px !important;
+}
+
+.specialTimeLine{
+  gap:4px !important;
+  margin-top:2px !important;
+}
+
+.taskSeta{
+  font-size:25px !important;
+  color:#7A6FA1 !important;
+}
+
+.item.done{
+  opacity:1 !important;
+  filter:none !important;
+  background:rgba(255,255,255,0.82) !important;
+  border-color:rgba(217,230,214,0.95) !important;
+}
+
+.item.done .taskIcon{
+  background:#EAF7E2 !important;
+}
+
+.item.done .buttonText,
+.item.done .groupedTitle{
+  color:#587062 !important;
+}
+
+.item.done .taskSeta{
+  color:#4E8F3A !important;
+}
+
+.regraHojeBox,
+.progress,
+.warningBox{
+  background:rgba(255,255,255,0.88) !important;
+  border-radius:24px !important;
+  border:1px solid rgba(217,230,214,0.95) !important;
+  box-shadow:0 8px 18px rgba(0,0,0,0.055) !important;
+}
+
+.progress{
+  padding:12px 14px !important;
+}
+
+.progressLine{
+  font-size:13.5px !important;
+}
+
+.hint{
+  font-size:11px !important;
+}
+
+.garden{
+  font-size:17px !important;
+}
+
+.completeBtn{
+  padding:13px 14px !important;
+  border-radius:20px !important;
+}
+
+.footerMiniAction{
+  margin-top:4px !important;
+}
+
+.futureBtn,
+.soundToggleBtn{
+  border-radius:18px !important;
+  padding:13px 12px !important;
+  background:rgba(255,255,255,0.92) !important;
+  color:#4A5B50 !important;
+  box-shadow:0 8px 18px rgba(0,0,0,0.05) !important;
+}
+
+@media (max-width:430px){
+  .topo{ margin-bottom:14px !important; }
+  .tabs{ margin-bottom:13px !important; }
+  .tab{ min-height:56px !important; }
+  .item{
+    min-height:74px !important;
+    grid-template-columns:50px 1fr 16px !important;
+    gap:12px !important;
+    padding:12px 13px !important;
+  }
+  .taskIcon{
+    width:50px !important;
+    height:50px !important;
+    font-size:27px !important;
+  }
+  .buttonText,
+  .groupedTitle{
+    font-size:14.3px !important;
+  }
+}
+
+
+
+/* ==== ajustes finais solicitados ==== */
+.dayActionsCompact{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  margin-top:4px;
+}
+.dayActionsCompact .completeBtn{
+  width:100%;
+  max-width:270px;
+}
+.dayActionsCompact .statusBox{
+  font-size:11.5px !important;
+  line-height:1.45;
+  text-align:center;
+  padding:0 6px;
+}
+.footerMiniAction{
+  grid-template-columns:1fr auto 1fr !important;
+  gap:10px !important;
+}
+.soundToggleBtn{
+  width:48px;
+  min-width:48px !important;
+  height:48px;
+  padding:0 !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px !important;
+}
+
+/* centralização de textos dos cards */
+.item{ text-align:center !important; }
+.left{ align-items:center !important; text-align:center !important; }
+.buttonText, .groupedTitle, .buttonDesc, .groupedSubtasks, .buttonTime{ text-align:center !important; }
+.groupedSubtasks.stack-lines{ align-items:center !important; }
+.specialTimeLine{ justify-content:center !important; }
+
+/* janela de configuração no estilo do maya-menu */
+.modalKidsConfig{
+  width:min(392px, 100%) !important;
+  max-height:calc(100vh - 28px) !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border-radius:30px !important;
+  border:1px solid rgba(191,222,179,0.92) !important;
+  background:linear-gradient(180deg, rgba(255,255,255,0.97), rgba(255,251,240,0.97)) !important;
+}
+.kidsConfigInner{
+  max-height:calc(100vh - 28px);
+  overflow-y:auto;
+  padding:22px 18px 18px;
+}
+.kidsHeaderConfig{
+  display:grid;
+  grid-template-columns:58px 1fr 42px;
+  gap:10px;
+  align-items:center;
+  margin-bottom:16px;
+}
+.kidsConfigHeaderIcon{font-size:30px;}
+.kidsTitleBox{min-width:0; text-align:center;}
+.kidsTitle{color:#2E6F2F; font-weight:700; font-size:19px; line-height:1.15;}
+.kidsSubtitle{font-size:12px; color:#4B5A60; line-height:1.35; margin-top:4px;}
+.kidsClose{width:42px; height:42px; border:none; border-radius:50%; background:#EEF5EC; color:#355B2F; font-size:24px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(0,0,0,0.04);}
+.kidsPrimaryBtn{width:100%; border:none; border-radius:18px; padding:14px 16px; background:#8FCB3A; color:#fff; font-family:var(--fonte); font-size:16px; font-weight:700; box-shadow:0 8px 18px rgba(73,112,68,0.14); cursor:pointer;}
+.kidsPrimaryBtn:hover{background:#7EB92F;}
+
+.configSection{margin-bottom:11px;}
+.configKidsCard{
+  width:100%;
+  border:none;
+  border-radius:24px;
+  padding:12px 13px;
+  display:grid;
+  grid-template-columns:66px 1fr 20px;
+  gap:12px;
+  align-items:center;
+  text-align:left;
+  font-family:var(--fonte);
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,0.9);
+  box-shadow:0 8px 20px rgba(0,0,0,0.055);
+}
+.configKidsCard.fundo{ background:linear-gradient(180deg,#F3FAEA,#EFF8E5); }
+.configKidsCard.sons{ background:linear-gradient(180deg,#F8ECFF,#F0E2FA); }
+.configKidsCard.rotina{ background:linear-gradient(180deg,#EAF7FF,#DFF1FF); }
+.configKidsCard.ideia{ background:linear-gradient(180deg,#FFF8DD,#FFF0C9); }
+.configBigIcon{
+  width:66px; height:66px; border-radius:50%; background:rgba(255,255,255,0.78);
+  display:flex; align-items:center; justify-content:center; font-size:32px;
+  border:1px solid rgba(255,255,255,0.9); box-shadow:inset 0 0 0 1px rgba(255,255,255,0.7);
+}
+.configKidsTitle{color:#2E6F2F; font-weight:700; font-size:17px; line-height:1.2; margin-bottom:3px;}
+.configKidsDesc{font-size:12px; color:#44555A; line-height:1.35;}
+.configArrow{font-size:26px; color:#3E7D35; text-align:center; transition:transform .2s ease;}
+.configSection.open .configArrow{transform:rotate(90deg);}
+.configSectionContent{
+  display:none;
+  margin-top:8px;
+  padding:13px 13px 12px;
+  background:rgba(255,255,255,0.82);
+  border:1px solid rgba(218,232,204,0.98);
+  border-radius:22px;
+  box-shadow:0 8px 18px rgba(73,112,68,0.06);
+}
+.configSection.open .configSectionContent{display:block;}
+.configSubLabel{font-size:12.5px; color:#2E6F2F; font-weight:700; margin:2px 0 8px;}
+.bgOptionsGrid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:10px;}
+.bgPreviewBtn{
+  border:none; border-radius:16px; background:#F8FAF7; padding:8px 6px; cursor:pointer; font-family:var(--fonte);
+  font-size:11.2px; color:#334; display:flex; flex-direction:column; gap:6px; align-items:center;
+  box-shadow:0 6px 12px rgba(0,0,0,0.04); border:1px solid rgba(217,230,214,0.95);
+}
+.bgPreviewBtn.ativo{outline:2px solid #8FCF57; background:#FFFFFF;}
+.bgThumb{width:100%; height:54px; border-radius:12px; display:block; border:1px solid rgba(255,255,255,0.85);}
+.bg-jardim{background:linear-gradient(180deg,#D9F0FF 0%, #F6FCFF 50%, #DFF2C9 100%);}
+.bg-ceu{background:linear-gradient(180deg,#D7EEFF 0%, #EFF9FF 68%, #FFFFFF 100%);}
+.bg-flores{background:linear-gradient(180deg,#EAF5FF 0%, #FFF7FB 60%, #F3FFD9 100%);}
+.bg-estrelas{background:linear-gradient(180deg,#7D90C9 0%, #D9E5FF 62%, #F8FBFF 100%);}
+.bg-luar{background:radial-gradient(circle at 75% 25%, #FFEF99 0 14px, transparent 15px), linear-gradient(180deg,#A6B8E6 0%, #E5EDFF 64%, #FCFDFF 100%);}
+.bg-galaxia{background:linear-gradient(180deg,#8C9FD5 0%, #DDE6FF 58%, #FDFEFF 100%);}
+.selectSomKids, .kidsConfigInner textarea, .kidsConfigInner input[type="text"]{
+  width:100%; border:1px solid var(--borda); border-radius:14px; padding:12px 14px; font-size:13px; font-family:var(--fonte);
+  background:#fff; outline:none;
+}
+.compactField{margin-bottom:10px;}
+.volumeKidsBox{background:#F7FBFF; border:1px solid var(--borda); border-radius:18px; padding:12px; margin-top:2px;}
+.rangeSomKids{width:100%; accent-color:#5C9D5C; cursor:pointer;}
+.volumeValorKids{text-align:center; margin-top:8px; font-size:12px; color:#44555A; font-weight:600;}
+.kidsMiniBtns button{padding:11px 12px; border-radius:14px;}
+.listaConfigTarefasKids{display:flex; flex-direction:column; gap:8px; margin-top:8px;}
+.listaConfigTarefasKids > div{border-radius:14px !important; padding:9px 10px !important;}
+.kidsSaveBtn{margin-top:6px;}
+
+/* fundos configuráveis por período */
+body[data-period="morning"][data-theme-bg="jardim"] .card{
+  background: linear-gradient(rgba(255,255,255,0.14), rgba(255,255,255,0.14)), url("fundo-jardim-maya.png") center top / cover no-repeat, linear-gradient(180deg, #DFF2FF 0%, #F5FBFC 48%, #F7FFF2 100%) !important;
+}
+body[data-period="morning"][data-theme-bg="ceu"] .card{
+  background: linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.12)), radial-gradient(circle at 24% 14%, rgba(255,255,255,0.9) 0 70px, transparent 72px), radial-gradient(circle at 78% 18%, rgba(255,255,255,0.86) 0 44px, transparent 46px), linear-gradient(180deg, #D8EEFF 0%, #EEF8FF 52%, #FAFFFD 100%) !important;
+}
+body[data-period="morning"][data-theme-bg="flores"] .card{
+  background: linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.12)), radial-gradient(circle at 16% 88%, rgba(255,173,197,0.38) 0 24px, transparent 25px), radial-gradient(circle at 84% 86%, rgba(255,214,107,0.34) 0 22px, transparent 23px), linear-gradient(180deg, #E5F4FF 0%, #FFF8FC 55%, #F2FFD8 100%) !important;
+}
+body[data-period="night"][data-theme-bg="estrelas"] .card{
+  background: linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), radial-gradient(circle at 18% 16%, rgba(255,255,255,0.92) 0 2px, transparent 3px), radial-gradient(circle at 36% 10%, rgba(255,255,255,0.85) 0 2px, transparent 3px), radial-gradient(circle at 78% 22%, rgba(255,255,255,0.82) 0 2px, transparent 3px), linear-gradient(180deg, #A4B7E8 0%, #E3EBFF 58%, #FCFDFF 100%) !important;
+}
+body[data-period="night"][data-theme-bg="luar"] .card{
+  background: linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.12)), radial-gradient(circle at 82% 13%, rgba(255,237,153,0.92) 0 34px, rgba(255,237,153,0.20) 35px, transparent 52px), radial-gradient(circle at 25% 15%, rgba(255,255,255,0.92) 0 56px, transparent 58px), linear-gradient(180deg, #B4C2EA 0%, #E8EEFF 62%, #FBFDFF 100%) !important;
+}
+body[data-period="night"][data-theme-bg="galaxia"] .card{
+  background: linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)), radial-gradient(circle at 22% 18%, rgba(255,255,255,0.86) 0 2px, transparent 3px), radial-gradient(circle at 76% 20%, rgba(255,255,255,0.78) 0 2px, transparent 3px), radial-gradient(circle at 56% 12%, rgba(255,216,242,0.35) 0 26px, transparent 27px), linear-gradient(180deg, #A8AEE8 0%, #E6E8FF 58%, #FCFCFF 100%) !important;
+}
+@media (max-width:430px){
+  .footerMiniAction{grid-template-columns:1fr auto 1fr !important; gap:8px !important;}
+  .bgOptionsGrid{grid-template-columns:repeat(3,1fr); gap:7px;}
+  .bgThumb{height:48px;}
+  .configKidsCard{grid-template-columns:62px 1fr 18px; gap:10px; padding:11px 12px;}
+  .configBigIcon{width:62px; height:62px; font-size:30px;}
+}
+
+
+.modalEditTaskKids{
+  width:min(380px, 100%) !important;
+  max-height:calc(100vh - 28px) !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border-radius:30px !important;
+  border:1px solid rgba(191,222,179,0.92) !important;
+  background:linear-gradient(180deg, rgba(255,255,255,0.97), rgba(255,251,240,0.97)) !important;
+}
+
+
+
+/* ajuste visual da janela Editar tarefa */
+.modalEditTaskKids{
+  width:min(372px, calc(100vw - 28px)) !important;
+  max-height:calc(100vh - 28px) !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border-radius:28px !important;
+  border:1px solid rgba(191,222,179,0.95) !important;
+  background:
+    radial-gradient(circle at 8% 10%, rgba(255,222,235,0.35) 0 42px, transparent 43px),
+    radial-gradient(circle at 94% 12%, rgba(225,246,255,0.45) 0 38px, transparent 39px),
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,252,244,0.98)) !important;
+  box-shadow:0 20px 48px rgba(63,111,79,0.22) !important;
+}
+
+.modalEditTaskKids .modalKidsInner{
+  max-height:calc(100vh - 28px);
+  overflow-y:auto;
+  padding:18px 16px 16px !important;
+}
+
+.modalEditTaskKids .kidsHeaderConfig{
+  grid-template-columns:46px 1fr 40px !important;
+  gap:8px !important;
+  margin-bottom:14px !important;
+  align-items:center !important;
+}
+
+.modalEditTaskKids .kidsHeaderIcon{
+  width:46px !important;
+  height:46px !important;
+  border-radius:17px !important;
+  font-size:25px !important;
+  background:#F7F0FF !important;
+}
+
+.modalEditTaskKids .kidsTitle{
+  font-size:21px !important;
+  line-height:1.08 !important;
+  color:#2E7A2F !important;
+}
+
+.modalEditTaskKids .kidsSubtitle{
+  font-size:12px !important;
+  line-height:1.35 !important;
+  margin-top:4px !important;
+  color:#55666B !important;
+}
+
+.modalEditTaskKids .kidsClose{
+  width:40px !important;
+  height:40px !important;
+  font-size:23px !important;
+  background:#F2FAED !important;
+}
+
+.modalEditTaskKids .field{
+  gap:6px !important;
+  margin-bottom:11px !important;
+}
+
+.modalEditTaskKids .labelComEmoji,
+.modalEditTaskKids .field > label{
+  min-height:28px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:8px !important;
+  padding:0 2px !important;
+  color:#2F3A35 !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+}
+
+.modalEditTaskKids .emojiMiniBtn{
+  width:30px !important;
+  height:30px !important;
+  border-radius:50% !important;
+  background:#FFF4D8 !important;
+  font-size:15px !important;
+  flex-shrink:0 !important;
+}
+
+.modalEditTaskKids textarea{
+  width:100% !important;
+  border:1px solid rgba(217,230,214,0.98) !important;
+  border-radius:18px !important;
+  background:rgba(255,255,255,0.95) !important;
+  padding:13px 14px !important;
+  font-size:13px !important;
+  line-height:1.45 !important;
+  color:#2F2F2F !important;
+  outline:none !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.55) !important;
+}
+
+.modalEditTaskKids textarea:focus{
+  border-color:#8FCF57 !important;
+  box-shadow:0 0 0 3px rgba(143,207,87,0.16) !important;
+}
+
+#editarTarefaTexto,
+#editarTarefaDescricao{
+  height:72px !important;
+}
+
+.horarioDuploEdit{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.horarioDuploCampo{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.horarioDuploCampo span{
+  font-size:12px;
+  color:#55666B;
+  font-weight:600;
+  padding-left:2px;
+}
+
+#editarTarefaHoraDe,
+#editarTarefaHoraAte{
+  height:46px !important;
+}
+
+.modalEditTaskKids .modalBtns{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:8px !important;
+  margin-top:4px !important;
+}
+
+.modalEditTaskKids .modalBtns button{
+  min-height:42px !important;
+  border-radius:16px !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+}
+
+.modalEditTaskKids .modalBtns .cancel{
+  background:#F1F2F0 !important;
+  color:#4A4F4A !important;
+}
+
+.modalEditTaskKids .modalBtns .save{
+  background:#5FA463 !important;
+  color:#FFFFFF !important;
+}
+
+@media (max-width:430px){
+  .modalEditTaskKids{
+    width:min(366px, calc(100vw - 24px)) !important;
+  }
+  .modalEditTaskKids .modalKidsInner{
+    padding:17px 14px 15px !important;
+  }
+  .modalEditTaskKids .kidsHeaderConfig{
+    grid-template-columns:42px 1fr 38px !important;
+  }
+  .modalEditTaskKids .kidsHeaderIcon{
+    width:42px !important;
+    height:42px !important;
+    font-size:23px !important;
+  }
+}
+
+
+/* Ajustes finais da configuração da rotina: igualar ao maya-menu */
+.modalKidsConfig{
+  width:min(392px, 100%) !important;
+  max-height:calc(100vh - 28px) !important;
+}
+
+.kidsConfigInner{
+  padding:20px 16px 16px !important;
+}
+
+.kidsHeaderConfig{
+  grid-template-columns:54px 1fr 42px !important;
+  gap:10px !important;
+  margin-bottom:14px !important;
+}
+
+.kidsHeaderConfig .kidsHeaderIcon,
+.kidsConfigHeaderIcon{
+  width:54px !important;
+  height:54px !important;
+  border-radius:20px !important;
+  font-size:29px !important;
+}
+
+.kidsTitle{
+  font-size:22px !important;
+  line-height:1.08 !important;
+}
+
+.kidsSubtitle{
+  font-size:12.5px !important;
+  line-height:1.35 !important;
+  margin-top:5px !important;
+}
+
+.configSection{
+  margin-bottom:9px !important;
+}
+
+.configKidsCard{
+  min-height:72px !important;
+  border-radius:22px !important;
+  padding:10px 12px !important;
+  grid-template-columns:54px 1fr 18px !important;
+  gap:12px !important;
+}
+
+.configBigIcon{
+  width:54px !important;
+  height:54px !important;
+  border-radius:18px !important;
+  font-size:27px !important;
+}
+
+.configKidsTitle{
+  font-size:15px !important;
+  line-height:1.18 !important;
+  margin-bottom:2px !important;
+}
+
+.configKidsDesc{
+  font-size:11.5px !important;
+  line-height:1.28 !important;
+}
+
+.configArrow{
+  font-size:23px !important;
+}
+
+.configSectionContent{
+  margin-top:7px !important;
+  padding:11px 12px !important;
+  border-radius:20px !important;
+}
+
+.kidsSaveBtn{
+  min-height:42px !important;
+  padding:11px 14px !important;
+  border-radius:18px !important;
+  font-size:14px !important;
+  margin-top:6px !important;
+  box-shadow:0 7px 14px rgba(73,112,68,0.14) !important;
+}
+
+.listaIdeiasFundo{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  margin-top:10px;
+}
+
+.ideiaFundoItem{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
+  background:#FFFDF5;
+  border:1px solid #F1E7BA;
+  border-radius:14px;
+  padding:9px 10px;
+  font-size:12px;
+  color:#39484D;
+  line-height:1.35;
+}
+
+.ideiaFundoItem button{
+  border:none;
+  width:28px;
+  height:28px;
+  border-radius:10px;
+  background:#F5E6E6;
+  color:#8A3030;
+  cursor:pointer;
+  font-family:var(--fonte);
+  font-size:12px;
+}
+
+@media (max-width:430px){
+  .kidsConfigInner{ padding:18px 14px 15px !important; }
+  .configKidsCard{
+    grid-template-columns:52px 1fr 18px !important;
+    min-height:70px !important;
+    padding:10px 11px !important;
+  }
+  .configBigIcon{
+    width:52px !important;
+    height:52px !important;
+    font-size:26px !important;
+  }
+}
+
+
+/* Campo de emoji do card na edição da tarefa */
+.emojiCardChooser{
+  display:grid;
+  grid-template-columns:64px 1fr;
+  gap:10px;
+  align-items:center;
+  background:#F8FAF7;
+  border:1px solid rgba(217,230,214,0.98);
+  border-radius:18px;
+  padding:10px;
+}
+
+.emojiCardPreview{
+  width:54px;
+  height:54px;
+  border:none;
+  border-radius:18px;
+  background:rgba(255,255,255,0.86);
+  font-size:28px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.8);
+}
+
+.emojiCardPicker{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  gap:5px;
+}
+
+.emojiCardOption{
+  border:none;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  background:#FFFFFF;
+  cursor:pointer;
+  font-size:17px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(217,230,214,0.75);
+}
+
+.emojiCardOption.ativo{
+  background:#EAF7E2;
+  border-color:#8FCF57;
+  box-shadow:0 0 0 2px rgba(143,207,87,0.18);
+}
+
+@media (max-width:430px){
+  .emojiCardPicker{
+    grid-template-columns:repeat(6, 1fr);
+  }
+}
+
+
+/* Sons extras da rotina */
+.somLinhaRotina{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 46px;
+  gap:8px;
+  align-items:center;
+}
+
+.botaoIconeSomRotina{
+  width:46px;
+  height:44px;
+  border:1px solid var(--borda);
+  background:#F8FAF7;
+  color:#3F6F4F;
+  border-radius:14px;
+  cursor:pointer;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.2s ease;
+}
+
+.botaoIconeSomRotina:hover{
+  background:#EAF4E9;
+}
+
+.botaoIconeSomRotina.desligado{
+  background:#F2F2F2;
+  color:#9A9A9A;
+}
+
+</style>
 </head>
 
 <body>
@@ -877,14 +2230,14 @@
         <button class="botao-voltar" onclick="location.href='maya-menu.html'"><span>←</span></button>
 
         <div class="topCenter">
-          <h1 class="titleIndex">🌿 Maya</h1>
-          <p class="subtitulo">seu jardim de rotina</p>
+          <h1 class="titleIndex">Rotina da Maya</h1>
+          <p class="subtitulo">pequenos passos, grandes conquistas</p>
         </div>
 
         <div class="dataTopo" aria-label="Data e hora atuais">
           <div id="linhaTempoHora" class="horaTopo"></div>
-          <div id="linhaTempoDia" class="dataTopoLinha"></div>
           <div id="linhaTempoData" class="dataTopoLinha"></div>
+          <div id="linhaTempoDia" class="dataTopoLinha"></div>
         </div>
       </div>
 
@@ -911,21 +2264,20 @@
       <div id="sectionTitle" class="sectionTitle"></div>
       <div id="list" class="list"></div>
 
-      <div class="progress">
-        <div class="progressLine" id="progressLine">0 de 0 concluídas</div>
-        <div class="hint" id="mainHint">Toque numa tarefa para marcar</div>
-        <div class="garden" id="garden">🌧️🌧️🌧️🌧️🌧️🌧️</div>
-
+      <div class="dayActionsCompact">
         <button id="completeDayBtn" class="completeBtn" onclick="completeDay()">
           🕘 Concluir o dia
         </button>
-
         <div id="statusBox" class="statusBox"></div>
       </div>
 
+      <div id="progressLine" style="display:none;">0 de 0 concluídas</div>
+      <div id="mainHint" style="display:none;">Toque numa tarefa para marcar</div>
+      <div id="garden" style="display:none;">🌧️🌧️🌧️🌧️🌧️🌧️</div>
+
       <div class="footerMiniAction">
-        <button id="soundToggleBtn" class="soundToggleBtn" onclick="toggleSomManual()">🔊 on</button>
         <button class="futureBtn" onclick="abrirModalConfiguracao()">configuração</button>
+        <button id="soundToggleBtn" class="soundToggleBtn" onclick="toggleSomManual()" title="ligar ou desligar som">🔊</button>
         <button class="futureBtn" onclick="abrirModalAnotacoes()">futuras edições</button>
       </div>
 
@@ -949,52 +2301,291 @@
   </div>
 
 <div class="modalOverlay" id="modalConfiguracao">
-  <div class="modal">
-
-    <div class="modalHeader">
-      <button class="fecharModal" onclick="fecharModalConfiguracao()">✕</button>
-    </div>
-
-    <h2 class="modalTitle">Configuração da rotina</h2>
-
-    <div class="field" style="margin-top:2px;">
-      <label>Período da rotina</label>
-      <div class="opcoes-config-periodo">
-        <button id="opcaoConfigManha" class="opcaoConfigPeriodoBtn" type="button" onclick="definirPeriodoConfiguracao('morning')">☀️ Manhã</button>
-        <button id="opcaoConfigNoite" class="opcaoConfigPeriodoBtn" type="button" onclick="definirPeriodoConfiguracao('night')">🌓 Noite</button>
+  <div class="modal modalKidsConfig">
+    <div class="modalKidsInner kidsConfigInner">
+      <div class="kidsHeader kidsHeaderConfig">
+        <div class="kidsHeaderIcon kidsConfigHeaderIcon">⚙️</div>
+        <div class="kidsTitleBox">
+          <div class="kidsTitle">Configuração</div>
+          <div class="kidsSubtitle">Escolha o que você quer mudar no seu cantinho!</div>
+        </div>
+        <button class="kidsClose" onclick="fecharModalConfiguracao()">✕</button>
       </div>
-      <div class="texto-ajuda-config">Escolha qual lista você quer ajustar sem precisar fechar a configuração.</div>
-    </div>
 
-    <div class="field">
-      <label class="labelComEmoji">
-        <span>Nova tarefa</span>
-        <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('novaTarefaTexto')">😊</button>
-      </label>
-      <textarea id="novaTarefaTexto" style="height:72px;" placeholder="Nome da tarefa"></textarea>
-    </div>
+      <div class="configSection" id="sectionCardRotina">
+        <button class="configKidsCard rotina" type="button" onclick="toggleConfigSection('rotina')">
+          <div class="configBigIcon">📝</div>
+          <div class="configKidsText">
+            <div class="configKidsTitle">Minha rotina</div>
+            <div class="configKidsDesc">Acrescente, edite e organize as tarefas da manhã e da noite.</div>
+          </div>
+          <div id="arrowRotina" class="configArrow">›</div>
+        </button>
+        <div id="configSectionRotina" class="configSectionContent">
+          <div class="field compactField" style="margin-top:2px;">
+            <label>Período da rotina</label>
+            <div class="opcoes-config-periodo">
+              <button id="opcaoConfigManha" class="opcaoConfigPeriodoBtn" type="button" onclick="definirPeriodoConfiguracao('morning')">☀️ Manhã</button>
+              <button id="opcaoConfigNoite" class="opcaoConfigPeriodoBtn" type="button" onclick="definirPeriodoConfiguracao('night')">🌙 Noite</button>
+            </div>
+            <div class="texto-ajuda-config">Escolha qual lista você quer ajustar sem fechar a configuração.</div>
+          </div>
 
-    <div class="field">
-      <label class="labelComEmoji">
-        <span>Descrição</span>
-        <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('novaTarefaDescricao')">😊</button>
-      </label>
-      <textarea id="novaTarefaDescricao" style="height:72px;" placeholder="Descrição da tarefa"></textarea>
-    </div>
+          <div class="field compactField">
+            <label class="labelComEmoji">
+              <span>Nova tarefa</span>
+              <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('novaTarefaTexto')">😊</button>
+            </label>
+            <textarea id="novaTarefaTexto" style="height:68px;" placeholder="Nome da tarefa"></textarea>
+          </div>
 
-    <div class="field">
-      <label>Horário</label>
-      <textarea id="novaTarefaHora" style="height:48px;" placeholder="Ex.: 09h30m"></textarea>
-    </div>
+          <div class="field compactField">
+            <label class="labelComEmoji">
+              <span>Descrição</span>
+              <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('novaTarefaDescricao')">😊</button>
+            </label>
+            <textarea id="novaTarefaDescricao" style="height:68px;" placeholder="Descrição da tarefa"></textarea>
+          </div>
 
-    <div class="modalBtns">
-      <button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
-      <button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
-    </div>
+          <div class="field compactField">
+            <label>Emoji do card</label>
+            <div class="emojiCardChooser">
+              <button id="novaTarefaEmojiPreview" class="emojiCardPreview" type="button" onclick="abrirEmojiPalette('novaTarefaEmoji')">🌼</button>
+              <div id="novaTarefaEmojiPicker" class="emojiCardPicker"></div>
+            </div>
+            <input id="novaTarefaEmoji" type="hidden" value="🌼">
+          </div>
 
-    <div id="listaConfigTarefas" style="display:flex; flex-direction:column; gap:8px; margin-top:4px;"></div>
+          <div class="field compactField">
+            <label>Horário</label>
+            <div class="horarioDuploEdit">
+              <div class="horarioDuploCampo">
+                <span>de</span>
+                <textarea id="novaTarefaHoraDe" style="height:48px;" placeholder="Ex.: 09h00m"></textarea>
+              </div>
+              <div class="horarioDuploCampo">
+                <span>até</span>
+                <textarea id="novaTarefaHoraAte" style="height:48px;" placeholder="Ex.: 11h00m"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="modalBtns kidsMiniBtns">
+            <button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
+            <button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
+          </div>
+
+          <div id="listaConfigTarefas" class="listaConfigTarefasKids"></div>
+        </div>
+      </div>
+
+      
+<div class="configSection" id="sectionCardFundos">
+        <button class="configKidsCard fundo" type="button" onclick="toggleConfigSection('fundos')">
+          <div class="configBigIcon">🌳</div>
+          <div class="configKidsText">
+            <div class="configKidsTitle">Meu fundo</div>
+            <div class="configKidsDesc">Escolha um cenário para a manhã e outro para a noite.</div>
+          </div>
+          <div id="arrowFundos" class="configArrow">›</div>
+        </button>
+        <div id="configSectionFundos" class="configSectionContent">
+          <div class="configSubLabel">☀️ Fundo da manhã</div>
+          <div class="bgOptionsGrid">
+            <button type="button" class="bgPreviewBtn" data-period="morning" data-theme="jardim" onclick="selecionarFundoConfiguracao('morning','jardim')">
+              <span class="bgThumb bg-jardim"></span><span>Jardim</span>
+            </button>
+            <button type="button" class="bgPreviewBtn" data-period="morning" data-theme="ceu" onclick="selecionarFundoConfiguracao('morning','ceu')">
+              <span class="bgThumb bg-ceu"></span><span>Céu claro</span>
+            </button>
+            <button type="button" class="bgPreviewBtn" data-period="morning" data-theme="flores" onclick="selecionarFundoConfiguracao('morning','flores')">
+              <span class="bgThumb bg-flores"></span><span>Flores</span>
+            </button>
+          </div>
+
+          <div class="configSubLabel">🌙 Fundo da noite</div>
+          <div class="bgOptionsGrid">
+            <button type="button" class="bgPreviewBtn" data-period="night" data-theme="estrelas" onclick="selecionarFundoConfiguracao('night','estrelas')">
+              <span class="bgThumb bg-estrelas"></span><span>Estrelas</span>
+            </button>
+            <button type="button" class="bgPreviewBtn" data-period="night" data-theme="luar" onclick="selecionarFundoConfiguracao('night','luar')">
+              <span class="bgThumb bg-luar"></span><span>Luar</span>
+            </button>
+            <button type="button" class="bgPreviewBtn" data-period="night" data-theme="galaxia" onclick="selecionarFundoConfiguracao('night','galaxia')">
+              <span class="bgThumb bg-galaxia"></span><span>Galáxia</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      
+<div class="configSection" id="sectionCardSons">
+        <button class="configKidsCard sons" type="button" onclick="toggleConfigSection('sons')">
+          <div class="configBigIcon">🎵</div>
+          <div class="configKidsText">
+            <div class="configKidsTitle">Sons</div>
+            <div class="configKidsDesc">Configure as músicas e o volume da rotina.</div>
+          </div>
+          <div id="arrowSons" class="configArrow">›</div>
+        </button>
+        <div id="configSectionSons" class="configSectionContent">
+          <div class="field compactField">
+            <label for="configSomManha">Som da manhã</label>
+            <select id="configSomManha" class="selectSomKids">
+              <option value="wheels-audionautix-manha.mp3">Wheels</option>
+              <option value="meditation-impromptu-03-kevin-macleod-noite.mp3">Meditation Impromptu 03</option>
+            </select>
+          </div>
+          <div class="field compactField">
+            <label for="configSomNoite">Som da noite</label>
+            <select id="configSomNoite" class="selectSomKids">
+              <option value="meditation-impromptu-03-kevin-macleod-noite.mp3">Meditation Impromptu 03</option>
+              <option value="wheels-audionautix-manha.mp3">Wheels</option>
+            </select>
+          </div>
+          <div class="field compactField">
+            <label for="configSomTarefaConcluida">Som de tarefa concluída</label>
+            <div class="somLinhaRotina">
+              <select id="configSomTarefaConcluida" class="selectSomKids">
+                <option value="">Aguardando seus sons especiais</option>
+                <option value="Magic Chime.mp3">Magic Chime</option>
+                <option value="Whistle toy.mp3">Whistle toy</option>
+                <option value="Pop.mp3">Pop</option>
+                <option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
+                <option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
+                <option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
+              </select>
+              <button id="toggleTarefaConcluidaRotina" class="botaoIconeSomRotina" onclick="toggleSomEfeitoRotina('tarefaConcluida')" type="button">🔊</button>
+            </div>
+          </div>
+
+          <div class="field compactField">
+            <label for="configSomBlocoConcluido">Som de bloco concluído</label>
+            <div class="somLinhaRotina">
+              <select id="configSomBlocoConcluido" class="selectSomKids">
+                <option value="">Aguardando seus sons especiais</option>
+                <option value="Magic Chime.mp3">Magic Chime</option>
+                <option value="Whistle toy.mp3">Whistle toy</option>
+                <option value="Pop.mp3">Pop</option>
+                <option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
+                <option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
+                <option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
+              </select>
+              <button id="toggleBlocoConcluidoRotina" class="botaoIconeSomRotina" onclick="toggleSomEfeitoRotina('blocoConcluido')" type="button">🔊</button>
+            </div>
+          </div>
+
+          <div class="field compactField">
+            <label for="configSomDiaConcluido">Som de dia concluído</label>
+            <div class="somLinhaRotina">
+              <select id="configSomDiaConcluido" class="selectSomKids">
+                <option value="">Aguardando seus sons especiais</option>
+                <option value="Magic Chime.mp3">Magic Chime</option>
+                <option value="Whistle toy.mp3">Whistle toy</option>
+                <option value="Pop.mp3">Pop</option>
+                <option value="Cowbell Ringing.mp3">Cowbell Ringing</option>
+                <option value="Child Toy Chime Clinck and Clanks.mp3">Child Toy Chime Clinck and Clanks</option>
+                <option value="Child Toy Chime Tarefa.mp3">Child Toy Chime Tarefa</option>
+              </select>
+              <button id="toggleDiaConcluidoRotina" class="botaoIconeSomRotina" onclick="toggleSomEfeitoRotina('diaConcluido')" type="button">🔊</button>
+            </div>
+          </div>
+          <div class="volumeKidsBox">
+            <div class="configSubLabel" style="margin:0 0 8px;">🔊 Volume geral</div>
+            <input id="configVolumeGeral" class="rangeSomKids" type="range" min="0" max="1" step="0.05" value="0.35" oninput="atualizarLabelVolumeConfig()">
+            <div id="configVolumeValor" class="volumeValorKids">35%</div>
+          </div>
+        </div>
+      </div>
+
+      
+<div class="configSection" id="sectionCardIdeia">
+        <button class="configKidsCard ideia" type="button" onclick="toggleConfigSection('ideia')">
+          <div class="configBigIcon">💡</div>
+          <div class="configKidsText">
+            <div class="configKidsTitle">Quero um novo fundo</div>
+            <div class="configKidsDesc">Conte sua ideia de cenário para a gente.</div>
+          </div>
+          <div id="arrowIdeia" class="configArrow">›</div>
+        </button>
+        <div id="configSectionIdeia" class="configSectionContent">
+          <div class="field compactField">
+            <label for="ideiaNovoFundo">Minha ideia</label>
+            <textarea id="ideiaNovoFundo" style="height:84px;" placeholder="Ex.: fundo com arco-íris, estrelas, flores ou praia..."></textarea>
+          </div>
+          <div class="modalBtns kidsMiniBtns">
+            <button class="save" onclick="salvarIdeiaNovoFundo()">guardar ideia</button>
+          </div>
+          <div id="statusIdeiaFundo" class="texto-ajuda-config" style="margin-top:6px;"></div>
+          <div id="listaIdeiasFundo" class="listaIdeiasFundo"></div>
+        </div>
+      </div>
+
+      
+
+      <button class="kidsPrimaryBtn kidsSaveBtn" onclick="salvarConfiguracaoVisual()">💾 Salvar alterações</button>
+    </div>
   </div>
 </div>
+
+  <div class="modalOverlay" id="modalEditarTarefaConfig">
+    <div class="modal modalEditTaskKids">
+      <div class="modalKidsInner">
+        <div class="kidsHeader kidsHeaderConfig">
+          <div class="kidsHeaderIcon kidsConfigHeaderIcon">✏️</div>
+          <div class="kidsTitleBox">
+            <div class="kidsTitle">Editar tarefa</div>
+            <div class="kidsSubtitle">Ajuste as informações dessa tarefa.</div>
+          </div>
+          <button class="kidsClose" onclick="fecharModalEditarTarefaConfig()">✕</button>
+        </div>
+
+        <div class="field compactField">
+          <label class="labelComEmoji">
+            <span>Nome da tarefa</span>
+            <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('editarTarefaTexto')">😊</button>
+          </label>
+          <textarea id="editarTarefaTexto" style="height:76px;" placeholder="Nome da tarefa"></textarea>
+        </div>
+
+        <div class="field compactField">
+          <label class="labelComEmoji">
+            <span>Descrição</span>
+            <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('editarTarefaDescricao')">😊</button>
+          </label>
+          <textarea id="editarTarefaDescricao" style="height:76px;" placeholder="Descrição da tarefa"></textarea>
+        </div>
+
+        <div class="field compactField">
+          <label>Emoji do card</label>
+          <div class="emojiCardChooser">
+            <button id="editarTarefaEmojiPreview" class="emojiCardPreview" type="button" onclick="abrirEmojiPalette('editarTarefaEmoji')">🌼</button>
+            <div id="editarTarefaEmojiPicker" class="emojiCardPicker"></div>
+          </div>
+          <input id="editarTarefaEmoji" type="hidden" value="">
+        </div>
+
+        <div class="field compactField">
+          <label>Horário</label>
+          <div class="horarioDuploEdit">
+            <div class="horarioDuploCampo">
+              <span>de</span>
+              <textarea id="editarTarefaHoraDe" style="height:48px;" placeholder="Ex.: 09h00m"></textarea>
+            </div>
+            <div class="horarioDuploCampo">
+              <span>até</span>
+              <textarea id="editarTarefaHoraAte" style="height:48px;" placeholder="Ex.: 11h00m"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modalBtns kidsMiniBtns">
+          <button type="button" class="cancel" onclick="fecharModalEditarTarefaConfig()">Cancelar</button>
+          <button type="button" id="btnSalvarEdicaoTarefaConfig" class="save" onclick="salvarEdicaoTarefaConfig(event)">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="modalOverlay" id="modalRegraTela">
     <div class="modal">
@@ -1061,6 +2652,7 @@
 
   <audio id="audioManha" loop preload="auto"></audio>
   <audio id="audioNoite" loop preload="auto"></audio>
+  <audio id="audioPreviewRotina" preload="auto"></audio>
 
 <div id="emojiPalette" class="emojiPalette"></div>
 
@@ -1071,6 +2663,9 @@
   const CONFIG_SOM_KEY = "config_som_maya";
   const REGRA_TELA_HOJE_KEY = "regra_tela_hoje_maya";
   const CONFIG_TAREFAS_KEY = "config_tarefas_maya_rotina";
+  const CONFIG_VISUAL_ROTINA_KEY = "config_visual_maya_rotina";
+  const IDEIA_FUNDO_ROTINA_KEY = "ideia_fundo_maya_rotina";
+  const LISTA_IDEIAS_FUNDO_ROTINA_KEY = "lista_ideias_fundo_maya_rotina";
 
   const TASKS = {
     morning: {
@@ -1194,6 +2789,28 @@
   ];
 
   let currentTab = "morning";
+
+  function turnoAtualPeloHorario(){
+    const agora = new Date();
+    const minutos = agora.getHours() * 60 + agora.getMinutes();
+    if(minutos >= 1 && minutos <= 18 * 60){
+      return "morning";
+    }
+    return "night";
+  }
+
+  function definirTurnoInicialPorHorario(){
+    if(location.hash === "#morning"){
+      currentTab = "morning";
+      return;
+    }
+    if(location.hash === "#night"){
+      currentTab = "night";
+      return;
+    }
+    currentTab = turnoAtualPeloHorario();
+  }
+
   let store = loadStore();
   let cycleDayKey = getCycleDayKey();
 
@@ -1207,6 +2824,12 @@
       ativo: true,
       manha: "wheels-audionautix-manha.mp3",
       noite: "meditation-impromptu-03-kevin-macleod-noite.mp3",
+      tarefaConcluidaAtivo: false,
+      tarefaConcluida: "",
+      blocoConcluidoAtivo: false,
+      blocoConcluido: "",
+      diaConcluidoAtivo: false,
+      diaConcluido: "",
       volume: 0.35
     };
   }
@@ -1228,9 +2851,287 @@
 
   function atualizarBotaoSom(){
     const btn = document.getElementById("soundToggleBtn");
+    if(!btn) return;
     const config = getConfigSomSalva();
-    btn.textContent = config.ativo ? "🔊 on" : "🔇 off";
+    btn.textContent = config.ativo ? "🔊" : "🔇";
     btn.classList.toggle("off", !config.ativo);
+  }
+
+  function getConfigVisualRotinaPadrao(){
+    return {
+      fundos: {
+        morning: "jardim",
+        night: "estrelas"
+      }
+    };
+  }
+
+  function getConfigVisualRotina(){
+    try{
+      return {
+        ...getConfigVisualRotinaPadrao(),
+        ...(JSON.parse(localStorage.getItem(CONFIG_VISUAL_ROTINA_KEY)) || {}),
+        fundos: {
+          ...getConfigVisualRotinaPadrao().fundos,
+          ...((JSON.parse(localStorage.getItem(CONFIG_VISUAL_ROTINA_KEY)) || {}).fundos || {})
+        }
+      };
+    }catch(e){
+      return getConfigVisualRotinaPadrao();
+    }
+  }
+
+  function salvarConfigVisualRotina(config){
+    localStorage.setItem(CONFIG_VISUAL_ROTINA_KEY, JSON.stringify(config));
+  }
+
+  function aplicarFundoConfigurado(){
+    const config = getConfigVisualRotina();
+    const theme = currentTab === "night" ? (config.fundos.night || "estrelas") : (config.fundos.morning || "jardim");
+    document.body.setAttribute("data-period", currentTab === "night" ? "night" : "morning");
+    document.body.setAttribute("data-theme-bg", theme);
+  }
+
+  function atualizarBotoesPreviewFundo(){
+    const config = getConfigVisualRotina();
+    document.querySelectorAll('.bgPreviewBtn').forEach(btn => {
+      const period = btn.getAttribute('data-period');
+      const theme = btn.getAttribute('data-theme');
+      const ativo = config.fundos?.[period] === theme;
+      btn.classList.toggle('ativo', ativo);
+    });
+  }
+
+  function selecionarFundoConfiguracao(periodo, tema){
+    const config = getConfigVisualRotina();
+    config.fundos[periodo] = tema;
+    salvarConfigVisualRotina(config);
+    atualizarBotoesPreviewFundo();
+    aplicarFundoConfigurado();
+  }
+
+  function closeAllConfigSections(){
+    ['fundos','sons','rotina','ideia'].forEach(nome => {
+      const card = document.getElementById('sectionCard' + nome.charAt(0).toUpperCase() + nome.slice(1));
+      if(card) card.classList.remove('open');
+    });
+  }
+
+  function toggleConfigSection(nome){
+    const map = {
+      fundos: 'sectionCardFundos',
+      sons: 'sectionCardSons',
+      rotina: 'sectionCardRotina',
+      ideia: 'sectionCardIdeia'
+    };
+    const alvo = document.getElementById(map[nome]);
+    if(!alvo) return;
+    const vaiAbrir = !alvo.classList.contains('open');
+    closeAllConfigSections();
+    if(vaiAbrir) alvo.classList.add('open');
+  }
+
+  function atualizarLabelVolumeConfig(){
+    const el = document.getElementById('configVolumeGeral');
+    const out = document.getElementById('configVolumeValor');
+    if(!el || !out) return;
+    out.textContent = Math.round(Number(el.value || 0) * 100) + '%';
+  }
+
+  function atualizarBotaoSomEfeitoRotina(chave, idBotao){
+    const botao = document.getElementById(idBotao);
+    if(!botao) return;
+    const config = getConfigSomSalva();
+    const ativo = !!config[chave];
+    botao.textContent = ativo ? "🔊" : "🔇";
+    botao.classList.toggle("desligado", !ativo);
+  }
+
+  function atualizarBotoesSonsEfeitosRotina(){
+    atualizarBotaoSomEfeitoRotina("tarefaConcluidaAtivo", "toggleTarefaConcluidaRotina");
+    atualizarBotaoSomEfeitoRotina("blocoConcluidoAtivo", "toggleBlocoConcluidoRotina");
+    atualizarBotaoSomEfeitoRotina("diaConcluidoAtivo", "toggleDiaConcluidoRotina");
+  }
+
+  function getSelectSomEfeitoRotina(tipo){
+    const mapa = {
+      tarefaConcluida: "configSomTarefaConcluida",
+      blocoConcluido: "configSomBlocoConcluido",
+      diaConcluido: "configSomDiaConcluido"
+    };
+    return document.getElementById(mapa[tipo]);
+  }
+
+  function getChaveSomEfeitoRotina(tipo){
+    const mapa = {
+      tarefaConcluida: ["tarefaConcluidaAtivo", "toggleTarefaConcluidaRotina"],
+      blocoConcluido: ["blocoConcluidoAtivo", "toggleBlocoConcluidoRotina"],
+      diaConcluido: ["diaConcluidoAtivo", "toggleDiaConcluidoRotina"]
+    };
+    return mapa[tipo];
+  }
+
+  function tocarPreviewSomEfeitoRotina(src){
+    if(!src) return;
+    const audio = document.getElementById("audioPreviewRotina");
+    if(!audio) return;
+
+    audio.pause();
+    audio.currentTime = 0;
+    audio.src = src;
+    audio.volume = Number(document.getElementById("configVolumeGeral")?.value || getConfigSomSalva().volume || 0.35);
+    audio.play().catch(() => {});
+    setTimeout(() => {
+      audio.pause();
+      audio.currentTime = 0;
+    }, 4500);
+  }
+
+  function toggleSomEfeitoRotina(tipo){
+    const dados = getChaveSomEfeitoRotina(tipo);
+    if(!dados) return;
+
+    const [chaveAtivo, idBotao] = dados;
+    const config = getConfigSomSalva();
+    config[chaveAtivo] = !config[chaveAtivo];
+    salvarConfigSom(config);
+    atualizarBotaoSomEfeitoRotina(chaveAtivo, idBotao);
+
+    if(config[chaveAtivo]){
+      const select = getSelectSomEfeitoRotina(tipo);
+      tocarPreviewSomEfeitoRotina(select?.value || "");
+    }
+  }
+
+  function getListaIdeiasFundo(){
+    try{
+      const lista = JSON.parse(localStorage.getItem(LISTA_IDEIAS_FUNDO_ROTINA_KEY)) || [];
+      return Array.isArray(lista) ? lista : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function salvarListaIdeiasFundo(lista){
+    localStorage.setItem(LISTA_IDEIAS_FUNDO_ROTINA_KEY, JSON.stringify(lista));
+  }
+
+  function renderizarListaIdeiasFundo(){
+    const box = document.getElementById('listaIdeiasFundo');
+    if(!box) return;
+
+    let lista = getListaIdeiasFundo();
+
+    const ideiaAntiga = localStorage.getItem(IDEIA_FUNDO_ROTINA_KEY);
+    if(ideiaAntiga && !lista.includes(ideiaAntiga)){
+      lista.push(ideiaAntiga);
+      salvarListaIdeiasFundo(lista);
+    }
+
+    box.innerHTML = '';
+
+    if(!lista.length){
+      box.innerHTML = '<div class="texto-ajuda-config">Nenhuma ideia guardada ainda.</div>';
+      return;
+    }
+
+    lista.forEach((texto, index) => {
+      const item = document.createElement('div');
+      item.className = 'ideiaFundoItem';
+
+      const span = document.createElement('span');
+      span.textContent = texto;
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = '✕';
+      btn.title = 'remover ideia';
+      btn.onclick = () => removerIdeiaFundo(index);
+
+      item.appendChild(span);
+      item.appendChild(btn);
+      box.appendChild(item);
+    });
+  }
+
+  function removerIdeiaFundo(index){
+    const lista = getListaIdeiasFundo();
+    lista.splice(index, 1);
+    salvarListaIdeiasFundo(lista);
+    renderizarListaIdeiasFundo();
+  }
+
+  function preencherConfiguracaoVisual(){
+    const som = getConfigSomSalva();
+    const selectManha = document.getElementById('configSomManha');
+    const selectNoite = document.getElementById('configSomNoite');
+    const selectTarefaConcluida = document.getElementById('configSomTarefaConcluida');
+    const selectBlocoConcluido = document.getElementById('configSomBlocoConcluido');
+    const selectDiaConcluido = document.getElementById('configSomDiaConcluido');
+    const volume = document.getElementById('configVolumeGeral');
+    const ideia = document.getElementById('ideiaNovoFundo');
+    if(selectManha) selectManha.value = som.manha || 'wheels-audionautix-manha.mp3';
+    if(selectNoite) selectNoite.value = som.noite || 'meditation-impromptu-03-kevin-macleod-noite.mp3';
+    if(selectTarefaConcluida) selectTarefaConcluida.value = som.tarefaConcluida || '';
+    if(selectBlocoConcluido) selectBlocoConcluido.value = som.blocoConcluido || '';
+    if(selectDiaConcluido) selectDiaConcluido.value = som.diaConcluido || '';
+    if(volume) volume.value = Number(som.volume ?? 0.35);
+    atualizarLabelVolumeConfig();
+    atualizarBotoesSonsEfeitosRotina();
+    if(ideia) ideia.value = '';
+    atualizarBotoesPreviewFundo();
+    renderizarListaIdeiasFundo();
+  }
+
+  function salvarIdeiaNovoFundo(){
+    const campo = document.getElementById('ideiaNovoFundo');
+    const status = document.getElementById('statusIdeiaFundo');
+    const valor = campo ? campo.value.trim() : '';
+
+    if(!valor){
+      if(status) status.textContent = 'Escreva uma ideia primeiro 🌷';
+      return;
+    }
+
+    const lista = getListaIdeiasFundo();
+    lista.push(valor);
+    salvarListaIdeiasFundo(lista);
+    localStorage.setItem(IDEIA_FUNDO_ROTINA_KEY, valor);
+
+    if(campo) campo.value = '';
+    if(status) status.textContent = 'Ideia guardada 🌷';
+    renderizarListaIdeiasFundo();
+  }
+
+  function salvarConfiguracaoVisual(){
+    const config = getConfigSomSalva();
+    const selectManha = document.getElementById('configSomManha');
+    const selectNoite = document.getElementById('configSomNoite');
+    const selectTarefaConcluida = document.getElementById('configSomTarefaConcluida');
+    const selectBlocoConcluido = document.getElementById('configSomBlocoConcluido');
+    const selectDiaConcluido = document.getElementById('configSomDiaConcluido');
+    const volume = document.getElementById('configVolumeGeral');
+    if(selectManha) config.manha = selectManha.value;
+    if(selectNoite) config.noite = selectNoite.value;
+    if(selectTarefaConcluida) config.tarefaConcluida = selectTarefaConcluida.value;
+    if(selectBlocoConcluido) config.blocoConcluido = selectBlocoConcluido.value;
+    if(selectDiaConcluido) config.diaConcluido = selectDiaConcluido.value;
+    if(volume) config.volume = Number(volume.value || 0.35);
+    salvarConfigSom(config);
+    ["configSomTarefaConcluida", "configSomBlocoConcluido", "configSomDiaConcluido"].forEach(id => {
+      const select = document.getElementById(id);
+      if(select){
+        select.addEventListener("change", () => tocarPreviewSomEfeitoRotina(select.value));
+      }
+    });
+
+    renderizarEmojiPickerNovaTarefa("🌼");
+    aplicarConfigNosAudios();
+    aplicarFundoConfigurado();
+    if(musicaLiberada && config.ativo){
+      tocarAudioCorreto();
+    }
+    fecharModalConfiguracao();
   }
 
   function aplicarConfigNosAudios(){
@@ -1802,6 +3703,76 @@ const EMOJIS_CONFIG_MAYA = [
   "✅","💬","📖","📝","🏡","🧺","🌈","🪴"
 ];
 let campoEmojiAtualMaya = null;
+let emojiEditandoTarefaAtual = "";
+
+function getEmojiEditavelDaTarefa(item){
+  if(!item) return "";
+  return item.emoji || item.icone || "";
+}
+
+const EMOJIS_CARD_TAREFA = [
+  "⭐","🎮","🛁","🍽️","🪥","💧","🎒",
+  "🌙","🎨","📚","🧸","👟","📝","🌼",
+  "☀️","🌈","💚","🧼","🧺","🥛","🏡"
+];
+
+function escolherEmojiTarefa(emoji){
+  emojiEditandoTarefaAtual = emoji;
+  const input = document.getElementById("editarTarefaEmoji");
+  const preview = document.getElementById("editarTarefaEmojiPreview");
+  if(input) input.value = emoji;
+  if(preview) preview.textContent = emoji || "🌼";
+
+  document.querySelectorAll("#editarTarefaEmojiPicker .emojiCardOption").forEach(btn => {
+    btn.classList.toggle("ativo", btn.textContent === emoji);
+  });
+}
+
+function escolherEmojiNovaTarefa(emoji){
+  const input = document.getElementById("novaTarefaEmoji");
+  const preview = document.getElementById("novaTarefaEmojiPreview");
+  if(input) input.value = emoji;
+  if(preview) preview.textContent = emoji || "🌼";
+
+  document.querySelectorAll("#novaTarefaEmojiPicker .emojiCardOption").forEach(btn => {
+    btn.classList.toggle("ativo", btn.textContent === emoji);
+  });
+}
+
+function renderizarEmojiPickerTarefa(emojiAtual){
+  const box = document.getElementById("editarTarefaEmojiPicker");
+  if(!box) return;
+
+  box.innerHTML = "";
+  EMOJIS_CARD_TAREFA.forEach(emoji => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "emojiCardOption";
+    btn.textContent = emoji;
+    btn.onclick = () => escolherEmojiTarefa(emoji);
+    if(emoji === emojiAtual) btn.classList.add("ativo");
+    box.appendChild(btn);
+  });
+}
+
+function renderizarEmojiPickerNovaTarefa(emojiAtual = "🌼"){
+  const box = document.getElementById("novaTarefaEmojiPicker");
+  if(!box) return;
+
+  box.innerHTML = "";
+  EMOJIS_CARD_TAREFA.forEach(emoji => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "emojiCardOption";
+    btn.textContent = emoji;
+    btn.onclick = () => escolherEmojiNovaTarefa(emoji);
+    if(emoji === emojiAtual) btn.classList.add("ativo");
+    box.appendChild(btn);
+  });
+
+  escolherEmojiNovaTarefa(emojiAtual);
+}
+
 
 function abrirEmojiPalette(campoId){
   const campo = document.getElementById(campoId);
@@ -1829,6 +3800,19 @@ function abrirEmojiPalette(campoId){
 function inserirEmojiNoCampo(emoji){
   if(!campoEmojiAtualMaya) return;
   const campo = campoEmojiAtualMaya;
+
+  if(campo.id === "editarTarefaEmoji"){
+    escolherEmojiTarefa(emoji);
+    fecharEmojiPalette();
+    return;
+  }
+
+  if(campo.id === "novaTarefaEmoji"){
+    escolherEmojiNovaTarefa(emoji);
+    fecharEmojiPalette();
+    return;
+  }
+
   const inicio = campo.selectionStart ?? campo.value.length;
   const fim = campo.selectionEnd ?? campo.value.length;
   const antes = campo.value.slice(0, inicio);
@@ -1857,20 +3841,48 @@ function abrirModalConfiguracao(){
     periodoConfiguracaoAtual = currentTab === "night" ? "night" : "morning";
     document.getElementById("novaTarefaTexto").value = "";
     document.getElementById("novaTarefaDescricao").value = "";
-    document.getElementById("novaTarefaHora").value = "";
+    document.getElementById("novaTarefaHoraDe").value = "";
+    document.getElementById("novaTarefaHoraAte").value = "";
+    renderizarEmojiPickerNovaTarefa("🌼");
     renderizarOpcoesPeriodoConfiguracao();
     renderizarListaConfiguracao();
+    preencherConfiguracaoVisual();
+    closeAllConfigSections();
+    const status = document.getElementById('statusIdeiaFundo');
+    if(status) status.textContent = '';
     document.getElementById("modalConfiguracao").classList.add("show");
   }
 
   function fecharModalConfiguracao(){
+    closeAllConfigSections();
     document.getElementById("modalConfiguracao").classList.remove("show");
   }
 
+
+function normalizarDescricaoComPontos(texto){
+  const valor = String(texto || "").trim();
+
+  if(!valor) return "";
+
+  if(valor.includes("•")) return valor.replace(/\s*•\s*/g, " • ");
+
+  const partes = valor
+    .split(/\n+|;+/)
+    .map(parte => parte.trim())
+    .filter(Boolean);
+
+  if(partes.length > 1){
+    return partes.join(" • ");
+  }
+
+  return valor;
+}
+
   function adicionarTarefaConfiguracao(){
     const texto = document.getElementById("novaTarefaTexto").value.trim();
-const hora = formatarHorarioRotina(
-  document.getElementById("novaTarefaHora").value
+const hora = montarHorarioDeAte(
+  document.getElementById("novaTarefaHoraDe").value,
+  document.getElementById("novaTarefaHoraAte").value
 );
 
     if(!texto){
@@ -1881,12 +3893,16 @@ const hora = formatarHorarioRotina(
     const cfg = getConfigTarefas();
     const id = `custom_${periodoConfiguracaoAtual}_${Date.now()}`;
 
-const descricao = document.getElementById("novaTarefaDescricao").value.trim();
+const descricao = normalizarDescricaoComPontos(document.getElementById("novaTarefaDescricao").value);
+const emoji = document.getElementById("novaTarefaEmoji")?.value || "🌼";
+
 cfg.custom[periodoConfiguracaoAtual].push({
   id,
   text: texto,
   descricao: descricao,
   time: hora,
+  emoji: emoji,
+  icone: emoji,
   custom: true
 });
 
@@ -1897,7 +3913,9 @@ cfg.ordem[periodoConfiguracaoAtual].push(id);
     salvarConfigTarefas(cfg);
 document.getElementById("novaTarefaTexto").value = "";
 document.getElementById("novaTarefaDescricao").value = ""; // 👈 FALTA ESSA
-document.getElementById("novaTarefaHora").value = "";
+document.getElementById("novaTarefaHoraDe").value = "";
+document.getElementById("novaTarefaHoraAte").value = "";
+renderizarEmojiPickerNovaTarefa("🌼");
 renderizarListaConfiguracao();
 render();
   }
@@ -1969,7 +3987,7 @@ function renderizarListaConfiguracao(){
     nome.style.fontSize = "12px";
     nome.style.color = "var(--texto-principal)";
     nome.style.lineHeight = "1.35";
-    nome.textContent = `${item.text || item.nome}${item.time ? " • " + item.time : ""}`;
+    nome.textContent = item.text || item.nome || "Tarefa";
 
     const btnSubir = document.createElement("button");
     btnSubir.textContent = "↑";
@@ -2025,9 +4043,10 @@ function moverTarefaConfiguracao(id, direcao){
 }
 
 
-function editarTarefaConfiguracao(id){
-  const cfg = getConfigTarefas();
+let tarefaEditandoConfiguracao = null;
 
+function encontrarTarefaParaEdicao(id){
+  const cfg = getConfigTarefas();
   let item = null;
   let origem = "base";
 
@@ -2044,42 +4063,229 @@ function editarTarefaConfiguracao(id){
     item = [...TASKS.morning.items, ...TASKS.night.items].find(t => t.id === id);
   }
 
-  if(!item){
+  if(!item) return null;
+
+  const itemEditado = cfg.editadas && cfg.editadas[id] ? { ...item, ...cfg.editadas[id] } : item;
+  return { cfg, item, itemEditado, origem };
+}
+
+
+function descricaoFoiEditada(item){
+  return item && Object.prototype.hasOwnProperty.call(item, "descricao");
+}
+
+function obterDescricaoSalvaMesmoVazia(item){
+  return descricaoFoiEditada(item) ? String(item.descricao || "") : null;
+}
+
+function limparDecoracoesDescricao(texto){
+  return String(texto || "")
+    .replace(/[💚🩵💙]/g, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function obterDescricaoEditavelDaTarefa(item){
+  if(!item) return "";
+
+  const descricaoSalva = obterDescricaoSalvaMesmoVazia(item);
+  if(descricaoSalva !== null) return limparDecoracoesDescricao(descricaoSalva);
+
+  if(item.subtext) return limparDecoracoesDescricao(item.subtext);
+
+  const subtasks = getItemSubTasks(item, cycleDayKey);
+  if(Array.isArray(subtasks) && subtasks.length){
+    return limparDecoracoesDescricao(subtasks.map(formatarSubtituloBotao).join(" • "));
+  }
+
+  return "";
+}
+
+function obterHorarioEditavelDaTarefa(item){
+  if(!item) return "";
+  if(item.time) return item.time;
+
+  const descricao = obterDescricaoEditavelDaTarefa(item);
+  const match = descricao.match(/\d{1,2}h\d{0,2}m?\s*(?:às|as|-|até)\s*\d{1,2}h\d{0,2}m?/i);
+  return match ? match[0] : "";
+}
+
+function separarHorarioDeAte(valor){
+  const texto = String(valor || "").trim();
+  if(!texto) return { de: "", ate: "" };
+
+  const intervalo = texto.match(/(\d{1,2}h\d{0,2}m?)\s*(?:às|as|-|até)\s*(\d{1,2}h\d{0,2}m?)/i);
+  if(intervalo){
+    return {
+      de: formatarHorarioRotina(intervalo[1]),
+      ate: formatarHorarioRotina(intervalo[2])
+    };
+  }
+
+  return {
+    de: formatarHorarioRotina(texto),
+    ate: ""
+  };
+}
+
+function montarHorarioDeAte(de, ate){
+  const horaDe = formatarHorarioRotina(de);
+  const horaAte = formatarHorarioRotina(ate);
+
+  if(horaDe && horaAte){
+    return `${horaDe} até ${horaAte}`;
+  }
+
+  return horaDe || horaAte || "";
+}
+
+function editarTarefaConfiguracao(id){
+  const dados = encontrarTarefaParaEdicao(id);
+  if(!dados){
     alert("Tarefa não encontrada.");
     return;
   }
 
-  const itemEditado = cfg.editadas && cfg.editadas[id] ? cfg.editadas[id] : item;
+  tarefaEditandoConfiguracao = {
+    id,
+    origem: dados.origem
+  };
 
-  const novoNome = prompt("Nome da tarefa:", itemEditado.text || itemEditado.nome || "");
-  if(novoNome === null) return;
+  document.getElementById("editarTarefaTexto").value =
+    (dados.itemEditado.id === "n4" && !dados.itemEditado.text)
+      ? "Passatempos Relaxantes Sem Telas"
+      : (dados.itemEditado.text || dados.itemEditado.nome || "");
+  document.getElementById("editarTarefaDescricao").value = obterDescricaoEditavelDaTarefa(dados.itemEditado);
 
-  const novaDescricao = prompt("Descrição da tarefa:", itemEditado.descricao || "");
-  if(novaDescricao === null) return;
+  const emojiAtual = getEmojiEditavelDaTarefa(dados.itemEditado) || getIconeTarefa(dados.itemEditado);
+  escolherEmojiTarefa(emojiAtual);
+  renderizarEmojiPickerTarefa(emojiAtual);
 
-  const novoHorarioDigitado = prompt("Horário da tarefa:", itemEditado.time || "");
-  if(novoHorarioDigitado === null) return;
+  const horarioSeparado = separarHorarioDeAte(obterHorarioEditavelDaTarefa(dados.itemEditado));
+  document.getElementById("editarTarefaHoraDe").value = horarioSeparado.de;
+  document.getElementById("editarTarefaHoraAte").value = horarioSeparado.ate;
 
-  const novoHorario = formatarHorarioRotina(novoHorarioDigitado);
+  document.getElementById("modalEditarTarefaConfig").classList.add("show");
+}
 
-  if(origem === "base"){
-    if(!cfg.editadas) cfg.editadas = {};
+function fecharModalEditarTarefaConfig(){
+  tarefaEditandoConfiguracao = null;
+  document.getElementById("modalEditarTarefaConfig").classList.remove("show");
+}
 
-    cfg.editadas[id] = {
-      text: novoNome.trim(),
-      descricao: novaDescricao.trim(),
-      time: novoHorario
-    };
-  }else{
-    item.text = novoNome.trim();
-    item.descricao = novaDescricao.trim();
-    item.time = novoHorario;
+function atualizarDescricaoComHorario(descricao, horario){
+  let texto = String(descricao || "").trim();
+  const hora = String(horario || "").trim();
+
+  if(!hora) return texto;
+
+  const intervaloRegex = /(?:de\s*)?\d{1,2}h\d{0,2}m?\s*(?:às|as|-|até)\s*\d{1,2}h\d{0,2}m?/i;
+
+  if(intervaloRegex.test(texto)){
+    return texto.replace(intervaloRegex, `de ${hora}`);
   }
 
-  salvarConfigTarefas(cfg);
-  renderizarListaConfiguracao();
-  render();
+  return texto;
 }
+
+function aplicarEdicaoEmItemRuntime(id, dadosAtualizados){
+  ["morning", "night"].forEach(periodo => {
+    const item = TASKS[periodo].items.find(t => t.id === id);
+    if(item){
+      item.text = dadosAtualizados.text;
+      item.descricao = dadosAtualizados.descricao;
+      item.time = dadosAtualizados.time;
+      item.emoji = dadosAtualizados.emoji;
+      item.icone = dadosAtualizados.emoji;
+    }
+  });
+}
+
+function salvarEdicaoTarefaConfig(event){
+  if(event && typeof event.preventDefault === "function"){
+    event.preventDefault();
+  }
+
+  try{
+    if(!tarefaEditandoConfiguracao || !tarefaEditandoConfiguracao.id){
+      return false;
+    }
+
+    const id = tarefaEditandoConfiguracao.id;
+    const cfg = getConfigTarefas();
+
+    const campoNome = document.getElementById("editarTarefaTexto");
+    const campoDescricao = document.getElementById("editarTarefaDescricao");
+    const campoDe = document.getElementById("editarTarefaHoraDe");
+    const campoAte = document.getElementById("editarTarefaHoraAte");
+    const campoEmoji = document.getElementById("editarTarefaEmoji");
+
+    const novoNome = (campoNome?.value || "").trim();
+    const novoHorario = montarHorarioDeAte(campoDe?.value || "", campoAte?.value || "");
+
+    let novaDescricao = normalizarDescricaoComPontos(campoDescricao?.value || "");
+    novaDescricao = atualizarDescricaoComHorario(novaDescricao, novoHorario);
+
+    if(!novoNome){
+      alert("Escreva o nome da tarefa.");
+      return false;
+    }
+
+    const dadosAtualizados = {
+      text: novoNome,
+      descricao: novaDescricao,
+      time: novoHorario,
+      emoji: (campoEmoji?.value || emojiEditandoTarefaAtual || "").trim()
+    };
+
+    let salvouComoCustom = false;
+
+    ["morning", "night"].forEach(periodo => {
+      if(!Array.isArray(cfg.custom[periodo])) cfg.custom[periodo] = [];
+      const itemCustom = cfg.custom[periodo].find(t => t.id === id);
+      if(itemCustom){
+        itemCustom.text = dadosAtualizados.text;
+        itemCustom.nome = dadosAtualizados.text;
+        itemCustom.descricao = dadosAtualizados.descricao;
+        itemCustom.time = dadosAtualizados.time;
+        itemCustom.hora = dadosAtualizados.time;
+        itemCustom.emoji = dadosAtualizados.emoji;
+        itemCustom.icone = dadosAtualizados.emoji;
+        salvouComoCustom = true;
+      }
+    });
+
+    if(!salvouComoCustom){
+      if(!cfg.editadas) cfg.editadas = {};
+      cfg.editadas[id] = {
+        ...(cfg.editadas[id] || {}),
+        ...dadosAtualizados,
+        descricao: novaDescricao
+      };
+      aplicarEdicaoEmItemRuntime(id, dadosAtualizados);
+    }
+
+    salvarConfigTarefas(cfg);
+
+    // Garante que qualquer leitura feita logo depois já pegue a nova versão.
+    store = loadStore();
+
+    const modal = document.getElementById("modalEditarTarefaConfig");
+    if(modal) modal.classList.remove("show");
+
+    tarefaEditandoConfiguracao = null;
+
+    if(typeof renderizarListaConfiguracao === "function") renderizarListaConfiguracao();
+    if(typeof render === "function") render();
+
+    return false;
+  }catch(erro){
+    console.error("Erro ao salvar edição da tarefa:", erro);
+    alert("Não consegui salvar a edição. Abra o console para ver o erro.");
+    return false;
+  }
+}
+
 
   function bloquearPorPendenciaSeNecessario(){
     if(hasPendingPreviousScreenRules()){
@@ -2197,6 +4403,7 @@ return `Escolhido: ${ds.calmActivities.join(" + ")}`;
     currentTab = tab;
     document.getElementById("tabMorning").classList.toggle("active", tab === "morning");
     document.getElementById("tabNight").classList.toggle("active", tab === "night");
+    aplicarFundoConfigurado();
     render();
   }
 
@@ -2242,11 +4449,12 @@ return `Escolhido: ${ds.calmActivities.join(" + ")}`;
 
   function atualizarLinhaTempo(){
     const agora = new Date();
-    const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+    const diasSemana = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+    const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
 
     document.getElementById("linhaTempoHora").textContent = `${pad(agora.getHours())}:${pad(agora.getMinutes())}`;
-    document.getElementById("linhaTempoDia").textContent = `• ${diasCurtos[agora.getDay()]}`;
-    document.getElementById("linhaTempoData").textContent = `• ${pad(agora.getDate())}/${pad(agora.getMonth()+1)}`;
+    document.getElementById("linhaTempoData").textContent = `${pad(agora.getDate())} ${meses[agora.getMonth()]}`;
+    document.getElementById("linhaTempoDia").textContent = diasSemana[agora.getDay()];
   }
 
 function shouldMoveHighlightToEnd(item){
@@ -2335,9 +4543,40 @@ function formatarSubtituloBotao(texto){
     .trim();
 }
 
+function getIconeTarefa(it){
+  if(it?.emoji) return it.emoji;
+  if(it?.icone) return it.icone;
+  const texto = `${it?.text || ""} ${it?.descricao || ""} ${it?.subtext || ""}`.toLowerCase();
+  if(it?.id === "moment-play-screen") return "🎮";
+  if(it?.id === "n4") return "🌙";
+  if(texto.includes("higiene") || texto.includes("escovar") || texto.includes("banheiro") || texto.includes("rosto")) return "🪥";
+  if(texto.includes("água")) return "💧";
+  if(texto.includes("café") || texto.includes("almoçar") || texto.includes("jantar")) return "🍽️";
+  if(texto.includes("mochila") || texto.includes("escola") || texto.includes("contrato")) return "🎒";
+  if(texto.includes("banho")) return "🛁";
+  if(texto.includes("roupa") || texto.includes("tênis")) return "👟";
+  if(texto.includes("passatempo")) return "🎨";
+  return currentTab === "morning" ? "🌼" : "⭐";
+}
+
+function criarIconeCardTarefa(it){
+  const icone = document.createElement("div");
+  icone.className = "taskIcon";
+  icone.textContent = getIconeTarefa(it);
+  return icone;
+}
+
+function criarSetaCardTarefa(it){
+  const seta = document.createElement("div");
+  seta.className = "taskSeta";
+  seta.textContent = isDone(it.id) ? "✓" : "›";
+  return seta;
+}
+
   function render(){
     refreshCycleDay();
     atualizarExibicaoRegraHoje();
+    aplicarFundoConfigurado();
 
     document.getElementById("tabMorning").classList.toggle("active", currentTab === "morning");
     document.getElementById("tabNight").classList.toggle("active", currentTab === "night");
@@ -2362,6 +4601,8 @@ if(it.type){
   row.className = classes;
   row.onclick = () => abrirModalRegraTela(it);
 
+        row.appendChild(criarIconeCardTarefa(it));
+
         const left = document.createElement("div");
         left.className = "left";
 
@@ -2369,28 +4610,27 @@ if(it.type){
         text.className = "buttonText";
         text.textContent = it.text;
 
-        const timeLine = document.createElement("div");
-        timeLine.className = "specialTimeLine";
-
-        const iconBefore = document.createElement("span");
-        iconBefore.className = "specialHeart";
-        iconBefore.textContent = it.id === "moment-play-screen" ? "💚" : "🩵";
-
-        const sub = document.createElement("span");
-        sub.className = "buttonTime";
-        sub.textContent = it.subtext;
-
-        const iconAfter = document.createElement("span");
-        iconAfter.className = "specialHeart";
-        iconAfter.textContent = it.id === "moment-play-screen" ? "💚" : "🩵";
-
-        timeLine.appendChild(iconBefore);
-        timeLine.appendChild(sub);
-        timeLine.appendChild(iconAfter);
+        const descricaoLinha = document.createElement("div");
+        descricaoLinha.className = "buttonTime";
+        descricaoLinha.textContent = limparDecoracoesDescricao(
+          descricaoFoiEditada(it) ? formatarSubtituloBotao(it.descricao || "") : it.subtext
+        );
 
         left.appendChild(text);
-        left.appendChild(timeLine);
+
+        if(descricaoLinha.textContent.trim()){
+          left.appendChild(descricaoLinha);
+        }
+
+        if(it.time){
+          const horarioLinha = document.createElement("div");
+          horarioLinha.className = "buttonTime";
+          horarioLinha.textContent = it.time;
+          left.appendChild(horarioLinha);
+        }
+
         row.appendChild(left);
+        row.appendChild(criarSetaCardTarefa(it));
         list.appendChild(row);
         return;
       }
@@ -2406,6 +4646,8 @@ if(it.type){
 
       row.onclick = () => toggleDone(it.id);
 
+      row.appendChild(criarIconeCardTarefa(it));
+
       const left = document.createElement("div");
       left.className = "left";
 
@@ -2419,7 +4661,9 @@ if(it.type){
 
         const subtasks = getItemSubTasks(it, cycleDayKey);
 
-        if(shouldStackSubTasks(it)){
+        if(descricaoFoiEditada(it)){
+          groupedSubtasks.textContent = formatarSubtituloBotao(it.descricao || "");
+        }else if(shouldStackSubTasks(it)){
           groupedSubtasks.classList.add("stack-lines");
           subtasks.forEach(texto => {
             const linha = document.createElement("span");
@@ -2440,7 +4684,7 @@ if(it.type){
       } else if(it.id === "n4"){
         const title = document.createElement("div");
         title.className = "buttonText";
-        title.textContent = "Passatempos Relaxantes Sem Telas";
+        title.textContent = it.text || "Passatempos Relaxantes Sem Telas";
 
         const selectedLine = document.createElement("div");
         selectedLine.className = "buttonTime";
@@ -2475,6 +4719,7 @@ left.appendChild(time);
       }
 
       row.appendChild(left);
+      row.appendChild(criarSetaCardTarefa(it));
       list.appendChild(row);
     });
 
@@ -2561,14 +4806,24 @@ left.appendChild(time);
   }
 
   window.addEventListener("load", () => {
-    const campoHoraConfig = document.getElementById("novaTarefaHora");
-    if(campoHoraConfig){
-      campoHoraConfig.addEventListener("blur", () => {
-        campoHoraConfig.value = formatarHorarioRotina(campoHoraConfig.value);
+    ["novaTarefaHoraDe", "novaTarefaHoraAte", "editarTarefaHoraDe", "editarTarefaHoraAte"].forEach(id => {
+      const campo = document.getElementById(id);
+      if(campo){
+        campo.addEventListener("blur", () => {
+          campo.value = formatarHorarioRotina(campo.value);
+        });
+      }
+    });
+    const campoHoraEditar = document.getElementById("editarTarefaHora");
+    if(campoHoraEditar){
+      campoHoraEditar.addEventListener("blur", () => {
+        campoHoraEditar.value = formatarHorarioRotina(campoHoraEditar.value);
       });
     }
 
+    definirTurnoInicialPorHorario();
     aplicarConfigNosAudios();
+    aplicarFundoConfigurado();
     atualizarLinhaTempo();
     atualizarStatusRegraHoje();
     atualizarExibicaoRegraHoje();
@@ -2579,7 +4834,9 @@ left.appendChild(time);
   });
 
   window.addEventListener("pageshow", () => {
+    definirTurnoInicialPorHorario();
     aplicarConfigNosAudios();
+    aplicarFundoConfigurado();
     atualizarLinhaTempo();
     atualizarStatusRegraHoje();
     atualizarExibicaoRegraHoje();
@@ -2590,6 +4847,7 @@ left.appendChild(time);
 
   window.addEventListener("focus", () => {
     aplicarConfigNosAudios();
+    aplicarFundoConfigurado();
     atualizarLinhaTempo();
     atualizarStatusRegraHoje();
     atualizarExibicaoRegraHoje();
@@ -2610,6 +4868,9 @@ left.appendChild(time);
     if(event.key === REGRA_TELA_HOJE_KEY){
       atualizarStatusRegraHoje();
     }
+    if(event.key === CONFIG_VISUAL_ROTINA_KEY){
+      aplicarFundoConfigurado();
+    }
     atualizarLinhaTempo();
     render();
   });
@@ -2617,6 +4878,7 @@ left.appendChild(time);
   document.addEventListener("visibilitychange", () => {
     if(!document.hidden){
       aplicarConfigNosAudios();
+      aplicarFundoConfigurado();
       atualizarLinhaTempo();
       atualizarStatusRegraHoje();
       atualizarExibicaoRegraHoje();
@@ -2628,17 +4890,12 @@ left.appendChild(time);
   });
 
   window.addEventListener("hashchange", () => {
-    if(location.hash === "#night"){
-      currentTab = "night";
-    }else if(location.hash === "#morning"){
-      currentTab = "morning";
-    }
+    definirTurnoInicialPorHorario();
+    aplicarFundoConfigurado();
     render();
   });
 
-  if(location.hash === "#night"){
-    currentTab = "night";
-  }
+  definirTurnoInicialPorHorario();
 
   setInterval(() => {
     refreshCycleDay();
@@ -2649,6 +4906,19 @@ left.appendChild(time);
       tocarAudioCorreto();
     }
   }, 30000);
+
+
+  window.addEventListener("click", function(e){
+    const modalEditar = document.getElementById("modalEditarTarefaConfig");
+    if(e.target === modalEditar) fecharModalEditarTarefaConfig();
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+      const modalEditar = document.getElementById("modalEditarTarefaConfig");
+      if(modalEditar && modalEditar.classList.contains("show")) fecharModalEditarTarefaConfig();
+    }
+  });
 
   document.addEventListener("click", liberarMusica, { once:true });
   document.addEventListener("touchstart", liberarMusica, { once:true });
