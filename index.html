@@ -1006,6 +1006,24 @@ body{
   z-index:1200;
 }
 
+
+/* Ajuste fino: seta do modal mais centralizada */
+.rotinaVoltar{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  line-height:1 !important;
+  padding:0 !important;
+  text-align:center !important;
+}
+
+.rotinaVoltar span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+}
+
 </style>
 </head>
 
@@ -1261,6 +1279,36 @@ body{
     </div>
   </div>
 
+
+  <div class="modalOverlay" id="modalEmConstrucao">
+    <div class="rotinaCard" style="max-width:300px; gap:10px; padding:16px;">
+      <div class="rotinaTopo" style="min-height:38px;">
+        <button class="rotinaVoltar" onclick="fecharModalEmConstrucao()" style="width:36px; height:36px; border-radius:13px; display:flex; align-items:center; justify-content:center; padding:0; line-height:1;">←</button>
+
+        <div class="rotinaTituloArea">
+          <div class="rotinaTitle" id="modalEmConstrucaoTitulo" style="font-size:18px;">Rotina da Beth</div>
+          <div class="rotinaSub" style="font-size:11px;">página em construção</div>
+        </div>
+      </div>
+
+      <div style="
+        background:#F2F7F0;
+        border:1px solid rgba(221,232,216,0.95);
+        border-radius:18px;
+        padding:14px 12px;
+        text-align:center;
+        color:#3F6F4F;
+        font-size:13px;
+        line-height:1.45;
+      ">
+        <div style="font-size:26px; margin-bottom:4px;">🌷</div>
+        Em breve essa página estará disponível.
+      </div>
+
+      <button class="rotinaBotao" onclick="fecharModalEmConstrucao()" style="padding:12px; border-radius:16px;">Entendi</button>
+    </div>
+  </div>
+
   <div class="modalOverlay" id="modalRotina">
     <div class="rotinaCard">
 
@@ -1276,7 +1324,7 @@ body{
       <div class="rotinaBotoes">
         <button class="rotinaBotao" onclick="irPara('maya-menu.html')">🌼 Maya</button>
         <button class="rotinaBotao" onclick="irParaComSenha('gabriela-menu.html')">🌿 Gabriela</button>
-        <button class="rotinaBotao" onclick="irPara('beth-rotina.html')">🌷 Beth</button>
+        <button class="rotinaBotao" onclick="abrirModalEmConstrucao('Rotina da Beth')">🌷 Beth</button>
       </div>
 
     </div>
@@ -1368,6 +1416,17 @@ function fecharModalAgenda(){
   document.getElementById("modalAgenda").classList.remove("show");
 }
 
+function abrirModalEmConstrucao(nomePagina){
+  const titulo = document.getElementById("modalEmConstrucaoTitulo");
+  if(titulo) titulo.textContent = nomePagina || "Página em construção";
+  fecharModalRotina();
+  document.getElementById("modalEmConstrucao").classList.add("show");
+}
+
+function fecharModalEmConstrucao(){
+  document.getElementById("modalEmConstrucao").classList.remove("show");
+}
+
 function abrirModalBackupMaya(){
   document.getElementById("modalBackupMaya").classList.add("show");
 }
@@ -1379,6 +1438,7 @@ function fecharModalBackupMaya(){
 window.addEventListener("click", function(e){
   const modalRotina = document.getElementById("modalRotina");
   const modalAgenda = document.getElementById("modalAgenda");
+  const modalEmConstrucao = document.getElementById("modalEmConstrucao");
   const modalBackup = document.getElementById("modalBackupMaya");
   const modalSenhaProtegida = document.getElementById("modalSenhaProtegida");
 
@@ -1388,6 +1448,10 @@ window.addEventListener("click", function(e){
 
   if(e.target === modalAgenda){
     fecharModalAgenda();
+  }
+
+  if(e.target === modalEmConstrucao){
+    fecharModalEmConstrucao();
   }
 
   if(e.target === modalBackup){
@@ -1409,6 +1473,7 @@ document.addEventListener("keydown", function(e){
   if(e.key === "Escape"){
     fecharModalRotina();
     fecharModalAgenda();
+    fecharModalEmConstrucao();
     fecharModalBackupMaya();
     fecharModalSenhaProtegida();
   }
