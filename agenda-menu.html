@@ -366,10 +366,368 @@ textarea:focus{
     font-size:10.5px;
   }
 }
+
+/* =========================================================
+   VISUAL SYSTEM — MENU AGENDA
+   ========================================================= */
+:root{
+  --agenda-fundo:#F8F7F1;
+  --agenda-card:#FFFDF8;
+  --agenda-card-2:#F4F3EA;
+  --agenda-salvia:#7F9271;
+  --agenda-salvia-escuro:#516448;
+  --agenda-texto:#2F332D;
+  --agenda-suave:#77786F;
+  --agenda-borda:#E8E1D4;
+  --agenda-rosa:#E8C8BF;
+  --agenda-sombra:0 10px 24px rgba(76, 82, 62, 0.10);
+}
+
+html, body{
+  min-height:100%;
+}
+
+body.agenda-menu-visual{
+  align-items:flex-start !important;
+  padding:14px 12px 96px !important;
+  background:
+    radial-gradient(circle at 14% 4%, rgba(232,243,226,0.75), transparent 32%),
+    radial-gradient(circle at 95% 16%, rgba(243,236,221,0.80), transparent 30%),
+    linear-gradient(180deg, #FEFCF7 0%, var(--agenda-fundo) 100%) !important;
+  color:var(--agenda-texto) !important;
+  overflow-x:hidden;
+}
+
+body.agenda-menu-visual .pagina{
+  max-width:420px !important;
+}
+
+body.agenda-menu-visual .card{
+  background:rgba(255,253,248,0.92) !important;
+  border:1px solid rgba(232,225,212,0.92) !important;
+  border-radius:30px !important;
+  padding:18px 14px 20px !important;
+  gap:14px !important;
+  box-shadow:0 14px 34px rgba(76,82,62,0.11) !important;
+  overflow:hidden;
+  position:relative;
+}
+
+body.agenda-menu-visual .card::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-80px;
+  top:-70px;
+  border-radius:50%;
+  background:rgba(234,243,232,0.72);
+  z-index:0;
+}
+
+body.agenda-menu-visual .card::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  left:-95px;
+  bottom:-65px;
+  border-radius:50%;
+  background:rgba(243,236,221,0.62);
+  z-index:0;
+}
+
+body.agenda-menu-visual .card > *{
+  position:relative;
+  z-index:1;
+}
+
+body.agenda-menu-visual .topo{
+  grid-template-columns:44px 1fr 82px !important;
+  align-items:start !important;
+  gap:8px !important;
+  margin-bottom:2px !important;
+}
+
+body.agenda-menu-visual .botao-voltar{
+  width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,0.86) !important;
+  border:1px solid rgba(232,225,212,0.95) !important;
+  color:var(--agenda-salvia-escuro) !important;
+  box-shadow:0 6px 16px rgba(76,82,62,0.08) !important;
+  font-size:20px !important;
+}
+
+body.agenda-menu-visual .topCenter{
+  padding-top:0 !important;
+}
+
+body.agenda-menu-visual .titleIndex{
+  color:#40513B !important;
+  font-size:27px !important;
+  font-weight:500 !important;
+  line-height:1.05 !important;
+  letter-spacing:-0.3px !important;
+}
+
+body.agenda-menu-visual .subtitulo{
+  color:var(--agenda-suave) !important;
+  font-size:12px !important;
+  margin-top:5px !important;
+  white-space:normal !important;
+}
+
+body.agenda-menu-visual .dataTopo{
+  color:#6F7469 !important;
+  padding-top:0 !important;
+}
+
+body.agenda-menu-visual .horaTopo{
+  color:#B8807B !important;
+  font-size:15px !important;
+  font-weight:500 !important;
+}
+
+body.agenda-menu-visual .dataTopoLinha{
+  color:#5D6359 !important;
+  font-size:10.5px !important;
+}
+
+body.agenda-menu-visual .botoes-lista{
+  gap:9px !important;
+}
+
+body.agenda-menu-visual .botao{
+  min-height:74px !important;
+  height:auto !important;
+  border-radius:18px !important;
+  background:rgba(255,255,255,0.94) !important;
+  border:1px solid rgba(232,225,212,0.92) !important;
+  color:var(--agenda-texto) !important;
+  box-shadow:0 7px 18px rgba(76,82,62,0.08) !important;
+  padding:10px 42px 10px 74px !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:flex-start !important;
+  text-align:left !important;
+  position:relative !important;
+  overflow:hidden;
+}
+
+body.agenda-menu-visual .botao:hover{
+  transform:translateY(-1px);
+  background:#FFFDF8 !important;
+  box-shadow:0 10px 22px rgba(76,82,62,0.12) !important;
+}
+
+body.agenda-menu-visual .botao::before{
+  content:"◌";
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#F4F0E7;
+  border:1px solid rgba(232,225,212,0.78);
+  box-shadow:0 5px 12px rgba(76,82,62,0.06);
+  color:#6D805F;
+  font-size:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+}
+
+body.agenda-menu-visual .botao::after{
+  content:"›";
+  position:absolute;
+  right:20px;
+  top:50%;
+  transform:translateY(-54%);
+  color:#6F7E63;
+  font-size:31px;
+  line-height:1;
+  font-weight:300;
+}
+
+body.agenda-menu-visual .conteudo-botao{
+  align-items:flex-start !important;
+  text-align:left !important;
+  transform:none !important;
+}
+
+body.agenda-menu-visual .nome-botao{
+  color:#2F332D !important;
+  text-align:left !important;
+  font-size:15.5px !important;
+  line-height:1.25 !important;
+  font-weight:500 !important;
+  letter-spacing:-0.2px;
+}
+
+body.agenda-menu-visual .proxima-tarefa{
+  text-align:left !important;
+  margin-top:4px !important;
+  color:rgba(81,100,72,0.72) !important;
+  font-size:11px !important;
+  line-height:1.3 !important;
+}
+
+body.agenda-menu-visual .botao:nth-child(1)::before{ content:"✿"; }
+body.agenda-menu-visual .botao:nth-child(2)::before{ content:"☾"; }
+body.agenda-menu-visual .botao:nth-child(3)::before{ content:"♡"; }
+
+body.agenda-menu-visual .footerMiniAction{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:10px !important;
+  margin-top:10px !important;
+  padding-bottom:8px;
+}
+
+body.agenda-menu-visual .futureBtn{
+  min-height:56px !important;
+  border-radius:18px !important;
+  background:rgba(250,248,241,0.94) !important;
+  border:1px solid rgba(216,207,191,0.95) !important;
+  color:#40513B !important;
+  font-size:13px !important;
+  text-align:left !important;
+  padding:12px 32px 12px 14px !important;
+  box-shadow:0 6px 16px rgba(76,82,62,0.06);
+  position:relative;
+}
+
+body.agenda-menu-visual .futureBtn::before{
+  content:"⚙";
+  margin-right:8px;
+  color:#6D805F;
+}
+
+body.agenda-menu-visual .futureBtn::after{
+  content:"›";
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-52%);
+  font-size:24px;
+  color:#6F7E63;
+}
+
+body.agenda-menu-visual .modal{
+  border-radius:24px !important;
+  border:1px solid rgba(232,225,212,0.95);
+  background:#FFFDF8 !important;
+  box-shadow:0 16px 40px rgba(0,0,0,0.18) !important;
+}
+
+body.agenda-menu-visual .modalTitle{
+  color:#40513B !important;
+}
+
+body.agenda-menu-visual .save{
+  background:var(--agenda-salvia) !important;
+}
+
+body.agenda-menu-visual .save:hover{
+  background:var(--agenda-salvia-escuro) !important;
+}
+
+body.agenda-menu-visual .cancel{
+  background:#F1EEE6 !important;
+}
+
+@media (max-width:390px){
+  body.agenda-menu-visual .card{
+    padding:18px 12px 18px !important;
+  }
+
+  body.agenda-menu-visual .topo{
+    grid-template-columns:42px 1fr 76px !important;
+  }
+
+  body.agenda-menu-visual .titleIndex{
+    font-size:24px !important;
+  }
+
+  body.agenda-menu-visual .botao{
+    padding-left:68px !important;
+    padding-right:36px !important;
+  }
+
+  body.agenda-menu-visual .nome-botao{
+    font-size:14.5px !important;
+  }
+}
+/* FIM VISUAL SYSTEM — MENU AGENDA */
+
+
+/* AJUSTES FINAIS — MENU AGENDAS */
+body.agenda-menu-visual .botao{
+  padding:10px 42px !important;
+  justify-content:center !important;
+  align-items:center !important;
+  text-align:center !important;
+}
+
+body.agenda-menu-visual .botao::before{
+  display:none !important;
+  content:none !important;
+}
+
+body.agenda-menu-visual .conteudo-botao{
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  width:100% !important;
+}
+
+body.agenda-menu-visual .nome-botao{
+  text-align:center !important;
+  width:100% !important;
+}
+
+body.agenda-menu-visual .proxima-tarefa{
+  text-align:center !important;
+  width:100% !important;
+}
+
+@media (max-width:390px){
+  body.agenda-menu-visual .botao{
+    padding-left:36px !important;
+    padding-right:36px !important;
+  }
+}
+/* FIM AJUSTES FINAIS — MENU AGENDAS */
+
+
+/* AJUSTE — CENTRALIZAR BOTÃO FUTURAS EDIÇÕES */
+body.agenda-menu-visual .futureBtn{
+  text-align:center !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:12px 42px !important;
+}
+
+body.agenda-menu-visual .futureBtn::before{
+  position:static !important;
+  margin-right:8px !important;
+}
+
+body.agenda-menu-visual .futureBtn::after{
+  right:14px !important;
+}
+/* FIM AJUSTE — CENTRALIZAR BOTÃO FUTURAS EDIÇÕES */
+
 </style>
 </head>
 
-<body>
+<body class="agenda-menu-visual">
 
 <div class="pagina">
   <div class="card">
@@ -378,7 +736,7 @@ textarea:focus{
       <button class="botao-voltar" onclick="location.href='index.html'"><span>←</span></button>
 
       <div class="topCenter">
-        <h1 class="titleIndex">🗓️ Agenda</h1>
+        <h1 class="titleIndex">🗓️ Agendas</h1>
         <p class="subtitulo">Uso tempo com o que realmente importa</p>
       </div>
 
@@ -391,7 +749,7 @@ textarea:focus{
 
 <div class="botoes-lista">
 
-  <button class="botao" onclick="location.href='agenda-maya.html'">
+  <button class="botao" onclick="location.href='agenda-maya-ajustada-botoes-corrigidos.html'">
     <div class="conteudo-botao">
       <div class="nome-botao">🌸 Agenda da Filhotinha</div>
       <div class="proxima-tarefa">compromissos da Maya</div>
@@ -399,7 +757,7 @@ textarea:focus{
     </div>
   </button>
 
-  <button class="botao" onclick="location.href='gabriela-minha-agenda.html'">
+  <button class="botao" onclick="location.href='gabriela-minha-agenda-ajustada-botoes-corrigidos.html'">
     <div class="conteudo-botao">
       <div class="nome-botao">🗓️ Agenda da Mamãe</div>
       <div class="proxima-tarefa">compromissos da Gabriela</div>
@@ -407,7 +765,7 @@ textarea:focus{
     </div>
   </button>
 
-  <button class="botao" onclick="location.href='agenda-vovo-beth.html'">
+  <button class="botao" onclick="location.href='agenda-vovo-beth-janela-ajustada.html'">
     <div class="conteudo-botao">
       <div class="nome-botao">🌷 Agenda da Vovó</div>
       <div class="proxima-tarefa">compromissos da Beth</div>
