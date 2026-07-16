@@ -903,8 +903,6 @@ body{
       </div>
 
       <button class="botaoAdicionar botaoBackupOpcao" onclick="sincronizarAnotacoesNuvem()">↕ Sincronizar nuvem</button>
-      <button class="botaoAdicionar botaoBackupOpcao secundario" onclick="baixarAnotacoesDaNuvemComConfirmacao()">↓ Baixar da nuvem</button>
-      <button class="botaoAdicionar botaoBackupOpcao secundario" onclick="enviarAnotacoesParaNuvem()">↑ Enviar para nuvem</button>
       <button class="botaoAdicionar botaoBackupOpcao secundario" onclick="sairNuvem()">Sair da nuvem</button>
 
       <div class="linhaDivisoriaBackup"></div>
@@ -937,8 +935,10 @@ body{
 
 <script>
 const CHAVE_ANOTACOES = "jardim_anotacoes_importantes";
+const CHAVE_ULTIMA_SINCRONIZACAO_NUVEM = "jardim_anotacoes_ultima_sincronizacao_nuvem";
+const CHAVE_INICIO_LEMBRETE_NUVEM = "jardim_anotacoes_inicio_lembrete_nuvem";
 
-const SUPABASE_URL = "https://hrqoairpuujgfvyjxsjs.supabase.co";
+const SUPABASE_URL = "https://hrqoairpuujgfyvjxsjs.supabase.co";
 const SUPABASE_KEY = "sb_publishable_UR3ZKGf8ei8R0_-feHjkCg_eeW58oUY";
 let supabaseClient = null;
 let usuarioNuvem = null;
@@ -1320,6 +1320,53 @@ function importarAnotacoesArquivo(event){
 
 
 
+
+function salvarDataSincronizacaoNuvem(){
+  localStorage.setItem(CHAVE_ULTIMA_SINCRONIZACAO_NUVEM, new Date().toISOString());
+}
+
+function diasDesdeDataISO(dataISO){
+  if(!dataISO) return null;
+
+  const data = new Date(dataISO);
+  if(Number.isNaN(data.getTime())) return null;
+
+  const agora = new Date();
+  const diff = agora.getTime() - data.getTime();
+
+  return Math.floor(diff / (1000 * 60 * 60 * 24));
+}
+
+function verificarLembreteSincronizacaoNuvem(){
+  const ultima = localStorage.getItem(CHAVE_ULTIMA_SINCRONIZACAO_NUVEM);
+  const inicio = localStorage.getItem(CHAVE_INICIO_LEMBRETE_NUVEM);
+
+  if(!ultima && !inicio){
+    localStorage.setItem(CHAVE_INICIO_LEMBRETE_NUVEM, new Date().toISOString());
+    return;
+  }
+
+  const referencia = ultima || inicio;
+  const dias = diasDesdeDataISO(referencia);
+
+  if(dias === null || dias < 15) return;
+
+  setTimeout(() => {
+    const abrir = confirm(
+      "Lembrete da nuvem 🌿\n\n" +
+      "Já faz 15 dias ou mais desde a última sincronização das suas anotações.\n\n" +
+      "Quer abrir a nuvem agora para sincronizar?"
+    );
+
+    if(abrir){
+      abrirModalBackup();
+    }
+
+    localStorage.setItem(CHAVE_INICIO_LEMBRETE_NUVEM, new Date().toISOString());
+  }, 900);
+}
+
+
 function iniciarSupabase(){
   try{
     if(window.supabase && !supabaseClient){
@@ -1522,6 +1569,7 @@ async function enviarAnotacoesParaNuvem(){
     return;
   }
 
+  salvarDataSincronizacaoNuvem();
   atualizarStatusNuvem("Anotações enviadas para a nuvem.", "ok");
   alert("Anotações enviadas para a nuvem com sucesso.");
 }
@@ -1582,6 +1630,7 @@ async function baixarAnotacoesDaNuvem(opcoes = {juntar:true, pedirConfirmacaoSub
 
   salvarListaAnotacoes(novaLista);
   renderizarAnotacoes();
+  salvarDataSincronizacaoNuvem();
   atualizarStatusNuvem("Anotações baixadas da nuvem.", "ok");
   alert("Anotações baixadas. Total local: " + novaLista.length);
 }
@@ -1589,8 +1638,53 @@ async function baixarAnotacoesDaNuvem(opcoes = {juntar:true, pedirConfirmacaoSub
 async function sincronizarAnotacoesNuvem(){
   if(!(await garantirLoginNuvem())) return;
 
-  await enviarAnotacoesParaNuvem();
-  await baixarAnotacoesDaNuvem({juntar:true, pedirConfirmacaoSubstituir:false});
+  atualizarStatusNuvem("Sincronizando anotações...", "");
+
+  const listaLocal = carregarAnotacoes();
+
+  const { data, error } = await supabaseClient
+    .from("anotacoes")
+    .select("*")
+    .eq("user_id", usuarioNuvem.id);
+
+  if(error){
+    atualizarStatusNuvem("Erro ao sincronizar.", "erro");
+    alert("Erro ao sincronizar: " + error.message);
+    return;
+  }
+
+  const mapa = new Map();
+
+  (data || []).map(linhaNuvemParaAnotacao).forEach(item => {
+    if(item && item.id) mapa.set(item.id, item);
+  });
+
+  listaLocal.forEach(item => {
+    if(item && item.id) mapa.set(item.id, item);
+  });
+
+  const listaFinal = Array.from(mapa.values());
+
+  salvarListaAnotacoes(listaFinal);
+  renderizarAnotacoes();
+
+  if(listaFinal.length){
+    const linhas = listaFinal.map(anotacaoParaLinhaNuvem);
+
+    const envio = await supabaseClient
+      .from("anotacoes")
+      .upsert(linhas, { onConflict:"id" });
+
+    if(envio.error){
+      atualizarStatusNuvem("Erro ao enviar para a nuvem.", "erro");
+      alert("Erro ao enviar para a nuvem: " + envio.error.message);
+      return;
+    }
+  }
+
+  salvarDataSincronizacaoNuvem();
+  atualizarStatusNuvem("Sincronização concluída.", "ok");
+  alert("Sincronização concluída com sucesso. Total de anotações: " + listaFinal.length);
 }
 
 async function salvarAnotacaoNaNuvem(item){
@@ -1662,6 +1756,7 @@ document.addEventListener("keydown", function(e){
 window.addEventListener("load", function(){
   renderizarAnotacoes();
   carregarSessaoNuvem();
+  verificarLembreteSincronizacaoNuvem();
 });
 </script>
 

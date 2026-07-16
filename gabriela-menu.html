@@ -6432,5 +6432,59 @@ document.addEventListener("visibilitychange", function(){
   </button>
 </nav>
 
+
+<script>
+/* =========================================================
+   LEMBRETE DE SINCRONIZAÇÃO DA NUVEM — A CADA 15 DIAS
+   ========================================================= */
+(function(){
+  const CHAVE_ULTIMA_SINCRONIZACAO_NUVEM = "jardim_anotacoes_ultima_sincronizacao_nuvem";
+  const CHAVE_INICIO_LEMBRETE_NUVEM = "jardim_anotacoes_inicio_lembrete_nuvem";
+
+  function diasDesdeDataISO(dataISO){
+    if(!dataISO) return null;
+
+    const data = new Date(dataISO);
+    if(Number.isNaN(data.getTime())) return null;
+
+    const agora = new Date();
+    const diff = agora.getTime() - data.getTime();
+
+    return Math.floor(diff / (1000 * 60 * 60 * 24));
+  }
+
+  function verificarLembreteSincronizacaoNuvem(){
+    const ultima = localStorage.getItem(CHAVE_ULTIMA_SINCRONIZACAO_NUVEM);
+    const inicio = localStorage.getItem(CHAVE_INICIO_LEMBRETE_NUVEM);
+
+    if(!ultima && !inicio){
+      localStorage.setItem(CHAVE_INICIO_LEMBRETE_NUVEM, new Date().toISOString());
+      return;
+    }
+
+    const referencia = ultima || inicio;
+    const dias = diasDesdeDataISO(referencia);
+
+    if(dias === null || dias < 15) return;
+
+    setTimeout(function(){
+      const abrir = confirm(
+        "Lembrete da nuvem 🌿\n\n" +
+        "Já faz 15 dias ou mais desde a última sincronização das suas anotações.\n\n" +
+        "Quer abrir a página de Anotações para sincronizar agora?"
+      );
+
+      localStorage.setItem(CHAVE_INICIO_LEMBRETE_NUVEM, new Date().toISOString());
+
+      if(abrir){
+        window.location.href = "anotacao.html";
+      }
+    }, 900);
+  }
+
+  window.addEventListener("load", verificarLembreteSincronizacaoNuvem);
+})();
+</script>
+
 </body>
 </html>
