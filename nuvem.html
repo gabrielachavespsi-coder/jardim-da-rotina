@@ -76,6 +76,7 @@ body{font-family:var(--fonte);background:var(--fundo);color:var(--texto-principa
 const SUPABASE_URL = "https://hrqoairpuujgfyvjxsjs.supabase.co";
 const SUPABASE_KEY = "sb_publishable_UR3ZKGf8ei8R0_-feHjkCg_eeW58oUY";
 const CHAVE_ULTIMA_SINCRONIZACAO_NUVEM = "jardim_anotacoes_ultima_sincronizacao_nuvem";
+const CHAVE_ANOTACOES = "jardim_anotacoes_importantes";
 let supabaseClient = null;
 let usuarioNuvem = null;
 
@@ -162,6 +163,88 @@ function aplicarDadosLocalStorage(dados){
   Object.keys(dados).forEach(chave => localStorage.setItem(chave, dados[chave]));
 }
 
+
+function carregarAnotacoesLocais(){
+  try{
+    return JSON.parse(localStorage.getItem(CHAVE_ANOTACOES) || "[]");
+  }catch(e){
+    return [];
+  }
+}
+
+function salvarAnotacoesLocais(lista){
+  localStorage.setItem(CHAVE_ANOTACOES, JSON.stringify(lista || []));
+}
+
+function linhaNuvemParaAnotacao(linha){
+  return {
+    id: linha.id,
+    sobreQuem: linha.sobre_quem || "",
+    data: linha.data || "",
+    hora: linha.hora || "",
+    descricao: linha.descricao || "",
+    criadoEm: linha.criado_em || linha.created_at || new Date().toISOString(),
+    atualizadoEm: linha.atualizado_em || ""
+  };
+}
+
+function anotacaoParaLinhaNuvem(item){
+  return {
+    id: item.id,
+    user_id: usuarioNuvem.id,
+    sobre_quem: item.sobreQuem || null,
+    data: item.data || null,
+    hora: item.hora || null,
+    descricao: item.descricao || "",
+    criado_em: item.criadoEm || null,
+    atualizado_em: item.atualizadoEm || null
+  };
+}
+
+async function sincronizarAnotacoesAntigas(){
+  const locais = carregarAnotacoesLocais();
+
+  const consulta = await supabaseClient
+    .from("anotacoes")
+    .select("*")
+    .eq("user_id", usuarioNuvem.id);
+
+  if(consulta.error){
+    throw new Error("Erro ao buscar anotações: " + consulta.error.message);
+  }
+
+  const nuvem = (consulta.data || []).map(linhaNuvemParaAnotacao);
+
+  const mapa = new Map();
+
+  nuvem.forEach(item => {
+    if(item && item.id) mapa.set(item.id, item);
+  });
+
+  locais.forEach(item => {
+    if(item && item.id) mapa.set(item.id, item);
+  });
+
+  const final = Array.from(mapa.values());
+
+  if(final.length){
+    salvarAnotacoesLocais(final);
+
+    const envio = await supabaseClient
+      .from("anotacoes")
+      .upsert(final.map(anotacaoParaLinhaNuvem), { onConflict:"id" });
+
+    if(envio.error){
+      throw new Error("Erro ao enviar anotações: " + envio.error.message);
+    }
+
+    localStorage.setItem(CHAVE_ANOTACOES, JSON.stringify(final));
+  }
+
+  return final.length;
+}
+
+
 async function sincronizarNuvem(){
   if(!(await garantirLogin())) return;
   setStatus("Sincronizando nuvem...", "");
@@ -204,9 +287,23 @@ async function sincronizarNuvem(){
     }
   }
 
+  let totalAnotacoes = 0;
+
+  try{
+    totalAnotacoes = await sincronizarAnotacoesAntigas();
+  }catch(e){
+    setStatus("Dados gerais sincronizados, mas houve erro nas anotações.", "erro");
+    alert(e.message);
+    return;
+  }
+
   localStorage.setItem(CHAVE_ULTIMA_SINCRONIZACAO_NUVEM, new Date().toISOString());
   setStatus("Sincronização concluída.", "ok");
-  alert("Sincronização concluída com sucesso. Dados sincronizados: " + linhas.length);
+  alert(
+    "Sincronização concluída com sucesso.\n\n" +
+    "Dados gerais sincronizados: " + linhas.length + "\n" +
+    "Anotações sincronizadas: " + totalAnotacoes
+  );
 }
 
 window.addEventListener("load", carregarSessao);
