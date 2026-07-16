@@ -1054,7 +1054,7 @@ body{
           <div class="subtituloApp">Cuidar de você floresce tudo.</div>
         </div>
 
-        <button class="notificacaoBolinha" onclick="abrirModalBackupMaya()" title="Backup">⌂</button>
+        <button class="notificacaoBolinha" onclick="abrirModalBackupMaya()" title="Importar e Exportar">⇅</button>
       </header>
 
       <section class="hero">
@@ -1258,14 +1258,16 @@ body{
         <button class="rotinaVoltar" onclick="fecharModalBackupMaya()">←</button>
 
         <div class="rotinaTituloArea">
-          <div class="rotinaTitle">Backup</div>
-          <div class="rotinaSub">exportar ou importar dados</div>
+          <div class="rotinaTitle">Importar e Exportar</div>
+          <div class="rotinaSub">backup geral, nuvem e dados salvos</div>
         </div>
       </div>
 
       <div class="rotinaBotoes">
-        <button class="rotinaBotao" onclick="exportarBackupMaya()">📤 Exportar dados</button>
-        <button class="rotinaBotao" onclick="abrirImportacaoBackup()">📥 Importar dados</button>
+        <button class="rotinaBotao" onclick="irParaComSenha('backup-geral.html')">⇅ Backup geral do app</button>
+        <button class="rotinaBotao" onclick="irParaComSenha('anotacao.html#nuvem')">☁ Anotações e nuvem</button>
+        <button class="rotinaBotao" onclick="exportarBackupMaya()">📤 Exportar dados da Maya</button>
+        <button class="rotinaBotao" onclick="abrirImportacaoBackup()">📥 Importar dados da Maya</button>
 
         <input
           type="file"

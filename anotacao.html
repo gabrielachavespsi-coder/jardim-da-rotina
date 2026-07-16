@@ -750,6 +750,15 @@ body{
 }
 /* FIM NUVEM SUPABASE */
 
+
+/* AJUSTE: nuvem centralizada no index */
+.botaoBackupTopo{
+  display:none !important;
+}
+.statusNuvem{
+  display:none !important;
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -1367,6 +1376,15 @@ function verificarLembreteSincronizacaoNuvem(){
 }
 
 
+
+function abrirNuvemSeVeioDoIndex(){
+  if(window.location.hash === "#nuvem"){
+    setTimeout(function(){
+      abrirModalBackup();
+    }, 450);
+  }
+}
+
 function iniciarSupabase(){
   try{
     if(window.supabase && !supabaseClient){
@@ -1757,6 +1775,7 @@ window.addEventListener("load", function(){
   renderizarAnotacoes();
   carregarSessaoNuvem();
   verificarLembreteSincronizacaoNuvem();
+  abrirNuvemSeVeioDoIndex();
 });
 </script>
 

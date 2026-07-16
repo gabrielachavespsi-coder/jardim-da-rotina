@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backup Geral</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#6B6B6B;
+  --borda:#E3E5E1;
+  --fonte:'Poppins',sans-serif;
+  --sombra-suave:0 10px 30px rgba(63,111,79,0.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  padding:20px 14px;
+}
+
+.pagina{width:100%;max-width:420px;}
+
+.card{
+  width:100%;
+  background:var(--card);
+  border-radius:28px;
+  padding:20px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  border:1px solid rgba(227,229,225,0.8);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.topo{
+  display:grid;
+  grid-template-columns:42px 1fr 42px;
+  align-items:center;
+  gap:10px;
+}
+
+.botao-voltar{
+  border:none;
+  background:#EEF1EC;
+  border-radius:14px;
+  width:42px;
+  height:42px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  color:var(--texto-principal);
+}
+
+.topCenter{text-align:center;}
+
+.titleIndex{
+  font-size:22px;
+  font-weight:500;
+  line-height:1.15;
+  color:var(--verde-texto);
+}
+
+.subtitulo{
+  font-size:12px;
+  color:var(--texto-secundario);
+  margin-top:3px;
+  line-height:1.4;
+}
+
+.infoBox{
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:18px;
+  padding:14px;
+  font-size:12px;
+  color:var(--texto-secundario);
+  line-height:1.55;
+}
+
+.infoBox strong{
+  color:var(--verde-texto);
+  font-weight:500;
+}
+
+.botao{
+  width:100%;
+  border:none;
+  border-radius:18px;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  padding:14px 14px;
+  font-size:14px;
+  font-family:var(--fonte);
+  cursor:pointer;
+  transition:0.2s ease;
+  text-align:center;
+}
+
+.botao:hover{background:var(--verde-hover);}
+
+.botao.secundario{
+  background:#EEF1EC;
+  color:var(--texto-secundario);
+}
+
+.botao.perigo{
+  background:#F8E8EA;
+  color:#8A3030;
+}
+
+.listaChaves{
+  display:none;
+  background:#FFF;
+  border:1px solid var(--borda);
+  border-radius:16px;
+  padding:12px;
+  max-height:260px;
+  overflow:auto;
+  font-size:11px;
+  color:var(--texto-secundario);
+  line-height:1.45;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+.status{
+  min-height:34px;
+  border-radius:15px;
+  background:#F2F7F0;
+  border:1px solid rgba(221,232,216,0.95);
+  color:var(--verde-texto);
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8px 10px;
+}
+
+.status.erro{
+  background:#F8E8EA;
+  color:#8A3030;
+}
+
+.status.ok{
+  background:#EAF3E8;
+  color:var(--verde-escuro);
+}
+
+input[type="file"]{display:none;}
+</style>
+</head>
+
+<body>
+<div class="pagina">
+  <div class="card">
+
+    <div class="topo">
+      <button class="botao-voltar" onclick="voltar()">←</button>
+
+      <div class="topCenter">
+        <div class="titleIndex">Backup Geral</div>
+        <div class="subtitulo">importar e exportar dados salvos</div>
+      </div>
+
+      <div></div>
+    </div>
+
+    <div class="infoBox">
+      <strong>Importante:</strong><br>
+      Essa página serve para recuperar o backup geral do localStorage.
+      Ela pode restaurar rotinas, saldos, configurações e outros dados salvos no aparelho.
+      Antes de importar, ela cria automaticamente um backup de segurança do estado atual.
+    </div>
+
+    <div class="status" id="statusBackup">Pronta para importar ou exportar.</div>
+
+    <button class="botao" onclick="exportarBackupGeral()">↑ Exportar backup geral atual</button>
+    <button class="botao" onclick="selecionarBackupGeral()">↓ Importar backup geral</button>
+    <button class="botao secundario" onclick="mostrarChavesSalvas()">Ver chaves salvas neste aparelho</button>
+    <button class="botao secundario" onclick="location.href='gabriela-menu.html'">Voltar para Gabriela</button>
+
+    <input type="file" id="arquivoBackupGeral" accept=".json,application/json" onchange="importarBackupGeral(event)">
+
+    <div class="listaChaves" id="listaChaves"></div>
+
+  </div>
+</div>
+
+<script>
+function setStatus(texto, tipo){
+  const el = document.getElementById("statusBackup");
+  el.textContent = texto;
+  el.classList.remove("ok", "erro");
+  if(tipo) el.classList.add(tipo);
+}
+
+function voltar(){
+  if(history.length > 1){
+    history.back();
+  }else{
+    location.href = "gabriela-menu.html";
+  }
+}
+
+function coletarLocalStorage(){
+  const dados = {};
+  Object.keys(localStorage).forEach(k => {
+    dados[k] = localStorage.getItem(k);
+  });
+  return dados;
+}
+
+function baixarJSON(nome, dados){
+  const blob = new Blob([JSON.stringify(dados, null, 2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = nome;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function dataArquivo(){
+  const d = new Date();
+  const pad = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}`;
+}
+
+function exportarBackupGeral(){
+  const dados = coletarLocalStorage();
+  baixarJSON(`backup-localStorage-jardim-da-rotina-${dataArquivo()}.json`, dados);
+  setStatus("Backup geral exportado.", "ok");
+}
+
+function selecionarBackupGeral(){
+  document.getElementById("arquivoBackupGeral").value = "";
+  document.getElementById("arquivoBackupGeral").click();
+}
+
+function normalizarBackupImportado(json){
+  if(!json || typeof json !== "object" || Array.isArray(json)){
+    throw new Error("O arquivo não parece ser um backup geral válido.");
+  }
+
+  return json;
+}
+
+function criarBackupSegurancaAntesImportar(){
+  const dadosAtuais = coletarLocalStorage();
+  baixarJSON(`backup-seguranca-antes-importar-${dataArquivo()}.json`, dadosAtuais);
+}
+
+function importarBackupGeral(event){
+  const file = event.target.files && event.target.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(){
+    try{
+      const json = JSON.parse(reader.result);
+      const dados = normalizarBackupImportado(json);
+      const chaves = Object.keys(dados);
+
+      if(!chaves.length){
+        alert("O backup está vazio.");
+        return;
+      }
+
+      criarBackupSegurancaAntesImportar();
+
+      const juntar = confirm(
+        "Como deseja importar o backup geral?\n\n" +
+        "OK = juntar/atualizar dados, mantendo o que já existe no app\n" +
+        "Cancelar = substituir tudo pelo backup importado"
+      );
+
+      if(!juntar){
+        const confirmar = confirm(
+          "Atenção: isso vai apagar o localStorage atual deste aparelho e deixar apenas o conteúdo do backup.\n\n" +
+          "Um backup de segurança acabou de ser baixado.\n\n" +
+          "Deseja continuar?"
+        );
+
+        if(!confirmar){
+          setStatus("Importação cancelada.", "");
+          return;
+        }
+
+        localStorage.clear();
+      }
+
+      chaves.forEach(k => {
+        const valor = dados[k];
+        if(typeof valor === "string"){
+          localStorage.setItem(k, valor);
+        }else{
+          localStorage.setItem(k, JSON.stringify(valor));
+        }
+      });
+
+      setStatus(`Backup importado com sucesso. ${chaves.length} chaves restauradas.`, "ok");
+
+      alert(
+        "Backup geral importado com sucesso.\n\n" +
+        "Feche e abra novamente as páginas do app para os dados aparecerem atualizados."
+      );
+
+    }catch(e){
+      setStatus("Erro ao importar backup.", "erro");
+      alert("Erro ao importar backup: " + e.message);
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+function mostrarChavesSalvas(){
+  const box = document.getElementById("listaChaves");
+  const chaves = Object.keys(localStorage).sort();
+
+  if(!chaves.length){
+    box.textContent = "Nenhuma chave salva neste aparelho.";
+  }else{
+    box.textContent = chaves.map(k => {
+      const valor = localStorage.getItem(k) || "";
+      return `• ${k} — ${valor.length} caracteres`;
+    }).join("\n");
+  }
+
+  box.style.display = box.style.display === "block" ? "none" : "block";
+}
+</script>
+</body>
+</html>
