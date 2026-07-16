@@ -626,6 +626,75 @@ body{
   margin-bottom:-2px;
 }
 
+
+/* BACKUP DAS ANOTAÇÕES */
+.acoesBackup{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:-2px;
+}
+
+.botaoBackup{
+  width:100%;
+  min-height:44px;
+  border:none;
+  border-radius:17px;
+  background:#F2F7F0;
+  color:var(--verde-texto);
+  font-family:var(--fonte);
+  font-size:12.5px;
+  font-weight:500;
+  cursor:pointer;
+  border:1px solid rgba(221,232,216,0.95);
+  box-shadow:0 5px 14px rgba(84,110,79,0.07);
+}
+
+.botaoBackup:hover{
+  background:#EAF3E8;
+}
+
+.inputBackupOculto{
+  display:none;
+}
+
+@media (max-width:390px){
+  .acoesBackup{
+    grid-template-columns:1fr;
+  }
+}
+/* FIM BACKUP DAS ANOTAÇÕES */
+
+
+/* AJUSTE — MENU DE BACKUP NO TOPO */
+.botaoBackupTopo{
+  cursor:pointer;
+  border:none;
+  color:var(--verde-salvia-escuro);
+  font-size:22px;
+}
+
+.botaoBackupTopo:hover{
+  background:#F2F7F0;
+  transform:translateY(-1px);
+}
+
+.botaoBackupOpcao{
+  box-shadow:0 8px 18px rgba(111,141,98,0.16);
+}
+
+.botaoBackupOpcao.secundario{
+  background:#F2F7F0;
+  color:var(--verde-texto);
+  border:1px solid rgba(221,232,216,0.95);
+  box-shadow:0 5px 14px rgba(84,110,79,0.07);
+}
+
+.botaoBackupOpcao.secundario:hover{
+  background:#EAF3E8;
+}
+/* FIM AJUSTE — MENU DE BACKUP NO TOPO */
+
 </style>
 </head>
 
@@ -643,19 +712,12 @@ body{
         <div class="subtituloApp">Registre o que é importante lembrar.</div>
       </div>
 
-      <div class="logoBolinha">✎</div>
+      <button class="logoBolinha botaoBackupTopo" onclick="abrirModalBackup()" title="Backup">☁</button>
     </header>
-
-    <section class="heroAnotacao">
-      <div class="heroIcone">📝</div>
-      <div class="heroTexto">
-        <h2>Anotações importantes</h2>
-        <p>Guarde lembretes com data, hora e descrição. A lista aparece organizada por data.</p>
-      </div>
-    </section>
-
     <div class="acoesTopo">
       <button class="botaoAdicionar" onclick="abrirModalAnotacao()">＋ Adicionar anotação</button>
+
+
     </div>
 
     <div class="listaTitulo">
@@ -668,6 +730,14 @@ body{
   </main>
 
 </div>
+
+<input
+  type="file"
+  id="inputImportarAnotacoes"
+  class="inputBackupOculto"
+  accept=".json,application/json"
+  onchange="importarAnotacoesArquivo(event)"
+>
 
 <nav class="bottomNav">
   <button class="navItem" onclick="irPara('index.html')">
@@ -740,6 +810,25 @@ body{
         <button class="cancel" onclick="fecharModalAnotacao()">Cancelar</button>
         <button class="save" onclick="salvarAnotacao()">Salvar</button>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modalOverlay" id="modalBackup">
+  <div class="modalCard">
+    <div class="modalTopo">
+      <button class="modalVoltar" onclick="fecharModalBackup()">←</button>
+
+      <div class="modalTituloArea">
+        <div class="modalTitle">Backup</div>
+        <div class="modalSub">exporte ou importe suas anotações</div>
+      </div>
+    </div>
+
+    <div class="formAnotacao">
+      <button class="botaoAdicionar botaoBackupOpcao" onclick="exportarAnotacoes()">↑ Exportar anotações</button>
+      <button class="botaoAdicionar botaoBackupOpcao secundario" onclick="abrirImportarAnotacoes()">↓ Importar anotações</button>
     </div>
   </div>
 </div>
@@ -998,6 +1087,150 @@ function excluirAnotacao(id){
   renderizarAnotacoes();
 }
 
+
+function baixarArquivoJSON(nomeArquivo, dados){
+  const blob = new Blob([JSON.stringify(dados, null, 2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = nomeArquivo;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+function exportarAnotacoes(){
+  const anotacoes = carregarAnotacoes();
+
+  const backup = {
+    tipo:"backup_anotacoes_jardim_da_rotina",
+    versao:1,
+    criadoEm:new Date().toISOString(),
+    chave:CHAVE_ANOTACOES,
+    total:Array.isArray(anotacoes) ? anotacoes.length : 0,
+    anotacoes:anotacoes
+  };
+
+  baixarArquivoJSON("backup-anotacoes-jardim-da-rotina.json", backup);
+  fecharModalBackup();
+}
+
+function abrirImportarAnotacoes(){
+  const input = document.getElementById("inputImportarAnotacoes");
+  if(input){
+    input.value = "";
+    input.click();
+    fecharModalBackup();
+  }
+}
+
+function normalizarBackupAnotacoes(dados){
+  if(Array.isArray(dados)){
+    return dados;
+  }
+
+  if(dados && Array.isArray(dados.anotacoes)){
+    return dados.anotacoes;
+  }
+
+  if(dados && typeof dados === "object"){
+    if(typeof dados[CHAVE_ANOTACOES] === "string"){
+      try{
+        const lista = JSON.parse(dados[CHAVE_ANOTACOES]);
+        if(Array.isArray(lista)) return lista;
+      }catch(e){}
+    }
+
+    for(const chave of Object.keys(dados)){
+      if(chave.toLowerCase().includes("anot") && typeof dados[chave] === "string"){
+        try{
+          const lista = JSON.parse(dados[chave]);
+          if(Array.isArray(lista)) return lista;
+        }catch(e){}
+      }
+    }
+  }
+
+  return null;
+}
+
+function importarAnotacoesArquivo(event){
+  const arquivo = event.target.files && event.target.files[0];
+  if(!arquivo) return;
+
+  const leitor = new FileReader();
+
+  leitor.onload = function(){
+    try{
+      const dados = JSON.parse(leitor.result);
+      const anotacoesImportadas = normalizarBackupAnotacoes(dados);
+
+      if(!Array.isArray(anotacoesImportadas)){
+        alert("Não consegui encontrar uma lista de anotações válida neste arquivo.");
+        return;
+      }
+
+      const atuais = carregarAnotacoes();
+
+      const escolha = confirm(
+        "Foram encontradas " + anotacoesImportadas.length + " anotações no backup.\n\n" +
+        "OK = juntar com as anotações atuais\n" +
+        "Cancelar = substituir tudo pelo backup"
+      );
+
+      let novaLista;
+
+      if(escolha){
+        const mapa = new Map();
+
+        atuais.forEach(item => {
+          if(item && item.id) mapa.set(item.id, item);
+        });
+
+        anotacoesImportadas.forEach(item => {
+          if(!item || typeof item !== "object") return;
+
+          const id = item.id || `anotacao_importada_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+          mapa.set(id, {...item, id});
+        });
+
+        novaLista = Array.from(mapa.values());
+      }else{
+        const confirmarSubstituir = confirm(
+          "Tem certeza que deseja substituir as anotações atuais pelo backup?"
+        );
+
+        if(!confirmarSubstituir) return;
+
+        novaLista = anotacoesImportadas
+          .filter(item => item && typeof item === "object")
+          .map((item, index) => ({
+            ...item,
+            id:item.id || `anotacao_importada_${Date.now()}_${index}`
+          }));
+      }
+
+      salvarListaAnotacoes(novaLista);
+      renderizarAnotacoes();
+
+      alert("Anotações importadas com sucesso. Total atual: " + novaLista.length);
+    }catch(e){
+      alert("Não consegui ler este arquivo. Verifique se ele é um backup JSON válido.");
+    }
+  };
+
+  leitor.readAsText(arquivo);
+}
+
+
+function abrirModalBackup(){
+  document.getElementById("modalBackup").classList.add("show");
+}
+
+function fecharModalBackup(){
+  document.getElementById("modalBackup").classList.remove("show");
+}
+
 function abrirModalRotina(){
   document.getElementById("modalRotina").classList.add("show");
 }
@@ -1014,6 +1247,7 @@ window.addEventListener("click", function(e){
 
   const modalAnotacao = document.getElementById("modalAnotacao");
   const modalRotina = document.getElementById("modalRotina");
+  const modalBackup = document.getElementById("modalBackup");
 
   if(e.target === modalAnotacao){
     fecharModalAnotacao();
@@ -1021,6 +1255,11 @@ window.addEventListener("click", function(e){
 
   if(e.target === modalRotina){
     fecharModalRotina();
+    fecharModalBackup();
+  }
+
+  if(e.target === modalBackup){
+    fecharModalBackup();
   }
 });
 
@@ -1028,6 +1267,7 @@ document.addEventListener("keydown", function(e){
   if(e.key === "Escape"){
     fecharModalAnotacao();
     fecharModalRotina();
+    fecharModalBackup();
   }
 });
 
