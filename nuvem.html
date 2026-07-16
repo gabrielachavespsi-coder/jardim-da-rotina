@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuvem</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--verde-principal:#E6F2E5;--verde-hover:#D6EAD4;--verde-texto:#3F6F4F;--verde-escuro:#5C9D5C;--fundo:#F6F7F5;--card:#FFFFFF;--texto-principal:#2F2F2F;--texto-secundario:#6B6B6B;--borda:#E3E5E1;--fonte:'Poppins',sans-serif;--sombra-suave:0 10px 30px rgba(63,111,79,.08);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--fonte);background:var(--fundo);color:var(--texto-principal);display:flex;justify-content:center;padding:20px 14px;}
+.pagina{width:100%;max-width:420px;}
+.card{width:100%;background:var(--card);border-radius:28px;padding:20px 16px 18px;box-shadow:var(--sombra-suave);border:1px solid rgba(227,229,225,.8);display:flex;flex-direction:column;gap:14px;}
+.topo{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;gap:10px;}
+.botao-voltar{border:none;background:#EEF1EC;border-radius:14px;width:42px;height:42px;cursor:pointer;font-size:18px;font-family:var(--fonte);color:var(--texto-principal);}
+.topCenter{text-align:center;}
+.titleIndex{font-size:23px;font-weight:500;line-height:1.15;color:var(--verde-texto);}
+.subtitulo{font-size:12px;color:var(--texto-secundario);margin-top:3px;line-height:1.4;}
+.status{min-height:38px;border-radius:16px;background:#F2F7F0;border:1px solid rgba(221,232,216,.95);color:var(--verde-texto);font-size:12px;display:flex;align-items:center;justify-content:center;text-align:center;padding:9px 10px;}
+.status.ok{background:#EAF3E8;color:var(--verde-escuro);}
+.status.erro{background:#F8E8EA;color:#8A3030;}
+.infoBox{background:#F8FAF7;border:1px solid var(--borda);border-radius:18px;padding:14px;font-size:12px;color:var(--texto-secundario);line-height:1.55;}
+.infoBox strong{color:var(--verde-texto);font-weight:500;}
+.field{display:flex;flex-direction:column;gap:6px;}
+.field label{font-size:13px;color:var(--texto-principal);font-weight:500;}
+.inputModal{padding:12px 14px;border-radius:14px;border:1px solid var(--borda);font-size:13px;font-family:var(--fonte);width:100%;min-height:46px;outline:none;}
+.inputModal:focus{border-color:var(--verde-escuro);box-shadow:0 0 0 3px rgba(127,183,126,.12);}
+.botoesDuasColunas{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.botao{width:100%;border:none;border-radius:18px;background:var(--verde-principal);color:var(--verde-texto);padding:14px;font-size:14px;font-family:var(--fonte);cursor:pointer;text-align:center;}
+.botao:hover{background:var(--verde-hover);}
+.botao.forte{background:var(--verde-escuro);color:#fff;}
+.botao.secundario{background:#EEF1EC;color:var(--texto-secundario);}
+</style>
+</head>
+<body>
+<div class="pagina">
+  <div class="card">
+    <div class="topo">
+      <button class="botao-voltar" onclick="voltar()">←</button>
+      <div class="topCenter">
+        <div class="titleIndex">Nuvem</div>
+        <div class="subtitulo">sincronização do Jardim da Rotina</div>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="status" id="statusNuvem">Nuvem: desconectada</div>
+
+    <div class="infoBox">
+      <strong>Importante:</strong><br>
+      Esta tela sincroniza os dados salvos no aparelho com a nuvem. Depois de entrar, use <strong>Sincronizar nuvem</strong>.
+    </div>
+
+    <div class="field">
+      <label for="campoEmailNuvem">E-mail</label>
+      <input class="inputModal" type="email" id="campoEmailNuvem" placeholder="seu e-mail">
+    </div>
+
+    <div class="field">
+      <label for="campoSenhaNuvem">Senha</label>
+      <input class="inputModal" type="password" id="campoSenhaNuvem" placeholder="sua senha">
+    </div>
+
+    <div class="botoesDuasColunas">
+      <button class="botao forte" onclick="entrarConta()">Entrar na conta</button>
+      <button class="botao secundario" onclick="criarConta()">Criar conta</button>
+    </div>
+
+    <button class="botao" onclick="sincronizarNuvem()">☁ Sincronizar nuvem</button>
+    <button class="botao secundario" onclick="sairConta()">Sair da conta</button>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = "https://hrqoairpuujgfyvjxsjs.supabase.co";
+const SUPABASE_KEY = "sb_publishable_UR3ZKGf8ei8R0_-feHjkCg_eeW58oUY";
+const CHAVE_ULTIMA_SINCRONIZACAO_NUVEM = "jardim_anotacoes_ultima_sincronizacao_nuvem";
+let supabaseClient = null;
+let usuarioNuvem = null;
+
+function voltar(){ if(history.length > 1){ history.back(); } else { location.href = "index.html"; } }
+function iniciarSupabase(){ try{ if(window.supabase && !supabaseClient){ supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } }catch(e){ supabaseClient = null; } }
+function setStatus(texto, tipo){ const el=document.getElementById("statusNuvem"); el.textContent=texto; el.classList.remove("ok","erro"); if(tipo) el.classList.add(tipo); }
+function atualizarStatus(){ usuarioNuvem ? setStatus("Nuvem: conectada em " + usuarioNuvem.email, "ok") : setStatus("Nuvem: desconectada", ""); }
+
+async function carregarSessao(){
+  iniciarSupabase();
+  if(!supabaseClient){ setStatus("Nuvem indisponível. Verifique a internet.", "erro"); return; }
+  const { data } = await supabaseClient.auth.getSession();
+  usuarioNuvem = data && data.session ? data.session.user : null;
+  atualizarStatus();
+  if(usuarioNuvem){
+    const email=document.getElementById("campoEmailNuvem");
+    if(email && !email.value) email.value=usuarioNuvem.email || "";
+  }
+}
+
+function obterEmailSenha(){
+  const email=(document.getElementById("campoEmailNuvem").value || "").trim();
+  const senha=document.getElementById("campoSenhaNuvem").value || "";
+  if(!email){ alert("Digite seu e-mail."); return null; }
+  if(!senha || senha.length < 6){ alert("Digite uma senha com pelo menos 6 caracteres."); return null; }
+  return {email, senha};
+}
+
+async function criarConta(){
+  iniciarSupabase();
+  if(!supabaseClient){ alert("Não consegui iniciar a nuvem. Verifique sua internet."); return; }
+  const c=obterEmailSenha(); if(!c) return;
+  setStatus("Criando conta...", "");
+  const { data, error } = await supabaseClient.auth.signUp({email:c.email,password:c.senha});
+  if(error){ setStatus("Erro ao criar conta.", "erro"); alert("Erro ao criar conta: " + error.message); return; }
+  usuarioNuvem = data && data.user ? data.user : null;
+  atualizarStatus();
+  alert("Conta criada. Se o Supabase pedir confirmação de e-mail, confirme antes de entrar.");
+}
+
+async function entrarConta(){
+  iniciarSupabase();
+  if(!supabaseClient){ alert("Não consegui iniciar a nuvem. Verifique sua internet."); return; }
+  const c=obterEmailSenha(); if(!c) return;
+  setStatus("Entrando na conta...", "");
+  const { data, error } = await supabaseClient.auth.signInWithPassword({email:c.email,password:c.senha});
+  if(error){ setStatus("Erro ao entrar na conta.", "erro"); alert("Erro ao entrar: " + error.message); return; }
+  usuarioNuvem = data.user;
+  atualizarStatus();
+  alert("Entrada realizada com sucesso.");
+}
+
+async function sairConta(){
+  iniciarSupabase();
+  if(supabaseClient){ await supabaseClient.auth.signOut(); }
+  usuarioNuvem=null;
+  atualizarStatus();
+  alert("Você saiu da conta da nuvem neste aparelho.");
+}
+
+async function garantirLogin(){
+  iniciarSupabase();
+  if(!supabaseClient){ alert("Nuvem indisponível. Verifique a internet."); return false; }
+  if(!usuarioNuvem){
+    const { data } = await supabaseClient.auth.getSession();
+    usuarioNuvem = data && data.session ? data.session.user : null;
+  }
+  if(!usuarioNuvem){ setStatus("Entre na conta primeiro.", "erro"); alert("Entre na conta primeiro com e-mail e senha."); return false; }
+  atualizarStatus();
+  return true;
+}
+
+function coletarLocalStorageParaNuvem(){
+  const dados={};
+  Object.keys(localStorage).forEach(chave => {
+    if(chave.startsWith("sb-")) return;
+    const valor=localStorage.getItem(chave);
+    if(valor !== null) dados[chave]=valor;
+  });
+  return dados;
+}
+
+function aplicarDadosLocalStorage(dados){
+  Object.keys(dados).forEach(chave => localStorage.setItem(chave, dados[chave]));
+}
+
+async function sincronizarNuvem(){
+  if(!(await garantirLogin())) return;
+  setStatus("Sincronizando nuvem...", "");
+
+  const dadosLocais = coletarLocalStorageParaNuvem();
+
+  const consulta = await supabaseClient
+    .from("app_localstorage")
+    .select("chave, valor")
+    .eq("user_id", usuarioNuvem.id);
+
+  if(consulta.error){
+    setStatus("Erro ao baixar dados da nuvem.", "erro");
+    alert("Erro ao baixar dados da nuvem: " + consulta.error.message);
+    return;
+  }
+
+  const dadosNuvem = {};
+  (consulta.data || []).forEach(item => { dadosNuvem[item.chave] = item.valor; });
+
+  const dadosFinais = {...dadosNuvem, ...dadosLocais};
+  aplicarDadosLocalStorage(dadosFinais);
+
+  const linhas = Object.keys(dadosFinais).map(chave => ({
+    user_id: usuarioNuvem.id,
+    chave,
+    valor: dadosFinais[chave],
+    updated_at: new Date().toISOString()
+  }));
+
+  if(linhas.length){
+    const envio = await supabaseClient
+      .from("app_localstorage")
+      .upsert(linhas, { onConflict:"user_id,chave" });
+
+    if(envio.error){
+      setStatus("Erro ao enviar dados para a nuvem.", "erro");
+      alert("Erro ao enviar dados para a nuvem: " + envio.error.message);
+      return;
+    }
+  }
+
+  localStorage.setItem(CHAVE_ULTIMA_SINCRONIZACAO_NUVEM, new Date().toISOString());
+  setStatus("Sincronização concluída.", "ok");
+  alert("Sincronização concluída com sucesso. Dados sincronizados: " + linhas.length);
+}
+
+window.addEventListener("load", carregarSessao);
+</script>
+</body>
+</html>

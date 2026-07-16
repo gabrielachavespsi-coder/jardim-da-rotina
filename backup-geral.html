@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Backup Geral</title>
+<title>Backup de Dados</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -163,6 +163,19 @@ body{
 }
 
 input[type="file"]{display:none;}
+
+.modalEscolhaOverlay{position:fixed;inset:0;background:rgba(0,0,0,.34);display:none;justify-content:center;align-items:center;padding:16px;z-index:999;}
+.modalEscolhaOverlay.show{display:flex;}
+.modalEscolhaCard{width:100%;max-width:340px;background:#fff;border-radius:24px;padding:18px;box-shadow:0 14px 36px rgba(0,0,0,.18);border:1px solid rgba(221,232,216,.9);display:flex;flex-direction:column;gap:12px;}
+.modalEscolhaTitulo{text-align:center;color:var(--verde-texto);font-size:19px;font-weight:500;}
+.modalEscolhaTexto{color:var(--texto-secundario);font-size:12px;line-height:1.45;text-align:center;}
+.modalEscolhaBtns{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.btnEscolha{border:none;min-height:62px;border-radius:17px;font-family:var(--fonte);cursor:pointer;padding:10px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;}
+.btnEscolha strong{font-size:14px;font-weight:600;}
+.btnEscolha span{font-size:10.8px;line-height:1.25;}
+.btnEscolha.ok{background:var(--verde-escuro);color:white;box-shadow:0 8px 16px rgba(92,157,92,.20);}
+.btnEscolha.cancelar{background:#EEF1EC;color:var(--texto-secundario);}
+
 </style>
 </head>
 
@@ -174,8 +187,8 @@ input[type="file"]{display:none;}
       <button class="botao-voltar" onclick="voltar()">←</button>
 
       <div class="topCenter">
-        <div class="titleIndex">Backup Geral</div>
-        <div class="subtitulo">importar e exportar dados salvos</div>
+        <div class="titleIndex">Backup de Dados</div>
+        <div class="subtitulo">arquivo de segurança para última instância</div>
       </div>
 
       <div></div>
@@ -193,7 +206,6 @@ input[type="file"]{display:none;}
     <button class="botao" onclick="exportarBackupGeral()">↑ Exportar backup geral atual</button>
     <button class="botao" onclick="selecionarBackupGeral()">↓ Importar backup geral</button>
     <button class="botao secundario" onclick="mostrarChavesSalvas()">Ver chaves salvas neste aparelho</button>
-    <button class="botao secundario" onclick="location.href='gabriela-menu.html'">Voltar para Gabriela</button>
 
     <input type="file" id="arquivoBackupGeral" accept=".json,application/json" onchange="importarBackupGeral(event)">
 
@@ -203,6 +215,8 @@ input[type="file"]{display:none;}
 </div>
 
 <script>
+let backupPendenteImportacao = null;
+
 function setStatus(texto, tipo){
   const el = document.getElementById("statusBackup");
   el.textContent = texto;
@@ -282,44 +296,10 @@ function importarBackupGeral(event){
         return;
       }
 
-      criarBackupSegurancaAntesImportar();
+      backupPendenteImportacao = dados;
 
-      const juntar = confirm(
-        "Como deseja importar o backup geral?\n\n" +
-        "OK = juntar/atualizar dados, mantendo o que já existe no app\n" +
-        "Cancelar = substituir tudo pelo backup importado"
-      );
-
-      if(!juntar){
-        const confirmar = confirm(
-          "Atenção: isso vai apagar o localStorage atual deste aparelho e deixar apenas o conteúdo do backup.\n\n" +
-          "Um backup de segurança acabou de ser baixado.\n\n" +
-          "Deseja continuar?"
-        );
-
-        if(!confirmar){
-          setStatus("Importação cancelada.", "");
-          return;
-        }
-
-        localStorage.clear();
-      }
-
-      chaves.forEach(k => {
-        const valor = dados[k];
-        if(typeof valor === "string"){
-          localStorage.setItem(k, valor);
-        }else{
-          localStorage.setItem(k, JSON.stringify(valor));
-        }
-      });
-
-      setStatus(`Backup importado com sucesso. ${chaves.length} chaves restauradas.`, "ok");
-
-      alert(
-        "Backup geral importado com sucesso.\n\n" +
-        "Feche e abra novamente as páginas do app para os dados aparecerem atualizados."
-      );
+      const modal = document.getElementById("modalEscolhaImportacao");
+      if(modal) modal.classList.add("show");
 
     }catch(e){
       setStatus("Erro ao importar backup.", "erro");
@@ -330,12 +310,66 @@ function importarBackupGeral(event){
   reader.readAsText(file);
 }
 
+function confirmarModoImportacao(juntar){
+  const modal = document.getElementById("modalEscolhaImportacao");
+  if(modal) modal.classList.remove("show");
+
+  if(!backupPendenteImportacao){
+    setStatus("Nenhum backup selecionado.", "erro");
+    return;
+  }
+
+  const dados = backupPendenteImportacao;
+  const chaves = Object.keys(dados);
+
+  criarBackupSegurancaAntesImportar();
+
+  if(!juntar){
+    const confirmar = confirm(
+      "Atenção: isso vai apagar o localStorage atual deste aparelho e deixar apenas o conteúdo do backup.
+
+" +
+      "Um backup de segurança acabou de ser baixado.
+
+" +
+      "Deseja continuar?"
+    );
+
+    if(!confirmar){
+      setStatus("Importação cancelada.", "");
+      backupPendenteImportacao = null;
+      return;
+    }
+
+    localStorage.clear();
+  }
+
+  chaves.forEach(k => {
+    const valor = dados[k];
+    if(typeof valor === "string"){
+      localStorage.setItem(k, valor);
+    }else{
+      localStorage.setItem(k, JSON.stringify(valor));
+    }
+  });
+
+  setStatus(`Backup importado com sucesso. ${chaves.length} chaves restauradas.`, "ok");
+  backupPendenteImportacao = null;
+
+  alert(
+    "Backup geral importado com sucesso.
+
+" +
+    "Feche e abra novamente as páginas do app para os dados aparecerem atualizados."
+  );
+}
+
 function mostrarChavesSalvas(){
   const box = document.getElementById("listaChaves");
   const chaves = Object.keys(localStorage).sort();
 
   if(!chaves.length){
-    box.textContent = "Nenhuma chave salva neste aparelho.";
+    box.textContent = "Nenhuma chave salva neste aparelho ainda. Depois que você usar o app ou importar um backup, as chaves aparecem aqui.";
   }else{
     box.textContent = chaves.map(k => {
       const valor = localStorage.getItem(k) || "";
@@ -346,5 +380,21 @@ function mostrarChavesSalvas(){
   box.style.display = box.style.display === "block" ? "none" : "block";
 }
 </script>
+
+<div class="modalEscolhaOverlay" id="modalEscolhaImportacao">
+  <div class="modalEscolhaCard">
+    <div class="modalEscolhaTitulo">Importar backup geral?</div>
+    <div class="modalEscolhaTexto">Escolha como o arquivo será aplicado neste aparelho.</div>
+    <div class="modalEscolhaBtns">
+      <button class="btnEscolha ok" onclick="confirmarModoImportacao(true)">
+        <strong>OK</strong><span>sincroniza os dados</span>
+      </button>
+      <button class="btnEscolha cancelar" onclick="confirmarModoImportacao(false)">
+        <strong>Cancelar</strong><span>tudo é substituído</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

@@ -1259,23 +1259,13 @@ body{
 
         <div class="rotinaTituloArea">
           <div class="rotinaTitle">Importar e Exportar</div>
-          <div class="rotinaSub">backup geral, nuvem e dados salvos</div>
+          <div class="rotinaSub">nuvem e backup de dados</div>
         </div>
       </div>
 
       <div class="rotinaBotoes">
-        <button class="rotinaBotao" onclick="irParaComSenha('backup-geral.html')">⇅ Backup geral do app</button>
-        <button class="rotinaBotao" onclick="irParaComSenha('anotacao.html#nuvem')">☁ Anotações e nuvem</button>
-        <button class="rotinaBotao" onclick="exportarBackupMaya()">📤 Exportar dados da Maya</button>
-        <button class="rotinaBotao" onclick="abrirImportacaoBackup()">📥 Importar dados da Maya</button>
-
-        <input
-          type="file"
-          id="arquivoBackupMaya"
-          accept=".json"
-          style="display:none"
-          onchange="importarBackupMaya(event)"
-        >
+        <button class="rotinaBotao" onclick="irParaComSenha('nuvem.html')">☁ Nuvem</button>
+        <button class="rotinaBotao" onclick="irParaComSenha('backup-geral.html')">⇅ Backup de Dados</button>
       </div>
 
     </div>
