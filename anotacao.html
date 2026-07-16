@@ -695,7 +695,63 @@ body{
 }
 /* FIM AJUSTE — MENU DE BACKUP NO TOPO */
 
+
+/* NUVEM SUPABASE */
+.statusNuvem{
+  width:100%;
+  min-height:34px;
+  border-radius:15px;
+  background:#F2F7F0;
+  border:1px solid rgba(221,232,216,0.95);
+  color:var(--verde-texto);
+  font-size:11.8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8px 10px;
+}
+
+.statusNuvem.ok,
+.statusNuvemModal.ok{
+  background:#EAF3E8;
+  color:var(--verde-salvia-escuro);
+}
+
+.statusNuvem.erro,
+.statusNuvemModal.erro{
+  background:#F8E8EA;
+  color:#8A3030;
+}
+
+.statusNuvemModal{
+  width:100%;
+  min-height:38px;
+  border-radius:16px;
+  background:#F2F7F0;
+  border:1px solid rgba(221,232,216,0.95);
+  color:var(--verde-texto);
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:9px 10px;
+}
+
+.botoesNuvemDuasColunas{
+  margin-top:0;
+}
+
+.linhaDivisoriaBackup{
+  height:1px;
+  background:rgba(221,232,216,0.95);
+  margin:4px 0;
+}
+/* FIM NUVEM SUPABASE */
+
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -712,10 +768,11 @@ body{
         <div class="subtituloApp">Registre o que é importante lembrar.</div>
       </div>
 
-      <button class="logoBolinha botaoBackupTopo" onclick="abrirModalBackup()" title="Backup">☁</button>
+      <button class="logoBolinha botaoBackupTopo" onclick="abrirModalBackup()" title="Nuvem e backup">☁</button>
     </header>
     <div class="acoesTopo">
       <button class="botaoAdicionar" onclick="abrirModalAnotacao()">＋ Adicionar anotação</button>
+      <div class="statusNuvem" id="statusNuvem">Nuvem: desconectada</div>
 
 
     </div>
@@ -815,23 +872,49 @@ body{
 </div>
 
 
+
 <div class="modalOverlay" id="modalBackup">
   <div class="modalCard">
     <div class="modalTopo">
       <button class="modalVoltar" onclick="fecharModalBackup()">←</button>
 
       <div class="modalTituloArea">
-        <div class="modalTitle">Backup</div>
-        <div class="modalSub">exporte ou importe suas anotações</div>
+        <div class="modalTitle">Nuvem e backup</div>
+        <div class="modalSub">entre, sincronize ou restaure suas anotações</div>
       </div>
     </div>
 
     <div class="formAnotacao">
-      <button class="botaoAdicionar botaoBackupOpcao" onclick="exportarAnotacoes()">↑ Exportar anotações</button>
-      <button class="botaoAdicionar botaoBackupOpcao secundario" onclick="abrirImportarAnotacoes()">↓ Importar anotações</button>
+      <div class="statusNuvemModal" id="statusNuvemModal">Nuvem: desconectada</div>
+
+      <div class="field">
+        <label for="campoEmailNuvem">E-mail</label>
+        <input type="email" id="campoEmailNuvem" placeholder="seu e-mail">
+      </div>
+
+      <div class="field">
+        <label for="campoSenhaNuvem">Senha</label>
+        <input type="password" id="campoSenhaNuvem" placeholder="sua senha">
+      </div>
+
+      <div class="modalBtns botoesNuvemDuasColunas">
+        <button class="save" onclick="entrarNuvem()">Entrar</button>
+        <button class="cancel" onclick="criarContaNuvem()">Criar conta</button>
+      </div>
+
+      <button class="botaoAdicionar botaoBackupOpcao" onclick="sincronizarAnotacoesNuvem()">↕ Sincronizar nuvem</button>
+      <button class="botaoAdicionar botaoBackupOpcao secundario" onclick="baixarAnotacoesDaNuvemComConfirmacao()">↓ Baixar da nuvem</button>
+      <button class="botaoAdicionar botaoBackupOpcao secundario" onclick="enviarAnotacoesParaNuvem()">↑ Enviar para nuvem</button>
+      <button class="botaoAdicionar botaoBackupOpcao secundario" onclick="sairNuvem()">Sair da nuvem</button>
+
+      <div class="linhaDivisoriaBackup"></div>
+
+      <button class="botaoAdicionar botaoBackupOpcao" onclick="exportarAnotacoes()">↑ Exportar backup</button>
+      <button class="botaoAdicionar botaoBackupOpcao secundario" onclick="abrirImportarAnotacoes()">↓ Importar backup</button>
     </div>
   </div>
 </div>
+
 
 <div class="modalOverlay" id="modalRotina">
   <div class="modalCard">
@@ -854,6 +937,11 @@ body{
 
 <script>
 const CHAVE_ANOTACOES = "jardim_anotacoes_importantes";
+
+const SUPABASE_URL = "https://hrqoairpuujgfvyjxjs.supabase.co";
+const SUPABASE_KEY = "sb_publishable_UR3ZKGf8ei8R0_-feHjkCg_eeW58oUY";
+let supabaseClient = null;
+let usuarioNuvem = null;
 let anotacaoEditandoId = null;
 
 function irPara(destino){
@@ -1057,6 +1145,13 @@ function salvarAnotacao(){
   }
 
   salvarListaAnotacoes(lista);
+
+  const itemSalvo = anotacaoEditandoId
+    ? lista.find(a => a.id === anotacaoEditandoId)
+    : lista[lista.length - 1];
+
+  salvarAnotacaoNaNuvem(itemSalvo);
+
   fecharModalAnotacao();
   renderizarAnotacoes();
 }
@@ -1084,6 +1179,7 @@ function excluirAnotacao(id){
 
   const lista = carregarAnotacoes().filter(a => a.id !== id);
   salvarListaAnotacoes(lista);
+  excluirAnotacaoDaNuvem(id);
   renderizarAnotacoes();
 }
 
@@ -1223,6 +1319,298 @@ function importarAnotacoesArquivo(event){
 }
 
 
+
+function iniciarSupabase(){
+  try{
+    if(window.supabase && !supabaseClient){
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+  }catch(e){
+    supabaseClient = null;
+  }
+}
+
+function atualizarStatusNuvem(texto, tipo){
+  const status = document.getElementById("statusNuvem");
+  const statusModal = document.getElementById("statusNuvemModal");
+
+  const mensagem = texto || (usuarioNuvem ? `Nuvem: conectada em ${usuarioNuvem.email}` : "Nuvem: desconectada");
+
+  [status, statusModal].forEach(el => {
+    if(!el) return;
+    el.textContent = mensagem;
+    el.classList.remove("ok", "erro");
+    if(tipo) el.classList.add(tipo);
+    else if(usuarioNuvem) el.classList.add("ok");
+  });
+}
+
+async function carregarSessaoNuvem(){
+  iniciarSupabase();
+
+  if(!supabaseClient){
+    atualizarStatusNuvem("Nuvem indisponível. Verifique a internet.", "erro");
+    return;
+  }
+
+  const { data } = await supabaseClient.auth.getSession();
+  usuarioNuvem = data && data.session ? data.session.user : null;
+
+  atualizarStatusNuvem();
+
+  if(usuarioNuvem){
+    const email = document.getElementById("campoEmailNuvem");
+    if(email && !email.value) email.value = usuarioNuvem.email || "";
+  }
+}
+
+function obterEmailSenhaNuvem(){
+  const email = (document.getElementById("campoEmailNuvem")?.value || "").trim();
+  const senha = document.getElementById("campoSenhaNuvem")?.value || "";
+
+  if(!email){
+    alert("Digite seu e-mail.");
+    return null;
+  }
+
+  if(!senha || senha.length < 6){
+    alert("Digite uma senha com pelo menos 6 caracteres.");
+    return null;
+  }
+
+  return {email, senha};
+}
+
+async function criarContaNuvem(){
+  iniciarSupabase();
+  if(!supabaseClient){
+    alert("Não consegui iniciar a nuvem. Verifique sua internet.");
+    return;
+  }
+
+  const credenciais = obterEmailSenhaNuvem();
+  if(!credenciais) return;
+
+  atualizarStatusNuvem("Criando conta...", "");
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: credenciais.email,
+    password: credenciais.senha
+  });
+
+  if(error){
+    atualizarStatusNuvem("Erro ao criar conta.", "erro");
+    alert("Erro ao criar conta: " + error.message);
+    return;
+  }
+
+  usuarioNuvem = data && data.user ? data.user : null;
+  atualizarStatusNuvem(usuarioNuvem ? `Nuvem: conectada em ${usuarioNuvem.email}` : "Conta criada. Verifique seu e-mail, se necessário.", "ok");
+  alert("Conta criada. Se o Supabase pedir confirmação de e-mail, confirme antes de entrar.");
+}
+
+async function entrarNuvem(){
+  iniciarSupabase();
+  if(!supabaseClient){
+    alert("Não consegui iniciar a nuvem. Verifique sua internet.");
+    return;
+  }
+
+  const credenciais = obterEmailSenhaNuvem();
+  if(!credenciais) return;
+
+  atualizarStatusNuvem("Entrando na nuvem...", "");
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: credenciais.email,
+    password: credenciais.senha
+  });
+
+  if(error){
+    atualizarStatusNuvem("Erro ao entrar na nuvem.", "erro");
+    alert("Erro ao entrar: " + error.message);
+    return;
+  }
+
+  usuarioNuvem = data.user;
+  atualizarStatusNuvem();
+  alert("Entrada realizada com sucesso.");
+}
+
+async function sairNuvem(){
+  iniciarSupabase();
+  if(supabaseClient){
+    await supabaseClient.auth.signOut();
+  }
+
+  usuarioNuvem = null;
+  atualizarStatusNuvem("Nuvem: desconectada", "");
+  alert("Você saiu da nuvem.");
+}
+
+function anotacaoParaLinhaNuvem(item){
+  return {
+    id:item.id,
+    user_id:usuarioNuvem.id,
+    sobre_quem:item.sobreQuem || null,
+    data:item.data || null,
+    hora:item.hora || null,
+    descricao:item.descricao || "",
+    criado_em:item.criadoEm || null,
+    atualizado_em:item.atualizadoEm || null
+  };
+}
+
+function linhaNuvemParaAnotacao(linha){
+  return {
+    id:linha.id,
+    sobreQuem:linha.sobre_quem || "",
+    data:linha.data || "",
+    hora:linha.hora || "",
+    descricao:linha.descricao || "",
+    criadoEm:linha.criado_em || linha.created_at || new Date().toISOString(),
+    atualizadoEm:linha.atualizado_em || ""
+  };
+}
+
+async function garantirLoginNuvem(){
+  iniciarSupabase();
+
+  if(!supabaseClient){
+    alert("Nuvem indisponível. Verifique a internet.");
+    return false;
+  }
+
+  if(!usuarioNuvem){
+    const { data } = await supabaseClient.auth.getSession();
+    usuarioNuvem = data && data.session ? data.session.user : null;
+  }
+
+  if(!usuarioNuvem){
+    atualizarStatusNuvem("Entre na nuvem primeiro.", "erro");
+    alert("Entre na nuvem primeiro com e-mail e senha.");
+    return false;
+  }
+
+  atualizarStatusNuvem();
+  return true;
+}
+
+async function enviarAnotacoesParaNuvem(){
+  if(!(await garantirLoginNuvem())) return;
+
+  const lista = carregarAnotacoes();
+
+  if(!lista.length){
+    alert("Não há anotações locais para enviar.");
+    return;
+  }
+
+  atualizarStatusNuvem("Enviando anotações para a nuvem...", "");
+
+  const linhas = lista
+    .filter(item => item && item.id)
+    .map(anotacaoParaLinhaNuvem);
+
+  const { error } = await supabaseClient
+    .from("anotacoes")
+    .upsert(linhas, { onConflict:"id" });
+
+  if(error){
+    atualizarStatusNuvem("Erro ao enviar para a nuvem.", "erro");
+    alert("Erro ao enviar para a nuvem: " + error.message);
+    return;
+  }
+
+  atualizarStatusNuvem("Anotações enviadas para a nuvem.", "ok");
+  alert("Anotações enviadas para a nuvem com sucesso.");
+}
+
+async function baixarAnotacoesDaNuvemComConfirmacao(){
+  if(!(await garantirLoginNuvem())) return;
+
+  const escolha = confirm(
+    "Como deseja baixar da nuvem?\n\n" +
+    "OK = juntar com as anotações atuais\n" +
+    "Cancelar = substituir as anotações locais pelas da nuvem"
+  );
+
+  await baixarAnotacoesDaNuvem({ juntar: escolha, pedirConfirmacaoSubstituir: !escolha });
+}
+
+async function baixarAnotacoesDaNuvem(opcoes = {juntar:true, pedirConfirmacaoSubstituir:false}){
+  if(!(await garantirLoginNuvem())) return;
+
+  atualizarStatusNuvem("Baixando anotações da nuvem...", "");
+
+  const { data, error } = await supabaseClient
+    .from("anotacoes")
+    .select("*")
+    .eq("user_id", usuarioNuvem.id)
+    .order("data", { ascending:false });
+
+  if(error){
+    atualizarStatusNuvem("Erro ao baixar da nuvem.", "erro");
+    alert("Erro ao baixar da nuvem: " + error.message);
+    return;
+  }
+
+  const anotacoesNuvem = (data || []).map(linhaNuvemParaAnotacao);
+
+  let novaLista;
+
+  if(opcoes.juntar){
+    const mapa = new Map();
+
+    carregarAnotacoes().forEach(item => {
+      if(item && item.id) mapa.set(item.id, item);
+    });
+
+    anotacoesNuvem.forEach(item => {
+      if(item && item.id) mapa.set(item.id, item);
+    });
+
+    novaLista = Array.from(mapa.values());
+  }else{
+    if(opcoes.pedirConfirmacaoSubstituir){
+      const confirmar = confirm("Tem certeza que deseja substituir as anotações locais pelas anotações da nuvem?");
+      if(!confirmar) return;
+    }
+
+    novaLista = anotacoesNuvem;
+  }
+
+  salvarListaAnotacoes(novaLista);
+  renderizarAnotacoes();
+  atualizarStatusNuvem("Anotações baixadas da nuvem.", "ok");
+  alert("Anotações baixadas. Total local: " + novaLista.length);
+}
+
+async function sincronizarAnotacoesNuvem(){
+  if(!(await garantirLoginNuvem())) return;
+
+  await enviarAnotacoesParaNuvem();
+  await baixarAnotacoesDaNuvem({juntar:true, pedirConfirmacaoSubstituir:false});
+}
+
+async function salvarAnotacaoNaNuvem(item){
+  if(!usuarioNuvem || !supabaseClient || !item || !item.id) return;
+
+  await supabaseClient
+    .from("anotacoes")
+    .upsert([anotacaoParaLinhaNuvem(item)], { onConflict:"id" });
+}
+
+async function excluirAnotacaoDaNuvem(id){
+  if(!usuarioNuvem || !supabaseClient || !id) return;
+
+  await supabaseClient
+    .from("anotacoes")
+    .delete()
+    .eq("id", id)
+    .eq("user_id", usuarioNuvem.id);
+}
+
 function abrirModalBackup(){
   document.getElementById("modalBackup").classList.add("show");
 }
@@ -1271,7 +1659,10 @@ document.addEventListener("keydown", function(e){
   }
 });
 
-window.addEventListener("load", renderizarAnotacoes);
+window.addEventListener("load", function(){
+  renderizarAnotacoes();
+  carregarSessaoNuvem();
+});
 </script>
 
 </body>
