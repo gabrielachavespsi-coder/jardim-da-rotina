@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu Gabriela</title>
+<title>Rotina Gabi</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -1592,6 +1592,110 @@ body{
 }
 
 </style>
+
+<style>
+/* =========================================================
+   IMAGEM NOVA DO CARD PRINCIPAL
+   ========================================================= */
+.heroGabrielaComImagem{
+  display:block !important;
+  min-height:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border-radius:24px !important;
+  background:#F7F5EC !important;
+  aspect-ratio:2 / 1 !important;
+}
+
+.heroGabrielaComImagem::after{
+  display:none !important;
+}
+
+.heroGabrielaImagem{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center !important;
+  border-radius:24px !important;
+}
+
+/* Mantém o topo centralizado e sem invadir a data */
+.topo{
+  display:grid !important;
+  grid-template-columns:72px minmax(0,1fr) 72px !important;
+  align-items:start !important;
+  gap:0 !important;
+  min-height:62px !important;
+}
+
+.topCenter{
+  position:static !important;
+  left:auto !important;
+  top:auto !important;
+  transform:none !important;
+  width:auto !important;
+  max-width:none !important;
+  min-width:0 !important;
+  padding:0 4px !important;
+  text-align:center !important;
+}
+
+.titleIndex{
+  width:100% !important;
+  text-align:center !important;
+  font-size:27px !important;
+  line-height:1.05 !important;
+  white-space:nowrap !important;
+}
+
+.subtitulo{
+  width:100% !important;
+  text-align:center !important;
+  margin-top:5px !important;
+  font-size:11.5px !important;
+  white-space:nowrap !important;
+}
+
+.botao-voltar{
+  justify-self:start !important;
+}
+
+.dataTopo{
+  justify-self:end !important;
+  width:72px !important;
+  align-items:flex-end !important;
+  text-align:right !important;
+}
+
+@media(max-width:390px){
+  .heroGabrielaComImagem{
+    aspect-ratio:1.92 / 1 !important;
+    border-radius:22px !important;
+  }
+
+  .heroGabrielaImagem{
+    border-radius:22px !important;
+  }
+
+  .topo{
+    grid-template-columns:66px minmax(0,1fr) 66px !important;
+  }
+
+  .titleIndex{
+    font-size:24px !important;
+  }
+
+  .subtitulo{
+    font-size:10.5px !important;
+  }
+
+  .dataTopo{
+    width:66px !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -1603,7 +1707,7 @@ body{
       <button class="botao-voltar" onclick="window.location.href='index.html'"><span>←</span></button>
 
       <div class="topCenter">
-        <h1 class="titleIndex">Gabriela</h1>
+        <h1 class="titleIndex">Rotina Gabi</h1>
         <p class="subtitulo">seu espaço de organização</p>
       </div>
 
@@ -1614,27 +1718,12 @@ body{
       </div>
     </div>
 
-    <section class="heroGabrielaVisual">
-      <div class="heroTextoGabriela">
-        <div class="heroTituloGabriela">
-          Seu espaço de<br>
-          <em>cuidado e<br>organização</em>
-        </div>
-        <div class="heroDivisor"><span></span><small>🌿</small><span></span></div>
-        <p>Pequenas escolhas diárias<br>constroem grandes mudanças.</p>
-      </div>
-
-      <div class="heroIlustraGabriela" aria-hidden="true">
-        <div class="vasoGabriela"></div>
-        <div class="folhasGabriela">
-          <i></i><i></i><i></i><i></i><i></i><i></i>
-        </div>
-        <div class="velaGabriela"></div>
-        <div class="cadernoGabriela"></div>
-        <div class="canetaGabriela"></div>
-        <div class="brilhoGabriela b1">✦</div>
-        <div class="brilhoGabriela b2">✧</div>
-      </div>
+    <section class="heroGabrielaVisual heroGabrielaComImagem">
+      <img
+        src="gabriela-menu-hero.png"
+        alt="Seu espaço de cuidado e organização"
+        class="heroGabrielaImagem"
+      >
     </section>
 
     <div id="botoesLista" class="botoes-lista">
@@ -6483,6 +6572,152 @@ document.addEventListener("visibilitychange", function(){
   }
 
   window.addEventListener("load", verificarLembreteSincronizacaoNuvem);
+})();
+</script>
+
+
+<script>
+/* Integração direta das refeições do Jejum Intermitente */
+(function(){
+  const CHAVE_REFEICOES = "jejum_rotina_refeicoes_v1";
+  const CHAVE_CONCLUIDAS = "jejum_refeicoes_concluidas";
+
+  function hojeISO(){
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  }
+
+  function chaveConcluidas(){
+    return `${CHAVE_CONCLUIDAS}_${hojeISO()}`;
+  }
+
+  function lerRefeicoes(){
+    try{
+      const dados = JSON.parse(localStorage.getItem(CHAVE_REFEICOES) || "{}");
+      return Array.isArray(dados.itens) ? dados.itens : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function lerConcluidas(){
+    try{
+      const valor = JSON.parse(localStorage.getItem(chaveConcluidas()) || "[]");
+      return Array.isArray(valor) ? valor : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function estaConcluida(indice){
+    return !!lerConcluidas()[indice];
+  }
+
+  function definirConcluida(indice, valor){
+    const estado = lerConcluidas();
+    while(estado.length < 3) estado.push(false);
+    estado[indice] = !!valor;
+    localStorage.setItem(chaveConcluidas(), JSON.stringify(estado));
+  }
+
+  function minutos(hora){
+    const m = String(hora || "").match(/(\d{1,2})\D?(\d{2})?/);
+    return m ? Number(m[1]) * 60 + Number(m[2] || 0) : 9999;
+  }
+
+  window.JejumIntegracao = {
+    lerRefeicoes, lerConcluidas, estaConcluida, definirConcluida, minutos
+  };
+})();
+</script>
+
+<script>
+(function(){
+  if(typeof window.obterTodasTarefasParaHorario !== "function") return;
+
+  const obterOriginal = window.obterTodasTarefasParaHorario;
+  window.obterTodasTarefasParaHorario = function(){
+    const itens = obterOriginal.apply(this, arguments);
+    const refeicoes = JejumIntegracao.lerRefeicoes();
+    refeicoes.forEach((item, indice) => {
+      itens.push({
+        id:item.id || `jejum-ref-${indice+1}`,
+        nome:item.nome,
+        descricao:item.metodo || "Jejum Intermitente",
+        subtarefas:[],
+        hora:item.hora,
+        minutos:JejumIntegracao.minutos(item.hora),
+        blocoId:`jejum_${indice}`,
+        blocoNome:"Jejum Intermitente",
+        blocoTipo:"jejum",
+        chaveBase:"jejum_refeicoes_concluidas",
+        indice,
+        total:3,
+        url:item.destino || "jejum-intermitente.html",
+        concluido:JejumIntegracao.estaConcluida(indice),
+        custom:false,
+        jejum:true
+      });
+    });
+    return itens;
+  };
+
+  if(typeof window.setEstadoTarefaHorario === "function"){
+    const setOriginal = window.setEstadoTarefaHorario;
+    window.setEstadoTarefaHorario = function(item, valor){
+      if(item && item.jejum){
+        JejumIntegracao.definirConcluida(item.indice, valor);
+        return;
+      }
+      return setOriginal.apply(this, arguments);
+    };
+  }
+
+  window.addEventListener("focus", () => {
+    if(typeof window.atualizarMenu === "function") window.atualizarMenu();
+  });
+  window.addEventListener("storage", () => {
+    if(typeof window.atualizarMenu === "function") window.atualizarMenu();
+  });
+})();
+</script>
+
+
+<script>
+/* Integração das metas de água do Jejum Intermitente */
+(function(){
+  const CHAVE_AGUA="jejum_rotina_agua_v1";
+  const CHAVE_CONCLUIDAS="jejum_agua_concluida";
+  function hojeISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+  function chaveConcluidas(){return `${CHAVE_CONCLUIDAS}_${hojeISO()}`}
+  function lerItens(){try{const d=JSON.parse(localStorage.getItem(CHAVE_AGUA)||"{}");return Array.isArray(d.itens)?d.itens:[]}catch(e){return []}}
+  function lerConcluidas(){try{const v=JSON.parse(localStorage.getItem(chaveConcluidas())||"[]");return Array.isArray(v)?v:[]}catch(e){return []}}
+  function estaConcluida(i){return !!lerConcluidas()[i]}
+  function definirConcluida(i,v){const e=lerConcluidas();while(e.length<3)e.push(false);e[i]=!!v;localStorage.setItem(chaveConcluidas(),JSON.stringify(e))}
+  function minutos(h){const m=String(h||"").match(/(\d{1,2})\D?(\d{2})?/);return m?Number(m[1])*60+Number(m[2]||0):9999}
+  window.AguaJejumIntegracao={lerItens,lerConcluidas,estaConcluida,definirConcluida,minutos};
+})();
+</script>
+
+<script>
+(function(){
+  if(typeof window.obterTodasTarefasParaHorario!=="function")return;
+  const original=window.obterTodasTarefasParaHorario;
+  window.obterTodasTarefasParaHorario=function(){
+    const itens=original.apply(this,arguments);
+    AguaJejumIntegracao.lerItens().forEach((item,indice)=>itens.push({
+      id:item.id||`agua-jejum-${indice+1}`,nome:item.nome,descricao:item.descricao||"Hidratação",subtarefas:[],hora:item.hora,
+      minutos:AguaJejumIntegracao.minutos(item.hora),blocoId:`agua_jejum_${indice}`,blocoNome:"Consumo de água",blocoTipo:"agua-jejum",
+      chaveBase:"jejum_agua_concluida",indice,total:3,url:item.destino||"jejum-intermitente.html",concluido:AguaJejumIntegracao.estaConcluida(indice),custom:false,aguaJejum:true
+    }));
+    return itens;
+  };
+  if(typeof window.setEstadoTarefaHorario==="function"){
+    const setOriginal=window.setEstadoTarefaHorario;
+    window.setEstadoTarefaHorario=function(item,valor){if(item&&item.aguaJejum){AguaJejumIntegracao.definirConcluida(item.indice,valor);return}return setOriginal.apply(this,arguments)};
+  }
+  window.addEventListener("focus",()=>{if(typeof window.atualizarMenu==="function")window.atualizarMenu()});
+  window.addEventListener("storage",()=>{if(typeof window.atualizarMenu==="function")window.atualizarMenu()});
 })();
 </script>
 

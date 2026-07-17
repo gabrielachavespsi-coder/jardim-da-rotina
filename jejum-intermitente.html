@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jejum Intermitente</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--fundo:#F8F7F1;--card:#FFFDF8;--salvia:#7F9271;--salvia-escuro:#516448;--texto:#2F332D;--suave:#77786F;--borda:#E8E1D4;--rosa:#B8807B;--fonte:'Poppins',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}html,body{width:100%;min-height:100%}
+body{font-family:var(--fonte);display:flex;justify-content:center;align-items:flex-start;padding:14px 12px 44px;background:radial-gradient(circle at 14% 4%,rgba(232,243,226,.78),transparent 32%),radial-gradient(circle at 95% 16%,rgba(243,236,221,.86),transparent 30%),linear-gradient(180deg,#FEFCF7 0%,var(--fundo) 100%);color:var(--texto)}
+.pagina{width:100%;max-width:420px}.card{background:rgba(255,253,248,.94);border:1px solid rgba(232,225,212,.92);border-radius:30px;padding:18px 14px 22px;box-shadow:0 14px 34px rgba(76,82,62,.11);display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}.card>*{position:relative;z-index:1}.card:before{content:"";position:absolute;width:190px;height:190px;right:-86px;top:-78px;border-radius:50%;background:rgba(234,243,232,.75)}.card:after{content:"";position:absolute;width:160px;height:160px;left:-90px;bottom:-70px;border-radius:50%;background:rgba(243,236,221,.68)}
+.topo{display:grid;grid-template-columns:82px 1fr 82px;gap:4px;align-items:start}.voltar{width:42px;height:42px;border-radius:50%;border:1px solid var(--borda);background:rgba(255,255,255,.88);color:var(--salvia-escuro);font-size:20px;cursor:pointer;box-shadow:0 6px 16px rgba(76,82,62,.08)}.centro{text-align:center;min-width:0}.titulo{color:#40513B;font-size:29px;font-weight:500;line-height:1.05;letter-spacing:-.3px}.subtitulo{font-size:12px;color:var(--suave);margin-top:5px;line-height:1.25}.data{text-align:right;line-height:1.12;padding-top:0}.hora{font-size:15px;color:var(--rosa);font-weight:500;white-space:nowrap}.linha{font-size:10.5px;color:#5D6359;white-space:nowrap}
+.hero{border:1px solid var(--borda);border-radius:24px;padding:20px 18px;background:radial-gradient(circle at 95% 0%,rgba(255,255,255,.8),transparent 35%),linear-gradient(135deg,rgba(250,247,239,.99),rgba(238,242,230,.97));box-shadow:0 10px 24px rgba(76,82,62,.1);position:relative;overflow:hidden}.hero:after{content:"◷";position:absolute;right:20px;bottom:-16px;font-size:92px;color:rgba(127,146,113,.10)}.hero p{position:relative;z-index:1;font-size:12px;line-height:1.6;color:#666B62;text-align:center}
+.menuBtn{width:100%;min-height:66px;border-radius:18px;border:1px solid var(--borda);background:rgba(255,255,255,.95);box-shadow:0 7px 18px rgba(76,82,62,.08);padding:10px 44px 10px 74px;text-align:center;position:relative;cursor:pointer;font-family:var(--fonte);display:flex;flex-direction:column;align-items:center;justify-content:center}.menuBtn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(76,82,62,.12)}.menuBtn:before{content:"◷";position:absolute;left:16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:#F4F0E7;border:1px solid rgba(232,225,212,.78);display:flex;align-items:center;justify-content:center;color:#6D805F;font-size:23px}.menuBtn:after{content:"›";position:absolute;right:20px;top:50%;transform:translateY(-55%);font-size:31px;color:#6F7E63}.menuBtn strong{display:block;font-size:16px;line-height:1.22;font-weight:500;color:var(--texto);text-align:center}.menuBtn span{display:block;font-size:11px;line-height:1.3;color:var(--suave);margin-top:3px;text-align:center}
+.horariosCard{border:1px solid var(--borda);border-radius:22px;background:rgba(255,255,255,.86);padding:16px;box-shadow:0 7px 18px rgba(76,82,62,.07)}.secaoTitulo{text-align:center;color:#40513B;font-size:16px;font-weight:500;margin-bottom:4px}.secaoAjuda{text-align:center;color:var(--suave);font-size:10.8px;line-height:1.4;margin-bottom:13px}.horariosGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:end}.campoHorario{display:flex;flex-direction:column;gap:5px}.campoHorario label{font-size:11px;color:var(--suave);text-align:center}.timeInput{width:100%;height:46px;border:1px solid var(--borda);border-radius:13px;background:#FAF8F2;color:var(--salvia-escuro);font-family:var(--fonte);font-size:15px;font-weight:500;text-align:center;outline:none;padding:0 8px}.timeInput:focus{border-color:var(--salvia);box-shadow:0 0 0 3px rgba(127,146,113,.12);background:#fff}.salvarHorarios{width:100%;margin-top:12px;border:none;border-radius:13px;padding:12px;background:var(--salvia);color:#fff;font-family:var(--fonte);font-size:13px;cursor:pointer}.status{text-align:center;min-height:16px;margin-top:7px;font-size:10.5px;color:var(--salvia-escuro)}
+.escolhaRefeicoes{margin-bottom:13px;display:flex;flex-direction:column;gap:7px}.escolhaRefeicoes label{text-align:center;font-size:11px;color:var(--suave)}.opcoesRefeicoes{display:grid;grid-template-columns:1fr 1fr;gap:8px}.refQtdBtn{border:1px solid var(--borda);background:#FAF8F2;color:var(--salvia-escuro);border-radius:12px;padding:9px 8px;font-family:var(--fonte);font-size:12px;cursor:pointer}.refQtdBtn.ativo{background:#EAF0E5;border-color:#BFCDB6;font-weight:500}.refQtdBtn:disabled{opacity:.55;cursor:default}.campoHorario.oculto{display:none}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;padding:16px;z-index:50;overflow-y:auto}.overlay.show{display:flex}.modal{width:min(370px,100%);max-height:88vh;overflow:auto;background:var(--card);border:1px solid var(--borda);border-radius:24px;padding:18px;box-shadow:0 16px 40px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:12px}.modalTopo{display:grid;grid-template-columns:36px 1fr 36px;align-items:center}.modalTopo h2{text-align:center;font-size:18px;color:#40513B;font-weight:500}.iconBtn{width:34px;height:34px;border:none;border-radius:11px;background:#F1EEE6;color:var(--salvia-escuro);font-size:21px;cursor:pointer}.periodos{display:flex;flex-direction:column;gap:9px}.periodoItem{width:100%;border:1px solid var(--borda);background:#fff;border-radius:16px;padding:13px 14px;font-family:var(--fonte);text-align:left;cursor:pointer;color:var(--texto)}.periodoItem.ativo{background:#EAF0E5;border-color:#BFCDB6}.periodoNome{display:block;font-size:14px;font-weight:500;color:var(--salvia-escuro)}.periodoDescricao{display:block;font-size:10.7px;line-height:1.48;color:var(--suave);margin-top:5px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12.5px;font-weight:500}.input{width:100%;height:46px;border:1px solid var(--borda);border-radius:12px;padding:0 13px;font-family:var(--fonte);font-size:14px;outline:none}.input:focus{border-color:var(--salvia);box-shadow:0 0 0 3px rgba(127,146,113,.12)}.ajuda{font-size:10.5px;color:var(--suave);line-height:1.4}.acoes{display:flex;gap:8px}.acoes button{flex:1;border:none;border-radius:12px;padding:11px;font-family:var(--fonte);cursor:pointer}.cancelar{background:#F1EEE6;color:var(--texto)}.salvar{background:var(--salvia);color:#fff}.erro{min-height:15px;font-size:11px;color:#A04646;text-align:center}
+@media(max-width:390px){body{padding:10px 9px 30px}.card{border-radius:28px;padding:16px 11px 19px}.topo{grid-template-columns:76px 1fr 76px}.titulo{font-size:26px}.subtitulo{font-size:11px}.horariosGrid{gap:8px}.menuBtn{padding-left:68px;padding-right:36px}}
+@media(max-width:350px){.titulo{font-size:23px}.topo{grid-template-columns:68px 1fr 68px}.horariosGrid{gap:5px}.timeInput{font-size:13px;padding:0 3px}.campoHorario label{font-size:9.5px}}
+</style>
+
+<style>
+/* =========================================================
+   ÁGUA, PESO E BEM-ESTAR
+   ========================================================= */
+.acompanhamentoCard,
+.aguaCard{
+  border:1px solid var(--borda);
+  border-radius:22px;
+  background:rgba(255,255,255,.86);
+  padding:16px;
+  box-shadow:0 7px 18px rgba(76,82,62,.07);
+}
+
+.pesoLinha{
+  display:grid;
+  grid-template-columns:1fr 112px;
+  gap:8px;
+  align-items:end;
+}
+
+.pesoCampo{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.pesoCampo label{
+  font-size:11px;
+  color:var(--suave);
+}
+
+.pesoInput{
+  width:100%;
+  height:46px;
+  border:1px solid var(--borda);
+  border-radius:13px;
+  background:#FAF8F2;
+  color:var(--salvia-escuro);
+  font-family:var(--fonte);
+  font-size:15px;
+  font-weight:500;
+  text-align:center;
+  outline:none;
+  padding:0 10px;
+}
+
+.pesoInput:focus{
+  border-color:var(--salvia);
+  box-shadow:0 0 0 3px rgba(127,146,113,.12);
+  background:#fff;
+}
+
+.acaoSecundaria{
+  height:46px;
+  border:none;
+  border-radius:13px;
+  background:#EAF0E5;
+  color:var(--salvia-escuro);
+  font-family:var(--fonte);
+  font-size:12px;
+  cursor:pointer;
+  padding:0 10px;
+}
+
+.sentimentoBtn{
+  width:100%;
+  margin-top:10px;
+  min-height:48px;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  background:#FFFDF8;
+  color:#40513B;
+  font-family:var(--fonte);
+  font-size:13px;
+  cursor:pointer;
+}
+
+.aguaResultado{
+  text-align:center;
+  margin-top:8px;
+}
+
+.aguaMeta{
+  color:#40513B;
+  font-size:24px;
+  line-height:1.15;
+  font-weight:500;
+}
+
+.aguaNivel{
+  color:var(--salvia-escuro);
+  font-size:11.5px;
+  margin-top:4px;
+}
+
+.aguaExplicacao{
+  color:var(--suave);
+  font-size:10.5px;
+  line-height:1.45;
+  margin-top:7px;
+}
+
+.aguaPartes{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:7px;
+  margin-top:13px;
+}
+
+.aguaParte{
+  border:1px solid var(--borda);
+  border-radius:14px;
+  background:#FAF8F2;
+  padding:9px 5px;
+  text-align:center;
+}
+
+.aguaParteHora{
+  display:block;
+  color:#40513B;
+  font-size:12px;
+  font-weight:500;
+}
+
+.aguaParteQtd{
+  display:block;
+  color:var(--salvia-escuro);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.aguaAviso{
+  margin-top:10px;
+  color:#8A756E;
+  font-size:9.8px;
+  line-height:1.4;
+  text-align:center;
+}
+
+.textareaSentimento{
+  width:100%;
+  min-height:115px;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  background:#FFFDF8;
+  color:var(--texto);
+  font-family:var(--fonte);
+  font-size:13px;
+  padding:12px;
+  resize:vertical;
+  outline:none;
+}
+
+.sentimentoOpcoes{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+
+.sentimentoOpcao{
+  border:1px solid var(--borda);
+  border-radius:12px;
+  background:#FAF8F2;
+  color:var(--salvia-escuro);
+  padding:9px 4px;
+  font-family:var(--fonte);
+  font-size:11px;
+  cursor:pointer;
+}
+
+.sentimentoOpcao.ativo{
+  background:#EAF0E5;
+  border-color:#BFCDB6;
+  font-weight:500;
+}
+
+@media(max-width:350px){
+  .pesoLinha{grid-template-columns:1fr 100px}
+  .aguaPartes{gap:5px}
+  .aguaParte{padding:8px 3px}
+}
+</style>
+
+
+<style>
+/* =========================================================
+   AJUSTE FINAL — CONSUMO DE ÁGUA
+   ========================================================= */
+.aguaCard{
+  margin-top:0 !important;
+}
+
+.aguaResultado{
+  margin-top:10px !important;
+}
+
+.aguaMeta{
+  font-size:22px !important;
+}
+
+.aguaNivel{
+  max-width:280px;
+  margin:5px auto 0 !important;
+  line-height:1.35 !important;
+}
+</style>
+
+
+<style>
+/* =========================================================
+   DATA/HORA E META DE ÁGUA — AJUSTE FINAL
+   ========================================================= */
+.topo{
+  grid-template-columns:72px minmax(0,1fr) 72px !important;
+  min-height:62px !important;
+  gap:0 !important;
+}
+
+.centro{
+  padding:0 4px !important;
+  text-align:center !important;
+  min-width:0 !important;
+}
+
+.titulo{
+  font-size:22px !important;
+  line-height:1.1 !important;
+  white-space:nowrap !important;
+}
+
+.subtitulo{
+  font-size:10.5px !important;
+  margin-top:5px !important;
+  white-space:nowrap !important;
+}
+
+.data{
+  width:72px !important;
+  justify-self:end !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  text-align:right !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+
+.hora{
+  font-size:15px !important;
+  color:#B8807B !important;
+  font-weight:500 !important;
+}
+
+.linha{
+  font-size:10.5px !important;
+  color:#5D6359 !important;
+}
+
+.aguaCard{
+  border:1px solid var(--borda) !important;
+  border-radius:22px !important;
+  background:rgba(255,255,255,.92) !important;
+  padding:16px !important;
+  box-shadow:0 7px 18px rgba(76,82,62,.07) !important;
+}
+
+.aguaMeta{
+  font-size:24px !important;
+  color:#40513B !important;
+  font-weight:500 !important;
+  margin-top:10px !important;
+}
+
+.aguaNivel{
+  font-size:11.5px !important;
+  line-height:1.4 !important;
+  color:var(--salvia-escuro) !important;
+}
+
+.aguaExplicacao{
+  margin-top:8px !important;
+  font-size:10.5px !important;
+  line-height:1.45 !important;
+}
+
+.aguaPartes{
+  margin-top:14px !important;
+}
+
+@media(max-width:390px){
+  .topo{
+    grid-template-columns:66px minmax(0,1fr) 66px !important;
+  }
+  .titulo{font-size:20px !important}
+  .subtitulo{font-size:10px !important}
+  .data{width:66px !important}
+}
+</style>
+
+
+<style>
+/* Confirma que os horários calculados ficam legíveis */
+.timeInput{
+  color:#40513B !important;
+  font-weight:500 !important;
+}
+.timeInput:disabled,
+.timeInput[readonly]{
+  opacity:1 !important;
+  -webkit-text-fill-color:#40513B !important;
+}
+</style>
+
+</head>
+<body>
+<div class="pagina"><main class="card">
+<header class="topo"><button class="voltar" onclick="window.location.href='alimentacao.html'">←</button><div class="centro"><h1 class="titulo">Jejum Intermitente</h1><p class="subtitulo">organize sua janela alimentar</p></div><div class="data" aria-label="Data e hora atuais"><div id="hora" class="hora"></div><div id="dia" class="linha"></div><div id="data" class="linha"></div></div></header>
+<button class="menuBtn" onclick="abrirPeriodos()"><strong id="periodoTitulo">Método 16:8</strong><span id="periodoResumo">16 horas de jejum · 8 horas de alimentação</span></button>
+<section class="horariosCard"><h2 class="secaoTitulo">Horários das refeições</h2><p class="secaoAjuda">Escolha quantas refeições deseja fazer. Ao informar a primeira, os demais horários serão preenchidos automaticamente conforme o método.</p>
+<div class="escolhaRefeicoes" id="escolhaRefeicoes"><label>Quantidade de refeições</label><div class="opcoesRefeicoes"><button type="button" id="qtd2" class="refQtdBtn" onclick="definirQtdRefeicoes(2)">2 refeições</button><button type="button" id="qtd3" class="refQtdBtn" onclick="definirQtdRefeicoes(3)">3 refeições</button></div></div>
+<div class="horariosGrid">
+<div class="campoHorario" id="campoRef1"><label for="ref1">1ª refeição</label><input class="timeInput" id="ref1" type="time"></div>
+<div class="campoHorario" id="campoRef2"><label for="ref2">2ª refeição</label><input class="timeInput" id="ref2" type="time"></div>
+<div class="campoHorario" id="campoRef3"><label for="ref3">3ª refeição</label><input class="timeInput" id="ref3" type="time"></div>
+</div><button class="salvarHorarios" onclick="salvarHorarios()">salvar horários</button><div id="status" class="status"></div></section>
+
+
+<section class="aguaCard">
+  <h2 class="secaoTitulo">Consumo indicado de água</h2>
+  <p class="secaoAjuda">A meta diária é dividida pelo número de refeições. Cada horário fica 2 horas antes da refeição correspondente.</p>
+  <div id="aguaResultado" class="aguaResultado">
+    <div class="aguaMeta">Informe seu peso</div>
+    <div class="aguaNivel">A meta será calculada automaticamente.</div>
+  </div>
+  <div id="aguaPartes" class="aguaPartes"></div>
+  <p class="aguaAviso">Esta é uma estimativa do aplicativo. Necessidades de hidratação variam com clima, atividade física, saúde, gestação, amamentação e orientação profissional.</p>
+</section>
+
+</main></div>
+<div class="overlay" id="modalPeriodos"><div class="modal"><div class="modalTopo"><button class="iconBtn" onclick="abrirCadastro()">+</button><h2>Tipo de jejum</h2><button class="iconBtn" onclick="fecharPeriodos()">×</button></div><div id="listaPeriodos" class="periodos"></div></div></div>
+
+
+</div>
+
+<div class="overlay" id="modalCadastro"><div class="modal"><div class="modalTopo"><span></span><h2>Novo período</h2><button class="iconBtn" onclick="fecharCadastro()">×</button></div><div class="field"><label for="campoNome">Nome</label><input class="input" id="campoNome" placeholder="Ex.: Método 12:12"></div><div class="field"><label for="campoPeriodo">Período</label><input class="input" id="campoPeriodo" placeholder="Ex.: 12/12" inputmode="numeric"><div class="ajuda">O primeiro número corresponde ao jejum e o segundo à janela de alimentação.</div></div><div class="field"><label for="campoDescricao">Descrição</label><input class="input" id="campoDescricao" placeholder="Descrição breve do método"></div><div id="erro" class="erro"></div><div class="acoes"><button class="cancelar" onclick="fecharCadastro()">cancelar</button><button class="salvar" onclick="salvarPeriodo()">concluir</button></div></div></div>
+<script>
+const CHAVE='jejum_protocolos_v3',CHAVE_SEL='jejum_protocolo_selecionado_v3',CHAVE_HORARIOS='jejum_horarios_v3',CHAVE_QTD='jejum_qtd_refeicoes_v3',CHAVE_PESO='registro_peso_gabriela_v1',CHAVE_SENTIMENTO='registro_sentimento_gabriela_v1';
+const padroes=[
+{id:'12-12',nome:'Método Circadiano 12:12',periodo:'12/12',jejum:12,janela:12,qtdPermitidas:[2],descricao:'12 horas em jejum e uma janela de alimentação de 12 horas.'},
+{id:'14-10',nome:'Método 14:10',periodo:'14/10',jejum:14,janela:10,qtdPermitidas:[2,3],descricao:'14 horas de jejum e uma janela de alimentação de 10 horas.'},
+{id:'16-8',nome:'Método 16:8',periodo:'16/8',jejum:16,janela:8,qtdPermitidas:[2,3],descricao:'16 horas de jejum e uma janela de alimentação de 8 horas.'},
+{id:'20-4',nome:'Dieta do Guerreiro (20:4)',periodo:'20/4',jejum:20,janela:4,qtdPermitidas:[2],descricao:'20 horas de jejum e uma janela de alimentação de 4 horas.'}
+];
+let extras=JSON.parse(localStorage.getItem(CHAVE)||'[]');let periodos=[...padroes,...extras];let selecionado=localStorage.getItem(CHAVE_SEL)||'16-8';let qtdPorMetodo=JSON.parse(localStorage.getItem(CHAVE_QTD)||'{}');const $=id=>document.getElementById(id);
+function atual(){return periodos.find(p=>p.id===selecionado)||periodos[0]}
+function qtdAtual(){const permitidas=atual().qtdPermitidas||[2,3];const salva=Number(qtdPorMetodo[selecionado]);return permitidas.includes(salva)?salva:permitidas[0]}
+function minutos(h){if(!h)return null;const [a,b]=h.split(':').map(Number);return a*60+b}
+function hora(total){total=((Math.round(total)%(24*60))+(24*60))%(24*60);return `${String(Math.floor(total/60)).padStart(2,'0')}:${String(total%60).padStart(2,'0')}`}
+function definirQtdRefeicoes(qtd){if(!(atual().qtdPermitidas||[2,3]).includes(qtd))return;qtdPorMetodo[selecionado]=qtd;localStorage.setItem(CHAVE_QTD,JSON.stringify(qtdPorMetodo));atualizarEscolhaRefeicoes();calcularHorarios();atualizarAgua()}
+function atualizarEscolhaRefeicoes(){const permitidas=atual().qtdPermitidas||[2,3],qtd=qtdAtual();$('qtd2').disabled=!permitidas.includes(2);$('qtd3').disabled=!permitidas.includes(3);$('qtd2').classList.toggle('ativo',qtd===2);$('qtd3').classList.toggle('ativo',qtd===3);$('campoRef3').classList.toggle('oculto',qtd!==3);if(qtd!==3)$('ref3').value=''}
+function calcularHorarios(){const inicio=minutos($('ref1').value);if(inicio===null)return;const p=atual(),qtd=qtdAtual();
+ if(p.id==='12-12'){$('ref2').value=hora(inicio+12*60);$('ref3').value=''}
+ else if(p.id==='14-10'&&qtd===2){$('ref2').value=hora(inicio+10*60);$('ref3').value=''}
+ else if(p.id==='14-10'&&qtd===3){$('ref2').value=hora(inicio+5*60);$('ref3').value=hora(inicio-14*60)}
+ else if(p.id==='16-8'&&qtd===2){$('ref2').value=hora(inicio+8*60);$('ref3').value=''}
+ else if(p.id==='16-8'&&qtd===3){$('ref2').value=hora(inicio+4*60);$('ref3').value=hora(inicio-16*60)}
+ else if(p.id==='20-4'){$('ref2').value=hora(inicio+4*60);$('ref3').value=''}
+ else {const janela=p.janela*60;$('ref2').value=hora(inicio+janela);$('ref3').value=qtd===3?hora(inicio+janela):''}
+ $('status').textContent=`${qtd} refeições calculadas para o método ${p.periodo}.`;atualizarAgua()}
+function render(){const p=atual();selecionado=p.id;$('periodoTitulo').textContent=p.nome;$('periodoResumo').textContent=`${p.jejum} horas de jejum · ${p.janela} horas de alimentação`;$('listaPeriodos').innerHTML=periodos.map(x=>`<button class="periodoItem ${x.id===selecionado?'ativo':''}" onclick="selecionar('${x.id}')"><span class="periodoNome">${x.nome}</span><span class="periodoDescricao">${x.descricao}</span></button>`).join('');const salvos=JSON.parse(localStorage.getItem(CHAVE_HORARIOS)||'{}')[p.id];if(salvos?.qtd&&(p.qtdPermitidas||[2,3]).includes(Number(salvos.qtd))){qtdPorMetodo[p.id]=Number(salvos.qtd)}atualizarEscolhaRefeicoes();['ref1','ref2','ref3'].forEach((id,i)=>$(id).value=salvos?.valores?.[i]||salvos?.[i]||'');if($('ref1').value)calcularHorarios();else atualizarAgua()}
+function selecionar(id){selecionado=id;localStorage.setItem(CHAVE_SEL,id);render();fecharPeriodos();if($('ref1').value)calcularHorarios();atualizarAgua()}
+function abrirPeriodos(){render();$('modalPeriodos').classList.add('show')}function fecharPeriodos(){$('modalPeriodos').classList.remove('show')}
+function abrirCadastro(){fecharPeriodos();$('campoNome').value='';$('campoPeriodo').value='';$('campoDescricao').value='';$('erro').textContent='';$('modalCadastro').classList.add('show')}function fecharCadastro(){$('modalCadastro').classList.remove('show')}
+function normalizar(v){const m=String(v).trim().match(/^(\d{1,2})\s*[\/:]\s*0?(\d{1,2})$/);if(!m)return null;const jejum=+m[1],janela=+m[2];if(jejum<1||janela<1||jejum+janela!==24)return null;return{jejum,janela,periodo:`${jejum}/${janela}`}}
+function salvarPeriodo(){const p=normalizar($('campoPeriodo').value),nome=$('campoNome').value.trim(),descricao=$('campoDescricao').value.trim();if(!p){$('erro').textContent='Use um período que complete 24 horas, como 12/12.';return}const novo={id:'p-'+Date.now(),nome:nome||`Método ${p.jejum}:${p.janela}`,periodo:p.periodo,jejum:p.jejum,janela:p.janela,qtdPermitidas:[2,3],descricao:descricao||`${p.jejum} horas de jejum e uma janela de alimentação de ${p.janela} horas.`};extras.push(novo);localStorage.setItem(CHAVE,JSON.stringify(extras));periodos=[...padroes,...extras];selecionado=novo.id;localStorage.setItem(CHAVE_SEL,selecionado);fecharCadastro();render()}
+
+function hojeRegistro(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+
+let sentimentoSelecionado='';
+
+
+
+function nivelAgua(){
+  const p=atual(),qtd=qtdAtual();
+  if(p.id==='12-12'||(p.id==='14-10'&&qtd===3)){
+    return {nome:'Nível leve',mlKg:35,texto:'Método com janela mais ampla ou três refeições.'};
+  }
+  if((p.id==='14-10'&&qtd===2)||(p.id==='16-8'&&qtd===3)){
+    return {nome:'Nível moderado',mlKg:40,texto:'Janela mais concentrada ou redução do número de refeições.'};
+  }
+  if((p.id==='16-8'&&qtd===2)||p.id==='20-4'){
+    return {nome:'Nível avançado',mlKg:45,texto:'Janela curta e poucas refeições.'};
+  }
+  return {nome:'Estimativa padrão',mlKg:35,texto:'Estimativa inicial para este método personalizado.'};
+}
+function intervaloAdiante(inicio,fim){
+  let dif=fim-inicio;
+  if(dif<0)dif+=24*60;
+  return dif;
+}
+function obterPesoRegistrado(){
+  let peso=0;
+  try{
+    const bruto=localStorage.getItem(CHAVE_PESO);
+    if(bruto){
+      const dados=JSON.parse(bruto);
+      if(typeof dados==="number") peso=dados;
+      else if(dados && typeof dados==="object"){
+        peso=Number(
+          dados.ultimoPeso ??
+          dados.peso ??
+          dados.valor ??
+          dados.pesoAtual ??
+          0
+        );
+      }
+    }
+  }catch(e){}
+
+  if(!peso){
+    peso=Number(
+      localStorage.getItem("peso_gabriela_atual") ||
+      localStorage.getItem("peso_atual_gabriela") ||
+      localStorage.getItem("pesoAtual") ||
+      0
+    );
+  }
+  return Number.isFinite(peso) ? peso : 0;
+}
+function publicarAguaNaRotina(itens){
+  localStorage.setItem('jejum_rotina_agua_v1',JSON.stringify({
+    protocoloId:selecionado,
+    metodo:atual().nome,
+    atualizadoEm:new Date().toISOString(),
+    itens
+  }));
+  window.dispatchEvent(new CustomEvent('jejum:agua-atualizada',{detail:{itens}}));
+}
+function atualizarAgua(){
+  const peso=obterPesoRegistrado();
+  const box=$('aguaResultado'),partes=$('aguaPartes');
+  if(!box||!partes)return;
+  if(!peso){
+    box.innerHTML='<div class="aguaMeta">Peso ainda não encontrado</div><div class="aguaNivel">Registre o peso no index e volte para esta página.</div>';
+    partes.innerHTML='';
+    publicarAguaNaRotina([]);
+    return;
+  }
+  const n=nivelAgua();
+  const total=Math.round(peso*n.mlKg);
+  const litros=(total/1000).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:2});
+  box.innerHTML=`<div class="aguaMeta">${litros} L por dia</div><div class="aguaNivel">${n.nome} · ${n.mlKg} ml por kg · peso: ${peso.toLocaleString('pt-BR')} kg</div><div class="aguaExplicacao">${n.texto}</div>`;
+
+  const qtd=qtdAtual();
+  const refeicoes=['ref1','ref2','ref3'].slice(0,qtd).map(id=>$(id).value).filter(Boolean);
+  if(refeicoes.length!==qtd){
+    partes.innerHTML='<div class="aguaParte" style="grid-column:1/-1"><span class="aguaParteQtd">Informe o primeiro horário para calcular as refeições e as águas.</span></div>';
+    publicarAguaNaRotina([]);
+    return;
+  }
+
+  const porParte=Math.round(total/qtd);
+  const nomes=['1ª refeição','2ª refeição','3ª refeição'];
+  const itens=refeicoes.map((refHora,i)=>{
+    const aguaHora=hora(minutos(refHora)-120);
+    return {
+      id:`agua-${selecionado}-${i+1}`,
+      nome:`💧 Água · ${porParte} ml`,
+      descricao:`2 horas antes da ${nomes[i]}`,
+      metodo:atual().nome,
+      quantidadeMl:porParte,
+      hora:aguaHora,
+      refeicaoHora:refHora,
+      destino:destinoPorHorario(aguaHora)
+    };
+  });
+  partes.innerHTML=itens.map(item=>`<div class="aguaParte"><span class="aguaParteHora">${item.hora}</span><span class="aguaParteQtd">${item.quantidadeMl} ml</span></div>`).join('');
+  publicarAguaNaRotina(itens);
+}
+
+function destinoPorHorario(valor){const m=minutos(valor);if(m<7*60)return 'gabriela-autocuidado-movimento-silencio.html';if(m<9*60)return 'gabriela-manifestacao-criatividade.html';if(m<18*60+30)return 'gabriela-alimentacao-preparar-sair.html';if(m<20*60)return 'gabriela-estudo-organizacao-casa-dia.html';if(m<20*60+30)return 'gabriela-desacelerar-autocuidado.html';return 'gabriela-passatempos.html'}
+function publicarRefeicoesNaRotina(qtd,vals){const p=atual();const nomes=['1ª refeição','2ª refeição','3ª refeição'];const itens=vals.slice(0,qtd).filter(Boolean).map((h,i)=>({id:`jejum-${selecionado}-ref-${i+1}`,nome:`🍽️ ${nomes[i]}`,metodo:p.nome,hora:h,destino:destinoPorHorario(h)}));localStorage.setItem('jejum_rotina_refeicoes_v1',JSON.stringify({protocoloId:selecionado,metodo:p.nome,qtd,atualizadoEm:new Date().toISOString(),itens}));window.dispatchEvent(new CustomEvent('jejum:horarios-atualizados',{detail:{itens}}))}
+function salvarHorarios(){const qtd=qtdAtual(),vals=['ref1','ref2','ref3'].map(id=>$(id).value);if(!vals[0]){$('status').textContent='Informe pelo menos o horário da primeira refeição.';return}const todos=JSON.parse(localStorage.getItem(CHAVE_HORARIOS)||'{}');todos[selecionado]={qtd,valores:vals};localStorage.setItem(CHAVE_HORARIOS,JSON.stringify(todos));publicarRefeicoesNaRotina(qtd,vals);$('status').textContent='Horários salvos e enviados para sua rotina e agenda.';atualizarAgua()}
+['input','change','blur'].forEach(evento=>{
+  $('ref1').addEventListener(evento,()=>{
+    calcularHorarios();
+    atualizarAgua();
+  });
+  $('ref2').addEventListener(evento,atualizarAgua);
+  $('ref3').addEventListener(evento,atualizarAgua);
+});
+function tempo(){const a=new Date(),d=['dom','seg','ter','qua','qui','sex','sáb'];$('hora').textContent=`${String(a.getHours()).padStart(2,'0')}:${String(a.getMinutes()).padStart(2,'0')}`;$('dia').textContent=`• ${d[a.getDay()]}`;$('data').textContent=`• ${String(a.getDate()).padStart(2,'0')}/${String(a.getMonth()+1).padStart(2,'0')}`}
+window.addEventListener('load',()=>{
+  render();
+  if($('ref1').value) calcularHorarios();
+  atualizarAgua();
+  tempo();
+  setInterval(tempo,1000);
+});
+window.addEventListener('pageshow',()=>{
+  if($('ref1').value) calcularHorarios();
+  atualizarAgua();
+});
+window.addEventListener('focus',atualizarAgua);
+window.addEventListener('storage',atualizarAgua);
+window.addEventListener('pesoGabrielaAtualizado',atualizarAgua);document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('show')}));
+</script>
+</body></html>

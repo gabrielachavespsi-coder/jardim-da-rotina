@@ -461,6 +461,302 @@ input:focus, select:focus{
 }
 
 </style>
+
+<style>
+/* =========================================================
+   ACOMPANHAMENTO DO CORPO — SAÚDE / HISTÓRICO
+   ========================================================= */
+.acompanhamentoSaude{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:2px;
+}
+
+.graficoCard{
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:20px;
+  padding:14px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.035);
+}
+
+.graficoTopo{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.graficoTitulo{
+  font-size:14px;
+  line-height:1.35;
+  color:var(--verde-texto);
+  font-weight:500;
+}
+
+.graficoSubtitulo{
+  margin-top:3px;
+  font-size:10.5px;
+  line-height:1.4;
+  color:var(--texto-secundario);
+}
+
+.graficoResumo{
+  flex:0 0 auto;
+  min-width:70px;
+  border-radius:14px;
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  padding:8px 9px;
+  text-align:center;
+}
+
+.graficoResumoValor{
+  display:block;
+  color:var(--verde-texto);
+  font-size:15px;
+  line-height:1.1;
+  font-weight:500;
+}
+
+.graficoResumoLabel{
+  display:block;
+  margin-top:3px;
+  color:var(--texto-secundario);
+  font-size:9.5px;
+  line-height:1.25;
+}
+
+.canvasWrap{
+  width:100%;
+  min-height:180px;
+  background:#FFFFFF;
+  border:1px solid rgba(227,229,225,.9);
+  border-radius:16px;
+  padding:8px;
+  overflow:hidden;
+}
+
+.canvasWrap canvas{
+  width:100%;
+  height:180px;
+  display:block;
+}
+
+.graficoLegenda{
+  margin-top:8px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.legendaItem{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border-radius:999px;
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  padding:5px 8px;
+  font-size:9.5px;
+  color:var(--texto-secundario);
+}
+
+.legendaBolinha{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--verde-escuro);
+}
+
+.graficoVazio{
+  min-height:155px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--texto-secundario);
+  font-size:11.5px;
+  line-height:1.5;
+  padding:20px;
+}
+
+@media(max-width:390px){
+  .canvasWrap canvas{
+    height:165px;
+  }
+
+  .graficoResumo{
+    min-width:64px;
+  }
+}
+</style>
+
+
+<style>
+/* =========================================================
+   VISUAL SYSTEM SAÚDE — PADRÃO GABRIELA / ALIMENTAÇÃO
+   ========================================================= */
+body{
+  align-items:flex-start !important;
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,.8), transparent 35%),
+    linear-gradient(180deg,#FAFBF7 0%,#F6F8F3 100%) !important;
+}
+
+.card{
+  border:1px solid rgba(221,232,216,.86) !important;
+  border-radius:30px !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+  background:rgba(255,255,255,.86) !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  right:-62px;
+  top:-52px;
+  border-radius:50%;
+  background:rgba(232,243,226,.78);
+  z-index:0;
+}
+
+.card > *{
+  position:relative;
+  z-index:1;
+}
+
+.topo{
+  display:grid !important;
+  grid-template-columns:66px minmax(0,1fr) 66px !important;
+  gap:0 !important;
+  min-height:62px !important;
+  align-items:start !important;
+}
+
+.botao-voltar{
+  width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.9) !important;
+  border:1px solid rgba(221,232,216,.9) !important;
+  box-shadow:0 5px 14px rgba(84,110,79,.08) !important;
+  justify-self:start !important;
+}
+
+.topCenter{
+  min-width:0 !important;
+  width:100% !important;
+  text-align:center !important;
+  padding:0 3px !important;
+}
+
+.titleIndex{
+  width:100% !important;
+  text-align:center !important;
+  font-size:22px !important;
+  color:#435F3E !important;
+  font-weight:500 !important;
+  line-height:1.1 !important;
+  white-space:nowrap !important;
+}
+
+.subtitulo{
+  width:100% !important;
+  text-align:center !important;
+  font-size:10.5px !important;
+  color:#6F756C !important;
+  margin-top:5px !important;
+  white-space:normal !important;
+  line-height:1.3 !important;
+}
+
+.dataTopo{
+  width:66px !important;
+  justify-self:end !important;
+  align-items:flex-end !important;
+  text-align:right !important;
+}
+
+.horaTopo{
+  color:#B8807B !important;
+  font-size:14px !important;
+}
+
+.botoes-lista,
+.lista-registros{
+  gap:9px !important;
+}
+
+.botao,
+.registro{
+  min-height:66px !important;
+  border-radius:18px !important;
+  background:rgba(255,255,255,.96) !important;
+  border:1px solid rgba(232,225,212,.9) !important;
+  box-shadow:0 7px 18px rgba(76,82,62,.07) !important;
+  transition:.2s ease !important;
+}
+
+.botao:hover,
+.registro:hover{
+  transform:translateY(-1px) !important;
+  background:#FFFDF8 !important;
+  box-shadow:0 10px 22px rgba(76,82,62,.11) !important;
+}
+
+.registroTitulo,
+.nome-botao{
+  color:#2F332D !important;
+  font-size:15px !important;
+  font-weight:500 !important;
+}
+
+.registroDescricao,
+.proxima-tarefa{
+  color:#6F756C !important;
+  font-size:11px !important;
+}
+
+.addTopBtn,
+.futureBtn{
+  border-radius:14px !important;
+  min-height:40px !important;
+  background:#EAF0E5 !important;
+  color:#52664A !important;
+  border:1px solid rgba(221,232,216,.9) !important;
+}
+
+.modal{
+  border-radius:24px !important;
+  border:1px solid rgba(221,232,216,.9) !important;
+  box-shadow:0 18px 40px rgba(0,0,0,.16) !important;
+}
+
+input, select, textarea{
+  background:#FFFDF8 !important;
+  border-radius:14px !important;
+}
+
+@media(max-width:390px){
+  .topo{
+    grid-template-columns:60px minmax(0,1fr) 60px !important;
+  }
+  .titleIndex{
+    font-size:20px !important;
+  }
+  .dataTopo{
+    width:60px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -484,6 +780,54 @@ input:focus, select:focus{
     </div>
 
     <div id="listaRegistros" class="lista-registros"></div>
+
+
+<section class="acompanhamentoSaude">
+  <div class="graficoCard">
+    <div class="graficoTopo">
+      <div>
+        <div class="graficoTitulo">Evolução do peso</div>
+        <div class="graficoSubtitulo">Registros feitos pelo botão “Registrar peso” do início.</div>
+      </div>
+      <div class="graficoResumo">
+        <span id="pesoAtualResumo" class="graficoResumoValor">—</span>
+        <span class="graficoResumoLabel">último peso</span>
+      </div>
+    </div>
+
+    <div id="pesoGraficoVazio" class="graficoVazio" style="display:none;">
+      Nenhum peso registrado ainda.
+    </div>
+
+    <div id="pesoCanvasWrap" class="canvasWrap">
+      <canvas id="graficoPeso" aria-label="Gráfico da evolução do peso"></canvas>
+    </div>
+  </div>
+
+  <div class="graficoCard">
+    <div class="graficoTopo">
+      <div>
+        <div class="graficoTitulo">Como estou me sentindo</div>
+        <div class="graficoSubtitulo">Quantidade de registros por sensação escolhida no início.</div>
+      </div>
+      <div class="graficoResumo">
+        <span id="sensacoesTotalResumo" class="graficoResumoValor">0</span>
+        <span class="graficoResumoLabel">registros</span>
+      </div>
+    </div>
+
+    <div id="sensacoesGraficoVazio" class="graficoVazio" style="display:none;">
+      Nenhuma sensação registrada ainda.
+    </div>
+
+    <div id="sensacoesCanvasWrap" class="canvasWrap">
+      <canvas id="graficoSensacoes" aria-label="Gráfico das sensações registradas"></canvas>
+    </div>
+
+    <div id="legendaSensacoes" class="graficoLegenda"></div>
+  </div>
+</section>
+
 
     <div class="footerMiniAction">
       <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
@@ -679,5 +1023,276 @@ window.addEventListener("load", () => {
   renderizarLista();
 });
 </script>
+
+<script>
+/* =========================================================
+   GRÁFICOS DE PESO E SENSAÇÕES
+   ========================================================= */
+const CHAVE_PESO_GABI_GRAFICO = "registro_peso_gabriela_v1";
+const CHAVE_SENTIMENTO_GABI_GRAFICO = "registro_sentimento_gabriela_v1";
+
+function lerHistoricoPesoGrafico(){
+  try{
+    const dados = JSON.parse(localStorage.getItem(CHAVE_PESO_GABI_GRAFICO) || "{}");
+    const historico = Array.isArray(dados.historico) ? dados.historico : [];
+
+    return historico
+      .map(item => ({
+        data: item.data || "",
+        peso: Number(item.peso),
+        registradoEm: item.registradoEm || ""
+      }))
+      .filter(item => item.data && Number.isFinite(item.peso))
+      .sort((a,b) => {
+        const da = new Date(a.registradoEm || `${a.data}T00:00:00`);
+        const db = new Date(b.registradoEm || `${b.data}T00:00:00`);
+        return da - db;
+      });
+  }catch(e){
+    return [];
+  }
+}
+
+function lerSensacoesGrafico(){
+  try{
+    const dados = JSON.parse(localStorage.getItem(CHAVE_SENTIMENTO_GABI_GRAFICO) || "[]");
+    return Array.isArray(dados) ? dados : [];
+  }catch(e){
+    return [];
+  }
+}
+
+function formatarDataCurta(dataISO){
+  if(!dataISO) return "";
+  const partes = dataISO.split("-");
+  if(partes.length !== 3) return dataISO;
+  return `${partes[2]}/${partes[1]}`;
+}
+
+function prepararCanvas(canvas){
+  const proporcao = window.devicePixelRatio || 1;
+  const largura = Math.max(260, canvas.parentElement.clientWidth - 16);
+  const altura = parseFloat(getComputedStyle(canvas).height) || 180;
+
+  canvas.width = Math.round(largura * proporcao);
+  canvas.height = Math.round(altura * proporcao);
+  canvas.style.width = `${largura}px`;
+  canvas.style.height = `${altura}px`;
+
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(proporcao, 0, 0, proporcao, 0, 0);
+
+  return {ctx, largura, altura};
+}
+
+function desenharGraficoPeso(){
+  const dados = lerHistoricoPesoGrafico();
+  const canvas = document.getElementById("graficoPeso");
+  const wrap = document.getElementById("pesoCanvasWrap");
+  const vazio = document.getElementById("pesoGraficoVazio");
+  const resumo = document.getElementById("pesoAtualResumo");
+
+  if(!canvas || !wrap || !vazio || !resumo) return;
+
+  if(!dados.length){
+    resumo.textContent = "—";
+    wrap.style.display = "none";
+    vazio.style.display = "flex";
+    return;
+  }
+
+  wrap.style.display = "block";
+  vazio.style.display = "none";
+
+  const ultimo = dados[dados.length - 1];
+  resumo.textContent = `${ultimo.peso.toLocaleString("pt-BR")} kg`;
+
+  const {ctx, largura, altura} = prepararCanvas(canvas);
+  ctx.clearRect(0,0,largura,altura);
+
+  const margem = {top:18,right:14,bottom:36,left:42};
+  const larguraGrafico = largura - margem.left - margem.right;
+  const alturaGrafico = altura - margem.top - margem.bottom;
+
+  const pesos = dados.map(d => d.peso);
+  let minimo = Math.min(...pesos);
+  let maximo = Math.max(...pesos);
+
+  if(minimo === maximo){
+    minimo -= 1;
+    maximo += 1;
+  }else{
+    const folga = Math.max(.5, (maximo - minimo) * .18);
+    minimo -= folga;
+    maximo += folga;
+  }
+
+  ctx.font = "10px Poppins, sans-serif";
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = "#E3E5E1";
+  ctx.fillStyle = "#6B6B6B";
+
+  const linhas = 4;
+  for(let i=0;i<=linhas;i++){
+    const y = margem.top + (alturaGrafico/linhas)*i;
+    const valor = maximo - ((maximo-minimo)/linhas)*i;
+
+    ctx.beginPath();
+    ctx.moveTo(margem.left,y);
+    ctx.lineTo(largura-margem.right,y);
+    ctx.stroke();
+
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.fillText(valor.toFixed(1), margem.left-7, y);
+  }
+
+  const pontos = dados.map((item,indice) => {
+    const x = dados.length === 1
+      ? margem.left + larguraGrafico/2
+      : margem.left + (larguraGrafico/(dados.length-1))*indice;
+
+    const y = margem.top + ((maximo-item.peso)/(maximo-minimo))*alturaGrafico;
+    return {x,y,item};
+  });
+
+  ctx.strokeStyle = "#5C9D5C";
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  pontos.forEach((p,i) => {
+    if(i===0) ctx.moveTo(p.x,p.y);
+    else ctx.lineTo(p.x,p.y);
+  });
+  ctx.stroke();
+
+  pontos.forEach((p,indice) => {
+    ctx.beginPath();
+    ctx.fillStyle = "#5C9D5C";
+    ctx.arc(p.x,p.y,4,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.fillStyle = "#3F6F4F";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.font = "10px Poppins, sans-serif";
+    ctx.fillText(p.item.peso.toLocaleString("pt-BR"), p.x, p.y-7);
+
+    const mostrarData = dados.length <= 6 || indice === 0 || indice === dados.length-1 || indice % Math.ceil(dados.length/5) === 0;
+    if(mostrarData){
+      ctx.fillStyle = "#6B6B6B";
+      ctx.textBaseline = "top";
+      ctx.fillText(formatarDataCurta(p.item.data), p.x, altura-margem.bottom+10);
+    }
+  });
+}
+
+function desenharGraficoSensacoes(){
+  const registros = lerSensacoesGrafico();
+  const canvas = document.getElementById("graficoSensacoes");
+  const wrap = document.getElementById("sensacoesCanvasWrap");
+  const vazio = document.getElementById("sensacoesGraficoVazio");
+  const total = document.getElementById("sensacoesTotalResumo");
+  const legenda = document.getElementById("legendaSensacoes");
+
+  if(!canvas || !wrap || !vazio || !total || !legenda) return;
+
+  total.textContent = String(registros.length);
+
+  const contagem = {};
+  registros.forEach(item => {
+    const nome = String(item.sentimento || "Observação").trim() || "Observação";
+    contagem[nome] = (contagem[nome] || 0) + 1;
+  });
+
+  const dados = Object.entries(contagem)
+    .map(([nome,quantidade]) => ({nome,quantidade}))
+    .sort((a,b) => b.quantidade - a.quantidade || a.nome.localeCompare(b.nome,"pt-BR"));
+
+  if(!dados.length){
+    wrap.style.display = "none";
+    vazio.style.display = "flex";
+    legenda.innerHTML = "";
+    return;
+  }
+
+  wrap.style.display = "block";
+  vazio.style.display = "none";
+
+  const {ctx, largura, altura} = prepararCanvas(canvas);
+  ctx.clearRect(0,0,largura,altura);
+
+  const margem = {top:18,right:12,bottom:34,left:30};
+  const larguraGrafico = largura - margem.left - margem.right;
+  const alturaGrafico = altura - margem.top - margem.bottom;
+  const maximo = Math.max(...dados.map(d => d.quantidade),1);
+
+  ctx.font = "10px Poppins, sans-serif";
+  ctx.strokeStyle = "#E3E5E1";
+  ctx.fillStyle = "#6B6B6B";
+  ctx.lineWidth = 1;
+
+  for(let i=0;i<=maximo;i++){
+    const y = margem.top + alturaGrafico - (i/maximo)*alturaGrafico;
+    ctx.beginPath();
+    ctx.moveTo(margem.left,y);
+    ctx.lineTo(largura-margem.right,y);
+    ctx.stroke();
+
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.fillText(String(i),margem.left-6,y);
+  }
+
+  const espaco = larguraGrafico / dados.length;
+  const larguraBarra = Math.min(34, espaco*.58);
+
+  dados.forEach((item,indice) => {
+    const alturaBarra = (item.quantidade/maximo)*alturaGrafico;
+    const x = margem.left + espaco*indice + (espaco-larguraBarra)/2;
+    const y = margem.top + alturaGrafico - alturaBarra;
+
+    ctx.fillStyle = "#8DA77D";
+    ctx.beginPath();
+
+    if(typeof ctx.roundRect === "function"){
+      ctx.roundRect(x,y,larguraBarra,alturaBarra,[7,7,2,2]);
+      ctx.fill();
+    }else{
+      ctx.fillRect(x,y,larguraBarra,alturaBarra);
+    }
+
+    ctx.fillStyle = "#3F6F4F";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(String(item.quantidade),x+larguraBarra/2,y-5);
+
+    const abreviado = item.nome.length > 8 ? item.nome.slice(0,7)+"…" : item.nome;
+    ctx.fillStyle = "#6B6B6B";
+    ctx.textBaseline = "top";
+    ctx.fillText(abreviado,x+larguraBarra/2,altura-margem.bottom+9);
+  });
+
+  legenda.innerHTML = dados.map(item => `
+    <span class="legendaItem">
+      <span class="legendaBolinha"></span>
+      ${escapeHtml(item.nome)}: ${item.quantidade}
+    </span>
+  `).join("");
+}
+
+function renderizarGraficosSaude(){
+  desenharGraficoPeso();
+  desenharGraficoSensacoes();
+}
+
+window.addEventListener("load", renderizarGraficosSaude);
+window.addEventListener("focus", renderizarGraficosSaude);
+window.addEventListener("storage", renderizarGraficosSaude);
+window.addEventListener("resize", () => {
+  clearTimeout(window.__timerGraficosSaude);
+  window.__timerGraficosSaude = setTimeout(renderizarGraficosSaude,120);
+});
+</script>
+
 </body>
 </html>

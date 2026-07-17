@@ -1421,5 +1421,141 @@ window.addEventListener("storage", () => {
 })();
 </script>
 
+
+<script>
+/* Integração direta das refeições do Jejum Intermitente */
+(function(){
+  const CHAVE_REFEICOES = "jejum_rotina_refeicoes_v1";
+  const CHAVE_CONCLUIDAS = "jejum_refeicoes_concluidas";
+
+  function hojeISO(){
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  }
+
+  function chaveConcluidas(){
+    return `${CHAVE_CONCLUIDAS}_${hojeISO()}`;
+  }
+
+  function lerRefeicoes(){
+    try{
+      const dados = JSON.parse(localStorage.getItem(CHAVE_REFEICOES) || "{}");
+      return Array.isArray(dados.itens) ? dados.itens : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function lerConcluidas(){
+    try{
+      const valor = JSON.parse(localStorage.getItem(chaveConcluidas()) || "[]");
+      return Array.isArray(valor) ? valor : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function estaConcluida(indice){
+    return !!lerConcluidas()[indice];
+  }
+
+  function definirConcluida(indice, valor){
+    const estado = lerConcluidas();
+    while(estado.length < 3) estado.push(false);
+    estado[indice] = !!valor;
+    localStorage.setItem(chaveConcluidas(), JSON.stringify(estado));
+  }
+
+  function minutos(hora){
+    const m = String(hora || "").match(/(\d{1,2})\D?(\d{2})?/);
+    return m ? Number(m[1]) * 60 + Number(m[2] || 0) : 9999;
+  }
+
+  window.JejumIntegracao = {
+    lerRefeicoes, lerConcluidas, estaConcluida, definirConcluida, minutos
+  };
+})();
+</script>
+
+<script>
+(function(){
+  if(typeof window.obterRotinaDoDia !== "function") return;
+
+  const obterOriginal = window.obterRotinaDoDia;
+  window.obterRotinaDoDia = function(){
+    const rotina = obterOriginal.apply(this, arguments);
+    const refeicoes = JejumIntegracao.lerRefeicoes();
+    const concluidas = JejumIntegracao.lerConcluidas();
+
+    refeicoes.forEach((item, indice) => {
+      if(concluidas[indice]) return;
+
+      const agora = new Date();
+      const mins = JejumIntegracao.minutos(item.hora);
+      const inicio = new Date(
+        agora.getFullYear(), agora.getMonth(), agora.getDate(),
+        Math.floor(mins/60), mins%60, 0, 0
+      );
+
+      rotina.push({
+        tipo:"rotina",
+        summary:item.nome,
+        horaTexto:item.hora,
+        inicio,
+        bloco:"Jejum Intermitente",
+        link:item.destino || "jejum-intermitente.html",
+        chave:"jejum_refeicoes_concluidas",
+        indice,
+        total:3,
+        modo:"normal"
+      });
+    });
+
+    return rotina.sort((a,b) => a.inicio - b.inicio);
+  };
+
+  window.addEventListener("focus", () => {
+    if(typeof window.renderizarEventos === "function" && typeof window.eventosAgendaCache !== "undefined"){
+      window.renderizarEventos(window.eventosAgendaCache, "hoje");
+    }
+  });
+})();
+</script>
+
+
+<script>
+/* Integração das metas de água do Jejum Intermitente */
+(function(){
+  const CHAVE_AGUA="jejum_rotina_agua_v1";
+  const CHAVE_CONCLUIDAS="jejum_agua_concluida";
+  function hojeISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+  function chaveConcluidas(){return `${CHAVE_CONCLUIDAS}_${hojeISO()}`}
+  function lerItens(){try{const d=JSON.parse(localStorage.getItem(CHAVE_AGUA)||"{}");return Array.isArray(d.itens)?d.itens:[]}catch(e){return []}}
+  function lerConcluidas(){try{const v=JSON.parse(localStorage.getItem(chaveConcluidas())||"[]");return Array.isArray(v)?v:[]}catch(e){return []}}
+  function estaConcluida(i){return !!lerConcluidas()[i]}
+  function definirConcluida(i,v){const e=lerConcluidas();while(e.length<3)e.push(false);e[i]=!!v;localStorage.setItem(chaveConcluidas(),JSON.stringify(e))}
+  function minutos(h){const m=String(h||"").match(/(\d{1,2})\D?(\d{2})?/);return m?Number(m[1])*60+Number(m[2]||0):9999}
+  window.AguaJejumIntegracao={lerItens,lerConcluidas,estaConcluida,definirConcluida,minutos};
+})();
+</script>
+
+<script>
+(function(){
+  if(typeof window.obterRotinaDoDia!=="function")return;
+  const original=window.obterRotinaDoDia;
+  window.obterRotinaDoDia=function(){
+    const rotina=original.apply(this,arguments),itens=AguaJejumIntegracao.lerItens(),concluidas=AguaJejumIntegracao.lerConcluidas();
+    itens.forEach((item,indice)=>{
+      if(concluidas[indice])return;
+      const agora=new Date(),mins=AguaJejumIntegracao.minutos(item.hora);
+      const inicio=new Date(agora.getFullYear(),agora.getMonth(),agora.getDate(),Math.floor(mins/60),mins%60,0,0);
+      rotina.push({tipo:"rotina",summary:item.nome,horaTexto:item.hora,inicio,bloco:"Consumo de água",link:item.destino||"jejum-intermitente.html",chave:"jejum_agua_concluida",indice,total:3,modo:"normal"});
+    });
+    return rotina.sort((a,b)=>a.inicio-b.inicio);
+  };
+  window.addEventListener("focus",()=>{if(typeof window.renderizarEventos==="function"&&typeof window.eventosAgendaCache!=="undefined")window.renderizarEventos(window.eventosAgendaCache,"hoje")});
+})();
+</script>
+
 </body>
 </html>

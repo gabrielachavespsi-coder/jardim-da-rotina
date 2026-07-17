@@ -1046,6 +1046,85 @@ body.gabi-rotina .lista .tarefa.feita::before{
 }
 
 </style>
+
+<style>
+/* =========================================================
+   ALINHAMENTO DE TÍTULO E SUBTÍTULO — ÁGUA E REFEIÇÕES
+   ========================================================= */
+.tarefa[data-refeicao-jejum="1"] .descricao-tarefa,
+.tarefa[data-agua-jejum="1"] .descricao-tarefa{
+  display:block !important;
+  padding-left:22px !important;
+  box-sizing:border-box !important;
+}
+</style>
+
+
+<style>
+/* =========================================================
+   CONCLUSÃO INDIVIDUAL DE ATIVIDADES
+   ========================================================= */
+.modalSubtarefasLista{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:2px;
+}
+
+.modalSubtarefaItem{
+  width:100%;
+  min-height:48px;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  background:#F8FAF7;
+  color:var(--verde-texto);
+  padding:10px 12px;
+  display:grid;
+  grid-template-columns:24px 1fr;
+  gap:9px;
+  align-items:center;
+  text-align:left;
+  font-family:var(--fonte);
+  font-size:13px;
+  cursor:pointer;
+}
+
+.modalSubtarefaItem.concluida{
+  background:#E8F1E6;
+  opacity:.74;
+}
+
+.modalSubtarefaCheck{
+  width:20px;
+  height:20px;
+  border:1.5px solid var(--verde-texto);
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+}
+
+.modalSubtarefaItem.concluida .modalSubtarefaCheck{
+  background:var(--verde-texto);
+  color:#fff;
+}
+
+.progressoSubtarefas{
+  display:block;
+  margin-top:4px;
+  font-size:10.5px;
+  color:rgba(63,111,79,.68);
+}
+
+.modalSubtarefasAjuda{
+  text-align:center;
+  font-size:11px;
+  line-height:1.45;
+  color:var(--texto-secundario);
+}
+</style>
+
 </head>
 <body class="gabi-rotina">
 
@@ -1841,6 +1920,421 @@ window.addEventListener("storage", () => {
   renderizarTarefas();
   atualizarLinhaTempo();
 });
+</script>
+
+
+<script>
+/* Integração direta das refeições do Jejum Intermitente */
+(function(){
+  const CHAVE_REFEICOES = "jejum_rotina_refeicoes_v1";
+  const CHAVE_CONCLUIDAS = "jejum_refeicoes_concluidas";
+
+  function hojeISO(){
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  }
+
+  function chaveConcluidas(){
+    return `${CHAVE_CONCLUIDAS}_${hojeISO()}`;
+  }
+
+  function lerRefeicoes(){
+    try{
+      const dados = JSON.parse(localStorage.getItem(CHAVE_REFEICOES) || "{}");
+      return Array.isArray(dados.itens) ? dados.itens : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function lerConcluidas(){
+    try{
+      const valor = JSON.parse(localStorage.getItem(chaveConcluidas()) || "[]");
+      return Array.isArray(valor) ? valor : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function estaConcluida(indice){
+    return !!lerConcluidas()[indice];
+  }
+
+  function definirConcluida(indice, valor){
+    const estado = lerConcluidas();
+    while(estado.length < 3) estado.push(false);
+    estado[indice] = !!valor;
+    localStorage.setItem(chaveConcluidas(), JSON.stringify(estado));
+  }
+
+  function minutos(hora){
+    const m = String(hora || "").match(/(\d{1,2})\D?(\d{2})?/);
+    return m ? Number(m[1]) * 60 + Number(m[2] || 0) : 9999;
+  }
+
+  window.JejumIntegracao = {
+    lerRefeicoes, lerConcluidas, estaConcluida, definirConcluida, minutos
+  };
+})();
+</script>
+
+<script>
+(function(){
+  const PAGINA_DESTINO = "gabriela-alimentacao-preparar-sair.html";
+
+  function integrarRefeicoes(){
+    const lista = document.getElementById("lista-tarefas");
+    if(!lista || !window.JejumIntegracao) return;
+
+    lista.querySelectorAll("[data-refeicao-jejum='1']").forEach(el => el.remove());
+
+    const refeicoes = JejumIntegracao.lerRefeicoes()
+      .map((item, indice) => ({...item, indice}))
+      .filter(item => item.destino === PAGINA_DESTINO);
+
+    refeicoes.forEach(item => {
+      const botao = document.createElement("button");
+      botao.type = "button";
+      botao.className = "tarefa" + (JejumIntegracao.estaConcluida(item.indice) ? " feita" : "");
+      botao.dataset.refeicaoJejum = "1";
+      botao.dataset.minutos = String(JejumIntegracao.minutos(item.hora));
+      botao.innerHTML = `
+        <span class="check">✅</span>
+        <span class="nome"><span class="grupo-titulo">${item.nome}</span><span class="descricao-tarefa">${item.metodo || "Jejum Intermitente"}</span></span>
+        <span class="hora">${item.hora}</span>
+      `;
+      botao.onclick = () => {
+        const novoEstado = !JejumIntegracao.estaConcluida(item.indice);
+        JejumIntegracao.definirConcluida(item.indice, novoEstado);
+        integrarRefeicoes();
+      };
+      lista.appendChild(botao);
+    });
+
+    const tarefas = Array.from(lista.children);
+    tarefas.sort((a,b) => {
+      const feitaA = a.classList.contains("feita") ? 1 : 0;
+      const feitaB = b.classList.contains("feita") ? 1 : 0;
+      if(feitaA !== feitaB) return feitaA - feitaB;
+
+      function obterMinutos(el){
+        if(el.dataset.minutos) return Number(el.dataset.minutos);
+        const h = el.querySelector(".hora")?.textContent || "";
+        return JejumIntegracao.minutos(h);
+      }
+      return obterMinutos(a) - obterMinutos(b);
+    }).forEach(el => lista.appendChild(el));
+  }
+
+  if(typeof window.renderizarTarefas === "function"){
+    const original = window.renderizarTarefas;
+    window.renderizarTarefas = function(){
+      original.apply(this, arguments);
+      integrarRefeicoes();
+    };
+  }
+
+  window.addEventListener("load", integrarRefeicoes);
+  window.addEventListener("focus", integrarRefeicoes);
+  window.addEventListener("storage", integrarRefeicoes);
+})();
+</script>
+
+
+<script>
+/* Integração das metas de água do Jejum Intermitente */
+(function(){
+  const CHAVE_AGUA="jejum_rotina_agua_v1";
+  const CHAVE_CONCLUIDAS="jejum_agua_concluida";
+  function hojeISO(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+  function chaveConcluidas(){return `${CHAVE_CONCLUIDAS}_${hojeISO()}`}
+  function lerItens(){try{const d=JSON.parse(localStorage.getItem(CHAVE_AGUA)||"{}");return Array.isArray(d.itens)?d.itens:[]}catch(e){return []}}
+  function lerConcluidas(){try{const v=JSON.parse(localStorage.getItem(chaveConcluidas())||"[]");return Array.isArray(v)?v:[]}catch(e){return []}}
+  function estaConcluida(i){return !!lerConcluidas()[i]}
+  function definirConcluida(i,v){const e=lerConcluidas();while(e.length<3)e.push(false);e[i]=!!v;localStorage.setItem(chaveConcluidas(),JSON.stringify(e))}
+  function minutos(h){const m=String(h||"").match(/(\d{1,2})\D?(\d{2})?/);return m?Number(m[1])*60+Number(m[2]||0):9999}
+  window.AguaJejumIntegracao={lerItens,lerConcluidas,estaConcluida,definirConcluida,minutos};
+})();
+</script>
+
+<script>
+(function(){
+  const PAGINA_DESTINO="gabriela-alimentacao-preparar-sair.html";
+  function integrarAgua(){
+    const lista=document.getElementById("lista-tarefas");
+    if(!lista||!window.AguaJejumIntegracao)return;
+    lista.querySelectorAll("[data-agua-jejum='1']").forEach(el=>el.remove());
+    const itens=AguaJejumIntegracao.lerItens().map((item,indice)=>({...item,indice})).filter(item=>item.destino===PAGINA_DESTINO);
+    itens.forEach(item=>{
+      const botao=document.createElement("button");
+      botao.type="button";
+      botao.className="tarefa"+(AguaJejumIntegracao.estaConcluida(item.indice)?" feita":"");
+      botao.dataset.aguaJejum="1";
+      botao.dataset.minutos=String(AguaJejumIntegracao.minutos(item.hora));
+      botao.innerHTML=`<span class="check">✅</span><span class="nome"><span class="grupo-titulo">${item.nome}</span><span class="descricao-tarefa">${item.descricao||item.metodo||"Hidratação"}</span></span><span class="hora">${item.hora}</span>`;
+      botao.onclick=()=>{const novo=!AguaJejumIntegracao.estaConcluida(item.indice);AguaJejumIntegracao.definirConcluida(item.indice,novo);integrarAgua()};
+      lista.appendChild(botao);
+    });
+    Array.from(lista.children).sort((a,b)=>{
+      const fa=a.classList.contains("feita")?1:0,fb=b.classList.contains("feita")?1:0;
+      if(fa!==fb)return fa-fb;
+      const ma=a.dataset.minutos?Number(a.dataset.minutos):AguaJejumIntegracao.minutos(a.querySelector(".hora")?.textContent||"");
+      const mb=b.dataset.minutos?Number(b.dataset.minutos):AguaJejumIntegracao.minutos(b.querySelector(".hora")?.textContent||"");
+      return ma-mb;
+    }).forEach(el=>lista.appendChild(el));
+  }
+  if(typeof window.renderizarTarefas==="function"){const original=window.renderizarTarefas;window.renderizarTarefas=function(){original.apply(this,arguments);integrarAgua()}}
+  window.addEventListener("load",integrarAgua);window.addEventListener("focus",integrarAgua);window.addEventListener("storage",integrarAgua);
+})();
+</script>
+
+
+<div class="modalOverlay" id="modalConclusaoSubtarefas">
+  <div class="modal">
+    <div class="modalHeader">
+      <button class="fecharModal" type="button" onclick="fecharModalConclusaoSubtarefas()">×</button>
+    </div>
+    <div class="modalTitle" id="tituloModalConclusaoSubtarefas">Concluir atividades</div>
+    <div class="modalSubtarefasAjuda">Marque cada atividade realizada. O card continuará na lista até que todas sejam concluídas.</div>
+    <div class="modalSubtarefasLista" id="listaModalConclusaoSubtarefas"></div>
+    <div class="modalBtns">
+      <button class="cancel" type="button" onclick="fecharModalConclusaoSubtarefas()">fechar</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* =========================================================
+   SUBTAREFAS CONCLUÍDAS INDIVIDUALMENTE
+   ========================================================= */
+(function(){
+  let tarefaSubtarefasAtual = null;
+
+  function chaveSubtarefasDia(){
+    return `${chaveDoDia()}_atividades`;
+  }
+
+  function obterEstadoSubtarefas(){
+    try{
+      const salvo = JSON.parse(localStorage.getItem(chaveSubtarefasDia()) || "{}");
+      return salvo && typeof salvo === "object" ? salvo : {};
+    }catch(e){
+      return {};
+    }
+  }
+
+  function salvarEstadoSubtarefas(estado){
+    localStorage.setItem(chaveSubtarefasDia(), JSON.stringify(estado));
+  }
+
+  function textoSemHtml(valor){
+    const div = document.createElement("div");
+    div.innerHTML = String(valor || "")
+      .replace(/<br\s*\/?>/gi, "\n")
+      .replace(/<\/span>/gi, "\n");
+    return (div.textContent || "")
+      .split("\n")
+      .map(v => v.trim())
+      .filter(Boolean);
+  }
+
+  function obterAtividadesDaTarefa(tarefa){
+    if(!tarefa) return [];
+
+    if(Array.isArray(tarefa.subtarefas)){
+      return tarefa.subtarefas
+        .map(v => typeof v === "string" ? v : (v.nome || v.titulo || ""))
+        .map(v => String(v).trim())
+        .filter(Boolean);
+    }
+
+    const temp = document.createElement("div");
+    temp.innerHTML = String(tarefa.nome || "");
+
+    const sublista = temp.querySelector(".sublista-tarefa");
+    if(sublista){
+      const linhas = [];
+      sublista.querySelectorAll(".linha-sub").forEach(el => {
+        const t = (el.textContent || "").trim();
+        if(t) linhas.push(t);
+      });
+
+      if(linhas.length > 1) return linhas;
+
+      const porBr = sublista.innerHTML
+        .split(/<br\s*\/?>/i)
+        .map(parte => {
+          const d = document.createElement("div");
+          d.innerHTML = parte;
+          return (d.textContent || "").trim();
+        })
+        .filter(Boolean);
+
+      if(porBr.length > 1) return porBr;
+
+      const spans = Array.from(sublista.querySelectorAll(":scope > span"))
+        .map(el => (el.textContent || "").trim())
+        .filter(Boolean);
+
+      if(spans.length > 1) return spans;
+    }
+
+    return [];
+  }
+
+  function tituloPrincipal(tarefa){
+    const temp = document.createElement("div");
+    temp.innerHTML = String(tarefa?.nome || "");
+    const grupo = temp.querySelector(".grupo-titulo");
+    return (grupo?.textContent || textoSemHtml(tarefa?.nome)[0] || "Atividades").trim();
+  }
+
+  function idAtividade(tarefa, indice){
+    return `${tarefa.id}__${indice}`;
+  }
+
+  function todasConcluidas(tarefa){
+    const atividades = obterAtividadesDaTarefa(tarefa);
+    if(atividades.length <= 1) return null;
+    const estado = obterEstadoSubtarefas();
+    return atividades.every((_, indice) => Boolean(estado[idAtividade(tarefa, indice)]));
+  }
+
+  function progresso(tarefa){
+    const atividades = obterAtividadesDaTarefa(tarefa);
+    const estado = obterEstadoSubtarefas();
+    const feitas = atividades.filter((_, indice) => Boolean(estado[idAtividade(tarefa, indice)])).length;
+    return {feitas, total:atividades.length};
+  }
+
+  window.fecharModalConclusaoSubtarefas = function(){
+    tarefaSubtarefasAtual = null;
+    document.getElementById("modalConclusaoSubtarefas")?.classList.remove("show");
+  };
+
+  window.alternarSubtarefaRotina = function(indice){
+    if(!tarefaSubtarefasAtual) return;
+
+    const estadoSub = obterEstadoSubtarefas();
+    const chave = idAtividade(tarefaSubtarefasAtual, indice);
+    estadoSub[chave] = !estadoSub[chave];
+    salvarEstadoSubtarefas(estadoSub);
+
+    const terminou = todasConcluidas(tarefaSubtarefasAtual);
+    const estadoPai = obterEstado();
+    estadoPai[tarefaSubtarefasAtual.id] = Boolean(terminou);
+    salvarEstado(estadoPai);
+
+    renderizarListaModalSubtarefas();
+    renderizarTarefas();
+
+    if(terminou){
+      setTimeout(fecharModalConclusaoSubtarefas, 220);
+    }
+  };
+
+  function renderizarListaModalSubtarefas(){
+    if(!tarefaSubtarefasAtual) return;
+
+    const atividades = obterAtividadesDaTarefa(tarefaSubtarefasAtual);
+    const estado = obterEstadoSubtarefas();
+    const lista = document.getElementById("listaModalConclusaoSubtarefas");
+    const titulo = document.getElementById("tituloModalConclusaoSubtarefas");
+
+    titulo.textContent = tituloPrincipal(tarefaSubtarefasAtual);
+    lista.innerHTML = atividades.map((atividade, indice) => {
+      const concluida = Boolean(estado[idAtividade(tarefaSubtarefasAtual, indice)]);
+      return `
+        <button type="button"
+          class="modalSubtarefaItem ${concluida ? "concluida" : ""}"
+          onclick="alternarSubtarefaRotina(${indice})">
+          <span class="modalSubtarefaCheck">${concluida ? "✓" : ""}</span>
+          <span>${atividade}</span>
+        </button>
+      `;
+    }).join("");
+  }
+
+  function abrirModalSubtarefas(tarefa){
+    tarefaSubtarefasAtual = tarefa;
+    renderizarListaModalSubtarefas();
+    document.getElementById("modalConclusaoSubtarefas")?.classList.add("show");
+  }
+
+  const alternarOriginal = window.alternarTarefa;
+
+  window.alternarTarefa = function(id){
+    const tarefa = tarefasVisiveis().find(t => t.id === id);
+    const atividades = obterAtividadesDaTarefa(tarefa);
+
+    if(atividades.length > 1){
+      abrirModalSubtarefas(tarefa);
+      return;
+    }
+
+    if(typeof alternarOriginal === "function"){
+      alternarOriginal(id);
+    }
+  };
+
+  window.renderizarTarefas = function(){
+    const lista = document.getElementById("lista-tarefas");
+    const visiveis = tarefasVisiveis();
+    const estadoPai = obterEstado();
+
+    visiveis.forEach(tarefa => {
+      const concluidaPorAtividades = todasConcluidas(tarefa);
+      if(concluidaPorAtividades !== null){
+        estadoPai[tarefa.id] = concluidaPorAtividades;
+      }
+    });
+    salvarEstado(estadoPai);
+
+    const ordenadas = [...visiveis].sort((a,b) => {
+      return Number(Boolean(estadoPai[a.id])) - Number(Boolean(estadoPai[b.id]));
+    });
+
+    lista.innerHTML = "";
+
+    ordenadas.forEach(tarefa => {
+      const atividades = obterAtividadesDaTarefa(tarefa);
+      const temVarias = atividades.length > 1;
+      const prog = temVarias ? progresso(tarefa) : null;
+      const feita = Boolean(estadoPai[tarefa.id]);
+
+      const botao = document.createElement("button");
+      botao.className = "tarefa" + (feita ? " feita" : "");
+      botao.onclick = () => alternarTarefa(tarefa.id);
+
+      const progressoHtml = temVarias
+        ? `<span class="progressoSubtarefas">${prog.feitas} de ${prog.total} atividades concluídas</span>`
+        : "";
+
+      botao.innerHTML = `
+        <span class="check">✅</span>
+        <span class="nome">
+          ${formatarSubtituloBotao(tarefa.nome)}
+          ${tarefa.descricao ? `<span class="descricao-tarefa">${formatarDescricao(tarefa.descricao)}</span>` : ""}
+          ${progressoHtml}
+        </span>
+        <span class="hora">${tarefa.hora || ""}</span>
+      `;
+
+      lista.appendChild(botao);
+    });
+  };
+
+  document.getElementById("modalConclusaoSubtarefas")?.addEventListener("click", e => {
+    if(e.target.id === "modalConclusaoSubtarefas") fecharModalConclusaoSubtarefas();
+  });
+
+  document.addEventListener("keydown", e => {
+    if(e.key === "Escape") fecharModalConclusaoSubtarefas();
+  });
+
+  renderizarTarefas();
+})();
 </script>
 
 </body>
