@@ -1,12 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Rotina Gabi</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
 :root{
   --verde-principal:#E6F2E5;
@@ -1592,7 +1591,6 @@ body{
 }
 
 </style>
-
 <style>
 /* =========================================================
    IMAGEM NOVA DO CARD PRINCIPAL
@@ -1695,255 +1693,352 @@ body{
   }
 }
 </style>
+<style>
+/* ===== CABEÇALHO PADRONIZADO — REFERÊNCIA VISUAL FINAL: PÁGINA SAÚDE ===== */
+.card, .appCard{
+  padding-top:22px !important;
+}
+.cabecalho-saude-padrao{
+  display:grid !important;
+  grid-template-columns:42px minmax(0,1fr) 66px !important;
+  align-items:start !important;
+  gap:0 !important;
+  min-height:62px !important;
+  width:100% !important;
+  position:relative !important;
+  left:auto !important;
+  transform:none !important;
+  margin:0 0 6px !important;
+  padding:0 !important;
+}
+.cabecalho-saude-padrao .botao-voltar-padrao{
+  width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.90) !important;
+  border:1px solid rgba(221,232,216,.90) !important;
+  box-shadow:0 5px 14px rgba(84,110,79,.08) !important;
+  color:#2F332D !important;
+  justify-self:start !important;
+  cursor:pointer !important;
+  font-family:'Poppins',sans-serif !important;
+  font-size:17px !important;
+  line-height:1 !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  transition:.2s ease !important;
+}
+.cabecalho-saude-padrao .botao-voltar-padrao:hover{
+  background:#FFFFFF !important;
+  box-shadow:0 6px 16px rgba(84,110,79,.12) !important;
+}
+.cabecalho-saude-padrao .botao-voltar-padrao span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:100% !important;
+  transform:translateY(-1px) !important;
+}
+.cabecalho-saude-padrao .centro-titulo-padrao{
+  min-width:0 !important;
+  width:max-content !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  text-align:center !important;
+  padding:0 3px !important;
+  justify-self:center !important;
+  max-width:100% !important;
+}
+.cabecalho-saude-padrao .titulo-padrao{
+  width:auto !important;
+  margin:0 !important;
+  color:#435F3E !important;
+  font-family:'Poppins',sans-serif !important;
+  font-size:22px !important;
+  font-weight:500 !important;
+  line-height:1.1 !important;
+  letter-spacing:normal !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+}
+.cabecalho-saude-padrao .subtitulo-padrao{
+  width:auto !important;
+  margin:5px 0 0 !important;
+  color:#6F756C !important;
+  font-family:'Poppins',sans-serif !important;
+  font-size:10.5px !important;
+  font-weight:400 !important;
+  line-height:1.3 !important;
+  text-align:center !important;
+  white-space:normal !important;
+}
+.cabecalho-saude-padrao .data-padrao{
+  width:66px !important;
+  min-height:42px !important;
+  justify-self:end !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+  color:#6F756C !important;
+  font-family:'Poppins',sans-serif !important;
+  line-height:1.1 !important;
+  padding-top:1px !important;
+}
+.cabecalho-saude-padrao .hora-padrao{
+  color:#B8807B !important;
+  font-size:14px !important;
+  font-weight:500 !important;
+  white-space:nowrap !important;
+  margin-bottom:2px !important;
+}
+.cabecalho-saude-padrao .data-linha-padrao{
+  color:#6F756C !important;
+  font-size:10.5px !important;
+  font-weight:400 !important;
+  white-space:nowrap !important;
+}
+.acoes-topo-preservadas{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+  flex-wrap:wrap !important;
+  width:100% !important;
+  margin:0 0 2px !important;
+}
+@media(max-width:360px){
+  .cabecalho-saude-padrao{grid-template-columns:42px minmax(0,1fr) 62px !important;}
+  .cabecalho-saude-padrao .data-padrao{width:62px !important;}
+  .cabecalho-saude-padrao .titulo-padrao{font-size:20px !important;}
+  .cabecalho-saude-padrao .subtitulo-padrao{font-size:9.8px !important;}
+}
 
+/* Ajuste final: título e subtítulo centralizados pelo centro real da página */
+.cabecalho-saude-padrao .centro-titulo-padrao{
+  position:absolute !important;
+  left:50% !important;
+  top:0 !important;
+  transform:translateX(-50%) !important;
+  width:max-content !important;
+  max-width:calc(100% - 132px) !important;
+  margin:0 !important;
+  padding:0 !important;
+  align-items:center !important;
+  text-align:center !important;
+  justify-self:auto !important;
+}
+.cabecalho-saude-padrao .titulo-padrao,
+.cabecalho-saude-padrao .subtitulo-padrao{
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+</style>
+<style>
+/* Correção: preserva o centro real do título sem deslocar botão e data */
+.cabecalho-saude-padrao .botao-voltar-padrao{
+  grid-column:1 !important;
+  grid-row:1 !important;
+}
+.cabecalho-saude-padrao .data-padrao{
+  grid-column:3 !important;
+  grid-row:1 !important;
+  justify-self:end !important;
+}
+</style>
 </head>
-
 <body>
-
 <div class="pagina">
-  <div class="card">
-
-    <div class="topo">
-      <button class="botao-voltar" onclick="window.location.href='index.html'"><span>←</span></button>
-
-      <div class="topCenter">
-        <h1 class="titleIndex">Rotina Gabi</h1>
-        <p class="subtitulo">seu espaço de organização</p>
-      </div>
-
-      <div class="dataTopo" aria-label="Data e hora atuais">
-        <div id="linhaTempoHora" class="horaTopo"></div>
-        <div id="linhaTempoDia" class="dataTopoLinha"></div>
-        <div id="linhaTempoData" class="dataTopoLinha"></div>
-      </div>
-    </div>
-
-    <section class="heroGabrielaVisual heroGabrielaComImagem">
-      <img
-        src="gabriela-menu-hero.png"
-        alt="Seu espaço de cuidado e organização"
-        class="heroGabrielaImagem"
-      >
-    </section>
-
-    <div id="botoesLista" class="botoes-lista">
-      <div class="botao-wrap" id="wrap-bloco1" data-bloco-id="bloco1">
-        <div class="check-concluido">✅</div>
-        <button class="botao" onclick="window.location.href='gabriela-autocuidado-movimento-silencio.html'">
-          <div class="nome-botao">Autocuidado</div>
-          <div id="proxima-bloco1" class="proxima-tarefa"></div>
-          <div id="alerta-bloco1" class="alerta"></div>
-        </button>
-      </div>
-
-      <div class="botao-wrap" id="wrap-bloco2" data-bloco-id="bloco2">
-        <div class="check-concluido">✅</div>
-        <button class="botao" onclick="abrirBlocoMenu('bloco2','gabriela-manifestacao-criatividade.html')">
-          <div class="nome-botao">Manifestação</div>
-          <div id="proxima-bloco2" class="proxima-tarefa"></div>
-          <div id="alerta-bloco2" class="alerta"></div>
-        </button>
-      </div>
-
-      <div class="botao-wrap" id="wrap-bloco4" data-bloco-id="bloco4">
-        <div class="check-concluido">✅</div>
-        <button class="botao" onclick="window.location.href='gabriela-alimentacao-preparar-sair.html'">
-          <div class="nome-botao">Alimentação</div>
-          <div id="proxima-bloco4" class="proxima-tarefa"></div>
-          <div id="alerta-bloco4" class="alerta"></div>
-        </button>
-      </div>
-
-      <div class="botao-wrap" id="wrap-bloco6" data-bloco-id="bloco6">
-        <div class="check-concluido">✅</div>
-        <button class="botao" onclick="window.location.href='gabriela-estudo-organizacao-casa-dia.html'">
-          <div class="nome-botao">Estudo e Organização</div>
-          <div id="proxima-bloco6" class="proxima-tarefa"></div>
-          <div id="alerta-bloco6" class="alerta"></div>
-        </button>
-      </div>
-
-      <div class="botao-wrap" id="wrap-bloco7" data-bloco-id="bloco7">
-        <div class="check-concluido">✅</div>
-        <button class="botao" onclick="window.location.href='gabriela-desacelerar-autocuidado.html'">
-          <div class="nome-botao">Desacelerar</div>
-          <div id="proxima-bloco7" class="proxima-tarefa"></div>
-          <div id="alerta-bloco7" class="alerta"></div>
-        </button>
-      </div>
-
-      <div class="botao-wrap" id="wrap-bloco8" data-bloco-id="bloco8">
-        <div class="check-concluido">✅</div>
-        <button class="botao" onclick="abrirBlocoMenu('bloco8','gabriela-passatempos.html')">
-          <div class="nome-botao">Passatempos Relaxantes</div>
-          <div id="proxima-bloco8" class="proxima-tarefa"></div>
-          <div id="alerta-bloco8" class="alerta"></div>
-        </button>
-      </div>
-    </div>
-
-    <div id="horarioLista" class="horario-lista"></div>
-
-    <div class="footerMiniAction">
-      <button class="futureBtn" onclick="abrirModalConfiguracao()">configuração</button>
-      <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
-    </div>
-
-  </div>
+<div class="card">
+<div class="cabecalho-saude-padrao"><button class="botao-voltar-padrao" onclick="window.location.href='index.html'"><span>←</span></button><div class="centro-titulo-padrao"><h1 class="titulo-padrao">🌱 Rotina Gabi</h1><p class="subtitulo-padrao">Seu espaço de organização</p></div><div aria-label="Data e hora atuais" class="data-padrao"><div class="hora-padrao" data-hora-padrao=""></div><div class="data-linha-padrao" data-dia-padrao=""></div><div class="data-linha-padrao" data-data-padrao=""></div></div></div>
+<section class="heroGabrielaVisual heroGabrielaComImagem">
+<img alt="Seu espaço de cuidado e organização" class="heroGabrielaImagem" src="gabriela-menu-hero.png"/>
+</section>
+<div class="botoes-lista" id="botoesLista">
+<div class="botao-wrap" data-bloco-id="bloco1" id="wrap-bloco1">
+<div class="check-concluido">✅</div>
+<button class="botao" onclick="window.location.href='gabriela-autocuidado-movimento-silencio.html'">
+<div class="nome-botao">Autocuidado</div>
+<div class="proxima-tarefa" id="proxima-bloco1"></div>
+<div class="alerta" id="alerta-bloco1"></div>
+</button>
 </div>
-
+<div class="botao-wrap" data-bloco-id="bloco2" id="wrap-bloco2">
+<div class="check-concluido">✅</div>
+<button class="botao" onclick="abrirBlocoMenu('bloco2','gabriela-manifestacao-criatividade.html')">
+<div class="nome-botao">Manifestação</div>
+<div class="proxima-tarefa" id="proxima-bloco2"></div>
+<div class="alerta" id="alerta-bloco2"></div>
+</button>
+</div>
+<div class="botao-wrap" data-bloco-id="bloco4" id="wrap-bloco4">
+<div class="check-concluido">✅</div>
+<button class="botao" onclick="window.location.href='gabriela-alimentacao-preparar-sair.html'">
+<div class="nome-botao">Alimentação</div>
+<div class="proxima-tarefa" id="proxima-bloco4"></div>
+<div class="alerta" id="alerta-bloco4"></div>
+</button>
+</div>
+<div class="botao-wrap" data-bloco-id="bloco6" id="wrap-bloco6">
+<div class="check-concluido">✅</div>
+<button class="botao" onclick="window.location.href='gabriela-estudo-organizacao-casa-dia.html'">
+<div class="nome-botao">Estudo e Organização</div>
+<div class="proxima-tarefa" id="proxima-bloco6"></div>
+<div class="alerta" id="alerta-bloco6"></div>
+</button>
+</div>
+<div class="botao-wrap" data-bloco-id="bloco7" id="wrap-bloco7">
+<div class="check-concluido">✅</div>
+<button class="botao" onclick="window.location.href='gabriela-desacelerar-autocuidado.html'">
+<div class="nome-botao">Desacelerar</div>
+<div class="proxima-tarefa" id="proxima-bloco7"></div>
+<div class="alerta" id="alerta-bloco7"></div>
+</button>
+</div>
+<div class="botao-wrap" data-bloco-id="bloco8" id="wrap-bloco8">
+<div class="check-concluido">✅</div>
+<button class="botao" onclick="abrirBlocoMenu('bloco8','gabriela-passatempos.html')">
+<div class="nome-botao">Passatempos Relaxantes</div>
+<div class="proxima-tarefa" id="proxima-bloco8"></div>
+<div class="alerta" id="alerta-bloco8"></div>
+</button>
+</div>
+</div>
+<div class="horario-lista" id="horarioLista"></div>
+<div class="footerMiniAction">
+<button class="futureBtn" onclick="abrirModalConfiguracao()">configuração</button>
+<button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalFuturasEdicoes">
-  <div class="modal">
-    <h2 class="modalTitle">Futuras edições</h2>
-
-    <div class="field">
-      <label>Ideias de melhorias futuras</label>
-      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
-    </div>
-
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
-      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
-    </div>
-  </div>
+<div class="modal">
+<h2 class="modalTitle">Futuras edições</h2>
+<div class="field">
+<label>Ideias de melhorias futuras</label>
+<textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
 </div>
-
-
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+<button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalConfiguracao">
-  <div class="modal">
-    <div class="modalHeader">
-      <button class="fecharModal" onclick="fecharModalConfiguracao()">✕</button>
-    </div>
-
-    <h2 class="modalTitle">Configuração do menu</h2>
-
-    <div class="field" style="margin-top:2px;">
-      <label>Visual das tarefas</label>
-      <div class="opcoes-visuais">
-        <button id="opcaoVisualBlocos" class="opcaoVisualBtn" type="button" onclick="definirVisualizacaoMenu('blocos')">
+<div class="modal">
+<div class="modalHeader">
+<button class="fecharModal" onclick="fecharModalConfiguracao()">✕</button>
+</div>
+<h2 class="modalTitle">Configuração do menu</h2>
+<div class="field" style="margin-top:2px;">
+<label>Visual das tarefas</label>
+<div class="opcoes-visuais">
+<button class="opcaoVisualBtn" id="opcaoVisualBlocos" onclick="definirVisualizacaoMenu('blocos')" type="button">
           Em Blocos
         </button>
-        <button id="opcaoVisualHorario" class="opcaoVisualBtn" type="button" onclick="definirVisualizacaoMenu('horario')">
+<button class="opcaoVisualBtn" id="opcaoVisualHorario" onclick="definirVisualizacaoMenu('horario')" type="button">
           Por horário
         </button>
-      </div>
-      <div class="texto-ajuda-config">
+</div>
+<div class="texto-ajuda-config">
         A opção por horário mostra todos os compromissos do dia, um embaixo do outro, para ajudar você a seguir no seu ritmo cíclico.
       </div>
-    </div>
-
-    <div class="field">
-      <label>Nova tarefa</label>
-      <textarea id="novaTarefaTexto" style="height:72px;" placeholder="Nome da tarefa"></textarea>
-    </div>
-
-    <div class="field">
-      <label>Emoji do título</label>
-      <input id="novaTarefaEmoji" class="inputModal" type="text" maxlength="4" placeholder="Opcional. Ex.: 🌿">
-    </div>
-
-    <div class="field">
-      <label>Página ao clicar no título/tarefa</label>
-      <input id="novaTarefaUrl" class="inputModal" type="text" placeholder="Opcional. Ex.: agenda.html">
-    </div>
-
-    <div class="field">
-      <label>Descrição / lista abaixo</label>
-      <textarea id="novaTarefaDescricao" style="height:72px;" placeholder="Uma atividade por linha. Ex.:
+</div>
+<div class="field">
+<label>Nova tarefa</label>
+<textarea id="novaTarefaTexto" placeholder="Nome da tarefa" style="height:72px;"></textarea>
+</div>
+<div class="field">
+<label>Emoji do título</label>
+<input class="inputModal" id="novaTarefaEmoji" maxlength="4" placeholder="Opcional. Ex.: 🌿" type="text"/>
+</div>
+<div class="field">
+<label>Página ao clicar no título/tarefa</label>
+<input class="inputModal" id="novaTarefaUrl" placeholder="Opcional. Ex.: agenda.html" type="text"/>
+</div>
+<div class="field">
+<label>Descrição / lista abaixo</label>
+<textarea id="novaTarefaDescricao" placeholder="Uma atividade por linha. Ex.:
 Assinar documento
-Enviar comprovante => documentos.html"></textarea>
-    </div>
-
-    <div class="field">
-      <label>Horário</label>
-      <textarea id="novaTarefaHora" style="height:48px;" placeholder="Digite só números. Ex.: 1030"></textarea>
-    </div>
-
-    <div class="modalBtns">
-      <button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
-      <button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
-    </div>
-
-    <div id="listaConfigTarefas" style="display:flex; flex-direction:column; gap:8px; margin-top:4px;"></div>
-
-  </div>
+Enviar comprovante =&gt; documentos.html" style="height:72px;"></textarea>
 </div>
-
+<div class="field">
+<label>Horário</label>
+<textarea id="novaTarefaHora" placeholder="Digite só números. Ex.: 1030" style="height:48px;"></textarea>
+</div>
+<div class="modalBtns">
+<button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
+<button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
+</div>
+<div id="listaConfigTarefas" style="display:flex; flex-direction:column; gap:8px; margin-top:4px;"></div>
+</div>
+</div>
 <div class="modalOverlay" id="modalEditarTarefa">
-  <div class="modal">
-    <h2 class="modalTitle">Editar tarefa</h2>
-
-    <div class="field">
-      <label>Nome da tarefa</label>
-      <textarea id="editarTarefaNome" style="height:72px;" placeholder="Nome da tarefa"></textarea>
-    </div>
-
-    <div class="field">
-      <label>Emoji do título</label>
-      <input id="editarTarefaEmoji" class="inputModal" type="text" maxlength="4" placeholder="Opcional. Ex.: 🌿">
-    </div>
-
-    <div class="field">
-      <label>Página ao clicar no título/tarefa</label>
-      <input id="editarTarefaUrl" class="inputModal" type="text" placeholder="Opcional. Ex.: agenda.html">
-    </div>
-
-    <div class="field">
-      <label>Descrição / lista abaixo</label>
-      <textarea id="editarTarefaDescricao" style="height:72px;" placeholder="Uma atividade por linha. Ex.: Enviar comprovante => comprovantes.html"></textarea>
-    </div>
-
-    <div class="field">
-      <label>Horário</label>
-      <textarea id="editarTarefaHora" style="height:48px;" placeholder="Digite só números. Ex.: 1030"></textarea>
-    </div>
-
-    <div id="statusEditarTarefa" class="status-edicao"></div>
-
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalEditarTarefa()">cancelar</button>
-      <button class="save" onclick="salvarEdicaoTarefaConfiguracao()">concluir</button>
-    </div>
-  </div>
+<div class="modal">
+<h2 class="modalTitle">Editar tarefa</h2>
+<div class="field">
+<label>Nome da tarefa</label>
+<textarea id="editarTarefaNome" placeholder="Nome da tarefa" style="height:72px;"></textarea>
 </div>
-
+<div class="field">
+<label>Emoji do título</label>
+<input class="inputModal" id="editarTarefaEmoji" maxlength="4" placeholder="Opcional. Ex.: 🌿" type="text"/>
+</div>
+<div class="field">
+<label>Página ao clicar no título/tarefa</label>
+<input class="inputModal" id="editarTarefaUrl" placeholder="Opcional. Ex.: agenda.html" type="text"/>
+</div>
+<div class="field">
+<label>Descrição / lista abaixo</label>
+<textarea id="editarTarefaDescricao" placeholder="Uma atividade por linha. Ex.: Enviar comprovante =&gt; comprovantes.html" style="height:72px;"></textarea>
+</div>
+<div class="field">
+<label>Horário</label>
+<textarea id="editarTarefaHora" placeholder="Digite só números. Ex.: 1030" style="height:48px;"></textarea>
+</div>
+<div class="status-edicao" id="statusEditarTarefa"></div>
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalEditarTarefa()">cancelar</button>
+<button class="save" onclick="salvarEdicaoTarefaConfiguracao()">concluir</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalBlocoConcluido">
-  <div class="modal">
-    <h2 class="modalTitle" id="modalBlocoConcluidoTitulo">Tarefa concluída</h2>
-
-    <div class="modalBtns" style="flex-direction:column;">
-      <button class="save" onclick="abrirPaginaBlocoConcluido()">abrir página</button>
-      <button class="botao" onclick="desfazerSelecaoBlocoConcluido()">desfazer seleção da tarefa</button>
-      <button class="cancel" onclick="fecharModalBlocoConcluido()">cancelar</button>
-    </div>
-  </div>
+<div class="modal">
+<h2 class="modalTitle" id="modalBlocoConcluidoTitulo">Tarefa concluída</h2>
+<div class="modalBtns" style="flex-direction:column;">
+<button class="save" onclick="abrirPaginaBlocoConcluido()">abrir página</button>
+<button class="botao" onclick="desfazerSelecaoBlocoConcluido()">desfazer seleção da tarefa</button>
+<button class="cancel" onclick="fecharModalBlocoConcluido()">cancelar</button>
 </div>
-
+</div>
+</div>
 <div class="modalOverlay" id="modalMensagemImportanteMaya">
-  <div class="modal">
-    <h2 class="modalTitle">Mensagem Importante Maya</h2>
-
-    <div style="font-size:13px; color:var(--texto-secundario); text-align:center; line-height:1.55;">
-      Ontem faltou você responder se respeitou as regras do uso de telas de manhã e de noite.<br>
+<div class="modal">
+<h2 class="modalTitle">Mensagem Importante Maya</h2>
+<div style="font-size:13px; color:var(--texto-secundario); text-align:center; line-height:1.55;">
+      Ontem faltou você responder se respeitou as regras do uso de telas de manhã e de noite.<br/>
       Para liberar o dia de hoje, sua mamãe precisa liberar o acesso.
     </div>
-
-    <div class="regraHojeBtns" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-      <button class="regraHojeBtn ok" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#E6F4E6; color:#2F6A3B;" onclick="responderRegraPendenteMaya('morningRule', true)">☀️ Manhã sim</button>
-      <button class="regraHojeBtn nao" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#FFF1F1; color:#A04646;" onclick="responderRegraPendenteMaya('morningRule', false)">☀️ Manhã não</button>
-      <button class="regraHojeBtn ok" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#E6F4E6; color:#2F6A3B;" onclick="responderRegraPendenteMaya('nightRule', true)">🌙 Noite sim</button>
-      <button class="regraHojeBtn nao" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#FFF1F1; color:#A04646;" onclick="responderRegraPendenteMaya('nightRule', false)">🌙 Noite não</button>
-    </div>
-
-    <div id="statusRegraPendenteMaya" style="font-size:12px; color:var(--texto-secundario); text-align:center; line-height:1.45;"></div>
-
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalMensagemImportanteMaya()">Responder depois</button>
-    </div>
-  </div>
+<div class="regraHojeBtns" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+<button class="regraHojeBtn ok" onclick="responderRegraPendenteMaya('morningRule', true)" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#E6F4E6; color:#2F6A3B;">☀️ Manhã sim</button>
+<button class="regraHojeBtn nao" onclick="responderRegraPendenteMaya('morningRule', false)" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#FFF1F1; color:#A04646;">☀️ Manhã não</button>
+<button class="regraHojeBtn ok" onclick="responderRegraPendenteMaya('nightRule', true)" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#E6F4E6; color:#2F6A3B;">🌙 Noite sim</button>
+<button class="regraHojeBtn nao" onclick="responderRegraPendenteMaya('nightRule', false)" style="border:none; border-radius:14px; padding:10px 12px; font-family:var(--fonte); font-size:12px; cursor:pointer; background:#FFF1F1; color:#A04646;">🌙 Noite não</button>
 </div>
-
-
+<div id="statusRegraPendenteMaya" style="font-size:12px; color:var(--texto-secundario); text-align:center; line-height:1.45;"></div>
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalMensagemImportanteMaya()">Responder depois</button>
+</div>
+</div>
+</div>
 <script>
 const CHAVE_FUTURAS_EDICOES_GABRIELA_MENU = "futuras_edicoes_gabriela_menu";
 const CHAVE_HISTORICO_DIARIO = "historico_diario_gabriela_menu";
@@ -6495,33 +6590,25 @@ document.addEventListener("visibilitychange", function(){
   }
 });
 </script>
-
-
 <nav class="bottomNavGabriela">
-  <button class="navItemGabriela" onclick="window.location.href='index.html'">
-    <span class="navIconGabriela">⌂</span>
-    <span>Início</span>
-  </button>
-
-  <button class="navItemGabriela" onclick="window.location.href='index.html'">
-    <span class="navIconGabriela">☑</span>
-    <span>Rotina</span>
-  </button>
-
-  <button class="navPlusGabriela" onclick="abrirModalConfiguracao()">+</button>
-
-  <button class="navItemGabriela" onclick="window.location.href='anotacao.html'">
-    <span class="navIconGabriela">▤</span>
-    <span>Anotações</span>
-  </button>
-
-  <button class="navItemGabriela ativo" onclick="window.location.href='gabriela-menu.html'">
-    <span class="navIconGabriela">♡</span>
-    <span>Autocuidado</span>
-  </button>
+<button class="navItemGabriela" onclick="window.location.href='index.html'">
+<span class="navIconGabriela">⌂</span>
+<span>Início</span>
+</button>
+<button class="navItemGabriela" onclick="window.location.href='index.html'">
+<span class="navIconGabriela">☑</span>
+<span>Rotina</span>
+</button>
+<button class="navPlusGabriela" onclick="abrirModalConfiguracao()">+</button>
+<button class="navItemGabriela" onclick="window.location.href='anotacao.html'">
+<span class="navIconGabriela">▤</span>
+<span>Anotações</span>
+</button>
+<button class="navItemGabriela ativo" onclick="window.location.href='gabriela-menu.html'">
+<span class="navIconGabriela">♡</span>
+<span>Autocuidado</span>
+</button>
 </nav>
-
-
 <script>
 /* =========================================================
    LEMBRETE DE SINCRONIZAÇÃO DA NUVEM — A CADA 15 DIAS
@@ -6574,8 +6661,6 @@ document.addEventListener("visibilitychange", function(){
   window.addEventListener("load", verificarLembreteSincronizacaoNuvem);
 })();
 </script>
-
-
 <script>
 /* Integração direta das refeições do Jejum Intermitente */
 (function(){
@@ -6630,7 +6715,6 @@ document.addEventListener("visibilitychange", function(){
   };
 })();
 </script>
-
 <script>
 (function(){
   if(typeof window.obterTodasTarefasParaHorario !== "function") return;
@@ -6681,8 +6765,6 @@ document.addEventListener("visibilitychange", function(){
   });
 })();
 </script>
-
-
 <script>
 /* Integração das metas de água do Jejum Intermitente */
 (function(){
@@ -6698,7 +6780,6 @@ document.addEventListener("visibilitychange", function(){
   window.AguaJejumIntegracao={lerItens,lerConcluidas,estaConcluida,definirConcluida,minutos};
 })();
 </script>
-
 <script>
 (function(){
   if(typeof window.obterTodasTarefasParaHorario!=="function")return;
@@ -6721,5 +6802,62 @@ document.addEventListener("visibilitychange", function(){
 })();
 </script>
 
+<script>
+(function atualizarCabecalhoPadrao(){
+  function pad2(n){ return String(n).padStart(2,"0"); }
+  function preencher(){
+    var agora=new Date();
+    var diasCurtos=["dom","seg","ter","qua","qui","sex","sáb"];
+    var hora=pad2(agora.getHours())+":"+pad2(agora.getMinutes());
+    var dia="• "+diasCurtos[agora.getDay()];
+    var data="• "+pad2(agora.getDate())+"/"+pad2(agora.getMonth()+1);
+    document.querySelectorAll('[data-hora-padrao]').forEach(function(el){el.textContent=hora;});
+    document.querySelectorAll('[data-dia-padrao]').forEach(function(el){el.textContent=dia;});
+    document.querySelectorAll('[data-data-padrao]').forEach(function(el){el.textContent=data;});
+  }
+  preencher();
+  setInterval(preencher,1000);
+})();
+</script>
+
+<style>
+/* SOMENTE PADRONIZAÇÃO DO CARD EXTERNO COM A PÁGINA SAÚDE */
+body{
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,.8), transparent 35%),
+    linear-gradient(180deg,#FAFBF7 0%,#F6F8F3 100%) !important;
+}
+.pagina{
+  width:100% !important;
+  max-width:420px !important;
+}
+.card{
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  padding:22px 16px 18px !important;
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(221,232,216,.86) !important;
+  border-radius:30px !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  right:-62px;
+  top:-52px;
+  border-radius:50%;
+  background:rgba(232,243,226,.78);
+  z-index:0;
+}
+.card > *{
+  position:relative;
+  z-index:1;
+}
+</style>
 </body>
 </html>

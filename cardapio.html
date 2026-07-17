@@ -307,14 +307,339 @@ body.alimentacao-subvisual .danger{
 /* FIM VISUAL SYSTEM — ALIMENTAÇÃO SUBPÁGINAS */
 
 </style>
+
+<style>
+/* AJUSTE CABEÇALHO — CARDÁPIO NO PADRÃO APROVADO */
+body.alimentacao-subvisual{
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,.8), transparent 35%),
+    linear-gradient(180deg,#FAFBF7 0%,#F6F8F3 100%) !important;
+}
+body.alimentacao-subvisual .card{
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(221,232,216,.86) !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+  border-radius:30px !important;
+  padding:22px 16px 18px !important;
+  overflow:hidden !important;
+}
+body.alimentacao-subvisual .card::before{
+  width:150px !important;
+  height:150px !important;
+  right:-62px !important;
+  top:-52px !important;
+  background:rgba(232,243,226,.78) !important;
+}
+body.alimentacao-subvisual .card::after{
+  width:170px !important;
+  height:170px !important;
+  left:-95px !important;
+  bottom:-65px !important;
+  background:rgba(243,236,221,.62) !important;
+}
+body.alimentacao-subvisual .topbar.topoSaudeLike{
+  display:grid !important;
+  grid-template-columns:66px minmax(0,1fr) 66px !important;
+  gap:0 !important;
+  min-height:68px !important;
+  align-items:start !important;
+  margin-bottom:8px !important;
+  padding-top:8px !important;
+}
+body.alimentacao-subvisual .backBtn{
+  width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.9) !important;
+  border:1px solid rgba(221,232,216,.9) !important;
+  box-shadow:0 5px 14px rgba(84,110,79,.08) !important;
+  color:#2F332D !important;
+  justify-self:start !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 !important;
+  margin-top:0 !important;
+  line-height:1 !important;
+}
+body.alimentacao-subvisual .backBtn span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:100% !important;
+  transform:translateY(-2px) !important;
+}
+body.alimentacao-subvisual .topCenter.topCenterSaudeLike{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  min-width:0 !important;
+  width:100% !important;
+  text-align:center !important;
+  padding:0 3px !important;
+  gap:0 !important;
+}
+body.alimentacao-subvisual .topCenter.topCenterSaudeLike .title{
+  width:100% !important;
+  margin:0 !important;
+  text-align:center !important;
+  font-size:22px !important;
+  color:#435F3E !important;
+  font-weight:500 !important;
+  line-height:1.1 !important;
+  letter-spacing:0 !important;
+  white-space:nowrap !important;
+}
+body.alimentacao-subvisual .subtituloHeader{
+  width:100% !important;
+  margin:5px 0 0 0 !important;
+  text-align:center !important;
+  font-size:10.5px !important;
+  color:#6F756C !important;
+  line-height:1.3 !important;
+  white-space:normal !important;
+}
+body.alimentacao-subvisual .headerTime{
+  width:66px !important;
+  justify-self:end !important;
+  min-height:40px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+  padding-top:1px !important;
+  line-height:1.1 !important;
+}
+body.alimentacao-subvisual .headerHora{
+  font-size:14px !important;
+  color:#B8807B !important;
+  font-weight:500 !important;
+  white-space:nowrap !important;
+  margin-bottom:2px !important;
+}
+body.alimentacao-subvisual .headerLinha{
+  font-size:10.6px !important;
+  color:#6F756C !important;
+  white-space:nowrap !important;
+}
+body.alimentacao-subvisual .topActionsHeader{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:8px !important;
+  margin-top:-2px !important;
+  margin-bottom:2px !important;
+}
+body.alimentacao-subvisual .topActionsHeader .summaryBtn,
+body.alimentacao-subvisual .topActionsHeader .addBtn{
+  background:#EAF0E5 !important;
+  color:#52664A !important;
+  border:1px solid rgba(221,232,216,.9) !important;
+}
+body.alimentacao-subvisual .topActionsHeader .summaryBtn{
+  min-height:40px !important;
+  border-radius:14px !important;
+  padding:9px 14px !important;
+}
+body.alimentacao-subvisual .topActionsHeader .addBtn{
+  width:40px !important;
+  height:40px !important;
+  border-radius:50% !important;
+}
+@media(max-width:390px){
+  body.alimentacao-subvisual .topbar.topoSaudeLike{
+    grid-template-columns:60px minmax(0,1fr) 60px !important;
+  }
+  body.alimentacao-subvisual .topCenter.topCenterSaudeLike .title{
+    font-size:20px !important;
+  }
+  body.alimentacao-subvisual .headerTime{
+    width:60px !important;
+  }
+}
+</style>
+
+<style>
+/* AJUSTE PONTUAL — SUBIR CONTEÚDO DO CARDÁPIO */
+body.alimentacao-subvisual .topActionsHeader{
+  margin-top:-10px !important;
+  margin-bottom:0 !important;
+}
+body.alimentacao-subvisual .listBox{
+  margin-top:-2px !important;
+}
+body.alimentacao-subvisual .card{
+  padding-top:18px !important;
+}
+</style>
+
+<style>
+/* AJUSTE PONTUAL — CARDÁPIO MAIS PRÓXIMO DO PADRÃO SAÚDE */
+body.alimentacao-subvisual .card{
+  padding-top:14px !important;
+}
+body.alimentacao-subvisual .topbar.topoSaudeLike{
+  padding-top:2px !important;
+  min-height:60px !important;
+  margin-bottom:2px !important;
+}
+body.alimentacao-subvisual .backBtn{
+  margin-top:-2px !important;
+}
+body.alimentacao-subvisual .headerTime{
+  padding-top:0 !important;
+}
+body.alimentacao-subvisual .topCenter.topCenterSaudeLike .title{
+  margin-top:-1px !important;
+}
+body.alimentacao-subvisual .subtituloHeader{
+  margin-top:3px !important;
+}
+body.alimentacao-subvisual .topActionsHeader{
+  margin-top:-14px !important;
+  margin-bottom:-2px !important;
+}
+body.alimentacao-subvisual .listBox{
+  margin-top:-6px !important;
+}
+body.alimentacao-subvisual .footerMiniAction{
+  margin-top:2px !important;
+}
+</style>
+
+<style>
+/* AJUSTE FINO — DESCER LEVEMENTE O CABEÇALHO */
+body.alimentacao-subvisual .topbar.topoSaudeLike{
+  padding-top:6px !important;
+}
+body.alimentacao-subvisual .backBtn{
+  margin-top:0 !important;
+}
+body.alimentacao-subvisual .topCenter.topCenterSaudeLike .title{
+  margin-top:1px !important;
+}
+body.alimentacao-subvisual .headerTime{
+  padding-top:2px !important;
+}
+</style>
+
+<style>
+/* CORREÇÃO FINAL — REPOR DATA E HORA NO CABEÇALHO */
+body.alimentacao-subvisual .topbar.topoSaudeLike{
+  grid-template-columns:66px minmax(0,1fr) 66px !important;
+  overflow:visible !important;
+}
+body.alimentacao-subvisual .headerTime{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  position:relative !important;
+  z-index:8 !important;
+  width:66px !important;
+  min-width:66px !important;
+  min-height:46px !important;
+  justify-self:end !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+  padding:2px 0 0 0 !important;
+  margin:0 !important;
+  overflow:visible !important;
+}
+body.alimentacao-subvisual .headerHora,
+body.alimentacao-subvisual .headerLinha{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  white-space:nowrap !important;
+}
+body.alimentacao-subvisual .headerHora{
+  color:#B8807B !important;
+  font-size:14px !important;
+  font-weight:500 !important;
+  line-height:1.1 !important;
+  margin-bottom:2px !important;
+}
+body.alimentacao-subvisual .headerLinha{
+  color:#6F756C !important;
+  font-size:10.6px !important;
+  line-height:1.1 !important;
+}
+@media(max-width:390px){
+  body.alimentacao-subvisual .topbar.topoSaudeLike{
+    grid-template-columns:60px minmax(0,1fr) 60px !important;
+  }
+  body.alimentacao-subvisual .headerTime{
+    width:60px !important;
+    min-width:60px !important;
+  }
+}
+</style>
+
+<style>
+/* AJUSTE PONTUAL — MESMO FUNDO DA PÁGINA SAÚDE */
+body.alimentacao-subvisual{
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,.8), transparent 35%),
+    linear-gradient(180deg,#FAFBF7 0%,#F6F8F3 100%) !important;
+}
+body.alimentacao-subvisual .card{
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(221,232,216,.86) !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+}
+body.alimentacao-subvisual .card::before{
+  background:rgba(232,243,226,.78) !important;
+}
+</style>
+
+<style>
+/* AJUSTE EXATO — FUNDO IGUAL À PÁGINA SAÚDE */
+body.alimentacao-subvisual{
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,.8), transparent 35%),
+    linear-gradient(180deg,#FAFBF7 0%,#F6F8F3 100%) !important;
+}
+body.alimentacao-subvisual .card{
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(221,232,216,.86) !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+}
+body.alimentacao-subvisual .card::before{
+  content:"" !important;
+  position:absolute !important;
+  width:150px !important;
+  height:150px !important;
+  right:-62px !important;
+  top:-52px !important;
+  border-radius:50% !important;
+  background:rgba(232,243,226,.78) !important;
+  z-index:0 !important;
+}
+body.alimentacao-subvisual .card::after{
+  content:none !important;
+  display:none !important;
+}
+</style>
 </head>
 <body class="alimentacao-subvisual">
 <div class="card">
-  <div class="topbar">
-    <button class="backBtn" onclick="window.location.href='alimentacao.html'">←</button>
-    <div class="topCenter"><span class="titleIcon">🗓️</span><h1 class="title">Cardápio</h1></div>
-    <div class="topActions"><button class="summaryBtn" onclick="abrirResumoCardapio()">Resumo</button><button class="addBtn" onclick="abrirModalNovo()">+</button></div>
+  <div class="topbar topoSaudeLike">
+    <button class="backBtn" onclick="window.location.href='alimentacao.html'"><span>←</span></button>
+    <div class="topCenter topCenterSaudeLike">
+      <h1 class="title">🍽️ Cardápio</h1>
+      <p class="subtituloHeader">Planejar o cardápio é cultivar o equilíbrio</p>
+    </div>
+    <div class="headerTime" aria-label="Data e hora atuais">
+      <div id="linhaTempoHora" class="headerHora"></div>
+      <div id="linhaTempoDia" class="headerLinha"></div>
+      <div id="linhaTempoData" class="headerLinha"></div>
+    </div>
   </div>
+  <div class="topActions topActionsHeader"><button class="summaryBtn" onclick="abrirResumoCardapio()">Resumo</button><button class="addBtn" onclick="abrirModalNovo()">+</button></div>
   <div class="listBox">
     <div class="filtrosTopoLista">
       <select class="periodoSelect" id="semanaSelect" onchange="render()"></select>
@@ -372,6 +697,40 @@ function abrirResumoCardapio(){const semana=document.getElementById('semanaSelec
 function fecharResumoCardapio(){document.getElementById('modalResumo').classList.remove('show')}
 function abrirModalFuturasEdicoes(){document.getElementById('futurasEdicoesTexto').value=localStorage.getItem(CHAVE_FUTURAS)||'';document.getElementById('modalFuturasEdicoes').classList.add('show')} function fecharModalFuturasEdicoes(){document.getElementById('modalFuturasEdicoes').classList.remove('show')} function salvarFuturasEdicoes(){localStorage.setItem(CHAVE_FUTURAS,document.getElementById('futurasEdicoesTexto').value);fecharModalFuturasEdicoes()}
 montarCheckboxes('diasBox',DIAS,'diaCheck'); montarCheckboxes('refeicoesBox',REFEICOES.map(r=>[r,r]),'refeicaoCheck'); montarSemanas(); render();
+
+function pad2(numero){ return String(numero).padStart(2, "0"); }
+function atualizarLinhaTempoCabecalho(){
+  const agora = new Date();
+  const diasCurtos = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+  const h = document.getElementById("linhaTempoHora");
+  const d = document.getElementById("linhaTempoDia");
+  const dt = document.getElementById("linhaTempoData");
+  if(h) h.textContent = `${pad2(agora.getHours())}:${pad2(agora.getMinutes())}`;
+  if(d) d.textContent = `• ${diasCurtos[agora.getDay()]}`;
+  if(dt) dt.textContent = `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
+}
+window.addEventListener("load",()=>{ atualizarLinhaTempoCabecalho(); setInterval(atualizarLinhaTempoCabecalho,1000); });
+
+</script>
+
+<script>
+(function(){
+  function p2(n){ return String(n).padStart(2,'0'); }
+  function reporDataHoraCardapio(){
+    const agora=new Date();
+    const dias=['dom','seg','ter','qua','qui','sex','sáb'];
+    const hora=document.getElementById('linhaTempoHora');
+    const dia=document.getElementById('linhaTempoDia');
+    const data=document.getElementById('linhaTempoData');
+    if(hora) hora.textContent=`${p2(agora.getHours())}:${p2(agora.getMinutes())}`;
+    if(dia) dia.textContent=`• ${dias[agora.getDay()]}`;
+    if(data) data.textContent=`• ${p2(agora.getDate())}/${p2(agora.getMonth()+1)}`;
+  }
+  document.addEventListener('DOMContentLoaded',reporDataHoraCardapio);
+  window.addEventListener('load',reporDataHoraCardapio);
+  window.addEventListener('pageshow',reporDataHoraCardapio);
+  setInterval(reporDataHoraCardapio,1000);
+})();
 </script>
 </body>
 </html>

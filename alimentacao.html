@@ -1121,6 +1121,80 @@ body.alimentacao-visual .menu-alimentacao-lista .descricao-botao-menu{
 }
 </style>
 
+
+<style>
+/* AJUSTE PADRÃO SAÚDE — ALIMENTAÇÃO */
+body.alimentacao-visual{
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,.8), transparent 35%),
+    linear-gradient(180deg,#FAFBF7 0%,#F6F8F3 100%) !important;
+  padding:16px 12px 96px !important;
+  align-items:flex-start !important;
+}
+body.alimentacao-visual .pagina{ max-width:420px !important; }
+body.alimentacao-visual .card{
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(221,232,216,.86) !important;
+  border-radius:30px !important;
+  padding:18px 16px 18px !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+  position:relative !important;
+  overflow:hidden !important;
+}
+body.alimentacao-visual .card::before{
+  content:"" !important; position:absolute !important; width:150px !important; height:150px !important;
+  right:-62px !important; top:-52px !important; border-radius:50% !important; background:rgba(232,243,226,.78) !important; z-index:0 !important;
+}
+body.alimentacao-visual .card::after{ content:none !important; display:none !important; }
+body.alimentacao-visual .card > *{ position:relative; z-index:1; }
+body.alimentacao-visual .topo{
+  display:grid !important; grid-template-columns:66px minmax(0,1fr) 66px !important; gap:0 !important;
+  min-height:64px !important; align-items:start !important; margin-bottom:2px !important; padding-top:6px !important;
+}
+body.alimentacao-visual .botao-voltar{
+  width:42px !important; height:42px !important; border-radius:50% !important; background:rgba(255,255,255,.92) !important;
+  border:1px solid rgba(221,232,216,.95) !important; box-shadow:0 5px 14px rgba(84,110,79,.08) !important;
+  color:#2F332D !important; font-size:20px !important; margin:0 !important;
+}
+body.alimentacao-visual .botao-voltar span{ transform:translateY(-2px) !important; }
+body.alimentacao-visual .topCenter{ padding:0 3px !important; align-items:center !important; justify-content:flex-start !important; }
+body.alimentacao-visual .titleIndex{ color:#435F3E !important; font-weight:500 !important; font-size:22px !important; line-height:1.1 !important; text-align:center !important; margin:0 !important; }
+body.alimentacao-visual .titleIndex::after{ content:none !important; }
+body.alimentacao-visual .subtitulo{ font-size:10.5px !important; color:#6F756C !important; margin-top:5px !important; line-height:1.3 !important; text-align:center !important; white-space:normal !important; }
+body.alimentacao-visual .dataTopo{ width:66px !important; min-height:40px !important; padding-top:1px !important; }
+body.alimentacao-visual .horaTopo{ font-size:14px !important; color:#B8807B !important; font-weight:500 !important; margin-bottom:2px !important; }
+body.alimentacao-visual .dataTopoLinha{ font-size:10.6px !important; color:#6F756C !important; }
+</style>
+
+<style>
+/* AJUSTE PONTUAL — GARANTIR DATA E HORA VISÍVEIS */
+body.alimentacao-visual .dataTopo{
+  width:66px !important;
+  min-width:66px !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+}
+</style>
+<script>
+(function(){
+  function pad2Cabecalho(n){ return String(n).padStart(2,'0'); }
+  function atualizarCabecalhoTempo(){
+    var agora=new Date();
+    var dias=['dom','seg','ter','qua','qui','sex','sáb'];
+    var h=document.getElementById('linhaTempoHora');
+    var d=document.getElementById('linhaTempoDia');
+    var dt=document.getElementById('linhaTempoData');
+    if(h) h.textContent=pad2Cabecalho(agora.getHours())+':'+pad2Cabecalho(agora.getMinutes());
+    if(d) d.textContent='• '+dias[agora.getDay()];
+    if(dt) dt.textContent='• '+pad2Cabecalho(agora.getDate())+'/'+pad2Cabecalho(agora.getMonth()+1);
+  }
+  atualizarCabecalhoTempo();
+  document.addEventListener('DOMContentLoaded', atualizarCabecalhoTempo);
+  window.addEventListener('load', atualizarCabecalhoTempo);
+  setInterval(atualizarCabecalhoTempo, 1000);
+})();
+</script>
 </head>
 
 <body class="alimentacao-visual">
@@ -1132,14 +1206,14 @@ body.alimentacao-visual .menu-alimentacao-lista .descricao-botao-menu{
       <button class="botao-voltar" onclick="window.location.href='index.html'"><span>←</span></button>
 
       <div class="topCenter">
-        <h1 class="titleIndex">Alimentação</h1>
-        <p class="subtitulo">seu espaço de cuidado e organização</p>
+        <h1 class="titleIndex">🥗 Alimentação</h1>
+        <p class="subtitulo">Seu espaço de cuidado e organização</p>
       </div>
 
       <div class="dataTopo" aria-label="Data e hora atuais">
-        <div id="linhaTempoHora" class="horaTopo"></div>
-        <div id="linhaTempoDia" class="dataTopoLinha"></div>
-        <div id="linhaTempoData" class="dataTopoLinha"></div>
+        <div id="linhaTempoHora" class="horaTopo">00:00</div>
+        <div id="linhaTempoDia" class="dataTopoLinha">• seg</div>
+        <div id="linhaTempoData" class="dataTopoLinha">• 00/00</div>
       </div>
     </div>
 

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Alimentação</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
 :root{
   --verde-principal:#F2F7F1;
@@ -952,7 +951,7 @@ body.gabi-rotina .descricao-tarefa{
 
 body.gabi-rotina .hora{
   color:rgba(81,100,72,0.72) !important;
-  font-size:11px !important;
+  font-size:10.6px !important;
   line-height:1.25 !important;
   align-self:center !important;
   margin-top:0 !important;
@@ -1045,8 +1044,149 @@ body.gabi-rotina .lista .tarefa.feita::before{
   body.gabi-rotina .hora{ font-size:10.5px !important; }
 }
 
-</style>
 
+
+/* === Ajuste grupo 2 baseado na página Saúde === */
+.card{
+  width:100% !important;
+  max-width:420px !important;
+  min-height:auto !important;
+  background:rgba(255,255,255,0.72) !important;
+  border:1px solid rgba(221,232,216,0.85) !important;
+  border-radius:30px !important;
+  box-shadow:0 5px 18px rgba(84,110,79,0.09) !important;
+  padding:20px 16px 18px !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-70px;
+  top:-55px;
+  background:rgba(232,243,226,0.8);
+  border-radius:50%;
+  z-index:0;
+}
+.card::after{
+  content:"";
+  position:absolute;
+  width:145px;
+  height:145px;
+  left:-68px;
+  bottom:-58px;
+  background:rgba(243,236,221,0.62);
+  border-radius:50%;
+  z-index:0;
+}
+.card > *{ position:relative; z-index:1; }
+
+.topo{
+  position:relative !important;
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:flex-start !important;
+  gap:0 !important;
+  min-height:54px !important;
+  margin-bottom:10px !important;
+}
+
+.botao-voltar{
+  width:42px !important;
+  min-width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.96) !important;
+  border:1px solid rgba(221,232,216,.95) !important;
+  box-shadow:0 6px 16px rgba(84,110,79,.10) !important;
+  color:#435F3E !important;
+  font-size:20px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 !important;
+  line-height:1 !important;
+}
+.botao-voltar:hover{ background:rgba(255,255,255,1) !important; }
+.botao-voltar span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:100% !important;
+  transform:translateY(-1px) !important;
+}
+
+.topCenter{
+  position:absolute !important;
+  left:50% !important;
+  top:0 !important;
+  transform:translateX(-50%) !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  text-align:center !important;
+  min-width:0 !important;
+  width:max-content !important;
+  max-width:calc(100% - 150px) !important;
+}
+.tituloLinha{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+  width:100% !important;
+}
+.emojiTitulo{
+  font-size:20px !important;
+  line-height:1 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+}
+.titleIndex{
+  color:#435F3E !important;
+  font-weight:500 !important;
+  font-size:20px !important;
+  margin:0 !important;
+  line-height:1.12 !important;
+  text-align:center !important;
+}
+.subtitulo{
+  font-size:10.6px !important;
+  color:#6F756C !important;
+  margin-top:3px !important;
+  text-align:center !important;
+  line-height:1.15 !important;
+  white-space:nowrap !important;
+}
+.dataTopo{
+  min-height:42px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+  color:#6F756C !important;
+  line-height:1.08 !important;
+  padding-top:2px !important;
+}
+.horaTopo{
+  font-size:14px !important;
+  color:#B8807B !important;
+  font-weight:500 !important;
+  white-space:nowrap !important;
+  margin-bottom:3px !important;
+}
+.dataTopoLinha{
+  font-size:10.6px !important;
+  color:#6F756C !important;
+  white-space:nowrap !important;
+}
+
+</style>
 <style>
 /* =========================================================
    ALINHAMENTO DE TÍTULO E SUBTÍTULO — ÁGUA E REFEIÇÕES
@@ -1058,8 +1198,6 @@ body.gabi-rotina .lista .tarefa.feita::before{
   box-sizing:border-box !important;
 }
 </style>
-
-
 <style>
 /* =========================================================
    CONCLUSÃO INDIVIDUAL DE ATIVIDADES
@@ -1125,138 +1263,358 @@ body.gabi-rotina .lista .tarefa.feita::before{
 }
 </style>
 
+<style>
+/* CORREÇÃO FINAL: cabeçalho idêntico ao da página Saúde */
+.card .topo{
+  display:grid !important;
+  grid-template-columns:66px minmax(0,1fr) 66px !important;
+  gap:0 !important;
+  min-height:62px !important;
+  align-items:start !important;
+  position:relative !important;
+  margin-bottom:6px !important;
+}
+.card .topo .botao-voltar{
+  width:42px !important;
+  min-width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.9) !important;
+  border:1px solid rgba(221,232,216,.9) !important;
+  box-shadow:0 5px 14px rgba(84,110,79,.08) !important;
+  color:#2F2F2F !important;
+  font-size:17px !important;
+  justify-self:start !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 !important;
+  line-height:1 !important;
+}
+.card .topo .topCenter{
+  position:static !important;
+  left:auto !important;
+  top:auto !important;
+  transform:none !important;
+  min-width:0 !important;
+  width:100% !important;
+  max-width:none !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  padding:0 3px !important;
+}
+.card .topo .titleIndex{
+  width:100% !important;
+  color:#435F3E !important;
+  font-weight:500 !important;
+  font-size:22px !important;
+  margin:0 !important;
+  line-height:1.1 !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+  letter-spacing:normal !important;
+  transform:none !important;
+}
+.card .topo .subtitulo{
+  width:100% !important;
+  color:#6F756C !important;
+  font-weight:400 !important;
+  font-size:10.5px !important;
+  margin:5px 0 0 !important;
+  line-height:1.3 !important;
+  text-align:center !important;
+  white-space:normal !important;
+  letter-spacing:normal !important;
+  transform:none !important;
+}
+.card .topo .dataTopo{
+  width:66px !important;
+  min-height:40px !important;
+  justify-self:end !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+  color:#6F756C !important;
+  line-height:1.1 !important;
+  padding-top:1px !important;
+  position:static !important;
+  transform:none !important;
+}
+.card .topo .horaTopo{
+  color:#B8807B !important;
+  font-size:14px !important;
+  font-weight:500 !important;
+  margin-bottom:2px !important;
+  white-space:nowrap !important;
+}
+.card .topo .dataTopoLinha{
+  color:#6F756C !important;
+  font-size:10.6px !important;
+  white-space:nowrap !important;
+}
+@media(max-width:390px){
+  .card .topo{
+    grid-template-columns:60px minmax(0,1fr) 60px !important;
+  }
+  .card .topo .titleIndex{
+    font-size:20px !important;
+  }
+  .card .topo .dataTopo{
+    width:60px !important;
+  }
+}
+</style>
+
+
+<style>
+/* AJUSTE FINAL — ALIMENTAÇÃO NO MESMO PADRÃO APROVADO */
+.card .topo{
+  position:relative !important;
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:flex-start !important;
+  min-height:70px !important;
+  gap:0 !important;
+  margin-bottom:6px !important;
+  padding-top:8px !important;
+}
+.card .topo .botao-voltar{
+  position:relative !important;
+  z-index:2 !important;
+  margin-top:0 !important;
+}
+.card .topo .dataTopo{
+  position:relative !important;
+  z-index:2 !important;
+  width:66px !important;
+  min-width:66px !important;
+  padding-top:0 !important;
+}
+.card .topo .topCenter{
+  position:absolute !important;
+  left:50% !important;
+  top:8px !important;
+  transform:translateX(-50%) !important;
+  width:calc(100% - 132px) !important;
+  max-width:270px !important;
+  min-width:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  text-align:center !important;
+  padding:0 !important;
+  margin:0 !important;
+  z-index:1 !important;
+}
+.card .topo .titleIndex{
+  width:100% !important;
+  color:#435F3E !important;
+  font-weight:500 !important;
+  font-size:22px !important;
+  line-height:1.12 !important;
+  text-align:center !important;
+  margin:0 !important;
+  display:block !important;
+  white-space:nowrap !important;
+}
+.card .topo .titleIndex::after,
+body.gabi-rotina .titleIndex::after{
+  content:none !important;
+  display:none !important;
+}
+.card .topo .subtitulo{
+  width:max-content !important;
+  max-width:100% !important;
+  align-self:center !important;
+  margin:5px auto 0 !important;
+  padding:0 !important;
+  color:#6F756C !important;
+  font-weight:400 !important;
+  font-size:10.5px !important;
+  line-height:1.3 !important;
+  text-align:center !important;
+  text-indent:0 !important;
+  position:relative !important;
+  left:0 !important;
+  right:auto !important;
+  transform:none !important;
+  white-space:nowrap !important;
+  display:block !important;
+}
+.card .topo .horaTopo{
+  color:#B8807B !important;
+  font-size:14px !important;
+  font-weight:500 !important;
+}
+.card .topo .dataTopoLinha{
+  color:#6F756C !important;
+  font-size:10.6px !important;
+}
+body.gabi-rotina .card,
+.card{
+  border:1px solid rgba(221,232,216,.86) !important;
+  border-radius:30px !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+  background:rgba(255,255,255,.86) !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+body.gabi-rotina .card::before,
+.card::before{
+  content:"" !important;
+  position:absolute !important;
+  width:150px !important;
+  height:150px !important;
+  right:-62px !important;
+  top:-52px !important;
+  border-radius:50% !important;
+  background:rgba(232,243,226,.78) !important;
+  z-index:0 !important;
+}
+body.gabi-rotina .card::after,
+.card::after{
+  content:none !important;
+  display:none !important;
+}
+body.gabi-rotina .card > *,
+.card > *{
+  position:relative !important;
+  z-index:1 !important;
+}
+@media(max-width:390px){
+  .card .topo{
+    min-height:68px !important;
+    padding-top:7px !important;
+  }
+  .card .topo .topCenter{
+    top:7px !important;
+    width:calc(100% - 120px) !important;
+    max-width:250px !important;
+  }
+  .card .topo .dataTopo{
+    width:60px !important;
+    min-width:60px !important;
+    padding-top:0 !important;
+  }
+  .card .topo .titleIndex{
+    font-size:20px !important;
+  }
+  .card .topo .subtitulo{
+    font-size:9.8px !important;
+  }
+}
+</style>
+
 </head>
 <body class="gabi-rotina">
-
 <div class="pagina">
-  <div class="card">
-
-    <div class="topo">
-      <button class="botao-voltar" onclick="window.location.href='gabriela-menu.html'"><span>←</span></button>
-
-      <div class="topCenter">
-        <h1 class="titleIndex">Alimentação</h1>
-        <p class="subtitulo">se alimentar e se nutrir, é cuidar de si</p>
-      </div>
-
-      <div class="dataTopo" aria-label="Data e hora atuais">
-        <div id="linhaTempoHora" class="horaTopo"></div>
-        <div id="linhaTempoDia" class="dataTopoLinha"></div>
-        <div id="linhaTempoData" class="dataTopoLinha"></div>
-      </div>
-    </div>
-
-    <div class="caixa-grande">
-      <div class="lista" id="lista-tarefas"></div>
-    </div>
-
+<div class="card">
+<div class="topo">
+<button class="botao-voltar" onclick="window.location.href='gabriela-menu.html'"><span>←</span></button>
+<div class="topCenter">
+<h1 class="titleIndex">🥗 Alimentação</h1>
+<p class="subtitulo">Comida de verdade é um ato de afeto e cura a alma</p>
+</div>
+<div aria-label="Data e hora atuais" class="dataTopo">
+<div class="horaTopo" id="linhaTempoHora"></div>
+<div class="dataTopoLinha" id="linhaTempoDia"></div>
+<div class="dataTopoLinha" id="linhaTempoData"></div>
+</div>
+</div>
+<div class="caixa-grande">
+<div class="lista" id="lista-tarefas"></div>
+</div>
 <div class="footerMiniAction">
-  <button class="futureBtn" onclick="abrirModalConfiguracao()">configuração</button>
-  <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+<button class="futureBtn" onclick="abrirModalConfiguracao()">configuração</button>
+<button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
 </div>
-
-  </div>
 </div>
-
+</div>
 <div class="modalOverlay" id="modalFuturasEdicoes">
-  <div class="modal">
-    <h2 class="modalTitle">Futuras edições</h2>
-
-    <div class="field">
-      <label>Ideias de melhorias futuras</label>
-      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
-    </div>
-
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
-      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
-    </div>
-  </div>
+<div class="modal">
+<h2 class="modalTitle">Futuras edições</h2>
+<div class="field">
+<label>Ideias de melhorias futuras</label>
+<textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
 </div>
-
-
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+<button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalConfiguracao">
-  <div class="modal">
-    <div class="modalHeader">
-      <button class="fecharModal" onclick="fecharModalConfiguracao()">✕</button>
-    </div>
-
-    <h2 class="modalTitle">Configuração da rotina</h2>
-
-    <div class="field">
-      <label class="labelComEmoji">
-        <span>Nova tarefa</span>
-        <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('novaTarefaTexto', this)">😊</button>
-      </label>
-      <textarea id="novaTarefaTexto" style="height:70px;" placeholder="Nome da tarefa"></textarea>
-    </div>
-      <input id="novaTarefaEmoji" type="hidden" value="">
-
-    <div class="field">
-      <label class="labelComEmoji">
-        <span>Descrição</span>
-        <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('novaTarefaDescricao', this)">✨</button>
-      </label>
-      <textarea id="novaTarefaDescricao" style="height:70px;" placeholder="Escreva uma descrição ou uma lista."></textarea>
-    </div>
-
-    <div class="field">
-      <label>Horário</label>
-      <textarea id="novaTarefaHora" style="height:50px;" placeholder="Digite só números. Ex.: 0530"></textarea>
-      <div class="campo-ajuda-pequena">O horário é formatado automaticamente como 00h00m.</div>
-    </div>
-
-    <div class="modalBtns">
-      <button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
-      <button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
-    </div>
-
-    <div id="listaConfigTarefas" class="configLista"></div>
-
-  </div>
+<div class="modal">
+<div class="modalHeader">
+<button class="fecharModal" onclick="fecharModalConfiguracao()">✕</button>
 </div>
-
+<h2 class="modalTitle">Configuração da rotina</h2>
+<div class="field">
+<label class="labelComEmoji">
+<span>Nova tarefa</span>
+<button class="emojiMiniBtn" onclick="abrirEmojiPalette('novaTarefaTexto', this)" type="button">😊</button>
+</label>
+<textarea id="novaTarefaTexto" placeholder="Nome da tarefa" style="height:70px;"></textarea>
+</div>
+<input id="novaTarefaEmoji" type="hidden" value=""/>
+<div class="field">
+<label class="labelComEmoji">
+<span>Descrição</span>
+<button class="emojiMiniBtn" onclick="abrirEmojiPalette('novaTarefaDescricao', this)" type="button">✨</button>
+</label>
+<textarea id="novaTarefaDescricao" placeholder="Escreva uma descrição ou uma lista." style="height:70px;"></textarea>
+</div>
+<div class="field">
+<label>Horário</label>
+<textarea id="novaTarefaHora" placeholder="Digite só números. Ex.: 0530" style="height:50px;"></textarea>
+<div class="campo-ajuda-pequena">O horário é formatado automaticamente como 00h00m.</div>
+</div>
+<div class="modalBtns">
+<button class="save" onclick="adicionarTarefaConfiguracao()">acrescentar</button>
+<button class="cancel" onclick="fecharModalConfiguracao()">cancelar</button>
+</div>
+<div class="configLista" id="listaConfigTarefas"></div>
+</div>
+</div>
 <div class="modalOverlay" id="modalEditarTarefa">
-  <div class="modal">
-    <div class="modalHeader">
-      <button class="fecharModal" onclick="fecharModalEditarTarefa()">✕</button>
-    </div>
-
-    <h2 class="modalTitle">Editar tarefa</h2>
-
-    <div class="field">
-      <label class="labelComEmoji">
-        <span>Nome da tarefa</span>
-        <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('editarTarefaNome', this)">😊</button>
-      </label>
-      <textarea id="editarTarefaNome" style="height:70px;" placeholder="Nome da tarefa"></textarea>
-    </div>
-      <input id="editarTarefaEmoji" type="hidden" value="">
-
-    <div class="field">
-      <label class="labelComEmoji">
-        <span>Descrição</span>
-        <button class="emojiMiniBtn" type="button" onclick="abrirEmojiPalette('editarTarefaDescricao', this)">✨</button>
-      </label>
-      <textarea id="editarTarefaDescricao" style="height:70px;" placeholder="Descrição da tarefa"></textarea>
-    </div>
-
-    <div class="field">
-      <label>Horário</label>
-      <textarea id="editarTarefaHora" style="height:50px;" placeholder="Digite só números. Ex.: 0530"></textarea>
-    </div>
-
-    <div id="statusEditarTarefa" class="status-edicao"></div>
-
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalEditarTarefa()">cancelar</button>
-      <button class="save" onclick="salvarEdicaoTarefaConfiguracao()">concluir</button>
-    </div>
-  </div>
+<div class="modal">
+<div class="modalHeader">
+<button class="fecharModal" onclick="fecharModalEditarTarefa()">✕</button>
 </div>
-
-<div id="emojiPalette" class="emojiPalette" aria-label="Escolher emoji"></div>
-
+<h2 class="modalTitle">Editar tarefa</h2>
+<div class="field">
+<label class="labelComEmoji">
+<span>Nome da tarefa</span>
+<button class="emojiMiniBtn" onclick="abrirEmojiPalette('editarTarefaNome', this)" type="button">😊</button>
+</label>
+<textarea id="editarTarefaNome" placeholder="Nome da tarefa" style="height:70px;"></textarea>
+</div>
+<input id="editarTarefaEmoji" type="hidden" value=""/>
+<div class="field">
+<label class="labelComEmoji">
+<span>Descrição</span>
+<button class="emojiMiniBtn" onclick="abrirEmojiPalette('editarTarefaDescricao', this)" type="button">✨</button>
+</label>
+<textarea id="editarTarefaDescricao" placeholder="Descrição da tarefa" style="height:70px;"></textarea>
+</div>
+<div class="field">
+<label>Horário</label>
+<textarea id="editarTarefaHora" placeholder="Digite só números. Ex.: 0530" style="height:50px;"></textarea>
+</div>
+<div class="status-edicao" id="statusEditarTarefa"></div>
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalEditarTarefa()">cancelar</button>
+<button class="save" onclick="salvarEdicaoTarefaConfiguracao()">concluir</button>
+</div>
+</div>
+</div>
+<div aria-label="Escolher emoji" class="emojiPalette" id="emojiPalette"></div>
 <script>
 const tarefasBloco = [
   {
@@ -1921,8 +2279,6 @@ window.addEventListener("storage", () => {
   atualizarLinhaTempo();
 });
 </script>
-
-
 <script>
 /* Integração direta das refeições do Jejum Intermitente */
 (function(){
@@ -1977,7 +2333,6 @@ window.addEventListener("storage", () => {
   };
 })();
 </script>
-
 <script>
 (function(){
   const PAGINA_DESTINO = "gabriela-alimentacao-preparar-sair.html";
@@ -2039,8 +2394,6 @@ window.addEventListener("storage", () => {
   window.addEventListener("storage", integrarRefeicoes);
 })();
 </script>
-
-
 <script>
 /* Integração das metas de água do Jejum Intermitente */
 (function(){
@@ -2056,7 +2409,6 @@ window.addEventListener("storage", () => {
   window.AguaJejumIntegracao={lerItens,lerConcluidas,estaConcluida,definirConcluida,minutos};
 })();
 </script>
-
 <script>
 (function(){
   const PAGINA_DESTINO="gabriela-alimentacao-preparar-sair.html";
@@ -2087,23 +2439,19 @@ window.addEventListener("storage", () => {
   window.addEventListener("load",integrarAgua);window.addEventListener("focus",integrarAgua);window.addEventListener("storage",integrarAgua);
 })();
 </script>
-
-
 <div class="modalOverlay" id="modalConclusaoSubtarefas">
-  <div class="modal">
-    <div class="modalHeader">
-      <button class="fecharModal" type="button" onclick="fecharModalConclusaoSubtarefas()">×</button>
-    </div>
-    <div class="modalTitle" id="tituloModalConclusaoSubtarefas">Concluir atividades</div>
-    <div class="modalSubtarefasAjuda">Marque cada atividade realizada. O card continuará na lista até que todas sejam concluídas.</div>
-    <div class="modalSubtarefasLista" id="listaModalConclusaoSubtarefas"></div>
-    <div class="modalBtns">
-      <button class="cancel" type="button" onclick="fecharModalConclusaoSubtarefas()">fechar</button>
-    </div>
-  </div>
+<div class="modal">
+<div class="modalHeader">
+<button class="fecharModal" onclick="fecharModalConclusaoSubtarefas()" type="button">×</button>
 </div>
-
-
+<div class="modalTitle" id="tituloModalConclusaoSubtarefas">Concluir atividades</div>
+<div class="modalSubtarefasAjuda">Marque cada atividade realizada. O card continuará na lista até que todas sejam concluídas.</div>
+<div class="modalSubtarefasLista" id="listaModalConclusaoSubtarefas"></div>
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalConclusaoSubtarefas()" type="button">fechar</button>
+</div>
+</div>
+</div>
 <script>
 /* =========================================================
    SUBTAREFAS CONCLUÍDAS INDIVIDUALMENTE
@@ -2336,6 +2684,5 @@ window.addEventListener("storage", () => {
   renderizarTarefas();
 })();
 </script>
-
 </body>
 </html>

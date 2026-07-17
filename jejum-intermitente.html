@@ -333,10 +333,202 @@ body{font-family:var(--fonte);display:flex;justify-content:center;align-items:fl
 }
 </style>
 
+
+<style>
+/* AJUSTE FINAL — JEJUM NO PADRÃO DA PÁGINA SAÚDE */
+body{
+  align-items:flex-start !important;
+  padding:16px !important;
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,.8), transparent 35%),
+    linear-gradient(180deg,#FAFBF7 0%,#F6F8F3 100%) !important;
+}
+.card{
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(221,232,216,.86) !important;
+  border-radius:30px !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+.card::before{
+  width:150px !important;
+  height:150px !important;
+  right:-62px !important;
+  top:-52px !important;
+  background:rgba(232,243,226,.78) !important;
+}
+.card::after{content:none !important;display:none !important;}
+.topo{
+  display:grid !important;
+  grid-template-columns:66px minmax(0,1fr) 66px !important;
+  gap:0 !important;
+  min-height:70px !important;
+  align-items:start !important;
+  padding-top:8px !important;
+}
+.voltar{
+  width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.9) !important;
+  border:1px solid rgba(221,232,216,.9) !important;
+  box-shadow:0 5px 14px rgba(84,110,79,.08) !important;
+  justify-self:start !important;
+  margin:0 !important;
+}
+.centro{
+  width:100% !important;
+  min-width:0 !important;
+  padding:0 3px !important;
+  text-align:center !important;
+}
+.titulo{
+  width:100% !important;
+  margin:0 !important;
+  color:#435F3E !important;
+  font-size:22px !important;
+  font-weight:500 !important;
+  line-height:1.1 !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+}
+.subtitulo{
+  width:100% !important;
+  margin-top:5px !important;
+  color:#6F756C !important;
+  font-size:10.5px !important;
+  line-height:1.3 !important;
+  text-align:center !important;
+  white-space:normal !important;
+}
+.data{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  width:66px !important;
+  min-width:66px !important;
+  min-height:42px !important;
+  justify-self:end !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+  padding:0 !important;
+  margin:0 !important;
+  overflow:visible !important;
+}
+.hora{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  color:#B8807B !important;
+  font-size:14px !important;
+  font-weight:500 !important;
+  line-height:1.1 !important;
+  white-space:nowrap !important;
+  margin-bottom:2px !important;
+}
+.linha{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  color:#6F756C !important;
+  font-size:10.6px !important;
+  line-height:1.1 !important;
+  white-space:nowrap !important;
+}
+@media(max-width:390px){
+  body{padding:14px !important;}
+  .topo{
+    grid-template-columns:60px minmax(0,1fr) 60px !important;
+    min-height:68px !important;
+    padding-top:7px !important;
+  }
+  .titulo{font-size:20px !important;}
+  .subtitulo{font-size:10px !important;}
+  .data{width:60px !important;min-width:60px !important;}
+}
+</style>
+
+
+<style>
+/* CORREÇÃO FINAL — DATA E HORA DENTRO DO CABEÇALHO */
+.topo{
+  grid-template-columns:72px minmax(0,1fr) 72px !important;
+}
+.data{
+  width:72px !important;
+  min-width:72px !important;
+  padding-right:10px !important;
+  transform:translateX(-6px) !important;
+  box-sizing:border-box !important;
+}
+.hora, .linha{
+  width:100% !important;
+  text-align:right !important;
+}
+@media(max-width:390px){
+  .topo{grid-template-columns:66px minmax(0,1fr) 66px !important;}
+  .data{
+    width:66px !important;
+    min-width:66px !important;
+    padding-right:7px !important;
+    transform:translateX(-4px) !important;
+  }
+}
+</style>
+
+<style>
+/* AJUSTE PONTUAL — SETA DO BOTÃO VOLTAR */
+.voltar{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 !important;
+  line-height:1 !important;
+}
+.voltar span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:100% !important;
+  transform:translateY(-2px) !important;
+}
+</style>
+
+<style>
+/* AJUSTE FINAL — TÍTULO NO MESMO TAMANHO DA PÁGINA SAÚDE */
+.titulo{
+  font-size:22px !important;
+}
+@media(max-width:390px){
+  .titulo{font-size:20px !important;}
+}
+</style>
+
+<style>
+/* AJUSTE REAL DO TÍTULO — MESMA PROPORÇÃO VISUAL DA SAÚDE */
+.titulo{
+  font-size:19px !important;
+  line-height:1.1 !important;
+  white-space:nowrap !important;
+  letter-spacing:-0.15px !important;
+}
+.centro{
+  padding:0 2px !important;
+}
+@media(max-width:390px){
+  .titulo{
+    font-size:18px !important;
+  }
+}
+</style>
 </head>
 <body>
 <div class="pagina"><main class="card">
-<header class="topo"><button class="voltar" onclick="window.location.href='alimentacao.html'">←</button><div class="centro"><h1 class="titulo">Jejum Intermitente</h1><p class="subtitulo">organize sua janela alimentar</p></div><div class="data" aria-label="Data e hora atuais"><div id="hora" class="hora"></div><div id="dia" class="linha"></div><div id="data" class="linha"></div></div></header>
+<header class="topo"><button class="voltar" onclick="window.location.href='alimentacao.html'"><span>←</span></button><div class="centro"><h1 class="titulo">⏳ Jejum Intermitente</h1><p class="subtitulo">Jejum renova suas energias</p></div><div class="data" aria-label="Data e hora atuais"><div id="hora" class="hora"></div><div id="dia" class="linha"></div><div id="data" class="linha"></div></div></header>
 <button class="menuBtn" onclick="abrirPeriodos()"><strong id="periodoTitulo">Método 16:8</strong><span id="periodoResumo">16 horas de jejum · 8 horas de alimentação</span></button>
 <section class="horariosCard"><h2 class="secaoTitulo">Horários das refeições</h2><p class="secaoAjuda">Escolha quantas refeições deseja fazer. Ao informar a primeira, os demais horários serão preenchidos automaticamente conforme o método.</p>
 <div class="escolhaRefeicoes" id="escolhaRefeicoes"><label>Quantidade de refeições</label><div class="opcoesRefeicoes"><button type="button" id="qtd2" class="refQtdBtn" onclick="definirQtdRefeicoes(2)">2 refeições</button><button type="button" id="qtd3" class="refQtdBtn" onclick="definirQtdRefeicoes(3)">3 refeições</button></div></div>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Consultas</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
 
 :root{
@@ -551,7 +552,6 @@ input:focus, select:focus{
 }
 
 </style>
-
 <style>
 /* =========================================================
    VISUAL SYSTEM SAÚDE — PADRÃO GABRIELA / ALIMENTAÇÃO
@@ -713,270 +713,386 @@ input, select, textarea{
   }
 }
 </style>
+<style>
+/* ===== CABEÇALHO PADRONIZADO — REFERÊNCIA VISUAL FINAL: PÁGINA SAÚDE ===== */
+.card, .appCard{
+  padding-top:22px !important;
+}
+.cabecalho-saude-padrao{
+  display:grid !important;
+  grid-template-columns:42px minmax(0,1fr) 66px !important;
+  align-items:start !important;
+  gap:0 !important;
+  min-height:62px !important;
+  width:100% !important;
+  position:relative !important;
+  left:auto !important;
+  transform:none !important;
+  margin:0 0 6px !important;
+  padding:0 !important;
+}
+.cabecalho-saude-padrao .botao-voltar-padrao{
+  width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.90) !important;
+  border:1px solid rgba(221,232,216,.90) !important;
+  box-shadow:0 5px 14px rgba(84,110,79,.08) !important;
+  color:#2F332D !important;
+  justify-self:start !important;
+  cursor:pointer !important;
+  font-family:'Poppins',sans-serif !important;
+  font-size:17px !important;
+  line-height:1 !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  transition:.2s ease !important;
+}
+.cabecalho-saude-padrao .botao-voltar-padrao:hover{
+  background:#FFFFFF !important;
+  box-shadow:0 6px 16px rgba(84,110,79,.12) !important;
+}
+.cabecalho-saude-padrao .botao-voltar-padrao span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:100% !important;
+  transform:translateY(-1px) !important;
+}
+.cabecalho-saude-padrao .centro-titulo-padrao{
+  min-width:0 !important;
+  width:max-content !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  text-align:center !important;
+  padding:0 3px !important;
+  justify-self:center !important;
+  max-width:100% !important;
+}
+.cabecalho-saude-padrao .titulo-padrao{
+  width:auto !important;
+  margin:0 !important;
+  color:#435F3E !important;
+  font-family:'Poppins',sans-serif !important;
+  font-size:22px !important;
+  font-weight:500 !important;
+  line-height:1.1 !important;
+  letter-spacing:normal !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+}
+.cabecalho-saude-padrao .subtitulo-padrao{
+  width:auto !important;
+  margin:5px 0 0 !important;
+  color:#6F756C !important;
+  font-family:'Poppins',sans-serif !important;
+  font-size:10.5px !important;
+  font-weight:400 !important;
+  line-height:1.3 !important;
+  text-align:center !important;
+  white-space:normal !important;
+}
+.cabecalho-saude-padrao .data-padrao{
+  width:66px !important;
+  min-height:42px !important;
+  justify-self:end !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+  color:#6F756C !important;
+  font-family:'Poppins',sans-serif !important;
+  line-height:1.1 !important;
+  padding-top:1px !important;
+}
+.cabecalho-saude-padrao .hora-padrao{
+  color:#B8807B !important;
+  font-size:14px !important;
+  font-weight:500 !important;
+  white-space:nowrap !important;
+  margin-bottom:2px !important;
+}
+.cabecalho-saude-padrao .data-linha-padrao{
+  color:#6F756C !important;
+  font-size:10.5px !important;
+  font-weight:400 !important;
+  white-space:nowrap !important;
+}
+.acoes-topo-preservadas{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+  flex-wrap:wrap !important;
+  width:100% !important;
+  margin:0 0 2px !important;
+}
+@media(max-width:360px){
+  .cabecalho-saude-padrao{grid-template-columns:42px minmax(0,1fr) 62px !important;}
+  .cabecalho-saude-padrao .data-padrao{width:62px !important;}
+  .cabecalho-saude-padrao .titulo-padrao{font-size:20px !important;}
+  .cabecalho-saude-padrao .subtitulo-padrao{font-size:9.8px !important;}
+}
 
+/* Ajuste final: título e subtítulo centralizados pelo centro real da página */
+.cabecalho-saude-padrao .centro-titulo-padrao{
+  position:absolute !important;
+  left:50% !important;
+  top:0 !important;
+  transform:translateX(-50%) !important;
+  width:max-content !important;
+  max-width:calc(100% - 132px) !important;
+  margin:0 !important;
+  padding:0 !important;
+  align-items:center !important;
+  text-align:center !important;
+  justify-self:auto !important;
+}
+.cabecalho-saude-padrao .titulo-padrao,
+.cabecalho-saude-padrao .subtitulo-padrao{
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+</style>
+<style>
+/* Correção: preserva o centro real do título sem deslocar botão e data */
+.cabecalho-saude-padrao .botao-voltar-padrao{
+  grid-column:1 !important;
+  grid-row:1 !important;
+}
+.cabecalho-saude-padrao .data-padrao{
+  grid-column:3 !important;
+  grid-row:1 !important;
+  justify-self:end !important;
+}
+</style>
 </head>
 <body>
-
 <div class="pagina">
-  <div class="card">
-    <div class="topo">
-      <button class="botao-voltar" onclick="location.href='saude.html'"><span>←</span></button>
-      <div class="topCenter">
-        <h1 class="titleIndex">📅 Consultas</h1>
-        <p class="subtitulo">acompanhar atendimentos</p>
-      </div>
-      <div class="dataTopo" aria-label="Data e hora atuais">
-        <div id="linhaTempoHora" class="horaTopo"></div>
-        <div id="linhaTempoDia" class="dataTopoLinha"></div>
-        <div id="linhaTempoData" class="dataTopoLinha"></div>
-      </div>
-    </div>
-
-    <div id="statusAgendaSaude" class="agendaStatus"></div>
-    <div class="agendaMiniInfo">Filtro preparado para buscar apenas eventos da agenda Google chamada “Saúde”, do dia atual até o último dia do próximo mês.</div>
-
-    <div id="listaRegistros" class="lista-registros"></div>
-
-    <div class="footerMiniAction">
-      <button class="addTopBtn" onclick="abrirModalNovo()">+ acrescentar</button>
-      <button class="addTopBtn" onclick="conectarGoogleAgenda()">Conectar Google Agenda</button>
-      <button class="addTopBtn" onclick="atualizarAgendaSaude()">Atualizar agenda</button>
-      <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
-    </div>
-  </div>
+<div class="card">
+<div class="cabecalho-saude-padrao"><button class="botao-voltar-padrao" onclick="location.href='saude.html'"><span>←</span></button><div class="centro-titulo-padrao"><h1 class="titulo-padrao">📅 Consultas</h1><p class="subtitulo-padrao">Dialogar para guiar os próximos passos</p></div><div aria-label="Data e hora atuais" class="data-padrao"><div class="hora-padrao" data-hora-padrao=""></div><div class="data-linha-padrao" data-dia-padrao=""></div><div class="data-linha-padrao" data-data-padrao=""></div></div></div>
+<div class="agendaStatus" id="statusAgendaSaude"></div>
+<div class="agendaMiniInfo">Filtro preparado para buscar apenas eventos da agenda Google chamada “Saúde”, do dia atual até o último dia do próximo mês.</div>
+<div class="lista-registros" id="listaRegistros"></div>
+<div class="footerMiniAction">
+<button class="addTopBtn" onclick="abrirModalNovo()">+ acrescentar</button>
+<button class="addTopBtn" onclick="conectarGoogleAgenda()">Conectar Google Agenda</button>
+<button class="addTopBtn" onclick="atualizarAgendaSaude()">Atualizar agenda</button>
+<button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
 </div>
-
+</div>
+</div>
 <div class="modalOverlay" id="modalCadastro">
-  <div class="modal">
-    <div class="modalHeader">
-      <button class="fecharModal" onclick="fecharModalCadastro()">✕</button>
-    </div>
-    <h2 class="modalTitle" id="tituloCadastro">Novo registro</h2>
-    <div class="field">
-      <label>Consulta / Especialidade</label>
-      <input id="titulo" type="text" placeholder="Ex.: Endócrino, dentista, terapia">
-    </div>
-<div class="field">
-      <label>Profissional</label>
-      <select id="profissional"></select>
-    </div>
-    <div class="selectActions">
-      <button type="button" onclick="abrirModalNovoProfissional()">Novo profissional</button>
-      <button type="button" class="dangerMini" onclick="excluirProfissionalSelecionado()">Excluir profissional</button>
-    </div>
-<div class="field">
-      <label>Data</label>
-      <input id="data" type="date">
-    </div>
-<div class="field">
-      <label>Hora</label>
-      <input id="hora" type="time">
-    </div>
-<div class="field">
-      <label>Local</label>
-      <select id="local"></select>
-    </div>
-    <div class="selectActions">
-      <button type="button" onclick="abrirModalNovoLocal()">Novo local</button>
-      <button type="button" class="dangerMini" onclick="excluirLocalSelecionado()">Excluir local</button>
-    </div>
-<div class="field">
-      <label>Adicionar informações relacionadas</label>
-      <div class="consultaQuickActions">
-        <button type="button" class="consultaQuickBtn" onclick="abrirModalRemedioDaConsulta()">💊 Remédios</button>
-        <button type="button" class="consultaQuickBtn" onclick="abrirModalExameDaConsulta()">🧪 Exames</button>
-        <button type="button" class="consultaQuickBtn" onclick="abrirModalHistoricoDaConsulta()">📝 Histórico</button>
-      </div>
-      <div class="quickHint">Esses registros serão salvos nas páginas correspondentes, vinculados aos dados desta consulta.</div>
-    </div>
-
-    <div class="field">
-      <label>Observações</label>
-      <textarea id="observacoes" style="height:90px;" placeholder="Anote orientações, sintomas, retorno..."></textarea>
-    </div>
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalCadastro()">Cancelar</button>
-      <button class="cancel" id="btnExcluir" onclick="excluirRegistroAtual()" style="display:none;">Excluir</button>
-      <button class="save" onclick="salvarCadastro()">Concluir</button>
-    </div>
-  </div>
+<div class="modal">
+<div class="modalHeader">
+<button class="fecharModal" onclick="fecharModalCadastro()">✕</button>
 </div>
-
-
+<h2 class="modalTitle" id="tituloCadastro">Novo registro</h2>
+<div class="field">
+<label>Consulta / Especialidade</label>
+<input id="titulo" placeholder="Ex.: Endócrino, dentista, terapia" type="text"/>
+</div>
+<div class="field">
+<label>Profissional</label>
+<select id="profissional"></select>
+</div>
+<div class="selectActions">
+<button onclick="abrirModalNovoProfissional()" type="button">Novo profissional</button>
+<button class="dangerMini" onclick="excluirProfissionalSelecionado()" type="button">Excluir profissional</button>
+</div>
+<div class="field">
+<label>Data</label>
+<input id="data" type="date"/>
+</div>
+<div class="field">
+<label>Hora</label>
+<input id="hora" type="time"/>
+</div>
+<div class="field">
+<label>Local</label>
+<select id="local"></select>
+</div>
+<div class="selectActions">
+<button onclick="abrirModalNovoLocal()" type="button">Novo local</button>
+<button class="dangerMini" onclick="excluirLocalSelecionado()" type="button">Excluir local</button>
+</div>
+<div class="field">
+<label>Adicionar informações relacionadas</label>
+<div class="consultaQuickActions">
+<button class="consultaQuickBtn" onclick="abrirModalRemedioDaConsulta()" type="button">💊 Remédios</button>
+<button class="consultaQuickBtn" onclick="abrirModalExameDaConsulta()" type="button">🧪 Exames</button>
+<button class="consultaQuickBtn" onclick="abrirModalHistoricoDaConsulta()" type="button">📝 Histórico</button>
+</div>
+<div class="quickHint">Esses registros serão salvos nas páginas correspondentes, vinculados aos dados desta consulta.</div>
+</div>
+<div class="field">
+<label>Observações</label>
+<textarea id="observacoes" placeholder="Anote orientações, sintomas, retorno..." style="height:90px;"></textarea>
+</div>
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalCadastro()">Cancelar</button>
+<button class="cancel" id="btnExcluir" onclick="excluirRegistroAtual()" style="display:none;">Excluir</button>
+<button class="save" onclick="salvarCadastro()">Concluir</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalNovoProfissional">
-  <div class="modal" style="width:min(300px,100%);">
-    <h2 class="modalTitle">Novo profissional</h2>
-    <div class="field">
-      <label>Nome do profissional</label>
-      <input id="novoProfissionalInput" type="text" placeholder="Ex.: Dra. Ana, Endócrino, Clínica...">
-    </div>
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalNovoProfissional()">Cancelar</button>
-      <button class="save" onclick="salvarNovoProfissional()">Ok</button>
-    </div>
-  </div>
+<div class="modal" style="width:min(300px,100%);">
+<h2 class="modalTitle">Novo profissional</h2>
+<div class="field">
+<label>Nome do profissional</label>
+<input id="novoProfissionalInput" placeholder="Ex.: Dra. Ana, Endócrino, Clínica..." type="text"/>
 </div>
-
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalNovoProfissional()">Cancelar</button>
+<button class="save" onclick="salvarNovoProfissional()">Ok</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalNovoLocal">
-  <div class="modal" style="width:min(300px,100%);">
-    <h2 class="modalTitle">Novo local</h2>
-    <div class="field">
-      <label>Local da consulta</label>
-      <input id="novoLocalInput" type="text" placeholder="Ex.: SUS, clínica, online...">
-    </div>
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalNovoLocal()">Cancelar</button>
-      <button class="save" onclick="salvarNovoLocal()">Ok</button>
-    </div>
-  </div>
+<div class="modal" style="width:min(300px,100%);">
+<h2 class="modalTitle">Novo local</h2>
+<div class="field">
+<label>Local da consulta</label>
+<input id="novoLocalInput" placeholder="Ex.: SUS, clínica, online..." type="text"/>
 </div>
-
-
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalNovoLocal()">Cancelar</button>
+<button class="save" onclick="salvarNovoLocal()">Ok</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalRemedioConsulta">
-  <div class="modal">
-    <div class="modalHeader">
-      <button class="fecharModal" onclick="fecharModalRemedioDaConsulta()">✕</button>
-    </div>
-    <h2 class="modalTitle">Remédio relacionado</h2>
-
-    <div class="field">
-      <label>Remédio</label>
-      <input id="consultaRemedioNome" type="text" placeholder="Ex.: Dipirona, vitamina, antibiótico...">
-    </div>
-
-    <div class="row">
-      <div class="field">
-        <label>Dosagem</label>
-        <input id="consultaRemedioDosagem" type="text" placeholder="Ex.: 500mg">
-      </div>
-      <div class="field">
-        <label>Quantidade</label>
-        <input id="consultaRemedioQuantidade" type="text" placeholder="Ex.: 1 comp.">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="field">
-        <label>Data de início</label>
-        <input id="consultaRemedioInicio" type="date">
-      </div>
-      <div class="field">
-        <label>Data de fim</label>
-        <input id="consultaRemedioFim" type="date">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="field">
-        <label>Horário 1</label>
-        <input id="consultaRemedioHorario1" type="time">
-      </div>
-      <div class="field">
-        <label>Horário 2</label>
-        <input id="consultaRemedioHorario2" type="time">
-      </div>
-    </div>
-
-    <div class="field">
-      <label>Observações</label>
-      <textarea id="consultaRemedioObservacoes" style="height:80px;" placeholder="Orientações do profissional, cuidado, reação..."></textarea>
-    </div>
-
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalRemedioDaConsulta()">Cancelar</button>
-      <button class="save" onclick="salvarRemedioDaConsulta()">Concluir</button>
-    </div>
-  </div>
+<div class="modal">
+<div class="modalHeader">
+<button class="fecharModal" onclick="fecharModalRemedioDaConsulta()">✕</button>
 </div>
-
+<h2 class="modalTitle">Remédio relacionado</h2>
+<div class="field">
+<label>Remédio</label>
+<input id="consultaRemedioNome" placeholder="Ex.: Dipirona, vitamina, antibiótico..." type="text"/>
+</div>
+<div class="row">
+<div class="field">
+<label>Dosagem</label>
+<input id="consultaRemedioDosagem" placeholder="Ex.: 500mg" type="text"/>
+</div>
+<div class="field">
+<label>Quantidade</label>
+<input id="consultaRemedioQuantidade" placeholder="Ex.: 1 comp." type="text"/>
+</div>
+</div>
+<div class="row">
+<div class="field">
+<label>Data de início</label>
+<input id="consultaRemedioInicio" type="date"/>
+</div>
+<div class="field">
+<label>Data de fim</label>
+<input id="consultaRemedioFim" type="date"/>
+</div>
+</div>
+<div class="row">
+<div class="field">
+<label>Horário 1</label>
+<input id="consultaRemedioHorario1" type="time"/>
+</div>
+<div class="field">
+<label>Horário 2</label>
+<input id="consultaRemedioHorario2" type="time"/>
+</div>
+</div>
+<div class="field">
+<label>Observações</label>
+<textarea id="consultaRemedioObservacoes" placeholder="Orientações do profissional, cuidado, reação..." style="height:80px;"></textarea>
+</div>
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalRemedioDaConsulta()">Cancelar</button>
+<button class="save" onclick="salvarRemedioDaConsulta()">Concluir</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalExameConsulta">
-  <div class="modal">
-    <div class="modalHeader">
-      <button class="fecharModal" onclick="fecharModalExameDaConsulta()">✕</button>
-    </div>
-    <h2 class="modalTitle">Exame relacionado</h2>
-
-    <div class="field">
-      <label>Exame</label>
-      <input id="consultaExameNome" type="text" placeholder="Ex.: Hemograma, ultrassom, raio-x...">
-    </div>
-
-    <div class="field">
-      <label>Data</label>
-      <input id="consultaExameData" type="date">
-    </div>
-
-    <div class="field">
-      <label>Local</label>
-      <input id="consultaExameLocal" type="text" placeholder="Clínica, laboratório, hospital...">
-    </div>
-
-    <div class="field">
-      <label>Resultado</label>
-      <input id="consultaExameResultado" type="text" placeholder="Pendente, normal, alterado...">
-    </div>
-
-    <div class="field">
-      <label>Observações</label>
-      <textarea id="consultaExameObservacoes" style="height:80px;" placeholder="Pedido médico, preparo, observações..."></textarea>
-    </div>
-
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalExameDaConsulta()">Cancelar</button>
-      <button class="save" onclick="salvarExameDaConsulta()">Concluir</button>
-    </div>
-  </div>
+<div class="modal">
+<div class="modalHeader">
+<button class="fecharModal" onclick="fecharModalExameDaConsulta()">✕</button>
 </div>
-
+<h2 class="modalTitle">Exame relacionado</h2>
+<div class="field">
+<label>Exame</label>
+<input id="consultaExameNome" placeholder="Ex.: Hemograma, ultrassom, raio-x..." type="text"/>
+</div>
+<div class="field">
+<label>Data</label>
+<input id="consultaExameData" type="date"/>
+</div>
+<div class="field">
+<label>Local</label>
+<input id="consultaExameLocal" placeholder="Clínica, laboratório, hospital..." type="text"/>
+</div>
+<div class="field">
+<label>Resultado</label>
+<input id="consultaExameResultado" placeholder="Pendente, normal, alterado..." type="text"/>
+</div>
+<div class="field">
+<label>Observações</label>
+<textarea id="consultaExameObservacoes" placeholder="Pedido médico, preparo, observações..." style="height:80px;"></textarea>
+</div>
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalExameDaConsulta()">Cancelar</button>
+<button class="save" onclick="salvarExameDaConsulta()">Concluir</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalHistoricoConsulta">
-  <div class="modal">
-    <div class="modalHeader">
-      <button class="fecharModal" onclick="fecharModalHistoricoDaConsulta()">✕</button>
-    </div>
-    <h2 class="modalTitle">Histórico relacionado</h2>
-
-    <div class="field">
-      <label>Título</label>
-      <input id="consultaHistoricoTitulo" type="text" placeholder="Ex.: Orientação da consulta, sintoma, diagnóstico...">
-    </div>
-
-    <div class="field">
-      <label>Data</label>
-      <input id="consultaHistoricoData" type="date">
-    </div>
-
-    <div class="field">
-      <label>Categoria</label>
-      <input id="consultaHistoricoCategoria" type="text" placeholder="Ex.: Consulta, sintoma, diagnóstico, orientação...">
-    </div>
-
-    <div class="field">
-      <label>Descrição</label>
-      <textarea id="consultaHistoricoDescricao" style="height:100px;" placeholder="Informações importantes para guardar no histórico..."></textarea>
-    </div>
-
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalHistoricoDaConsulta()">Cancelar</button>
-      <button class="save" onclick="salvarHistoricoDaConsulta()">Concluir</button>
-    </div>
-  </div>
+<div class="modal">
+<div class="modalHeader">
+<button class="fecharModal" onclick="fecharModalHistoricoDaConsulta()">✕</button>
 </div>
-
+<h2 class="modalTitle">Histórico relacionado</h2>
+<div class="field">
+<label>Título</label>
+<input id="consultaHistoricoTitulo" placeholder="Ex.: Orientação da consulta, sintoma, diagnóstico..." type="text"/>
+</div>
+<div class="field">
+<label>Data</label>
+<input id="consultaHistoricoData" type="date"/>
+</div>
+<div class="field">
+<label>Categoria</label>
+<input id="consultaHistoricoCategoria" placeholder="Ex.: Consulta, sintoma, diagnóstico, orientação..." type="text"/>
+</div>
+<div class="field">
+<label>Descrição</label>
+<textarea id="consultaHistoricoDescricao" placeholder="Informações importantes para guardar no histórico..." style="height:100px;"></textarea>
+</div>
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalHistoricoDaConsulta()">Cancelar</button>
+<button class="save" onclick="salvarHistoricoDaConsulta()">Concluir</button>
+</div>
+</div>
+</div>
 <div class="modalOverlay" id="modalFuturasEdicoes">
-  <div class="modal">
-    <h2 class="modalTitle">Futuras edições</h2>
-    <div class="field">
-      <label>Ideias de melhorias futuras</label>
-      <textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
-    </div>
-    <div class="modalBtns">
-      <button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
-      <button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
-    </div>
-  </div>
+<div class="modal">
+<h2 class="modalTitle">Futuras edições</h2>
+<div class="field">
+<label>Ideias de melhorias futuras</label>
+<textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea>
 </div>
-
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+<div class="modalBtns">
+<button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button>
+<button class="save" onclick="salvarFuturasEdicoes()">Concluir</button>
+</div>
+</div>
+</div>
+<script async="" defer="" src="https://accounts.google.com/gsi/client"></script>
 <script>
 const CHAVE_DADOS = "saude_consultas";
 const CHAVE_PROFISSIONAIS = "saude_consultas_profissionais";
@@ -1791,5 +1907,63 @@ window.addEventListener("load", () => {
   renderizarLista();
 });
 </script>
+
+<script>
+(function atualizarCabecalhoPadrao(){
+  function pad2(n){ return String(n).padStart(2,"0"); }
+  function preencher(){
+    var agora=new Date();
+    var diasCurtos=["dom","seg","ter","qua","qui","sex","sáb"];
+    var hora=pad2(agora.getHours())+":"+pad2(agora.getMinutes());
+    var dia="• "+diasCurtos[agora.getDay()];
+    var data="• "+pad2(agora.getDate())+"/"+pad2(agora.getMonth()+1);
+    document.querySelectorAll('[data-hora-padrao]').forEach(function(el){el.textContent=hora;});
+    document.querySelectorAll('[data-dia-padrao]').forEach(function(el){el.textContent=dia;});
+    document.querySelectorAll('[data-data-padrao]').forEach(function(el){el.textContent=data;});
+  }
+  preencher();
+  setInterval(preencher,1000);
+})();
+</script>
+
+<style>
+/* SOMENTE PADRONIZAÇÃO DO CARD EXTERNO COM A PÁGINA SAÚDE */
+body{
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,.8), transparent 35%),
+    linear-gradient(180deg,#FAFBF7 0%,#F6F8F3 100%) !important;
+}
+.pagina{
+  width:100% !important;
+  max-width:420px !important;
+}
+.card{
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  padding:22px 16px 18px !important;
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(221,232,216,.86) !important;
+  border-radius:30px !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  right:-62px;
+  top:-52px;
+  border-radius:50%;
+  background:rgba(232,243,226,.78);
+  z-index:0;
+}
+.card > *{
+  position:relative;
+  z-index:1;
+}
+</style>
 </body>
 </html>

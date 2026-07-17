@@ -1125,6 +1125,159 @@ body.gabi-rotina .lista .tarefa.feita::before{
 }
 </style>
 
+
+<style>
+/* AJUSTE FINAL — DESACELERAR NO PADRÃO APROVADO */
+body.gabi-rotina .card,
+.card{
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(221,232,216,.86) !important;
+  border-radius:30px !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+body.gabi-rotina .card::before,
+.card::before{
+  content:"" !important;
+  position:absolute !important;
+  width:150px !important;
+  height:150px !important;
+  right:-62px !important;
+  top:-52px !important;
+  border-radius:50% !important;
+  background:rgba(232,243,226,.78) !important;
+  z-index:0 !important;
+}
+body.gabi-rotina .card::after,
+.card::after{
+  content:none !important;
+  display:none !important;
+}
+body.gabi-rotina .card > *,
+.card > *{
+  position:relative;
+  z-index:1;
+}
+.card .topo{
+  position:relative !important;
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:flex-start !important;
+  gap:0 !important;
+  min-height:70px !important;
+  margin-bottom:6px !important;
+  padding-top:8px !important;
+}
+.card .topo .botao-voltar{
+  position:relative !important;
+  z-index:2 !important;
+  width:42px !important;
+  min-width:42px !important;
+  height:42px !important;
+  margin-top:0 !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.9) !important;
+  border:1px solid rgba(221,232,216,.9) !important;
+  box-shadow:0 5px 14px rgba(84,110,79,.08) !important;
+  color:#2F2F2F !important;
+  font-size:17px !important;
+}
+.card .topo .topCenter{
+  position:absolute !important;
+  left:50% !important;
+  top:8px !important;
+  transform:translateX(-50%) !important;
+  width:calc(100% - 132px) !important;
+  max-width:270px !important;
+  min-width:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  text-align:center !important;
+  padding:0 !important;
+  margin:0 !important;
+  z-index:1 !important;
+}
+.card .topo .titleIndex{
+  display:block !important;
+  width:100% !important;
+  margin:0 auto !important;
+  color:#435F3E !important;
+  font-weight:500 !important;
+  font-size:22px !important;
+  line-height:1.1 !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+  letter-spacing:normal !important;
+  transform:none !important;
+}
+.card .topo .titleIndex::after{
+  content:none !important;
+  display:none !important;
+}
+.card .topo .subtitulo{
+  display:block !important;
+  width:100% !important;
+  margin:5px auto 0 !important;
+  color:#6F756C !important;
+  font-weight:400 !important;
+  font-size:10.5px !important;
+  line-height:1.3 !important;
+  text-align:center !important;
+  white-space:normal !important;
+  letter-spacing:normal !important;
+  transform:none !important;
+}
+.card .topo .dataTopo{
+  position:relative !important;
+  z-index:2 !important;
+  width:66px !important;
+  min-width:66px !important;
+  min-height:40px !important;
+  margin-top:0 !important;
+  padding-top:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+  color:#6F756C !important;
+  line-height:1.1 !important;
+}
+.card .topo .horaTopo{
+  color:#B8807B !important;
+  font-size:14px !important;
+  font-weight:500 !important;
+  margin-bottom:2px !important;
+  white-space:nowrap !important;
+}
+.card .topo .dataTopoLinha{
+  color:#6F756C !important;
+  font-size:10.6px !important;
+  white-space:nowrap !important;
+}
+@media(max-width:390px){
+  .card .topo{
+    min-height:68px !important;
+    padding-top:7px !important;
+  }
+  .card .topo .topCenter{
+    top:7px !important;
+    width:calc(100% - 120px) !important;
+    max-width:245px !important;
+  }
+  .card .topo .titleIndex{
+    font-size:20px !important;
+  }
+  .card .topo .dataTopo{
+    width:60px !important;
+    min-width:60px !important;
+  }
+}
+</style>
+
 </head>
 <body class="gabi-rotina">
 
@@ -1135,8 +1288,8 @@ body.gabi-rotina .lista .tarefa.feita::before{
       <button class="botao-voltar" onclick="window.location.href='gabriela-menu.html'"><span>←</span></button>
 
       <div class="topCenter">
-        <h1 class="titleIndex">Desacelerar</h1>
-        <p class="subtitulo">desacelerar e se acolher também é autocuidado</p>
+        <h1 class="titleIndex">🌙 Desacelerar</h1>
+        <p class="subtitulo">Dar espaço ao ócio abre portas à imaginação</p>
       </div>
 
       <div class="dataTopo" aria-label="Data e hora atuais">
