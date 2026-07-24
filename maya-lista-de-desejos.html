@@ -177,17 +177,65 @@ body{
   text-align:center;
 }
 
+.saldoMoedasBox{
+  background:linear-gradient(180deg, #F2F8F0 0%, #FFFFFF 100%);
+  border-color:#D9EBD6;
+  position:relative;
+  overflow:hidden;
+}
+
+.saldoMoedasBox::before{
+  content:"";
+  position:absolute;
+  width:86px;
+  height:86px;
+  right:-34px;
+  top:-34px;
+  background:rgba(92,157,92,0.10);
+  border-radius:50%;
+}
+
+.saldoDecor{
+  width:38px;
+  height:38px;
+  margin:0 auto 4px;
+  border-radius:14px;
+  background:#FFFFFF;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 12px rgba(63,111,79,0.08);
+  font-size:20px;
+}
+
 .saldoLabel{
   font-size:12px;
-  color:var(--texto-secundario);
-  margin-bottom:4px;
+  color:var(--verde-texto);
+  margin-bottom:3px;
+  font-weight:500;
 }
 
 .saldoValor{
-  font-size:24px;
+  font-size:28px;
   line-height:1.2;
   color:var(--verde-texto);
   font-weight:600;
+}
+
+.saldoMensagem{
+  margin-top:6px;
+  font-size:11.5px;
+  color:var(--texto-secundario);
+  line-height:1.45;
+}
+
+.avisoTroca{
+  background:#FFFDF5;
+  border-color:#F1E7BA;
+  color:#6B5A2A;
+  text-align:center;
+  font-size:12px;
+  line-height:1.55;
 }
 
 .listHeader{
@@ -232,65 +280,163 @@ body{
 
 .wishItem{
   width:100%;
-  border:none;
-  background:var(--verde-principal);
+  border:1px solid rgba(63,111,79,0.10);
+  background:linear-gradient(135deg, #EAF6E7 0%, #F6FBF3 58%, #FFFDF5 100%);
   color:var(--verde-texto);
-  border-radius:16px;
-  padding:14px 16px;
+  border-radius:20px;
+  padding:14px;
   font-size:var(--botao);
   font-family:var(--fonte);
   cursor:pointer;
   transition:0.2s ease;
   display:block;
-  box-shadow:none;
+  box-shadow:0 8px 18px rgba(63,111,79,0.08);
+  position:relative;
+  overflow:hidden;
+}
+
+.wishItem:nth-child(4n+1){
+  background:linear-gradient(135deg, #E8F5E7 0%, #F8FBF4 58%, #FFFBEA 100%);
+}
+
+.wishItem:nth-child(4n+2){
+  background:linear-gradient(135deg, #EAF7FF 0%, #F7FBFF 58%, #FFF7EC 100%);
+}
+
+.wishItem:nth-child(4n+3){
+  background:linear-gradient(135deg, #F4EEFF 0%, #FCFAFF 58%, #FFF8EF 100%);
+}
+
+.wishItem:nth-child(4n+4){
+  background:linear-gradient(135deg, #FFF1F7 0%, #FFFAFC 58%, #F4FBF1 100%);
+}
+
+.wishItem::after{
+  content:"✨";
+  position:absolute;
+  right:14px;
+  top:12px;
+  font-size:16px;
+  opacity:0.55;
 }
 
 .wishItem:hover{
-  background:var(--verde-hover);
+  transform:translateY(-1px);
+  box-shadow:0 10px 22px rgba(63,111,79,0.11);
+}
+
+.wishTop{
+  display:grid;
+  grid-template-columns:42px 1fr;
+  gap:10px;
+  align-items:center;
+  padding-right:20px;
+}
+
+.wishIcon{
+  width:42px;
+  height:42px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.85);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  box-shadow:0 4px 12px rgba(63,111,79,0.08);
 }
 
 .wishNome{
-  font-size:14px;
+  font-size:15px;
   color:var(--verde-texto);
-  text-align:center;
-  line-height:1.35;
-  font-weight:500;
+  text-align:left;
+  line-height:1.25;
+  font-weight:600;
   word-break:break-word;
 }
 
 .wishInfo{
-  margin-top:6px;
-  font-size:11px;
-  color:rgba(63,111,79,0.76);
+  margin-top:10px;
+  font-size:11.5px;
+  color:rgba(63,111,79,0.82);
+  text-align:left;
+  line-height:1.5;
+  background:rgba(255,255,255,0.58);
+  border:1px solid rgba(255,255,255,0.68);
+  border-radius:14px;
+  padding:9px 10px;
+}
+
+.wishInfoLinha{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
   text-align:center;
-  line-height:1.45;
+}
+
+.wishMoneyGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
+}
+
+.moneyMini{
+  background:rgba(255,255,255,0.78);
+  border:1px solid rgba(255,255,255,0.78);
+  border-radius:14px;
+  padding:8px 6px;
+  text-align:center;
+}
+
+.moneyMiniLabel{
+  font-size:10.5px;
+  color:var(--texto-secundario);
+  line-height:1.25;
+}
+
+.moneyMiniValor{
+  font-size:12.5px;
+  color:var(--verde-texto);
+  font-weight:600;
+  margin-top:2px;
 }
 
 .progressoBox{
-  margin-top:10px;
+  margin-top:12px;
   text-align:center;
 }
 
 .progressoTexto{
-  font-size:11px;
-  color:rgba(63,111,79,0.76);
+  font-size:15px;
+  color:var(--verde-texto);
   text-align:center;
+  line-height:1.25;
+  margin-bottom:7px;
+  font-weight:600;
+}
+
+.progressoSubTexto{
+  font-size:10.8px;
+  color:rgba(63,111,79,0.70);
+  margin-top:6px;
   line-height:1.35;
-  margin-bottom:6px;
 }
 
 .barraExterna{
   width:100%;
-  height:10px;
-  background:#dfe8dc;
+  height:13px;
+  background:rgba(63,111,79,0.12);
   border-radius:999px;
   overflow:hidden;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,0.06);
 }
 
 .barraInterna{
   height:100%;
   width:0%;
-  background:var(--verde-escuro);
+  background:linear-gradient(90deg, #5C9D5C 0%, #9CCB77 100%);
   border-radius:999px;
   transition:width 0.3s ease;
 }
@@ -333,9 +479,8 @@ body{
   color:#8a3030;
 }
 
-.actionBtn:disabled{
-  opacity:0.45;
-  cursor:not-allowed;
+.actionBtn.disabledVisual{
+  opacity:0.55;
 }
 
 .empty{
@@ -343,36 +488,6 @@ body{
   color:var(--texto-secundario);
   text-align:center;
   padding:4px 0;
-}
-
-.footerBtn{
-  width:100%;
-  border:none;
-  background:var(--verde-principal);
-  color:var(--verde-texto);
-  border-radius:16px;
-  padding:14px 16px;
-  font-size:14px;
-  font-family:var(--fonte);
-  cursor:pointer;
-  transition:0.2s ease;
-  display:block;
-  text-align:center;
-}
-
-.footerBtn:hover{
-  background:var(--verde-hover);
-}
-
-.atendidosPanel{
-  display:none;
-  flex-direction:column;
-  gap:12px;
-  margin-top:12px;
-}
-
-.atendidosPanel.show{
-  display:flex;
 }
 
 .footerMiniAction{
@@ -420,6 +535,10 @@ body{
   padding:18px;
   border-radius:20px;
   width:min(360px, 100%);
+  max-width:100%;
+  max-height:calc(100vh - 32px);
+  overflow-y:auto;
+  overflow-x:hidden;
   display:flex;
   flex-direction:column;
   gap:10px;
@@ -433,10 +552,25 @@ body{
   font-weight:500;
 }
 
+.modalTexto{
+  font-size:13px;
+  color:var(--texto-principal);
+  line-height:1.6;
+  text-align:center;
+}
+
+.modalTextoMenor{
+  font-size:11.5px;
+  color:var(--texto-secundario);
+  line-height:1.5;
+  text-align:center;
+}
+
 .field{
   display:flex;
   flex-direction:column;
   gap:6px;
+  min-width:0;
 }
 
 .field label{
@@ -446,7 +580,11 @@ body{
   font-weight:500;
 }
 
-.field input{
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  min-width:0;
   padding:12px 14px;
   border-radius:12px;
   border:1px solid var(--borda);
@@ -455,6 +593,51 @@ body{
   outline:none;
   color:var(--texto-principal);
   background:#fff;
+}
+
+.field textarea{
+  min-height:86px;
+  height:86px;
+  resize:vertical;
+}
+
+.grid2Desejo{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:9px;
+  width:100%;
+}
+
+.ajudaCampo{
+  font-size:10px;
+  color:#8B9186;
+  line-height:1.35;
+}
+
+.desejoEmojiLinha{
+  display:grid;
+  grid-template-columns:64px 1fr;
+  gap:8px;
+  align-items:center;
+}
+
+.emojiSelect{
+  width:100%;
+  height:44px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  background:#fff;
+  color:var(--texto-principal);
+  font-size:20px;
+  font-family:var(--fonte);
+  text-align:center;
+  outline:none;
+  cursor:pointer;
+}
+
+.emojiSelect:focus{
+  border-color:var(--verde-escuro);
+  box-shadow:0 0 0 3px rgba(127,183,126,0.12);
 }
 
 textarea{
@@ -470,6 +653,8 @@ textarea{
 }
 
 .field input:focus,
+.field select:focus,
+.field textarea:focus,
 textarea:focus{
   border-color:var(--verde-escuro);
   box-shadow:0 0 0 3px rgba(127,183,126,0.12);
@@ -516,6 +701,11 @@ textarea:focus{
 }
 
 @media (max-width: 390px){
+  .modal{width:min(360px,100%);padding:16px;}
+  .grid2Desejo{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;}
+  .field input,.field select,.field textarea{padding:11px 12px;font-size:12px;}
+  .field label{font-size:12px;}
+  .ajudaCampo{font-size:9.5px;}
   body{
     padding:14px;
   }
@@ -540,6 +730,10 @@ textarea:focus{
     font-size:10.5px;
   }
 }
+
+@media (max-width: 335px){
+  .grid2Desejo{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
@@ -552,7 +746,7 @@ textarea:focus{
 
       <div class="topCenter">
         <h1 class="titleIndex">✨ Lista de Desejos</h1>
-<div class="subtitulo">Cada conquista te aproxima dos seus sonhos 💫</div>
+        <div class="subtitulo">Cada conquista te aproxima dos seus sonhos 💫</div>
       </div>
 
       <div class="dataTopo" aria-label="Data e hora atuais">
@@ -562,10 +756,13 @@ textarea:focus{
       </div>
     </div>
 
-    <div class="box saldoBox">
-      <div class="saldoLabel">Saldo</div>
+    <div class="box saldoBox saldoMoedasBox">
+      <div class="saldoDecor">💰</div>
+      <div class="saldoLabel">Saldo em Moedas</div>
       <div class="saldoValor" id="saldoAtual">R$ 0,00</div>
     </div>
+
+    <div class="box avisoTroca" id="avisoPeriodoTroca"></div>
 
     <div class="box">
       <div class="listHeader">
@@ -575,14 +772,6 @@ textarea:focus{
       </div>
 
       <div id="listaDesejos" class="wishList"></div>
-    </div>
-
-    <div class="box">
-      <button class="footerBtn" onclick="alternarAtendidos()">🌟 Desejos Atendidos</button>
-
-      <div id="painelAtendidos" class="atendidosPanel">
-        <div id="listaAtendidos" class="wishList"></div>
-      </div>
     </div>
 
     <div class="footerMiniAction">
@@ -596,29 +785,86 @@ textarea:focus{
   <div class="modal">
     <h2 class="modalTitle" id="modalTitulo">Novo desejo</h2>
 
+    <div class="grid2Desejo">
+      <div class="field">
+        <label for="campoEmoji">Ícone</label>
+        <input id="campoEmoji" maxlength="3" placeholder="✨" />
+      </div>
+      <div class="field">
+        <label for="campoCategoria">Categoria</label>
+        <select id="campoCategoria">
+          <option selected>Maya</option>
+        </select>
+      </div>
+    </div>
+
     <div class="field">
-      <label for="campoDesejo">Desejo</label>
+      <label for="campoDesejo">Nome do desejo</label>
       <input type="text" id="campoDesejo" maxlength="100" placeholder="Ex.: Boneca, passeio, livro..." />
     </div>
 
-    <div class="field">
-      <label for="campoLocal">Local (se tiver)</label>
-      <input type="text" id="campoLocal" maxlength="100" placeholder="Ex.: Shopping, livraria..." />
+    <div class="grid2Desejo">
+      <div class="field">
+        <label for="campoValor">Valor estimado</label>
+        <input type="text" id="campoValor" inputmode="decimal" placeholder="0,00" />
+        <div class="ajudaCampo">Se você digitar 50, ele vira 50,00 automaticamente.</div>
+      </div>
+      <div class="field">
+        <label for="campoGuardado">Valor guardado</label>
+        <input type="text" id="campoGuardado" inputmode="decimal" placeholder="0,00" />
+        <div class="ajudaCampo">O mesmo acontece aqui.</div>
+      </div>
+    </div>
+
+    <div class="grid2Desejo">
+      <div class="field">
+        <label for="campoData">Data desejada</label>
+        <input type="date" id="campoData" />
+      </div>
+      <div class="field">
+        <label for="campoPrioridade">Prioridade</label>
+        <select id="campoPrioridade">
+          <option>Baixa</option>
+          <option selected>Média</option>
+          <option>Alta</option>
+        </select>
+      </div>
     </div>
 
     <div class="field">
-      <label for="campoData">Quero alcançar essa Meta até o dia</label>
-      <input type="date" id="campoData" />
+      <label for="campoLocal">Próximo pequeno passo</label>
+      <input type="text" id="campoLocal" maxlength="150" placeholder="Qual é a menor ação possível?" />
     </div>
 
     <div class="field">
-      <label for="campoValor">Valor</label>
-      <input type="text" id="campoValor" inputmode="numeric" placeholder="R$ 0,00" />
+      <label for="campoObservacoes">Observações</label>
+      <textarea id="campoObservacoes" placeholder="Por que esse desejo é importante?"></textarea>
     </div>
 
     <div class="modalActions">
       <button class="modalBtn cancel" onclick="fecharModal()">Cancelar</button>
-      <button class="modalBtn save" onclick="salvarDesejo()">Concluir</button>
+      <button class="modalBtn save" onclick="salvarDesejo()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalConfirmarRealizar">
+  <div class="modal">
+    <h2 class="modalTitle">Realizar desejo 💫</h2>
+    <div class="modalTexto" id="textoConfirmarRealizar"></div>
+    <div class="modalActions">
+      <button class="modalBtn save" onclick="confirmarRealizarDesejo()">Com certeza!</button>
+      <button class="modalBtn cancel" onclick="fecharModalConfirmarRealizar()">Ainda vou decidir</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalAviso">
+  <div class="modal">
+    <h2 class="modalTitle" id="modalAvisoTitulo">Aviso</h2>
+    <div class="modalTexto" id="modalAvisoTexto"></div>
+    <div class="modalBtns">
+      <button class="save" onclick="fecharModalAviso()">Fechar</button>
     </div>
   </div>
 </div>
@@ -641,10 +887,14 @@ textarea:focus{
 
 <script>
 const CHAVE_DESEJOS = "mayaListaDesejos";
+const CHAVE_CONSUMO_CONSCIENTE = "jardim_desejos_v1";
 const CHAVE_ATENDIDOS = "mayaDesejosAtendidos";
+const CHAVE_SALDO_MAYA = "mayaSaldoAtual";
+const CHAVE_HISTORICO_PREMIACAO = "mayaHistoricoPremiacao";
 const CHAVE_FUTURAS_EDICOES_LISTA_DE_DESEJOS = "futuras_edicoes_maya_lista_de_desejos";
 
 let editandoId = null;
+let desejoSelecionadoParaRealizar = null;
 
 function lerJSON(chave) {
   try {
@@ -656,6 +906,61 @@ function lerJSON(chave) {
 
 function salvarJSON(chave, valor) {
   localStorage.setItem(chave, JSON.stringify(valor));
+}
+
+function lerDesejosConsumoConsciente(){
+  return lerJSON(CHAVE_CONSUMO_CONSCIENTE);
+}
+
+function salvarDesejosConsumoConsciente(lista){
+  salvarJSON(CHAVE_CONSUMO_CONSCIENTE, lista);
+}
+
+function converterMayaParaConsumo(item, concluido=false){
+  return {
+    id: item.origemDesejosId || ("maya_" + item.id),
+    origemMayaId: item.id,
+    icone: item.emoji || "✨",
+    nome: item.desejo || "",
+    categoria: "Maya",
+    valor: Number(item.valor || 0),
+    guardado: Number(item.valorGuardado || 0),
+    dataMeta: item.data || "",
+    prioridade: item.prioridade || "Média",
+    passo: item.local || "",
+    obs: item.observacoes || "",
+    concluido: Boolean(concluido),
+    criadoEm: item.criadoEm || new Date().toISOString(),
+    atualizadoEm: new Date().toISOString()
+  };
+}
+
+function sincronizarMayaComConsumo(item, concluido=false){
+  if(!item || !item.id) return;
+  const lista = lerDesejosConsumoConsciente();
+  const indice = lista.findIndex(x =>
+    x.id === item.origemDesejosId ||
+    x.origemMayaId === item.id
+  );
+  const convertido = converterMayaParaConsumo(item, concluido);
+  if(indice >= 0){
+    convertido.id = lista[indice].id;
+    convertido.criadoEm = lista[indice].criadoEm || convertido.criadoEm;
+    lista[indice] = {...lista[indice], ...convertido};
+    item.origemDesejosId = lista[indice].id;
+  }else{
+    lista.unshift(convertido);
+    item.origemDesejosId = convertido.id;
+  }
+  salvarDesejosConsumoConsciente(lista);
+}
+
+function excluirDoConsumoPorMaya(item){
+  if(!item) return;
+  const lista = lerDesejosConsumoConsciente().filter(x =>
+    x.id !== item.origemDesejosId && x.origemMayaId !== item.id
+  );
+  salvarDesejosConsumoConsciente(lista);
 }
 
 function gerarId() {
@@ -676,6 +981,31 @@ function formatarData(dataISO) {
   return `${dia}/${mes}/${ano}`;
 }
 
+function formatarDataHora(data = new Date()){
+  return data.toLocaleString("pt-BR", {
+    day:"2-digit",
+    month:"2-digit",
+    year:"numeric",
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+}
+
+function estaNoPeriodoDeTroca(date = new Date()){
+  const dia = date.getDate();
+  return dia >= 3 && dia <= 7;
+}
+
+function atualizarAvisoPeriodoTroca(){
+  const aviso = document.getElementById("avisoPeriodoTroca");
+
+  if(estaNoPeriodoDeTroca()){
+    aviso.textContent = "✨ Chegou seu momento de escolher! Entre os dias 03 e 07, você pode realizar desejos usando suas moedinhas.";
+  }else{
+    aviso.textContent = "🗓️ Seu momento de escolher acontece entre os dias 03 e 07 de cada mês. Até lá, continue juntando moedinhas ✨";
+  }
+}
+
 function mascaraMoeda(input) {
   let valor = input.value.replace(/\D/g, "");
   valor = (Number(valor) / 100).toFixed(2) + "";
@@ -692,7 +1022,12 @@ function extrairNumeroMoeda(texto) {
 }
 
 function obterSaldoAtualMaya() {
-  return Number(localStorage.getItem("mayaSaldoAtual")) || 0;
+  return Number(localStorage.getItem(CHAVE_SALDO_MAYA)) || 0;
+}
+
+function salvarSaldoAtualMaya(valor){
+  const saldoSeguro = Math.max(0, Number(valor || 0));
+  localStorage.setItem(CHAVE_SALDO_MAYA, String(saldoSeguro));
 }
 
 function atualizarSaldo() {
@@ -706,13 +1041,25 @@ function calcularPercentualConquista(valorDesejo, saldoAtual) {
   return Math.max(0, Math.min(100, percentual));
 }
 
+function formatarCampoMoedaMaya(id){
+  const input=document.getElementById(id);
+  if(!input || !input.value.trim()) return;
+  const valor=extrairNumeroMoeda(input.value);
+  input.value=valor.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
 function abrirModalNovo() {
   editandoId = null;
   document.getElementById("modalTitulo").textContent = "Novo desejo";
   document.getElementById("campoDesejo").value = "";
+  document.getElementById("campoEmoji").value = "";
+  document.getElementById("campoCategoria").value = "Maya";
   document.getElementById("campoLocal").value = "";
   document.getElementById("campoData").value = "";
   document.getElementById("campoValor").value = "";
+  document.getElementById("campoGuardado").value = "";
+  document.getElementById("campoPrioridade").value = "Média";
+  document.getElementById("campoObservacoes").value = "";
   document.getElementById("modalOverlay").classList.add("show");
 }
 
@@ -724,9 +1071,14 @@ function abrirModalEditar(id) {
   editandoId = id;
   document.getElementById("modalTitulo").textContent = "Editar desejo";
   document.getElementById("campoDesejo").value = item.desejo || "";
+  document.getElementById("campoEmoji").value = item.emoji || obterEmojiDesejo(item.desejo);
+  document.getElementById("campoCategoria").value = "Maya";
   document.getElementById("campoLocal").value = item.local || "";
   document.getElementById("campoData").value = item.data || "";
-  document.getElementById("campoValor").value = formatarMoeda(item.valor || 0);
+  document.getElementById("campoValor").value = Number(item.valor||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById("campoGuardado").value = Number(item.valorGuardado||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById("campoPrioridade").value = item.prioridade || "Média";
+  document.getElementById("campoObservacoes").value = item.observacoes || "";
   document.getElementById("modalOverlay").classList.add("show");
 }
 
@@ -735,44 +1087,46 @@ function fecharModal() {
 }
 
 function salvarDesejo() {
+  formatarCampoMoedaMaya("campoValor");
+  formatarCampoMoedaMaya("campoGuardado");
   const desejo = document.getElementById("campoDesejo").value.trim();
+  const emoji = document.getElementById("campoEmoji").value.trim() || "✨";
   const local = document.getElementById("campoLocal").value.trim();
   const data = document.getElementById("campoData").value;
-  const valorTexto = document.getElementById("campoValor").value.trim();
-  const valor = extrairNumeroMoeda(valorTexto);
+  const valor = extrairNumeroMoeda(document.getElementById("campoValor").value.trim());
+  const valorGuardado = extrairNumeroMoeda(document.getElementById("campoGuardado").value.trim());
+  const prioridade = document.getElementById("campoPrioridade").value;
+  const observacoes = document.getElementById("campoObservacoes").value.trim();
 
   if (!desejo) {
-    alert("Preencha o campo Desejo.");
-    return;
-  }
-
-  if (!valor || valor <= 0) {
-    alert("Preencha um valor válido.");
+    abrirModalAviso("Campo obrigatório", "Preencha o nome do desejo.");
     return;
   }
 
   const desejos = lerJSON(CHAVE_DESEJOS);
+  let itemSalvo;
 
   if (editandoId) {
     const indice = desejos.findIndex(d => d.id === editandoId);
     if (indice !== -1) {
       desejos[indice] = {
-        ...desejos[indice],
-        desejo,
-        local,
-        data,
-        valor
+        ...desejos[indice], desejo, emoji, local, data, valor, valorGuardado,
+        prioridade, observacoes, categoria:"Maya", atualizadoEm:new Date().toISOString()
       };
+      itemSalvo = desejos[indice];
     }
   } else {
-    desejos.push({
-      id: gerarId(),
-      desejo,
-      local,
-      data,
-      valor,
-      criadoEm: new Date().toISOString()
-    });
+    itemSalvo = {
+      id: gerarId(), desejo, emoji, local, data, valor, valorGuardado,
+      prioridade, observacoes, categoria:"Maya", criadoEm:new Date().toISOString()
+    };
+    desejos.push(itemSalvo);
+  }
+
+  if(itemSalvo){
+    sincronizarMayaComConsumo(itemSalvo, false);
+    const indice = desejos.findIndex(d => d.id === itemSalvo.id);
+    if(indice !== -1) desejos[indice] = itemSalvo;
   }
 
   salvarJSON(CHAVE_DESEJOS, desejos);
@@ -785,64 +1139,153 @@ function excluirDesejo(id) {
   if (!confirmar) return;
 
   let desejos = lerJSON(CHAVE_DESEJOS);
+  const item = desejos.find(d => d.id === id);
+  excluirDoConsumoPorMaya(item);
   desejos = desejos.filter(d => d.id !== id);
   salvarJSON(CHAVE_DESEJOS, desejos);
   renderizarDesejos();
 }
 
-function utilizarDesejo(id) {
-  const desejos = lerJSON(CHAVE_DESEJOS);
-  const atendidos = lerJSON(CHAVE_ATENDIDOS);
-  const saldo = obterSaldoAtualMaya();
+function abrirModalAviso(titulo, texto){
+  document.getElementById("modalAvisoTitulo").textContent = titulo;
+  document.getElementById("modalAvisoTexto").innerHTML = texto;
+  document.getElementById("modalAviso").classList.add("show");
+}
 
+function fecharModalAviso(){
+  document.getElementById("modalAviso").classList.remove("show");
+}
+
+function abrirAvisoForaPeriodo(){
+  abrirModalAviso(
+    "Ainda não chegou o momento de escolher 💛",
+    "As trocas acontecem entre os dias <strong>03 e 07</strong> de cada mês.<br><br>Enquanto isso, você pode continuar juntando suas moedinhas ✨<br>para conquistar coisas ainda mais especiais 🌈🎁"
+  );
+}
+
+function realizarDesejo(id) {
+  const desejos = lerJSON(CHAVE_DESEJOS);
+  const saldo = obterSaldoAtualMaya();
   const item = desejos.find(d => d.id === id);
+
   if (!item) return;
 
-  if (saldo < item.valor) {
-    alert("A Maya ainda não atingiu a pontuação/valor necessário para utilizar este desejo.");
+  if(!estaNoPeriodoDeTroca()){
+    abrirAvisoForaPeriodo();
     return;
   }
 
-  const confirmar = confirm(`Confirmar utilização do desejo "${item.desejo}"?`);
-  if (!confirmar) return;
+  if (saldo < item.valor) {
+    abrirModalAviso(
+      "Ainda falta um pouquinho 🌱",
+      `A Maya ainda não tem saldo suficiente para realizar esse desejo.<br><br>Saldo atual: <strong>${formatarMoeda(saldo)}</strong><br>Valor do desejo: <strong>${formatarMoeda(item.valor)}</strong>`
+    );
+    return;
+  }
 
-  const restantes = desejos.filter(d => d.id !== id);
+  const saldoDepois = saldo - item.valor;
+  desejoSelecionadoParaRealizar = item;
+
+  document.getElementById("textoConfirmarRealizar").innerHTML =
+    `Que legal Maya! Se você realizar esse desejo, seu saldo será <strong>${formatarMoeda(saldoDepois)}</strong>.<br><br>Você confirma que quer realizar esse desejo?`;
+
+  document.getElementById("modalConfirmarRealizar").classList.add("show");
+}
+
+function fecharModalConfirmarRealizar(){
+  document.getElementById("modalConfirmarRealizar").classList.remove("show");
+  desejoSelecionadoParaRealizar = null;
+}
+
+function confirmarRealizarDesejo(){
+  if(!desejoSelecionadoParaRealizar) return;
+
+  const item = desejoSelecionadoParaRealizar;
+  const saldoAntes = obterSaldoAtualMaya();
+  const saldoDepois = Math.max(0, saldoAntes - Number(item.valor || 0));
+
+  let desejos = lerJSON(CHAVE_DESEJOS);
+  const atendidos = lerJSON(CHAVE_ATENDIDOS);
+  const historico = lerJSON(CHAVE_HISTORICO_PREMIACAO);
+
+  sincronizarMayaComConsumo(item, true);
+  desejos = desejos.filter(d => d.id !== item.id);
 
   atendidos.push({
     ...item,
-    utilizadoEm: new Date().toISOString()
+    realizadoEm: new Date().toISOString(),
+    utilizadoEm: new Date().toISOString(),
+    saldoAntes,
+    saldoDepois
   });
 
-  salvarJSON(CHAVE_DESEJOS, restantes);
-  salvarJSON(CHAVE_ATENDIDOS, atendidos);
+  historico.push({
+    id: gerarId(),
+    data: new Date().toISOString(),
+    moedas: saldoAntes,
+    escolha: `Desejo realizado: ${item.desejo}`,
+    valor: Number(item.valor || 0),
+    saldoAposEscolha: saldoDepois,
+    origem: "lista-de-desejos"
+  });
 
+  salvarJSON(CHAVE_DESEJOS, desejos);
+  salvarJSON(CHAVE_ATENDIDOS, atendidos);
+  salvarJSON(CHAVE_HISTORICO_PREMIACAO, historico);
+  salvarSaldoAtualMaya(saldoDepois);
+
+  fecharModalConfirmarRealizar();
+  atualizarSaldo();
   renderizarDesejos();
-  renderizarAtendidos();
+
+  abrirModalAviso(
+    "Desejo realizado! ✨",
+    `Que alegria, Maya! Seu desejo foi para o registro de desejos atendidos. Seu novo saldo é <strong>${formatarMoeda(saldoDepois)}</strong>. 💫🎁`
+  );
 }
 
-function alternarAtendidos() {
-  document.getElementById("painelAtendidos").classList.toggle("show");
-  renderizarAtendidos();
+function obterEmojiDesejo(texto){
+  const t = String(texto || "").toLowerCase();
+  if(t.includes("boneca")) return "🧸";
+  if(t.includes("livro") || t.includes("história")) return "📚";
+  if(t.includes("passeio") || t.includes("parque") || t.includes("shopping")) return "🎠";
+  if(t.includes("roupa") || t.includes("vestido") || t.includes("sapato")) return "👗";
+  if(t.includes("jogo") || t.includes("game")) return "🎮";
+  if(t.includes("arte") || t.includes("desenho") || t.includes("pintura")) return "🎨";
+  if(t.includes("patins") || t.includes("bicicleta")) return "🛼";
+  if(t.includes("doce") || t.includes("sorvete") || t.includes("bolo")) return "🍦";
+  return "🎁";
 }
 
 function criarCardDesejo(item) {
   const saldo = obterSaldoAtualMaya();
-  const liberado = saldo >= item.valor;
+  const saldoSuficiente = saldo >= item.valor;
+  const periodoLiberado = estaNoPeriodoDeTroca();
   const percentual = calcularPercentualConquista(item.valor, saldo);
 
   const card = document.createElement("div");
   card.className = "wishItem";
 
-  const nome = document.createElement("div");
-  nome.className = "wishNome";
-  nome.textContent = item.desejo;
+  const falta = Math.max(0, Number(item.valor || 0) - saldo);
 
-  const info = document.createElement("div");
-  info.className = "wishInfo";
-  info.innerHTML = `
-    <div>Local: ${item.local || "—"}</div>
-    <div>Alcançar meta até: ${item.data ? formatarData(item.data) : "—"}</div>
-    <div>Valor: ${formatarMoeda(item.valor || 0)}</div>
+  const topo = document.createElement("div");
+  topo.className = "wishTop";
+  topo.innerHTML = `
+    <div class="wishIcon">${item.emoji || obterEmojiDesejo(item.desejo)}</div>
+    <div class="wishNome">${item.desejo}</div>
+  `;
+
+  const dinheiro = document.createElement("div");
+  dinheiro.className = "wishMoneyGrid";
+  dinheiro.innerHTML = `
+    <div class="moneyMini">
+      <div class="moneyMiniLabel">💰 Já tem</div>
+      <div class="moneyMiniValor">${formatarMoeda(Math.min(saldo, Number(item.valor || 0)))}</div>
+    </div>
+    <div class="moneyMini">
+      <div class="moneyMiniLabel">🎯 Falta</div>
+      <div class="moneyMiniValor">${formatarMoeda(falta)}</div>
+    </div>
   `;
 
   const progresso = document.createElement("div");
@@ -852,26 +1295,50 @@ function criarCardDesejo(item) {
     <div class="barraExterna">
       <div class="barraInterna" style="width:${percentual}%;"></div>
     </div>
+    <div class="progressoSubTexto">${percentual >= 100 ? "Prontinho para realizar no período de escolha! 🌟" : "Cada ponto e moeda te deixa mais próxima de alcançar sua meta💫"}</div>
   `;
+
+  const info = document.createElement("div");
+  info.className = "wishInfo";
+info.innerHTML = `
+  <div style="
+    font-size:11.5px;
+    color:rgba(63,111,79,0.8);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  ">
+    📍 Descrição: ${item.local || "—"}
+  </div>
+
+  <div style="
+    font-size:11.5px;
+    color:rgba(63,111,79,0.8);
+    margin-top:6px;
+  ">
+    📅 Data da Meta: ${item.data ? formatarData(item.data) : "—"} 
+    • 💵 ${formatarMoeda(item.valor || 0)}
+  </div>
+`;
 
   const actions = document.createElement("div");
   actions.className = "wishActions";
   actions.innerHTML = `
     <button class="actionBtn" type="button">Editar</button>
-    <button class="actionBtn primary" type="button" ${liberado ? "" : "disabled"}>Utilizar</button>
+    <button class="actionBtn primary ${periodoLiberado && saldoSuficiente ? "" : "disabledVisual"}" type="button">Realizar</button>
     <button class="actionBtn danger" type="button">Excluir</button>
   `;
 
-  const [btnEditar, btnUtilizar, btnExcluir] = actions.querySelectorAll("button");
+  const [btnEditar, btnRealizar, btnExcluir] = actions.querySelectorAll("button");
 
   btnEditar.onclick = (e) => {
     e.stopPropagation();
     abrirModalEditar(item.id);
   };
 
-  btnUtilizar.onclick = (e) => {
+  btnRealizar.onclick = (e) => {
     e.stopPropagation();
-    utilizarDesejo(item.id);
+    realizarDesejo(item.id);
   };
 
   btnExcluir.onclick = (e) => {
@@ -886,9 +1353,10 @@ function criarCardDesejo(item) {
     actions.classList.toggle("show");
   });
 
-  card.appendChild(nome);
-  card.appendChild(info);
+  card.appendChild(topo);
+  card.appendChild(dinheiro);
   card.appendChild(progresso);
+  card.appendChild(info);
   card.appendChild(actions);
 
   return card;
@@ -896,6 +1364,7 @@ function criarCardDesejo(item) {
 
 function renderizarDesejos() {
   atualizarSaldo();
+  atualizarAvisoPeriodoTroca();
 
   const container = document.getElementById("listaDesejos");
   container.innerHTML = "";
@@ -910,35 +1379,6 @@ function renderizarDesejos() {
 
   desejos.forEach(item => {
     container.appendChild(criarCardDesejo(item));
-  });
-}
-
-function renderizarAtendidos() {
-  const container = document.getElementById("listaAtendidos");
-  container.innerHTML = "";
-
-  const atendidos = lerJSON(CHAVE_ATENDIDOS)
-    .sort((a, b) => new Date(b.utilizadoEm) - new Date(a.utilizadoEm));
-
-  if (atendidos.length === 0) {
-    container.innerHTML = `<div class="empty">Nenhum desejo atendido ainda.</div>`;
-    return;
-  }
-
-  atendidos.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "wishItem";
-    card.style.cursor = "default";
-    card.innerHTML = `
-      <div class="wishNome">${item.desejo}</div>
-      <div class="wishInfo">
-        <div>Local: ${item.local || "—"}</div>
-        <div>Alcançar meta até: ${item.data ? formatarData(item.data) : "—"}</div>
-        <div>Valor: ${formatarMoeda(item.valor || 0)}</div>
-        <div><strong>Utilizado em:</strong> ${new Date(item.utilizadoEm).toLocaleDateString("pt-BR")}</div>
-      </div>
-    `;
-    container.appendChild(card);
   });
 }
 
@@ -973,17 +1413,34 @@ function atualizarLinhaTempo(){
   document.getElementById("linhaTempoData").textContent = `• ${pad2(agora.getDate())}/${pad2(agora.getMonth()+1)}`;
 }
 
-document.getElementById("campoValor").addEventListener("input", function() {
-  mascaraMoeda(this);
-});
+function atualizarTela(){
+  atualizarLinhaTempo();
+  renderizarDesejos();
+}
+
+document.getElementById("campoValor").addEventListener("blur", function(){ formatarCampoMoedaMaya("campoValor"); });
+document.getElementById("campoGuardado").addEventListener("blur", function(){ formatarCampoMoedaMaya("campoGuardado"); });
 
 window.addEventListener("load", () => {
-  atualizarLinhaTempo();
+  atualizarTela();
   setInterval(atualizarLinhaTempo, 1000);
 });
 
-renderizarDesejos();
-renderizarAtendidos();
+window.addEventListener("pageshow", atualizarTela);
+window.addEventListener("focus", atualizarTela);
+window.addEventListener("storage", atualizarTela);
+
+window.addEventListener("click", function(e){
+  const modalOverlay = document.getElementById("modalOverlay");
+  const modalConfirmarRealizar = document.getElementById("modalConfirmarRealizar");
+  const modalAviso = document.getElementById("modalAviso");
+  const modalFuturasEdicoes = document.getElementById("modalFuturasEdicoes");
+
+  if(e.target === modalOverlay) fecharModal();
+  if(e.target === modalConfirmarRealizar) fecharModalConfirmarRealizar();
+  if(e.target === modalAviso) fecharModalAviso();
+  if(e.target === modalFuturasEdicoes) fecharModalFuturasEdicoes();
+});
 </script>
 
 </body>

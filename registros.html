@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Registros — Jardim da Rotina</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fundo:#F8F7F1;
+  --card:#FFFDF8;
+  --texto:#2F332D;
+  --suave:#77786F;
+  --borda:#E8E1D4;
+  --salvia:#7F9271;
+  --salvia-escuro:#516448;
+  --salvia-claro:#EAF2E7;
+  --rosa:#E8C8BF;
+  --vermelho:#A45F5F;
+  --fonte:'Poppins',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%}
+body{
+  font-family:var(--fonte);
+  color:var(--texto);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:14px 12px 96px;
+  background:
+    radial-gradient(circle at 14% 4%,rgba(232,243,226,.75),transparent 32%),
+    radial-gradient(circle at 95% 16%,rgba(243,236,221,.80),transparent 30%),
+    linear-gradient(180deg,#FEFCF7 0%,var(--fundo) 100%);
+}
+.pagina{width:100%;max-width:420px}
+.card{
+  width:100%;
+  min-height:calc(100vh - 28px);
+  background:rgba(255,253,248,.94);
+  border:1px solid rgba(232,225,212,.92);
+  border-radius:30px;
+  padding:18px 14px 20px;
+  box-shadow:0 14px 34px rgba(76,82,62,.11);
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  gap:13px;
+}
+.card:before{
+  content:"";
+  position:absolute;
+  width:180px;height:180px;right:-80px;top:-70px;border-radius:50%;
+  background:rgba(234,243,232,.72);
+}
+.card:after{
+  content:"";
+  position:absolute;
+  width:170px;height:170px;left:-95px;bottom:-65px;border-radius:50%;
+  background:rgba(243,236,221,.62);
+}
+.card>*{position:relative;z-index:1}
+.topo{
+  position:relative;
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) 82px;
+  align-items:start;
+  gap:8px;
+  min-height:62px;
+}
+.voltar{
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--borda);background:#fff;color:var(--salvia-escuro);
+  font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.centro{
+  position:absolute;left:50%;top:0;transform:translateX(-50%);
+  width:290px;max-width:calc(100% - 96px);text-align:center;
+}
+.titulo{color:#40513B;font-size:20px;font-weight:500;line-height:1.15;white-space:nowrap}
+.subtitulo{color:var(--suave);font-size:10.5px;margin-top:3px;white-space:nowrap}
+.dataTopo{grid-column:3;justify-self:end;text-align:right;color:#6F756C}
+.hora{color:#B8807B;font-size:14px;font-weight:500;line-height:1.1}
+.dataLinha{font-size:10.5px;line-height:1.1}
+
+.intro{
+  background:rgba(234,243,232,.82);
+  border:1px solid rgba(220,230,214,.95);
+  border-radius:18px;
+  padding:13px 14px;
+  text-align:center;
+}
+.intro strong{display:block;color:#40513B;font-size:13px;font-weight:500}
+.intro p{margin-top:4px;color:#687062;font-size:10.5px;line-height:1.45}
+
+.adicionar{
+  width:100%;min-height:54px;border:none;border-radius:17px;
+  background:var(--salvia);color:#fff;font:500 13px var(--fonte);
+  cursor:pointer;box-shadow:0 7px 15px rgba(111,141,98,.20);
+}
+.filtros{display:flex;gap:7px}
+.filtros button{
+  flex:1;border:1px solid var(--borda);background:#fff;color:#687062;
+  border-radius:13px;padding:9px 6px;font:10.5px var(--fonte);cursor:pointer;
+}
+.filtros button.ativo{background:var(--salvia-claro);border-color:#BFD0B7;color:#4F654A;font-weight:500}
+
+.lista{display:flex;flex-direction:column;gap:10px}
+.vazio{
+  border:1px dashed #CFC8BC;border-radius:18px;padding:22px 16px;
+  text-align:center;background:rgba(255,255,255,.75);color:var(--suave);
+  font-size:11px;line-height:1.55;
+}
+.registro{
+  background:#fff;border:1px solid var(--borda);border-radius:18px;
+  padding:13px;box-shadow:0 7px 18px rgba(76,82,62,.07);
+}
+.registroTopo{display:flex;align-items:flex-start;gap:8px}
+.registroData{
+  flex:1;color:#53644F;font-size:11px;font-weight:500;
+}
+.registroAcoes{display:flex;gap:5px}
+.registroAcoes button{
+  width:30px;height:30px;border:none;border-radius:9px;
+  background:#F1F0EA;color:#5F675A;cursor:pointer;
+}
+.registroAcoes .excluir{color:var(--vermelho);background:#F7ECEA}
+.registroTexto{
+  margin-top:8px;color:#41453F;font-size:12px;line-height:1.55;white-space:pre-wrap;
+}
+.midias{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:10px}
+.midia{
+  border-radius:13px;overflow:hidden;background:#F2F3EF;border:1px solid #E7E5DE;
+  min-height:90px;display:flex;align-items:center;justify-content:center;
+}
+.midia img,.midia video{width:100%;height:140px;object-fit:cover;display:block}
+.midiaUnica{grid-column:1/-1}
+.midiaUnica img,.midiaUnica video{height:auto;max-height:320px}
+
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.35);
+  display:none;justify-content:center;align-items:center;padding:16px;z-index:999;
+}
+.overlay.show{display:flex}
+.modal{
+  width:min(370px,100%);max-height:calc(100vh - 32px);overflow:auto;
+  background:#FFFDF8;border:1px solid var(--borda);border-radius:23px;
+  padding:18px;box-shadow:0 16px 42px rgba(0,0,0,.18);
+  display:flex;flex-direction:column;gap:10px;
+}
+.modal h2{text-align:center;color:#40513B;font-size:18px;font-weight:500}
+.modalDesc{text-align:center;color:var(--suave);font-size:10.5px;line-height:1.45;margin-top:-3px}
+.campo{display:flex;flex-direction:column;gap:4px}
+.campo label{color:#343832;font-size:12px;font-weight:500}
+.ajuda{color:#898B84;font-size:9.5px;line-height:1.35}
+input,textarea{
+  width:100%;border:1px solid var(--borda);border-radius:13px;background:#fff;
+  padding:11px 12px;font:12px var(--fonte);outline:none;
+}
+textarea{height:150px;resize:vertical}
+input:focus,textarea:focus{border-color:var(--salvia);box-shadow:0 0 0 3px rgba(127,146,113,.13)}
+.arquivosLabel{
+  min-height:48px;border:1px dashed var(--salvia);border-radius:14px;
+  background:#fff;color:#50634B;font-size:11px;display:flex;align-items:center;
+  justify-content:center;text-align:center;padding:10px;cursor:pointer;
+}
+.arquivosLabel input{display:none}
+.previewArquivos{display:flex;flex-direction:column;gap:6px}
+.arquivoPendente{
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  padding:8px 10px;background:#F2F4EF;border-radius:11px;font-size:10px;color:#62685F;
+}
+.arquivoPendente button{border:none;background:transparent;color:var(--vermelho);cursor:pointer}
+.botoes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.botoes button{min-height:44px;border:none;border-radius:14px;font:12px var(--fonte);cursor:pointer}
+.cancelar{background:#EEEDE8;color:#555A52}
+.salvar{background:var(--salvia);color:#fff}
+.senhaInput{text-align:center;font-size:18px;letter-spacing:3px}
+.erro{display:none;color:#A64E4E;font-size:11px;text-align:center}
+
+@media(max-width:390px){
+  .centro{width:270px}
+  .titulo{font-size:19px}
+}
+</style>
+</head>
+<body>
+
+<div class="pagina">
+  <main class="card">
+    <header class="topo">
+      <button class="voltar" onclick="location.href='index.html'">←</button>
+      <div class="centro">
+        <h1 class="titulo">📝 Registros</h1>
+        <div class="subtitulo">Memórias e informações importantes da maternidade</div>
+      </div>
+      <div class="dataTopo">
+        <div id="horaTopo" class="hora"></div>
+        <div id="diaTopo" class="dataLinha"></div>
+        <div id="dataTopo" class="dataLinha"></div>
+      </div>
+    </header>
+
+    <section class="intro">
+      <strong>Um espaço privado para registrar o que importa</strong>
+      <p>Adicione relatos por escrito, datas, fotos e vídeos para consultar depois.</p>
+    </section>
+
+    <button class="adicionar" onclick="abrirNovoRegistro()">＋ Adicionar registro</button>
+
+    <div class="filtros">
+      <button id="filtroRecentes" class="ativo" onclick="mudarOrdem('recentes')">Mais recentes</button>
+      <button id="filtroAntigos" onclick="mudarOrdem('antigos')">Mais antigos</button>
+    </div>
+
+    <section id="listaRegistros" class="lista"></section>
+  </main>
+</div>
+
+<div id="modalSenha" class="overlay show">
+  <div class="modal">
+    <h2>🔐 Registros protegidos</h2>
+    <p class="modalDesc">Digite a senha para acessar informações privadas sobre a maternidade.</p>
+    <div class="campo">
+      <label>Senha</label>
+      <span class="ajuda">Use a senha definida para esta página.</span>
+      <input id="senhaInput" class="senhaInput" type="password" placeholder="••••" inputmode="numeric" maxlength="4">
+    </div>
+    <div id="erroSenha" class="erro">Senha incorreta. Tente novamente.</div>
+    <div class="botoes">
+      <button class="cancelar" onclick="location.href='index.html'">Voltar</button>
+      <button class="salvar" onclick="validarSenha()">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalRegistro" class="overlay">
+  <div class="modal">
+    <h2 id="tituloModalRegistro">Novo registro</h2>
+    <p class="modalDesc">Registre uma informação, lembrança ou acontecimento importante.</p>
+
+    <input id="registroId" type="hidden">
+
+    <div class="campo">
+      <label>Data</label>
+      <span class="ajuda">Informe quando o acontecimento ocorreu.</span>
+      <input id="registroData" type="date">
+    </div>
+
+    <div class="campo">
+      <label>Registro escrito</label>
+      <span class="ajuda">Descreva o fato com as informações que deseja preservar.</span>
+      <textarea id="registroTexto" placeholder="Escreva aqui..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Fotos ou vídeos</label>
+      <span class="ajuda">Você pode selecionar mais de um arquivo do dispositivo.</span>
+      <label class="arquivosLabel">
+        <span>📎 Escolher fotos ou vídeos</span>
+        <input id="registroArquivos" type="file" accept="image/*,video/*" multiple onchange="prepararArquivos(event)">
+      </label>
+      <div id="previewArquivos" class="previewArquivos"></div>
+    </div>
+
+    <div class="botoes">
+      <button class="cancelar" onclick="fecharModalRegistro()">Cancelar</button>
+      <button class="salvar" onclick="salvarRegistro()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SENHA_REGISTROS="1234";
+const DB_NOME="jardim_registros_maternidade";
+const DB_VERSAO=1;
+const STORE_REGISTROS="registros";
+const STORE_MIDIAS="midias";
+
+let db=null;
+let ordemAtual="recentes";
+let arquivosPendentes=[];
+let midiasMantidas=[];
+
+function abrirBanco(){
+  return new Promise((resolve,reject)=>{
+    const req=indexedDB.open(DB_NOME,DB_VERSAO);
+    req.onupgradeneeded=()=>{
+      const banco=req.result;
+      if(!banco.objectStoreNames.contains(STORE_REGISTROS)){
+        const store=banco.createObjectStore(STORE_REGISTROS,{keyPath:"id",autoIncrement:true});
+        store.createIndex("data","data");
+      }
+      if(!banco.objectStoreNames.contains(STORE_MIDIAS)){
+        const store=banco.createObjectStore(STORE_MIDIAS,{keyPath:"id",autoIncrement:true});
+        store.createIndex("registroId","registroId");
+      }
+    };
+    req.onsuccess=()=>{db=req.result;resolve(db)};
+    req.onerror=()=>reject(req.error);
+  });
+}
+
+function tx(store,modo="readonly"){
+  return db.transaction(store,modo).objectStore(store);
+}
+
+function validarSenha(){
+  const input=document.getElementById("senhaInput");
+  const erro=document.getElementById("erroSenha");
+  if(input.value===SENHA_REGISTROS){
+    sessionStorage.setItem("registros_autorizado","1");
+    document.getElementById("modalSenha").classList.remove("show");
+    erro.style.display="none";
+    carregarRegistros();
+  }else{
+    erro.style.display="block";
+    input.select();
+  }
+}
+
+function hojeISO(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+
+function abrirNovoRegistro(){
+  document.getElementById("tituloModalRegistro").textContent="Novo registro";
+  document.getElementById("registroId").value="";
+  document.getElementById("registroData").value=hojeISO();
+  document.getElementById("registroTexto").value="";
+  document.getElementById("registroArquivos").value="";
+  arquivosPendentes=[];
+  midiasMantidas=[];
+  renderArquivosPendentes();
+  document.getElementById("modalRegistro").classList.add("show");
+}
+
+function fecharModalRegistro(){
+  document.getElementById("modalRegistro").classList.remove("show");
+  arquivosPendentes=[];
+  midiasMantidas=[];
+}
+
+function prepararArquivos(event){
+  const novos=[...(event.target.files||[])];
+  arquivosPendentes.push(...novos);
+  event.target.value="";
+  renderArquivosPendentes();
+}
+
+function removerArquivoPendente(indice){
+  arquivosPendentes.splice(indice,1);
+  renderArquivosPendentes();
+}
+
+function removerMidiaMantida(id){
+  midiasMantidas=midiasMantidas.filter(x=>x.id!==id);
+  renderArquivosPendentes();
+}
+
+function renderArquivosPendentes(){
+  const el=document.getElementById("previewArquivos");
+  const mantidas=midiasMantidas.map(x=>`
+    <div class="arquivoPendente">
+      <span>Arquivo já salvo</span>
+      <button onclick="removerMidiaMantida(${x.id})">remover</button>
+    </div>`).join("");
+  const novas=arquivosPendentes.map((f,i)=>`
+    <div class="arquivoPendente">
+      <span>${escapar(f.name)} • ${formatarTamanho(f.size)}</span>
+      <button onclick="removerArquivoPendente(${i})">remover</button>
+    </div>`).join("");
+  el.innerHTML=mantidas+novas;
+}
+
+function formatarTamanho(bytes){
+  if(bytes<1024*1024)return Math.round(bytes/1024)+" KB";
+  return (bytes/(1024*1024)).toFixed(1)+" MB";
+}
+
+function salvarRegistro(){
+  const id=Number(document.getElementById("registroId").value)||null;
+  const data=document.getElementById("registroData").value;
+  const texto=document.getElementById("registroTexto").value.trim();
+
+  if(!data){alert("Informe a data do registro.");return}
+  if(!texto && !arquivosPendentes.length && !midiasMantidas.length){
+    alert("Escreva uma informação ou adicione uma foto ou vídeo.");
+    return;
+  }
+
+  const transacao=db.transaction([STORE_REGISTROS,STORE_MIDIAS],"readwrite");
+  const registros=transacao.objectStore(STORE_REGISTROS);
+  const midias=transacao.objectStore(STORE_MIDIAS);
+
+  const registro={
+    data,
+    texto,
+    atualizadoEm:Date.now()
+  };
+  if(id)registro.id=id;
+
+  const req=id?registros.put(registro):registros.add(registro);
+
+  req.onsuccess=()=>{
+    const registroId=id||req.result;
+
+    if(id){
+      const idx=midias.index("registroId");
+      const busca=idx.openCursor(IDBKeyRange.only(registroId));
+      busca.onsuccess=e=>{
+        const cursor=e.target.result;
+        if(cursor){
+          if(!midiasMantidas.some(x=>x.id===cursor.value.id))cursor.delete();
+          cursor.continue();
+        }
+      };
+    }
+
+    arquivosPendentes.forEach(file=>{
+      midias.add({
+        registroId,
+        nome:file.name,
+        tipo:file.type,
+        blob:file,
+        criadoEm:Date.now()
+      });
+    });
+  };
+
+  transacao.oncomplete=()=>{
+    fecharModalRegistro();
+    carregarRegistros();
+  };
+  transacao.onerror=()=>alert("Não foi possível salvar o registro.");
+}
+
+function obterTodosRegistros(){
+  return new Promise((resolve,reject)=>{
+    const req=tx(STORE_REGISTROS).getAll();
+    req.onsuccess=()=>resolve(req.result||[]);
+    req.onerror=()=>reject(req.error);
+  });
+}
+
+function obterMidias(registroId){
+  return new Promise((resolve,reject)=>{
+    const req=tx(STORE_MIDIAS).index("registroId").getAll(IDBKeyRange.only(registroId));
+    req.onsuccess=()=>resolve(req.result||[]);
+    req.onerror=()=>reject(req.error);
+  });
+}
+
+async function carregarRegistros(){
+  const lista=await obterTodosRegistros();
+  lista.sort((a,b)=>{
+    const da=new Date(a.data+"T12:00:00").getTime();
+    const dbb=new Date(b.data+"T12:00:00").getTime();
+    return ordemAtual==="recentes"?dbb-da:da-dbb;
+  });
+
+  const el=document.getElementById("listaRegistros");
+  if(!lista.length){
+    el.innerHTML=`<div class="vazio">Nenhum registro criado ainda.<br>Toque em “Adicionar registro” para começar.</div>`;
+    return;
+  }
+
+  el.innerHTML="";
+  for(const registro of lista){
+    const midias=await obterMidias(registro.id);
+    const artigo=document.createElement("article");
+    artigo.className="registro";
+    artigo.innerHTML=`
+      <div class="registroTopo">
+        <div class="registroData">${formatarData(registro.data)}</div>
+        <div class="registroAcoes">
+          <button onclick="editarRegistro(${registro.id})" title="Editar">✎</button>
+          <button class="excluir" onclick="excluirRegistro(${registro.id})" title="Excluir">×</button>
+        </div>
+      </div>
+      ${registro.texto?`<div class="registroTexto">${escapar(registro.texto)}</div>`:""}
+      <div class="midias"></div>
+    `;
+
+    const area=artigo.querySelector(".midias");
+    if(!midias.length)area.remove();
+    else{
+      if(midias.length===1)area.children?.[0]?.classList?.add("midiaUnica");
+      midias.forEach((m,i)=>{
+        const wrap=document.createElement("div");
+        wrap.className="midia"+(midias.length===1?" midiaUnica":"");
+        const url=URL.createObjectURL(m.blob);
+        if((m.tipo||"").startsWith("video/")){
+          const video=document.createElement("video");
+          video.src=url;video.controls=true;video.preload="metadata";
+          wrap.appendChild(video);
+        }else{
+          const img=document.createElement("img");
+          img.src=url;img.alt=m.nome||"Foto do registro";
+          wrap.appendChild(img);
+        }
+        area.appendChild(wrap);
+      });
+    }
+    el.appendChild(artigo);
+  }
+}
+
+async function editarRegistro(id){
+  const req=tx(STORE_REGISTROS).get(id);
+  req.onsuccess=async()=>{
+    const r=req.result;
+    if(!r)return;
+    document.getElementById("tituloModalRegistro").textContent="Editar registro";
+    document.getElementById("registroId").value=r.id;
+    document.getElementById("registroData").value=r.data;
+    document.getElementById("registroTexto").value=r.texto||"";
+    arquivosPendentes=[];
+    midiasMantidas=await obterMidias(id);
+    renderArquivosPendentes();
+    document.getElementById("modalRegistro").classList.add("show");
+  };
+}
+
+function excluirRegistro(id){
+  if(!confirm("Excluir este registro e todos os arquivos anexados?"))return;
+  const t=db.transaction([STORE_REGISTROS,STORE_MIDIAS],"readwrite");
+  t.objectStore(STORE_REGISTROS).delete(id);
+  const idx=t.objectStore(STORE_MIDIAS).index("registroId");
+  const req=idx.openCursor(IDBKeyRange.only(id));
+  req.onsuccess=e=>{
+    const cursor=e.target.result;
+    if(cursor){cursor.delete();cursor.continue()}
+  };
+  t.oncomplete=carregarRegistros;
+}
+
+function mudarOrdem(ordem){
+  ordemAtual=ordem;
+  document.getElementById("filtroRecentes").classList.toggle("ativo",ordem==="recentes");
+  document.getElementById("filtroAntigos").classList.toggle("ativo",ordem==="antigos");
+  carregarRegistros();
+}
+
+function formatarData(iso){
+  const [a,m,d]=iso.split("-");
+  return `${d}/${m}/${a}`;
+}
+
+function escapar(texto){
+  return String(texto??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
+}
+
+function atualizarTempo(){
+  const a=new Date(),p=n=>String(n).padStart(2,"0");
+  const dias=["dom","seg","ter","qua","qui","sex","sáb"];
+  horaTopo.textContent=`${p(a.getHours())}:${p(a.getMinutes())}`;
+  diaTopo.textContent=`• ${dias[a.getDay()]}`;
+  dataTopo.textContent=`• ${p(a.getDate())}/${p(a.getMonth()+1)}`;
+}
+
+document.getElementById("senhaInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter")validarSenha();
+});
+
+window.addEventListener("load",async()=>{
+  atualizarTempo();
+  setInterval(atualizarTempo,1000);
+  try{
+    await abrirBanco();
+    if(sessionStorage.getItem("registros_autorizado")==="1"){
+      document.getElementById("modalSenha").classList.remove("show");
+      carregarRegistros();
+    }else{
+      setTimeout(()=>document.getElementById("senhaInput").focus(),100);
+    }
+  }catch(e){
+    alert("Este dispositivo não permitiu abrir o banco de registros.");
+  }
+});
+</script>
+</body>
+</html>

@@ -914,6 +914,26 @@ input, select, textarea{
   justify-self:end !important;
 }
 </style>
+
+<style id="registro-index-no-historico">
+.graficoResumo{cursor:pointer;transition:.2s ease;user-select:none}
+.graficoResumo:hover{transform:translateY(-1px);background:#F7FBF5;box-shadow:0 7px 16px rgba(84,110,79,.10)}
+.graficoResumo:focus-visible{outline:3px solid rgba(92,157,92,.18);outline-offset:2px}
+.registroModalCard{width:100%;max-width:330px;background:#FFF;border:1px solid rgba(221,232,216,.95);border-radius:26px;padding:18px;box-shadow:0 16px 40px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:12px}
+.registroModalTitulo{text-align:center;color:var(--verde-texto);font-size:19px;font-weight:500}
+.registroModalInput,.registroModalTexto{width:100%;border:1px solid var(--borda);border-radius:15px;background:#FFFDF8;font-family:var(--fonte);font-size:14px;padding:12px;outline:none}
+.registroModalInput:focus,.registroModalTexto:focus{border-color:var(--verde-escuro);box-shadow:0 0 0 3px rgba(127,183,126,.12)}
+.registroModalTexto{min-height:110px;resize:vertical}
+.registroModalFrase{width:100%;color:var(--verde-texto);font-size:12.5px;font-weight:500;line-height:1.35;margin-top:-2px;margin-bottom:-4px;text-align:center}
+.registroSentimentos{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.registroSentimentoBtn{border:1px solid var(--borda);border-radius:12px;background:#F2F7F0;color:var(--verde-texto);font-family:var(--fonte);font-size:11px;padding:9px 4px;cursor:pointer}
+.registroSentimentoBtn.ativo{background:var(--verde-principal);border-color:var(--verde-escuro);font-weight:500}
+.registroModalBtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.registroModalBtns button{min-height:44px;border:none;border-radius:14px;font-family:var(--fonte);cursor:pointer}
+.registroCancelar{background:#F0F1EF;color:#4D544D}
+.registroSalvar{background:var(--verde-escuro);color:#FFF}
+@media(max-width:350px){.registroSentimentos{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 <div class="pagina">
@@ -930,7 +950,7 @@ input, select, textarea{
 <div class="graficoTitulo">Evolução do peso</div>
 <div class="graficoSubtitulo">Registros feitos pelo botão “Registrar peso” do início.</div>
 </div>
-<div class="graficoResumo">
+<div class="graficoResumo" role="button" tabindex="0" aria-label="Registrar peso" onclick="abrirModalPesoHistorico()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirModalPesoHistorico()}">
 <span class="graficoResumoValor" id="pesoAtualResumo">—</span>
 <span class="graficoResumoLabel">último peso</span>
 </div>
@@ -948,7 +968,7 @@ input, select, textarea{
 <div class="graficoTitulo">Como estou me sentindo</div>
 <div class="graficoSubtitulo">Quantidade de registros por sensação escolhida no início.</div>
 </div>
-<div class="graficoResumo">
+<div class="graficoResumo" role="button" tabindex="0" aria-label="Registrar como estou me sentindo" onclick="abrirModalSentimentoHistorico()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirModalSentimentoHistorico()}">
 <span class="graficoResumoValor" id="sensacoesTotalResumo">0</span>
 <span class="graficoResumoLabel">registros</span>
 </div>
@@ -996,6 +1016,38 @@ input, select, textarea{
 </div>
 </div>
 </div>
+
+<div class="modalOverlay" id="modalPesoHistorico">
+  <div class="registroModalCard">
+    <div class="registroModalTitulo">Registrar peso</div>
+    <input id="pesoHistoricoInput" class="registroModalInput" type="number" min="20" max="300" step="0.1" placeholder="Peso atual em kg">
+    <div class="registroModalBtns">
+      <button class="registroCancelar" type="button" onclick="fecharModalPesoHistorico()">cancelar</button>
+      <button class="registroSalvar" type="button" onclick="salvarPesoHistorico()">salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalSentimentoHistorico">
+  <div class="registroModalCard">
+    <div class="registroModalTitulo">Como estou me sentindo?</div>
+    <div class="registroSentimentos">
+      <button class="registroSentimentoBtn" type="button" data-sentimento="Muito bem" onclick="selecionarSentimentoHistorico(this)">Muito bem</button>
+      <button class="registroSentimentoBtn" type="button" data-sentimento="Bem" onclick="selecionarSentimentoHistorico(this)">Bem</button>
+      <button class="registroSentimentoBtn" type="button" data-sentimento="Neutra" onclick="selecionarSentimentoHistorico(this)">Neutra</button>
+      <button class="registroSentimentoBtn" type="button" data-sentimento="Cansada" onclick="selecionarSentimentoHistorico(this)">Cansada</button>
+      <button class="registroSentimentoBtn" type="button" data-sentimento="Com fome" onclick="selecionarSentimentoHistorico(this)">Com fome</button>
+      <button class="registroSentimentoBtn" type="button" data-sentimento="Dor de cabeça" onclick="selecionarSentimentoHistorico(this)">Dor de cabeça</button>
+    </div>
+    <div class="registroModalFrase">Sinais que meu corpo está comunicando</div>
+    <textarea id="sentimentoHistoricoObs" class="registroModalTexto" placeholder="Escreva uma observação, se desejar..."></textarea>
+    <div class="registroModalBtns">
+      <button class="registroCancelar" type="button" onclick="fecharModalSentimentoHistorico()">cancelar</button>
+      <button class="registroSalvar" type="button" onclick="salvarSentimentoHistorico()">salvar</button>
+    </div>
+  </div>
+</div>
+
 <div class="modalOverlay" id="modalFuturasEdicoes">
 <div class="modal">
 <h2 class="modalTitle">Futuras edições</h2>
@@ -1480,5 +1532,60 @@ body{
   z-index:1;
 }
 </style>
+
+<script id="registro-index-no-historico-js">
+let sentimentoHistoricoSelecionado="";
+function hojeRegistroHistorico(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function abrirModalPesoHistorico(){
+  let dados={};
+  try{dados=JSON.parse(localStorage.getItem("registro_peso_gabriela_v1")||"{}")||{}}catch(e){}
+  document.getElementById("pesoHistoricoInput").value=dados.ultimoPeso||"";
+  document.getElementById("modalPesoHistorico").classList.add("show");
+  setTimeout(()=>document.getElementById("pesoHistoricoInput")?.focus(),80);
+}
+function fecharModalPesoHistorico(){document.getElementById("modalPesoHistorico").classList.remove("show")}
+function salvarPesoHistorico(){
+  const peso=Number(String(document.getElementById("pesoHistoricoInput").value).replace(",","."));
+  if(!peso||peso<20||peso>300){alert("Informe um peso válido entre 20 e 300 kg.");return}
+  let dados={};
+  try{dados=JSON.parse(localStorage.getItem("registro_peso_gabriela_v1")||"{}")||{}}catch(e){}
+  if(!Array.isArray(dados.historico))dados.historico=[];
+  dados.ultimoPeso=peso;
+  dados.historico.push({data:hojeRegistroHistorico(),peso,registradoEm:new Date().toISOString(),origem:"saude-historico"});
+  localStorage.setItem("registro_peso_gabriela_v1",JSON.stringify(dados));
+  localStorage.setItem("peso_gabriela_atual",String(peso));
+  localStorage.setItem("peso_atual_gabriela",String(peso));
+  window.dispatchEvent(new CustomEvent("pesoGabrielaAtualizado",{detail:{peso,origem:"saude-historico"}}));
+  fecharModalPesoHistorico();
+  renderizarGraficosSaude();
+}
+function abrirModalSentimentoHistorico(){
+  sentimentoHistoricoSelecionado="";
+  document.querySelectorAll("#modalSentimentoHistorico .registroSentimentoBtn").forEach(b=>b.classList.remove("ativo"));
+  document.getElementById("sentimentoHistoricoObs").value="";
+  document.getElementById("modalSentimentoHistorico").classList.add("show");
+}
+function fecharModalSentimentoHistorico(){document.getElementById("modalSentimentoHistorico").classList.remove("show")}
+function selecionarSentimentoHistorico(btn){
+  sentimentoHistoricoSelecionado=btn.dataset.sentimento||"";
+  document.querySelectorAll("#modalSentimentoHistorico .registroSentimentoBtn").forEach(b=>b.classList.toggle("ativo",b===btn));
+}
+function salvarSentimentoHistorico(){
+  const obs=document.getElementById("sentimentoHistoricoObs").value.trim();
+  if(!sentimentoHistoricoSelecionado&&!obs){alert("Selecione uma opção ou escreva uma observação.");return}
+  let lista=[];
+  try{const dados=JSON.parse(localStorage.getItem("registro_sentimento_gabriela_v1")||"[]");lista=Array.isArray(dados)?dados:[]}catch(e){}
+  lista.push({data:hojeRegistroHistorico(),sentimento:sentimentoHistoricoSelecionado||"Observação",observacao:obs,registradoEm:new Date().toISOString(),origem:"saude-historico"});
+  localStorage.setItem("registro_sentimento_gabriela_v1",JSON.stringify(lista));
+  fecharModalSentimentoHistorico();
+  renderizarGraficosSaude();
+}
+["modalPesoHistorico","modalSentimentoHistorico"].forEach(id=>{
+  document.getElementById(id)?.addEventListener("click",e=>{if(e.target.id===id)e.target.classList.remove("show")});
+});
+</script>
 </body>
 </html>

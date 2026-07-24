@@ -671,7 +671,7 @@ body{
   border:none;
   background:var(--verde-salvia);
   color:white;
-  font-size:35px;
+  font-size:25px;
   line-height:1;
   margin:-22px auto 0;
   box-shadow:0 10px 20px rgba(111,141,98,0.25);
@@ -1121,6 +1121,17 @@ body{
   resize:vertical;
 }
 
+.registroModalFrase{
+  width:100%;
+  color:var(--verde-texto);
+  font-size:12.5px;
+  font-weight:500;
+  line-height:1.35;
+  margin-top:-2px;
+  margin-bottom:-4px;
+  text-align:center;
+}
+
 .registroSentimentos{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -1294,6 +1305,375 @@ body{
 }
 </style>
 
+
+<style id="pilulas-inspiracao-estilos">
+/* =========================================================
+   PÍLULAS DE INSPIRAÇÃO
+   ========================================================= */
+#modalPilulasInspiracao{
+  align-items:flex-start;
+  overflow-y:auto;
+  padding:18px 14px 96px;
+  z-index:1300;
+}
+
+.pilulasCard{
+  width:100%;
+  max-width:390px;
+  max-height:calc(100vh - 120px);
+  overflow-y:auto;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(234,243,232,.95) 0 54px, transparent 55px),
+    radial-gradient(circle at 92% 3%, rgba(243,236,221,.78) 0 48px, transparent 49px),
+    rgba(255,255,255,.985);
+  border:1px solid rgba(221,232,216,.95);
+  border-radius:30px;
+  padding:16px;
+  box-shadow:0 18px 46px rgba(63,90,58,.22);
+  display:flex;
+  flex-direction:column;
+  gap:13px;
+}
+
+.pilulasTopo{
+  position:relative;
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.pilulasFechar{
+  position:absolute;
+  left:0;
+  top:0;
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:#F1F5EF;
+  color:var(--verde-texto);
+  font-family:var(--fonte);
+  font-size:21px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(221,232,216,.92);
+}
+
+.pilulasTituloArea{
+  padding:0 48px;
+  text-align:center;
+}
+
+.pilulasTitulo{
+  color:#435F3E;
+  font-size:21px;
+  line-height:1.15;
+  font-weight:500;
+}
+
+.pilulasSubtitulo{
+  color:var(--texto-suave);
+  font-size:11.5px;
+  line-height:1.35;
+  margin-top:4px;
+}
+
+.pilulasAdicionarBox{
+  background:rgba(242,247,240,.9);
+  border:1px solid rgba(221,232,216,.95);
+  border-radius:22px;
+  padding:13px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.pilulasAdicionarTitulo{
+  text-align:center;
+  color:var(--verde-texto);
+  font-size:13px;
+  font-weight:500;
+}
+
+.pilulasTipoBtns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.pilulasTipoBtn{
+  min-height:42px;
+  border:1px solid var(--borda);
+  border-radius:15px;
+  background:white;
+  color:#50634B;
+  font-family:var(--fonte);
+  font-size:12px;
+  cursor:pointer;
+}
+
+.pilulasTipoBtn.ativo{
+  background:var(--verde-claro);
+  border-color:var(--verde-salvia);
+  font-weight:500;
+}
+
+.pilulasCampo{
+  width:100%;
+  min-height:46px;
+  border:1px solid var(--borda);
+  border-radius:15px;
+  padding:11px 12px;
+  font-family:var(--fonte);
+  font-size:12.5px;
+  outline:none;
+  background:white;
+}
+
+.pilulasCampo:focus{
+  border-color:var(--verde-salvia);
+  box-shadow:0 0 0 3px rgba(141,167,125,.14);
+}
+
+.pilulasArquivoLabel{
+  min-height:48px;
+  border:1px dashed var(--verde-salvia);
+  border-radius:15px;
+  background:white;
+  color:var(--verde-texto);
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:10px;
+  cursor:pointer;
+}
+
+.pilulasArquivoLabel input{display:none;}
+
+.pilulasSalvar{
+  min-height:44px;
+  border:none;
+  border-radius:16px;
+  background:var(--verde-salvia);
+  color:white;
+  font-family:var(--fonte);
+  font-size:13px;
+  font-weight:500;
+  cursor:pointer;
+}
+
+.pilulasLista{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.pilulaItem{
+  position:relative;
+  background:white;
+  border:1px solid rgba(221,232,216,.95);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 7px 18px rgba(84,110,79,.08);
+}
+
+.pilulaImagem{
+  width:100%;
+  display:block;
+  max-height:300px;
+  object-fit:cover;
+  background:#F3F5F0;
+}
+
+.pilulaLinkCard{
+  width:100%;
+  min-height:106px;
+  border:none;
+  background:linear-gradient(135deg,#F7F2EA,#EEF5EB);
+  padding:16px 50px 16px 16px;
+  text-align:left;
+  cursor:pointer;
+  font-family:var(--fonte);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+}
+
+.pilulaLinkIcone{
+  font-size:25px;
+}
+
+.pilulaLinkTitulo{
+  color:#374735;
+  font-size:14px;
+  font-weight:500;
+}
+
+.pilulaLinkUrl{
+  color:#747A70;
+  font-size:10.5px;
+  line-height:1.35;
+  word-break:break-all;
+}
+
+.pilulaLegenda{
+  padding:10px 42px 11px 12px;
+  color:#5F675D;
+  font-size:11.5px;
+  line-height:1.45;
+}
+
+.pilulaExcluir{
+  position:absolute;
+  right:9px;
+  top:9px;
+  width:32px;
+  height:32px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,.94);
+  color:#A25757;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+  font-size:16px;
+  cursor:pointer;
+  z-index:2;
+}
+
+.pilulasVazio{
+  border:1px dashed rgba(141,167,125,.7);
+  border-radius:20px;
+  padding:22px 16px;
+  text-align:center;
+  color:var(--texto-suave);
+  font-size:12px;
+  line-height:1.5;
+  background:rgba(250,252,248,.8);
+}
+
+.pilulasVazioIcone{
+  display:block;
+  font-size:29px;
+  margin-bottom:6px;
+}
+
+@media(max-width:390px){
+  .pilulasCard{padding:14px;border-radius:27px;}
+  .pilulasTitulo{font-size:19px;}
+}
+</style>
+
+
+<style id="pilulas-instagram-embed-estilos">
+.pilulaInstagramWrap{background:#fff;padding:8px 8px 0;}
+.pilulaInstagramFrame{display:block;width:100%;min-height:560px;border:0;border-radius:14px;background:#f5f5f2;}
+.pilulaInstagramFallback{display:block;width:calc(100% - 16px);margin:8px;padding:11px 12px;border:0;border-radius:14px;background:#EEF5EB;color:#40513B;font-family:var(--fonte);font-size:12px;cursor:pointer;}
+@media(max-width:390px){.pilulaInstagramFrame{min-height:500px;}}
+</style>
+
+
+<style id="pilulas-fila-diaria-estilos">
+.pilulasAdicionarTopo,
+.pilulasFecharDireita{
+  position:absolute;
+  top:0;
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  font-family:var(--fonte);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(221,232,216,.92);
+}
+.pilulasAdicionarTopo{
+  left:0;
+  background:var(--verde-salvia);
+  color:#fff;
+  font-size:29px;
+  line-height:1;
+  box-shadow:0 7px 15px rgba(111,141,98,.2);
+}
+.pilulasFecharDireita{
+  right:0;
+  background:#F1F5EF;
+  color:var(--verde-texto);
+  font-size:24px;
+}
+.pilulasAdicionarTopo.ativo{
+  transform:rotate(45deg);
+  background:var(--verde-salvia-escuro);
+}
+.pilulasHojeInfo{
+  min-height:20px;
+  text-align:center;
+  color:#6F756C;
+  font-size:11px;
+  line-height:1.35;
+}
+.pilulaItemHoje::before{
+  content:"Pílula de hoje";
+  display:block;
+  padding:9px 12px 0;
+  color:#6F8D62;
+  font-size:10.5px;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+</style>
+
+
+<style id="pilulas-ajustes-finais-fila">
+/* Cabeçalho compacto e em uma linha */
+.pilulasTopo{min-height:54px !important;}
+.pilulasTituloArea{padding:0 46px !important; width:100%; min-width:0;}
+.pilulasTitulo{font-size:19px !important; line-height:1.1 !important; white-space:nowrap !important;}
+.pilulasSubtitulo{font-size:11.5px !important; line-height:1.2 !important; margin-top:4px !important; white-space:nowrap !important;}
+.pilulasFecharDireita{left:0 !important; right:auto !important;}
+.pilulasAdicionarTopo{right:0 !important; left:auto !important; font-size:28px !important; transform:none !important;}
+.pilulasAdicionarTopo.ativo{transform:none !important; background:var(--verde-salvia-escuro) !important;}
+.pilulasFilaTitulo{font-size:12px;color:#53644f;font-weight:500;margin:1px 2px -3px;}
+.pilulasFilaLista{display:flex;flex-direction:column;gap:8px;}
+.pilulasFilaVazia{border:1px dashed rgba(141,167,125,.58);border-radius:16px;padding:12px;text-align:center;color:#7b8178;font-size:11px;background:rgba(250,252,248,.75);}
+.pilulasFilaItem{position:relative;border:1px solid rgba(221,232,216,.95);border-radius:17px;background:#fff;overflow:hidden;box-shadow:0 5px 13px rgba(84,110,79,.06);cursor:pointer;}
+.pilulasFilaResumo{display:grid;grid-template-columns:52px minmax(0,1fr) 20px;gap:10px;align-items:center;padding:9px 10px;}
+.pilulasFilaMiniatura{width:52px;height:52px;border-radius:12px;background:#EEF3EC;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#63735e;font-size:20px;}
+.pilulasFilaMiniatura img{width:100%;height:100%;object-fit:cover;display:block;}
+.pilulasFilaTexto{min-width:0;display:flex;flex-direction:column;gap:4px;}
+.pilulasFilaSubtitulo{font-size:12px;color:#364533;font-weight:500;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pilulasFilaConteudo{font-size:10.5px;color:#777d74;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pilulasFilaSeta{color:#82917c;font-size:19px;text-align:center;transition:.2s;}
+.pilulasFilaItem.aberto .pilulasFilaSeta{transform:rotate(90deg);}
+.pilulasFilaAcoes{display:none;grid-template-columns:1fr 1fr 42px 42px;gap:6px;padding:0 9px 9px;}
+.pilulasFilaItem.aberto .pilulasFilaAcoes{display:grid;}
+.pilulasFilaAcoes button{min-height:36px;border:0;border-radius:11px;font-family:var(--fonte);font-size:10.5px;cursor:pointer;background:#F1F4EF;color:#455840;}
+.pilulasFilaAcoes .pilulasFilaExcluir{background:#F7E7E5;color:#984d4d;}
+.pilulasFilaAcoes button:disabled{opacity:.35;cursor:not-allowed;}
+.pilulasHojeInfo{margin-top:3px;}
+@media(max-width:390px){
+ .pilulasTitulo{font-size:17px !important;}
+ .pilulasTituloArea{padding:0 43px !important;}
+ .pilulasSubtitulo{font-size:11px !important;}
+ .pilulasFilaResumo{grid-template-columns:46px minmax(0,1fr) 18px;gap:8px;padding:8px;}
+ .pilulasFilaMiniatura{width:46px;height:46px;}
+ .pilulasFilaAcoes{grid-template-columns:1fr 1fr 38px 38px;}
+}
+</style>
+
+
+<style id="pilula-hoje-apenas-janela-inicial">
+/* A pílula do dia aparece somente na janela inicial. */
+#modalPilulasInspiracao.formulario-aberto #pilulasLista{display:none !important;}
+</style>
+
 </head>
 
 <body>
@@ -1316,7 +1696,7 @@ body{
     <main class="appCard">
 
       <header class="topoApp">
-        <div class="logoBolinha">♧</div>
+        <button class="logoBolinha" type="button" onclick="abrirModalPerfilConfiguracoes()" title="Perfil e configurações">♧</button>
 
         <div class="tituloArea">
           <h1 class="tituloApp">Jardim da Rotina</h1>
@@ -1408,6 +1788,31 @@ body{
           <div class="pill">☆ Pequenos passos</div>
         </button>
 
+
+        <button class="menuCard" onclick="irParaComSenha('financas.html')">
+          <div>
+            <div class="menuCardTopo">
+              <div class="menuIcone">💰</div>
+              <div class="menuSeta">›</div>
+            </div>
+            <h3>Finanças</h3>
+            <p>Organize entradas, despesas, contas e metas financeiras.</p>
+          </div>
+          <div class="pill">◈ Cuidar do futuro</div>
+        </button>
+
+        <button class="menuCard" onclick="irParaComSenha('desejos.html')">
+          <div>
+            <div class="menuCardTopo">
+              <div class="menuIcone">✨</div>
+              <div class="menuSeta">›</div>
+            </div>
+            <h3>Consumo Consciente</h3>
+            <p>Desejos avaliando os impactos ambientais, sociais e econômicos</p>
+          </div>
+          <div class="pill">♡ Sonhar e realizar</div>
+        </button>
+
       </section>
 
       
@@ -1443,16 +1848,16 @@ body{
       <span>Rotina</span>
     </button>
 
-    <button class="navPlus" onclick="abrirModalRotina()">+</button>
+    <button class="navPlus" onclick="abrirModalPilulasInspiracao()" title="Pílulas de Inspiração" aria-label="Pílulas de Inspiração">✨</button>
 
     <button class="navItem" onclick="irParaComSenha('anotacao.html')">
       <span class="navIcon">✎</span>
       <span>Anotações</span>
     </button>
 
-    <button class="navItem" onclick="irPara('gabriela-menu.html')">
-      <span class="navIcon">♡</span>
-      <span>Autocuidado</span>
+    <button class="navItem" onclick="irPara('registros.html')">
+      <span class="navIcon">▤</span>
+      <span>Registros</span>
     </button>
 
   </nav>
@@ -1460,6 +1865,49 @@ body{
 
 
   
+
+<div class="modalOverlay" id="modalPilulasInspiracao">
+  <div class="pilulasCard">
+    <div class="pilulasTopo">
+      <button class="pilulasFecharDireita" type="button" onclick="fecharModalPilulasInspiracao()" title="Fechar">×</button>
+      <div class="pilulasTituloArea">
+        <div class="pilulasTitulo">✨ Pílulas de Inspiração</div>
+        <div class="pilulasSubtitulo">Ideias que fazem bem</div>
+      </div>
+      <button class="pilulasAdicionarTopo" type="button" onclick="alternarFormularioPilulas()" title="Acrescentar inspiração">+</button>
+    </div>
+
+    <div class="pilulasAdicionarBox" id="pilulasAdicionarBox" style="display:none;">
+      <div class="pilulasAdicionarTitulo">Acrescentar inspiração</div>
+      <div class="pilulasTipoBtns">
+        <button id="pilulasTipoInstagram" class="pilulasTipoBtn ativo" type="button" onclick="selecionarTipoPilula('instagram')">▶ Vídeo do Instagram</button>
+        <button id="pilulasTipoImagem" class="pilulasTipoBtn" type="button" onclick="selecionarTipoPilula('imagem')">▧ Imagem</button>
+      </div>
+
+      <div id="pilulasCampoInstagram">
+        <input id="pilulasInstagramUrl" class="pilulasCampo" type="url" placeholder="Cole o link do Reel ou publicação do Instagram">
+      </div>
+
+      <div id="pilulasCampoImagem" style="display:none;">
+        <label class="pilulasArquivoLabel">
+          <span id="pilulasArquivoTexto">Toque para escolher uma imagem</span>
+          <input id="pilulasImagemArquivo" type="file" accept="image/*" onchange="prepararImagemPilula(event)">
+        </label>
+      </div>
+
+      <textarea id="pilulasLegenda" class="pilulasCampo" rows="3" placeholder="Subtítulo da inspiração"></textarea>
+      <button class="pilulasSalvar" id="pilulasSalvarBtn" type="button" onclick="salvarPilulaInspiracao()">Guardar na fila</button>
+    </div>
+
+    <div id="pilulasGerenciamentoFila" style="display:none;">
+      <div class="pilulasFilaTitulo">Fila de inspirações</div>
+      <div id="pilulasFilaLista" class="pilulasFilaLista"></div>
+      <div id="pilulasHojeInfo" class="pilulasHojeInfo"></div>
+    </div>
+    <div id="pilulasLista" class="pilulasLista"></div>
+  </div>
+</div>
+
 <div class="modalOverlay" id="modalPesoIndex">
   <div class="registroModalCard">
     <div class="registroModalTitulo">Registrar peso</div>
@@ -1482,6 +1930,7 @@ body{
       <button class="registroSentimentoBtn" data-sentimento="Com fome" onclick="selecionarSentimentoIndex(this)">Com fome</button>
       <button class="registroSentimentoBtn" data-sentimento="Dor de cabeça" onclick="selecionarSentimentoIndex(this)">Dor de cabeça</button>
     </div>
+    <div class="registroModalFrase">Sinais que meu corpo está comunicando</div>
     <textarea id="sentimentoIndexObs" class="registroModalTexto" placeholder="Escreva uma observação, se desejar..."></textarea>
     <div class="registroModalBtns">
       <button class="senhaModalCancelar" onclick="fecharModalSentimentoIndex()">cancelar</button>
@@ -1508,6 +1957,23 @@ body{
         <button class="rotinaBotao" onclick="irPara('agenda-vovo-beth.html')">🌷 Beth</button>
       </div>
 
+    </div>
+  </div>
+
+  <div class="modalOverlay" id="modalPerfilConfiguracoes">
+    <div class="rotinaCard">
+      <div class="rotinaTopo">
+        <button class="rotinaVoltar" type="button" onclick="fecharModalPerfilConfiguracoes()">←</button>
+        <div class="rotinaTituloArea">
+          <div class="rotinaTitle">Perfil e configurações</div>
+          <div class="rotinaSub">o que você deseja fazer?</div>
+        </div>
+      </div>
+      <div class="rotinaBotoes">
+        <button class="rotinaBotao" type="button" onclick="irPara('perfil.html')">👤 Acessar o perfil</button>
+        <button class="rotinaBotao" type="button" onclick="fecharModalPerfilConfiguracoes(); irParaComSenha('configuracao-senhas.html')">🔐 Configuração de senhas</button>
+        <button class="rotinaBotao" type="button" onclick="fecharModalPerfilConfiguracoes(); irPara('desenvolvedor-app.html')">🛠 Desenvolvedor App</button>
+      </div>
     </div>
   </div>
 
@@ -1618,6 +2084,344 @@ body{
 
 <script>
 
+
+const CHAVE_PILULAS_INSPIRACAO = "pilulas_inspiracao_index_v1";
+const CHAVE_ESTADO_PILULA_DIARIA = "estado_pilula_diaria_index_v1";
+let tipoPilulaAtual = "instagram";
+let imagemPilulaPendente = "";
+let pilulaEdicaoId = null;
+let imagemPilulaEdicaoAtual = "";
+
+function dataLocalPilulas(data = new Date()){
+  return `${data.getFullYear()}-${String(data.getMonth()+1).padStart(2,"0")}-${String(data.getDate()).padStart(2,"0")}`;
+}
+
+function diasEntrePilulas(dataInicial, dataFinal){
+  const [a,b,c] = String(dataInicial || "").split("-").map(Number);
+  const [x,y,z] = String(dataFinal || "").split("-").map(Number);
+  if(!a || !b || !c || !x || !y || !z) return 1;
+  return Math.max(0, Math.floor((Date.UTC(x,y-1,z)-Date.UTC(a,b-1,c))/86400000));
+}
+
+function abrirModalPilulasInspiracao(){
+  selecionarTipoPilula("instagram");
+  const box = document.getElementById("pilulasAdicionarBox");
+  const plus = document.querySelector(".pilulasAdicionarTopo");
+  if(box) box.style.display = "none";
+  if(plus) plus.classList.remove("ativo");
+  document.getElementById("modalPilulasInspiracao")?.classList.remove("formulario-aberto");
+  const gerenciamento = document.getElementById("pilulasGerenciamentoFila");
+  if(gerenciamento) gerenciamento.style.display = "none";
+  const listaHoje = document.getElementById("pilulasLista");
+  if(listaHoje) listaHoje.style.display = "block";
+  renderizarPilulasInspiracao();
+  const modalPilulas = document.getElementById("modalPilulasInspiracao");
+  if(modalPilulas){
+    modalPilulas.classList.remove("formulario-aberto");
+    modalPilulas.classList.add("show");
+  }
+}
+
+function fecharModalPilulasInspiracao(){
+  const modal = document.getElementById("modalPilulasInspiracao");
+  if(modal){
+    modal.classList.remove("show");
+    modal.classList.remove("formulario-aberto");
+  }
+  limparFormularioPilulas();
+}
+
+function alternarFormularioPilulas(){
+  const box = document.getElementById("pilulasAdicionarBox");
+  const plus = document.querySelector(".pilulasAdicionarTopo");
+  if(!box) return;
+  const abrir = box.style.display === "none" || !box.style.display;
+  box.style.display = abrir ? "flex" : "none";
+  if(plus) plus.classList.toggle("ativo", abrir);
+  const modalPilulas = document.getElementById("modalPilulasInspiracao");
+  if(modalPilulas) modalPilulas.classList.toggle("formulario-aberto", abrir);
+  const gerenciamento = document.getElementById("pilulasGerenciamentoFila");
+  if(gerenciamento) gerenciamento.style.display = abrir ? "block" : "none";
+  const listaHoje = document.getElementById("pilulasLista");
+  if(listaHoje) listaHoje.style.display = abrir ? "none" : "block";
+  if(abrir){
+    selecionarTipoPilula("instagram");
+    setTimeout(() => document.getElementById("pilulasInstagramUrl")?.focus(), 80);
+  }
+}
+
+function selecionarTipoPilula(tipo){
+  tipoPilulaAtual = tipo === "imagem" ? "imagem" : "instagram";
+  const instagram = document.getElementById("pilulasCampoInstagram");
+  const imagem = document.getElementById("pilulasCampoImagem");
+  const btnInstagram = document.getElementById("pilulasTipoInstagram");
+  const btnImagem = document.getElementById("pilulasTipoImagem");
+  if(instagram) instagram.style.display = tipoPilulaAtual === "instagram" ? "block" : "none";
+  if(imagem) imagem.style.display = tipoPilulaAtual === "imagem" ? "block" : "none";
+  if(btnInstagram) btnInstagram.classList.toggle("ativo", tipoPilulaAtual === "instagram");
+  if(btnImagem) btnImagem.classList.toggle("ativo", tipoPilulaAtual === "imagem");
+}
+
+function prepararImagemPilula(event){
+  const arquivo = event.target.files && event.target.files[0];
+  const texto = document.getElementById("pilulasArquivoTexto");
+  imagemPilulaPendente = "";
+  if(!arquivo){
+    if(texto) texto.textContent = "Toque para escolher uma imagem";
+    return;
+  }
+  if(!arquivo.type.startsWith("image/")) return;
+  const leitor = new FileReader();
+  leitor.onload = function(e){
+    imagemPilulaPendente = String(e.target.result || "");
+    if(texto) texto.textContent = arquivo.name || "Imagem selecionada";
+  };
+  leitor.readAsDataURL(arquivo);
+}
+
+function obterPilulasInspiracao(){
+  try{
+    const dados = JSON.parse(localStorage.getItem(CHAVE_PILULAS_INSPIRACAO) || "[]");
+    return Array.isArray(dados) ? dados : [];
+  }catch(e){ return []; }
+}
+
+function salvarPilulasInspiracao(lista){
+  localStorage.setItem(CHAVE_PILULAS_INSPIRACAO, JSON.stringify(lista));
+}
+
+function obterEstadoPilulaDiaria(total){
+  const hoje = dataLocalPilulas();
+  let estado = {data:hoje, indice:0};
+  try{
+    const salvo = JSON.parse(localStorage.getItem(CHAVE_ESTADO_PILULA_DIARIA) || "null");
+    if(salvo && Number.isFinite(Number(salvo.indice)) && salvo.data){
+      estado = {data:String(salvo.data), indice:Number(salvo.indice)};
+    }
+  }catch(e){}
+  if(total <= 0){
+    estado = {data:hoje, indice:0};
+  }else{
+    const passaram = diasEntrePilulas(estado.data, hoje);
+    if(passaram > 0){
+      estado.indice = (estado.indice + passaram) % total;
+      estado.data = hoje;
+    }else{
+      estado.indice = ((estado.indice % total) + total) % total;
+    }
+  }
+  localStorage.setItem(CHAVE_ESTADO_PILULA_DIARIA, JSON.stringify(estado));
+  return estado;
+}
+
+function salvarPilulaInspiracao(){
+  const legenda = (document.getElementById("pilulasLegenda")?.value || "").trim();
+  let conteudo = "";
+  if(tipoPilulaAtual === "instagram"){
+    conteudo = (document.getElementById("pilulasInstagramUrl")?.value || "").trim();
+    if(!conteudo){ alert("Cole o link do vídeo do Instagram."); return; }
+    if(!/^https?:\/\//i.test(conteudo)){ alert("Cole um link completo, começando com http:// ou https://."); return; }
+  }else{
+    conteudo = imagemPilulaPendente || imagemPilulaEdicaoAtual;
+    if(!conteudo){ alert("Escolha uma imagem para guardar."); return; }
+  }
+  const lista = obterPilulasInspiracao();
+  if(pilulaEdicaoId){
+    const indice = lista.findIndex(item => item.id === pilulaEdicaoId);
+    if(indice >= 0){
+      lista[indice] = {...lista[indice], tipo:tipoPilulaAtual, conteudo, legenda, editadoEm:new Date().toISOString()};
+    }
+  }else{
+    lista.push({
+      id:`pilula_${Date.now()}_${Math.random().toString(36).slice(2,7)}`,
+      tipo:tipoPilulaAtual,
+      conteudo,
+      legenda,
+      criadoEm:new Date().toISOString()
+    });
+  }
+  try{ salvarPilulasInspiracao(lista); }
+  catch(e){ alert("Essa imagem ficou grande demais para ser salva. Tente usar uma imagem menor."); return; }
+  if(lista.length === 1 && !pilulaEdicaoId){
+    localStorage.setItem(CHAVE_ESTADO_PILULA_DIARIA, JSON.stringify({data:dataLocalPilulas(), indice:0}));
+  }
+  limparFormularioPilulas();
+
+  /* Depois de guardar, permanece na janela de acrescentar e organizar. */
+  const box = document.getElementById("pilulasAdicionarBox");
+  const plus = document.querySelector(".pilulasAdicionarTopo");
+  const modalPilulas = document.getElementById("modalPilulasInspiracao");
+  const gerenciamento = document.getElementById("pilulasGerenciamentoFila");
+  const listaHoje = document.getElementById("pilulasLista");
+
+  if(box) box.style.display = "flex";
+  if(plus) plus.classList.add("ativo");
+  if(modalPilulas) modalPilulas.classList.add("formulario-aberto");
+  if(gerenciamento) gerenciamento.style.display = "block";
+  if(listaHoje) listaHoje.style.display = "none";
+
+  renderizarPilulasInspiracao();
+
+  selecionarTipoPilula("instagram");
+  setTimeout(() => document.getElementById("pilulasInstagramUrl")?.focus(), 80);
+}
+
+function limparFormularioPilulas(){
+  const url = document.getElementById("pilulasInstagramUrl");
+  const legenda = document.getElementById("pilulasLegenda");
+  const arquivo = document.getElementById("pilulasImagemArquivo");
+  const texto = document.getElementById("pilulasArquivoTexto");
+  if(url) url.value = "";
+  if(legenda) legenda.value = "";
+  if(arquivo) arquivo.value = "";
+  if(texto) texto.textContent = "Toque para escolher uma imagem";
+  imagemPilulaPendente = "";
+  imagemPilulaEdicaoAtual = "";
+  pilulaEdicaoId = null;
+  const salvarBtn = document.getElementById("pilulasSalvarBtn");
+  if(salvarBtn) salvarBtn.textContent = "Guardar na fila";
+  const tituloForm = document.querySelector(".pilulasAdicionarTitulo");
+  if(tituloForm) tituloForm.textContent = "Acrescentar inspiração";
+}
+
+function escaparHtmlPilulas(valor){
+  return String(valor || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+}
+function abrirLinkPilula(url){ window.open(url, "_blank", "noopener,noreferrer"); }
+function obterInstagramEmbedUrl(url){
+  try{
+    const u = new URL(url);
+    const match = u.pathname.match(/^\/(reel|p|tv)\/([^/?#]+)/i);
+    if(!match) return "";
+    return `https://www.instagram.com/${match[1].toLowerCase()}/${match[2]}/embed/`;
+  }catch(e){ return ""; }
+}
+
+
+function alternarAcoesPilula(id){
+  document.querySelectorAll(".pilulasFilaItem").forEach(el => {
+    if(el.dataset.id === id) el.classList.toggle("aberto");
+    else el.classList.remove("aberto");
+  });
+}
+
+function editarPilulaInspiracao(id){
+  const item = obterPilulasInspiracao().find(p => p.id === id);
+  if(!item) return;
+  pilulaEdicaoId = id;
+  imagemPilulaPendente = "";
+  imagemPilulaEdicaoAtual = item.tipo === "imagem" ? item.conteudo : "";
+  selecionarTipoPilula(item.tipo);
+  const url = document.getElementById("pilulasInstagramUrl");
+  const legenda = document.getElementById("pilulasLegenda");
+  const texto = document.getElementById("pilulasArquivoTexto");
+  if(url) url.value = item.tipo === "instagram" ? item.conteudo : "";
+  if(legenda) legenda.value = item.legenda || "";
+  if(texto) texto.textContent = item.tipo === "imagem" ? "Imagem atual mantida — toque para trocar" : "Toque para escolher uma imagem";
+  const box = document.getElementById("pilulasAdicionarBox");
+  const plus = document.querySelector(".pilulasAdicionarTopo");
+  if(box) box.style.display = "flex";
+  if(plus) plus.classList.add("ativo");
+  document.getElementById("modalPilulasInspiracao")?.classList.add("formulario-aberto");
+  const gerenciamento = document.getElementById("pilulasGerenciamentoFila");
+  if(gerenciamento) gerenciamento.style.display = "block";
+  const listaHoje = document.getElementById("pilulasLista");
+  if(listaHoje) listaHoje.style.display = "none";
+  const salvarBtn = document.getElementById("pilulasSalvarBtn");
+  if(salvarBtn) salvarBtn.textContent = "Salvar alterações";
+  const tituloForm = document.querySelector(".pilulasAdicionarTitulo");
+  if(tituloForm) tituloForm.textContent = "Editar inspiração";
+  box?.scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function moverPilulaInspiracao(id, direcao){
+  const lista = obterPilulasInspiracao();
+  const atual = lista.findIndex(item => item.id === id);
+  const destino = atual + direcao;
+  if(atual < 0 || destino < 0 || destino >= lista.length) return;
+  const estado = obterEstadoPilulaDiaria(lista.length);
+  const idHoje = lista[estado.indice]?.id;
+  [lista[atual], lista[destino]] = [lista[destino], lista[atual]];
+  salvarPilulasInspiracao(lista);
+  const novoIndiceHoje = lista.findIndex(item => item.id === idHoje);
+  localStorage.setItem(CHAVE_ESTADO_PILULA_DIARIA, JSON.stringify({data:dataLocalPilulas(), indice:Math.max(0,novoIndiceHoje)}));
+  renderizarPilulasInspiracao();
+}
+
+function htmlFilaPilula(item, indice, total){
+  const subtitulo = escaparHtmlPilulas(item.legenda || "Sem subtítulo");
+  const conteudo = item.tipo === "imagem" ? "Imagem adicionada" : escaparHtmlPilulas(item.conteudo);
+  const miniatura = item.tipo === "imagem" ? `<img src="${item.conteudo}" alt="">` : "▶";
+  return `<div class="pilulasFilaItem" data-id="${item.id}">
+    <div class="pilulasFilaResumo" onclick="alternarAcoesPilula('${item.id}')">
+      <div class="pilulasFilaMiniatura">${miniatura}</div>
+      <div class="pilulasFilaTexto"><div class="pilulasFilaSubtitulo">${subtitulo}</div><div class="pilulasFilaConteudo">${conteudo}</div></div>
+      <div class="pilulasFilaSeta">›</div>
+    </div>
+    <div class="pilulasFilaAcoes">
+      <button type="button" onclick="editarPilulaInspiracao('${item.id}')">Editar</button>
+      <button class="pilulasFilaExcluir" type="button" onclick="excluirPilulaInspiracao('${item.id}')">Excluir</button>
+      <button type="button" onclick="moverPilulaInspiracao('${item.id}',-1)" ${indice===0?'disabled':''} title="Mover para cima">↑</button>
+      <button type="button" onclick="moverPilulaInspiracao('${item.id}',1)" ${indice===total-1?'disabled':''} title="Mover para baixo">↓</button>
+    </div>
+  </div>`;
+}
+
+function renderizarFilaPilulas(lista){
+  const area = document.getElementById("pilulasFilaLista");
+  if(!area) return;
+  if(!lista.length){ area.innerHTML = `<div class="pilulasFilaVazia">Nenhuma inspiração adicionada.</div>`; return; }
+  area.innerHTML = lista.map((item,indice) => htmlFilaPilula(item,indice,lista.length)).join("");
+}
+
+function excluirPilulaInspiracao(id){
+  if(!confirm("Excluir esta inspiração?")) return;
+  const listaAntiga = obterPilulasInspiracao();
+  const indiceExcluido = listaAntiga.findIndex(item => item.id === id);
+  const estado = obterEstadoPilulaDiaria(listaAntiga.length);
+  const lista = listaAntiga.filter(item => item.id !== id);
+  if(lista.length === 0){
+    localStorage.removeItem(CHAVE_ESTADO_PILULA_DIARIA);
+  }else{
+    let novoIndice = estado.indice;
+    if(indiceExcluido >= 0 && indiceExcluido < estado.indice) novoIndice--;
+    if(novoIndice >= lista.length) novoIndice = 0;
+    localStorage.setItem(CHAVE_ESTADO_PILULA_DIARIA, JSON.stringify({data:dataLocalPilulas(), indice:novoIndice}));
+  }
+  salvarPilulasInspiracao(lista);
+  renderizarPilulasInspiracao();
+}
+
+function htmlPilulaInspiracao(item){
+  const legenda = item.legenda ? `<div class="pilulaLegenda">${escaparHtmlPilulas(item.legenda)}</div>` : "";
+  if(item.tipo === "imagem"){
+    return `<article class="pilulaItem pilulaItemHoje"><button class="pilulaExcluir" type="button" onclick="excluirPilulaInspiracao('${item.id}')">×</button><img class="pilulaImagem" src="${item.conteudo}" alt="Imagem inspiradora">${legenda}</article>`;
+  }
+  const embedUrl = obterInstagramEmbedUrl(item.conteudo);
+  if(embedUrl){
+    return `<article class="pilulaItem pilulaItemHoje"><button class="pilulaExcluir" type="button" onclick="excluirPilulaInspiracao('${item.id}')">×</button><div class="pilulaInstagramWrap"><iframe class="pilulaInstagramFrame" src="${escaparHtmlPilulas(embedUrl)}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><button class="pilulaInstagramFallback" type="button" onclick='abrirLinkPilula(${JSON.stringify(item.conteudo)})'>Abrir no Instagram se o vídeo não carregar</button>${legenda}</article>`;
+  }
+  return `<article class="pilulaItem pilulaItemHoje"><button class="pilulaExcluir" type="button" onclick="excluirPilulaInspiracao('${item.id}')">×</button><button class="pilulaLinkCard" type="button" onclick='abrirLinkPilula(${JSON.stringify(item.conteudo)})'><span class="pilulaLinkIcone">▶</span><span class="pilulaLinkTitulo">Abrir vídeo inspirador no Instagram</span><span class="pilulaLinkUrl">${escaparHtmlPilulas(item.conteudo)}</span></button>${legenda}</article>`;
+}
+
+function renderizarPilulasInspiracao(){
+  const area = document.getElementById("pilulasLista");
+  const info = document.getElementById("pilulasHojeInfo");
+  if(!area) return;
+  const lista = obterPilulasInspiracao();
+  renderizarFilaPilulas(lista);
+  if(!lista.length){
+    if(info) info.textContent = "Use o + para acrescentar a primeira inspiração.";
+    area.innerHTML = `<div class="pilulasVazio"><span class="pilulasVazioIcone">✨</span>Suas inspirações entrarão em uma fila.<br>A cada novo dia, uma pílula diferente aparecerá aqui.</div>`;
+    return;
+  }
+  const estado = obterEstadoPilulaDiaria(lista.length);
+  const itemHoje = lista[estado.indice] || lista[0];
+  if(info) info.textContent = `Pílula ${estado.indice + 1} de ${lista.length} • amanhã aparece a próxima`;
+  area.innerHTML = htmlPilulaInspiracao(itemHoje);
+}
+
+
 const CHAVE_PESO_GABI="registro_peso_gabriela_v1";
 const CHAVE_SENTIMENTO_GABI="registro_sentimento_gabriela_v1";
 let sentimentoIndexSelecionado="";
@@ -1683,7 +2487,29 @@ function atualizarResumoAcompanhamentoIndex(){
   document.getElementById("resumoAcompanhamentoIndex").textContent=partes.join(" • ");
 }
 
-const SENHA = "1234";
+const SENHA_PADRAO = "1234";
+const CHAVE_CONFIG_SENHAS = "jardim_configuracao_senhas_v1";
+
+function normalizarPaginaSenha(destino){
+  return String(destino || "").split("?")[0].split("#")[0].trim();
+}
+
+function obterConfiguracaoSenhas(){
+  try{
+    const salvo = JSON.parse(localStorage.getItem(CHAVE_CONFIG_SENHAS) || "null");
+    if(salvo && typeof salvo === "object") return salvo;
+  }catch(e){}
+  return {senhaGeral:SENHA_PADRAO,paginas:{}};
+}
+
+function obterSenhaDoDestino(destino){
+  const cfg = obterConfiguracaoSenhas();
+  const pagina = normalizarPaginaSenha(destino);
+  const item = cfg.paginas && cfg.paginas[pagina];
+  if(item && item.protegida === false) return "";
+  if(item && item.senha) return String(item.senha);
+  return String(cfg.senhaGeral || SENHA_PADRAO);
+}
 
 function liberarApp(){
   const telaSenha = document.getElementById("telaSenha");
@@ -1701,14 +2527,22 @@ function irPara(destino){
 }
 
 let destinoProtegidoPendente = "";
+let senhaDestinoPendente = "";
 
 function irParaComSenha(destino){
+  const senhaConfigurada = obterSenhaDoDestino(destino);
+  if(!senhaConfigurada){
+    location.href = destino;
+    return;
+  }
   destinoProtegidoPendente = destino;
+  senhaDestinoPendente = senhaConfigurada;
   const input = document.getElementById("senhaProtegidaInput");
   const erro = document.getElementById("senhaProtegidaErro");
 
   fecharModalRotina();
   fecharModalAgenda();
+  fecharModalPerfilConfiguracoes();
 
   if(input) input.value = "";
   if(erro) erro.style.display = "none";
@@ -1722,6 +2556,7 @@ function irParaComSenha(destino){
 
 function fecharModalSenhaProtegida(){
   destinoProtegidoPendente = "";
+  senhaDestinoPendente = "";
   const modal = document.getElementById("modalSenhaProtegida");
   const erro = document.getElementById("senhaProtegidaErro");
 
@@ -1736,7 +2571,7 @@ function confirmarSenhaProtegida(){
   const erro = document.getElementById("senhaProtegidaErro");
   const senhaDigitada = input ? input.value : "";
 
-  if(senhaDigitada === SENHA && destinoProtegidoPendente){
+  if(senhaDigitada === senhaDestinoPendente && destinoProtegidoPendente){
     const destino = destinoProtegidoPendente;
     fecharModalSenhaProtegida();
     location.href = destino;
@@ -1748,6 +2583,13 @@ function confirmarSenhaProtegida(){
     input.value = "";
     input.focus();
   }
+}
+
+function abrirModalPerfilConfiguracoes(){
+  document.getElementById("modalPerfilConfiguracoes")?.classList.add("show");
+}
+function fecharModalPerfilConfiguracoes(){
+  document.getElementById("modalPerfilConfiguracoes")?.classList.remove("show");
 }
 
 function abrirModalRotina(){
@@ -1791,6 +2633,7 @@ window.addEventListener("click", function(e){
   const modalEmConstrucao = document.getElementById("modalEmConstrucao");
   const modalBackup = document.getElementById("modalBackupMaya");
   const modalSenhaProtegida = document.getElementById("modalSenhaProtegida");
+  const modalPilulas = document.getElementById("modalPilulasInspiracao");
 
   if(e.target === modalRotina){
     fecharModalRotina();
@@ -1811,6 +2654,10 @@ window.addEventListener("click", function(e){
   if(e.target === modalSenhaProtegida){
     fecharModalSenhaProtegida();
   }
+
+  if(e.target === modalPilulas){
+    fecharModalPilulasInspiracao();
+  }
 });
 
 document.addEventListener("keydown", function(e){
@@ -1826,6 +2673,7 @@ document.addEventListener("keydown", function(e){
     fecharModalEmConstrucao();
     fecharModalBackupMaya();
     fecharModalSenhaProtegida();
+    fecharModalPilulasInspiracao();
   }
 });
 

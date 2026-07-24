@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Projeto App Jardim da Rotina</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fundo:#F8F7F1;--card:#FFFDF8;--texto:#2F332D;--suave:#77786F;
+  --borda:#E8E1D4;--salvia:#718364;--salvia-clara:#EAF2E7;--rosa:#F6ECEF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;padding:14px 12px 96px;display:flex;justify-content:center;
+  font-family:Poppins,sans-serif;color:var(--texto);
+  background:
+    radial-gradient(circle at 14% 4%,rgba(232,243,226,.75),transparent 32%),
+    radial-gradient(circle at 95% 16%,rgba(243,236,221,.8),transparent 30%),
+    linear-gradient(180deg,#FEFCF7 0%,var(--fundo) 100%);
+}
+.pagina{width:100%;max-width:420px}
+.card{
+  position:relative;overflow:hidden;width:100%;padding:18px 14px 20px;
+  display:flex;flex-direction:column;gap:12px;
+  background:rgba(255,253,248,.94);border:1px solid var(--borda);
+  border-radius:30px;box-shadow:0 14px 34px rgba(76,82,62,.11)
+}
+.card:before{content:"";position:absolute;width:180px;height:180px;right:-80px;top:-70px;border-radius:50%;background:rgba(234,243,232,.72)}
+.card:after{content:"";position:absolute;width:170px;height:170px;left:-95px;bottom:-65px;border-radius:50%;background:rgba(243,236,221,.62)}
+.card>*{position:relative;z-index:1}
+.topo{position:relative;display:grid;grid-template-columns:44px 1fr 82px;min-height:62px}
+.voltar{width:42px;height:42px;border-radius:50%;border:1px solid var(--borda);background:#fff;color:#516448;font-size:20px;cursor:pointer}
+.centro{position:absolute;left:50%;top:0;transform:translateX(-50%);width:290px;max-width:calc(100% - 96px);text-align:center}
+h1{font-size:20px;line-height:1.15;font-weight:500;color:#40513B;white-space:nowrap}
+.sub{margin-top:3px;font-size:10.5px;color:var(--suave);white-space:nowrap}
+.data{grid-column:3;justify-self:end;text-align:right}
+.hora{font-size:14px;color:#B8807B;font-weight:500}
+.data div:not(.hora){font-size:10.5px;color:#6F756C}
+.projetoInicio,.projetoStatus,.menuBtn,.futureBtn{
+  width:100%;border:1px solid var(--borda);background:rgba(255,255,255,.94);
+  border-radius:18px;box-shadow:0 7px 18px rgba(76,82,62,.08)
+}
+.projetoInicio{
+  min-height:76px;padding:12px 44px 12px 16px;display:flex;align-items:center;gap:12px;
+  position:relative;cursor:pointer;font-family:inherit;color:#40513B
+}
+.icone{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#F4F0E7;font-size:22px}
+.inicioTexto{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center}
+.inicioTexto strong{font-size:15px;font-weight:500}
+.inicioTexto small{font-size:10.5px;color:var(--suave);white-space:nowrap}
+.seta{position:absolute;right:17px;top:50%;transform:translateY(-50%);font-size:28px;color:#6F7E63}
+.projetoStatus{padding:15px 16px 14px;text-align:center;position:relative;background:var(--salvia-clara)}
+.statusSelo{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#58705A}
+.statusEtapa{display:block;font-size:15px;font-weight:500;color:#40513B;margin-top:3px}
+.config{position:absolute;right:14px;top:14px;width:34px;height:34px;border-radius:50%;border:1px solid var(--borda);background:#fff;color:#6F756C;font-size:20px;cursor:pointer}
+.barra{height:8px;background:#DDE6D8;border-radius:999px;overflow:hidden;margin-top:12px}
+.barra span{display:block;height:100%;width:0;background:var(--salvia);transition:.2s}
+.resumo{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.resumo div{padding:11px;text-align:center;background:#fff;border:1px solid var(--borda);border-radius:15px}
+.resumo strong{display:block;font-size:18px;color:#40513B;font-weight:500}
+.resumo span{font-size:9.8px;color:var(--suave)}
+.menu{display:flex;flex-direction:column;gap:9px}
+.menuBtn{
+  min-height:72px;padding:11px 42px 11px 72px;position:relative;cursor:pointer;
+  text-align:left;font-family:inherit;color:var(--texto)
+}
+.menuBtn:before{
+  content:attr(data-icon);position:absolute;left:15px;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#F4F0E7;font-size:20px
+}
+.menuBtn:after{content:"›";position:absolute;right:18px;top:50%;transform:translateY(-53%);font-size:28px;color:#6F7E63}
+.menuBtn strong{display:block;font-size:15px;font-weight:500}
+.menuBtn small{display:block;margin-top:3px;font-size:10.5px;color:var(--suave)}
+.futureBtn{min-height:62px;position:relative;font-family:inherit;color:#40513B;cursor:pointer}
+.futureBtn:before{content:"♡";margin-right:8px;color:#B8807B}
+.futureBtn:after{content:"›";position:absolute;right:14px;top:50%;transform:translateY(-52%);font-size:24px;color:#6F7E63}
+.overlay{position:fixed;inset:0;z-index:99;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(44,49,40,.34)}
+.overlay.show{display:flex}
+.modal{width:min(380px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:18px;display:flex;flex-direction:column;gap:10px;background:#FFFDF8;border:1px solid var(--borda);border-radius:22px;box-shadow:0 14px 34px rgba(76,82,62,.18)}
+.modal h2{text-align:center;font-size:17px;font-weight:500;color:#40513B}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:12px;font-weight:500}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--borda);border-radius:12px;background:#fff;font:12px Poppins,sans-serif;outline:none}
+textarea{height:120px;resize:none}
+.duplo{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acoes{display:flex;gap:8px}
+.acoes button,.acao{flex:1;padding:10px;border:none;border-radius:12px;font:12px Poppins,sans-serif;cursor:pointer}
+.cancel{background:#EEEDE8;color:#555A52}.save{background:var(--salvia);color:#fff}
+.acao{width:100%;background:var(--salvia);color:#fff}
+.lista{display:flex;flex-direction:column;gap:8px}
+.item{padding:11px 12px;display:flex;gap:8px;align-items:flex-start;background:#fff;border:1px solid var(--borda);border-radius:14px}
+.itemTexto{flex:1}.item strong{font-size:12.5px;font-weight:500}.item p{font-size:10.5px;color:var(--suave);margin-top:3px}.item button{width:28px;height:28px;border:none;border-radius:8px;background:#F1F0EA;cursor:pointer}
+.vazio{padding:18px;text-align:center;border:1px dashed #D8D2C7;border-radius:14px;font-size:11px;color:var(--suave)}
+[hidden]{display:none!important}
+@media(max-width:390px){.duplo{grid-template-columns:1fr}.centro{width:270px}.inicioTexto small{font-size:10px}}
+</style>
+
+<style>
+/* ORIENTAÇÕES OBJETIVAS NAS JANELAS */
+.modalDescricao{
+  margin:-2px 4px 4px !important;
+  color:#77786F !important;
+  font-size:10.5px !important;
+  line-height:1.45 !important;
+  text-align:center !important;
+}
+
+.fieldAjuda{
+  margin-top:-2px !important;
+  color:#8A8B83 !important;
+  font-size:9.5px !important;
+  line-height:1.35 !important;
+}
+
+.field label{
+  margin-bottom:0 !important;
+}
+
+.modal .field{
+  gap:4px !important;
+}
+
+.modal h2 + .modalDescricao{
+  margin-top:-3px !important;
+}
+</style>
+
+<style>
+.filtrosPaginas{display:flex;gap:6px;overflow-x:auto}.filtroPagina{border:1px solid #DED8CC;background:#FFFDF8;color:#687062;border-radius:999px;padding:7px 11px;font:10.5px Poppins,sans-serif}.filtroPagina.ativo{background:#718364;color:#fff}.buscaPaginas input{width:100%}.paginaCatalogo{padding:12px;border:1px solid #E8E1D4;border-radius:15px;background:#fff}.paginaCatalogoTopo{display:flex;gap:9px}.paginaCatalogoEmoji{width:36px;height:36px;border-radius:50%;background:#F4F0E7;display:grid;place-items:center}.paginaCatalogoInfo{flex:1;min-width:0}.paginaCatalogoNome{font-size:12.5px;font-weight:500}.paginaCatalogoArquivo{font-size:9.8px;color:#77786F;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.paginaOrigem{display:inline-flex;margin-top:5px;padding:3px 7px;border-radius:999px;font-size:9px}.origem-existente{background:#EAF2E7;color:#4E694D}.origem-criada{background:#F5EAF0;color:#855F6B}.paginaCatalogoAcoes{display:flex;gap:6px;margin-top:10px}.paginaCatalogoAcoes button{flex:1;border:none;border-radius:10px;padding:8px;font:10.5px Poppins,sans-serif}.btnVisualizar{background:#F1F0EA;color:#5E655A}.btnEditar{background:#718364;color:#fff}.importarHtml{width:100%;border:1px dashed #CFC8BC;background:#FFFDF8;color:#687062;border-radius:14px;padding:10px 12px;font:11px Poppins,sans-serif;text-align:center}.importarHtml input{display:none}.previewPagina{text-align:center;border:1px solid #E8E1D4;border-radius:16px;padding:14px;background:#fff}.previewPagina h3{font-size:16px;font-weight:500;color:#40513B}.previewPagina p{font-size:10.5px;color:#77786F}.previewPagina code{display:block;margin-top:10px;padding:8px;background:#F5F3EE;border-radius:10px;font-size:9.5px;overflow-wrap:anywhere}
+</style>
+
+<style>
+/* REORDENAÇÃO E SUBPÁGINAS */
+.paginaCatalogo{
+  position:relative;
+}
+
+.paginaCatalogo.subpagina{
+  margin-left:24px;
+  width:calc(100% - 24px);
+  background:#FFFEFB;
+  border-left:3px solid #D9E4D4;
+}
+
+.paginaCatalogo.subpagina::before{
+  content:"↳";
+  position:absolute;
+  left:-19px;
+  top:17px;
+  color:#8A9A82;
+  font-size:15px;
+}
+
+.paginaCatalogoOrdenar{
+  display:flex;
+  gap:4px;
+  margin-left:auto;
+  flex:0 0 auto;
+}
+
+.paginaCatalogoOrdenar button{
+  width:26px;
+  height:26px;
+  border:1px solid #E2DED5;
+  border-radius:8px;
+  background:#F7F5EF;
+  color:#7A8174;
+  font:12px 'Poppins',sans-serif;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+
+.paginaCatalogoOrdenar button:hover{
+  background:#EDF2EA;
+  color:#516448;
+}
+
+.paginaCatalogoOrdenar button:disabled{
+  opacity:.28;
+  cursor:default;
+}
+
+.subpaginaEtiqueta{
+  display:inline-flex;
+  margin-top:5px;
+  margin-left:4px;
+  padding:3px 7px;
+  border-radius:999px;
+  font-size:9px;
+  background:#F2F0EA;
+  color:#73766F;
+}
+
+.grupoPagina{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+</style>
+
+
+<style>
+/* SELEÇÃO MÚLTIPLA DE SUBPÁGINAS */
+.subpaginasSelecao{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  max-height:190px;
+  overflow-y:auto;
+  padding:8px;
+  border:1px solid #E8E1D4;
+  border-radius:13px;
+  background:#fff;
+}
+
+.subpaginaOpcao{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:38px;
+  padding:7px 9px;
+  border-radius:10px;
+  background:#F8F7F2;
+  cursor:pointer;
+}
+
+.subpaginaOpcao:hover{
+  background:#F0F4ED;
+}
+
+.subpaginaOpcao input{
+  width:16px !important;
+  height:16px !important;
+  flex:0 0 auto;
+  accent-color:#718364;
+}
+
+.subpaginaOpcaoTexto{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+
+.subpaginaOpcaoNome{
+  font-size:11px;
+  color:#3F443C;
+  line-height:1.25;
+}
+
+.subpaginaOpcaoArquivo{
+  font-size:9px;
+  color:#85877F;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.subpaginasVazio{
+  padding:10px;
+  text-align:center;
+  color:#85877F;
+  font-size:10px;
+}
+</style>
+
+
+<style>
+/* SUBPÁGINAS RECOLHÍVEIS */
+.paginaCatalogo.temSubpaginas{
+  cursor:pointer;
+}
+
+.paginaCatalogo.temSubpaginas:hover{
+  border-color:#D5DFD0;
+}
+
+.expansorSubpaginas{
+  width:26px;
+  height:26px;
+  border:1px solid #E2DED5;
+  border-radius:8px;
+  background:#F7F5EF;
+  color:#718064;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+  line-height:1;
+  transition:transform .18s ease, background .18s ease;
+  flex:0 0 auto;
+}
+
+.paginaCatalogo.aberta .expansorSubpaginas{
+  transform:rotate(90deg);
+  background:#EDF2EA;
+}
+
+.quantidadeSubpaginas{
+  display:inline-flex;
+  margin-top:5px;
+  margin-left:4px;
+  padding:3px 7px;
+  border-radius:999px;
+  font-size:9px;
+  background:#EDF2EA;
+  color:#5D7057;
+}
+
+.paginaCatalogo.subpagina{
+  animation:subpaginaEntrar .16s ease;
+}
+
+@keyframes subpaginaEntrar{
+  from{opacity:0;transform:translateY(-3px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
+
+
+<style>
+/* EXCLUSÃO DE PÁGINAS CRIADAS OU IMPORTADAS */
+.btnExcluirPagina{
+  flex:0 0 72px !important;
+  background:#F7ECEA !important;
+  color:#9A5555 !important;
+}
+
+.btnExcluirPagina:hover{
+  background:#F1DDDA !important;
+}
+</style>
+
+</head>
+<body>
+<div class="pagina"><div class="card">
+  <div class="topo">
+    <button class="voltar" onclick="location.href='gabriela-criacao-artistica-projetos-sonhos.html'">←</button>
+    <div class="centro"><h1>👩‍👧 Jardim da Rotina</h1><div class="sub">Desenvolvimento do aplicativo</div></div>
+    <div class="data"><div id="hora" class="hora"></div><div id="dia"></div><div id="data"></div></div>
+  </div>
+
+  <button id="inicio" class="projetoInicio" onclick="abrir('modalInicio')">
+    <span class="icone">🌱</span>
+    <span class="inicioTexto"><strong>Iniciar desenvolvimento do app</strong><small>Começar a organizar a próxima versão</small></span>
+    <span class="seta">›</span>
+  </button>
+
+  <div id="status" class="projetoStatus" hidden>
+    <span id="statusSelo" class="statusSelo">Projeto em andamento</span>
+    <strong id="statusEtapa" class="statusEtapa">Etapa • Planejamento</strong>
+    <button class="config" onclick="abrir('modalConfig')">⋮</button>
+    <div class="barra"><span id="barra"></span></div>
+  </div>
+
+  <div class="resumo">
+    <div><strong id="rIdeias">0</strong><span>Ideias</span></div>
+    <div><strong id="rPaginas">0</strong><span>Páginas</span></div>
+    <div><strong id="rTarefas">0</strong><span>Tarefas pendentes</span></div>
+    <div><strong id="rErros">0</strong><span>Correções abertas</span></div>
+  </div>
+
+  <div class="menu">
+    <button class="menuBtn" data-icon="◫" onclick="secao('visao')"><strong>Visão Geral</strong><small>Acompanhe o estado atual do desenvolvimento</small></button>
+    <button class="menuBtn" data-icon="💡" onclick="secao('ideias')"><strong>Ideias e Melhorias</strong><small>Registre e organize novas possibilidades</small></button>
+    <button class="menuBtn" data-icon="✎" onclick="secao('criador')"><strong>Criador de Páginas</strong><small>Monte uma nova página pelo próprio app</small></button>
+    <button class="menuBtn" data-icon="▤" onclick="secao('paginas')"><strong>Páginas do Aplicativo</strong><small>Visualize as páginas planejadas e criadas</small></button>
+    <button class="menuBtn" data-icon="↔" onclick="secao('navegacao')"><strong>Navegação do App</strong><small>Organize os caminhos entre as páginas</small></button>
+    <button class="menuBtn" data-icon="✓" onclick="secao('tarefas')"><strong>Tarefas de Desenvolvimento</strong><small>Planeje o que precisa ser criado ou ajustado</small></button>
+    <button class="menuBtn" data-icon="⚠" onclick="secao('testes')"><strong>Testes e Correções</strong><small>Registre erros e acompanhe as soluções</small></button>
+    <button class="menuBtn" data-icon="◴" onclick="secao('versoes')"><strong>Versões do Aplicativo</strong><small>Organize os ciclos e atualizações do app</small></button>
+  </div>
+
+  <button class="futureBtn" onclick="abrirFuturas()">futuras edições</button>
+</div></div>
+
+<div class="overlay" id="modalInicio"><div class="modal">
+  <h2>Iniciar desenvolvimento?</h2><p class="modalDescricao">Comece um novo ciclo para organizar páginas, tarefas e melhorias do app.</p>
+  <p style="font-size:11.5px;color:#77786F;text-align:center">O projeto começará na etapa de planejamento.</p>
+  <div class="acoes"><button class="cancel" onclick="fechar('modalInicio')">Cancelar</button><button class="save" onclick="iniciarProjeto()">Iniciar</button></div>
+</div></div>
+
+<div class="overlay" id="modalConfig"><div class="modal">
+  <h2>Configuração do projeto</h2><p class="modalDescricao">Controle o andamento do ciclo atual. Reiniciar ou encerrar altera o progresso.</p>
+  <button class="acao" onclick="pausar()">Pausar / Retomar</button>
+  <button class="acao" onclick="reiniciar()">Reiniciar projeto</button>
+  <button class="acao" onclick="encerrar()">Encerrar projeto</button>
+  <button class="cancel acao" onclick="fechar('modalConfig')">Fechar</button>
+</div></div>
+
+<div class="overlay" id="modalSecao"><div class="modal">
+  <h2 id="secaoTitulo">Seção</h2><p id="secaoDescricao" class="modalDescricao"></p>
+  <div id="secaoConteudo"></div>
+  <button class="cancel acao" onclick="fechar('modalSecao')">Fechar</button>
+</div></div>
+
+<div class="overlay" id="modalPaginas"><div class="modal"><h2>Páginas do Aplicativo</h2><p class="modalDescricao">Consulte e edite páginas existentes ou criadas pelo próprio app.</p><div class="filtrosPaginas"><button class="filtroPagina ativo" onclick="filtrarPaginas('todas',this)">Todas</button><button class="filtroPagina" onclick="filtrarPaginas('existente',this)">Existentes</button><button class="filtroPagina" onclick="filtrarPaginas('criada',this)">Criadas no app</button></div><div class="buscaPaginas"><input id="buscaPagina" placeholder="Pesquisar por nome ou arquivo" oninput="renderCatalogoPaginas()"></div><label class="importarHtml">＋ Importar página HTML<input type="file" accept=".html,text/html" onchange="importarPaginaHtml(event)"></label><div id="catalogoPaginas" class="lista"></div><button class="cancel acao" onclick="fechar('modalPaginas')">Fechar</button></div></div>
+<div class="overlay" id="modalEditarPagina"><div class="modal"><h2>Editar página</h2><p class="modalDescricao">Altere as informações principais sem modificar as funções internas.</p><input id="editPaginaId" type="hidden"><div class="duplo"><div class="field"><label>Emoji</label><span class="fieldAjuda">Símbolo da página.</span><input id="editEmoji"></div><div class="field"><label>Origem</label><span class="fieldAjuda">Informa de onde veio.</span><input id="editOrigem" disabled></div></div><div class="field"><label>Nome da página</label><span class="fieldAjuda">Nome usado no catálogo.</span><input id="editNome"></div><div class="field"><label>Nome do arquivo</label><span class="fieldAjuda">Arquivo HTML da página.</span><input id="editArquivo"></div><div class="field"><label>Título</label><span class="fieldAjuda">Texto principal do cabeçalho.</span><input id="editTitulo"></div><div class="field"><label>Subtítulo</label><span class="fieldAjuda">Frase curta da página.</span><input id="editSubtitulo"></div><div class="field"><label>Página de retorno</label><span class="fieldAjuda">Destino da seta de voltar.</span><input id="editVoltar"></div><div class="field"><label>Onde aparece o acesso</label><span class="fieldAjuda">Menu onde fica o botão.</span><input id="editAcesso"></div>
+<div class="field">
+  <label>Subpáginas desta página</label>
+  <span class="fieldAjuda">Marque uma ou mais páginas que devem aparecer dentro desta.</span>
+  <div id="editSubpaginasLista" class="subpaginasSelecao"></div>
+</div>
+<div class="acoes"><button class="cancel" onclick="fechar('modalEditarPagina')">Cancelar</button><button class="save" onclick="salvarEdicaoPagina()">Salvar</button></div></div></div>
+<div class="overlay" id="modalPreviewPagina"><div class="modal"><h2>Visualizar página</h2><p class="modalDescricao">Prévia das informações cadastradas.</p><div id="previewPaginaConteudo" class="previewPagina"></div><button class="cancel acao" onclick="fechar('modalPreviewPagina')">Fechar</button></div></div>
+<div class="overlay" id="modalForm"><div class="modal">
+  <h2 id="formTitulo">Novo registro</h2><p id="formDescricaoTopo" class="modalDescricao">Registre uma informação para acompanhar durante o desenvolvimento.</p>
+  <div class="field"><label>Título</label><span class="fieldAjuda">Dê um nome curto e fácil de identificar.</span><input id="fTitulo"></div>
+  <div class="field"><label>Descrição</label><span class="fieldAjuda">Explique em poucas palavras o que precisa ser feito.</span><textarea id="fDescricao"></textarea></div>
+  <div class="duplo">
+    <div class="field"><label>Categoria</label><span class="fieldAjuda">Agrupe por área, página ou perfil.</span><input id="fCategoria"></div>
+    <div class="field"><label>Status</label><span class="fieldAjuda">Escolha em qual etapa o registro está.</span><select id="fStatus"><option>Ideia</option><option>Planejada</option><option>Em desenvolvimento</option><option>Em teste</option><option>Concluída</option><option>Publicada</option></select></div>
+  </div>
+  <div class="acoes"><button class="cancel" onclick="fechar('modalForm')">Cancelar</button><button class="save" onclick="salvarRegistro()">Salvar</button></div>
+</div></div>
+
+<div class="overlay" id="modalCriador"><div class="modal">
+  <h2>Criador de Páginas</h2><p class="modalDescricao">Defina a estrutura inicial da página. O modelo ficará salvo em Páginas do Aplicativo.</p>
+  <div class="field"><label>Nome da página</label><span class="fieldAjuda">Nome usado para localizar a página no projeto.</span><input id="pNome"></div>
+  <div class="field"><label>Nome do arquivo</label><span class="fieldAjuda">Use letras minúsculas, hífens e termine com .html.</span><input id="pArquivo" placeholder="nova-pagina.html"></div>
+  <div class="duplo"><div class="field"><label>Emoji</label><span class="fieldAjuda">Símbolo que representará a página.</span><input id="pEmoji" placeholder="📄"></div><div class="field"><label>Tipo</label><span class="fieldAjuda">Escolha a estrutura mais próxima do que deseja criar.</span><select id="pTipo"><option>Menu de botões</option><option>Lista de registros</option><option>Formulário</option><option>Rotina</option><option>Projeto</option><option>Personalizada</option></select></div></div>
+  <div class="field"><label>Título</label><span class="fieldAjuda">Texto principal exibido no cabeçalho.</span><input id="pTitulo"></div>
+  <div class="field"><label>Subtítulo</label><span class="fieldAjuda">Frase curta que explica a função da página.</span><input id="pSub"></div>
+  <div class="field"><label>Página de retorno</label><span class="fieldAjuda">Arquivo aberto ao tocar na seta de voltar.</span><input id="pVoltar" placeholder="index.html"></div>
+  <div class="field"><label>Onde aparecerá o acesso</label><span class="fieldAjuda">Informe o menu ou página que terá o botão de entrada.</span><input id="pAcesso"></div>
+  <div class="field">
+  <label>Subpáginas desta página</label>
+  <span class="fieldAjuda">Marque páginas existentes que ficarão dentro da nova página.</span>
+  <div id="pSubpaginasLista" class="subpaginasSelecao"></div>
+</div>
+  <div class="acoes"><button class="cancel" onclick="fechar('modalCriador')">Cancelar</button><button class="save" onclick="criarPagina()">Criar modelo</button></div>
+</div></div>
+
+<div class="overlay" id="modalVisao"><div class="modal">
+  <h2>Visão Geral</h2><p class="modalDescricao">Defina o foco, a etapa e o progresso da versão atual.</p>
+  <div class="field"><label>Nome da versão</label><span class="fieldAjuda">Ex.: Versão 1.2 ou Organização e Projetos.</span><input id="vNome"></div>
+  <div class="field"><label>Objetivo principal</label><span class="fieldAjuda">Descreva o resultado mais importante deste ciclo.</span><textarea id="vObjetivo"></textarea></div>
+  <div class="duplo"><div class="field"><label>Etapa atual</label><span class="fieldAjuda">Indique o momento atual do desenvolvimento.</span><select id="vEtapa"><option>Planejamento</option><option>Desenvolvimento</option><option>Testes</option><option>Publicação</option></select></div><div class="field"><label>Progresso (%)</label><span class="fieldAjuda">Valor estimado para preencher a barra do projeto.</span><input id="vProgresso" type="number" min="0" max="100" value="0"></div></div>
+  <div class="acoes"><button class="cancel" onclick="fechar('modalVisao')">Cancelar</button><button class="save" onclick="salvarVisao()">Salvar</button></div>
+</div></div>
+
+<div class="overlay" id="modalFuturas"><div class="modal">
+  <h2>Futuras edições</h2><p class="modalDescricao">Guarde ideias que não serão desenvolvidas neste ciclo.</p>
+  <div class="field"><label>Ideias de melhorias futuras</label><span class="fieldAjuda">Anote somente o que deseja avaliar em outro momento.</span><textarea id="futuras"></textarea></div>
+  <div class="acoes"><button class="cancel" onclick="fechar('modalFuturas')">Cancelar</button><button class="save" onclick="salvarFuturas()">Concluir</button></div>
+</div></div>
+
+<script>
+const P="jardim_app_",K={estado:P+"estado",visao:P+"visao",ideias:P+"ideias",paginas:P+"paginas",navegacao:P+"navegacao",tarefas:P+"tarefas",testes:P+"testes",versoes:P+"versoes",futuras:P+"futuras",catalogoExistente:P+"catalogo_existente",ordemPaginas:P+"ordem_paginas"};
+let tipoAtual="";
+const ler=(k,p)=>{try{return JSON.parse(localStorage.getItem(k))??p}catch{return p}},salvar=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const abrir=id=>document.getElementById(id).classList.add("show"),fechar=id=>document.getElementById(id).classList.remove("show");
+const estado=()=>ler(K.estado,{iniciado:false,status:"nao_iniciado",etapa:"Planejamento",progresso:0});
+
+function iniciarProjeto(){salvar(K.estado,{iniciado:true,status:"em_andamento",etapa:"Planejamento",progresso:0});fechar("modalInicio");render()}
+function pausar(){let e=estado();e.status=e.status==="pausado"?"em_andamento":"pausado";salvar(K.estado,e);fechar("modalConfig");render()}
+function reiniciar(){salvar(K.estado,{iniciado:false,status:"nao_iniciado",etapa:"Planejamento",progresso:0});fechar("modalConfig");render()}
+function encerrar(){let e=estado();e.iniciado=false;e.status="encerrado";salvar(K.estado,e);fechar("modalConfig");render()}
+
+function secao(tipo){
+  if(tipo==="visao"){const v=ler(K.visao,{nome:"",objetivo:"",etapa:"Planejamento",progresso:0});vNome.value=v.nome;vObjetivo.value=v.objetivo;vEtapa.value=v.etapa;vProgresso.value=v.progresso;abrir("modalVisao");return}
+  if(tipo==="criador"){preencherListaSubpaginas("pSubpaginasLista","",[]);abrir("modalCriador");return}
+  if(tipo==="paginas"){renderCatalogoPaginas();abrir("modalPaginas");return}
+  const titulos={ideias:"Ideias e Melhorias",paginas:"Páginas do Aplicativo",navegacao:"Navegação do App",tarefas:"Tarefas de Desenvolvimento",testes:"Testes e Correções",versoes:"Versões do Aplicativo"};
+  const descricoes={
+    ideias:"Registre sugestões e acompanhe quais serão desenvolvidas.",
+    paginas:"Consulte os modelos de páginas criados dentro do app.",
+    navegacao:"Registre como os menus e páginas devem se conectar.",
+    tarefas:"Organize ações necessárias para desenvolver o aplicativo.",
+    testes:"Anote problemas encontrados e acompanhe as correções.",
+    versoes:"Registre cada ciclo de atualização do Jardim da Rotina."
+  };
+  secaoTitulo.textContent=titulos[tipo];
+  secaoDescricao.textContent=descricoes[tipo]||"";
+  tipoAtual=tipo;
+  const chave=K[tipo],lista=ler(chave,[]);
+  const novo=tipo==="paginas"?"":`<button class="acao" onclick="novoRegistro('${tipo}')">＋ Novo registro</button>`;
+  secaoConteudo.innerHTML=novo+`<div class="lista">${lista.length?lista.map(x=>`<div class="item"><div class="itemTexto"><strong>${x.emoji||""} ${x.titulo||x.nome}</strong><p>${x.descricao||x.arquivo||""}</p></div><button onclick="excluir('${tipo}',${x.id})">×</button></div>`).join(""):'<div class="vazio">Nenhum registro criado ainda.</div>'}</div>`;
+  abrir("modalSecao")
+}
+function novoRegistro(tipo){
+  tipoAtual=tipo;
+  const titulos={
+    ideias:"Nova ideia",
+    navegacao:"Nova ligação",
+    tarefas:"Nova tarefa",
+    testes:"Novo problema",
+    versoes:"Nova versão"
+  };
+  const descricoes={
+    ideias:"Registre uma melhoria ou função que deseja avaliar.",
+    navegacao:"Descreva a ligação desejada entre duas páginas.",
+    tarefas:"Registre uma ação objetiva para o desenvolvimento.",
+    testes:"Descreva um erro ou comportamento que precisa ser corrigido.",
+    versoes:"Registre o objetivo e o conteúdo de um novo ciclo."
+  };
+  formTitulo.textContent=titulos[tipo]||"Novo registro";
+  formDescricaoTopo.textContent=descricoes[tipo]||"Registre uma informação para acompanhar.";
+  fTitulo.value="";fDescricao.value="";fCategoria.value="";fStatus.value="Ideia";
+  abrir("modalForm")
+}
+function salvarRegistro(){const l=ler(K[tipoAtual],[]);l.push({id:Date.now(),titulo:fTitulo.value,descricao:fDescricao.value,categoria:fCategoria.value,status:fStatus.value});salvar(K[tipoAtual],l);fechar("modalForm");fechar("modalSecao");render();secao(tipoAtual)}
+function excluir(tipo,id){salvar(K[tipo],ler(K[tipo],[]).filter(x=>x.id!==id));fechar("modalSecao");render();secao(tipo)}
+function criarPagina(){
+  const l=ler(K.paginas,[]);
+  const nova={
+    id:Date.now(),
+    nome:pNome.value,
+    arquivo:pArquivo.value,
+    emoji:pEmoji.value,
+    tipo:pTipo.value,
+    titulo:pTitulo.value,
+    subtitulo:pSub.value,
+    voltar:pVoltar.value,
+    acesso:pAcesso.value,
+    parentId:""
+  };
+
+  l.push(nova);
+  salvar(K.paginas,l);
+
+  const ordem=obterOrdemPaginas();
+  ordem.push(String(nova.id));
+  salvar(K.ordemPaginas,ordem);
+
+  const filhos=obterSubpaginasSelecionadas("pSubpaginasLista");
+  atribuirSubpaginas(String(nova.id),filhos);
+
+  fechar("modalCriador");
+  render();
+}
+function salvarVisao(){const v={nome:vNome.value,objetivo:vObjetivo.value,etapa:vEtapa.value,progresso:Math.max(0,Math.min(100,Number(vProgresso.value||0)))};salvar(K.visao,v);let e=estado();e.etapa=v.etapa;e.progresso=v.progresso;salvar(K.estado,e);fechar("modalVisao");render()}
+function abrirFuturas(){futuras.value=localStorage.getItem(K.futuras)||"";abrir("modalFuturas")}
+function salvarFuturas(){localStorage.setItem(K.futuras,futuras.value);fechar("modalFuturas")}
+
+
+const PAGINAS_EXISTENTES_PADRAO=[
+{id:"exist-index",origem:"existente",emoji:"🏡",nome:"Página Inicial",arquivo:"index.html",titulo:"Jardim da Rotina",subtitulo:"Organize sua rotina com leveza",voltar:"",acesso:"Tela inicial",parentId:""},
+{id:"exist-gabriela-menu",origem:"existente",emoji:"🌿",nome:"Rotina Gabi",arquivo:"gabriela-menu.html",titulo:"Rotina Gabi",subtitulo:"Cuide do seu tempo e da sua energia",voltar:"index.html",acesso:"Página Inicial",parentId:""},
+{id:"exist-maya-menu",origem:"existente",emoji:"⭐",nome:"Maya",arquivo:"maya-menu.html",titulo:"Maya",subtitulo:"Rotina, conquistas e descobertas",voltar:"index.html",acesso:"Página Inicial",parentId:""},
+{id:"exist-alimentacao",origem:"existente",emoji:"🍎",nome:"Alimentação",arquivo:"alimentacao.html",titulo:"Alimentação",subtitulo:"Comida de verdade é um ato de afeto e cura a alma",voltar:"index.html",acesso:"Página Inicial",parentId:""},
+{id:"exist-saude",origem:"existente",emoji:"🩺",nome:"Saúde",arquivo:"saude.html",titulo:"Saúde",subtitulo:"Cultivar bons hábitos é desenhar o seu amanhã",voltar:"index.html",acesso:"Página Inicial",parentId:""},
+{id:"exist-agenda",origem:"existente",emoji:"📅",nome:"Agendas",arquivo:"agenda-menu.html",titulo:"Agendas",subtitulo:"Gerencie o tempo e honre compromissos",voltar:"index.html",acesso:"Página Inicial",parentId:""},
+{id:"exist-projetos",origem:"existente",emoji:"🎨",nome:"Projetos e Sonhos",arquivo:"gabriela-criacao-artistica-projetos-sonhos.html",titulo:"Projetos e Sonhos",subtitulo:"Dê forma ao que vive na sua imaginação",voltar:"gabriela-menu.html",acesso:"Rotina Gabi",parentId:""},
+{id:"exist-gaia",origem:"existente",emoji:"📗",nome:"Livro de Gaia",arquivo:"gabriela-projeto-livro-gaia.html",titulo:"Livro de Gaia",subtitulo:"Escolha qual parte do projeto deseja abrir agora",voltar:"gabriela-criacao-artistica-projetos-sonhos.html",acesso:"Projetos e Sonhos",parentId:""},
+{id:"exist-app",origem:"existente",emoji:"👩‍👧",nome:"Projeto App Jardim da Rotina",arquivo:"gabriela-projeto-app-jardim-da-rotina.html",titulo:"Jardim da Rotina",subtitulo:"Desenvolvimento do aplicativo",voltar:"gabriela-criacao-artistica-projetos-sonhos.html",acesso:"Projetos e Sonhos"}
+];
+let filtroPaginasAtual="todas";
+function obterCatalogoExistente(){
+  const salvas=ler(K.catalogoExistente,[]);
+  const mapa=new Map(PAGINAS_EXISTENTES_PADRAO.map(x=>[x.id,{parentId:"",...x}]));
+  salvas.forEach(x=>mapa.set(x.id,{...mapa.get(x.id),...x}));
+  return [...mapa.values()]
+}
+
+function obterPaginasCriadas(){
+  return ler(K.paginas,[]).map(x=>({
+    ...x,
+    id:String(x.id),
+    origem:"criada",
+    nome:x.nome||x.titulo||"Sem nome",
+    titulo:x.titulo||x.nome||"",
+    subtitulo:x.subtitulo||"",
+    voltar:x.voltar||"",
+    acesso:x.acesso||"",
+    parentId:x.parentId||""
+  }))
+}
+
+function obterTodasPaginas(){
+  return [...obterCatalogoExistente(),...obterPaginasCriadas()]
+}
+
+function obterOrdemPaginas(){
+  const paginas=obterTodasPaginas();
+  const ids=paginas.map(x=>String(x.id));
+  let ordem=ler(K.ordemPaginas,[]);
+  ordem=ordem.filter(id=>ids.includes(String(id))).map(String);
+  ids.forEach(id=>{if(!ordem.includes(id))ordem.push(id)});
+  return ordem;
+}
+
+function ordenarPaginasBase(lista){
+  const ordem=obterOrdemPaginas();
+  return [...lista].sort((a,b)=>ordem.indexOf(String(a.id))-ordem.indexOf(String(b.id)));
+}
+
+function montarHierarquiaPaginas(lista){
+  const ordenadas=ordenarPaginasBase(lista);
+  const porPai=new Map();
+  ordenadas.forEach(p=>{
+    const pai=String(p.parentId||"");
+    if(!porPai.has(pai))porPai.set(pai,[]);
+    porPai.get(pai).push(p);
+  });
+
+  const resultado=[];
+  const visitados=new Set();
+
+  function adicionar(p,nivel=0){
+    if(visitados.has(String(p.id)))return;
+    visitados.add(String(p.id));
+    resultado.push({...p,nivel});
+    (porPai.get(String(p.id))||[]).forEach(f=>adicionar(f,nivel+1));
+  }
+
+  (porPai.get("")||[]).forEach(p=>adicionar(p,0));
+  ordenadas.forEach(p=>{if(!visitados.has(String(p.id)))adicionar(p,0)});
+  return resultado;
+}
+
+function preencherListaSubpaginas(containerId,paginaAtualId="",selecionadas=[]){
+  const container=document.getElementById(containerId);
+  if(!container)return;
+
+  const paginas=ordenarPaginasBase(obterTodasPaginas())
+    .filter(x=>String(x.id)!==String(paginaAtualId));
+
+  if(!paginas.length){
+    container.innerHTML='<div class="subpaginasVazio">Nenhuma outra página disponível.</div>';
+    return;
+  }
+
+  const marcadas=new Set(selecionadas.map(String));
+
+  container.innerHTML=paginas.map(x=>`
+    <label class="subpaginaOpcao">
+      <input
+        type="checkbox"
+        value="${esc(x.id)}"
+        ${marcadas.has(String(x.id))?'checked':''}
+      >
+      <span class="subpaginaOpcaoTexto">
+        <span class="subpaginaOpcaoNome">${esc(x.emoji||"📄")} ${esc(x.nome||x.titulo||"Sem nome")}</span>
+        <span class="subpaginaOpcaoArquivo">${esc(x.arquivo||"")}</span>
+      </span>
+    </label>
+  `).join("");
+}
+
+function obterSubpaginasSelecionadas(containerId){
+  return [...document.querySelectorAll(`#${containerId} input[type="checkbox"]:checked`)]
+    .map(x=>String(x.value));
+}
+
+function atribuirSubpaginas(paginaPaiId,filhosSelecionados){
+  const selecionados=new Set(filhosSelecionados.map(String));
+
+  const existentes=ler(K.catalogoExistente,[]);
+  const paginasCriadas=ler(K.paginas,[]);
+
+  const todos=obterTodasPaginas();
+
+  todos.forEach(p=>{
+    const id=String(p.id);
+    if(id===String(paginaPaiId))return;
+
+    let novoPai=String(p.parentId||"");
+
+    if(selecionados.has(id)){
+      novoPai=String(paginaPaiId);
+    }else if(novoPai===String(paginaPaiId)){
+      novoPai="";
+    }else{
+      return;
+    }
+
+    if(p.origem==="existente"){
+      const i=existentes.findIndex(x=>String(x.id)===id);
+      const alteracao={id:p.id,origem:"existente",parentId:novoPai};
+      if(i>=0)existentes[i]={...existentes[i],...alteracao};
+      else existentes.push(alteracao);
+    }else{
+      const i=paginasCriadas.findIndex(x=>String(x.id)===id);
+      if(i>=0)paginasCriadas[i]={...paginasCriadas[i],parentId:novoPai};
+    }
+  });
+
+  salvar(K.catalogoExistente,existentes);
+  salvar(K.paginas,paginasCriadas);
+}
+
+function filtrarPaginas(f,b){
+  filtroPaginasAtual=f;
+  document.querySelectorAll('.filtroPagina').forEach(x=>x.classList.remove('ativo'));
+  b.classList.add('ativo');
+  renderCatalogoPaginas()
+}
+
+function esc(t){
+  return String(t??'').replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))
+}
+
+function moverPagina(id,direcao){
+  const paginas=obterTodasPaginas();
+  const atual=paginas.find(x=>String(x.id)===String(id));
+  if(!atual)return;
+
+  const irmaos=ordenarPaginasBase(
+    paginas.filter(x=>String(x.parentId||"")===String(atual.parentId||""))
+  );
+  const indice=irmaos.findIndex(x=>String(x.id)===String(id));
+  const novoIndice=indice+direcao;
+  if(indice<0||novoIndice<0||novoIndice>=irmaos.length)return;
+
+  const ordem=obterOrdemPaginas();
+  const idA=String(irmaos[indice].id);
+  const idB=String(irmaos[novoIndice].id);
+  const posA=ordem.indexOf(idA);
+  const posB=ordem.indexOf(idB);
+  [ordem[posA],ordem[posB]]=[ordem[posB],ordem[posA]];
+  salvar(K.ordemPaginas,ordem);
+  renderCatalogoPaginas();
+}
+
+
+const paginasExpandidas=new Set();
+
+function alternarSubpaginas(id){
+  const chave=String(id);
+  if(paginasExpandidas.has(chave)){
+    paginasExpandidas.delete(chave);
+  }else{
+    paginasExpandidas.add(chave);
+  }
+  renderCatalogoPaginas();
+}
+
+function paginaEstaVisivel(item,mapa,q){
+  if(q)return true;
+  if(!item.parentId)return true;
+
+  let paiId=String(item.parentId||"");
+  const visitados=new Set();
+
+  while(paiId){
+    if(visitados.has(paiId))return false;
+    visitados.add(paiId);
+
+    if(!paginasExpandidas.has(paiId))return false;
+
+    const pai=mapa.get(paiId);
+    if(!pai)return false;
+    paiId=String(pai.parentId||"");
+  }
+  return true;
+}
+
+function renderCatalogoPaginas(){
+  let paginas=obterTodasPaginas();
+  const q=(buscaPagina?.value||'').trim().toLowerCase();
+
+  if(filtroPaginasAtual!=='todas'){
+    paginas=paginas.filter(x=>x.origem===filtroPaginasAtual);
+  }
+
+  if(q){
+    const todas=obterTodasPaginas();
+    const encontradas=todas.filter(x=>
+      (x.nome||'').toLowerCase().includes(q)||
+      (x.arquivo||'').toLowerCase().includes(q)||
+      (x.titulo||'').toLowerCase().includes(q)
+    );
+
+    const ids=new Set();
+    const mapaTodas=new Map(todas.map(x=>[String(x.id),x]));
+
+    encontradas.forEach(x=>{
+      ids.add(String(x.id));
+      let paiId=String(x.parentId||"");
+      while(paiId&&mapaTodas.has(paiId)){
+        ids.add(paiId);
+        paiId=String(mapaTodas.get(paiId).parentId||"");
+      }
+    });
+
+    paginas=todas.filter(x=>ids.has(String(x.id)));
+  }
+
+  const hierarquia=montarHierarquiaPaginas(paginas);
+  const mapa=new Map(obterTodasPaginas().map(x=>[String(x.id),x]));
+  const filhosPorPai=new Map();
+
+  obterTodasPaginas().forEach(p=>{
+    const pai=String(p.parentId||"");
+    if(!filhosPorPai.has(pai))filhosPorPai.set(pai,[]);
+    filhosPorPai.get(pai).push(p);
+  });
+
+  const visiveis=hierarquia.filter(x=>paginaEstaVisivel(x,mapa,q));
+
+  catalogoPaginas.innerHTML=visiveis.length?visiveis.map(x=>{
+    const irmaos=ordenarPaginasBase(
+      obterTodasPaginas().filter(p=>String(p.parentId||"")===String(x.parentId||""))
+    );
+    const pos=irmaos.findIndex(p=>String(p.id)===String(x.id));
+    const pai=mapa.get(String(x.parentId||""));
+    const filhos=filhosPorPai.get(String(x.id))||[];
+    const temFilhos=filhos.length>0;
+    const aberta=paginasExpandidas.has(String(x.id));
+
+    return `<div
+      class="paginaCatalogo ${x.nivel>0?'subpagina':''} ${temFilhos?'temSubpaginas':''} ${aberta?'aberta':''}"
+      style="${x.nivel>1?'margin-left:'+(24+Math.min(x.nivel-1,2)*14)+'px;width:calc(100% - '+(24+Math.min(x.nivel-1,2)*14)+'px)':''}"
+      ${temFilhos?`onclick="alternarSubpaginas('${x.id}')"`:''}
+    >
+      <div class="paginaCatalogoTopo">
+        <div class="paginaCatalogoEmoji">${esc(x.emoji||'📄')}</div>
+
+        <div class="paginaCatalogoInfo">
+          <div class="paginaCatalogoNome">${esc(x.nome||x.titulo)}</div>
+          <div class="paginaCatalogoArquivo">${esc(x.arquivo||'')}</div>
+          <span class="paginaOrigem origem-${x.origem}">${x.origem==='existente'?'Existente no app':'Criada pelo app'}</span>
+          ${pai?`<span class="subpaginaEtiqueta">Subpágina de ${esc(pai.nome||pai.titulo)}</span>`:''}
+          ${temFilhos?`<span class="quantidadeSubpaginas">${filhos.length} ${filhos.length===1?'subpágina':'subpáginas'}</span>`:''}
+        </div>
+
+        ${temFilhos?`<span class="expansorSubpaginas" aria-hidden="true">›</span>`:''}
+
+        <div class="paginaCatalogoOrdenar" title="Reordenar" onclick="event.stopPropagation()">
+          <button onclick="event.stopPropagation();moverPagina('${x.id}',-1)" ${pos<=0?'disabled':''} aria-label="Mover para cima">↑</button>
+          <button onclick="event.stopPropagation();moverPagina('${x.id}',1)" ${pos<0||pos>=irmaos.length-1?'disabled':''} aria-label="Mover para baixo">↓</button>
+        </div>
+      </div>
+
+      <div class="paginaCatalogoAcoes" onclick="event.stopPropagation()">
+        <button class="btnVisualizar" onclick="event.stopPropagation();visualizarPaginaCatalogo('${x.id}','${x.origem}')">Visualizar</button>
+        <button class="btnEditar" onclick="event.stopPropagation();editarPaginaCatalogo('${x.id}','${x.origem}')">Editar</button>
+        ${x.origem==='criada'
+          ? `<button class="btnExcluirPagina" onclick="event.stopPropagation();excluirPaginaCatalogo('${x.id}')">Excluir</button>`
+          : ''}
+      </div>
+    </div>`
+  }).join(''):'<div class="vazio">Nenhuma página encontrada.</div>'
+}
+
+function excluirPaginaCatalogo(id){
+  const pagina=obterTodasPaginas().find(x=>String(x.id)===String(id));
+  if(!pagina || pagina.origem!=="criada") return;
+
+  const filhos=obterTodasPaginas().filter(
+    x=>String(x.parentId||"")===String(id)
+  );
+
+  let mensagem=`Excluir "${pagina.nome||pagina.titulo||"Sem nome"}" do catálogo?`;
+  if(filhos.length){
+    mensagem+=`\n\n${filhos.length} subpágina${filhos.length===1?" será":"s serão"} desvinculada${filhos.length===1?"":"s"} desta página.`;
+  }
+
+  if(!confirm(mensagem)) return;
+
+  let criadas=ler(K.paginas,[]);
+  criadas=criadas
+    .filter(x=>String(x.id)!==String(id))
+    .map(x=>String(x.parentId||"")===String(id) ? {...x,parentId:""} : x);
+  salvar(K.paginas,criadas);
+
+  const existentes=ler(K.catalogoExistente,[]).map(
+    x=>String(x.parentId||"")===String(id) ? {...x,parentId:""} : x
+  );
+  salvar(K.catalogoExistente,existentes);
+
+  const ordem=obterOrdemPaginas().filter(x=>String(x)!==String(id));
+  salvar(K.ordemPaginas,ordem);
+
+  paginasExpandidas.delete(String(id));
+  renderCatalogoPaginas();
+  render();
+}
+
+function localizarPagina(id,o){return obterTodasPaginas().find(x=>String(x.id)===String(id)&&x.origem===o)}
+function visualizarPaginaCatalogo(id,o){const x=localizarPagina(id,o);previewPaginaConteudo.innerHTML=`<div style="font-size:30px">${esc(x.emoji||'📄')}</div><h3>${esc(x.titulo||x.nome)}</h3><p>${esc(x.subtitulo||'Sem subtítulo cadastrado')}</p><code>${esc(x.arquivo||'')}</code>`;abrir('modalPreviewPagina')}
+function editarPaginaCatalogo(id,o){
+  const x=localizarPagina(id,o);
+  editPaginaId.value=id+'|'+o;
+  editEmoji.value=x.emoji||'';
+  editOrigem.value=o==='existente'?'Existente no app':'Criada pelo app';
+  editNome.value=x.nome||'';
+  editArquivo.value=x.arquivo||'';
+  editTitulo.value=x.titulo||'';
+  editSubtitulo.value=x.subtitulo||'';
+  editVoltar.value=x.voltar||'';
+  editAcesso.value=x.acesso||'';
+
+  const filhos=obterTodasPaginas()
+    .filter(p=>String(p.parentId||"")===String(id))
+    .map(p=>String(p.id));
+
+  preencherListaSubpaginas('editSubpaginasLista',id,filhos);
+  abrir('modalEditarPagina')
+}
+function salvarEdicaoPagina(){
+  const [id,o]=editPaginaId.value.split('|');
+
+  const d={
+    id,
+    origem:o,
+    emoji:editEmoji.value,
+    nome:editNome.value,
+    arquivo:editArquivo.value,
+    titulo:editTitulo.value,
+    subtitulo:editSubtitulo.value,
+    voltar:editVoltar.value,
+    acesso:editAcesso.value
+  };
+
+  if(o==='existente'){
+    const l=ler(K.catalogoExistente,[]);
+    const i=l.findIndex(x=>String(x.id)===String(id));
+    i>=0?l[i]={...l[i],...d}:l.push(d);
+    salvar(K.catalogoExistente,l)
+  }else{
+    const l=ler(K.paginas,[]);
+    const i=l.findIndex(x=>String(x.id)===String(id));
+    if(i>=0)l[i]={...l[i],...d};
+    salvar(K.paginas,l)
+  }
+
+  const filhos=obterSubpaginasSelecionadas("editSubpaginasLista");
+  atribuirSubpaginas(id,filhos);
+
+  fechar('modalEditarPagina');
+  renderCatalogoPaginas();
+  render()
+}
+function importarPaginaHtml(e){const a=e.target.files?.[0];if(!a)return;const r=new FileReader();r.onload=()=>{const t=String(r.result||''),titulo=(t.match(/<title[^>]*>(.*?)<\/title>/is)||[])[1]||a.name.replace(/\.html$/i,''),h1=(t.match(/<h1[^>]*>(.*?)<\/h1>/is)||[])[1]||titulo,limpa=s=>String(s).replace(/<[^>]+>/g,'').trim(),l=ler(K.paginas,[]);l.push({id:Date.now(),origem:'criada',emoji:'📄',nome:limpa(titulo),arquivo:a.name,titulo:limpa(h1),subtitulo:'',voltar:'',acesso:'',parentId:'',importada:true});salvar(K.paginas,l);e.target.value='';renderCatalogoPaginas();render()};r.readAsText(a)}
+
+function render(){
+  const e=estado();inicio.hidden=e.iniciado&&e.status!=="encerrado";status.hidden=!e.iniciado||e.status==="encerrado";
+  if(!status.hidden){statusSelo.textContent=e.status==="pausado"?"Projeto pausado":"Projeto em andamento";statusEtapa.textContent="Etapa • "+e.etapa;barra.style.width=e.progresso+"%"}
+  if(e.status==="encerrado"){inicio.querySelector("strong").textContent="Iniciar novo ciclo do app";inicio.querySelector("small").textContent="Começar uma nova versão do Jardim da Rotina"}
+  else{inicio.querySelector("strong").textContent="Iniciar desenvolvimento do app";inicio.querySelector("small").textContent="Começar a organizar a próxima versão"}
+  rIdeias.textContent=ler(K.ideias,[]).length;rPaginas.textContent=ler(K.paginas,[]).length;
+  rTarefas.textContent=ler(K.tarefas,[]).filter(x=>!["Concluída","Publicada"].includes(x.status)).length;
+  rErros.textContent=ler(K.testes,[]).filter(x=>!["Concluída","Publicada"].includes(x.status)).length;
+}
+function relogio(){const a=new Date(),p=n=>String(n).padStart(2,"0"),d=["dom","seg","ter","qua","qui","sex","sáb"];hora.textContent=p(a.getHours())+":"+p(a.getMinutes());dia.textContent="• "+d[a.getDay()];data.textContent="• "+p(a.getDate())+"/"+p(a.getMonth()+1)}
+window.addEventListener("load",()=>{render();relogio();setInterval(relogio,1000)})
+</script>
+</body>
+</html>

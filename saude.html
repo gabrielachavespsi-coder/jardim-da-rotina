@@ -782,6 +782,122 @@ input, select, textarea{
 }
 </style>
 
+
+<style>
+/* =========================================================
+   BOTÕES DA SAÚDE — MESMO PADRÃO VISUAL DA GABRIELA-MENU
+   ========================================================= */
+.saudeMenuLista{
+  gap:9px !important;
+}
+
+.saudeMenuLista .botao{
+  width:100% !important;
+  min-height:66px !important;
+  height:auto !important;
+  border-radius:18px !important;
+  background:rgba(255,255,255,.94) !important;
+  border:1px solid rgba(232,225,212,.92) !important;
+  color:#2F332D !important;
+  box-shadow:0 7px 18px rgba(76,82,62,.08) !important;
+  padding:10px 42px 10px 74px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  align-items:flex-start !important;
+  text-align:left !important;
+  position:relative !important;
+  overflow:hidden !important;
+  transition:.2s ease !important;
+}
+
+.saudeMenuLista .botao:hover{
+  transform:translateY(-1px) !important;
+  background:#FFFDF8 !important;
+  box-shadow:0 10px 22px rgba(76,82,62,.12) !important;
+}
+
+.saudeMenuLista .botao::before{
+  position:absolute !important;
+  left:16px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:44px !important;
+  height:44px !important;
+  border-radius:50% !important;
+  background:#F4F0E7 !important;
+  border:1px solid rgba(232,225,212,.78) !important;
+  box-shadow:0 5px 12px rgba(76,82,62,.06) !important;
+  color:#6D805F !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  line-height:1 !important;
+  font-size:20px !important;
+}
+
+.saudeMenuLista .botao::after{
+  content:"›" !important;
+  position:absolute !important;
+  right:20px !important;
+  top:50% !important;
+  transform:translateY(-54%) !important;
+  color:#6F7E63 !important;
+  font-size:31px !important;
+  line-height:1 !important;
+  font-weight:300 !important;
+}
+
+.saudeMenuLista .botao:nth-child(1)::before{content:"▦" !important; font-size:21px !important;}
+.saudeMenuLista .botao:nth-child(2)::before{content:"◈" !important; font-size:20px !important; transform:translateY(-50%) rotate(45deg) !important;}
+.saudeMenuLista .botao:nth-child(3)::before{content:"⚗" !important; font-size:21px !important;}
+.saudeMenuLista .botao:nth-child(4)::before{content:"▤" !important; font-size:21px !important;}
+
+.saudeMenuLista .conteudo-botao{
+  width:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  justify-content:center !important;
+  text-align:left !important;
+  transform:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  gap:0 !important;
+}
+
+.saudeMenuLista .nome-botao{
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  color:#2F332D !important;
+  text-align:left !important;
+  font-size:16px !important;
+  line-height:1.22 !important;
+  font-weight:500 !important;
+  letter-spacing:-.2px !important;
+}
+
+.saudeMenuLista .proxima-tarefa{
+  width:100% !important;
+  margin:3px 0 0 !important;
+  padding:0 !important;
+  color:#77786F !important;
+  text-align:left !important;
+  font-size:11.5px !important;
+  line-height:1.25 !important;
+}
+
+@media(max-width:390px){
+  .saudeMenuLista .botao{
+    padding-left:68px !important;
+    padding-right:36px !important;
+  }
+  .saudeMenuLista .nome-botao{font-size:15px !important;}
+  .saudeMenuLista .proxima-tarefa{font-size:11px !important;}
+}
+</style>
+
 </head>
 
 <body>
@@ -819,7 +935,7 @@ input, select, textarea{
 
       <button class="botao" onclick="location.href='saude-consultas.html'">
         <div class="conteudo-botao">
-          <div class="nome-botao">📅 Consultas</div>
+          <div class="nome-botao">Consultas</div>
           <div class="proxima-tarefa">acompanhar atendimentos</div>
           <div class="horario-proxima"></div>
         </div>
@@ -827,7 +943,7 @@ input, select, textarea{
 
       <button class="botao" onclick="location.href='saude-remedios.html'">
         <div class="conteudo-botao">
-          <div class="nome-botao">💊 Remédios</div>
+          <div class="nome-botao">Remédios</div>
           <div class="proxima-tarefa">organizar medicações</div>
           <div class="horario-proxima"></div>
         </div>
@@ -835,7 +951,7 @@ input, select, textarea{
 
       <button class="botao" onclick="location.href='saude-exames.html'">
         <div class="conteudo-botao">
-          <div class="nome-botao">🧪 Exames</div>
+          <div class="nome-botao">Exames</div>
           <div class="proxima-tarefa">guardar resultados</div>
           <div class="horario-proxima"></div>
         </div>
@@ -843,7 +959,7 @@ input, select, textarea{
 
       <button class="botao" onclick="location.href='saude-historico.html'">
         <div class="conteudo-botao">
-          <div class="nome-botao">📝 Histórico</div>
+          <div class="nome-botao">Histórico</div>
           <div class="proxima-tarefa">registrar informações importantes</div>
           <div class="horario-proxima"></div>
         </div>

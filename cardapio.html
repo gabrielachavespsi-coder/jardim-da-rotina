@@ -624,6 +624,124 @@ body.alimentacao-subvisual .card::after{
   display:none !important;
 }
 </style>
+
+<style id="importacao-cardapio-estilos">
+.importarCardapioBtn{width:100%;min-height:46px;border:none;border-radius:15px;background:#EAF3E8;color:#516448;font-family:var(--fonte);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #D9E7D4;margin-bottom:2px}
+.importarCardapioBtn:hover{background:#DFECDD}
+.divisorModal{display:flex;align-items:center;gap:8px;color:#92958E;font-size:10.5px;margin:1px 0}.divisorModal::before,.divisorModal::after{content:"";height:1px;flex:1;background:#E4DED2}
+.campoDuplo{display:grid;grid-template-columns:1fr 1fr;gap:8px}.importAjuda{font-size:11px;color:#77786F;line-height:1.45;background:#F7F5EF;border:1px solid #E8E1D4;border-radius:14px;padding:10px 11px}
+.importStatus{min-height:18px;font-size:11.5px;line-height:1.4;color:#516448;text-align:center}.importStatus.erro{color:#A34C4C}
+.previewImportacao{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow:auto}.previewItem{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:flex-start;background:#FFF;border:1px solid #E8E1D4;border-radius:14px;padding:10px}.previewItem input{width:auto;margin-top:3px;accent-color:#7F9271}.previewDia{font-size:12px;font-weight:600;color:#40513B}.previewLinha{font-size:11.5px;color:#62675F;line-height:1.4;margin-top:2px}.fonteLinkCard{font-size:10.5px;color:#7A8074;margin-top:3px;word-break:break-all}.detalheExtra{font-size:11px;color:#77786F;margin-top:3px;line-height:1.35}
+@media(max-width:390px){.campoDuplo{grid-template-columns:1fr}.modal{padding:15px}.modalTitle{font-size:17px}}
+</style>
+
+
+<style id="estilo-prompt-cardapio">
+.acoesImportacaoCadastro{display:grid;grid-template-columns:1fr 1fr;gap:8px}.copiarPromptBtn{border:1px solid rgba(216,207,191,.95);background:#F1EEE6;color:#516448;border-radius:14px;min-height:46px;padding:10px 12px;font-family:'Poppins',sans-serif;font-size:12px;cursor:pointer}.copiarPromptBtn:hover{background:#EAE5DA}.promptCardapioTexto{min-height:330px!important;max-height:52vh;resize:none!important;font-size:11.5px!important;line-height:1.45!important;white-space:pre-wrap}.modalPromptCardapio{width:min(390px,100%)!important}@media(max-width:390px){.acoesImportacaoCadastro{grid-template-columns:1fr}.promptCardapioTexto{min-height:290px!important}}
+</style>
+
+<style id="acoes-footer-cardapio">
+body.alimentacao-subvisual .listBox{
+  margin-top:0 !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio{
+  display:grid !important;
+  grid-template-columns:1fr 1fr 1fr !important;
+  gap:10px !important;
+  align-items:stretch !important;
+  margin-top:8px !important;
+  padding-bottom:8px !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .futureBtn{
+  min-height:56px !important;
+  padding:12px 34px 12px 18px !important;
+  justify-content:center !important;
+  text-align:center !important;
+  font-size:12.5px !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .futureBtn::after{
+  content:"›";
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-52%);
+  font-size:24px;
+  color:#6F7E63;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .summaryFooterBtn::before{
+  content:"☰" !important;
+  margin-right:8px;
+  color:#6D805F;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .addFooterBtn::before{
+  content:"+" !important;
+  margin-right:8px;
+  color:#6D805F;
+  font-weight:700;
+  font-size:18px;
+  line-height:1;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .futureEditFooterBtn::before{
+  content:"⚙" !important;
+  margin-right:8px;
+  color:#6D805F;
+}
+@media(max-width:390px){
+  body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio{
+    grid-template-columns:1fr !important;
+  }
+}
+</style>
+
+<style id="ajuste-botao-mais-footer-footerAcoesCardapio">
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio{
+  grid-template-columns:1fr 84px 1fr !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .addFooterBtn{
+  width:84px !important;
+  min-width:84px !important;
+  max-width:84px !important;
+  min-height:54px !important;
+  padding:0 !important;
+  justify-self:center !important;
+  border-radius:18px !important;
+  background:linear-gradient(180deg, #EEF5EA 0%, #E7F0E1 100%) !important;
+  border:1px solid rgba(214,228,206,.98) !important;
+  box-shadow:0 6px 16px rgba(76,82,62,.08) !important;
+  font-size:0 !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .addFooterBtn::before{
+  content:"+" !important;
+  margin:0 !important;
+  color:#6D805F !important;
+  font-size:26px !important;
+  font-weight:500 !important;
+  line-height:1 !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .addFooterBtn::after{
+  content:none !important;
+  display:none !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .addFooterBtn:hover{
+  transform:translateY(-1px) !important;
+  box-shadow:0 8px 18px rgba(76,82,62,.11) !important;
+}
+@media(max-width:390px){
+  body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio{
+    grid-template-columns:1fr 72px 1fr !important;
+  }
+  body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .addFooterBtn{
+    width:72px !important;
+    min-width:72px !important;
+    max-width:72px !important;
+    min-height:52px !important;
+  }
+  body.alimentacao-subvisual .footerMiniAction.footerAcoesCardapio .addFooterBtn::before{
+    font-size:24px !important;
+  }
+}
+</style>
+
 </head>
 <body class="alimentacao-subvisual">
 <div class="card">
@@ -639,8 +757,7 @@ body.alimentacao-subvisual .card::after{
       <div id="linhaTempoData" class="headerLinha"></div>
     </div>
   </div>
-  <div class="topActions topActionsHeader"><button class="summaryBtn" onclick="abrirResumoCardapio()">Resumo</button><button class="addBtn" onclick="abrirModalNovo()">+</button></div>
-  <div class="listBox">
+    <div class="listBox">
     <div class="filtrosTopoLista">
       <select class="periodoSelect" id="semanaSelect" onchange="render()"></select>
       <select class="filtroSelect" id="diaFiltro" onchange="render()">
@@ -649,22 +766,64 @@ body.alimentacao-subvisual .card::after{
     </div>
     <div id="listaCardapio"></div>
   </div>
-  <div class="footerMiniAction"><button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button></div>
+  <div class="footerMiniAction footerAcoesCardapio">
+    <button class="futureBtn summaryFooterBtn" onclick="abrirResumoCardapio()">resumo</button>
+    <button class="futureBtn addFooterBtn" onclick="abrirModalNovo()" aria-label="novo item do cardápio" title="novo item do cardápio"></button>
+    <button class="futureBtn futureEditFooterBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+  </div>
 </div>
 
 <div class="modalOverlay" id="modalCadastro"><div class="modal">
   <div class="modalHeader"><h2 class="modalTitle" id="tituloCadastro">Nova refeição</h2><div class="dataHoraTopo" id="dataHoraCadastro"></div></div>
-  <div class="field"><label>Dias da semana</label><div id="diasBox" class="checkboxBox"></div></div>
+
+  <div class="acoesImportacaoCadastro">
+    <button class="importarCardapioBtn" type="button" onclick="abrirModalImportacaoCardapio()">🔗 Importar de uma página ou texto</button>
+    <button class="copiarPromptBtn" type="button" onclick="abrirModalPromptCardapio()">✨ Copiar prompt para a IA</button>
+  </div>
+  <div class="divisorModal">ou preencher manualmente</div>
+
   <div class="field"><label>Refeição</label><div id="refeicoesBox" class="checkboxBox"></div></div>
   <div class="field"><label>Prato / alimento</label><div id="pratosBox" class="checkboxBox oneCol"></div><input id="pratoExtraInput" placeholder="Ou escreva outra opção, separando por vírgula"><div class="campoAjuda">Você pode selecionar mais de uma opção e também escrever outras.</div></div>
-  <div class="field"><label>Observações</label><textarea id="obsInput" placeholder="Ex.: sem tela, pouca bebida, levar lanche..."></textarea></div>
+  <div class="field"><label>Dias da semana</label><div id="diasBox" class="checkboxBox"></div></div>
+
+  <div class="campoDuplo">
+    <div class="field"><label>Quantidade / porções</label><input id="porcoesInput" placeholder="Ex.: 4 porções"></div>
+    <div class="field"><label>Tempo ou horário</label><input id="tempoInput" placeholder="Ex.: 30 min ou 12h30"></div>
+  </div>
+
+  <div class="field"><label>Ingredientes principais</label><textarea id="ingredientesInput" placeholder="Ex.: arroz, feijão, legumes..." style="min-height:82px"></textarea></div>
+  <div class="field"><label>Preparo ou organização antecipada</label><textarea id="preparoInput" placeholder="Ex.: deixar o feijão de molho na noite anterior..." style="min-height:82px"></textarea></div>
+  <div class="field"><label>Fonte / link</label><input id="fonteInput" type="url" placeholder="Link da receita ou do cardápio (opcional)"></div>
+  <div class="field"><label>Observações</label><textarea id="obsInput" placeholder="Ex.: sem tela, pouca bebida, levar lanche..." style="min-height:90px"></textarea></div>
   <div class="modalBtns"><button class="cancel" onclick="fecharModalCadastro()">Cancelar</button><button class="danger" id="btnExcluir" onclick="excluirItemEditando()" style="display:none;">Excluir</button><button class="saveMore" onclick="salvarCadastroEMaisNovo()">Concluir + Novo</button><button class="save" onclick="salvarCadastro()">Concluir</button></div>
+</div></div>
+
+<div class="modalOverlay" id="modalImportacaoCardapio"><div class="modal">
+  <div class="modalHeader"><h2 class="modalTitle">Importar cardápio</h2><button class="miniBtn" type="button" onclick="fecharModalImportacaoCardapio()">✕</button></div>
+  <div class="importAjuda">Cole o link de uma página. O aplicativo tentará ler o conteúdo. Se o site bloquear a leitura, copie o texto da página e cole no campo abaixo.</div>
+  <div class="field"><label>Link da página</label><input id="importUrlInput" type="url" placeholder="https://..."></div>
+  <button class="importarCardapioBtn" type="button" onclick="buscarCardapioPeloLink()">Buscar informações do link</button>
+  <div class="divisorModal">ou</div>
+  <div class="field"><label>Texto do cardápio</label><textarea id="importTextoInput" placeholder="Cole aqui o cardápio com os dias, refeições e pratos..." style="min-height:150px"></textarea></div>
+  <button class="importarCardapioBtn" type="button" onclick="analisarTextoCardapio()">Analisar informações</button>
+  <div id="importStatus" class="importStatus"></div>
+  <div id="previewImportacao" class="previewImportacao"></div>
+  <div class="modalBtns"><button class="cancel" onclick="fecharModalImportacaoCardapio()">Cancelar</button><button class="save" id="btnAplicarImportacao" onclick="aplicarImportacaoSelecionada()" style="display:none">Acrescentar selecionados</button></div>
+</div></div>
+
+
+<div class="modalOverlay" id="modalPromptCardapio"><div class="modal modalPromptCardapio">
+  <div class="modalHeader"><h2 class="modalTitle">Prompt para organizar o cardápio</h2><button class="miniBtn" type="button" onclick="fecharModalPromptCardapio()">✕</button></div>
+  <div class="importAjuda">Copie este comando, cole na IA junto com o cardápio e depois cole a resposta no campo de importação do aplicativo.</div>
+  <textarea id="promptCardapioTexto" class="promptCardapioTexto" readonly></textarea>
+  <div id="statusCopiaPrompt" class="importStatus"></div>
+  <div class="modalBtns"><button class="cancel" onclick="fecharModalPromptCardapio()">Fechar</button><button class="save" onclick="copiarPromptCardapio()">Copiar prompt</button></div>
 </div></div>
 
 <div class="modalOverlay" id="modalResumo"><div class="modal"><h2 class="modalTitle">Resumo do Cardápio</h2><div id="resumoLista" class="resumoLista"></div><div class="modalBtns"><button class="cancel" onclick="fecharResumoCardapio()">Fechar</button></div></div></div>
 <div class="modalOverlay" id="modalFuturasEdicoes"><div class="modal"><h2 class="modalTitle">Futuras edições</h2><div class="field"><label>Ideias de melhorias futuras</label><textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea></div><div class="modalBtns"><button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button><button class="save" onclick="salvarFuturasEdicoes()">Concluir</button></div></div></div>
 <script>
-const CHAVE="cardapio_semanal"; const CHAVE_FUTURAS="futuras_edicoes_cardapio"; const CHAVE_RECEITAS="receitas_cadastradas"; let editandoId=null;
+const CHAVE="cardapio_semanal"; let itensImportacaoCardapio=[]; const CHAVE_FUTURAS="futuras_edicoes_cardapio"; const CHAVE_RECEITAS="receitas_cadastradas"; let editandoId=null;
 const DIAS=[['segunda','Segunda'],['terca','Terça'],['quarta','Quarta'],['quinta','Quinta'],['sexta','Sexta'],['sabado','Sábado'],['domingo','Domingo']];
 const REFEICOES=['Café da manhã','Lanche da manhã','Almoço','Lanche da tarde','Jantar','Ceia'];
 function getDados(){try{return JSON.parse(localStorage.getItem(CHAVE))||[]}catch{return[]}} function salvarDados(d){localStorage.setItem(CHAVE,JSON.stringify(d))}
@@ -682,20 +841,166 @@ function getMarcados(classe){return [...document.querySelectorAll('.'+classe+':c
 function marcar(classe,valores){const set=new Set(normalizarArray(valores)); document.querySelectorAll('.'+classe).forEach(i=>i.checked=set.has(i.value))}
 function getReceitasNomes(){try{return (JSON.parse(localStorage.getItem(CHAVE_RECEITAS))||[]).map(r=>r.nome).filter(Boolean).sort((a,b)=>a.localeCompare(b,'pt-BR',{sensitivity:'base'}))}catch{return[]}}
 function preencherPratosBox(valores=[]){const receitas=getReceitasNomes(); const box=document.getElementById('pratosBox'); if(!receitas.length){box.innerHTML='<div class="empty" style="padding:0;">Nenhuma receita cadastrada ainda.</div>';return} box.innerHTML=receitas.map(nome=>`<label class="checkOption"><input type="checkbox" class="pratoCheck" value="${escapeHtml(nome)}"> ${escapeHtml(nome)}</label>`).join(''); marcar('pratoCheck',valores)}
-function abrirModalNovo(){editandoId=null;document.getElementById('tituloCadastro').textContent='Nova refeição';document.getElementById('dataHoraCadastro').textContent=dataHora();marcar('diaCheck',['segunda']);marcar('refeicaoCheck',['Café da manhã']);preencherPratosBox([]);document.getElementById('pratoExtraInput').value='';document.getElementById('obsInput').value='';document.getElementById('btnExcluir').style.display='none';document.getElementById('modalCadastro').classList.add('show')}
-function abrirModalEditar(id){const item=getDados().find(i=>i.id===id); if(!item)return; editandoId=id;document.getElementById('tituloCadastro').textContent='Editar refeição';document.getElementById('dataHoraCadastro').textContent=dataHora();marcar('diaCheck',[item.dia]);marcar('refeicaoCheck',[item.refeicao]);preencherPratosBox([item.prato]);document.getElementById('pratoExtraInput').value='';document.getElementById('obsInput').value=item.obs||'';document.getElementById('btnExcluir').style.display='block';document.getElementById('modalCadastro').classList.add('show')}
+function abrirModalNovo(){editandoId=null;document.getElementById('tituloCadastro').textContent='Nova refeição';document.getElementById('dataHoraCadastro').textContent=dataHora();marcar('diaCheck',['segunda']);marcar('refeicaoCheck',['Café da manhã']);preencherPratosBox([]);document.getElementById('pratoExtraInput').value='';document.getElementById('porcoesInput').value='';document.getElementById('tempoInput').value='';document.getElementById('ingredientesInput').value='';document.getElementById('preparoInput').value='';document.getElementById('fonteInput').value='';document.getElementById('obsInput').value='';document.getElementById('btnExcluir').style.display='none';document.getElementById('modalCadastro').classList.add('show')}
+function abrirModalEditar(id){const item=getDados().find(i=>i.id===id); if(!item)return; editandoId=id;document.getElementById('tituloCadastro').textContent='Editar refeição';document.getElementById('dataHoraCadastro').textContent=dataHora();marcar('diaCheck',[item.dia]);marcar('refeicaoCheck',[item.refeicao]);preencherPratosBox([item.prato]);document.getElementById('pratoExtraInput').value='';document.getElementById('porcoesInput').value=item.porcoes||'';document.getElementById('tempoInput').value=item.tempo||'';document.getElementById('ingredientesInput').value=item.ingredientes||'';document.getElementById('preparoInput').value=item.preparo||'';document.getElementById('fonteInput').value=item.fonte||'';document.getElementById('obsInput').value=item.obs||'';document.getElementById('btnExcluir').style.display='block';document.getElementById('modalCadastro').classList.add('show')}
 function fecharModalCadastro(){document.getElementById('modalCadastro').classList.remove('show')}
 function getPratosSelecionados(){const marcados=getMarcados('pratoCheck'); const extras=document.getElementById('pratoExtraInput').value.split(',').map(t=>t.trim()).filter(Boolean); return [...new Set([...marcados,...extras])]}
-function coletar(){return{dias:getMarcados('diaCheck'),refeicoes:getMarcados('refeicaoCheck'),pratos:getPratosSelecionados(),obs:document.getElementById('obsInput').value.trim(),semana:document.getElementById('semanaSelect').value}}
+function coletar(){return{dias:getMarcados('diaCheck'),refeicoes:getMarcados('refeicaoCheck'),pratos:getPratosSelecionados(),porcoes:document.getElementById('porcoesInput').value.trim(),tempo:document.getElementById('tempoInput').value.trim(),ingredientes:document.getElementById('ingredientesInput').value.trim(),preparo:document.getElementById('preparoInput').value.trim(),fonte:document.getElementById('fonteInput').value.trim(),obs:document.getElementById('obsInput').value.trim(),semana:document.getElementById('semanaSelect').value}}
 function validar(d){if(!d.semana){alert('Selecione um período por semana.');return false} if(!d.dias.length){alert('Selecione pelo menos um dia da semana.');return false} if(!d.refeicoes.length){alert('Selecione pelo menos uma refeição.');return false} if(!d.pratos.length){alert('Selecione ou escreva pelo menos um prato / alimento.');return false} return true}
-function expandirItens(f){const itens=[]; f.dias.forEach(dia=>f.refeicoes.forEach(refeicao=>f.pratos.forEach(prato=>itens.push({dia,refeicao,prato,obs:f.obs,semana:f.semana})))); return itens}
+function expandirItens(f){const itens=[]; f.dias.forEach(dia=>f.refeicoes.forEach(refeicao=>f.pratos.forEach(prato=>itens.push({dia,refeicao,prato,porcoes:f.porcoes,tempo:f.tempo,ingredientes:f.ingredientes,preparo:f.preparo,fonte:f.fonte,obs:f.obs,semana:f.semana})))); return itens}
 function salvarCadastro(){const f=coletar(); if(!validar(f))return; let dados=getDados(); if(editandoId!==null){const idx=dados.findIndex(i=>i.id===editandoId); const primeiro=expandirItens(f)[0]; if(idx>=0&&primeiro)dados[idx]={...dados[idx],...primeiro}}else{expandirItens(f).forEach((item,idx)=>dados.push({id:Date.now()+idx,...item,criadoEm:new Date().toISOString()}))} salvarDados(dados); fecharModalCadastro(); render()}
-function salvarCadastroEMaisNovo(){const f=coletar(); if(!validar(f))return; let dados=getDados(); if(editandoId!==null){const idx=dados.findIndex(i=>i.id===editandoId); const primeiro=expandirItens(f)[0]; if(idx>=0&&primeiro)dados[idx]={...dados[idx],...primeiro}; editandoId=null}else{expandirItens(f).forEach((item,idx)=>dados.push({id:Date.now()+idx,...item,criadoEm:new Date().toISOString()}))} salvarDados(dados); document.getElementById('pratoExtraInput').value='';document.getElementById('obsInput').value='';preencherPratosBox([]);render()}
+function salvarCadastroEMaisNovo(){const f=coletar(); if(!validar(f))return; let dados=getDados(); if(editandoId!==null){const idx=dados.findIndex(i=>i.id===editandoId); const primeiro=expandirItens(f)[0]; if(idx>=0&&primeiro)dados[idx]={...dados[idx],...primeiro}; editandoId=null}else{expandirItens(f).forEach((item,idx)=>dados.push({id:Date.now()+idx,...item,criadoEm:new Date().toISOString()}))} salvarDados(dados); document.getElementById('pratoExtraInput').value='';document.getElementById('porcoesInput').value='';document.getElementById('tempoInput').value='';document.getElementById('ingredientesInput').value='';document.getElementById('preparoInput').value='';document.getElementById('fonteInput').value='';document.getElementById('obsInput').value='';preencherPratosBox([]);render()}
 function excluirItemEditando(){if(editandoId===null)return; if(!confirm('Deseja excluir esta refeição?'))return; salvarDados(getDados().filter(i=>i.id!==editandoId)); fecharModalCadastro(); render()}
-function render(){const semana=document.getElementById('semanaSelect').value; const filtro=document.getElementById('diaFiltro').value; const wrap=document.getElementById('listaCardapio'); if(!semana){wrap.innerHTML='<div class="empty">Selecione um período por semana para ver o cardápio.</div>'; return} const dados=getDados().filter(i=>i.semana===semana); wrap.innerHTML=''; const dias=DIAS.filter(([k])=>filtro==='todos'||filtro===k); let total=0; dias.forEach(([dia,label])=>{const doDia=dados.filter(i=>i.dia===dia); if(filtro==='todos'||doDia.length){let html=`<div class="secaoLista"><div class="secaoTitulo">${label}</div><div class="secaoSubtitulo">cardápio do dia</div>`; REFEICOES.forEach(ref=>{const itens=doDia.filter(i=>i.refeicao===ref); if(itens.length){html+=`<div class="refeicaoTitulo">${ref}</div>`; itens.forEach(item=>{total++; html+=`<div class="item" onclick="abrirModalEditar(${item.id})"><div class="itemTexto"><div class="nome">${escapeHtml(item.prato)}</div>${item.obs?`<div class="detalhe">${escapeHtml(item.obs)}</div>`:''}</div></div>`})}}); html+='</div>'; wrap.innerHTML+=html}}); if(!total)wrap.innerHTML='<div class="empty">Nenhuma refeição cadastrada ainda.</div>'}
+function render(){const semana=document.getElementById('semanaSelect').value; const filtro=document.getElementById('diaFiltro').value; const wrap=document.getElementById('listaCardapio'); if(!semana){wrap.innerHTML='<div class="empty">Selecione um período por semana para ver o cardápio.</div>'; return} const dados=getDados().filter(i=>i.semana===semana); wrap.innerHTML=''; const dias=DIAS.filter(([k])=>filtro==='todos'||filtro===k); let total=0; dias.forEach(([dia,label])=>{const doDia=dados.filter(i=>i.dia===dia); if(filtro==='todos'||doDia.length){let html=`<div class="secaoLista"><div class="secaoTitulo">${label}</div><div class="secaoSubtitulo">cardápio do dia</div>`; REFEICOES.forEach(ref=>{const itens=doDia.filter(i=>i.refeicao===ref); if(itens.length){html+=`<div class="refeicaoTitulo">${ref}</div>`; itens.forEach(item=>{total++; html+=`<div class="item" onclick="abrirModalEditar(${item.id})"><div class="itemTexto"><div class="nome">${escapeHtml(item.prato)}</div>${item.porcoes||item.tempo?`<div class="detalheExtra">${escapeHtml([item.porcoes,item.tempo].filter(Boolean).join(' • '))}</div>`:''}${item.ingredientes?`<div class="detalheExtra"><strong>Ingredientes:</strong> ${escapeHtml(item.ingredientes)}</div>`:''}${item.preparo?`<div class="detalheExtra"><strong>Preparo:</strong> ${escapeHtml(item.preparo)}</div>`:''}${item.obs?`<div class="detalhe">${escapeHtml(item.obs)}</div>`:''}${item.fonte?`<div class="fonteLinkCard">Fonte: ${escapeHtml(item.fonte)}</div>`:''}</div></div>`})}}); html+='</div>'; wrap.innerHTML+=html}}); if(!total)wrap.innerHTML='<div class="empty">Nenhuma refeição cadastrada ainda.</div>'}
 function abrirResumoCardapio(){const semana=document.getElementById('semanaSelect').value; const c=document.getElementById('resumoLista'); if(!semana){c.innerHTML='<div class="empty">Selecione um período por semana para ver o resumo.</div>'; document.getElementById('modalResumo').classList.add('show'); return} const dados=getDados().filter(i=>i.semana===semana); if(!dados.length)c.innerHTML='<div class="empty">Nenhuma refeição cadastrada ainda.</div>'; else c.innerHTML=DIAS.map(([dia,label])=>{const itens=dados.filter(i=>i.dia===dia); if(!itens.length)return ''; return `<div class="resumoItem"><div class="resumoNome">${label}</div>${itens.map(i=>`<div class="resumoLinha"><span class="resumoDetalheInline">${escapeHtml(i.refeicao)}:</span><span class="resumoDetalheInline">${escapeHtml(i.prato)}</span></div>`).join('')}</div>`}).join(''); document.getElementById('modalResumo').classList.add('show')}
 function fecharResumoCardapio(){document.getElementById('modalResumo').classList.remove('show')}
 function abrirModalFuturasEdicoes(){document.getElementById('futurasEdicoesTexto').value=localStorage.getItem(CHAVE_FUTURAS)||'';document.getElementById('modalFuturasEdicoes').classList.add('show')} function fecharModalFuturasEdicoes(){document.getElementById('modalFuturasEdicoes').classList.remove('show')} function salvarFuturasEdicoes(){localStorage.setItem(CHAVE_FUTURAS,document.getElementById('futurasEdicoesTexto').value);fecharModalFuturasEdicoes()}
+
+function abrirModalImportacaoCardapio(){
+  document.getElementById('modalImportacaoCardapio').classList.add('show');
+  document.getElementById('importStatus').textContent='';
+  document.getElementById('previewImportacao').innerHTML='';
+  document.getElementById('btnAplicarImportacao').style.display='none';
+}
+function fecharModalImportacaoCardapio(){document.getElementById('modalImportacaoCardapio').classList.remove('show')}
+function setImportStatus(msg,erro=false){const e=document.getElementById('importStatus');e.textContent=msg;e.classList.toggle('erro',erro)}
+async function buscarCardapioPeloLink(){
+  const url=document.getElementById('importUrlInput').value.trim();
+  if(!url){setImportStatus('Cole um link para continuar.',true);return}
+  setImportStatus('Tentando ler a página...');
+  try{
+    const resposta=await fetch(url,{mode:'cors'});
+    if(!resposta.ok)throw new Error('HTTP '+resposta.status);
+    const html=await resposta.text();
+    const doc=new DOMParser().parseFromString(html,'text/html');
+    doc.querySelectorAll('script,style,noscript,svg').forEach(n=>n.remove());
+    const texto=(doc.body?.innerText||'').replace(/\n{3,}/g,'\n\n').trim();
+    if(!texto)throw new Error('sem texto');
+    document.getElementById('importTextoInput').value=texto.slice(0,30000);
+    document.getElementById('fonteInput').value=url;
+    setImportStatus('Página lida. Revise o texto e toque em Analisar informações.');
+  }catch(e){
+    document.getElementById('fonteInput').value=url;
+    setImportStatus('Este site bloqueou a leitura automática. Copie o texto da página e cole no campo abaixo.',true);
+  }
+}
+function normalizarDiaTexto(t){
+  const s=t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const mapa={segunda:'segunda',seg:'segunda',terca:'terca',ter:'terca',quarta:'quarta',qua:'quarta',quinta:'quinta',qui:'quinta',sexta:'sexta',sex:'sexta',sabado:'sabado',sab:'sabado',domingo:'domingo',dom:'domingo'};
+  return Object.keys(mapa).find(k=>new RegExp('^'+k+'(?:-feira)?\b').test(s))?mapa[Object.keys(mapa).find(k=>new RegExp('^'+k+'(?:-feira)?\b').test(s))]:'';
+}
+function detectarRefeicaoTexto(t){
+  const s=t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const pares=[['cafe da manha','Café da manhã'],['lanche da manha','Lanche da manhã'],['almoco','Almoço'],['lanche da tarde','Lanche da tarde'],['jantar','Jantar'],['ceia','Ceia']];
+  return (pares.find(([k])=>s.includes(k))||[])[1]||'';
+}
+function analisarTextoCardapio(){
+  const bruto=document.getElementById('importTextoInput').value.trim();
+  if(!bruto){setImportStatus('Cole o texto do cardápio para analisar.',true);return}
+  const linhas=bruto.split(/\n+/).map(l=>l.replace(/[•●▪◦]/g,'').trim()).filter(Boolean);
+  let diaAtual='',refAtual=''; const itens=[];
+  linhas.forEach(linha=>{
+    const d=normalizarDiaTexto(linha); if(d){diaAtual=d; const resto=linha.replace(/^\s*[^:–-]+[:–-]?\s*/,'').trim(); if(resto&&resto!==linha){const r=detectarRefeicaoTexto(resto)||refAtual||'Almoço';itens.push({dia:diaAtual,refeicao:r,prato:resto.replace(new RegExp(r,'i'),'').replace(/^\s*[:–-]\s*/,'').trim()})} return}
+    const r=detectarRefeicaoTexto(linha); if(r){refAtual=r; const prato=linha.replace(new RegExp(r,'i'),'').replace(/^\s*[:–-]\s*/,'').trim(); if(prato&&diaAtual)itens.push({dia:diaAtual,refeicao:r,prato}); return}
+    if(diaAtual&&refAtual&&linha.length>2&&linha.length<180)itens.push({dia:diaAtual,refeicao:refAtual,prato:linha});
+  });
+  itensImportacaoCardapio=itens.filter(i=>i.prato);
+  if(!itensImportacaoCardapio.length){setImportStatus('Não consegui separar automaticamente. Organize o texto usando dia, refeição e prato em linhas separadas.',true);return}
+  setImportStatus(`${itensImportacaoCardapio.length} item(ns) encontrado(s). Revise antes de acrescentar.`);
+  document.getElementById('previewImportacao').innerHTML=itensImportacaoCardapio.map((i,idx)=>`<label class="previewItem"><input type="checkbox" class="importCheck" value="${idx}" checked><span><span class="previewDia">${escapeHtml(DIAS.find(d=>d[0]===i.dia)?.[1]||i.dia)}</span><span class="previewLinha">${escapeHtml(i.refeicao)} — ${escapeHtml(i.prato)}</span></span></label>`).join('');
+  document.getElementById('btnAplicarImportacao').style.display='block';
+}
+function aplicarImportacaoSelecionada(){
+  const selecionados=[...document.querySelectorAll('.importCheck:checked')].map(c=>itensImportacaoCardapio[Number(c.value)]).filter(Boolean);
+  if(!selecionados.length){setImportStatus('Selecione pelo menos um item.',true);return}
+  const semana=document.getElementById('semanaSelect').value;
+  if(!semana){setImportStatus('Antes de importar, selecione um período por semana na página principal.',true);return}
+  const fonte=document.getElementById('importUrlInput').value.trim(); const dados=getDados(); const agora=Date.now();
+  selecionados.forEach((i,idx)=>dados.push({id:agora+idx,dia:i.dia,refeicao:i.refeicao,prato:i.prato,porcoes:'',tempo:'',ingredientes:'',preparo:'',fonte,obs:'Importado de uma página ou texto',semana,criadoEm:new Date().toISOString()}));
+  salvarDados(dados); fecharModalImportacaoCardapio(); fecharModalCadastro(); render();
+}
+
+
+const PROMPT_CARDAPIO_IA = `Analise o cardápio que vou enviar e organize as informações exatamente na ordem dos campos do aplicativo.
+
+Não invente informações. Quando algum dado não estiver presente, escreva: “Não informado”. Separe cada combinação de refeição, prato e dia como um registro independente.
+
+ORDEM DOS CAMPOS
+1. Refeição
+Use somente: Café da manhã, Lanche da manhã, Almoço, Lanche da tarde, Jantar ou Ceia.
+
+2. Prato / alimento
+Informe o nome de cada prato, preparação, bebida ou alimento. Quando houver mais de um item na mesma refeição, separe por “ • ”. Não confunda ingredientes com o nome do prato.
+
+3. Dias da semana
+Use somente: Segunda, Terça, Quarta, Quinta, Sexta, Sábado ou Domingo.
+
+4. Quantidade / porções
+Informe rendimento, número de pessoas, unidades ou quantidade servida.
+
+5. Tempo ou horário
+Identifique claramente como “Horário: 12h30” ou “Tempo de preparo: 40 minutos”.
+
+6. Ingredientes principais
+Liste somente os ingredientes mencionados, separados por “ • ”.
+
+7. Preparo ou organização antecipada
+Informe o que precisa ser descongelado, cortado, temperado, deixado de molho, preparado antes ou reaproveitado.
+
+8. Fonte / link
+Repita o link fornecido. Se não houver, escreva “Não informado”.
+
+9. Observações
+Inclua restrições, substituições, acompanhamentos, forma de servir, armazenamento ou outras informações relevantes sem repetir os campos anteriores.
+
+FORMATO DA RESPOSTA
+
+REGISTRO 1
+Refeição:
+Prato / alimento:
+Dias da semana:
+Quantidade / porções:
+Tempo ou horário:
+Ingredientes principais:
+Preparo ou organização antecipada:
+Fonte / link:
+Observações:
+
+Continue nesse formato até terminar todo o cardápio. Ao final, informe:
+Total de registros encontrados:
+Informações que precisam ser confirmadas:
+
+REGRAS IMPORTANTES
+- Preserve os nomes originais dos pratos.
+- Corrija apenas erros evidentes de digitação.
+- Não crie receitas nem complete dados por conhecimento próprio.
+- Quando o mesmo prato aparecer em dias diferentes, crie um registro para cada dia.
+- Quando houver alternativas indicadas por “ou”, mantenha a palavra “ou”.
+
+CONTEÚDO PARA ANALISAR:
+[COLE AQUI O LINK, TEXTO OU A DESCRIÇÃO DA IMAGEM]`;
+
+function abrirModalPromptCardapio(){
+  const campo=document.getElementById('promptCardapioTexto');
+  if(campo) campo.value=PROMPT_CARDAPIO_IA;
+  const status=document.getElementById('statusCopiaPrompt');
+  if(status) status.textContent='';
+  document.getElementById('modalPromptCardapio').classList.add('show');
+}
+function fecharModalPromptCardapio(){document.getElementById('modalPromptCardapio').classList.remove('show')}
+async function copiarPromptCardapio(){
+  const texto=PROMPT_CARDAPIO_IA;
+  const status=document.getElementById('statusCopiaPrompt');
+  try{
+    if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(texto)}
+    else{const campo=document.getElementById('promptCardapioTexto');campo.focus();campo.select();document.execCommand('copy')}
+    if(status) status.textContent='Prompt copiado. Agora cole na IA junto com o cardápio.';
+  }catch(e){
+    const campo=document.getElementById('promptCardapioTexto');campo.focus();campo.select();
+    if(status) status.textContent='Selecione o texto e use Copiar.';
+  }
+}
+
 montarCheckboxes('diasBox',DIAS,'diaCheck'); montarCheckboxes('refeicoesBox',REFEICOES.map(r=>[r,r]),'refeicaoCheck'); montarSemanas(); render();
 
 function pad2(numero){ return String(numero).padStart(2, "0"); }
@@ -731,6 +1036,11 @@ window.addEventListener("load",()=>{ atualizarLinhaTempoCabecalho(); setInterval
   window.addEventListener('pageshow',reporDataHoraCardapio);
   setInterval(reporDataHoraCardapio,1000);
 })();
+</script>
+
+<script>
+window.addEventListener('click',function(e){const m=document.getElementById('modalPromptCardapio');if(e.target===m)fecharModalPromptCardapio()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharModalPromptCardapio()});
 </script>
 </body>
 </html>

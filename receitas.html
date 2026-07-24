@@ -412,6 +412,68 @@ body.alimentacao-subvisual .futureBtn{min-height:56px !important;border-radius:1
 body.alimentacao-subvisual .futureBtn::after{content:"›";position:absolute;right:14px;top:50%;transform:translateY(-52%);font-size:24px;color:#6F7E63;}
 @media(max-width:390px){body.alimentacao-subvisual .topbar.topoSaudeLike{grid-template-columns:60px minmax(0,1fr) 60px !important;} body.alimentacao-subvisual .topCenter.topCenterSaudeLike .title{font-size:20px !important;} body.alimentacao-subvisual .headerTime{width:60px !important;}}
 </style>
+
+<style id="importacao-receitas-estilos">
+.importarReceitaBtn{width:100%;min-height:46px;border:none;border-radius:15px;background:#EAF3E8;color:#516448;font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #D9E7D4;margin-bottom:2px}.importarReceitaBtn:hover{background:#DFECDD}.divisorModal{display:flex;align-items:center;gap:8px;color:#92958E;font-size:10.5px;margin:1px 0}.divisorModal::before,.divisorModal::after{content:"";height:1px;flex:1;background:#E4DED2}.importAjuda{font-size:11px;color:#77786F;line-height:1.45;background:#F7F5EF;border:1px solid #E8E1D4;border-radius:14px;padding:10px 11px}.importStatus{min-height:18px;font-size:11.5px;line-height:1.4;color:#516448;text-align:center}.importStatus.erro{color:#A34C4C}.previewImportacao{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow:auto}.previewItem{background:#FFF;border:1px solid #E8E1D4;border-radius:14px;padding:10px}.previewTitulo{font-size:12px;font-weight:600;color:#40513B}.previewLinha{font-size:11.5px;color:#62675F;line-height:1.4;margin-top:2px}.acoesImportacaoCadastro{display:grid;grid-template-columns:1fr 1fr;gap:8px}.copiarPromptBtn{border:1px solid rgba(216,207,191,.95);background:#F1EEE6;color:#516448;border-radius:14px;min-height:46px;padding:10px 12px;font-family:'Poppins',sans-serif;font-size:12px;cursor:pointer}.copiarPromptBtn:hover{background:#EAE5DA}.promptReceitaTexto{min-height:350px!important;max-height:52vh;resize:none!important;font-size:11.5px!important;line-height:1.45!important;white-space:pre-wrap}.modalPromptReceita{width:min(390px,100%)!important}
+body.alimentacao-subvisual .listBox{margin-top:0!important}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas{display:grid!important;grid-template-columns:1fr 1fr 1fr!important;gap:10px!important;align-items:stretch!important;margin-top:8px!important;padding-bottom:8px!important}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .futureBtn{min-height:56px!important;padding:12px 34px 12px 18px!important;justify-content:center!important;text-align:center!important;font-size:12.5px!important}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .futureBtn::after{content:"›";position:absolute;right:14px;top:50%;transform:translateY(-52%);font-size:24px;color:#6F7E63}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .listFooterBtn::before{content:"☰"!important;margin-right:8px;color:#6D805F}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .addFooterBtn::before{content:"+"!important;margin-right:8px;color:#6D805F;font-weight:700;font-size:18px;line-height:1}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .futureEditFooterBtn::before{content:"⚙"!important;margin-right:8px;color:#6D805F}
+@media(max-width:390px){.acoesImportacaoCadastro{grid-template-columns:1fr}.promptReceitaTexto{min-height:290px!important}body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas{grid-template-columns:1fr!important}}
+</style>
+
+<style id="ajuste-botao-mais-footer-footerAcoesReceitas">
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas{
+  grid-template-columns:1fr 84px 1fr !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .addFooterBtn{
+  width:84px !important;
+  min-width:84px !important;
+  max-width:84px !important;
+  min-height:54px !important;
+  padding:0 !important;
+  justify-self:center !important;
+  border-radius:18px !important;
+  background:linear-gradient(180deg, #EEF5EA 0%, #E7F0E1 100%) !important;
+  border:1px solid rgba(214,228,206,.98) !important;
+  box-shadow:0 6px 16px rgba(76,82,62,.08) !important;
+  font-size:0 !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .addFooterBtn::before{
+  content:"+" !important;
+  margin:0 !important;
+  color:#6D805F !important;
+  font-size:26px !important;
+  font-weight:500 !important;
+  line-height:1 !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .addFooterBtn::after{
+  content:none !important;
+  display:none !important;
+}
+body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .addFooterBtn:hover{
+  transform:translateY(-1px) !important;
+  box-shadow:0 8px 18px rgba(76,82,62,.11) !important;
+}
+@media(max-width:390px){
+  body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas{
+    grid-template-columns:1fr 72px 1fr !important;
+  }
+  body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .addFooterBtn{
+    width:72px !important;
+    min-width:72px !important;
+    max-width:72px !important;
+    min-height:52px !important;
+  }
+  body.alimentacao-subvisual .footerMiniAction.footerAcoesReceitas .addFooterBtn::before{
+    font-size:24px !important;
+  }
+}
+</style>
+
 </head>
 <body class="alimentacao-subvisual">
 <div class="card">
@@ -427,7 +489,6 @@ body.alimentacao-subvisual .futureBtn::after{content:"›";position:absolute;rig
       <div id="linhaTempoData" class="headerLinha">• 00/00</div>
     </div>
   </div>
-  <div class="topActions topActionsHeader"><button class="summaryBtn" onclick="abrirListaIngredientes()">Lista</button><button class="addBtn" onclick="abrirModalNovo()">+</button></div>
   <div class="listBox">
     <div class="filtrosTopoLista">
       <select class="filtroSelect" id="culinariaFiltro" onchange="render()"><option value="todas">Tipos de Culinárias</option></select>
@@ -436,21 +497,57 @@ body.alimentacao-subvisual .futureBtn::after{content:"›";position:absolute;rig
     </div>
     <div id="listaReceitas"></div>
   </div>
-  <div class="footerMiniAction"><button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button></div>
+  <div class="footerMiniAction footerAcoesReceitas">
+    <button class="futureBtn listFooterBtn" onclick="abrirListaIngredientes()">lista</button>
+    <button class="futureBtn addFooterBtn" onclick="abrirModalNovo()" aria-label="nova receita" title="nova receita"></button>
+    <button class="futureBtn futureEditFooterBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
+  </div>
 </div>
 
 <div class="modalOverlay" id="modalCadastro"><div class="modal">
   <div class="modalHeader"><h2 class="modalTitle" id="tituloCadastro">Nova receita</h2><div class="dataHoraTopo" id="dataHoraCadastro"></div></div>
+
+  <div class="acoesImportacaoCadastro">
+    <button class="importarReceitaBtn" type="button" onclick="abrirModalImportacaoReceita()">🔗 Importar de uma página ou texto</button>
+    <button class="copiarPromptBtn" type="button" onclick="abrirModalPromptReceita()">✨ Copiar prompt para a IA</button>
+  </div>
+  <div class="divisorModal">ou preencher manualmente</div>
+
   <div class="field"><label>Nome da receita</label><input id="nomeInput" placeholder="Ex.: Panqueca de banana"></div>
   <div class="field"><label>Culinária</label><div id="culinariasBox" class="checkboxBox"></div></div>
-  <div class="field"><label>Categoria</label><div id="categoriasBox" class="checkboxBox"></div></div>
-  <div class="row"><div class="col"><label>Rendimento</label><input id="rendimentoInput" placeholder="Ex.: 2 porções"></div><div class="col"><label>Tempo</label><input id="tempoInput" placeholder="Ex.: 30 min"></div></div>
+  <div class="field"><label>Horário da refeição</label><div id="categoriasBox" class="checkboxBox"></div></div>
+  <div class="row"><div class="col"><label>Rendimento</label><input id="rendimentoInput" placeholder="Ex.: 2 porções"></div><div class="col"><label>Tempo de preparo</label><input id="tempoInput" placeholder="Ex.: 30 min"></div></div>
   <div class="field"><label>Ingredientes</label><textarea id="ingredientesInput" placeholder="Um ingrediente por linha"></textarea></div>
   <div class="field"><label>Modo de preparo</label><textarea id="preparoInput" placeholder="Escreva o passo a passo"></textarea></div>
+  <div class="field"><label>Preparo ou organização antecipada</label><textarea id="antecipadoInput" placeholder="Ex.: deixar de molho, descongelar, separar ingredientes..." style="min-height:82px"></textarea></div>
+  <div class="field"><label>Conservação / armazenamento</label><textarea id="conservacaoInput" placeholder="Ex.: conservar na geladeira por até 3 dias..." style="min-height:82px"></textarea></div>
+  <div class="field"><label>Fonte / link</label><input id="fonteInput" type="url" placeholder="Link da receita (opcional)"></div>
+  <div class="field"><label>Observações</label><textarea id="observacoesInput" placeholder="Substituições, restrições, forma de servir ou outras informações importantes" style="min-height:82px"></textarea></div>
   <div class="modalBtns"><button class="cancel" onclick="fecharModalCadastro()">Cancelar</button><button class="danger" id="btnExcluir" onclick="excluirItemEditando()" style="display:none;">Excluir</button><button class="saveMore" onclick="salvarCadastroEMaisNovo()">Concluir + Novo</button><button class="save" onclick="salvarCadastro()">Concluir</button></div>
 </div></div>
 
-<div class="modalOverlay" id="modalDetalhe"><div class="modal"><h2 class="modalTitle" id="detalheTitulo">Receita</h2><div id="detalheMeta" class="detalhe"></div><div class="field"><label>Ingredientes</label><div id="detalheIngredientes" class="ingredientesBox"></div></div><div class="field"><label>Modo de preparo</label><div id="detalhePreparo" class="preparoBox"></div></div><div class="modalBtns"><button class="cancel" onclick="fecharDetalhe()">Fechar</button><button class="save" id="btnEditarDetalhe">Editar</button></div></div></div>
+<div class="modalOverlay" id="modalImportacaoReceita"><div class="modal">
+  <div class="modalHeader"><h2 class="modalTitle">Importar receita</h2><button class="miniBtn" type="button" onclick="fecharModalImportacaoReceita()">✕</button></div>
+  <div class="importAjuda">Cole o link de uma página. O aplicativo tentará ler o conteúdo. Se o site bloquear a leitura, copie o texto da receita ou a resposta da IA e cole abaixo.</div>
+  <div class="field"><label>Link da página</label><input id="importUrlInput" type="url" placeholder="https://..."></div>
+  <button class="importarReceitaBtn" type="button" onclick="buscarReceitaPeloLink()">Buscar informações do link</button>
+  <div class="divisorModal">ou</div>
+  <div class="field"><label>Texto da receita ou resposta da IA</label><textarea id="importTextoInput" placeholder="Cole aqui o conteúdo da receita..." style="min-height:180px"></textarea></div>
+  <button class="importarReceitaBtn" type="button" onclick="analisarTextoReceita()">Analisar informações</button>
+  <div id="importStatus" class="importStatus"></div>
+  <div id="previewImportacao" class="previewImportacao"></div>
+  <div class="modalBtns"><button class="cancel" onclick="fecharModalImportacaoReceita()">Cancelar</button><button class="save" id="btnAplicarImportacao" onclick="aplicarImportacaoReceita()" style="display:none">Usar estas informações</button></div>
+</div></div>
+
+<div class="modalOverlay" id="modalPromptReceita"><div class="modal modalPromptReceita">
+  <div class="modalHeader"><h2 class="modalTitle">Prompt para organizar a receita</h2><button class="miniBtn" type="button" onclick="fecharModalPromptReceita()">✕</button></div>
+  <div class="importAjuda">Copie este comando, cole na IA junto com o link, texto ou imagem da receita e depois cole a resposta na importação do aplicativo.</div>
+  <textarea id="promptReceitaTexto" class="promptReceitaTexto" readonly></textarea>
+  <div id="statusCopiaPrompt" class="importStatus"></div>
+  <div class="modalBtns"><button class="cancel" onclick="fecharModalPromptReceita()">Fechar</button><button class="save" onclick="copiarPromptReceita()">Copiar prompt</button></div>
+</div></div>
+
+<div class="modalOverlay" id="modalDetalhe"><div class="modal"><h2 class="modalTitle" id="detalheTitulo">Receita</h2><div id="detalheMeta" class="detalhe"></div><div class="field"><label>Ingredientes</label><div id="detalheIngredientes" class="ingredientesBox"></div></div><div class="field"><label>Modo de preparo</label><div id="detalhePreparo" class="preparoBox"></div></div><div class="field" id="detalheAntecipadoField"><label>Preparo antecipado</label><div id="detalheAntecipado" class="preparoBox"></div></div><div class="field" id="detalheConservacaoField"><label>Conservação</label><div id="detalheConservacao" class="preparoBox"></div></div><div class="field" id="detalheFonteField"><label>Fonte</label><div id="detalheFonte" class="preparoBox"></div></div><div class="field" id="detalheObservacoesField"><label>Observações</label><div id="detalheObservacoes" class="preparoBox"></div></div><div class="modalBtns"><button class="cancel" onclick="fecharDetalhe()">Fechar</button><button class="save" id="btnEditarDetalhe">Editar</button></div></div></div>
 <div class="modalOverlay" id="modalListaIngredientes"><div class="modal"><h2 class="modalTitle">Ingredientes das receitas</h2><div id="listaIngredientesConteudo" class="ingredientesBox"></div><div class="modalBtns"><button class="cancel" onclick="fecharListaIngredientes()">Fechar</button></div></div></div>
 <div class="modalOverlay" id="modalFuturasEdicoes"><div class="modal"><h2 class="modalTitle">Futuras edições</h2><div class="field"><label>Ideias de melhorias futuras</label><textarea id="futurasEdicoesTexto" placeholder="Escreva aqui suas ideias para melhorar essa tela..."></textarea></div><div class="modalBtns"><button class="cancel" onclick="fecharModalFuturasEdicoes()">Cancelar</button><button class="save" onclick="salvarFuturasEdicoes()">Concluir</button></div></div></div>
 <script>
@@ -486,20 +583,81 @@ function montarCheckboxes(containerId, opcoes, classe){document.getElementById(c
 function getMarcados(classe){return [...document.querySelectorAll('.'+classe+':checked')].map(i=>i.value)}
 function marcar(classe, valores){const set=new Set(garantirArray(valores)); document.querySelectorAll('.'+classe).forEach(i=>i.checked=set.has(i.value))}
 function montarFiltros(){const cf=document.getElementById('culinariaFiltro'); cf.innerHTML='<option value="todas">Tipos de Culinárias</option>'+CULINARIAS.map(c=>`<option>${escapeHtml(c)}</option>`).join(''); const cat=document.getElementById('categoriaFiltro'); cat.innerHTML='<option value="todas">Horário da Refeição</option>'+CATEGORIAS.map(c=>`<option>${escapeHtml(c)}</option>`).join('')}
-function abrirModalNovo(){editandoId=null;document.getElementById('tituloCadastro').textContent='Nova receita';document.getElementById('dataHoraCadastro').textContent=dataHora();['nomeInput','tempoInput','rendimentoInput','ingredientesInput','preparoInput'].forEach(id=>document.getElementById(id).value='');marcar('culinariaCheck',[]);marcar('categoriaCheck',[]);document.getElementById('btnExcluir').style.display='none';document.getElementById('modalCadastro').classList.add('show')}
-function abrirModalEditar(id){const item=getDados().find(i=>i.id===id); if(!item)return; editandoId=id;document.getElementById('tituloCadastro').textContent='Editar receita';document.getElementById('dataHoraCadastro').textContent=dataHora();document.getElementById('nomeInput').value=item.nome||'';marcar('culinariaCheck',item.culinarias||item.culinaria||[]);marcar('categoriaCheck',item.categorias||item.categoria||[]);document.getElementById('tempoInput').value=item.tempo||'';document.getElementById('rendimentoInput').value=item.rendimento||'';document.getElementById('ingredientesInput').value=item.ingredientes||'';document.getElementById('preparoInput').value=item.preparo||'';document.getElementById('btnExcluir').style.display='block';document.getElementById('modalCadastro').classList.add('show')}
+function abrirModalNovo(){editandoId=null;document.getElementById('tituloCadastro').textContent='Nova receita';document.getElementById('dataHoraCadastro').textContent=dataHora();['nomeInput','tempoInput','rendimentoInput','ingredientesInput','preparoInput','antecipadoInput','conservacaoInput','fonteInput','observacoesInput'].forEach(id=>document.getElementById(id).value='');marcar('culinariaCheck',[]);marcar('categoriaCheck',[]);document.getElementById('btnExcluir').style.display='none';document.getElementById('modalCadastro').classList.add('show')}
+function abrirModalEditar(id){const item=getDados().find(i=>i.id===id); if(!item)return; editandoId=id;document.getElementById('tituloCadastro').textContent='Editar receita';document.getElementById('dataHoraCadastro').textContent=dataHora();document.getElementById('nomeInput').value=item.nome||'';marcar('culinariaCheck',item.culinarias||item.culinaria||[]);marcar('categoriaCheck',item.categorias||item.categoria||[]);document.getElementById('tempoInput').value=item.tempo||'';document.getElementById('rendimentoInput').value=item.rendimento||'';document.getElementById('ingredientesInput').value=item.ingredientes||'';document.getElementById('preparoInput').value=item.preparo||'';document.getElementById('antecipadoInput').value=item.antecipado||'';document.getElementById('conservacaoInput').value=item.conservacao||'';document.getElementById('fonteInput').value=item.fonte||'';document.getElementById('observacoesInput').value=item.observacoes||'';document.getElementById('btnExcluir').style.display='block';document.getElementById('modalCadastro').classList.add('show')}
 function fecharModalCadastro(){document.getElementById('modalCadastro').classList.remove('show')}
-function coletar(){return{nome:document.getElementById('nomeInput').value.trim(),culinarias:getMarcados('culinariaCheck'),categorias:getMarcados('categoriaCheck'),tempo:document.getElementById('tempoInput').value.trim(),rendimento:document.getElementById('rendimentoInput').value.trim(),ingredientes:document.getElementById('ingredientesInput').value.trim(),preparo:document.getElementById('preparoInput').value.trim()}}
+function coletar(){return{nome:document.getElementById('nomeInput').value.trim(),culinarias:getMarcados('culinariaCheck'),categorias:getMarcados('categoriaCheck'),tempo:document.getElementById('tempoInput').value.trim(),rendimento:document.getElementById('rendimentoInput').value.trim(),ingredientes:document.getElementById('ingredientesInput').value.trim(),preparo:document.getElementById('preparoInput').value.trim(),antecipado:document.getElementById('antecipadoInput').value.trim(),conservacao:document.getElementById('conservacaoInput').value.trim(),fonte:document.getElementById('fonteInput').value.trim(),observacoes:document.getElementById('observacoesInput').value.trim()}}
 function validar(d){if(!d.nome){alert('Escreva o nome da receita.');return false} if(!d.culinarias.length){alert('Selecione pelo menos uma culinária.');return false} if(!d.categorias.length){alert('Selecione pelo menos uma categoria.');return false} return true}
 function salvarCadastro(){const f=coletar(); if(!validar(f))return; let dados=getDados(); if(editandoId!==null){const idx=dados.findIndex(i=>i.id===editandoId); if(idx>=0)dados[idx]={...dados[idx],...f}}else{dados.push({id:Date.now(),...f,criadoEm:new Date().toISOString()})} salvarDados(dados); fecharModalCadastro(); render()}
-function salvarCadastroEMaisNovo(){const f=coletar(); if(!validar(f))return; let dados=getDados(); if(editandoId!==null){const idx=dados.findIndex(i=>i.id===editandoId); if(idx>=0)dados[idx]={...dados[idx],...f}; editandoId=null}else{dados.push({id:Date.now(),...f,criadoEm:new Date().toISOString()})} salvarDados(dados); ['nomeInput','tempoInput','rendimentoInput','ingredientesInput','preparoInput'].forEach(id=>document.getElementById(id).value=''); marcar('culinariaCheck',[]); marcar('categoriaCheck',[]); render()}
+function salvarCadastroEMaisNovo(){const f=coletar(); if(!validar(f))return; let dados=getDados(); if(editandoId!==null){const idx=dados.findIndex(i=>i.id===editandoId); if(idx>=0)dados[idx]={...dados[idx],...f}; editandoId=null}else{dados.push({id:Date.now(),...f,criadoEm:new Date().toISOString()})} salvarDados(dados); ['nomeInput','tempoInput','rendimentoInput','ingredientesInput','preparoInput','antecipadoInput','conservacaoInput','fonteInput','observacoesInput'].forEach(id=>document.getElementById(id).value=''); marcar('culinariaCheck',[]); marcar('categoriaCheck',[]); render()}
 function excluirItemEditando(){if(editandoId===null)return; if(!confirm('Deseja excluir esta receita?'))return; salvarDados(getDados().filter(i=>i.id!==editandoId)); fecharModalCadastro(); render()}
-function abrirDetalhe(id){const item=getDados().find(i=>i.id===id); if(!item)return; detalheId=id; const cats=garantirArray(item.categorias||item.categoria).join(', '); const culs=garantirArray(item.culinarias||item.culinaria).join(', '); document.getElementById('detalheTitulo').textContent=item.nome;document.getElementById('detalheMeta').textContent=`${culs||'Sem culinária'} • ${cats||'Sem categoria'}${item.rendimento?' • '+item.rendimento:''}${item.tempo?' • '+item.tempo:''}`;document.getElementById('detalheIngredientes').textContent=item.ingredientes||'Sem ingredientes cadastrados.';document.getElementById('detalhePreparo').textContent=item.preparo||'Sem modo de preparo cadastrado.';document.getElementById('btnEditarDetalhe').onclick=()=>{fecharDetalhe(); abrirModalEditar(id)};document.getElementById('modalDetalhe').classList.add('show')}
+function abrirDetalhe(id){const item=getDados().find(i=>i.id===id); if(!item)return; detalheId=id; const cats=garantirArray(item.categorias||item.categoria).join(', '); const culs=garantirArray(item.culinarias||item.culinaria).join(', '); document.getElementById('detalheTitulo').textContent=item.nome;document.getElementById('detalheMeta').textContent=`${culs||'Sem culinária'} • ${cats||'Sem categoria'}${item.rendimento?' • '+item.rendimento:''}${item.tempo?' • '+item.tempo:''}`;document.getElementById('detalheIngredientes').textContent=item.ingredientes||'Sem ingredientes cadastrados.';document.getElementById('detalhePreparo').textContent=item.preparo||'Sem modo de preparo cadastrado.';document.getElementById('detalheAntecipado').textContent=item.antecipado||'Não informado.';document.getElementById('detalheConservacao').textContent=item.conservacao||'Não informado.';document.getElementById('detalheFonte').innerHTML=item.fonte?`<a href="${escapeHtml(item.fonte)}" target="_blank" rel="noopener">${escapeHtml(item.fonte)}</a>`:'Não informado.';document.getElementById('detalheObservacoes').textContent=item.observacoes||'Não informado.';document.getElementById('btnEditarDetalhe').onclick=()=>{fecharDetalhe(); abrirModalEditar(id)};document.getElementById('modalDetalhe').classList.add('show')}
 function fecharDetalhe(){document.getElementById('modalDetalhe').classList.remove('show')}
 function render(){const cul=document.getElementById('culinariaFiltro').value; const cat=document.getElementById('categoriaFiltro').value; const busca=document.getElementById('buscaInput').value.toLowerCase().trim(); let dados=getDados().sort((a,b)=>(a.nome||'').localeCompare(b.nome||'', 'pt-BR',{sensitivity:'base'})); if(cul!=='todas')dados=dados.filter(i=>garantirArray(i.culinarias||i.culinaria).includes(cul)); if(cat!=='todas')dados=dados.filter(i=>garantirArray(i.categorias||i.categoria).includes(cat)); if(busca)dados=dados.filter(i=>`${i.nome} ${garantirArray(i.culinarias||i.culinaria).join(' ')} ${garantirArray(i.categorias||i.categoria).join(' ')} ${i.ingredientes} ${i.preparo}`.toLowerCase().includes(busca)); const lista=document.getElementById('listaReceitas'); if(!dados.length){lista.innerHTML='<div class="empty">Nenhuma receita cadastrada ainda.</div>';return} lista.innerHTML=dados.map(i=>{const cats=garantirArray(i.categorias||i.categoria).join(', '); const culs=garantirArray(i.culinarias||i.culinaria).join(', '); return `<div class="item" onclick="abrirDetalhe(${i.id})"><div class="itemTexto"><div class="nome">${escapeHtml(i.nome)}</div><div class="detalhe">${escapeHtml(culs||'Sem culinária')} • ${escapeHtml(cats||'Sem categoria')}${i.rendimento?' • '+escapeHtml(i.rendimento):''}${i.tempo?' • '+escapeHtml(i.tempo):''}</div></div></div>`}).join('')}
 function abrirListaIngredientes(){const dados=getDados(); const texto=dados.flatMap(r=>String(r.ingredientes||'').split('\\n').map(i=>i.trim()).filter(Boolean)).join('\\n'); document.getElementById('listaIngredientesConteudo').textContent=texto||'Nenhum ingrediente cadastrado ainda.'; document.getElementById('modalListaIngredientes').classList.add('show')}
 function fecharListaIngredientes(){document.getElementById('modalListaIngredientes').classList.remove('show')}
 function abrirModalFuturasEdicoes(){document.getElementById('futurasEdicoesTexto').value=localStorage.getItem(CHAVE_FUTURAS)||'';document.getElementById('modalFuturasEdicoes').classList.add('show')} function fecharModalFuturasEdicoes(){document.getElementById('modalFuturasEdicoes').classList.remove('show')} function salvarFuturasEdicoes(){localStorage.setItem(CHAVE_FUTURAS,document.getElementById('futurasEdicoesTexto').value);fecharModalFuturasEdicoes()}
+
+let receitaImportadaAtual=null;
+function abrirModalImportacaoReceita(){document.getElementById('importUrlInput').value=document.getElementById('fonteInput').value||'';document.getElementById('importTextoInput').value='';document.getElementById('importStatus').textContent='';document.getElementById('previewImportacao').innerHTML='';document.getElementById('btnAplicarImportacao').style.display='none';receitaImportadaAtual=null;document.getElementById('modalImportacaoReceita').classList.add('show')}
+function fecharModalImportacaoReceita(){document.getElementById('modalImportacaoReceita').classList.remove('show')}
+function setImportStatus(msg,erro=false){const e=document.getElementById('importStatus');e.textContent=msg;e.classList.toggle('erro',erro)}
+async function buscarReceitaPeloLink(){const url=document.getElementById('importUrlInput').value.trim();if(!url){setImportStatus('Cole um link para continuar.',true);return}setImportStatus('Tentando ler a página...');try{const resposta=await fetch(url,{mode:'cors'});if(!resposta.ok)throw new Error('HTTP '+resposta.status);const html=await resposta.text();const doc=new DOMParser().parseFromString(html,'text/html');doc.querySelectorAll('script,style,noscript,svg').forEach(n=>n.remove());const texto=(doc.body?.innerText||'').replace(/\n{3,}/g,'\n\n').trim();if(!texto)throw new Error('sem texto');document.getElementById('importTextoInput').value=texto.slice(0,30000);document.getElementById('fonteInput').value=url;setImportStatus('Página lida. Revise o texto e toque em Analisar informações.')}catch(e){document.getElementById('fonteInput').value=url;setImportStatus('Este site bloqueou a leitura automática. Copie o texto da página e cole no campo abaixo.',true)}}
+function extrairCampo(texto,nome,proximo){const fim=proximo?`(?=\\n\\s*${proximo}\\s*:|$)`:'$';const re=new RegExp(`${nome}\\s*:\\s*([\\s\\S]*?)${fim}`,'i');return (texto.match(re)?.[1]||'').trim().replace(/^Não informado\.?$/i,'')}
+function analisarTextoReceita(){const bruto=document.getElementById('importTextoInput').value.trim();if(!bruto){setImportStatus('Cole o texto da receita para analisar.',true);return}let obj=null;try{const limpo=bruto.replace(/^```(?:json)?/i,'').replace(/```$/,'').trim();obj=JSON.parse(limpo);if(obj.receita)obj=obj.receita}catch(e){}
+if(obj){receitaImportadaAtual={nome:obj.nome||obj.nome_receita||'',culinarias:garantirArray(obj.culinarias||obj.culinaria),categorias:garantirArray(obj.categorias||obj.horario_refeicao||obj.categoria),rendimento:obj.rendimento||'',tempo:obj.tempo_preparo||obj.tempo||'',ingredientes:Array.isArray(obj.ingredientes)?obj.ingredientes.join('\n'):(obj.ingredientes||''),preparo:Array.isArray(obj.modo_preparo)?obj.modo_preparo.join('\n'):(obj.modo_preparo||obj.preparo||''),antecipado:obj.preparo_antecipado||obj.organizacao_antecipada||'',conservacao:obj.conservacao||obj.armazenamento||'',fonte:obj.fonte_url||obj.fonte||document.getElementById('importUrlInput').value.trim(),observacoes:obj.observacoes||''}}
+else{receitaImportadaAtual={nome:extrairCampo(bruto,'Nome da receita','Culinária'),culinarias:extrairCampo(bruto,'Culinária','Horário da refeição').split(/[•,]/).map(s=>s.trim()).filter(Boolean),categorias:extrairCampo(bruto,'Horário da refeição','Rendimento').split(/[•,]/).map(s=>s.trim()).filter(Boolean),rendimento:extrairCampo(bruto,'Rendimento','Tempo de preparo'),tempo:extrairCampo(bruto,'Tempo de preparo','Ingredientes'),ingredientes:extrairCampo(bruto,'Ingredientes','Modo de preparo').replace(/\s*•\s*/g,'\n'),preparo:extrairCampo(bruto,'Modo de preparo','Preparo ou organização antecipada'),antecipado:extrairCampo(bruto,'Preparo ou organização antecipada','Conservação / armazenamento'),conservacao:extrairCampo(bruto,'Conservação / armazenamento','Fonte / link'),fonte:extrairCampo(bruto,'Fonte / link','Observações')||document.getElementById('importUrlInput').value.trim(),observacoes:extrairCampo(bruto,'Observações','')}}
+if(!receitaImportadaAtual.nome){setImportStatus('Não consegui identificar o nome da receita. Use o prompt da IA ou organize os campos com seus títulos.',true);return}setImportStatus('Informações encontradas. Revise antes de usar.');document.getElementById('previewImportacao').innerHTML=`<div class="previewItem"><div class="previewTitulo">${escapeHtml(receitaImportadaAtual.nome)}</div><div class="previewLinha"><strong>Culinária:</strong> ${escapeHtml(receitaImportadaAtual.culinarias.join(', ')||'não informada')}</div><div class="previewLinha"><strong>Refeição:</strong> ${escapeHtml(receitaImportadaAtual.categorias.join(', ')||'não informada')}</div><div class="previewLinha"><strong>Rendimento:</strong> ${escapeHtml(receitaImportadaAtual.rendimento||'não informado')}</div><div class="previewLinha"><strong>Tempo:</strong> ${escapeHtml(receitaImportadaAtual.tempo||'não informado')}</div></div>`;document.getElementById('btnAplicarImportacao').style.display='block'}
+function aplicarImportacaoReceita(){const r=receitaImportadaAtual;if(!r)return;document.getElementById('nomeInput').value=r.nome||'';marcar('culinariaCheck',r.culinarias||[]);marcar('categoriaCheck',r.categorias||[]);document.getElementById('rendimentoInput').value=r.rendimento||'';document.getElementById('tempoInput').value=r.tempo||'';document.getElementById('ingredientesInput').value=r.ingredientes||'';document.getElementById('preparoInput').value=r.preparo||'';document.getElementById('antecipadoInput').value=r.antecipado||'';document.getElementById('conservacaoInput').value=r.conservacao||'';document.getElementById('fonteInput').value=r.fonte||'';document.getElementById('observacoesInput').value=r.observacoes||'';fecharModalImportacaoReceita()}
+const PROMPT_RECEITA_IA=`Analise a receita que vou enviar e organize todas as informações exatamente na ordem dos campos do aplicativo.
+
+Não invente informações. Quando algum dado não estiver presente, escreva: “Não informado”. Preserve os nomes e as quantidades originais.
+
+ORDEM DOS CAMPOS
+1. Nome da receita
+2. Culinária
+3. Horário da refeição
+Use somente quando couber: Café da manhã, Almoço, Lanche, Jantar, Ceia, Sobremesa ou Molhos e bases.
+4. Rendimento
+5. Tempo de preparo
+6. Ingredientes
+Liste um ingrediente por linha, mantendo quantidades, unidades e observações.
+7. Modo de preparo
+Organize em etapas numeradas e preserve temperaturas e tempos.
+8. Preparo ou organização antecipada
+Informe o que deve ser deixado de molho, descongelado, marinado, separado ou preparado antes.
+9. Conservação / armazenamento
+Informe geladeira, congelamento, validade ou reaquecimento somente quando estiver no conteúdo.
+10. Fonte / link
+11. Observações
+Inclua substituições, restrições, forma de servir ou informações relevantes sem repetir os campos anteriores.
+
+FORMATO DA RESPOSTA
+Nome da receita:
+Culinária:
+Horário da refeição:
+Rendimento:
+Tempo de preparo:
+Ingredientes:
+Modo de preparo:
+Preparo ou organização antecipada:
+Conservação / armazenamento:
+Fonte / link:
+Observações:
+
+REGRAS IMPORTANTES
+- Não acrescente ingredientes nem etapas por conhecimento próprio.
+- Corrija apenas erros evidentes de digitação.
+- Não transforme sugestões em informações confirmadas.
+- Preserve medidas, temperaturas e tempos.
+- Quando houver alternativas indicadas por “ou”, mantenha a palavra “ou”.
+
+CONTEÚDO PARA ANALISAR:
+[COLE AQUI O LINK, TEXTO OU A DESCRIÇÃO DA IMAGEM]`;
+function abrirModalPromptReceita(){document.getElementById('promptReceitaTexto').value=PROMPT_RECEITA_IA;document.getElementById('statusCopiaPrompt').textContent='';document.getElementById('modalPromptReceita').classList.add('show')}
+function fecharModalPromptReceita(){document.getElementById('modalPromptReceita').classList.remove('show')}
+async function copiarPromptReceita(){const status=document.getElementById('statusCopiaPrompt');try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(PROMPT_RECEITA_IA);else{const c=document.getElementById('promptReceitaTexto');c.focus();c.select();document.execCommand('copy')}status.textContent='Prompt copiado. Agora cole na IA junto com a receita.'}catch(e){const c=document.getElementById('promptReceitaTexto');c.focus();c.select();status.textContent='Selecione o texto e use Copiar.'}}
+
 montarFiltros(); montarCheckboxes('culinariasBox',CULINARIAS,'culinariaCheck'); montarCheckboxes('categoriasBox',CATEGORIAS,'categoriaCheck'); render();
 </script>
 
@@ -521,6 +679,10 @@ montarFiltros(); montarCheckboxes('culinariasBox',CULINARIAS,'culinariaCheck'); 
   window.addEventListener('load', atualizar);
   setInterval(atualizar, 1000);
 })();
+</script>
+<script>
+window.addEventListener('click',function(e){['modalImportacaoReceita','modalPromptReceita'].forEach(id=>{const m=document.getElementById(id);if(e.target===m)m.classList.remove('show')})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){fecharModalImportacaoReceita();fecharModalPromptReceita()}});
 </script>
 </body>
 </html>

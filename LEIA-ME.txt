@@ -1,0 +1,5 @@
+Coloque na pasta www:
+- saude.html
+- saude-hero.png
+
+Ajustes: textos dos botões ainda mais à esquerda e subtítulo alinhado com o título.

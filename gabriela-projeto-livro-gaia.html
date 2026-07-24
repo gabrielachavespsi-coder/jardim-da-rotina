@@ -393,6 +393,1200 @@ textarea:focus{
   }
 }
 </style>
+
+<style>
+/* =========================================================
+   VISUAL FINAL — PADRÃO APROVADO DA GABRIELA-MENU
+   ========================================================= */
+:root{
+  --gabi-fundo:#F8F7F1;
+  --gabi-card:#FFFDF8;
+  --gabi-card-2:#F4F3EA;
+  --gabi-salvia:#7F9271;
+  --gabi-salvia-escuro:#516448;
+  --gabi-texto:#2F332D;
+  --gabi-suave:#77786F;
+  --gabi-borda:#E8E1D4;
+  --gabi-rosa:#E8C8BF;
+}
+
+html{
+  min-height:100%;
+  background:#F8F7F1 !important;
+}
+
+body{
+  min-height:100vh !important;
+  align-items:flex-start !important;
+  padding:14px 12px 96px !important;
+  background:radial-gradient(circle at 14% 4%, rgba(232,243,226,0.75), transparent 32%),
+    radial-gradient(circle at 95% 16%, rgba(243,236,221,0.80), transparent 30%),
+    linear-gradient(180deg, #FEFCF7 0%, var(--gabi-fundo) 100%) !important;
+  background-repeat:no-repeat !important;
+  background-size:100% 100% !important;
+  background-attachment:fixed !important;
+  color:var(--gabi-texto) !important;
+  overflow-x:hidden !important;
+}
+
+.pagina{
+  width:100% !important;
+  max-width:420px !important;
+}
+
+.card{
+  width:100% !important;
+  background:rgba(255,253,248,0.92) !important;
+  border:1px solid rgba(232,225,212,0.92) !important;
+  border-radius:30px !important;
+  padding:18px 14px 20px !important;
+  gap:14px !important;
+  box-shadow:0 14px 34px rgba(76,82,62,0.11) !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-80px;
+  top:-70px;
+  border-radius:50%;
+  background:rgba(234,243,232,0.72);
+  z-index:0;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  left:-95px;
+  bottom:-65px;
+  border-radius:50%;
+  background:rgba(243,236,221,0.62);
+  z-index:0;
+}
+
+.card > *{
+  position:relative;
+  z-index:1;
+}
+
+.topo{
+  position:relative !important;
+  display:grid !important;
+  grid-template-columns:44px minmax(0,1fr) 82px !important;
+  align-items:start !important;
+  gap:8px !important;
+  width:100% !important;
+  min-height:62px !important;
+  margin-bottom:2px !important;
+}
+
+.botao-voltar{
+  grid-column:1 !important;
+  justify-self:start !important;
+  width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,0.86) !important;
+  border:1px solid rgba(232,225,212,0.95) !important;
+  color:var(--gabi-salvia-escuro) !important;
+  box-shadow:0 6px 16px rgba(76,82,62,0.08) !important;
+  font-size:20px !important;
+  position:relative !important;
+  z-index:5 !important;
+}
+
+.topCenter{
+  position:absolute !important;
+  left:50% !important;
+  top:0 !important;
+  transform:translateX(-50%) !important;
+  width:290px !important;
+  max-width:calc(100% - 96px) !important;
+  margin:0 !important;
+  padding:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  text-align:center !important;
+  pointer-events:none !important;
+  z-index:2 !important;
+}
+
+.titleIndex{
+  width:auto !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  color:#40513B !important;
+  font-size:20px !important;
+  font-weight:500 !important;
+  line-height:1.15 !important;
+  letter-spacing:-0.1px !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+}
+
+.titleIndex::after{
+  font-size:14px !important;
+  vertical-align:middle !important;
+}
+
+.subtitulo{
+  width:auto !important;
+  max-width:280px !important;
+  margin:3px 0 0 !important;
+  padding:0 !important;
+  color:var(--gabi-suave) !important;
+  font-size:10.5px !important;
+  font-weight:400 !important;
+  line-height:1.3 !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+}
+
+.dataTopo{
+  grid-column:3 !important;
+  grid-row:1 !important;
+  justify-self:end !important;
+  align-self:start !important;
+  width:72px !important;
+  min-height:44px !important;
+  padding:0 !important;
+  margin:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+  line-height:1.08 !important;
+  position:relative !important;
+  z-index:5 !important;
+}
+
+.horaTopo{
+  color:#B8807B !important;
+  font-size:14px !important;
+  font-weight:500 !important;
+  white-space:nowrap !important;
+  margin:0 0 2px !important;
+  line-height:1.1 !important;
+}
+
+.dataTopoLinha{
+  color:#6F756C !important;
+  font-size:10.5px !important;
+  font-weight:400 !important;
+  white-space:nowrap !important;
+  margin:0 !important;
+  line-height:1.1 !important;
+}
+
+/* Botões da página Livro de Gaia */
+.botoes-lista{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:9px !important;
+}
+
+.botao{
+  width:100% !important;
+  min-height:66px !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:10px 42px 10px 74px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  align-items:flex-start !important;
+  position:relative !important;
+  overflow:hidden !important;
+  background:rgba(255,255,255,0.94) !important;
+  border:1px solid rgba(232,225,212,0.92) !important;
+  border-radius:18px !important;
+  box-shadow:0 7px 18px rgba(76,82,62,0.08) !important;
+  color:#2F332D !important;
+  text-align:left !important;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease !important;
+}
+
+.botao:hover{
+  transform:translateY(-1px) !important;
+  background:#FFFDF8 !important;
+  box-shadow:0 10px 22px rgba(76,82,62,0.12) !important;
+}
+
+.botao::before{
+  content:"✦";
+  position:absolute !important;
+  left:16px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:44px !important;
+  height:44px !important;
+  border-radius:50% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:#F4F0E7 !important;
+  border:1px solid rgba(232,225,212,0.78) !important;
+  box-shadow:0 5px 12px rgba(76,82,62,0.06) !important;
+  color:#6D805F !important;
+  font-size:21px !important;
+  line-height:1 !important;
+}
+
+.botao:nth-child(1)::before{ content:"✐"; }
+.botao:nth-child(2)::before{ content:"☷"; }
+
+.botao::after{
+  content:"›";
+  position:absolute !important;
+  right:20px !important;
+  top:50% !important;
+  transform:translateY(-54%) !important;
+  color:#6F7E63 !important;
+  font-size:31px !important;
+  line-height:1 !important;
+  font-weight:300 !important;
+}
+
+.conteudo-botao{
+  width:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  justify-content:center !important;
+  text-align:left !important;
+  transform:none !important;
+}
+
+.nome-botao{
+  width:100% !important;
+  margin:0 !important;
+  color:#2F332D !important;
+  font-size:16px !important;
+  font-weight:500 !important;
+  line-height:1.22 !important;
+  text-align:left !important;
+}
+
+.proxima-tarefa{
+  width:100% !important;
+  margin:4px 0 0 !important;
+  color:#77786F !important;
+  font-size:11px !important;
+  line-height:1.35 !important;
+  text-align:left !important;
+}
+
+/* Cards informativos das três páginas */
+.infoBox{
+  width:100% !important;
+  min-height:76px !important;
+  margin:0 !important;
+  padding:13px 44px 13px 74px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  align-items:flex-start !important;
+  position:relative !important;
+  overflow:hidden !important;
+  background:rgba(255,255,255,0.94) !important;
+  border:1px solid rgba(232,225,212,0.92) !important;
+  border-radius:18px !important;
+  box-shadow:0 7px 18px rgba(76,82,62,0.08) !important;
+  color:#2F332D !important;
+  text-align:left !important;
+}
+
+.infoBox::before{
+  content:"✦";
+  position:absolute !important;
+  left:16px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:44px !important;
+  height:44px !important;
+  border-radius:50% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:#F4F0E7 !important;
+  border:1px solid rgba(232,225,212,0.78) !important;
+  box-shadow:0 5px 12px rgba(76,82,62,0.06) !important;
+  color:#6D805F !important;
+  font-size:21px !important;
+  line-height:1 !important;
+}
+
+.infoBox::after{
+  content:"›";
+  position:absolute !important;
+  right:20px !important;
+  top:50% !important;
+  transform:translateY(-54%) !important;
+  color:#6F7E63 !important;
+  font-size:31px !important;
+  line-height:1 !important;
+  font-weight:300 !important;
+}
+
+.infoEmoji{
+  display:none !important;
+}
+
+.infoTexto{
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  color:#77786F !important;
+  font-size:11.5px !important;
+  line-height:1.42 !important;
+  text-align:left !important;
+}
+
+.infoTexto strong{
+  color:#2F332D !important;
+  font-weight:500 !important;
+}
+
+.footerMiniAction{
+  gap:8px !important;
+}
+
+.futureBtn{
+  background:rgba(255,255,255,0.82) !important;
+  border:1px solid rgba(232,225,212,0.92) !important;
+  color:#687062 !important;
+  border-radius:14px !important;
+  box-shadow:0 5px 12px rgba(76,82,62,0.06) !important;
+}
+
+.modal{
+  background:#FFFDF8 !important;
+  border:1px solid var(--gabi-borda) !important;
+  border-radius:22px !important;
+  box-shadow:0 14px 34px rgba(76,82,62,0.18) !important;
+}
+
+@media(max-width:390px){
+  .topCenter{
+    width:270px !important;
+    max-width:calc(100% - 88px) !important;
+  }
+
+  .titleIndex{
+    font-size:20px !important;
+  }
+
+  .subtitulo{
+    font-size:10.5px !important;
+  }
+
+  .botao,
+  .infoBox{
+    padding-left:68px !important;
+    padding-right:39px !important;
+  }
+
+  .botao::before,
+  .infoBox::before{
+    left:14px !important;
+    width:42px !important;
+    height:42px !important;
+  }
+
+  .botao::after,
+  .infoBox::after{
+    right:17px !important;
+  }
+}
+</style>
+
+
+<style>
+/* DATA E HORA VISÍVEIS — PADRÃO GABRIELA-MENU */
+.topo{
+  grid-template-columns:44px minmax(0,1fr) 82px !important;
+}
+
+.dataTopo{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  grid-column:3 !important;
+  grid-row:1 !important;
+  justify-self:end !important;
+  align-self:start !important;
+  width:72px !important;
+  min-width:72px !important;
+  min-height:44px !important;
+  padding:0 !important;
+  margin:0 !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  justify-content:flex-start !important;
+  text-align:right !important;
+  position:relative !important;
+  z-index:10 !important;
+  pointer-events:none !important;
+}
+
+.horaTopo{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  color:#B8807B !important;
+  font-size:14px !important;
+  font-weight:500 !important;
+  line-height:1.1 !important;
+  white-space:nowrap !important;
+  margin:0 0 2px !important;
+}
+
+.dataTopoLinha{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  color:#6F756C !important;
+  font-size:10.5px !important;
+  font-weight:400 !important;
+  line-height:1.1 !important;
+  white-space:nowrap !important;
+  margin:0 !important;
+}
+</style>
+
+
+<style>
+/* BOTÕES DO LIVRO DE GAIA — PADRÃO DA PÁGINA CRONOGRAMA */
+.botoes-lista{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:12px !important;
+}
+
+.botao{
+  width:100% !important;
+  min-height:86px !important;
+  height:auto !important;
+  padding:14px 44px 14px 74px !important;
+  border:none !important;
+  border-radius:18px !important;
+  background:rgba(255,255,255,0.94) !important;
+  border:1px solid rgba(232,225,212,0.92) !important;
+  box-shadow:0 7px 18px rgba(76,82,62,0.08) !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  position:relative !important;
+  overflow:hidden !important;
+  text-align:left !important;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease !important;
+}
+
+.botao:hover{
+  transform:translateY(-1px) !important;
+  background:#FFFDF8 !important;
+  box-shadow:0 10px 22px rgba(76,82,62,0.12) !important;
+}
+
+.botao::before{
+  content:"✦";
+  position:absolute !important;
+  left:16px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:44px !important;
+  height:44px !important;
+  border-radius:50% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:#F4F0E7 !important;
+  border:1px solid rgba(232,225,212,0.78) !important;
+  box-shadow:0 5px 12px rgba(76,82,62,0.06) !important;
+  color:#7E8574 !important;
+  font-size:18px !important;
+  line-height:1 !important;
+}
+
+.botao:nth-child(1)::before{ content:"✦"; }
+.botao:nth-child(2)::before{ content:"✦"; }
+
+.botao::after{
+  content:"›";
+  position:absolute !important;
+  right:20px !important;
+  top:50% !important;
+  transform:translateY(-54%) !important;
+  color:#7B846F !important;
+  font-size:30px !important;
+  line-height:1 !important;
+  font-weight:300 !important;
+}
+
+.conteudo-botao{
+  width:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  justify-content:center !important;
+  text-align:left !important;
+  transform:none !important;
+}
+
+.nome-botao{
+  width:100% !important;
+  margin:0 !important;
+  color:#2F332D !important;
+  font-size:17px !important;
+  font-weight:500 !important;
+  line-height:1.22 !important;
+  text-align:left !important;
+}
+
+.proxima-tarefa{
+  width:100% !important;
+  margin:4px 0 0 !important;
+  color:#77786F !important;
+  font-size:11px !important;
+  font-weight:400 !important;
+  line-height:1.35 !important;
+  text-align:left !important;
+}
+
+@media(max-width:390px){
+  .botao{
+    min-height:82px !important;
+    padding:13px 40px 13px 68px !important;
+  }
+  .botao::before{
+    left:14px !important;
+    width:42px !important;
+    height:42px !important;
+  }
+  .botao::after{
+    right:17px !important;
+  }
+  .nome-botao{
+    font-size:16px !important;
+  }
+}
+</style>
+
+
+<style>
+/* AJUSTE FINAL — BOTÕES MAIS HARMONIOSOS E CARD REMOVIDO */
+.botoes-lista{
+  gap:12px !important;
+}
+
+.botao{
+  min-height:92px !important;
+  padding:14px 44px 14px 74px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+.conteudo-botao{
+  width:100% !important;
+  min-height:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+
+.nome-botao{
+  text-align:center !important;
+  font-size:16px !important;
+  line-height:1.2 !important;
+  margin:0 !important;
+}
+
+.proxima-tarefa{
+  text-align:center !important;
+  font-size:11px !important;
+  line-height:1.32 !important;
+  margin:5px 0 0 !important;
+  max-width:220px !important;
+}
+
+@media(max-width:390px){
+  .botao{
+    min-height:88px !important;
+    padding:13px 40px 13px 68px !important;
+  }
+  .nome-botao{
+    font-size:15.5px !important;
+  }
+  .proxima-tarefa{
+    max-width:200px !important;
+  }
+}
+</style>
+
+
+<style>
+/* AJUSTE FINAL DOS BOTÕES — TEXTO À ESQUERDA E DESCRIÇÃO EM UMA LINHA */
+.botao{
+  min-height:84px !important;
+  padding:12px 44px 12px 74px !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+.conteudo-botao{
+  width:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  justify-content:center !important;
+  text-align:left !important;
+}
+
+.nome-botao{
+  width:100% !important;
+  text-align:left !important;
+  font-size:16px !important;
+  line-height:1.2 !important;
+  margin:0 !important;
+  white-space:nowrap !important;
+}
+
+.proxima-tarefa{
+  width:100% !important;
+  max-width:none !important;
+  text-align:left !important;
+  font-size:10.5px !important;
+  line-height:1.25 !important;
+  margin:4px 0 0 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+@media(max-width:390px){
+  .botao{
+    min-height:80px !important;
+    padding:12px 40px 12px 68px !important;
+  }
+
+  .nome-botao{
+    font-size:15.5px !important;
+  }
+
+  .proxima-tarefa{
+    font-size:10px !important;
+  }
+}
+</style>
+
+
+<style>
+/* ORDEM FINAL DOS ACESSOS DO LIVRO DE GAIA */
+.botoes-lista{
+  gap:12px !important;
+}
+
+.botao{
+  min-height:80px !important;
+}
+
+.nome-botao,
+.proxima-tarefa{
+  text-align:left !important;
+}
+
+.proxima-tarefa{
+  font-size:10px !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+@media(max-width:390px){
+  .proxima-tarefa{
+    font-size:9.7px !important;
+  }
+}
+</style>
+
+
+<style>
+/* FUTURAS EDIÇÕES — PADRÃO LARGO DA PÁGINA RITMO SEMANAL */
+.footerMiniAction{
+  width:100% !important;
+  display:block !important;
+  margin-top:10px !important;
+  padding:0 !important;
+}
+
+.footerMiniAction .futureBtn{
+  width:100% !important;
+  min-height:64px !important;
+  margin:0 !important;
+  padding:12px 34px !important;
+  border-radius:18px !important;
+  background:rgba(250,248,241,0.96) !important;
+  border:1px solid rgba(216,207,191,0.95) !important;
+  color:#40513B !important;
+  box-shadow:0 6px 16px rgba(76,82,62,0.06) !important;
+  font-family:'Poppins',sans-serif !important;
+  font-size:13px !important;
+  font-weight:400 !important;
+  line-height:1.25 !important;
+  text-align:center !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  position:relative !important;
+  cursor:pointer !important;
+  transition:.2s ease !important;
+}
+
+.footerMiniAction .futureBtn::before{
+  content:"♡" !important;
+  margin-right:8px !important;
+  color:#B8807B !important;
+  font-size:15px !important;
+  line-height:1 !important;
+}
+
+.footerMiniAction .futureBtn::after{
+  content:"›" !important;
+  position:absolute !important;
+  right:14px !important;
+  top:50% !important;
+  transform:translateY(-52%) !important;
+  color:#6F7E63 !important;
+  font-size:24px !important;
+  line-height:1 !important;
+}
+
+.footerMiniAction .futureBtn:hover{
+  background:#FFFDF8 !important;
+  transform:translateY(-1px) !important;
+  box-shadow:0 9px 20px rgba(76,82,62,0.09) !important;
+}
+</style>
+
+
+<style id="gaia-projeto-controle-css">
+.gaiaProjetoControle{width:100%;}
+.gaiaIniciarBtn,.gaiaStatusCard{width:100%;border:1px solid rgba(216,207,191,.95);border-radius:18px;background:rgba(255,255,255,.94);box-shadow:0 7px 18px rgba(76,82,62,.08);}
+.gaiaIniciarBtn{min-height:76px;padding:12px 42px 12px 16px;display:flex;align-items:center;gap:12px;position:relative;cursor:pointer;font-family:'Poppins',sans-serif;text-align:left;color:#40513B;}
+.gaiaInicioIcone{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#F4F0E7;font-size:22px;flex:0 0 auto;}
+.gaiaInicioTexto{display:flex;flex-direction:column;min-width:0;}
+.gaiaInicioTexto strong{font-size:15px;font-weight:500;line-height:1.25;}
+.gaiaInicioTexto small{font-size:10.5px;color:#77786F;margin-top:3px;}
+.gaiaInicioSeta{position:absolute;right:17px;top:50%;transform:translateY(-52%);font-size:28px;color:#6F7E63;}
+.gaiaStatusCard{padding:15px 16px;}
+.gaiaStatusTopo{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.gaiaStatusTopo>div{display:flex;flex-direction:column;gap:4px;}
+.gaiaStatusSelo{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#718364;}
+#gaiaStatusEtapa{font-size:15px;font-weight:500;color:#40513B;}
+.gaiaConfigBtn{width:34px;height:34px;border:1px solid #E8E1D4;border-radius:50%;background:#FFFDF8;color:#687062;font-size:20px;line-height:1;cursor:pointer;}
+.gaiaBarra{height:8px;background:#EAE8E0;border-radius:99px;overflow:hidden;margin-top:13px;}
+.gaiaBarra span{display:block;height:100%;width:0;background:linear-gradient(90deg,#91A184,#718364);border-radius:99px;transition:width .3s ease;}
+.gaiaModalCompacto{max-width:340px!important;}
+.gaiaModalTexto{font-size:12px;line-height:1.55;color:#686E65;text-align:center;}
+.gaiaSenhaInput{width:100%;height:46px;padding:0 13px;border:1px solid #E8E1D4;border-radius:12px;font-family:'Poppins',sans-serif;font-size:14px;outline:none;}
+.gaiaSenhaInput:focus{border-color:#91A184;box-shadow:0 0 0 3px rgba(127,146,113,.12);}
+.gaiaSenhaErro{min-height:16px;color:#A04646;font-size:11px;text-align:center;}
+.gaiaConfigLista{display:flex;flex-direction:column;gap:8px;}
+.gaiaConfigLista button,.gaiaFecharConfig{width:100%;border:1px solid #E8E1D4;border-radius:13px;padding:11px 12px;background:#F8F7F1;color:#40513B;font-family:'Poppins',sans-serif;font-size:12px;cursor:pointer;text-align:left;}
+.gaiaConfigLista button.perigo{background:#FAEEEE;color:#944B4B;border-color:#EBCFCF;}
+.gaiaFecharConfig{text-align:center!important;margin-top:2px;}
+</style>
+
+
+<style>
+/* GARANTE QUE O BOTÃO DE INÍCIO DESAPAREÇA APÓS INICIAR */
+#gaiaIniciarBtn[hidden],
+.gaiaIniciarBtn[hidden],
+#gaiaStatusCard[hidden],
+.gaiaStatusCard[hidden]{
+  display:none !important;
+}
+</style>
+
+
+<style>
+/* CARD DE STATUS DO PROJETO — CONTEÚDO CENTRALIZADO */
+#gaiaStatusCard,
+.gaiaStatusCard{
+  position: relative !important;
+}
+
+#gaiaStatusCard .statusHeader,
+.gaiaStatusCard .statusHeader,
+#gaiaStatusCard .gaiaStatusHeader,
+.gaiaStatusCard .gaiaStatusHeader{
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 4px !important;
+  padding-right: 54px !important;
+}
+
+#gaiaStatusCard .statusLabel,
+.gaiaStatusCard .statusLabel,
+#gaiaStatusCard .gaiaStatusLabel,
+.gaiaStatusCard .gaiaStatusLabel{
+  width: 100% !important;
+  text-align: center !important;
+  letter-spacing: 0.08em !important;
+}
+
+#gaiaStatusCard .statusMain,
+.gaiaStatusCard .statusMain,
+#gaiaStatusCard .gaiaStatusMain,
+.gaiaStatusCard .gaiaStatusMain,
+#gaiaStatusCard .statusWeekDay,
+.gaiaStatusCard .statusWeekDay,
+#gaiaStatusCard .gaiaStatusWeekDay,
+.gaiaStatusCard .gaiaStatusWeekDay{
+  width: 100% !important;
+  text-align: center !important;
+  justify-content: center !important;
+}
+
+#gaiaStatusCard .statusProgressWrap,
+.gaiaStatusCard .statusProgressWrap,
+#gaiaStatusCard .gaiaStatusProgressWrap,
+.gaiaStatusCard .gaiaStatusProgressWrap,
+#gaiaStatusCard .progressWrap,
+.gaiaStatusCard .progressWrap{
+  width: 100% !important;
+  margin-top: 10px !important;
+}
+
+#gaiaStatusCard .statusProgress,
+.gaiaStatusCard .statusProgress,
+#gaiaStatusCard .gaiaStatusProgress,
+.gaiaStatusCard .gaiaStatusProgress,
+#gaiaStatusCard progress,
+.gaiaStatusCard progress{
+  width: 100% !important;
+}
+
+#gaiaStatusCard .statusActions,
+.gaiaStatusCard .statusActions,
+#gaiaStatusCard .gaiaStatusActions,
+.gaiaStatusCard .gaiaStatusActions,
+#gaiaStatusCard .configBtn,
+.gaiaStatusCard .configBtn{
+  position: absolute !important;
+  right: 14px !important;
+  top: 14px !important;
+  margin: 0 !important;
+}
+
+@media(max-width:390px){
+  #gaiaStatusCard .statusHeader,
+  .gaiaStatusCard .statusHeader,
+  #gaiaStatusCard .gaiaStatusHeader,
+  .gaiaStatusCard .gaiaStatusHeader{
+    padding-right: 50px !important;
+  }
+}
+</style>
+
+
+<style>
+/* CARD DE STATUS — TEXTO TOTALMENTE CENTRALIZADO */
+#gaiaStatusCard,
+.gaiaStatusCard{
+  position:relative !important;
+  padding:16px 16px 14px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+}
+
+#gaiaStatusCard .gaiaStatusTopo,
+.gaiaStatusCard .statusHeader{
+  width:100% !important;
+  display:block !important;
+  text-align:center !important;
+  padding-right:0 !important;
+}
+
+#gaiaStatusCard .gaiaStatusTopo > div,
+.gaiaStatusCard .statusHeader > div{
+  width:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  gap:4px !important;
+  padding:0 42px !important;
+  box-sizing:border-box !important;
+}
+
+#gaiaStatusCard .gaiaStatusSelo,
+#gaiaStatusCard .statusLabel,
+#gaiaStatusCard #gaiaStatusSelo{
+  display:block !important;
+  width:100% !important;
+  text-align:center !important;
+  letter-spacing:.06em !important;
+  line-height:1.2 !important;
+}
+
+#gaiaStatusCard #gaiaStatusEtapa,
+#gaiaStatusCard .gaiaStatusEtapa,
+#gaiaStatusCard .statusMain{
+  display:block !important;
+  width:100% !important;
+  text-align:center !important;
+  font-size:15px !important;
+  line-height:1.28 !important;
+  margin:0 !important;
+}
+
+#gaiaStatusCard .gaiaBarra,
+#gaiaStatusCard .statusProgressWrap,
+#gaiaStatusCard .progressWrap{
+  width:100% !important;
+  margin-top:12px !important;
+}
+
+#gaiaStatusCard .gaiaConfigBtn,
+#gaiaStatusCard .configBtn{
+  position:absolute !important;
+  right:14px !important;
+  top:14px !important;
+  margin:0 !important;
+}
+
+@media(max-width:390px){
+  #gaiaStatusCard .gaiaStatusTopo > div,
+  .gaiaStatusCard .gaiaStatusTopo > div{
+    padding:0 40px !important;
+  }
+}
+</style>
+
+
+<style>
+/* CORES DO CARD CONFORME O ESTADO DO PROJETO */
+#gaiaStatusCard{
+  transition:background .25s ease, border-color .25s ease, box-shadow .25s ease !important;
+}
+
+/* Em andamento */
+#gaiaStatusCard.estado-em_andamento{
+  background:#EAF2E7 !important;
+  border-color:#D4E1CF !important;
+  box-shadow:0 7px 18px rgba(88,111,76,.10) !important;
+}
+#gaiaStatusCard.estado-em_andamento .gaiaStatusSelo,
+#gaiaStatusCard.estado-em_andamento #gaiaStatusEtapa{
+  color:#456244 !important;
+}
+#gaiaStatusCard.estado-em_andamento .gaiaBarra{
+  background:#DDE6D8 !important;
+}
+#gaiaStatusCard.estado-em_andamento .gaiaBarra span{
+  background:linear-gradient(90deg,#91A184,#718364) !important;
+}
+
+/* Pausado */
+#gaiaStatusCard.estado-pausado{
+  background:#F6ECEF !important;
+  border-color:#E8D4DB !important;
+  box-shadow:0 7px 18px rgba(150,104,119,.09) !important;
+}
+#gaiaStatusCard.estado-pausado .gaiaStatusSelo,
+#gaiaStatusCard.estado-pausado #gaiaStatusEtapa{
+  color:#855F6B !important;
+}
+#gaiaStatusCard.estado-pausado .gaiaBarra{
+  background:#EADDE2 !important;
+}
+#gaiaStatusCard.estado-pausado .gaiaBarra span{
+  background:linear-gradient(90deg,#C89DAA,#A87988) !important;
+}
+
+/* Encerrado */
+#gaiaStatusCard.estado-encerrado{
+  background:#EEECE7 !important;
+  border-color:#DCD8CF !important;
+  box-shadow:0 7px 18px rgba(92,88,78,.08) !important;
+}
+#gaiaStatusCard.estado-encerrado .gaiaStatusSelo,
+#gaiaStatusCard.estado-encerrado #gaiaStatusEtapa{
+  color:#6E6A62 !important;
+}
+#gaiaStatusCard.estado-encerrado .gaiaBarra{
+  background:#DEDBD4 !important;
+}
+#gaiaStatusCard.estado-encerrado .gaiaBarra span{
+  background:linear-gradient(90deg,#AAA69D,#817D75) !important;
+}
+
+/* Concluído */
+#gaiaStatusCard.estado-concluido{
+  background:#F8F0D9 !important;
+  border-color:#EAD9A8 !important;
+  box-shadow:0 7px 18px rgba(151,124,58,.10) !important;
+}
+#gaiaStatusCard.estado-concluido .gaiaStatusSelo,
+#gaiaStatusCard.estado-concluido #gaiaStatusEtapa{
+  color:#7B662D !important;
+}
+#gaiaStatusCard.estado-concluido .gaiaBarra{
+  background:#EDE2C1 !important;
+}
+#gaiaStatusCard.estado-concluido .gaiaBarra span{
+  background:linear-gradient(90deg,#D3B66F,#B38F3E) !important;
+}
+
+/* Botão lateral acompanha o estado sem mudar de posição */
+#gaiaStatusCard.estado-pausado .gaiaConfigBtn{
+  background:#FFF8FA !important;
+  border-color:#E2CCD4 !important;
+  color:#855F6B !important;
+}
+#gaiaStatusCard.estado-encerrado .gaiaConfigBtn{
+  background:#F8F7F3 !important;
+  border-color:#D7D2C8 !important;
+  color:#6E6A62 !important;
+}
+#gaiaStatusCard.estado-concluido .gaiaConfigBtn{
+  background:#FFF9E9 !important;
+  border-color:#E5D39E !important;
+  color:#7B662D !important;
+}
+</style>
+
+
+<style>
+/* BOTÃO INICIAR PROJETO — TEXTO CENTRALIZADO */
+#gaiaIniciarBtn,
+.gaiaIniciarBtn{
+  position:relative !important;
+}
+
+#gaiaIniciarBtn .gaiaInicioConteudo,
+.gaiaIniciarBtn .gaiaInicioInner,
+.gaiaIniciarBtn .gaiaInicioWrap{
+  width:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+
+#gaiaIniciarBtn .gaiaInicioTexto,
+.gaiaIniciarBtn .gaiaInicioText{
+  width:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  padding:0 44px 0 8px !important;
+  box-sizing:border-box !important;
+}
+
+#gaiaIniciarBtn .gaiaInicioTexto strong,
+.gaiaIniciarBtn .gaiaInicioText strong{
+  width:100% !important;
+  text-align:center !important;
+}
+
+#gaiaIniciarBtn .gaiaInicioTexto small,
+.gaiaIniciarBtn .gaiaInicioText small{
+  width:100% !important;
+  text-align:center !important;
+}
+
+@media(max-width:390px){
+  #gaiaIniciarBtn .gaiaInicioTexto,
+  .gaiaIniciarBtn .gaiaInicioTexto,
+  #gaiaIniciarBtn .gaiaInicioText,
+  .gaiaIniciarBtn .gaiaInicioText{
+    padding:0 40px 0 6px !important;
+  }
+}
+</style>
+
+
+<style>
+/* SUBTÍTULO DO BOTÃO INICIAR — UMA LINHA E CONTEÚDO RECENTRALIZADO */
+#gaiaIniciarBtn .gaiaInicioConteudo,
+#gaiaIniciarBtn .gaiaInicioInner,
+#gaiaIniciarBtn .gaiaInicioWrap{
+  width:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+
+#gaiaIniciarBtn .gaiaInicioTexto,
+#gaiaIniciarBtn .gaiaInicioText{
+  width:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  padding:0 46px 0 10px !important;
+  box-sizing:border-box !important;
+}
+
+#gaiaIniciarBtn .gaiaInicioTexto strong,
+#gaiaIniciarBtn .gaiaInicioText strong{
+  width:100% !important;
+  text-align:center !important;
+}
+
+#gaiaIniciarBtn .gaiaInicioTexto small,
+#gaiaIniciarBtn .gaiaInicioText small{
+  width:auto !important;
+  max-width:none !important;
+  display:block !important;
+  margin:2px auto 0 !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+  line-height:1.2 !important;
+  font-size:10.5px !important;
+}
+
+@media(max-width:390px){
+  #gaiaIniciarBtn .gaiaInicioTexto,
+  .gaiaIniciarBtn .gaiaInicioTexto,
+  #gaiaIniciarBtn .gaiaInicioText,
+  .gaiaIniciarBtn .gaiaInicioText{
+    padding:0 42px 0 8px !important;
+  }
+
+  #gaiaIniciarBtn .gaiaInicioTexto small,
+  .gaiaIniciarBtn .gaiaInicioTexto small,
+  #gaiaIniciarBtn .gaiaInicioText small,
+  .gaiaIniciarBtn .gaiaInicioText small{
+    font-size:10px !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -415,35 +1609,108 @@ textarea:focus{
       </div>
     </div>
 
+    
+    <section id="gaiaProjetoControle" class="gaiaProjetoControle" aria-live="polite">
+      <button id="gaiaIniciarBtn" class="gaiaIniciarBtn" type="button" onclick="gaiaAbrirInicio()">
+        <span class="gaiaInicioIcone">🌍</span>
+        <span class="gaiaInicioTexto">
+          <strong>Iniciar Projeto de Gaia</strong>
+          <small>Começar pela Semana 1 • Dia 1</small>
+        </span>
+        <span class="gaiaInicioSeta">›</span>
+      </button>
+
+      <div id="gaiaStatusCard" class="gaiaStatusCard" hidden>
+        <div class="gaiaStatusTopo">
+          <div>
+            <span id="gaiaStatusSelo" class="gaiaStatusSelo">Projeto em andamento</span>
+            <strong id="gaiaStatusEtapa">Semana 1 • Dia 1 de 7</strong>
+          </div>
+          <button class="gaiaConfigBtn" type="button" onclick="gaiaAbrirAutenticacao()" aria-label="Configurar projeto">⋮</button>
+        </div>
+        <div class="gaiaBarra" aria-label="Progresso do projeto">
+          <span id="gaiaBarraPreenchimento"></span>
+        </div>
+      </div>
+    </section>
+
     <div class="botoes-lista">
 
       <button class="botao" onclick="location.href='gabriela-projeto-livro-gaia-tarefa-dia.html'">
         <div class="conteudo-botao">
-          <div class="nome-botao">📝 Tarefa do Dia</div>
-          <div class="proxima-tarefa">abrir a tarefa principal de hoje</div>
+          <div class="nome-botao">📝 Tarefa do dia</div>
+          <div class="proxima-tarefa">Organize e visualize a tarefa principal de hoje</div>
         </div>
       </button>
 
-      <button class="botao" onclick="location.href='gabriela-projeto-livro-gaia-cronograma.html'">
+      <button class="botao" onclick="location.href='gabriela-projeto-livro-gaia-ritmo-semanal.html'">
         <div class="conteudo-botao">
-          <div class="nome-botao">🗓️ Cronograma Geral</div>
-          <div class="proxima-tarefa">acompanhar etapas do livro</div>
+          <div class="nome-botao">🌿 Ritmo Semanal</div>
+          <div class="proxima-tarefa">Veja a rotina semanal de escrita</div>
+        </div>
+      </button>
+
+      <button class="botao" onclick="location.href='gabriela-projeto-livro-gaia-blocos.html'">
+        <div class="conteudo-botao">
+          <div class="nome-botao">📚 Cronograma em Blocos</div>
+          <div class="proxima-tarefa">Acompanhe as semanas e etapas do Livro de Gaia</div>
         </div>
       </button>
 
     </div>
 
-    <div class="infoBox">
-      <div class="infoEmoji">🌱</div>
-      <div class="infoTexto">
-        Um jardim para acompanhar o seu livro com presença, beleza, continuidade e leveza.
-      </div>
-    </div>
-
-    <div class="footerMiniAction">
+<div class="footerMiniAction">
       <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
     </div>
 
+  </div>
+</div>
+
+
+<div class="modalOverlay" id="gaiaModalInicio">
+  <div class="modal gaiaModalCompacto">
+    <h2 class="modalTitle">Iniciar o Livro de Gaia?</h2>
+    <p class="gaiaModalTexto">Sua jornada começará na Semana 1, Dia 1. Os dias avançam somente quando você concluir a tarefa diária.</p>
+    <div class="modalBtns">
+      <button class="cancel" onclick="gaiaFecharModal('gaiaModalInicio')">Cancelar</button>
+      <button class="save" onclick="gaiaIniciarProjeto()">Iniciar projeto</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="gaiaModalSenha">
+  <div class="modal gaiaModalCompacto">
+    <h2 class="modalTitle" id="gaiaSenhaTitulo">Senha do projeto</h2>
+    <p class="gaiaModalTexto" id="gaiaSenhaAjuda"></p>
+    <input id="gaiaSenhaInput" class="gaiaSenhaInput" type="password" inputmode="numeric" autocomplete="off" placeholder="Digite a senha">
+    <div id="gaiaSenhaErro" class="gaiaSenhaErro"></div>
+    <div class="modalBtns">
+      <button class="cancel" onclick="gaiaFecharModal('gaiaModalSenha')">Cancelar</button>
+      <button class="save" onclick="gaiaConfirmarSenha()">Continuar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalOverlay" id="gaiaModalConfig">
+  <div class="modal gaiaModalCompacto">
+    <h2 class="modalTitle">Configuração do projeto</h2>
+    <div class="gaiaConfigLista">
+      <button id="gaiaPausarBtn" onclick="gaiaAlternarPausa()">⏸ Pausar projeto</button>
+      <button onclick="gaiaConfirmarAcao('reiniciar')">↻ Reiniciar projeto</button>
+      <button class="perigo" onclick="gaiaConfirmarAcao('encerrar')">× Encerrar projeto</button>
+    </div>
+    <button class="cancel gaiaFecharConfig" onclick="gaiaFecharModal('gaiaModalConfig')">Fechar</button>
+  </div>
+</div>
+
+<div class="modalOverlay" id="gaiaModalConfirmarAcao">
+  <div class="modal gaiaModalCompacto">
+    <h2 class="modalTitle" id="gaiaAcaoTitulo">Confirmar ação</h2>
+    <p class="gaiaModalTexto" id="gaiaAcaoTexto"></p>
+    <div class="modalBtns">
+      <button class="cancel" onclick="gaiaFecharModal('gaiaModalConfirmarAcao')">Cancelar</button>
+      <button class="save" id="gaiaAcaoConfirmarBtn">Confirmar</button>
+    </div>
   </div>
 </div>
 
@@ -505,6 +1772,160 @@ window.addEventListener("load", () => {
   atualizarLinhaTempo();
   setInterval(atualizarLinhaTempo, 1000);
 });
+</script>
+
+
+<script>
+(function garantirDataHoraVisivel(){
+  function pad2(n){
+    return String(n).padStart(2,"0");
+  }
+
+  function atualizar(){
+    const agora = new Date();
+    const dias = ["dom","seg","ter","qua","qui","sex","sáb"];
+
+    const hora = document.getElementById("linhaTempoHora");
+    const dia = document.getElementById("linhaTempoDia");
+    const data = document.getElementById("linhaTempoData");
+
+    if(hora) hora.textContent = pad2(agora.getHours()) + ":" + pad2(agora.getMinutes());
+    if(dia) dia.textContent = "• " + dias[agora.getDay()];
+    if(data) data.textContent = "• " + pad2(agora.getDate()) + "/" + pad2(agora.getMonth()+1);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", atualizar);
+  }else{
+    atualizar();
+  }
+
+  setInterval(atualizar, 1000);
+})();
+</script>
+
+
+<script id="gaia-projeto-controle-js">
+(function(){
+  const ESTADO='gaia_projeto_estado_v1';
+  const SENHA='gaia_projeto_senha_v1';
+  const TOTAL=119;
+  let acaoPendente=null;
+  function pad(n){return String(n).padStart(2,'0');}
+  function estadoPadrao(){return {iniciado:false,status:'nao_iniciado',dataInicio:null,semanaAtual:1,diaAtual:1,diasConcluidos:0,ultimaConclusao:null};}
+  function obter(){try{return {...estadoPadrao(),...JSON.parse(localStorage.getItem(ESTADO)||'{}')}}catch(e){return estadoPadrao()}}
+  function salvar(e){localStorage.setItem(ESTADO,JSON.stringify(e));window.dispatchEvent(new CustomEvent('gaiaProjetoAtualizado',{detail:e}));renderizar();}
+  window.gaiaFecharModal=function(id){document.getElementById(id)?.classList.remove('show');};
+  window.gaiaAbrirInicio=function(){
+    const e=obter();
+    const titulo=document.querySelector('#gaiaModalInicio .modalTitle');
+    const texto=document.querySelector('#gaiaModalInicio .gaiaModalTexto');
+
+    if(e.status==='encerrado'){
+      titulo.textContent='Iniciar um novo ciclo de Gaia?';
+      texto.textContent='O novo ciclo começará na Semana 1, Dia 1. Os dias avançam somente quando você concluir a tarefa diária.';
+    }else{
+      titulo.textContent='Iniciar o Livro de Gaia?';
+      texto.textContent='Sua jornada começará na Semana 1, Dia 1. Os dias avançam somente quando você concluir a tarefa diária.';
+    }
+
+    document.getElementById('gaiaModalInicio').classList.add('show');
+  };
+  window.gaiaIniciarProjeto=function(){const e=estadoPadrao();e.iniciado=true;e.status='em_andamento';e.dataInicio=new Date().toISOString();salvar(e);gaiaFecharModal('gaiaModalInicio');};
+  window.gaiaAbrirAutenticacao=function(){
+    const existe=!!localStorage.getItem(SENHA); const titulo=document.getElementById('gaiaSenhaTitulo'); const ajuda=document.getElementById('gaiaSenhaAjuda');
+    titulo.textContent=existe?'Digite a senha':'Crie uma senha'; ajuda.textContent=existe?'Informe a senha para abrir as configurações.':'Esta senha será exigida para pausar, reiniciar ou encerrar o projeto.';
+    document.getElementById('gaiaSenhaInput').value='';document.getElementById('gaiaSenhaErro').textContent='';document.getElementById('gaiaModalSenha').classList.add('show');setTimeout(()=>document.getElementById('gaiaSenhaInput').focus(),80);
+  };
+  window.gaiaConfirmarSenha=function(){const v=document.getElementById('gaiaSenhaInput').value.trim();if(v.length<4){document.getElementById('gaiaSenhaErro').textContent='Use pelo menos 4 caracteres.';return;}const atual=localStorage.getItem(SENHA);if(!atual)localStorage.setItem(SENHA,v);else if(v!==atual){document.getElementById('gaiaSenhaErro').textContent='Senha incorreta.';return;}gaiaFecharModal('gaiaModalSenha');document.getElementById('gaiaModalConfig').classList.add('show');};
+  window.gaiaAlternarPausa=function(){const e=obter();e.status=e.status==='pausado'?'em_andamento':'pausado';salvar(e);gaiaFecharModal('gaiaModalConfig');};
+  window.gaiaConfirmarAcao=function(acao){acaoPendente=acao;document.getElementById('gaiaAcaoTitulo').textContent=acao==='reiniciar'?'Reiniciar projeto?':'Encerrar projeto?';document.getElementById('gaiaAcaoTexto').textContent=acao==='reiniciar'?'O progresso atual será apagado e o projeto voltará para Semana 1 • Dia 1.':'O projeto será marcado como encerrado e não avançará mais.';document.getElementById('gaiaAcaoConfirmarBtn').onclick=executarAcao;document.getElementById('gaiaModalConfirmarAcao').classList.add('show');};
+  function executarAcao(){
+    let e=obter();
+
+    if(acaoPendente==='reiniciar'){
+      e=estadoPadrao();
+      e.iniciado=false;
+      e.status='nao_iniciado';
+      e.dataInicio=null;
+    }else if(acaoPendente==='encerrar'){
+      e.status='encerrado';
+      e.iniciado=false;
+    }
+
+    salvar(e);
+    gaiaFecharModal('gaiaModalConfirmarAcao');
+    gaiaFecharModal('gaiaModalConfig');
+  }
+  function renderizar(){
+    const e=obter();
+    const iniciar=document.getElementById('gaiaIniciarBtn');
+    const card=document.getElementById('gaiaStatusCard');
+    if(!iniciar||!card)return;
+
+    const mostrarBotaoInicio =
+      !e.iniciado ||
+      e.status==='nao_iniciado' ||
+      e.status==='encerrado';
+
+    const mostrarCardStatus =
+      e.iniciado &&
+      (
+        e.status==='em_andamento' ||
+        e.status==='pausado' ||
+        e.status==='concluido'
+      );
+
+    iniciar.hidden=!mostrarBotaoInicio;
+    card.hidden=!mostrarCardStatus;
+
+    if(mostrarBotaoInicio){
+      const tituloInicio=iniciar.querySelector('.gaiaInicioTexto strong');
+      const subtituloInicio=iniciar.querySelector('.gaiaInicioTexto small');
+
+      if(e.status==='encerrado'){
+        tituloInicio.textContent='Iniciar novo ciclo de Gaia';
+        subtituloInicio.textContent='Começar novamente pela Semana 1 • Dia 1';
+      }else{
+        tituloInicio.textContent='Iniciar Projeto de Gaia';
+        subtituloInicio.textContent='Começar pela Semana 1 • Dia 1';
+      }
+    }
+
+    if(!mostrarCardStatus)return;
+
+    const nomes={
+      em_andamento:'Projeto em andamento',
+      pausado:'Projeto pausado',
+      encerrado:'Projeto encerrado',
+      concluido:'Projeto concluído'
+    };
+
+    card.classList.remove(
+      'estado-em_andamento',
+      'estado-pausado',
+      'estado-encerrado',
+      'estado-concluido'
+    );
+    card.classList.add('estado-' + (e.status || 'em_andamento'));
+
+    document.getElementById('gaiaStatusSelo').textContent=
+      nomes[e.status]||'Projeto em andamento';
+
+    document.getElementById('gaiaStatusEtapa').textContent=
+      e.status==='concluido'
+        ? 'Livro de Gaia finalizado com amor 🌸'
+        : `Semana ${e.semanaAtual} • Dia ${e.diaAtual} de 7`;
+
+    document.getElementById('gaiaBarraPreenchimento').style.width=
+      Math.min(100,(e.diasConcluidos/TOTAL)*100)+'%';
+
+    document.getElementById('gaiaPausarBtn').textContent=
+      e.status==='pausado'?'▶ Retomar projeto':'⏸ Pausar projeto';
+  }
+  window.gaiaProjeto={obter,salvar,chave:ESTADO,totalDias:TOTAL};
+  window.addEventListener('storage',ev=>{if(ev.key===ESTADO)renderizar()});document.addEventListener('DOMContentLoaded',renderizar);window.addEventListener('pageshow',renderizar);
+})();
 </script>
 
 </body>

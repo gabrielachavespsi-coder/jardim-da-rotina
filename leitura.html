@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leitura do Dia</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--fundo:#F8F7F1;--card:#FFFDF8;--verde:#7F9271;--verde-escuro:#40513B;--texto:#31372F;--suave:#77786F;--borda:#E8E1D4;--creme:#F1EEE6;--fonte:'Poppins',sans-serif;--serif:'DM Serif Display',serif}
+*{box-sizing:border-box;margin:0;padding:0}html,body{min-height:100%}body{font-family:var(--fonte);color:var(--texto);display:flex;justify-content:center;align-items:flex-start;padding:14px 12px 96px;background:radial-gradient(circle at 14% 4%,rgba(232,243,226,.75),transparent 32%),radial-gradient(circle at 95% 16%,rgba(243,236,221,.8),transparent 30%),linear-gradient(180deg,#FEFCF7 0%,var(--fundo) 100%)}
+button,input,select{font-family:var(--fonte)}.pagina{width:100%;max-width:420px}.card{width:100%;background:rgba(255,253,248,.95);border:1px solid rgba(232,225,212,.92);border-radius:30px;padding:18px 14px 20px;box-shadow:0 14px 34px rgba(76,82,62,.11);display:flex;flex-direction:column;gap:14px;overflow:hidden;position:relative}.card:before{content:"";position:absolute;width:180px;height:180px;right:-80px;top:-70px;border-radius:50%;background:rgba(234,243,232,.72)}.card:after{content:"";position:absolute;width:170px;height:170px;left:-95px;bottom:-65px;border-radius:50%;background:rgba(243,236,221,.62)}.card>*{position:relative;z-index:1}
+.topo{display:grid;grid-template-columns:50px minmax(0,1fr) 50px;align-items:start;gap:6px;min-height:70px}.botao-voltar,.botao-add{width:42px;height:42px;border-radius:50%;border:1px solid rgba(232,225,212,.95);background:rgba(255,255,255,.9);color:var(--verde-escuro);box-shadow:0 6px 16px rgba(76,82,62,.08);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0}.botao-add{justify-self:end;font-size:26px}.topCenter{text-align:center;min-width:0}.titleIndex{color:var(--verde-escuro);font-size:23px;font-weight:500;line-height:1.1;white-space:nowrap}.subtitulo{font-size:11px;color:var(--suave);margin-top:5px;line-height:1.35}
+.seletorLivro{display:flex;gap:8px;align-items:center}.seletorLivro select{flex:1;height:44px;border:1px solid var(--borda);border-radius:14px;background:#fff;padding:8px 11px;color:#40513B;font-size:12px}.miniConfig{width:44px;height:44px;border:1px solid var(--borda);border-radius:14px;background:#F5F2EA;color:#4D5848;cursor:pointer}
+.hero{border-radius:22px;padding:18px;background:linear-gradient(135deg,#F7F3E9,#EAF1E6);border:1px solid var(--borda);box-shadow:0 8px 20px rgba(76,82,62,.08);overflow:hidden}.heroTopo{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.livroInfo{min-width:0}.livroInfo small{display:block;font-size:10px;color:var(--suave);letter-spacing:.08em;text-transform:uppercase}.livroInfo h2{font-family:var(--serif);font-size:23px;line-height:1.05;color:#4B5D43;font-weight:400;margin-top:4px}.seloDia{flex:none;background:rgba(255,255,255,.8);border:1px solid rgba(232,225,212,.95);border-radius:999px;padding:6px 10px;font-size:10.5px;color:#5B6F50;white-space:nowrap}.leituraHoje{margin-top:14px;font-size:13px;color:#44503F}.leituraHoje strong{font-weight:600}.progressoLinha{height:6px;background:#E8E4DA;border-radius:999px;overflow:hidden;margin-top:11px}.progressoLinha span{display:block;height:100%;background:#96A989;border-radius:999px;width:0}.progressoTexto{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font-size:9.5px;color:var(--suave)}
+.status{background:#FFF;border:1px dashed #D9D1C4;border-radius:18px;padding:18px;text-align:center;color:var(--suave);font-size:12px;line-height:1.55}.status.erro{color:#8A5151;background:#FFF8F6;border-style:solid;border-color:#E9CBC6}.paginas{display:flex;flex-direction:column;gap:12px}.paginaPdf{background:#ECE9E1;border-radius:18px;padding:8px;border:1px solid #DDD5C8;box-shadow:0 7px 18px rgba(76,82,62,.08)}.paginaPdf canvas{display:block;width:100%;height:auto;background:#fff;border-radius:11px;box-shadow:0 2px 9px rgba(0,0,0,.11)}.numeroPagina{text-align:center;font-size:9.5px;color:var(--suave);margin-top:7px}.acoes{display:grid;grid-template-columns:1fr;gap:9px}.concluir{border:none;border-radius:15px;padding:13px;background:var(--verde);color:#fff;font-size:13px;font-weight:500;cursor:pointer;box-shadow:0 7px 15px rgba(81,100,72,.18)}.concluir:disabled{opacity:.5;cursor:not-allowed}.secundario{border:1px solid var(--borda);border-radius:15px;padding:11px;background:#F5F2EA;color:#4D5848;font-size:12px;cursor:pointer}
+.modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.36);display:none;align-items:center;justify-content:center;padding:16px;z-index:1000}.modalOverlay.show{display:flex}.modal{width:min(370px,100%);max-height:88vh;overflow-y:auto;background:#FFFDF8;border:1px solid var(--borda);border-radius:24px;padding:18px;box-shadow:0 16px 40px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:13px}.modalHeader{display:flex;align-items:center;justify-content:space-between}.modalTitle{font-size:18px;color:var(--verde-escuro);font-weight:500}.fechar{width:32px;height:32px;border:none;border-radius:10px;background:var(--creme);cursor:pointer}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12px;font-weight:500}.field input,.field select{width:100%;height:44px;border:1px solid var(--borda);border-radius:13px;background:#fff;padding:10px 12px;font-size:12.5px;outline:none}.field input[type=file]{height:auto;padding:10px}.ajuda{font-size:9.5px;color:var(--suave);line-height:1.45}.modalBtns{display:flex;justify-content:center;gap:8px}.salvar{width:min(210px,100%);border:none;border-radius:13px;padding:12px;background:var(--verde);color:#fff;cursor:pointer}.danger{border:none;border-radius:13px;padding:11px 14px;background:#F4DFDC;color:#8A4545;cursor:pointer}.listaLivros{display:flex;flex-direction:column;gap:8px}.livroItem{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--borda);background:#F8F6EF;border-radius:14px;padding:10px}.livroItem strong{display:block;font-size:11.5px;color:#40513B}.livroItem span{display:block;font-size:9.5px;color:var(--suave);margin-top:2px}.livroItem button{width:34px;height:34px;border:none;border-radius:10px;background:#EEE9DF;color:#8A4545;cursor:pointer}.avisoArquivo{background:#F7F3EA;border-radius:13px;padding:10px;font-size:10px;line-height:1.45;color:#665F55}
+
+.diasSemana{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.diaCheck{position:relative}.diaCheck input{position:absolute;opacity:0;pointer-events:none}.diaCheck span{min-height:38px;border:1px solid var(--borda);border-radius:12px;background:#fff;color:var(--suave);display:flex;align-items:center;justify-content:center;font-size:10.5px;cursor:pointer;padding:7px 5px;text-align:center}diaCheck input:checked+span{background:#EAF1E5;border-color:#AFC0A6;color:#4B6043;font-weight:500}.limiteLivros{font-size:10px;color:var(--suave);text-align:center;line-height:1.4}.livroItem span.diasInfo{color:#5B6F50;margin-top:4px}
+
+.previewPaginaBox{background:#ECE9E1;border:1px solid #DDD5C8;border-radius:18px;padding:8px;min-height:240px;display:flex;align-items:center;justify-content:center}.previewPaginaBox canvas{display:block;width:100%;height:auto;max-height:54vh;object-fit:contain;background:#fff;border-radius:11px;box-shadow:0 2px 9px rgba(0,0,0,.11)}.previewControles{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;gap:8px;align-items:center}.previewControles button{height:42px;border:none;border-radius:12px;background:#F1EEE6;color:#40513B;font-size:20px;cursor:pointer}.previewControles input{height:42px;border:1px solid var(--borda);border-radius:12px;text-align:center;font-size:13px}.previewAjuda{text-align:center;font-size:10px;color:var(--suave);line-height:1.4}.modalEtapa{font-size:10px;color:var(--suave);text-align:center}erroDetalhe{font-size:10px;color:#8A5151;line-height:1.4;text-align:center}
+@media(max-width:390px){body{padding:10px 9px 92px}.card{border-radius:28px;padding:16px 11px 18px}.titleIndex{font-size:21px}.hero{padding:16px}.livroInfo h2{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="pagina"><main class="card">
+<header class="topo"><button class="botao-voltar" aria-label="Voltar" onclick="voltarManifestacao()">←</button><div class="topCenter"><h1 class="titleIndex">📖 Leitura do Dia</h1><p class="subtitulo">Sua biblioteca, um pequeno trecho por dia</p></div><button class="botao-add" aria-label="Adicionar livro" onclick="abrirAdicionarLivro()">＋</button></header>
+<div class="seletorLivro"><select id="seletorLivro" onchange="trocarLivro(this.value)"></select><button class="miniConfig" onclick="abrirConfiguracao()">⚙</button></div>
+<section class="hero"><div class="heroTopo"><div class="livroInfo"><small>Livro atual</small><h2 id="tituloLivro">Nenhum livro</h2></div><div class="seloDia" id="seloDia">Dia 01</div></div><p class="leituraHoje" id="leituraHoje">Adicione um PDF para começar.</p><div class="progressoLinha"><span id="barraProgresso"></span></div><div class="progressoTexto"><span id="progressoEsquerda">Página 1</span><span id="progressoDireita">0 páginas</span></div></section>
+<div class="status" id="status">Adicione seu primeiro livro em PDF.</div><section class="paginas" id="paginas"></section>
+<div class="acoes"><button class="concluir" id="btnConcluir" onclick="concluirLeitura()" disabled>Concluir leitura de hoje</button><button class="secundario" onclick="abrirBiblioteca()">Minha biblioteca</button></div>
+</main></div>
+
+<div class="modalOverlay" id="modalAdicionar"><div class="modal"><div class="modalHeader"><h2 class="modalTitle">Adicionar novo livro</h2><button class="fechar" onclick="fecharAdicionarLivro()">✕</button></div><div class="modalEtapa">Etapa 1 de 2</div><div class="field"><label for="novoPdf">Escolha o arquivo PDF</label><input id="novoPdf" type="file" accept="application/pdf,.pdf"><div class="ajuda">O aplicativo contará as páginas e deixará o livro pronto automaticamente.</div></div><div class="field"><label for="novoTitulo">Título</label><input id="novoTitulo" placeholder="Preenchido automaticamente pelo nome do arquivo"></div><div class="field"><label for="novaQtd">Quantidade por dia</label><select id="novaQtd"></select></div><div class="field"><label>Dias da semana para leitura</label><div class="diasSemana" id="diasNovo"><label class="diaCheck"><input type="checkbox" value="0"><span>Dom</span></label><label class="diaCheck"><input type="checkbox" value="1" checked><span>Seg</span></label><label class="diaCheck"><input type="checkbox" value="2" checked><span>Ter</span></label><label class="diaCheck"><input type="checkbox" value="3" checked><span>Qua</span></label><label class="diaCheck"><input type="checkbox" value="4" checked><span>Qui</span></label><label class="diaCheck"><input type="checkbox" value="5" checked><span>Sex</span></label><label class="diaCheck"><input type="checkbox" value="6"><span>Sáb</span></label></div><div class="ajuda">As próximas páginas só serão liberadas nos dias selecionados.</div></div><div class="avisoArquivo">O PDF será salvo apenas neste aparelho, sem ser enviado para a nuvem. A biblioteca aceita até 5 livros.</div><div class="limiteLivros" id="contadorLivrosAdicionar">0 de 5 livros</div><div class="erroDetalhe" id="erroImportacao"></div><div class="modalBtns"><button class="salvar" id="btnImportar" onclick="prepararLivroParaEscolherPagina()">Continuar</button></div></div></div>
+
+<div class="modalOverlay" id="modalEscolherPagina"><div class="modal"><div class="modalHeader"><h2 class="modalTitle">Por qual página começar?</h2><button class="fechar" onclick="fecharEscolhaPagina()">✕</button></div><div class="modalEtapa">Etapa 2 de 2</div><div class="previewPaginaBox"><canvas id="canvasPreviewPagina"></canvas></div><div class="previewControles"><button type="button" onclick="mudarPaginaPreview(-1)">‹</button><input id="novaInicial" type="number" min="1" value="1" onchange="irParaPaginaPreview(this.value)" inputmode="numeric"><button type="button" onclick="mudarPaginaPreview(1)">›</button></div><div class="previewAjuda" id="textoPreviewPagina">Página 1</div><div class="modalBtns"><button class="salvar" id="btnConcluirImportacao" onclick="concluirImportacaoLivro()">Concluir</button></div></div></div>
+
+<div class="modalOverlay" id="modalConfiguracao"><div class="modal"><div class="modalHeader"><h2 class="modalTitle">Configuração do livro</h2><button class="fechar" onclick="fecharConfiguracao()">✕</button></div><div class="field"><label for="editarTitulo">Título</label><input id="editarTitulo"></div><div class="field"><label for="paginasPorDia">Quantidade por dia</label><select id="paginasPorDia"></select></div><div class="field"><label>Dias da semana para leitura</label><div class="diasSemana" id="diasEditar"><label class="diaCheck"><input type="checkbox" value="0"><span>Dom</span></label><label class="diaCheck"><input type="checkbox" value="1"><span>Seg</span></label><label class="diaCheck"><input type="checkbox" value="2"><span>Ter</span></label><label class="diaCheck"><input type="checkbox" value="3"><span>Qua</span></label><label class="diaCheck"><input type="checkbox" value="4"><span>Qui</span></label><label class="diaCheck"><input type="checkbox" value="5"><span>Sex</span></label><label class="diaCheck"><input type="checkbox" value="6"><span>Sáb</span></label></div></div><div class="field"><label for="paginaInicial">Reiniciar na página</label><input id="paginaInicial" type="number" min="1"><div class="ajuda">Alterar este campo reinicia o progresso deste livro.</div></div><div class="modalBtns"><button class="salvar" onclick="salvarConfiguracao()">Concluir</button></div></div></div>
+
+<div class="modalOverlay" id="modalBiblioteca"><div class="modal"><div class="modalHeader"><h2 class="modalTitle">Minha biblioteca</h2><button class="fechar" onclick="fecharBiblioteca()">✕</button></div><div class="limiteLivros" id="contadorBiblioteca">0 de 5 livros</div><div class="listaLivros" id="listaLivros"></div><div class="modalBtns"><button class="salvar" onclick="fecharBiblioteca();abrirAdicionarLivro()">Adicionar outro livro</button></div></div></div>
+
+<script src="pdf.min.js" onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js'"></script>
+<script>
+const CHAVE_BIBLIOTECA='biblioteca_leitura_v2';
+const CHAVE_ATUAL='biblioteca_leitura_atual_v2';
+const DB_NOME='jardim_rotina_livros';
+const DB_VERSAO=1;
+const STORE='pdfs';
+const LIMITE_LIVROS=5;
+const NOMES_DIAS=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+let biblioteca=lerBiblioteca();
+let livroAtualId=localStorage.getItem(CHAVE_ATUAL)||'';
+let pdfDoc=null,paginasExibidas=[];
+let importacaoPendente=null;
+let previewDoc=null;
+let previewPaginaAtual=1;
+
+
+function diasSelecionados(containerId){return [...document.querySelectorAll(`#${containerId} input[type=checkbox]:checked`)].map(i=>Number(i.value)).sort((a,b)=>a-b)}
+function aplicarDias(containerId,dias){const lista=Array.isArray(dias)&&dias.length?dias:[1,2,3,4,5];document.querySelectorAll(`#${containerId} input[type=checkbox]`).forEach(i=>i.checked=lista.includes(Number(i.value)))}
+function rotuloDias(dias){const d=Array.isArray(dias)&&dias.length?dias:[1,2,3,4,5];if(d.length===7)return 'Todos os dias';if(JSON.stringify(d)==='[1,2,3,4,5]')return 'Segunda a sexta';return d.map(x=>['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][x]).join(', ')}
+function hojeEhDiaDeLeitura(livro){const dias=Array.isArray(livro.diasSemana)&&livro.diasSemana.length?livro.diasSemana:[1,2,3,4,5];return dias.includes(new Date().getDay())}
+function preencherQuantidadePaginas(){['novaQtd','paginasPorDia'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const atual=Number(el.value)||1;el.innerHTML=Array.from({length:20},(_,i)=>{const n=i+1;return `<option value="${n}">${n} ${n===1?'página':'páginas'} por dia</option>`}).join('');el.value=String(Math.min(20,Math.max(1,atual)))})}
+function configurarPdfJs(){if(!window.pdfjsLib)throw new Error('A biblioteca do leitor de PDF não foi carregada. Coloque também pdf.min.js na pasta www ou conecte o aparelho à internet.');try{pdfjsLib.GlobalWorkerOptions.workerSrc='pdf.worker.min.js'}catch(e){}}
+function mensagemErroPdf(e){const nome=e?.name||'';const msg=String(e?.message||e||'');if(nome==='PasswordException'||/password/i.test(msg))return 'Este PDF possui senha ou proteção. Retire a senha antes de adicioná-lo.';if(nome==='InvalidPDFException'||/invalid pdf/i.test(msg))return 'O arquivo não foi reconhecido como um PDF válido.';if(nome==='MissingPDFException')return 'O arquivo PDF não foi encontrado.';if(/quota|storage|space|disk/i.test(msg))return 'Não há espaço suficiente no armazenamento do aplicativo para salvar este livro.';if(/worker|fake worker/i.test(msg))return 'O componente local do leitor de PDF não foi encontrado. Coloque pdf.min.js e pdf.worker.min.js na pasta www.';return `Não foi possível preparar este PDF. Detalhe: ${msg||'erro desconhecido'}`;}
+
+
+function uid(){return 'livro_'+Date.now()+'_'+Math.random().toString(36).slice(2,8)}
+function dois(n){return String(n).padStart(2,'0')}
+function limparNomeArquivo(nome){return nome.replace(/\.pdf$/i,'').replace(/[-_]+/g,' ').replace(/\s+/g,' ').trim()}
+function lerBiblioteca(){try{return JSON.parse(localStorage.getItem(CHAVE_BIBLIOTECA)||'[]')}catch(e){return[]}}
+function salvarBiblioteca(){localStorage.setItem(CHAVE_BIBLIOTECA,JSON.stringify(biblioteca))}
+function livroAtual(){return biblioteca.find(l=>l.id===livroAtualId)||null}
+function voltarManifestacao(){window.location.href='gabriela-manifestacao-criatividade.html?abrir=leitura'}
+
+function abrirDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NOME,DB_VERSAO);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(STORE))db.createObjectStore(STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+async function salvarBlob(id,blob){const db=await abrirDB();return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(blob,id);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)})}
+async function lerBlob(id){const db=await abrirDB();return new Promise((resolve,reject)=>{const req=db.transaction(STORE,'readonly').objectStore(STORE).get(id);req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error)})}
+async function excluirBlob(id){const db=await abrirDB();return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(id);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)})}
+
+function abrirAdicionarLivro(){if(biblioteca.length>=LIMITE_LIVROS){alert('Sua biblioteca já tem 5 livros. Exclua um livro antes de adicionar outro.');abrirBiblioteca();return}novoPdf.value='';novoTitulo.value='';preencherQuantidadePaginas();novaQtd.value='1';aplicarDias('diasNovo',[1,2,3,4,5]);contadorLivrosAdicionar.textContent=`${biblioteca.length} de ${LIMITE_LIVROS} livros`;erroImportacao.textContent='';importacaoPendente=null;previewDoc=null;modalAdicionar.classList.add('show')}
+function fecharAdicionarLivro(){modalAdicionar.classList.remove('show')}
+function fecharEscolhaPagina(){modalEscolherPagina.classList.remove('show');if(!importacaoPendente){previewDoc=null}}
+novoPdf.addEventListener('change',()=>{const f=novoPdf.files[0];erroImportacao.textContent='';if(f&&!novoTitulo.value.trim())novoTitulo.value=limparNomeArquivo(f.name)})
+
+async function prepararLivroParaEscolherPagina(){
+ if(biblioteca.length>=LIMITE_LIVROS){alert('Para adicionar o 6º livro, exclua primeiro um dos 5 livros da biblioteca.');fecharAdicionarLivro();abrirBiblioteca();return}
+ const file=novoPdf.files[0];if(!file){alert('Escolha um arquivo PDF.');return}
+ const diasSemana=diasSelecionados('diasNovo');if(!diasSemana.length){alert('Escolha pelo menos um dia da semana.');return}
+ btnImportar.disabled=true;btnImportar.textContent='Preparando…';erroImportacao.textContent='';
+ try{
+  configurarPdfJs();
+  const dados=await file.arrayBuffer();
+  if(!dados.byteLength)throw new Error('O arquivo está vazio.');
+  previewDoc=await pdfjsLib.getDocument({data:new Uint8Array(dados),disableWorker:true}).promise;
+  importacaoPendente={file,titulo:novoTitulo.value.trim()||limparNomeArquivo(file.name),paginasPorDia:Math.min(20,Math.max(1,Number(novaQtd.value)||1)),diasSemana,totalPaginas:previewDoc.numPages};
+  previewPaginaAtual=1;novaInicial.max=String(previewDoc.numPages);novaInicial.value='1';
+  fecharAdicionarLivro();modalEscolherPagina.classList.add('show');await renderizarPaginaPreview();
+ }catch(e){console.error(e);erroImportacao.textContent=mensagemErroPdf(e)}
+ finally{btnImportar.disabled=false;btnImportar.textContent='Continuar'}
+}
+async function renderizarPaginaPreview(){if(!previewDoc)return;previewPaginaAtual=Math.min(previewDoc.numPages,Math.max(1,Number(previewPaginaAtual)||1));novaInicial.value=String(previewPaginaAtual);textoPreviewPagina.textContent=`Página ${previewPaginaAtual} de ${previewDoc.numPages}`;const pagina=await previewDoc.getPage(previewPaginaAtual);const base=pagina.getViewport({scale:1});const largura=Math.min(680,Math.max(280,document.querySelector('#modalEscolherPagina .modal').clientWidth*1.7));const viewport=pagina.getViewport({scale:largura/base.width});const canvas=canvasPreviewPagina;canvas.width=Math.floor(viewport.width);canvas.height=Math.floor(viewport.height);await pagina.render({canvasContext:canvas.getContext('2d'),viewport}).promise}
+async function mudarPaginaPreview(delta){previewPaginaAtual+=delta;await renderizarPaginaPreview()}
+async function irParaPaginaPreview(valor){previewPaginaAtual=Number(valor)||1;await renderizarPaginaPreview()}
+async function concluirImportacaoLivro(){
+ if(!importacaoPendente||!previewDoc)return;
+ btnConcluirImportacao.disabled=true;btnConcluirImportacao.textContent='Salvando…';
+ try{
+  const id=uid();const paginaInicial=Math.min(previewDoc.numPages,Math.max(1,Number(novaInicial.value)||1));
+  const item={id,titulo:importacaoPendente.titulo,arquivoOriginal:importacaoPendente.file.name,totalPaginas:previewDoc.numPages,paginasPorDia:importacaoPendente.paginasPorDia,diasSemana:importacaoPendente.diasSemana,paginaInicial,proximaPagina:paginaInicial,diasConcluidos:0,historico:[],criadoEm:new Date().toISOString()};
+  await salvarBlob(id,new Blob([importacaoPendente.file],{type:'application/pdf'}));biblioteca.push(item);salvarBiblioteca();livroAtualId=id;localStorage.setItem(CHAVE_ATUAL,id);
+  importacaoPendente=null;previewDoc=null;modalEscolherPagina.classList.remove('show');atualizarSeletor();await carregarLivroAtual();
+ }catch(e){console.error(e);alert(mensagemErroPdf(e))}
+ finally{btnConcluirImportacao.disabled=false;btnConcluirImportacao.textContent='Concluir'}
+}
+
+function atualizarSeletor(){
+ seletorLivro.innerHTML='';
+ if(!biblioteca.length){const o=document.createElement('option');o.textContent='Nenhum livro adicionado';o.value='';seletorLivro.appendChild(o);return}
+ biblioteca.forEach(l=>{const o=document.createElement('option');o.value=l.id;o.textContent=l.titulo;if(l.id===livroAtualId)o.selected=true;seletorLivro.appendChild(o)})
+}
+async function trocarLivro(id){livroAtualId=id;localStorage.setItem(CHAVE_ATUAL,id);await carregarLivroAtual()}
+
+async function carregarLivroAtual(){
+ const livro=livroAtual();pdfDoc=null;paginas.innerHTML='';btnConcluir.disabled=true;
+ if(!livro){tituloLivro.textContent='Nenhum livro';status.className='status';status.style.display='block';status.textContent='Adicione seu primeiro livro em PDF.';leituraHoje.textContent='Adicione um PDF para começar.';progressoDireita.textContent='0 páginas';barraProgresso.style.width='0%';return}
+ tituloLivro.textContent=livro.titulo;status.className='status';status.style.display='block';status.textContent='Carregando o livro…';
+ try{
+  const blob=await lerBlob(livro.id);if(!blob)throw new Error('PDF ausente');
+  configurarPdfJs();
+  const dados=await blob.arrayBuffer();pdfDoc=await pdfjsLib.getDocument({data:new Uint8Array(dados),disableWorker:true}).promise;
+  if(!livro.totalPaginas||livro.totalPaginas!==pdfDoc.numPages){livro.totalPaginas=pdfDoc.numPages;salvarBiblioteca()}
+  await renderizarLeitura();
+ }catch(e){console.error(e);status.className='status erro';status.style.display='block';status.textContent='Não foi possível abrir este livro. Você pode excluí-lo e importá-lo novamente.'}
+}
+
+async function renderizarLeitura(){
+ const livro=livroAtual();if(!livro||!pdfDoc)return;
+ status.style.display='none';paginas.innerHTML='';paginasExibidas=[];
+ if(!hojeEhDiaDeLeitura(livro)){const dias=rotuloDias(livro.diasSemana);status.className='status';status.style.display='block';status.textContent=`Hoje não é um dia programado para este livro. Dias escolhidos: ${dias}.`;leituraHoje.innerHTML=`Próxima leitura nos dias: <strong>${dias}</strong>`;seloDia.textContent=`Dia ${dois(Number(livro.diasConcluidos||0)+1)}`;progressoEsquerda.textContent=`Página ${livro.proximaPagina||livro.paginaInicial||1}`;progressoDireita.textContent=`${pdfDoc.numPages} páginas`;barraProgresso.style.width=`${Math.min(100,Math.round(((Number(livro.proximaPagina)||1)-1)/pdfDoc.numPages*100))}%`;btnConcluir.disabled=true;btnConcluir.textContent='Leitura não programada para hoje';return}
+ const inicio=Math.max(1,Math.min(pdfDoc.numPages,Number(livro.proximaPagina)||Number(livro.paginaInicial)||1));
+ const fim=Math.min(pdfDoc.numPages,inicio+Number(livro.paginasPorDia||1)-1);
+ for(let n=inicio;n<=fim;n++){
+  const wrap=document.createElement('div');wrap.className='paginaPdf';const canvas=document.createElement('canvas');const numero=document.createElement('div');numero.className='numeroPagina';numero.textContent=`Página ${n} de ${pdfDoc.numPages}`;wrap.append(canvas,numero);paginas.appendChild(wrap);
+  const pagina=await pdfDoc.getPage(n);const base=pagina.getViewport({scale:1});const largura=Math.min(760,Math.max(300,document.querySelector('.card').clientWidth*2));const escala=largura/base.width;const viewport=pagina.getViewport({scale:escala});canvas.width=Math.floor(viewport.width);canvas.height=Math.floor(viewport.height);await pagina.render({canvasContext:canvas.getContext('2d'),viewport}).promise;paginasExibidas.push(n)
+ }
+ seloDia.textContent=`Dia ${dois(Number(livro.diasConcluidos||0)+1)}`;
+ leituraHoje.innerHTML=inicio===fim?`Leitura de hoje: <strong>página ${inicio}</strong>`:`Leitura de hoje: <strong>páginas ${inicio} a ${fim}</strong>`;
+ progressoEsquerda.textContent=`Página ${inicio}`;progressoDireita.textContent=`${pdfDoc.numPages} páginas`;barraProgresso.style.width=`${Math.min(100,Math.round((inicio-1)/pdfDoc.numPages*100))}%`;btnConcluir.disabled=false;btnConcluir.textContent=fim>=pdfDoc.numPages?'Concluir o livro':'Concluir leitura de hoje'
+}
+
+function concluirLeitura(){
+ const livro=livroAtual();if(!livro||!pdfDoc||!paginasExibidas.length)return;
+ const inicio=paginasExibidas[0],fim=paginasExibidas[paginasExibidas.length-1];livro.historico=Array.isArray(livro.historico)?livro.historico:[];livro.historico.push({data:new Date().toISOString(),inicio,fim});livro.diasConcluidos=Number(livro.diasConcluidos||0)+1;livro.proximaPagina=Math.min(pdfDoc.numPages,fim+1);salvarBiblioteca();if(fim>=pdfDoc.numPages)alert('Parabéns! Você concluiu este livro.');voltarManifestacao()
+}
+
+function abrirConfiguracao(){const l=livroAtual();if(!l){abrirAdicionarLivro();return}editarTitulo.value=l.titulo;paginasPorDia.value=String(l.paginasPorDia||1);paginaInicial.value=String(l.paginaInicial||1);aplicarDias('diasEditar',l.diasSemana);modalConfiguracao.classList.add('show')}
+function fecharConfiguracao(){modalConfiguracao.classList.remove('show')}
+function salvarConfiguracao(){const l=livroAtual();if(!l)return;const novaInicial=Math.max(1,Math.min(l.totalPaginas||99999,Number(paginaInicial.value)||1));const reiniciar=novaInicial!==Number(l.paginaInicial);l.titulo=editarTitulo.value.trim()||l.titulo;l.paginasPorDia=Number(paginasPorDia.value)||1;const diasSemana=diasSelecionados('diasEditar');if(!diasSemana.length){alert('Escolha pelo menos um dia da semana.');return}l.diasSemana=diasSemana;l.paginaInicial=novaInicial;if(reiniciar){l.proximaPagina=novaInicial;l.diasConcluidos=0;l.historico=[]}salvarBiblioteca();fecharConfiguracao();atualizarSeletor();carregarLivroAtual()}
+
+function abrirBiblioteca(){renderBiblioteca();modalBiblioteca.classList.add('show')}
+function fecharBiblioteca(){modalBiblioteca.classList.remove('show')}
+function renderBiblioteca(){contadorBiblioteca.textContent=`${biblioteca.length} de ${LIMITE_LIVROS} livros`;if(!biblioteca.length){listaLivros.innerHTML='<div class="status">Nenhum livro adicionado.</div>';return}listaLivros.innerHTML=biblioteca.map(l=>`<div class="livroItem"><div><strong>${escapeHtml(l.titulo)}</strong><span>${l.totalPaginas||0} páginas · ${l.paginasPorDia||1} por dia</span><span class="diasInfo">${escapeHtml(rotuloDias(l.diasSemana))}</span></div><button onclick="excluirLivro('${l.id}')">✕</button></div>`).join('')}
+async function excluirLivro(id){const l=biblioteca.find(x=>x.id===id);if(!l||!confirm(`Excluir “${l.titulo}” da biblioteca?`))return;await excluirBlob(id);biblioteca=biblioteca.filter(x=>x.id!==id);salvarBiblioteca();if(livroAtualId===id){livroAtualId=biblioteca[0]?.id||'';localStorage.setItem(CHAVE_ATUAL,livroAtualId)}renderBiblioteca();atualizarSeletor();carregarLivroAtual()}
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+[modalAdicionar,modalEscolherPagina,modalConfiguracao,modalBiblioteca].forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
+window.addEventListener('resize',()=>{if(pdfDoc)renderizarLeitura()});
+async function importarLivroInicialDaPasta(){
+ if(biblioteca.length)return;
+ try{
+  const resposta=await fetch('milagre-da-manha.pdf');
+  if(!resposta.ok)return;
+  const blob=await resposta.blob();
+  if(!blob.size)return;
+  configurarPdfJs();
+  const dados=await blob.arrayBuffer();
+  const doc=await pdfjsLib.getDocument({data:new Uint8Array(dados),disableWorker:true}).promise;
+  const id=uid();
+  const item={id,titulo:'O Milagre da Manhã',arquivoOriginal:'milagre-da-manha.pdf',totalPaginas:doc.numPages,paginasPorDia:1,diasSemana:[1,2,3,4,5],paginaInicial:1,proximaPagina:1,diasConcluidos:0,historico:[],criadoEm:new Date().toISOString()};
+  await salvarBlob(id,blob);biblioteca.push(item);salvarBiblioteca();livroAtualId=id;localStorage.setItem(CHAVE_ATUAL,id);
+ }catch(e){console.warn('Livro inicial não encontrado na pasta www.',e)}
+}
+async function iniciar(){
+ preencherQuantidadePaginas();
+ biblioteca=biblioteca.map(l=>({...l,diasSemana:Array.isArray(l.diasSemana)&&l.diasSemana.length?l.diasSemana:[1,2,3,4,5]}));salvarBiblioteca();
+ await importarLivroInicialDaPasta();
+ if(!livroAtualId&&biblioteca.length){livroAtualId=biblioteca[0].id;localStorage.setItem(CHAVE_ATUAL,livroAtualId)}
+ atualizarSeletor();carregarLivroAtual();
+}
+iniciar();
+</script>
+</body>
+</html>
