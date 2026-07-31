@@ -31,6 +31,20 @@ body{font-family:var(--fonte);background:var(--fundo);color:var(--texto-principa
 .botao:hover{background:var(--verde-hover);}
 .botao.forte{background:var(--verde-escuro);color:#fff;}
 .botao.secundario{background:#EEF1EC;color:var(--texto-secundario);}
+
+.botaoEsqueci{
+  width:100%;border:none;background:transparent;color:var(--verde-texto);
+  font:500 12px var(--fonte);padding:3px 6px 1px;cursor:pointer;text-decoration:underline;
+  text-underline-offset:3px;
+}
+.botaoEsqueci:hover{color:var(--verde-escuro);}
+.modalOverlay{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(35,40,33,.38);}
+.modalOverlay.show{display:flex;}
+.modalSenha{width:min(360px,100%);background:#fff;border:1px solid var(--borda);border-radius:22px;padding:18px;box-shadow:0 18px 45px rgba(0,0,0,.20);display:flex;flex-direction:column;gap:12px;}
+.modalSenha h2{text-align:center;font-size:18px;font-weight:500;color:var(--verde-texto);}
+.modalSenha p{text-align:center;font-size:11px;line-height:1.5;color:var(--texto-secundario);}
+.modalSenhaAcoes{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.modalSenhaAcoes button{min-height:42px;border:none;border-radius:13px;font:12px var(--fonte);cursor:pointer;}
 </style>
 </head>
 <body>
@@ -67,8 +81,29 @@ body{font-family:var(--fonte);background:var(--fundo);color:var(--texto-principa
       <button class="botao secundario" onclick="criarConta()">Criar conta</button>
     </div>
 
+    <button class="botaoEsqueci" type="button" onclick="enviarRecuperacaoSenha()">Esqueci minha senha</button>
+
     <button class="botao" onclick="sincronizarNuvem()">☁ Sincronizar nuvem</button>
     <button class="botao secundario" onclick="sairConta()">Sair da conta</button>
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalNovaSenha">
+  <div class="modalSenha">
+    <h2>Criar nova senha</h2>
+    <p>Digite uma nova senha para sua conta da nuvem.</p>
+    <div class="field">
+      <label for="campoNovaSenha">Nova senha</label>
+      <input class="inputModal" type="password" id="campoNovaSenha" minlength="6" placeholder="mínimo de 6 caracteres">
+    </div>
+    <div class="field">
+      <label for="campoConfirmarNovaSenha">Confirmar nova senha</label>
+      <input class="inputModal" type="password" id="campoConfirmarNovaSenha" minlength="6" placeholder="digite novamente">
+    </div>
+    <div class="modalSenhaAcoes">
+      <button class="botao secundario" type="button" onclick="fecharModalNovaSenha()">Cancelar</button>
+      <button class="botao forte" type="button" onclick="salvarNovaSenha()">Salvar senha</button>
+    </div>
   </div>
 </div>
 
@@ -158,6 +193,68 @@ async function entrarConta(){
   usuarioNuvem = data.user;
   atualizarStatus();
   alert("Entrada realizada com sucesso.");
+}
+
+async function enviarRecuperacaoSenha(){
+  iniciarSupabase();
+  if(!supabaseClient){ alert("Não consegui iniciar a nuvem. Verifique sua internet."); return; }
+  const email=(document.getElementById("campoEmailNuvem").value || "").trim();
+  if(!email){ alert("Digite seu e-mail antes de solicitar a recuperação."); return; }
+
+  const redirectTo = window.location.origin && window.location.origin !== "null"
+    ? window.location.origin + window.location.pathname
+    : window.location.href.split("#")[0].split("?")[0];
+
+  setStatus("Enviando e-mail de recuperação...", "");
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo });
+  if(error){
+    setStatus("Erro ao enviar recuperação.", "erro");
+    alert("Erro ao enviar recuperação: " + error.message);
+    return;
+  }
+  setStatus("E-mail de recuperação enviado.", "ok");
+  alert("Enviamos um link de recuperação para " + email + ".\n\nAbra o e-mail, toque no link e volte a esta página para criar uma nova senha. Verifique também a pasta de spam.");
+}
+
+function abrirModalNovaSenha(){
+  document.getElementById("campoNovaSenha").value="";
+  document.getElementById("campoConfirmarNovaSenha").value="";
+  document.getElementById("modalNovaSenha").classList.add("show");
+  setTimeout(()=>document.getElementById("campoNovaSenha").focus(),50);
+}
+
+function fecharModalNovaSenha(){
+  document.getElementById("modalNovaSenha").classList.remove("show");
+}
+
+async function salvarNovaSenha(){
+  iniciarSupabase();
+  if(!supabaseClient){ alert("Não consegui iniciar a nuvem."); return; }
+  const senha=document.getElementById("campoNovaSenha").value || "";
+  const confirmar=document.getElementById("campoConfirmarNovaSenha").value || "";
+  if(senha.length < 6){ alert("A nova senha precisa ter pelo menos 6 caracteres."); return; }
+  if(senha !== confirmar){ alert("As senhas não são iguais."); return; }
+  setStatus("Atualizando senha...", "");
+  const { error } = await supabaseClient.auth.updateUser({ password: senha });
+  if(error){
+    setStatus("Erro ao atualizar senha.", "erro");
+    alert("Erro ao atualizar senha: " + error.message);
+    return;
+  }
+  fecharModalNovaSenha();
+  setStatus("Senha atualizada com sucesso.", "ok");
+  alert("Senha atualizada. Você já pode entrar com a nova senha.");
+}
+
+function observarRecuperacaoSenha(){
+  iniciarSupabase();
+  if(!supabaseClient) return;
+  supabaseClient.auth.onAuthStateChange((event, session)=>{
+    if(event === "PASSWORD_RECOVERY"){
+      usuarioNuvem = session?.user || null;
+      abrirModalNovaSenha();
+    }
+  });
 }
 
 async function sairConta(){
@@ -346,7 +443,7 @@ async function sincronizarNuvem(){
   );
 }
 
-window.addEventListener("load", carregarSessao);
+window.addEventListener("load", ()=>{ observarRecuperacaoSenha(); carregarSessao(); });
 </script>
 </body>
 </html>
