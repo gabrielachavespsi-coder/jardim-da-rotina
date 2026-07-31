@@ -334,11 +334,744 @@ textarea{height:120px;resize:none}
 }
 </style>
 
+
+<style>
+/* CONFIRMAÇÃO DE EXCLUSÃO DENTRO DO APP */
+.modalConfirmarExclusao{
+  width:min(340px,100%) !important;
+  text-align:center;
+}
+
+.confirmarExclusaoIcone{
+  width:52px;
+  height:52px;
+  margin:0 auto 2px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#F7ECEA;
+  font-size:23px;
+}
+
+.confirmarExclusaoNome{
+  color:#40513B;
+  font-size:13px;
+  font-weight:500;
+}
+
+.confirmarExclusaoAviso{
+  color:#77786F;
+  font-size:10.5px;
+  line-height:1.45;
+}
+
+.btnExcluirConfirmar{
+  background:#A76565 !important;
+  color:#fff !important;
+}
+
+.importacaoResumo{
+  display:none;
+  padding:9px 11px;
+  border-radius:12px;
+  background:#EAF2E7;
+  color:#53664E;
+  font-size:10px;
+  line-height:1.4;
+  text-align:center;
+}
+
+.importacaoResumo.show{
+  display:block;
+}
+</style>
+
+
+<style>
+.origem-importada{
+  background:#E9EEF5 !important;
+  color:#5E6E84 !important;
+}
+</style>
+
+
+<style>
+/* BOTÕES INTERNOS DAS PÁGINAS */
+.botoesPaginaBox{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  max-height:220px;
+  overflow-y:auto;
+  padding:8px;
+  border:1px solid #E8E1D4;
+  border-radius:13px;
+  background:#fff;
+}
+
+.botaoPaginaItem{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  padding:9px;
+  border-radius:11px;
+  background:#F8F7F2;
+}
+
+.botaoPaginaInfo{
+  flex:1;
+  min-width:0;
+}
+
+.botaoPaginaNome{
+  font-size:11px;
+  color:#3F443C;
+  font-weight:500;
+  line-height:1.3;
+}
+
+.botaoPaginaMeta{
+  margin-top:2px;
+  font-size:9px;
+  color:#85877F;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+
+.botaoPaginaAcoes{
+  display:flex;
+  gap:4px;
+  flex:0 0 auto;
+}
+
+.botaoPaginaAcoes button{
+  width:28px;
+  height:28px;
+  border:none;
+  border-radius:8px;
+  background:#EEEDE8;
+  color:#62675F;
+  cursor:pointer;
+}
+
+.botaoPaginaAcoes .botaoExcluir{
+  background:#F7ECEA;
+  color:#9A5555;
+}
+
+.botaoPaginaVazio{
+  padding:12px;
+  text-align:center;
+  color:#85877F;
+  font-size:10px;
+  line-height:1.45;
+}
+
+.adicionarBotaoPagina{
+  width:100%;
+  margin-top:6px;
+  border:1px dashed #CFC8BC;
+  border-radius:12px;
+  background:#FFFDF8;
+  color:#687062;
+  padding:9px 10px;
+  font:10.5px 'Poppins',sans-serif;
+  cursor:pointer;
+}
+
+.contagemBotoes{
+  display:inline-flex;
+  margin-top:5px;
+  margin-left:4px;
+  padding:3px 7px;
+  border-radius:999px;
+  font-size:9px;
+  background:#F2F0EA;
+  color:#73766F;
+}
+</style>
+
+
+<style>
+/* IMPORTAÇÃO INTELIGENTE */
+.importacaoDetalhada{
+  display:none;
+  padding:11px 12px;
+  border-radius:14px;
+  background:#EAF2E7;
+  color:#53664E;
+  font-size:10px;
+  line-height:1.55;
+  text-align:left;
+}
+
+.importacaoDetalhada.show{
+  display:block;
+}
+
+.importacaoDetalhada strong{
+  display:block;
+  margin-bottom:3px;
+  color:#40513B;
+  font-size:11px;
+}
+
+.importacaoDetalhada span{
+  display:block;
+}
+
+.paginaDinamicaBadge{
+  display:inline-flex;
+  margin-top:5px;
+  margin-left:4px;
+  padding:3px 7px;
+  border-radius:999px;
+  font-size:9px;
+  background:#F8F1E3;
+  color:#7A6746;
+}
+</style>
+
+
+<style>
+/* ATUALIZAÇÃO DE PÁGINAS IMPORTADAS */
+.modalAtualizarPagina{
+  width:min(350px,100%) !important;
+  text-align:center;
+}
+
+.atualizarPaginaIcone{
+  width:52px;
+  height:52px;
+  margin:0 auto 2px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#EAF2E7;
+  font-size:23px;
+}
+
+.atualizarPaginaArquivo{
+  color:#40513B;
+  font-size:12.5px;
+  font-weight:500;
+  overflow-wrap:anywhere;
+}
+
+.atualizarPaginaAjuda{
+  color:#77786F;
+  font-size:10.5px;
+  line-height:1.5;
+}
+
+.btnManterPagina{
+  background:#EEEDE8 !important;
+  color:#555A52 !important;
+}
+
+.btnAtualizarPagina{
+  background:#718364 !important;
+  color:#fff !important;
+}
+</style>
+
+
+<style>
+/* NAVEGAÇÃO DO APP */
+.navegacaoLista{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.navCard{
+  padding:11px 12px;
+  border:1px solid #E8E1D4;
+  border-radius:15px;
+  background:#fff;
+}
+
+.navCard.sub{
+  margin-left:22px;
+  width:calc(100% - 22px);
+  border-left:3px solid #D9E4D4;
+  background:#FFFEFB;
+}
+
+.navTopo{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.navEmoji{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#F4F0E7;
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+}
+
+.navInfo{
+  flex:1;
+  min-width:0;
+}
+
+.navNome{
+  font-size:12px;
+  font-weight:500;
+  color:#3F443C;
+}
+
+.navArquivo{
+  font-size:9px;
+  color:#85877F;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.navPai{
+  margin-top:4px;
+  font-size:9px;
+  color:#718364;
+}
+
+.navAcoes{
+  display:flex;
+  gap:5px;
+  flex:0 0 auto;
+}
+
+.navAcoes button{
+  width:29px;
+  height:29px;
+  border:1px solid #E2DED5;
+  border-radius:8px;
+  background:#F7F5EF;
+  color:#6D7568;
+  cursor:pointer;
+}
+
+.navAcoes button:disabled{
+  opacity:.28;
+  cursor:default;
+}
+
+.navEditar{
+  width:auto !important;
+  padding:0 9px !important;
+}
+
+.navResumo{
+  padding:10px 12px;
+  border-radius:13px;
+  background:#EAF2E7;
+  color:#53664E;
+  font-size:10px;
+  line-height:1.45;
+  text-align:center;
+}
+
+.navSelecaoPai{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  max-height:240px;
+  overflow-y:auto;
+  padding:8px;
+  border:1px solid #E8E1D4;
+  border-radius:13px;
+  background:#fff;
+}
+
+.navPaiOpcao{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 9px;
+  border-radius:10px;
+  background:#F8F7F2;
+  cursor:pointer;
+}
+
+.navPaiOpcao input{
+  width:16px !important;
+  height:16px !important;
+  accent-color:#718364;
+}
+</style>
+
+
+<style>
+/* GRUPOS RECOLHÍVEIS NA NAVEGAÇÃO */
+.navCard.temFilhos{
+  cursor:pointer;
+}
+
+.navCard.temFilhos:hover{
+  border-color:#D5DFD0;
+}
+
+.navExpansor{
+  width:27px;
+  height:27px;
+  border:1px solid #E2DED5;
+  border-radius:8px;
+  background:#F7F5EF;
+  color:#718064;
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  font-size:16px;
+  line-height:1;
+  transition:transform .18s ease,background .18s ease;
+}
+
+.navCard.aberta .navExpansor{
+  transform:rotate(90deg);
+  background:#EDF2EA;
+}
+
+.navQuantidade{
+  display:inline-flex;
+  margin-top:4px;
+  padding:3px 7px;
+  border-radius:999px;
+  background:#EDF2EA;
+  color:#5D7057;
+  font-size:9px;
+}
+</style>
+
+
+<style>
+/* CARDS DA NAVEGAÇÃO — INFORMAÇÕES LEGÍVEIS E ESPAÇO OTIMIZADO */
+.navCard{
+  padding:10px 11px;
+}
+
+.navTopo{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) auto;
+  grid-template-areas:
+    "emoji info expansor"
+    "acoes acoes acoes";
+  align-items:start;
+  column-gap:9px;
+  row-gap:8px;
+}
+
+.navEmoji{
+  grid-area:emoji;
+  width:34px;
+  height:34px;
+  margin-top:1px;
+}
+
+.navInfo{
+  grid-area:info;
+  width:100%;
+  min-width:0;
+}
+
+.navNome{
+  font-size:12px;
+  line-height:1.35;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+
+.navArquivo{
+  margin-top:2px;
+  font-size:8.8px;
+  line-height:1.3;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
+.navPai{
+  margin-top:3px;
+  font-size:8.8px;
+  line-height:1.3;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+
+.navQuantidade{
+  margin-top:5px;
+  padding:3px 7px;
+  font-size:8.7px;
+  line-height:1.2;
+}
+
+.navExpansor{
+  grid-area:expansor;
+  width:27px;
+  height:27px;
+  margin-top:1px;
+}
+
+.navAcoes{
+  grid-area:acoes;
+  width:100%;
+  display:grid;
+  grid-template-columns:29px 29px minmax(72px,auto);
+  justify-content:end;
+  gap:5px;
+  padding-top:7px;
+  border-top:1px solid #EFEAE1;
+}
+
+.navAcoes button{
+  width:29px;
+  height:28px;
+}
+
+.navEditar{
+  width:auto !important;
+  min-width:72px;
+  height:28px !important;
+  padding:0 10px !important;
+}
+
+.navCard.sub{
+  margin-left:18px;
+  width:calc(100% - 18px);
+}
+
+@media(max-width:380px){
+  .navCard{
+    padding:9px 10px;
+  }
+
+  .navTopo{
+    grid-template-columns:31px minmax(0,1fr) auto;
+    column-gap:7px;
+  }
+
+  .navEmoji{
+    width:31px;
+    height:31px;
+  }
+
+  .navNome{
+    font-size:11.5px;
+  }
+
+  .navArquivo,
+  .navPai{
+    font-size:8.5px;
+  }
+
+  .navCard.sub{
+    margin-left:14px;
+    width:calc(100% - 14px);
+  }
+}
+</style>
+
+
+<style>
+/* JANELA PÁGINAS DO APLICATIVO */
+#modalPaginas .modal{
+  position:relative;
+}
+
+.modalCabecalhoComFechar{
+  position:relative;
+  margin-bottom:4px;
+  min-height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.modalCabecalhoComFechar h2{
+  margin:0;
+  width:100%;
+  text-align:center;
+  pointer-events:none;
+}
+
+.modalFecharTopo{
+  position:absolute;
+  top:-2px;
+  right:0;
+  width:34px;
+  height:34px;
+  border:1px solid #E5DED1;
+  border-radius:50%;
+  background:#F7F4EE;
+  color:#6D7467;
+  display:grid;
+  place-items:center;
+  font:18px/1 Poppins,sans-serif;
+  cursor:pointer;
+}
+
+.modalFecharTopo:hover{
+  background:#EEF2EA;
+}
+
+/* CARDS DAS PÁGINAS DO APLICATIVO */
+.paginaCatalogo{
+  padding:11px;
+  border-radius:16px;
+}
+
+.paginaCatalogoTopo{
+  display:grid;
+  grid-template-columns:36px minmax(0,1fr) auto;
+  grid-template-areas:
+    "emoji info ordenar"
+    "meta meta meta";
+  align-items:start;
+  column-gap:9px;
+  row-gap:8px;
+}
+
+.paginaCatalogoEmoji{
+  grid-area:emoji;
+  width:36px;
+  height:36px;
+  margin-top:1px;
+}
+
+.paginaCatalogoInfo{
+  grid-area:info;
+  min-width:0;
+}
+
+.paginaCatalogoNome{
+  font-size:12px;
+  line-height:1.35;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+
+.paginaCatalogoArquivo{
+  margin-top:2px;
+  font-size:8.8px;
+  line-height:1.3;
+  color:#7A7B72;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
+.paginaCatalogoOrdenar{
+  grid-area:ordenar;
+  display:flex;
+  gap:5px;
+}
+
+.paginaCatalogoOrdenar button{
+  width:28px;
+  height:28px;
+  border-radius:8px;
+  border:1px solid #E5DED1;
+  background:#F7F4EE;
+  color:#6F7768;
+  font:12px Poppins,sans-serif;
+}
+
+.paginaCatalogoMeta{
+  grid-area:meta;
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px 6px;
+  padding-left:45px;
+}
+
+.paginaOrigem,
+.subpaginaEtiqueta,
+.contagemBotoes,
+.paginaDinamicaBadge{
+  margin-top:0 !important;
+  display:inline-flex;
+  align-items:center;
+  min-height:20px;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:8.8px;
+  line-height:1.15;
+  white-space:normal;
+}
+
+.subpaginaEtiqueta{
+  background:#F1EEE7;
+  color:#7A7368;
+}
+
+.contagemBotoes{
+  background:#F2EEE5;
+  color:#8A7650;
+}
+
+.paginaDinamicaBadge{
+  background:#F6F0DD;
+  color:#8E7B4F;
+}
+
+.paginaCatalogoAcoes{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:6px;
+  margin-top:10px;
+  padding-top:8px;
+  border-top:1px solid #EFE9DE;
+}
+
+.paginaCatalogoAcoes button{
+  min-height:31px;
+  border-radius:10px;
+  padding:7px 8px;
+  font-size:10.4px !important;
+}
+
+.btnExcluirPagina{
+  background:#F5ECEC !important;
+  color:#A06666 !important;
+}
+
+@media(max-width:390px){
+  .paginaCatalogo{
+    padding:10px;
+  }
+
+  .paginaCatalogoTopo{
+    grid-template-columns:33px minmax(0,1fr) auto;
+    column-gap:7px;
+  }
+
+  .paginaCatalogoEmoji{
+    width:33px;
+    height:33px;
+  }
+
+  .paginaCatalogoNome{
+    font-size:11.5px;
+  }
+
+  .paginaCatalogoArquivo{
+    font-size:8.5px;
+  }
+
+  .paginaCatalogoMeta{
+    padding-left:40px;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="pagina"><div class="card">
   <div class="topo">
-    <button class="voltar" onclick="location.href='gabriela-criacao-artistica-projetos-sonhos.html'">←</button>
+    <button class="voltar" onclick="location.href='index.html'">←</button>
     <div class="centro"><h1>👩‍👧 Jardim da Rotina</h1><div class="sub">Desenvolvimento do aplicativo</div></div>
     <div class="data"><div id="hora" class="hora"></div><div id="dia"></div><div id="data"></div></div>
   </div>
@@ -366,7 +1099,7 @@ textarea{height:120px;resize:none}
   <div class="menu">
     <button class="menuBtn" data-icon="◫" onclick="secao('visao')"><strong>Visão Geral</strong><small>Acompanhe o estado atual do desenvolvimento</small></button>
     <button class="menuBtn" data-icon="💡" onclick="secao('ideias')"><strong>Ideias e Melhorias</strong><small>Registre e organize novas possibilidades</small></button>
-    <button class="menuBtn" data-icon="✎" onclick="secao('criador')"><strong>Criador de Páginas</strong><small>Monte uma nova página pelo próprio app</small></button>
+    <button class="menuBtn" data-icon="✎" onclick="location.href='criador-de-pagina.html'"><strong>Criador de Páginas</strong><small>Monte uma nova página pelo próprio app</small></button>
     <button class="menuBtn" data-icon="▤" onclick="secao('paginas')"><strong>Páginas do Aplicativo</strong><small>Visualize as páginas planejadas e criadas</small></button>
     <button class="menuBtn" data-icon="↔" onclick="secao('navegacao')"><strong>Navegação do App</strong><small>Organize os caminhos entre as páginas</small></button>
     <button class="menuBtn" data-icon="✓" onclick="secao('tarefas')"><strong>Tarefas de Desenvolvimento</strong><small>Planeje o que precisa ser criado ou ajustado</small></button>
@@ -397,14 +1130,133 @@ textarea{height:120px;resize:none}
   <button class="cancel acao" onclick="fechar('modalSecao')">Fechar</button>
 </div></div>
 
-<div class="overlay" id="modalPaginas"><div class="modal"><h2>Páginas do Aplicativo</h2><p class="modalDescricao">Consulte e edite páginas existentes ou criadas pelo próprio app.</p><div class="filtrosPaginas"><button class="filtroPagina ativo" onclick="filtrarPaginas('todas',this)">Todas</button><button class="filtroPagina" onclick="filtrarPaginas('existente',this)">Existentes</button><button class="filtroPagina" onclick="filtrarPaginas('criada',this)">Criadas no app</button></div><div class="buscaPaginas"><input id="buscaPagina" placeholder="Pesquisar por nome ou arquivo" oninput="renderCatalogoPaginas()"></div><label class="importarHtml">＋ Importar página HTML<input type="file" accept=".html,text/html" onchange="importarPaginaHtml(event)"></label><div id="catalogoPaginas" class="lista"></div><button class="cancel acao" onclick="fechar('modalPaginas')">Fechar</button></div></div>
-<div class="overlay" id="modalEditarPagina"><div class="modal"><h2>Editar página</h2><p class="modalDescricao">Altere as informações principais sem modificar as funções internas.</p><input id="editPaginaId" type="hidden"><div class="duplo"><div class="field"><label>Emoji</label><span class="fieldAjuda">Símbolo da página.</span><input id="editEmoji"></div><div class="field"><label>Origem</label><span class="fieldAjuda">Informa de onde veio.</span><input id="editOrigem" disabled></div></div><div class="field"><label>Nome da página</label><span class="fieldAjuda">Nome usado no catálogo.</span><input id="editNome"></div><div class="field"><label>Nome do arquivo</label><span class="fieldAjuda">Arquivo HTML da página.</span><input id="editArquivo"></div><div class="field"><label>Título</label><span class="fieldAjuda">Texto principal do cabeçalho.</span><input id="editTitulo"></div><div class="field"><label>Subtítulo</label><span class="fieldAjuda">Frase curta da página.</span><input id="editSubtitulo"></div><div class="field"><label>Página de retorno</label><span class="fieldAjuda">Destino da seta de voltar.</span><input id="editVoltar"></div><div class="field"><label>Onde aparece o acesso</label><span class="fieldAjuda">Menu onde fica o botão.</span><input id="editAcesso"></div>
-<div class="field">
-  <label>Subpáginas desta página</label>
-  <span class="fieldAjuda">Marque uma ou mais páginas que devem aparecer dentro desta.</span>
-  <div id="editSubpaginasLista" class="subpaginasSelecao"></div>
+
+<div class="overlay" id="modalNavegacao">
+  <div class="modal">
+    <div class="modalCabecalhoComFechar"><h2>Navegação do App</h2><button class="modalFecharTopo" type="button" aria-label="Fechar" onclick="fechar('modalNavegacao')">×</button></div>
+    <p class="modalDescricao">Veja e organize quais páginas são principais e quais são subpáginas.</p>
+    <div id="navegacaoResumo" class="navResumo"></div>
+    <button class="importarHtml" type="button" onclick="reconstruirNavegacaoAutomatica()">↻ Reanalisar navegação automática</button>
+    <div id="reanalisarNavegacaoAviso" class="importacaoResumo"></div>
+    <div id="navegacaoLista" class="navegacaoLista"></div>
+    <button class="cancel acao" type="button" onclick="fechar('modalNavegacao')">Fechar</button>
+  </div>
 </div>
+
+<div class="overlay" id="modalEditarNavegacao">
+  <div class="modal">
+    <h2>Editar navegação</h2>
+    <p class="modalDescricao">Escolha a página principal desta página. Para deixá-la principal, selecione “Nenhuma”.</p>
+    <input id="navPaginaId" type="hidden">
+    <div id="navPaginaNome" class="confirmarExclusaoNome"></div>
+    <div class="field">
+      <label>Página principal</label>
+      <span class="fieldAjuda">A página selecionada será o nível imediatamente acima.</span>
+      <select id="navPaginaPai"></select>
+    </div>
+    <div class="acoes">
+      <button class="cancel" type="button" onclick="fechar('modalEditarNavegacao')">Cancelar</button>
+      <button class="save" type="button" onclick="salvarNavegacaoPagina()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modalPaginas"><div class="modal"><div class="modalCabecalhoComFechar"><h2>Páginas do Aplicativo</h2><button class="modalFecharTopo" type="button" aria-label="Fechar" onclick="fechar('modalPaginas')">×</button></div><p class="modalDescricao">Importe suas páginas e organize quais serão principais ou subpáginas.</p><div class="filtrosPaginas"><button class="filtroPagina ativo" onclick="filtrarPaginas('todas',this)">Todas</button><button class="filtroPagina" onclick="filtrarPaginas('importada',this)">Importadas</button><button class="filtroPagina" onclick="filtrarPaginas('criada',this)">Criadas no app</button></div><div class="buscaPaginas"><input id="buscaPagina" placeholder="Pesquisar por nome ou arquivo" oninput="renderCatalogoPaginas()"></div><label class="importarHtml">＋ Importar páginas HTML<input type="file" accept=".html,text/html" multiple onchange="importarPaginasHtml(event)"></label><div id="importacaoResumo" class="importacaoDetalhada"></div><div id="catalogoPaginas" class="lista"></div><button class="cancel acao" onclick="fechar('modalPaginas')">Fechar</button></div></div>
+<div class="overlay" id="modalEditarPagina"><div class="modal"><h2>Editar página</h2><p class="modalDescricao">Altere as informações principais sem modificar as funções internas.</p><input id="editPaginaId" type="hidden"><div class="duplo"><div class="field"><label>Emoji</label><span class="fieldAjuda">Símbolo da página.</span><input id="editEmoji"></div><div class="field"><label>Origem</label><span class="fieldAjuda">Informa de onde veio.</span><input id="editOrigem" disabled></div></div><div class="field"><label>Nome da página</label><span class="fieldAjuda">Nome usado no catálogo.</span><input id="editNome"></div><div class="field"><label>Nome do arquivo</label><span class="fieldAjuda">Arquivo HTML da página.</span><input id="editArquivo"></div><div class="field"><label>Título</label><span class="fieldAjuda">Texto principal do cabeçalho da página.</span><input id="editTitulo"></div><div class="field"><label>Subtítulo</label><span class="fieldAjuda">Frase curta da página.</span><input id="editSubtitulo"></div><div class="field"><label>Página de retorno</label><span class="fieldAjuda">Destino da seta de voltar.</span><input id="editVoltar"></div><div class="field"><label>Onde aparece o acesso</label><span class="fieldAjuda">Menu onde fica o botão.</span><input id="editAcesso"></div>
+<div class="field">
+  <label>Botões desta página</label>
+  <span class="fieldAjuda">Revise os botões encontrados no HTML. Esta lista será usada pelos Alertas.</span>
+  <div id="editBotoesPaginaLista" class="botoesPaginaBox"></div>
+  <button class="adicionarBotaoPagina" type="button" onclick="abrirNovoBotaoPagina()">＋ Adicionar botão</button>
+</div>
+
+
 <div class="acoes"><button class="cancel" onclick="fechar('modalEditarPagina')">Cancelar</button><button class="save" onclick="salvarEdicaoPagina()">Salvar</button></div></div></div>
+
+
+
+<div class="overlay" id="modalAtualizarPagina">
+  <div class="modal modalAtualizarPagina">
+    <div class="atualizarPaginaIcone">↻</div>
+    <h2>Atualizar página existente?</h2>
+    <p class="modalDescricao">Já existe uma página com este mesmo nome de arquivo.</p>
+    <div id="arquivoPaginaAtualizar" class="atualizarPaginaArquivo"></div>
+    <div class="atualizarPaginaAjuda">
+      A atualização relê título, botões, destinos e navegação. O nome usado no catálogo, o emoji e os vínculos manuais serão preservados.
+    </div>
+    <div class="acoes">
+      <button class="btnManterPagina" type="button" onclick="responderAtualizacaoPagina(false)">Manter atual</button>
+      <button class="btnAtualizarPagina" type="button" onclick="responderAtualizacaoPagina(true)">Atualizar</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modalEditarBotaoPagina">
+  <div class="modal">
+    <h2 id="tituloModalBotaoPagina">Novo botão</h2>
+    <p class="modalDescricao">Cadastre as informações que a página Alertas usará para identificar este botão.</p>
+
+    <input id="botaoPaginaId" type="hidden">
+
+    <div class="field">
+      <label>Nome do botão</label>
+      <span class="fieldAjuda">Texto que aparecerá na lista de Alertas.</span>
+      <input id="botaoPaginaNome">
+    </div>
+
+    <div class="field">
+      <label>Descrição</label>
+      <span class="fieldAjuda">Explique em poucas palavras o que este botão faz.</span>
+      <input id="botaoPaginaDescricao">
+    </div>
+
+    <div class="duplo">
+      <div class="field">
+        <label>Tipo</label>
+        <span class="fieldAjuda">Ajuda a organizar as opções.</span>
+        <select id="botaoPaginaTipo">
+          <option value="tarefa">Tarefa</option>
+          <option value="menu">Menu</option>
+          <option value="acao">Ação</option>
+          <option value="registro">Registro</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Identificador</label>
+        <span class="fieldAjuda">ID interno reconhecido no HTML.</span>
+        <input id="botaoPaginaIdentificador">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Destino ou ação</label>
+      <span class="fieldAjuda">Arquivo, link ou função acionada pelo botão.</span>
+      <input id="botaoPaginaDestino">
+    </div>
+
+    <div class="acoes">
+      <button class="cancel" type="button" onclick="fechar('modalEditarBotaoPagina')">Cancelar</button>
+      <button class="save" type="button" onclick="salvarBotaoPagina()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modalExcluirPagina">
+  <div class="modal modalConfirmarExclusao">
+    <div class="confirmarExclusaoIcone">🗑️</div>
+    <h2>Excluir página?</h2>
+    <p class="modalDescricao">Esta ação remove somente o cadastro da página no catálogo.</p>
+    <div id="nomePaginaExcluir" class="confirmarExclusaoNome"></div>
+    <div id="avisoPaginaExcluir" class="confirmarExclusaoAviso"></div>
+    <div class="acoes">
+      <button class="cancel" type="button" onclick="cancelarExclusaoPagina()">Cancelar</button>
+      <button class="btnExcluirConfirmar" type="button" onclick="confirmarExclusaoPagina()">Excluir</button>
+    </div>
+  </div>
+</div>
+
 <div class="overlay" id="modalPreviewPagina"><div class="modal"><h2>Visualizar página</h2><p class="modalDescricao">Prévia das informações cadastradas.</p><div id="previewPaginaConteudo" class="previewPagina"></div><button class="cancel acao" onclick="fechar('modalPreviewPagina')">Fechar</button></div></div>
 <div class="overlay" id="modalForm"><div class="modal">
   <h2 id="formTitulo">Novo registro</h2><p id="formDescricaoTopo" class="modalDescricao">Registre uma informação para acompanhar durante o desenvolvimento.</p>
@@ -426,11 +1278,7 @@ textarea{height:120px;resize:none}
   <div class="field"><label>Subtítulo</label><span class="fieldAjuda">Frase curta que explica a função da página.</span><input id="pSub"></div>
   <div class="field"><label>Página de retorno</label><span class="fieldAjuda">Arquivo aberto ao tocar na seta de voltar.</span><input id="pVoltar" placeholder="index.html"></div>
   <div class="field"><label>Onde aparecerá o acesso</label><span class="fieldAjuda">Informe o menu ou página que terá o botão de entrada.</span><input id="pAcesso"></div>
-  <div class="field">
-  <label>Subpáginas desta página</label>
-  <span class="fieldAjuda">Marque páginas existentes que ficarão dentro da nova página.</span>
-  <div id="pSubpaginasLista" class="subpaginasSelecao"></div>
-</div>
+  
   <div class="acoes"><button class="cancel" onclick="fechar('modalCriador')">Cancelar</button><button class="save" onclick="criarPagina()">Criar modelo</button></div>
 </div></div>
 
@@ -462,8 +1310,9 @@ function encerrar(){let e=estado();e.iniciado=false;e.status="encerrado";salvar(
 
 function secao(tipo){
   if(tipo==="visao"){const v=ler(K.visao,{nome:"",objetivo:"",etapa:"Planejamento",progresso:0});vNome.value=v.nome;vObjetivo.value=v.objetivo;vEtapa.value=v.etapa;vProgresso.value=v.progresso;abrir("modalVisao");return}
-  if(tipo==="criador"){preencherListaSubpaginas("pSubpaginasLista","",[]);abrir("modalCriador");return}
+  if(tipo==="criador"){location.href="criador-de-pagina.html";return}
   if(tipo==="paginas"){renderCatalogoPaginas();abrir("modalPaginas");return}
+  if(tipo==="navegacao"){renderNavegacaoApp();abrir("modalNavegacao");return}
   const titulos={ideias:"Ideias e Melhorias",paginas:"Páginas do Aplicativo",navegacao:"Navegação do App",tarefas:"Tarefas de Desenvolvimento",testes:"Testes e Correções",versoes:"Versões do Aplicativo"};
   const descricoes={
     ideias:"Registre sugestões e acompanhe quais serão desenvolvidas.",
@@ -516,7 +1365,10 @@ function criarPagina(){
     subtitulo:pSub.value,
     voltar:pVoltar.value,
     acesso:pAcesso.value,
-    parentId:""
+    parentId:"",
+    botoes:[],
+    destinosPaginas:[],
+    conteudoDinamico:false
   };
 
   l.push(nova);
@@ -526,9 +1378,6 @@ function criarPagina(){
   ordem.push(String(nova.id));
   salvar(K.ordemPaginas,ordem);
 
-  const filhos=obterSubpaginasSelecionadas("pSubpaginasLista");
-  atribuirSubpaginas(String(nova.id),filhos);
-
   fechar("modalCriador");
   render();
 }
@@ -537,23 +1386,10 @@ function abrirFuturas(){futuras.value=localStorage.getItem(K.futuras)||"";abrir(
 function salvarFuturas(){localStorage.setItem(K.futuras,futuras.value);fechar("modalFuturas")}
 
 
-const PAGINAS_EXISTENTES_PADRAO=[
-{id:"exist-index",origem:"existente",emoji:"🏡",nome:"Página Inicial",arquivo:"index.html",titulo:"Jardim da Rotina",subtitulo:"Organize sua rotina com leveza",voltar:"",acesso:"Tela inicial",parentId:""},
-{id:"exist-gabriela-menu",origem:"existente",emoji:"🌿",nome:"Rotina Gabi",arquivo:"gabriela-menu.html",titulo:"Rotina Gabi",subtitulo:"Cuide do seu tempo e da sua energia",voltar:"index.html",acesso:"Página Inicial",parentId:""},
-{id:"exist-maya-menu",origem:"existente",emoji:"⭐",nome:"Maya",arquivo:"maya-menu.html",titulo:"Maya",subtitulo:"Rotina, conquistas e descobertas",voltar:"index.html",acesso:"Página Inicial",parentId:""},
-{id:"exist-alimentacao",origem:"existente",emoji:"🍎",nome:"Alimentação",arquivo:"alimentacao.html",titulo:"Alimentação",subtitulo:"Comida de verdade é um ato de afeto e cura a alma",voltar:"index.html",acesso:"Página Inicial",parentId:""},
-{id:"exist-saude",origem:"existente",emoji:"🩺",nome:"Saúde",arquivo:"saude.html",titulo:"Saúde",subtitulo:"Cultivar bons hábitos é desenhar o seu amanhã",voltar:"index.html",acesso:"Página Inicial",parentId:""},
-{id:"exist-agenda",origem:"existente",emoji:"📅",nome:"Agendas",arquivo:"agenda-menu.html",titulo:"Agendas",subtitulo:"Gerencie o tempo e honre compromissos",voltar:"index.html",acesso:"Página Inicial",parentId:""},
-{id:"exist-projetos",origem:"existente",emoji:"🎨",nome:"Projetos e Sonhos",arquivo:"gabriela-criacao-artistica-projetos-sonhos.html",titulo:"Projetos e Sonhos",subtitulo:"Dê forma ao que vive na sua imaginação",voltar:"gabriela-menu.html",acesso:"Rotina Gabi",parentId:""},
-{id:"exist-gaia",origem:"existente",emoji:"📗",nome:"Livro de Gaia",arquivo:"gabriela-projeto-livro-gaia.html",titulo:"Livro de Gaia",subtitulo:"Escolha qual parte do projeto deseja abrir agora",voltar:"gabriela-criacao-artistica-projetos-sonhos.html",acesso:"Projetos e Sonhos",parentId:""},
-{id:"exist-app",origem:"existente",emoji:"👩‍👧",nome:"Projeto App Jardim da Rotina",arquivo:"gabriela-projeto-app-jardim-da-rotina.html",titulo:"Jardim da Rotina",subtitulo:"Desenvolvimento do aplicativo",voltar:"gabriela-criacao-artistica-projetos-sonhos.html",acesso:"Projetos e Sonhos"}
-];
+const PAGINAS_EXISTENTES_PADRAO=[];
 let filtroPaginasAtual="todas";
 function obterCatalogoExistente(){
-  const salvas=ler(K.catalogoExistente,[]);
-  const mapa=new Map(PAGINAS_EXISTENTES_PADRAO.map(x=>[x.id,{parentId:"",...x}]));
-  salvas.forEach(x=>mapa.set(x.id,{...mapa.get(x.id),...x}));
-  return [...mapa.values()]
+  return [];
 }
 
 function obterPaginasCriadas(){
@@ -694,6 +1530,28 @@ function esc(t){
   return String(t??'').replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))
 }
 
+
+function moverPaginaCatalogo(id,direcao){
+  const paginas=ordenarPaginasBase(obterTodasPaginas());
+  const indice=paginas.findIndex(x=>String(x.id)===String(id));
+  const novoIndice=indice+direcao;
+
+  if(indice<0 || novoIndice<0 || novoIndice>=paginas.length)return;
+
+  const ordem=obterOrdemPaginas();
+  const idAtual=String(paginas[indice].id);
+  const idVizinho=String(paginas[novoIndice].id);
+  const posAtual=ordem.indexOf(idAtual);
+  const posVizinho=ordem.indexOf(idVizinho);
+
+  if(posAtual<0 || posVizinho<0)return;
+
+  [ordem[posAtual],ordem[posVizinho]]=[ordem[posVizinho],ordem[posAtual]];
+  salvar(K.ordemPaginas,ordem);
+
+  renderCatalogoPaginas();
+}
+
 function moverPagina(id,direcao){
   const paginas=obterTodasPaginas();
   const atual=paginas.find(x=>String(x.id)===String(id));
@@ -749,12 +1607,26 @@ function paginaEstaVisivel(item,mapa,q){
   return true;
 }
 
+
+function ordenarPaginasAlfabeticamente(lista){
+  return [...lista].sort((a,b)=>
+    String(a.nome||a.titulo||a.arquivo||"")
+      .localeCompare(
+        String(b.nome||b.titulo||b.arquivo||""),
+        "pt-BR",
+        {sensitivity:"base", numeric:true}
+      )
+  );
+}
+
 function renderCatalogoPaginas(){
   let paginas=obterTodasPaginas();
   const q=(buscaPagina?.value||'').trim().toLowerCase();
 
-  if(filtroPaginasAtual!=='todas'){
-    paginas=paginas.filter(x=>x.origem===filtroPaginasAtual);
+  if(filtroPaginasAtual==='importada'){
+    paginas=paginas.filter(x=>x.importada===true);
+  }else if(filtroPaginasAtual==='criada'){
+    paginas=paginas.filter(x=>x.importada!==true);
   }
 
   if(q){
@@ -780,32 +1652,16 @@ function renderCatalogoPaginas(){
     paginas=todas.filter(x=>ids.has(String(x.id)));
   }
 
-  const hierarquia=montarHierarquiaPaginas(paginas);
+  const visiveis=ordenarPaginasAlfabeticamente(paginas);
   const mapa=new Map(obterTodasPaginas().map(x=>[String(x.id),x]));
-  const filhosPorPai=new Map();
-
-  obterTodasPaginas().forEach(p=>{
-    const pai=String(p.parentId||"");
-    if(!filhosPorPai.has(pai))filhosPorPai.set(pai,[]);
-    filhosPorPai.get(pai).push(p);
-  });
-
-  const visiveis=hierarquia.filter(x=>paginaEstaVisivel(x,mapa,q));
 
   catalogoPaginas.innerHTML=visiveis.length?visiveis.map(x=>{
-    const irmaos=ordenarPaginasBase(
-      obterTodasPaginas().filter(p=>String(p.parentId||"")===String(x.parentId||""))
-    );
-    const pos=irmaos.findIndex(p=>String(p.id)===String(x.id));
+    const catalogoOrdenado=ordenarPaginasAlfabeticamente(obterTodasPaginas());
+    const pos=catalogoOrdenado.findIndex(p=>String(p.id)===String(x.id));
     const pai=mapa.get(String(x.parentId||""));
-    const filhos=filhosPorPai.get(String(x.id))||[];
-    const temFilhos=filhos.length>0;
-    const aberta=paginasExpandidas.has(String(x.id));
 
     return `<div
-      class="paginaCatalogo ${x.nivel>0?'subpagina':''} ${temFilhos?'temSubpaginas':''} ${aberta?'aberta':''}"
-      style="${x.nivel>1?'margin-left:'+(24+Math.min(x.nivel-1,2)*14)+'px;width:calc(100% - '+(24+Math.min(x.nivel-1,2)*14)+'px)':''}"
-      ${temFilhos?`onclick="alternarSubpaginas('${x.id}')"`:''}
+      class="paginaCatalogo" 
     >
       <div class="paginaCatalogoTopo">
         <div class="paginaCatalogoEmoji">${esc(x.emoji||'📄')}</div>
@@ -813,120 +1669,1051 @@ function renderCatalogoPaginas(){
         <div class="paginaCatalogoInfo">
           <div class="paginaCatalogoNome">${esc(x.nome||x.titulo)}</div>
           <div class="paginaCatalogoArquivo">${esc(x.arquivo||'')}</div>
-          <span class="paginaOrigem origem-${x.origem}">${x.origem==='existente'?'Existente no app':'Criada pelo app'}</span>
-          ${pai?`<span class="subpaginaEtiqueta">Subpágina de ${esc(pai.nome||pai.titulo)}</span>`:''}
-          ${temFilhos?`<span class="quantidadeSubpaginas">${filhos.length} ${filhos.length===1?'subpágina':'subpáginas'}</span>`:''}
         </div>
 
-        ${temFilhos?`<span class="expansorSubpaginas" aria-hidden="true">›</span>`:''}
-
         <div class="paginaCatalogoOrdenar" title="Reordenar" onclick="event.stopPropagation()">
-          <button onclick="event.stopPropagation();moverPagina('${x.id}',-1)" ${pos<=0?'disabled':''} aria-label="Mover para cima">↑</button>
-          <button onclick="event.stopPropagation();moverPagina('${x.id}',1)" ${pos<0||pos>=irmaos.length-1?'disabled':''} aria-label="Mover para baixo">↓</button>
+          <button onclick="event.stopPropagation();moverPaginaCatalogo('${x.id}',-1)" ${pos<=0?'disabled':''} aria-label="Mover para cima">↑</button>
+          <button onclick="event.stopPropagation();moverPaginaCatalogo('${x.id}',1)" ${pos<0||pos>=catalogoOrdenado.length-1?'disabled':''} aria-label="Mover para baixo">↓</button>
+        </div>
+
+        <div class="paginaCatalogoMeta">
+          <span class="paginaOrigem origem-${x.importada===true?'importada':'criada'}">${x.importada===true?'Importada':'Criada no app'}</span>
+          ${pai?`<span class="subpaginaEtiqueta">Subpágina de ${esc(pai.nome||pai.titulo)}</span>`:''}
+          ${Array.isArray(x.botoes)&&x.botoes.length?`<span class="contagemBotoes">${x.botoes.length} ${x.botoes.length===1?'botão':'botões'}</span>`:''}
+          ${x.conteudoDinamico?`<span class="paginaDinamicaBadge">conteúdo dinâmico</span>`:''}
         </div>
       </div>
 
       <div class="paginaCatalogoAcoes" onclick="event.stopPropagation()">
         <button class="btnVisualizar" onclick="event.stopPropagation();visualizarPaginaCatalogo('${x.id}','${x.origem}')">Visualizar</button>
         <button class="btnEditar" onclick="event.stopPropagation();editarPaginaCatalogo('${x.id}','${x.origem}')">Editar</button>
-        ${x.origem==='criada'
-          ? `<button class="btnExcluirPagina" onclick="event.stopPropagation();excluirPaginaCatalogo('${x.id}')">Excluir</button>`
-          : ''}
+        <button class="btnExcluirPagina" onclick="event.stopPropagation();excluirPaginaCatalogo('${x.id}')">Excluir</button>
       </div>
     </div>`
   }).join(''):'<div class="vazio">Nenhuma página encontrada.</div>'
 }
 
+
+
+function obterFilhosDaPagina(id){
+  return obterTodasPaginas().filter(
+    p=>String(p.parentId||"")===String(id)
+  );
+}
+
+function ordenarDentroDoPai(lista){
+  return ordenarPaginasBase(lista);
+}
+
+
+const navegacaoExpandida=new Set();
+let navegacaoInicializada=false;
+
+function alternarNavegacaoPagina(id){
+  const chave=String(id);
+
+  if(navegacaoExpandida.has(chave)){
+    navegacaoExpandida.delete(chave);
+  }else{
+    navegacaoExpandida.add(chave);
+  }
+
+  renderNavegacaoApp();
+}
+
+function paginaNavegacaoVisivel(item){
+  const caminho=Array.isArray(item.caminhoVisual)?item.caminhoVisual:[];
+
+  for(const ancestralId of caminho){
+    if(!navegacaoExpandida.has(String(ancestralId))){
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function montarNavegacaoVisual(){
+  const todas=ordenarDentroDoPai(obterTodasPaginas());
+  const mapa=new Map(todas.map(p=>[String(p.id),p]));
+  const filhosPorPai=new Map();
+
+  todas.forEach(p=>{
+    const paiId=String(p.parentId||"");
+    if(!filhosPorPai.has(paiId))filhosPorPai.set(paiId,[]);
+    filhosPorPai.get(paiId).push(p);
+  });
+
+  filhosPorPai.forEach(lista=>{
+    lista.sort((a,b)=>{
+      const ordem=obterOrdemPaginas();
+      return ordem.indexOf(String(a.id))-ordem.indexOf(String(b.id));
+    });
+  });
+
+  const resultado=[];
+  const visitados=new Set();
+
+  function adicionar(pagina,nivel=0,caminho=[]){
+    const id=String(pagina.id);
+    if(visitados.has(id))return;
+
+    visitados.add(id);
+    resultado.push({
+      ...pagina,
+      nivel,
+      caminhoVisual:[...caminho],
+      parentIdVisual:nivel>0?String(caminho[caminho.length-1]||""):""
+    });
+
+    const filhos=filhosPorPai.get(id)||[];
+    filhos.forEach(filho=>{
+      const filhoId=String(filho.id);
+
+      /* Evita ciclos: uma página já presente no caminho não pode virar descendente. */
+      if(caminho.includes(filhoId) || filhoId===id)return;
+
+      adicionar(filho,nivel+1,[...caminho,id]);
+    });
+  }
+
+  /* Raízes válidas: sem pai ou com pai inexistente. */
+  todas
+    .filter(p=>{
+      const paiId=String(p.parentId||"");
+      return !paiId || !mapa.has(paiId) || paiId===String(p.id);
+    })
+    .forEach(p=>adicionar(p,0,[]));
+
+  /*
+    Qualquer página ainda não visitada pertence a um ciclo ou vínculo inconsistente.
+    Ela é mostrada como página principal para nunca desaparecer da lista.
+  */
+  todas.forEach(p=>{
+    if(!visitados.has(String(p.id))){
+      adicionar(p,0,[]);
+    }
+  });
+
+  return resultado;
+}
+
+
+function contarDescendentesNavegacao(id,itens){
+  const filhos=itens.filter(
+    item=>String(item.parentIdVisual||"")===String(id)
+  );
+
+  return filhos.reduce(
+    (total,filho)=>total+1+contarDescendentesNavegacao(filho.id,itens),
+    0
+  );
+}
+
+function abrirTodosGruposNavegacao(itens){
+  itens.forEach(item=>{
+    const possuiFilhos=itens.some(
+      filho=>String(filho.parentIdVisual||"")===String(item.id)
+    );
+
+    if(possuiFilhos){
+      navegacaoExpandida.add(String(item.id));
+    }
+  });
+}
+
+function renderNavegacaoApp(){
+  const todas=obterTodasPaginas();
+  const itens=montarNavegacaoVisual();
+
+  const itensPorId=new Map(
+    itens.map(item=>[String(item.id),item])
+  );
+
+  const filhosVisuaisPorPai=new Map();
+
+  itens.forEach(item=>{
+    const paiVisual=String(item.parentIdVisual||"");
+
+    if(!filhosVisuaisPorPai.has(paiVisual)){
+      filhosVisuaisPorPai.set(paiVisual,[]);
+    }
+
+    filhosVisuaisPorPai.get(paiVisual).push(item);
+  });
+
+  /*
+    Na primeira abertura, todos os grupos começam abertos.
+    Depois disso, cada toque mantém a escolha da usuária.
+  */
+  if(!navegacaoInicializada){
+    abrirTodosGruposNavegacao(itens);
+    navegacaoInicializada=true;
+  }
+
+  const subpaginasValidas=itens.filter(
+    item=>item.nivel>0
+  ).length;
+
+  const paginasPrincipais=itens.filter(
+    item=>item.nivel===0
+  ).length;
+
+  const visiveis=itens.filter(
+    item=>paginaNavegacaoVisivel(item)
+  );
+
+  navegacaoResumo.textContent=
+    `${itens.length} página${itens.length===1?"":"s"} • `+
+    `${paginasPrincipais} principal${paginasPrincipais===1?"":"is"} • `+
+    `${subpaginasValidas} subpágina${subpaginasValidas===1?"":"s"} • `+
+    `${visiveis.length} visível${visiveis.length===1?"":"is"}`;
+
+  navegacaoLista.innerHTML=visiveis.length
+    ? visiveis.map(item=>{
+        const paiVisual=itensPorId.get(
+          String(item.parentIdVisual||"")
+        );
+
+        const filhos=filhosVisuaisPorPai.get(
+          String(item.id)
+        )||[];
+
+        const temFilhos=filhos.length>0;
+        const aberta=navegacaoExpandida.has(
+          String(item.id)
+        );
+
+        const totalDescendentes=temFilhos
+          ? contarDescendentesNavegacao(item.id,itens)
+          : 0;
+
+        const irmaos=filhosVisuaisPorPai.get(
+          String(item.parentIdVisual||"")
+        )||[];
+
+        const indice=irmaos.findIndex(
+          p=>String(p.id)===String(item.id)
+        );
+
+        return `
+          <div
+            class="navCard ${item.nivel>0?"sub":""} ${temFilhos?"temFilhos":""} ${aberta?"aberta":""}"
+            style="${item.nivel>1?`margin-left:${22+Math.min(item.nivel-1,2)*14}px;width:calc(100% - ${22+Math.min(item.nivel-1,2)*14}px)`:''}"
+            ${temFilhos?`onclick="alternarNavegacaoPagina('${item.id}')"`:""}
+          >
+            <div class="navTopo">
+              <div class="navEmoji">${esc(item.emoji||"📄")}</div>
+
+              <div class="navInfo">
+                <div class="navNome">${esc(item.nome||item.titulo||"Sem nome")}</div>
+                <div class="navArquivo">${esc(item.arquivo||"")}</div>
+
+                ${paiVisual
+                  ? `<div class="navPai">Subpágina de ${esc(paiVisual.nome||paiVisual.titulo||"")}</div>`
+                  : ""
+                }
+
+                ${temFilhos
+                  ? `<span class="navQuantidade">${totalDescendentes} ${totalDescendentes===1?"página interna":"páginas internas"}</span>`
+                  : ""
+                }
+              </div>
+
+              ${temFilhos
+                ? `<span class="navExpansor" aria-hidden="true">›</span>`
+                : ""
+              }
+
+              <div class="navAcoes" onclick="event.stopPropagation()">
+                <button
+                  type="button"
+                  onclick="event.stopPropagation();moverPagina('${item.id}',-1);renderNavegacaoApp()"
+                  ${indice<=0?"disabled":""}
+                >↑</button>
+
+                <button
+                  type="button"
+                  onclick="event.stopPropagation();moverPagina('${item.id}',1);renderNavegacaoApp()"
+                  ${indice<0||indice>=irmaos.length-1?"disabled":""}
+                >↓</button>
+
+                <button
+                  class="navEditar"
+                  type="button"
+                  onclick="event.stopPropagation();editarNavegacaoPagina('${item.id}')"
+                >Editar</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("")
+    : '<div class="vazio">Importe as páginas primeiro em “Páginas do Aplicativo”.</div>';
+}
+
+function reconstruirNavegacaoAutomatica(){
+  const paginas=ler(K.paginas,[]);
+
+  if(!paginas.length){
+    reanalisarNavegacaoAviso.textContent="Nenhuma página importada para analisar.";
+    reanalisarNavegacaoAviso.classList.add("show");
+    return;
+  }
+
+  paginas.forEach(pagina=>{
+    if(pagina.vinculoManual)return;
+
+    const destinos=new Set(
+      (pagina.destinosPaginas||[])
+        .map(limparNomeArquivo)
+        .filter(Boolean)
+    );
+
+    (pagina.botoes||[]).forEach(botao=>{
+      const destino=limparNomeArquivo(
+        botao.destinoPagina||
+        (/\.html(?:$|[?#])/i.test(String(botao.destino||""))
+          ? botao.destino
+          : "")
+      );
+
+      if(destino)destinos.add(destino);
+    });
+
+    pagina.destinosPaginas=[...destinos];
+
+    if(!pagina.paginaRetorno){
+      pagina.paginaRetorno=limparNomeArquivo(pagina.voltar||"");
+    }
+  });
+
+  const relacoes=organizarSubpaginasAutomaticamente(paginas);
+  salvar(K.paginas,paginas);
+
+  navegacaoExpandida.clear();
+  navegacaoInicializada=false;
+  renderNavegacaoApp();
+  renderCatalogoPaginas();
+
+  const manuais=paginas.filter(p=>p.vinculoManual).length;
+  reanalisarNavegacaoAviso.textContent=
+    `${relacoes} relação${relacoes===1?" automática reconstruída":"ões automáticas reconstruídas"}`+
+    (manuais?` • ${manuais} vínculo${manuais===1?" manual preservado":"s manuais preservados"}`:"");
+
+  reanalisarNavegacaoAviso.classList.add("show");
+
+  setTimeout(()=>{
+    reanalisarNavegacaoAviso.classList.remove("show");
+  },5000);
+}
+
+function editarNavegacaoPagina(id){
+  const todas=obterTodasPaginas();
+  const atual=todas.find(p=>String(p.id)===String(id));
+  if(!atual)return;
+
+  navPaginaId.value=String(id);
+  navPaginaNome.textContent=atual.nome||atual.titulo||"Página";
+
+  const descendentes=new Set();
+  function marcarDescendentes(paiId){
+    obterFilhosDaPagina(paiId).forEach(filho=>{
+      descendentes.add(String(filho.id));
+      marcarDescendentes(String(filho.id));
+    });
+  }
+  marcarDescendentes(String(id));
+
+  const opcoes=todas
+    .filter(p=>
+      String(p.id)!==String(id) &&
+      !descendentes.has(String(p.id))
+    )
+    .sort((a,b)=>
+      String(a.nome||a.titulo||a.arquivo||"")
+        .localeCompare(
+          String(b.nome||b.titulo||b.arquivo||""),
+          "pt-BR",
+          {sensitivity:"base",numeric:true}
+        )
+    );
+
+  navPaginaPai.innerHTML=
+    `<option value="">Nenhuma — página principal</option>`+
+    opcoes.map(p=>`
+      <option value="${esc(p.id)}" ${String(atual.parentId||"")===String(p.id)?"selected":""}>
+        ${esc(p.nome||p.titulo||p.arquivo)}
+      </option>
+    `).join("");
+
+  abrir("modalEditarNavegacao");
+}
+
+function salvarNavegacaoPagina(){
+  const id=String(navPaginaId.value||"");
+  const paiId=String(navPaginaPai.value||"");
+  const paginas=ler(K.paginas,[]);
+  const indice=paginas.findIndex(p=>String(p.id)===id);
+  if(indice<0)return;
+
+  paginas[indice]={
+    ...paginas[indice],
+    parentId:paiId,
+    vinculoManual:true
+  };
+  salvar(K.paginas,paginas);
+
+  fechar("modalEditarNavegacao");
+  navegacaoInicializada=false;
+  renderNavegacaoApp();
+  renderCatalogoPaginas();
+}
+
+
+let paginaExcluirPendente="";
+
 function excluirPaginaCatalogo(id){
   const pagina=obterTodasPaginas().find(x=>String(x.id)===String(id));
-  if(!pagina || pagina.origem!=="criada") return;
+  if(!pagina)return;
+
+  paginaExcluirPendente=String(id);
 
   const filhos=obterTodasPaginas().filter(
     x=>String(x.parentId||"")===String(id)
   );
 
-  let mensagem=`Excluir "${pagina.nome||pagina.titulo||"Sem nome"}" do catálogo?`;
-  if(filhos.length){
-    mensagem+=`\n\n${filhos.length} subpágina${filhos.length===1?" será":"s serão"} desvinculada${filhos.length===1?"":"s"} desta página.`;
-  }
+  nomePaginaExcluir.textContent=pagina.nome||pagina.titulo||"Página sem nome";
+  avisoPaginaExcluir.textContent=filhos.length
+    ? `${filhos.length} subpágina${filhos.length===1?" será":"s serão"} mantida${filhos.length===1?"":"s"}, mas ficará${filhos.length===1?"":"ão"} sem página principal.`
+    : "A página poderá ser importada novamente depois.";
 
-  if(!confirm(mensagem)) return;
+  abrir("modalExcluirPagina");
+}
 
-  let criadas=ler(K.paginas,[]);
-  criadas=criadas
+function cancelarExclusaoPagina(){
+  paginaExcluirPendente="";
+  fechar("modalExcluirPagina");
+}
+
+function confirmarExclusaoPagina(){
+  const id=paginaExcluirPendente;
+  if(!id)return;
+
+  let paginas=ler(K.paginas,[]);
+  paginas=paginas
     .filter(x=>String(x.id)!==String(id))
-    .map(x=>String(x.parentId||"")===String(id) ? {...x,parentId:""} : x);
-  salvar(K.paginas,criadas);
+    .map(x=>String(x.parentId||"")===String(id)?{...x,parentId:""}:x);
+  salvar(K.paginas,paginas);
 
-  const existentes=ler(K.catalogoExistente,[]).map(
-    x=>String(x.parentId||"")===String(id) ? {...x,parentId:""} : x
+  salvar(
+    K.ordemPaginas,
+    obterOrdemPaginas().filter(x=>String(x)!==String(id))
   );
-  salvar(K.catalogoExistente,existentes);
-
-  const ordem=obterOrdemPaginas().filter(x=>String(x)!==String(id));
-  salvar(K.ordemPaginas,ordem);
 
   paginasExpandidas.delete(String(id));
+  paginaExcluirPendente="";
+  fechar("modalExcluirPagina");
   renderCatalogoPaginas();
   render();
 }
 
-function localizarPagina(id,o){return obterTodasPaginas().find(x=>String(x.id)===String(id)&&x.origem===o)}
-function visualizarPaginaCatalogo(id,o){const x=localizarPagina(id,o);previewPaginaConteudo.innerHTML=`<div style="font-size:30px">${esc(x.emoji||'📄')}</div><h3>${esc(x.titulo||x.nome)}</h3><p>${esc(x.subtitulo||'Sem subtítulo cadastrado')}</p><code>${esc(x.arquivo||'')}</code>`;abrir('modalPreviewPagina')}
+function localizarPagina(id,o){
+  return obterTodasPaginas().find(
+    x=>String(x.id)===String(id)&&x.origem===o
+  );
+}
+
+function visualizarPaginaCatalogo(id,o){
+  const x=localizarPagina(id,o);
+  if(!x)return;
+
+  const quantidade=Array.isArray(x.botoes)?x.botoes.length:0;
+
+  previewPaginaConteudo.innerHTML=`
+    <div style="font-size:30px">${esc(x.emoji||"📄")}</div>
+    <h3>${esc(x.titulo||x.nome)}</h3>
+    <p>${esc(x.subtitulo||"Sem subtítulo cadastrado")}</p>
+    <code>${esc(x.arquivo||"")}</code>
+    <p style="margin-top:9px">
+      ${quantidade} ${quantidade===1?"botão identificado":"botões identificados"}
+    </p>
+  `;
+
+  abrir("modalPreviewPagina");
+}
+
+let paginaEmEdicaoId="";
+let botoesPaginaTemporarios=[];
+
+function normalizarTextoBotao(valor){
+  return String(valor||"")
+    .replace(/\s+/g," ")
+    .trim();
+}
+
+function inferirTipoBotao(elemento,texto,destino){
+  const classe=(elemento.className||"").toString().toLowerCase();
+  const combinado=`${texto} ${destino} ${classe}`.toLowerCase();
+
+  if(/concluir|tarefa|rotina|higiene|café|jantar|deitar|mochila/.test(combinado))return "tarefa";
+  if(/adicionar|salvar|editar|excluir|config|sincronizar|importar|exportar/.test(combinado))return "acao";
+  if(/registro|anota|histórico/.test(combinado))return "registro";
+  if(elemento.tagName==="A" || /location|href|irpara|window\.open/.test(combinado))return "menu";
+  return "outro";
+}
+
+function renderBotoesPaginaEdicao(){
+  const container=document.getElementById("editBotoesPaginaLista");
+  if(!container)return;
+
+  container.innerHTML=botoesPaginaTemporarios.length
+    ? botoesPaginaTemporarios.map((botao,indice)=>`
+      <div class="botaoPaginaItem">
+        <div class="botaoPaginaInfo">
+          <div class="botaoPaginaNome">${esc(botao.nome||"Botão sem nome")}</div>
+          <div class="botaoPaginaMeta">
+            ${esc(botao.tipo||"outro")}
+            ${botao.destino?` • ${esc(botao.destino)}`:""}
+          </div>
+        </div>
+        <div class="botaoPaginaAcoes">
+          <button type="button" onclick="editarBotaoPagina(${indice})">✎</button>
+          <button type="button" class="botaoExcluir" onclick="excluirBotaoPagina(${indice})">×</button>
+        </div>
+      </div>
+    `).join("")
+    : '<div class="botaoPaginaVazio">Nenhum botão cadastrado nesta página.</div>';
+}
+
+function abrirNovoBotaoPagina(){
+  botaoPaginaId.value="";
+  tituloModalBotaoPagina.textContent="Novo botão";
+  botaoPaginaNome.value="";
+  botaoPaginaDescricao.value="";
+  botaoPaginaTipo.value="tarefa";
+  botaoPaginaIdentificador.value="";
+  botaoPaginaDestino.value="";
+  abrir("modalEditarBotaoPagina");
+}
+
+function editarBotaoPagina(indice){
+  const botao=botoesPaginaTemporarios[indice];
+  if(!botao)return;
+
+  botaoPaginaId.value=String(indice);
+  tituloModalBotaoPagina.textContent="Editar botão";
+  botaoPaginaNome.value=botao.nome||"";
+  botaoPaginaDescricao.value=botao.descricao||"";
+  botaoPaginaTipo.value=botao.tipo||"outro";
+  botaoPaginaIdentificador.value=botao.identificador||"";
+  botaoPaginaDestino.value=botao.destino||"";
+  abrir("modalEditarBotaoPagina");
+}
+
+function salvarBotaoPagina(){
+  const nome=botaoPaginaNome.value.trim();
+
+  if(!nome){
+    alert("Informe o nome do botão.");
+    return;
+  }
+
+  const indice=botaoPaginaId.value===""?-1:Number(botaoPaginaId.value);
+
+  const botao={
+    id:indice>=0
+      ? botoesPaginaTemporarios[indice].id||`btn-${Date.now()}`
+      : `btn-${Date.now()}`,
+    nome,
+    descricao:botaoPaginaDescricao.value.trim(),
+    tipo:botaoPaginaTipo.value,
+    identificador:botaoPaginaIdentificador.value.trim(),
+    destino:botaoPaginaDestino.value.trim(),
+    origem:indice>=0
+      ? botoesPaginaTemporarios[indice].origem||"manual"
+      : "manual"
+  };
+
+  if(indice>=0){
+    botoesPaginaTemporarios[indice]=botao;
+  }else{
+    botoesPaginaTemporarios.push(botao);
+  }
+
+  fechar("modalEditarBotaoPagina");
+  renderBotoesPaginaEdicao();
+}
+
+function excluirBotaoPagina(indice){
+  botoesPaginaTemporarios.splice(indice,1);
+  renderBotoesPaginaEdicao();
+}
+
 function editarPaginaCatalogo(id,o){
   const x=localizarPagina(id,o);
-  editPaginaId.value=id+'|'+o;
-  editEmoji.value=x.emoji||'';
-  editOrigem.value=o==='existente'?'Existente no app':'Criada pelo app';
-  editNome.value=x.nome||'';
-  editArquivo.value=x.arquivo||'';
-  editTitulo.value=x.titulo||'';
-  editSubtitulo.value=x.subtitulo||'';
-  editVoltar.value=x.voltar||'';
-  editAcesso.value=x.acesso||'';
+  if(!x)return;
 
-  const filhos=obterTodasPaginas()
-    .filter(p=>String(p.parentId||"")===String(id))
-    .map(p=>String(p.id));
+  editPaginaId.value=id+"|"+o;
+  editEmoji.value=x.emoji||"";
+  editOrigem.value=x.importada===true?"Importada":"Criada no app";
+  editNome.value=x.nome||"";
+  editArquivo.value=x.arquivo||"";
+  editTitulo.value=x.titulo||"";
+  editSubtitulo.value=x.subtitulo||"";
+  editVoltar.value=x.voltar||"";
+  editAcesso.value=x.acesso||"";
 
-  preencherListaSubpaginas('editSubpaginasLista',id,filhos);
-  abrir('modalEditarPagina')
+  paginaEmEdicaoId=String(id);
+  botoesPaginaTemporarios=Array.isArray(x.botoes)
+    ? JSON.parse(JSON.stringify(x.botoes))
+    : [];
+
+  renderBotoesPaginaEdicao();
+  abrir("modalEditarPagina");
 }
-function salvarEdicaoPagina(){
-  const [id,o]=editPaginaId.value.split('|');
 
-  const d={
-    id,
-    origem:o,
+function salvarEdicaoPagina(){
+  const [id,o]=editPaginaId.value.split("|");
+  const paginas=ler(K.paginas,[]);
+  const indice=paginas.findIndex(x=>String(x.id)===String(id));
+
+  if(indice<0)return;
+
+  paginas[indice]={
+    ...paginas[indice],
     emoji:editEmoji.value,
     nome:editNome.value,
     arquivo:editArquivo.value,
     titulo:editTitulo.value,
     subtitulo:editSubtitulo.value,
     voltar:editVoltar.value,
-    acesso:editAcesso.value
+    acesso:editAcesso.value,
+    botoes:JSON.parse(JSON.stringify(botoesPaginaTemporarios))
   };
 
-  if(o==='existente'){
-    const l=ler(K.catalogoExistente,[]);
-    const i=l.findIndex(x=>String(x.id)===String(id));
-    i>=0?l[i]={...l[i],...d}:l.push(d);
-    salvar(K.catalogoExistente,l)
-  }else{
-    const l=ler(K.paginas,[]);
-    const i=l.findIndex(x=>String(x.id)===String(id));
-    if(i>=0)l[i]={...l[i],...d};
-    salvar(K.paginas,l)
+  salvar(K.paginas,paginas);
+  fechar("modalEditarPagina");
+  renderCatalogoPaginas();
+  renderNavegacaoApp();
+  render();
+}
+
+function limparNomeArquivo(caminho){
+  return String(caminho||"")
+    .split("?")[0]
+    .split("#")[0]
+    .replace(/^\.?\//,"")
+    .replace(/^www\//i,"")
+    .trim();
+}
+
+function extrairDestinoDeOnclick(onclick){
+  const texto=String(onclick||"");
+
+  const padroes=[
+    /(?:location\.href|window\.location(?:\.href)?|document\.location)\s*=\s*['"]([^'"]+\.html(?:[^'"]*)?)['"]/i,
+    /(?:irPara|abrirPagina|navegarPara|goTo|openPage)\s*\(\s*['"]([^'"]+\.html(?:[^'"]*)?)['"]/i,
+    /window\.open\s*\(\s*['"]([^'"]+\.html(?:[^'"]*)?)['"]/i
+  ];
+
+  for(const padrao of padroes){
+    const achado=texto.match(padrao);
+    if(achado)return limparNomeArquivo(achado[1]);
+  }
+  return "";
+}
+
+function extrairDestinoElemento(el){
+  const href=el.getAttribute("href")||"";
+  if(href && /\.html(?:$|[?#])/i.test(href)){
+    return limparNomeArquivo(href);
   }
 
-  const filhos=obterSubpaginasSelecionadas("editSubpaginasLista");
-  atribuirSubpaginas(id,filhos);
-
-  fechar('modalEditarPagina');
-  renderCatalogoPaginas();
-  render()
+  return extrairDestinoDeOnclick(el.getAttribute("onclick")||"");
 }
-function importarPaginaHtml(e){const a=e.target.files?.[0];if(!a)return;const r=new FileReader();r.onload=()=>{const t=String(r.result||''),titulo=(t.match(/<title[^>]*>(.*?)<\/title>/is)||[])[1]||a.name.replace(/\.html$/i,''),h1=(t.match(/<h1[^>]*>(.*?)<\/h1>/is)||[])[1]||titulo,limpa=s=>String(s).replace(/<[^>]+>/g,'').trim(),l=ler(K.paginas,[]);l.push({id:Date.now(),origem:'criada',emoji:'📄',nome:limpa(titulo),arquivo:a.name,titulo:limpa(h1),subtitulo:'',voltar:'',acesso:'',parentId:'',importada:true});salvar(K.paginas,l);e.target.value='';renderCatalogoPaginas();render()};r.readAsText(a)}
+
+function detectarConteudoDinamico(textoHtml){
+  const sinais=[
+    /localStorage\./i,
+    /JSON\.parse\s*\(\s*localStorage/i,
+    /\.innerHTML\s*=/i,
+    /createElement\s*\(/i,
+    /appendChild\s*\(/i,
+    /\.map\s*\([^)]*=>\s*`[^`]*<button/i,
+    /tasks|tarefas|items|cards|subtasks|rotina/i
+  ];
+
+  return sinais.some(p=>p.test(textoHtml));
+}
+
+function extrairBotoesEConexoes(textoHtml){
+  const parser=new DOMParser();
+  const doc=parser.parseFromString(textoHtml,"text/html");
+
+  const elementos=[
+    ...doc.querySelectorAll(
+      "button,a[href],[role='button'],input[type='button'],input[type='submit'],[onclick]"
+    )
+  ];
+
+  const ignorarAcao=/^(voltar|fechar|cancelar|×|←|›|ok|salvar|editar|excluir)$/i;
+  const botoes=[];
+  const destinos=[];
+  const chaves=new Set();
+  let paginaRetorno="";
+
+  function textoElemento(el){
+    return normalizarTextoBotao(
+      el.getAttribute("aria-label")||
+      el.getAttribute("title")||
+      el.getAttribute("value")||
+      el.querySelector("strong")?.textContent||
+      el.querySelector(".titulo")?.textContent||
+      el.querySelector(".configKidsTitle")?.textContent||
+      el.innerText||
+      el.textContent||
+      ""
+    );
+  }
+
+  function ehBotaoRetorno(el,texto){
+    const classe=String(el.className||"").toLowerCase();
+    const id=String(el.id||"").toLowerCase();
+    const aria=String(el.getAttribute("aria-label")||"").toLowerCase();
+    const title=String(el.getAttribute("title")||"").toLowerCase();
+    const combinado=`${texto} ${classe} ${id} ${aria} ${title}`.toLowerCase();
+
+    return (
+      /\bvoltar\b|\bback\b/.test(combinado) ||
+      texto==="←" ||
+      texto==="‹"
+    );
+  }
+
+  elementos.forEach((el,indice)=>{
+    const texto=textoElemento(el);
+    const destinoPagina=extrairDestinoElemento(el);
+    const onclick=el.getAttribute("onclick")||"";
+    const href=el.getAttribute("href")||"";
+    const destino=destinoPagina||normalizarTextoBotao(href||onclick);
+
+    if(ehBotaoRetorno(el,texto)){
+      if(destinoPagina && !paginaRetorno){
+        paginaRetorno=destinoPagina;
+      }
+      return;
+    }
+
+    if(!texto || ignorarAcao.test(texto))return;
+
+    const classe=String(el.className||"").toLowerCase();
+    const idEl=String(el.id||"").toLowerCase();
+    const combinado=`${texto} ${classe} ${idEl}`.toLowerCase();
+
+    if(/\bfechar\b|\bcancel\b|\bsalvar\b|\beditar\b|\bexcluir\b/.test(combinado)){
+      return;
+    }
+
+    const identificador=
+      el.id||
+      el.getAttribute("data-id")||
+      el.getAttribute("data-task-id")||
+      `botao-${indice+1}`;
+
+    const chave=`${texto.toLowerCase()}|${destino.toLowerCase()}`;
+    if(chaves.has(chave))return;
+    chaves.add(chave);
+
+    const tipo=inferirTipoBotao(el,texto,destino);
+
+    botoes.push({
+      id:`btn-${Date.now()}-${indice}`,
+      nome:texto,
+      descricao:"",
+      tipo,
+      identificador,
+      destino,
+      destinoPagina,
+      origem:"detectado"
+    });
+
+    if(destinoPagina && tipo==="menu"){
+      destinos.push(destinoPagina);
+    }
+  });
+
+  return {
+    botoes,
+    destinos:[...new Set(destinos)],
+    paginaRetorno,
+    conteudoDinamico:detectarConteudoDinamico(textoHtml)
+  };
+}
+
+function organizarSubpaginasAutomaticamente(paginas){
+  const porArquivo=new Map(
+    paginas.map(p=>[
+      limparNomeArquivo(p.arquivo).toLowerCase(),
+      p
+    ])
+  );
+
+  paginas.forEach(p=>{
+    if(!p.vinculoManual){
+      p.parentId="";
+    }
+
+    const destinos=new Set(
+      (p.destinosPaginas||[])
+        .map(limparNomeArquivo)
+        .filter(Boolean)
+    );
+
+    (p.botoes||[]).forEach(botao=>{
+      const destino=limparNomeArquivo(
+        botao.destinoPagina||
+        (/\.html(?:$|[?#])/i.test(String(botao.destino||""))
+          ? botao.destino
+          : "")
+      );
+
+      if(destino)destinos.add(destino);
+    });
+
+    p.destinosPaginas=[...destinos];
+
+    if(!p.paginaRetorno){
+      p.paginaRetorno=limparNomeArquivo(p.voltar||"");
+    }
+  });
+
+  let relacoes=0;
+
+  /* Primeiro usa a página de retorno da própria página. */
+  paginas.forEach(filha=>{
+    if(filha.vinculoManual)return;
+
+    const retorno=limparNomeArquivo(
+      filha.paginaRetorno||filha.voltar||""
+    ).toLowerCase();
+
+    const pai=porArquivo.get(retorno);
+
+    if(
+      pai &&
+      String(pai.id)!==String(filha.id) &&
+      !/^(index|login)\.html$/i.test(
+        limparNomeArquivo(filha.arquivo)
+      )
+    ){
+      filha.parentId=String(pai.id);
+      relacoes++;
+    }
+  });
+
+  /* Depois usa botões que apontam para outras páginas. */
+  const candidatosPai=new Map();
+
+  paginas.forEach(pai=>{
+    (pai.destinosPaginas||[]).forEach(destinoOriginal=>{
+      const destino=limparNomeArquivo(destinoOriginal).toLowerCase();
+      const filha=porArquivo.get(destino);
+
+      if(
+        !filha ||
+        filha.vinculoManual ||
+        filha.parentId ||
+        String(filha.id)===String(pai.id)
+      )return;
+
+      if(!candidatosPai.has(String(filha.id))){
+        candidatosPai.set(String(filha.id),[]);
+      }
+
+      candidatosPai.get(String(filha.id)).push(pai);
+    });
+  });
+
+  candidatosPai.forEach((pais,filhaId)=>{
+    const filha=paginas.find(
+      p=>String(p.id)===String(filhaId)
+    );
+
+    if(!filha || filha.parentId || !pais.length)return;
+
+    const paiEscolhido=[...pais].sort((a,b)=>{
+      const aArquivo=limparNomeArquivo(a.arquivo);
+      const bArquivo=limparNomeArquivo(b.arquivo);
+
+      const aMenu=/(menu|index|hub|inicio)/i.test(aArquivo)?1:0;
+      const bMenu=/(menu|index|hub|inicio)/i.test(bArquivo)?1:0;
+
+      if(aMenu!==bMenu)return bMenu-aMenu;
+
+      return (
+        (b.destinosPaginas||[]).length-
+        (a.destinosPaginas||[]).length
+      );
+    })[0];
+
+    filha.parentId=String(paiEscolhido.id);
+    relacoes++;
+  });
+
+  return relacoes;
+}
+
+function contarBotoesPaginas(paginas){
+  return paginas.reduce(
+    (total,p)=>total+(Array.isArray(p.botoes)?p.botoes.length:0),
+    0
+  );
+}
+
+
+let filaAtualizacaoPaginas=[];
+let resolverAtualizacaoPagina=null;
+
+function perguntarAtualizacaoPagina(nomeArquivo){
+  arquivoPaginaAtualizar.textContent=nomeArquivo;
+  abrir("modalAtualizarPagina");
+
+  return new Promise(resolve=>{
+    resolverAtualizacaoPagina=resolve;
+  });
+}
+
+function responderAtualizacaoPagina(atualizar){
+  fechar("modalAtualizarPagina");
+
+  if(resolverAtualizacaoPagina){
+    const resolver=resolverAtualizacaoPagina;
+    resolverAtualizacaoPagina=null;
+    resolver(Boolean(atualizar));
+  }
+}
+
+function montarDadosPaginaImportada(arquivo,texto,idExistente=null,paginaAnterior=null){
+  const tituloDocumento=(texto.match(/<title[^>]*>(.*?)<\/title>/is)||[])[1]
+    ||arquivo.name.replace(/\.html$/i,"");
+
+  const h1=(texto.match(/<h1[^>]*>(.*?)<\/h1>/is)||[])[1]
+    ||tituloDocumento;
+
+  const limpar=valor=>String(valor||"")
+    .replace(/<[^>]+>/g,"")
+    .replace(/\s+/g," ")
+    .trim();
+
+  const analise=extrairBotoesEConexoes(texto);
+
+  return {
+    id:idExistente??Date.now(),
+    origem:"criada",
+    emoji:paginaAnterior?.emoji||"📄",
+    nome:paginaAnterior?.nome||limpar(tituloDocumento),
+    arquivo:arquivo.name,
+    titulo:limpar(h1),
+    subtitulo:paginaAnterior?.subtitulo||"",
+    voltar:paginaAnterior?.voltar||"",
+    acesso:paginaAnterior?.acesso||"",
+    parentId:paginaAnterior?.parentId||"",
+    vinculoManual:paginaAnterior?.vinculoManual===true,
+    importada:true,
+    botoes:analise.botoes,
+    destinosPaginas:analise.destinos,
+    paginaRetorno:analise.paginaRetorno||"",
+    conteudoDinamico:analise.conteudoDinamico
+  };
+}
+
+async function importarPaginasHtml(event){
+  const arquivos=[...(event.target.files||[])];
+  if(!arquivos.length)return;
+
+  const paginas=ler(K.paginas,[]);
+  let importadas=0;
+  let atualizadas=0;
+  let mantidas=0;
+  let erros=0;
+
+  for(let indice=0;indice<arquivos.length;indice++){
+    const arquivo=arquivos[indice];
+
+    try{
+      const texto=await arquivo.text();
+      const indiceExistente=paginas.findIndex(
+        p=>String(p.arquivo||"").toLowerCase()===arquivo.name.toLowerCase()
+      );
+
+      if(indiceExistente>=0){
+        const confirmar=await perguntarAtualizacaoPagina(arquivo.name);
+
+        if(!confirmar){
+          mantidas++;
+          continue;
+        }
+
+        const anterior=paginas[indiceExistente];
+        paginas[indiceExistente]=montarDadosPaginaImportada(
+          arquivo,
+          texto,
+          anterior.id,
+          anterior
+        );
+        atualizadas++;
+      }else{
+        paginas.push(
+          montarDadosPaginaImportada(
+            arquivo,
+            texto,
+            Date.now()+indice,
+            null
+          )
+        );
+        importadas++;
+      }
+    }catch(erro){
+      erros++;
+    }
+  }
+
+  const relacoes=organizarSubpaginasAutomaticamente(paginas);
+
+  salvar(K.paginas,paginas);
+  salvar(K.ordemPaginas,paginas.map(p=>String(p.id)));
+  event.target.value="";
+
+  const totalBotoes=contarBotoesPaginas(paginas);
+  const dinamicas=paginas.filter(p=>p.conteudoDinamico).length;
+
+  const resumo=document.getElementById("importacaoResumo");
+  resumo.innerHTML=`
+    <strong>Importação concluída</strong>
+    <span>${importadas} página${importadas===1?" importada":"s importadas"}</span>
+    <span>${atualizadas} página${atualizadas===1?" atualizada":"s atualizadas"}</span>
+    ${mantidas?`<span>${mantidas} página${mantidas===1?" mantida sem alteração":"s mantidas sem alteração"}</span>`:""}
+    <span>${relacoes} relação${relacoes===1?" de subpágina identificada":"ões de subpáginas identificadas"}</span>
+    <span>${totalBotoes} botão${totalBotoes===1?" registrado":"ões registrados"} no catálogo</span>
+    <span>${dinamicas} página${dinamicas===1?" possui":"s possuem"} conteúdo dinâmico</span>
+    ${erros?`<span>${erros} arquivo${erros===1?" não pôde":"s não puderam"} ser processado${erros===1?"":"s"}</span>`:""}
+  `;
+  resumo.classList.add("show");
+
+  renderCatalogoPaginas();
+  render();
+}
+
+function limparCatalogoAutomaticoAntigo(){
+  const chaveReset=P+"catalogo_zerado_v2";
+
+  if(localStorage.getItem(chaveReset)!=="1"){
+    salvar(K.paginas,[]);
+    salvar(K.catalogoExistente,[]);
+    salvar(K.ordemPaginas,[]);
+    localStorage.setItem(chaveReset,"1");
+  }
+}
 
 function render(){
   const e=estado();inicio.hidden=e.iniciado&&e.status!=="encerrado";status.hidden=!e.iniciado||e.status==="encerrado";
@@ -938,7 +2725,7 @@ function render(){
   rErros.textContent=ler(K.testes,[]).filter(x=>!["Concluída","Publicada"].includes(x.status)).length;
 }
 function relogio(){const a=new Date(),p=n=>String(n).padStart(2,"0"),d=["dom","seg","ter","qua","qui","sex","sáb"];hora.textContent=p(a.getHours())+":"+p(a.getMinutes());dia.textContent="• "+d[a.getDay()];data.textContent="• "+p(a.getDate())+"/"+p(a.getMonth()+1)}
-window.addEventListener("load",()=>{render();relogio();setInterval(relogio,1000)})
+window.addEventListener("load",()=>{limparCatalogoAutomaticoAntigo();render();relogio();setInterval(relogio,1000)})
 </script>
 </body>
 </html>

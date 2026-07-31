@@ -81,11 +81,34 @@ let supabaseClient = null;
 let usuarioNuvem = null;
 
 function voltar(){ if(history.length > 1){ history.back(); } else { location.href = "index.html"; } }
-function iniciarSupabase(){ try{ if(window.supabase && !supabaseClient){ supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } }catch(e){ supabaseClient = null; } }
+function ambienteArquivoLocal(){ return location.protocol === "file:"; }
+function iniciarSupabase(){
+  try{
+    if(ambienteArquivoLocal()){
+      supabaseClient = null;
+      setStatus("Abra o app por localhost para usar a nuvem no PC.", "erro");
+      return;
+    }
+    if(window.supabase && !supabaseClient){
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+  }catch(e){
+    console.error("Erro ao iniciar Supabase:", e);
+    supabaseClient = null;
+  }
+}
 function setStatus(texto, tipo){ const el=document.getElementById("statusNuvem"); el.textContent=texto; el.classList.remove("ok","erro"); if(tipo) el.classList.add(tipo); }
 function atualizarStatus(){ usuarioNuvem ? setStatus("Nuvem: conectada em " + usuarioNuvem.email, "ok") : setStatus("Nuvem: desconectada", ""); }
 
 async function carregarSessao(){
+  if(ambienteArquivoLocal()){
+    setStatus("Nuvem bloqueada no modo arquivo. Abra pelo localhost.", "erro");
+    const info=document.querySelector(".infoBox");
+    if(info){
+      info.innerHTML='<strong>Para usar a nuvem no PC:</strong><br>Não abra esta página diretamente pela pasta. Execute o arquivo <strong>abrir-app-no-pc.bat</strong> e acesse o app pelo endereço <strong>http://localhost:8000</strong>.';
+    }
+    return;
+  }
   iniciarSupabase();
   if(!supabaseClient){ setStatus("Nuvem indisponível. Verifique a internet.", "erro"); return; }
   const { data } = await supabaseClient.auth.getSession();
@@ -106,6 +129,10 @@ function obterEmailSenha(){
 }
 
 async function criarConta(){
+  if(ambienteArquivoLocal()){
+    alert("A nuvem não funciona quando a página é aberta como arquivo do Windows. Feche esta tela e execute abrir-app-no-pc.bat.");
+    return;
+  }
   iniciarSupabase();
   if(!supabaseClient){ alert("Não consegui iniciar a nuvem. Verifique sua internet."); return; }
   const c=obterEmailSenha(); if(!c) return;
@@ -118,6 +145,10 @@ async function criarConta(){
 }
 
 async function entrarConta(){
+  if(ambienteArquivoLocal()){
+    alert("A nuvem não funciona quando a página é aberta como arquivo do Windows. Feche esta tela e execute abrir-app-no-pc.bat.");
+    return;
+  }
   iniciarSupabase();
   if(!supabaseClient){ alert("Não consegui iniciar a nuvem. Verifique sua internet."); return; }
   const c=obterEmailSenha(); if(!c) return;
@@ -130,6 +161,10 @@ async function entrarConta(){
 }
 
 async function sairConta(){
+  if(ambienteArquivoLocal()){
+    alert("Abra o app pelo localhost para acessar a nuvem.");
+    return;
+  }
   iniciarSupabase();
   if(supabaseClient){ await supabaseClient.auth.signOut(); }
   usuarioNuvem=null;
@@ -138,6 +173,11 @@ async function sairConta(){
 }
 
 async function garantirLogin(){
+  if(ambienteArquivoLocal()){
+    setStatus("Abra o app pelo localhost para usar a nuvem.", "erro");
+    alert("A nuvem não funciona no modo file://. Execute abrir-app-no-pc.bat.");
+    return false;
+  }
   iniciarSupabase();
   if(!supabaseClient){ alert("Nuvem indisponível. Verifique a internet."); return false; }
   if(!usuarioNuvem){

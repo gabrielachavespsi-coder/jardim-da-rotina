@@ -1674,6 +1674,10 @@ body{
 #modalPilulasInspiracao.formulario-aberto #pilulasLista{display:none !important;}
 </style>
 
+<style>
+.tituloObjetivosMetas{white-space:nowrap;font-size:16px !important;letter-spacing:-0.35px;}
+@media(max-width:390px){.tituloObjetivosMetas{font-size:15px !important;letter-spacing:-0.45px;}}
+</style>
 </head>
 
 <body>
@@ -1782,7 +1786,7 @@ body{
               <div class="menuIcone">🎯</div>
               <div class="menuSeta">›</div>
             </div>
-            <h3>Metas</h3>
+            <h3 class="tituloObjetivosMetas">Objetivos e Metas</h3>
             <p>Objetivos, conquistas e próximos passos com clareza.</p>
           </div>
           <div class="pill">☆ Pequenos passos</div>
@@ -1973,6 +1977,7 @@ body{
         <button class="rotinaBotao" type="button" onclick="irPara('perfil.html')">👤 Acessar o perfil</button>
         <button class="rotinaBotao" type="button" onclick="fecharModalPerfilConfiguracoes(); irParaComSenha('configuracao-senhas.html')">🔐 Configuração de senhas</button>
         <button class="rotinaBotao" type="button" onclick="fecharModalPerfilConfiguracoes(); irPara('desenvolvedor-app.html')">🛠 Desenvolvedor App</button>
+        <button class="rotinaBotao" type="button" onclick="fecharModalPerfilConfiguracoes(); irPara('alertas.html')">🔔 Alertas</button>
       </div>
     </div>
   </div>

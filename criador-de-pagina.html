@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Criador de Página</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fundo:#F8F7F1;--card:#FFFDF8;--texto:#2F332D;--suave:#77786F;
+  --borda:#E8E1D4;--salvia:#718364;--salvia-escura:#516448;--salvia-clara:#EAF2E7;
+  --rosa:#F6ECEF;--bege:#F4F0E7;--branco:#FFFFFF;--perigo:#A45F5F;
+  --sombra:0 12px 30px rgba(76,82,62,.10);--fonte:'Poppins',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{
+  min-height:100vh;padding:14px 12px 100px;display:flex;justify-content:center;
+  font-family:var(--fonte);color:var(--texto);
+  background:
+    radial-gradient(circle at 14% 4%,rgba(232,243,226,.78),transparent 32%),
+    radial-gradient(circle at 95% 16%,rgba(243,236,221,.82),transparent 30%),
+    linear-gradient(180deg,#FEFCF7 0%,var(--fundo) 100%);
+}
+button,input,select,textarea{font-family:var(--fonte)}
+.pagina{width:100%;max-width:420px}
+.cardPrincipal{
+  position:relative;overflow:hidden;width:100%;padding:18px 14px 20px;
+  background:rgba(255,253,248,.94);border:1px solid rgba(232,225,212,.92);
+  border-radius:30px;box-shadow:0 14px 34px rgba(76,82,62,.11);
+}
+.cardPrincipal::before{content:"";position:absolute;width:180px;height:180px;right:-80px;top:-70px;border-radius:50%;background:rgba(234,243,232,.72)}
+.cardPrincipal>*{position:relative;z-index:1}
+.topo{display:grid;grid-template-columns:44px minmax(0,1fr) 76px;min-height:62px;align-items:start}
+.voltar{width:42px;height:42px;border-radius:50%;border:1px solid var(--borda);background:#fff;color:#516448;font-size:20px;cursor:pointer;box-shadow:0 5px 14px rgba(76,82,62,.07)}
+.centro{text-align:center;min-width:0;padding:0 4px}
+h1{font-size:20px;line-height:1.15;font-weight:500;color:#40513B;white-space:nowrap}
+.sub{margin-top:4px;font-size:10.5px;color:var(--suave);line-height:1.3}
+.data{text-align:right;line-height:1.1}.hora{font-size:14px;color:#B8807B;font-weight:500}.data div:not(.hora){font-size:10.5px;color:#6F756C}
+
+.conteudo{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.editorCard{
+  background:#fff;border:1px solid var(--borda);border-radius:20px;padding:14px;
+  box-shadow:0 7px 18px rgba(76,82,62,.06);position:relative;
+}
+.editorCard.ativo{border-left:4px solid var(--salvia);padding-left:11px}
+.editorCardCabecalho{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.editorIcone{width:38px;height:38px;border-radius:13px;background:var(--salvia-clara);display:grid;place-items:center;color:var(--salvia-escura);font-size:18px;flex:0 0 auto}
+.editorTituloArea{flex:1;min-width:0}.editorTitulo{font-size:14px;font-weight:500;color:#40513B}.editorDescricao{margin-top:2px;font-size:9.8px;color:var(--suave);line-height:1.4}
+.seloPadrao{font-size:8.8px;padding:4px 7px;border-radius:999px;background:#F1F0EA;color:#77786F;white-space:nowrap}
+
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}.field:last-child{margin-bottom:0}
+.field label{font-size:11.5px;font-weight:500;color:#40453E}.ajuda{font-size:9.2px;color:#8A8B83;line-height:1.35}
+input,select,textarea{width:100%;padding:10px 11px;border:1px solid var(--borda);border-radius:11px;background:#fff;color:var(--texto);font-size:11.5px;outline:none}
+textarea{min-height:78px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:#9BAC91;box-shadow:0 0 0 3px rgba(113,131,100,.12)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+.padroesLista{display:flex;flex-direction:column;gap:7px}
+.padraoItem{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:9px;align-items:center;padding:9px 10px;border-radius:13px;background:#F8F7F2;border:1px solid #EEE9DF}
+.padraoIcone{width:34px;height:34px;border-radius:11px;background:#fff;display:grid;place-items:center;color:#61755A}.padraoNome{font-size:11.5px;font-weight:500}.padraoTexto{font-size:9px;color:var(--suave);margin-top:1px}.padraoCheck{font-size:16px;color:var(--salvia)}
+
+.blocoCard{background:#fff;border:1px solid var(--borda);border-radius:18px;padding:12px;box-shadow:0 6px 14px rgba(76,82,62,.05);position:relative}
+.blocoCard.selecionado{border-left:4px solid var(--salvia);padding-left:9px}
+.blocoTopo{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:9px;align-items:center;cursor:pointer}
+.blocoTipoIcone{width:34px;height:34px;border-radius:11px;background:var(--bege);display:grid;place-items:center;font-size:16px}
+.blocoNome{font-size:12px;font-weight:500;color:#40513B}.blocoResumo{font-size:9.2px;color:var(--suave);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blocoSeta{font-size:18px;color:#718364;transition:.18s}.blocoCard.aberto .blocoSeta{transform:rotate(90deg)}
+.blocoEditor{display:none;margin-top:11px;padding-top:11px;border-top:1px solid #EFEAE1}.blocoCard.aberto .blocoEditor{display:block}
+.blocoAcoes{display:grid;grid-template-columns:28px 28px 1fr 1fr;gap:6px;margin-top:10px;padding-top:9px;border-top:1px solid #EFEAE1}
+.blocoAcoes button{min-height:31px;border:none;border-radius:9px;background:#F1F0EA;color:#62675F;font-size:10px;cursor:pointer}.blocoAcoes .excluir{background:#F7ECEA;color:#9A5555}
+
+.adicionarArea{position:sticky;bottom:12px;z-index:10;margin-top:4px}
+.adicionarBarra{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:8px;background:rgba(255,255,255,.96);border:1px solid var(--borda);border-radius:17px;box-shadow:0 10px 24px rgba(76,82,62,.15)}
+.adicionarBarra button{min-height:42px;border:none;border-radius:11px;background:#F4F1EA;color:#52664A;font-size:17px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}.adicionarBarra small{font-size:7.8px;color:#72786E}
+
+.previewCard{background:linear-gradient(180deg,#FBFCF8,#F5F7F1);border:1px solid #DDE5D8;border-radius:18px;padding:12px}
+.previewTopo{display:grid;grid-template-columns:34px 1fr 55px;align-items:start}.previewVoltar{width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid #DDE5D8;display:grid;place-items:center;font-size:13px}.previewTitulo{text-align:center}.previewTitulo strong{display:block;font-size:13px;color:#40513B}.previewTitulo span{display:block;font-size:8.5px;color:#77786F;margin-top:2px}.previewTempo{text-align:right;font-size:7.8px;color:#77786F}.previewTempo b{display:block;font-size:10px;color:#B8807B}.previewBlocos{display:flex;flex-direction:column;gap:6px;margin-top:10px}.previewBloco{min-height:38px;border-radius:11px;background:#fff;border:1px solid #E8E1D4;padding:8px 10px;font-size:9px;color:#5C6558}.previewFuture{margin-top:8px;min-height:34px;border-radius:11px;background:#F7F4EC;border:1px solid #E2DACA;display:grid;place-items:center;font-size:8.5px;color:#516448}
+
+.footerAcoes{display:grid;grid-template-columns:1fr 1fr;gap:8px}.footerAcoes button{min-height:44px;border:none;border-radius:14px;font-size:11.5px;cursor:pointer}.cancel{background:#EEEDE8;color:#555A52}.save{background:var(--salvia);color:#fff}
+.aviso{display:none;padding:10px 12px;border-radius:13px;background:var(--salvia-clara);color:#53664E;font-size:10.5px;line-height:1.45;text-align:center}.aviso.show{display:block}
+
+.modalOverlay{position:fixed;inset:0;background:rgba(44,49,40,.35);display:none;align-items:center;justify-content:center;padding:16px;z-index:99}.modalOverlay.show{display:flex}.modal{width:min(350px,100%);max-height:88vh;overflow:auto;background:#FFFDF8;border:1px solid var(--borda);border-radius:22px;padding:16px;box-shadow:0 16px 40px rgba(0,0,0,.18)}.modal h2{text-align:center;font-size:16px;color:#40513B;font-weight:500;margin-bottom:4px}.modal p{text-align:center;font-size:9.8px;color:var(--suave);line-height:1.4;margin-bottom:12px}.tiposGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tipoBtn{min-height:70px;border:1px solid var(--borda);border-radius:14px;background:#fff;color:#40513B;cursor:pointer;padding:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}.tipoBtn span{font-size:20px}.tipoBtn strong{font-size:10px;font-weight:500}.modalFechar{width:100%;margin-top:10px;min-height:38px;border:none;border-radius:12px;background:#EEEDE8;color:#555A52;font-size:11px;cursor:pointer}
+
+@media(max-width:390px){.grid2{grid-template-columns:1fr}.adicionarBarra button{font-size:15px}.adicionarBarra small{font-size:7px}.centro h1{font-size:18px}.sub{font-size:9.8px}}
+</style>
+
+<style id="ajustes-criador-dinamico">
+.campoExplicacao{margin-top:5px;padding:8px 9px;border-radius:10px;background:#F4F7F1;color:#66705F;font-size:9px;line-height:1.4;border:1px solid #E3EADF}
+.campoCondicional{display:none;margin-top:7px}
+.campoCondicional.show{display:block}
+.emojiPreviewLinha{display:flex;align-items:center;gap:8px}
+</style>
+
+
+<style id="ajustes-navegacao-conteudos">
+.autoField{background:#F5F7F2 !important;color:#5F685A !important;cursor:not-allowed}
+.navDecisionGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.navDecisionCard{padding:10px;border:1px solid #E3EADF;border-radius:13px;background:#F8FAF6}
+.navDecisionTitle{display:flex;align-items:center;gap:7px;font-size:10.8px;font-weight:500;color:#40513B;margin-bottom:5px}
+.navDecisionIcon{width:25px;height:25px;border-radius:9px;background:#EAF2E7;display:grid;place-items:center;color:#58705A}
+.navDecisionText{font-size:8.9px;color:#737A70;line-height:1.4}
+.navExample{margin-top:7px;padding:7px 8px;border-radius:9px;background:#fff;border:1px solid #E8E1D4;font-size:8.8px;color:#5F685A;line-height:1.4}
+.blocoPreviewBox{margin:10px 0 12px;padding:12px;border:1px solid #DDE5D8;border-radius:16px;background:linear-gradient(180deg,#FBFCF8,#F5F7F1)}
+.blocoPreviewLabel{font-size:9px;color:#77786F;margin-bottom:7px;text-align:left}
+.blocoPreviewDemo{min-height:92px;display:flex;align-items:center;justify-content:center}
+.demoCard{width:100%;border:1px solid #E3EADF;border-radius:13px;background:#fff;padding:10px;color:#40513B;font-size:10px}
+.demoTitle{font-size:13px;font-weight:500;margin-bottom:4px}.demoMuted{font-size:8.8px;color:#77786F}.demoBtn{margin-top:8px;border-radius:10px;background:#718364;color:#fff;padding:8px;text-align:center}.demoList{display:flex;flex-direction:column;gap:5px}.demoList div{padding:7px 8px;border:1px solid #E8E1D4;border-radius:9px;background:#fff}.demoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.demoGrid div{padding:8px 4px;border:1px solid #E8E1D4;border-radius:9px;text-align:center;background:#fff}.demoImage{height:76px;border-radius:11px;background:linear-gradient(135deg,#EAF2E7,#F4EEE2);display:grid;place-items:center;font-size:24px}.demoDivider{height:1px;background:#D8DED3;width:100%}.demoProgress{height:8px;background:#E3EADF;border-radius:999px;overflow:hidden}.demoProgress span{display:block;width:62%;height:100%;background:#718364}.modalPreviewActions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.modalPreviewActions button{min-height:39px;border:none;border-radius:12px;font-size:10.5px;cursor:pointer}.btnAddBlock{background:#718364;color:#fff}.btnBackBlock{background:#EEEDE8;color:#555A52}
+@media(max-width:390px){.navDecisionGrid{grid-template-columns:1fr}}
+</style>
+
+</head>
+<body>
+<div class="pagina"><main class="cardPrincipal">
+  <header class="topo">
+    <button class="voltar" type="button" onclick="location.href='desenvolvedor-app.html'">←</button>
+    <div class="centro"><h1>✎ Criador de Página</h1><div class="sub">Monte a estrutura e o conteúdo da nova página</div></div>
+    <div class="data"><div id="hora" class="hora">00:00</div><div id="dia">• seg</div><div id="data">• 00/00</div></div>
+  </header>
+
+  <div class="conteudo">
+    <section class="editorCard ativo">
+      <div class="editorCardCabecalho">
+        <div class="editorIcone">1</div>
+        <div class="editorTituloArea"><div class="editorTitulo">Identidade da página</div><div class="editorDescricao">Informações principais usadas no cabeçalho e no catálogo do aplicativo.</div></div>
+      </div>
+      <div class="field"><label>Título da página</label><span class="ajuda">Digite o texto que aparecerá no centro do cabeçalho. O nome interno e o arquivo serão criados automaticamente.</span><input id="pTitulo" placeholder="Ex.: Diário de Gratidão"></div>
+      <div class="grid2">
+        <div class="field"><label>Nome da página — automático</label><span class="ajuda">Espaços viram hífens, acentos são removidos e todas as letras ficam minúsculas.</span><input id="pNome" class="autoField" readonly placeholder="diario-de-gratidao"></div>
+        <div class="field"><label>Nome do arquivo — automático</label><span class="ajuda">Usa o mesmo nome e acrescenta .html no final.</span><input id="pArquivo" class="autoField" readonly placeholder="diario-de-gratidao.html"></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>Emoji</label><span class="ajuda">Escolha um símbolo para identificar a página.</span><select id="pEmoji">
+<option value="📄">📄 Página geral</option><option value="🌿">🌿 Rotina e bem-estar</option><option value="🩺">🩺 Saúde</option><option value="🥗">🥗 Alimentação</option><option value="📅">📅 Agenda</option><option value="🎯">🎯 Objetivos e metas</option><option value="💰">💰 Finanças</option><option value="📝">📝 Anotações</option><option value="📚">📚 Leitura e estudo</option><option value="🎨">🎨 Criatividade</option><option value="✨">✨ Manifestação</option><option value="🧩">🧩 Perfil e configurações</option><option value="🛒">🛒 Compras e mercado</option><option value="🍲">🍲 Receitas</option><option value="⏳">⏳ Jejum e tempo</option><option value="💫">💫 Desejos e sonhos</option><option value="🚨">🚨 Alertas</option><option value="📊">📊 Histórico e gráficos</option><option value="🛠️">🛠️ Desenvolvimento</option><option value="👩‍👧">👩‍👧 Família</option>
+</select></div>
+        <div class="field"><label>Tipo de estrutura</label><span class="ajuda">Define quais blocos serão sugeridos para começar. Depois você pode adicionar, retirar e reordenar tudo.</span><select id="pTipo"><option value="Menu de botões">Menu de botões</option><option value="Lista de registros">Lista de registros</option><option value="Formulário">Formulário</option><option value="Rotina">Rotina</option><option value="Projeto">Projeto</option><option value="Painel com resumo">Painel com resumo</option><option value="Agenda ou calendário">Agenda ou calendário</option><option value="Personalizada">Personalizada</option></select><div id="tipoEstruturaExplicacao" class="campoExplicacao"></div></div>
+      </div>
+      <div class="field"><label>Subtítulo da página</label><span class="ajuda">Frase curta abaixo do título.</span><input id="pSub" placeholder="Explique a função desta página"></div>
+      <div class="navDecisionGrid">
+        <div class="navDecisionCard">
+          <div class="navDecisionTitle"><span class="navDecisionIcon">←</span><span>Página de retorno</span></div>
+          <div class="navDecisionText">Define para onde a pessoa volta quando toca na seta do cabeçalho desta nova página.</div>
+          <div class="field" style="margin-top:8px"><select id="pVoltar"><option value="index.html">Página inicial — index.html</option><option value="gabriela-menu.html">Menu Gabriela — gabriela-menu.html</option><option value="maya-menu.html">Menu Maya — maya-menu.html</option><option value="alimentacao.html">Alimentação — alimentacao.html</option><option value="saude.html">Saúde — saude.html</option><option value="desenvolvedor-app.html">Desenvolvedor App — desenvolvedor-app.html</option><option value="outra">Outra página...</option></select><input id="pVoltarOutro" class="campoCondicional" placeholder="Ex.: projetos.html"></div>
+          <div class="navExample">Exemplo: se escolher <b>Alimentação</b>, a seta desta nova página abrirá <b>alimentacao.html</b>.</div>
+        </div>
+        <div class="navDecisionCard">
+          <div class="navDecisionTitle"><span class="navDecisionIcon">↗</span><span>Onde aparecerá o acesso</span></div>
+          <div class="navDecisionText">Define qual página receberá o botão que abre esta nova página.</div>
+          <div class="field" style="margin-top:8px"><select id="pAcesso"><option value="index.html">Página inicial — index.html</option><option value="gabriela-menu.html">Menu Gabriela — gabriela-menu.html</option><option value="maya-menu.html">Menu Maya — maya-menu.html</option><option value="alimentacao.html">Alimentação — alimentacao.html</option><option value="saude.html">Saúde — saude.html</option><option value="desenvolvedor-app.html">Desenvolvedor App — desenvolvedor-app.html</option><option value="outra">Outra página...</option></select><input id="pAcessoOutro" class="campoCondicional" placeholder="Ex.: projetos.html"></div>
+          <div id="acessoExplicacao" class="navExample">Exemplo: se escolher <b>Saúde</b>, o botão desta nova página aparecerá em <b>saude.html</b>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="editorCard">
+      <div class="editorCardCabecalho">
+        <div class="editorIcone">2</div>
+        <div class="editorTituloArea"><div class="editorTitulo">Conteúdo da página</div><div class="editorDescricao">Adicione os blocos que formarão a tela, como no editor de um formulário.</div></div>
+      </div>
+      <div id="listaBlocos"></div>
+    </section>
+
+    <section class="editorCard">
+      <div class="editorCardCabecalho">
+        <div class="editorIcone">◫</div>
+        <div class="editorTituloArea"><div class="editorTitulo">Prévia da estrutura</div><div class="editorDescricao">Visualização simplificada da página que será criada.</div></div>
+      </div>
+      <div class="previewCard">
+        <div class="previewTopo"><div class="previewVoltar">←</div><div class="previewTitulo"><strong id="prevTitulo">📄 Nova página</strong><span id="prevSub">Subtítulo da página</span></div><div class="previewTempo"><b>20:15</b><div>• qui</div><div>• 30/07</div></div></div>
+        <div id="prevBlocos" class="previewBlocos"></div>
+        <div class="previewFuture">⚙ Futuras edições ›</div>
+      </div>
+    </section>
+
+    <div id="aviso" class="aviso"></div>
+    <div class="footerAcoes"><button class="cancel" type="button" onclick="location.href='desenvolvedor-app.html'">Cancelar</button><button class="save" type="button" onclick="criarPagina()">Criar modelo</button></div>
+  </div>
+
+  <div class="adicionarArea">
+    <div class="adicionarBarra">
+      <button type="button" onclick="abrirTipos('texto')">T<small>Texto</small></button>
+      <button type="button" onclick="abrirTipos('acao')">＋<small>Ação</small></button>
+      <button type="button" onclick="abrirTipos('dados')">▤<small>Dados</small></button>
+      <button type="button" onclick="abrirTipos('visual')">▧<small>Visual</small></button>
+      <button type="button" onclick="abrirTipos('secao')">≡<small>Seção</small></button>
+    </div>
+  </div>
+</main></div>
+
+<div id="modalTipos" class="modalOverlay"><div class="modal"><h2>Adicionar à página</h2><p>Escolha uma opção para ver como ela poderá aparecer antes de adicionar.</p><div id="tiposGrid" class="tiposGrid"></div><button class="modalFechar" onclick="fecharTipos()">Cancelar</button></div></div>
+
+<div id="modalPreviewBloco" class="modalOverlay"><div class="modal"><h2 id="previewBlocoTitulo">Prévia do conteúdo</h2><p id="previewBlocoDescricao">Veja um exemplo visual. O texto e as opções poderão ser editados depois.</p><div class="blocoPreviewBox"><div class="blocoPreviewLabel">Exemplo de como pode aparecer na página</div><div id="previewBlocoDemo" class="blocoPreviewDemo"></div></div><div class="modalPreviewActions"><button class="btnBackBlock" type="button" onclick="voltarParaTipos()">Voltar</button><button class="btnAddBlock" type="button" onclick="confirmarAdicionarBloco()">Adicionar à página</button></div></div></div>
+
+<script>
+const P="jardim_app_",K={paginas:P+"paginas",ordemPaginas:P+"ordem_paginas"};
+const ler=(k,p)=>{try{return JSON.parse(localStorage.getItem(k))??p}catch{return p}},salvar=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let blocos=[];
+let tipoBlocoPendente="";
+const TIPOS={
+ texto:[['titulo','Aa','Título ou texto'],['aviso','!','Aviso ou orientação'],['frase','❝','Frase de destaque']],
+ acao:[['botao','＋','Botão de acesso'],['grupo-botoes','▦','Grupo de botões'],['acao-principal','✓','Ação principal']],
+ dados:[['lista','☷','Lista de registros'],['formulario','✎','Formulário'],['resumo','▤','Cards de resumo'],['filtros','⌕','Filtros']],
+ visual:[['hero','▧','Card com imagem'],['imagem','▣','Imagem'],['grafico','⌁','Gráfico'],['progresso','━','Progresso']],
+ secao:[['secao','≡','Nova seção'],['divisor','—','Divisor'],['espaco','↕','Espaçamento']]
+};
+function gerarId(){return Date.now()+Math.floor(Math.random()*10000)}
+function normalizarNome(v){return String(v||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'')}
+function normalizarArquivo(v){const a=normalizarNome(String(v||'').replace(/\.html$/i,''));return a?a+'.html':''}
+function atualizarNomesAutomaticos(){const base=normalizarNome(pTitulo.value);pNome.value=base;pArquivo.value=base?base+'.html':'';atualizarPreview()}
+function nomeTipo(tipo){const todos=Object.values(TIPOS).flat();return todos.find(x=>x[0]===tipo)?.[2]||tipo}
+function iconeTipo(tipo){const todos=Object.values(TIPOS).flat();return todos.find(x=>x[0]===tipo)?.[1]||'□'}
+function abrirTipos(grupo){tiposGrid.innerHTML=TIPOS[grupo].map(x=>`<button class="tipoBtn" onclick="abrirPreviewBloco('${x[0]}')"><span>${x[1]}</span><strong>${x[2]}</strong></button>`).join('');modalTipos.classList.add('show')}
+function exemploBloco(tipo){
+ const exemplos={
+  titulo:'<div class="demoCard"><div class="demoTitle">Título da seção</div><div class="demoMuted">Texto complementar ou orientação.</div></div>',
+  aviso:'<div class="demoCard" style="background:#FFF7DC">⚠ Informação importante para quem usa a página.</div>',
+  frase:'<div class="demoCard" style="text-align:center;font-style:italic">“Uma frase em destaque aparece aqui.”</div>',
+  botao:'<div class="demoCard"><div class="demoBtn">Abrir outra página</div></div>',
+  'grupo-botoes':'<div class="demoCard"><div class="demoList"><div>🌿 Primeira opção ›</div><div>📅 Segunda opção ›</div><div>📝 Terceira opção ›</div></div></div>',
+  'acao-principal':'<div class="demoCard"><div class="demoBtn">＋ Adicionar novo registro</div></div>',
+  lista:'<div class="demoCard"><div class="demoList"><div>Registro mais recente <small>Hoje</small></div><div>Segundo registro <small>Ontem</small></div><div>Terceiro registro <small>25/07</small></div></div></div>',
+  formulario:'<div class="demoCard"><div class="demoList"><div>Nome</div><div>Data</div><div>Descrição</div></div><div class="demoBtn">Salvar</div></div>',
+  resumo:'<div class="demoGrid"><div><b>12</b><br><span class="demoMuted">Hoje</span></div><div><b>28</b><br><span class="demoMuted">Total</span></div><div><b>3</b><br><span class="demoMuted">Pendentes</span></div></div>',
+  filtros:'<div class="demoCard"><span style="padding:5px 8px;border-radius:999px;background:#EAF2E7">Todos</span> <span style="padding:5px 8px;border-radius:999px;background:#F1F0EA">Ativos</span> <span style="padding:5px 8px;border-radius:999px;background:#F1F0EA">Concluídos</span></div>',
+  hero:'<div class="demoCard"><div class="demoImage">🌿</div><div class="demoTitle" style="margin-top:7px">Mensagem principal</div><div class="demoMuted">Imagem e texto de abertura da página.</div></div>',
+  imagem:'<div class="demoCard"><div class="demoImage">🖼️</div></div>',
+  grafico:'<div class="demoCard"><div style="height:70px;display:flex;align-items:end;gap:7px"><span style="height:35%;flex:1;background:#DCE8D7;border-radius:5px 5px 0 0"></span><span style="height:62%;flex:1;background:#BFD3B8;border-radius:5px 5px 0 0"></span><span style="height:82%;flex:1;background:#8FA684;border-radius:5px 5px 0 0"></span><span style="height:55%;flex:1;background:#CADAC4;border-radius:5px 5px 0 0"></span></div></div>',
+  progresso:'<div class="demoCard"><div class="demoMuted">Progresso geral • 62%</div><div class="demoProgress" style="margin-top:8px"><span></span></div></div>',
+  secao:'<div class="demoCard"><div class="demoTitle">Nova seção</div><div class="demoMuted">Agrupa conteúdos relacionados.</div></div>',
+  divisor:'<div class="demoDivider"></div>',
+  espaco:'<div style="height:70px;border:1px dashed #D8DED3;border-radius:11px;display:grid;place-items:center;color:#8A8B83;font-size:9px">Espaço entre conteúdos</div>'
+ };
+ return exemplos[tipo]||'<div class="demoCard">Prévia do bloco</div>';
+}
+function abrirPreviewBloco(tipo){tipoBlocoPendente=tipo;modalTipos.classList.remove('show');previewBlocoTitulo.textContent=nomeTipo(tipo);previewBlocoDescricao.textContent='Veja um exemplo visual. Depois de adicionar, você poderá mudar o nome, o conteúdo e as opções.';previewBlocoDemo.innerHTML=exemploBloco(tipo);modalPreviewBloco.classList.add('show')}
+function voltarParaTipos(){modalPreviewBloco.classList.remove('show');modalTipos.classList.add('show')}
+function confirmarAdicionarBloco(){if(!tipoBlocoPendente)return;const tipo=tipoBlocoPendente;tipoBlocoPendente='';modalPreviewBloco.classList.remove('show');adicionarBloco(tipo)}
+function fecharTipos(){modalTipos.classList.remove('show')}
+function adicionarBloco(tipo){blocos.push({id:gerarId(),tipo,titulo:nomeTipo(tipo),descricao:'',destino:'',opcoes:''});fecharTipos();renderBlocos();setTimeout(()=>document.querySelector('.blocoCard:last-child')?.classList.add('aberto'),20)}
+function renderBlocos(){
+  listaBlocos.innerHTML=blocos.length?blocos.map((b,i)=>`<div class="blocoCard" data-id="${b.id}"><div class="blocoTopo" onclick="this.parentElement.classList.toggle('aberto')"><div class="blocoTipoIcone">${iconeTipo(b.tipo)}</div><div><div class="blocoNome">${esc(b.titulo||nomeTipo(b.tipo))}</div><div class="blocoResumo">${esc(b.descricao||nomeTipo(b.tipo))}</div></div><div class="blocoSeta">›</div></div><div class="blocoEditor"><div class="field"><label>Nome do bloco</label><input value="${escAttr(b.titulo)}" oninput="atualizarBloco(${b.id},'titulo',this.value)"></div><div class="field"><label>Descrição ou conteúdo</label><textarea oninput="atualizarBloco(${b.id},'descricao',this.value)">${esc(b.descricao)}</textarea></div>${['botao','grupo-botoes','acao-principal'].includes(b.tipo)?`<div class="field"><label>Destino ou ação</label><input value="${escAttr(b.destino)}" placeholder="pagina.html ou nomeDaFuncao()" oninput="atualizarBloco(${b.id},'destino',this.value)"></div>`:''}${['lista','formulario','resumo','filtros','grupo-botoes'].includes(b.tipo)?`<div class="field"><label>Itens ou campos</label><span class="ajuda">Separe os nomes por vírgula.</span><input value="${escAttr(b.opcoes)}" placeholder="Ex.: Nome, Data, Descrição" oninput="atualizarBloco(${b.id},'opcoes',this.value)"></div>`:''}<div class="blocoAcoes"><button onclick="mover(${b.id},-1)" ${i===0?'disabled':''}>↑</button><button onclick="mover(${b.id},1)" ${i===blocos.length-1?'disabled':''}>↓</button><button onclick="duplicar(${b.id})">Duplicar</button><button class="excluir" onclick="excluirBloco(${b.id})">Excluir</button></div></div></div>`).join(''):'<div style="padding:18px;text-align:center;border:1px dashed #D8D2C7;border-radius:14px;font-size:10px;color:#77786F">Use a barra inferior para adicionar o primeiro bloco da página.</div>';
+  atualizarPreview();
+}
+function atualizarBloco(id,campo,valor){
+  const b=blocos.find(x=>x.id===id);
+  if(!b)return;
+  b[campo]=valor;
+  const card=document.querySelector(`.blocoCard[data-id="${id}"]`);
+  if(card){
+    const nome=card.querySelector('.blocoNome');
+    const resumo=card.querySelector('.blocoResumo');
+    if(nome)nome.textContent=b.titulo||nomeTipo(b.tipo);
+    if(resumo)resumo.textContent=b.descricao||nomeTipo(b.tipo);
+  }
+  atualizarPreview();
+}
+function renderBlocosPreservando(id){
+  const abertos=[...document.querySelectorAll('.blocoCard.aberto')].map(x=>x.dataset.id);
+  renderBlocos();
+  abertos.concat(String(id)).forEach(x=>document.querySelector(`.blocoCard[data-id="${x}"]`)?.classList.add('aberto'));
+}
+function mover(id,d){const i=blocos.findIndex(x=>x.id===id),n=i+d;if(i<0||n<0||n>=blocos.length)return;[blocos[i],blocos[n]]=[blocos[n],blocos[i]];renderBlocos()}
+function duplicar(id){const i=blocos.findIndex(x=>x.id===id);if(i<0)return;blocos.splice(i+1,0,{...blocos[i],id:gerarId(),titulo:blocos[i].titulo+' (cópia)'});renderBlocos()}
+function excluirBloco(id){blocos=blocos.filter(x=>x.id!==id);renderBlocos()}
+function atualizarPreview(){prevTitulo.textContent=(pEmoji.value||'📄')+' '+(pTitulo.value.trim()||pNome.value.trim()||'Nova página');prevSub.textContent=pSub.value.trim()||'Subtítulo da página';prevBlocos.innerHTML=blocos.length?blocos.map(b=>`<div class="previewBloco">${iconeTipo(b.tipo)} ${esc(b.titulo||nomeTipo(b.tipo))}</div>`).join(''):'<div class="previewBloco">O conteúdo adicionado aparecerá aqui.</div>'}
+function mostrarAviso(t,erro=false){aviso.textContent=t;aviso.classList.add('show');aviso.style.background=erro?'#F7E8E6':'#EAF2E7';aviso.style.color=erro?'#985454':'#53664E'}
+function criarPagina(){
+ const nome=pNome.value.trim(),titulo=pTitulo.value.trim(),arquivo=normalizarArquivo(pArquivo.value);
+ if(!nome){mostrarAviso('Preencha o nome da página.',true);pNome.focus();return}
+ if(!titulo){mostrarAviso('Preencha o título da página.',true);pTitulo.focus();return}
+ if(!arquivo){mostrarAviso('Preencha o nome do arquivo.',true);pArquivo.focus();return}
+ const paginas=ler(K.paginas,[]);if(paginas.some(x=>String(x.arquivo||'').toLowerCase()===arquivo)){mostrarAviso('Já existe uma página criada com esse nome de arquivo.',true);return}
+ const nova={id:gerarId(),nome,titulo,arquivo,emoji:pEmoji.value||'📄',tipo:pTipo.value,subtitulo:pSub.value.trim(),voltar:(pVoltar.value==='outra'?pVoltarOutro.value.trim():pVoltar.value)||'index.html',acesso:(pAcesso.value==='outra'?pAcessoOutro.value.trim():pAcesso.value),parentId:'',botoes:blocos.filter(b=>['botao','grupo-botoes','acao-principal'].includes(b.tipo)).map(b=>({id:String(b.id),nome:b.titulo,descricao:b.descricao,tipo:'acao',destino:b.destino})),blocos,padroes:{voltar:true,dataHora:true,futurasEdicoes:true},destinosPaginas:[],conteudoDinamico:blocos.some(b=>['lista','formulario','resumo','filtros','grafico','progresso'].includes(b.tipo))};
+ paginas.push(nova);salvar(K.paginas,paginas);const ordem=ler(K.ordemPaginas,[]).map(String);ordem.push(String(nova.id));salvar(K.ordemPaginas,ordem);mostrarAviso('Modelo criado e salvo em Páginas do Aplicativo.');setTimeout(()=>location.href='desenvolvedor-app.html',700)
+}
+function esc(t){return String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function escAttr(t){return esc(t).replace(/\n/g,' ')}
+function atualizarTempo(){const a=new Date(),d=['dom','seg','ter','qua','qui','sex','sáb'],p=n=>String(n).padStart(2,'0');hora.textContent=p(a.getHours())+':'+p(a.getMinutes());dia.textContent='• '+d[a.getDay()];data.textContent='• '+p(a.getDate())+'/'+p(a.getMonth()+1)}
+const EXPLICACOES_TIPO={
+  'Menu de botões':'Começa com um card de abertura e um grupo de botões para acessar outras páginas ou funções.',
+  'Lista de registros':'Começa com botão de adicionar, filtros e uma lista de cards cadastrados.',
+  'Formulário':'Começa com campos de preenchimento e botão para salvar ou concluir.',
+  'Rotina':'Começa com tarefas, horários, conclusão e organização por período.',
+  'Projeto':'Começa com status, progresso, etapas, tarefas e ações do projeto.',
+  'Painel com resumo':'Começa com indicadores, cards de resumo e atalhos para detalhes.',
+  'Agenda ou calendário':'Começa com data, períodos, compromissos e botão para novo evento.',
+  'Personalizada':'Começa vazia para você escolher manualmente todos os blocos.'
+};
+function atualizarExplicacaoTipo(){tipoEstruturaExplicacao.textContent=EXPLICACOES_TIPO[pTipo.value]||'';}
+function atualizarAcesso(){
+  const outro=pAcesso.value==='outra';
+  pAcessoOutro.classList.toggle('show',outro);
+  const texto=pAcesso.options[pAcesso.selectedIndex]?.textContent||'';
+  acessoExplicacao.innerHTML=outro?'Digite o arquivo da página que receberá o botão de entrada.':`O botão de acesso será colocado em <b>${texto}</b>.`;
+  if(outro)setTimeout(()=>pAcessoOutro.focus(),0);
+}
+function atualizarRetorno(){
+  const outro=pVoltar.value==='outra';
+  pVoltarOutro.classList.toggle('show',outro);
+  if(outro)setTimeout(()=>pVoltarOutro.focus(),0);
+}
+pTitulo.addEventListener('input',atualizarNomesAutomaticos);
+pSub.addEventListener('input',atualizarPreview);
+pEmoji.addEventListener('change',atualizarPreview);
+pTipo.addEventListener('change',atualizarExplicacaoTipo);
+pAcesso.addEventListener('change',atualizarAcesso);
+pVoltar.addEventListener('change',atualizarRetorno);
+atualizarExplicacaoTipo();
+atualizarAcesso();
+atualizarRetorno();
+atualizarNomesAutomaticos();
+blocos=[{id:gerarId(),tipo:'hero',titulo:'Card principal',descricao:'Imagem ou mensagem de abertura da página',destino:'',opcoes:''},{id:gerarId(),tipo:'grupo-botoes',titulo:'Menu principal',descricao:'Botões que levam às funções da página',destino:'',opcoes:'Botão 1, Botão 2'}];
+atualizarTempo();setInterval(atualizarTempo,1000);renderBlocos();
+</script>
+</body>
+</html>

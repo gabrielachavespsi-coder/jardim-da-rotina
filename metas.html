@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Metas</title>
+<title>Objetivos</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -132,7 +132,9 @@ body{
   color:var(--texto-secundario);
   text-align:center;
   line-height:1.35;
-  white-space:normal;
+  white-space:nowrap;
+  max-width:none;
+  font-size:10.5px;
 }
 
 .dataTopo{
@@ -312,6 +314,49 @@ body{
   color:var(--texto-principal);
 }
 
+
+.actionCreateBox{
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) 30px;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  transition:0.2s ease;
+}
+.actionCreateBox:hover{background:#F2F7F0;}
+.createActionIcon{
+  width:42px;height:42px;border-radius:14px;background:var(--verde-principal);
+  color:var(--verde-texto);display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:500;
+}
+.createActionText{min-width:0;}
+.actionCreateBox .boxTitle{text-align:left;}
+.createActionSub{font-size:10.2px;color:var(--texto-secundario);line-height:1.25;margin-top:2px;white-space:nowrap;}
+.field select{
+  padding:12px 14px;border-radius:12px;border:1px solid var(--borda);
+  font-size:13px;font-family:var(--fonte);outline:none;color:var(--texto-principal);background:#fff;
+}
+.field select:focus{border-color:var(--verde-escuro);box-shadow:0 0 0 3px rgba(127,183,126,0.12);}
+.objetivoItem{
+  border:1px solid rgba(63,111,79,.12);background:#F4F8F2;border-radius:16px;overflow:hidden;
+}
+.objetivoResumo{padding:14px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) 24px;gap:8px;align-items:center;}
+.objetivoNome{font-size:14px;font-weight:500;color:var(--verde-texto);}
+.objetivoDescricao{font-size:11.5px;color:var(--texto-secundario);line-height:1.4;margin-top:3px;}
+.objetivoResumoInfo{font-size:11px;color:var(--texto-secundario);line-height:1.45;margin-top:7px;}
+.objetivoMetasTitulo{font-size:12.5px;font-weight:500;color:var(--verde-texto);line-height:1.35;margin:10px 2px 6px;}
+.objetivoSeta{font-size:21px;color:var(--verde-texto);transition:.2s;text-align:center;}
+.objetivoItem.aberto .objetivoSeta{transform:rotate(90deg);}
+.objetivoConteudo{display:none;padding:0 12px 12px;}
+.objetivoItem.aberto .objetivoConteudo{display:block;}
+.objetivoInfo{font-size:11px;color:var(--texto-secundario);padding:10px 2px;border-top:1px solid rgba(63,111,79,.12);line-height:1.5;}
+.objetivoMetas{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.objetivoMetaMini{background:var(--verde-principal);border-radius:13px;padding:10px 12px;color:var(--verde-texto);font-size:12px;line-height:1.4;}
+.objetivoMetaTopo{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.objetivoMetaNome{min-width:0;flex:1;}
+.objetivoMetaBtn{border:none;border-radius:10px;background:#fff;color:var(--verde-texto);font-family:var(--fonte);font-size:10.5px;padding:6px 9px;cursor:pointer;flex-shrink:0;}
+.objetivoMetaBtn.reabrir{background:#F5F1E8;color:#6B665A;}
+.objetivoAcoes{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
 .modalOverlay{
   position:fixed;
   inset:0;
@@ -462,6 +507,681 @@ body{
   }
 }
 </style>
+
+
+<style id="ajuste-fundo-saude-metas">
+/* Fundo e cartão no mesmo padrão visual da página Saúde */
+body{
+  align-items:flex-start !important;
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,.8), transparent 35%),
+    linear-gradient(180deg,#FAFBF7 0%,#F6F8F3 100%) !important;
+}
+
+.card{
+  border:1px solid rgba(221,232,216,.86) !important;
+  border-radius:30px !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+  background:rgba(255,255,255,.86) !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  right:-62px;
+  top:-52px;
+  border-radius:50%;
+  background:rgba(232,243,226,.78);
+  z-index:0;
+}
+
+.card > *{
+  position:relative;
+  z-index:1;
+}
+</style>
+
+<style id="ajustes-alimentacao-metas">
+/* Cabeçalho e botão Futuras edições no padrão da página Alimentação */
+.topo{
+  display:grid !important;
+  grid-template-columns:66px minmax(0,1fr) 66px !important;
+  gap:0 !important;
+  min-height:64px !important;
+  align-items:start !important;
+  margin-bottom:2px !important;
+  padding-top:6px !important;
+}
+.botao-voltar{
+  width:42px !important; height:42px !important; border-radius:50% !important;
+  background:rgba(255,255,255,.92) !important; border:1px solid rgba(221,232,216,.95) !important;
+  box-shadow:0 5px 14px rgba(84,110,79,.08) !important; color:#2F332D !important; font-size:20px !important;
+}
+.topCenter{padding:0 3px !important; align-items:center !important; justify-content:flex-start !important;}
+.titleIndex{color:#435F3E !important; font-weight:500 !important; font-size:22px !important; line-height:1.1 !important; white-space:nowrap !important;}
+.subtitulo{font-size:10.5px !important; color:#6F756C !important; margin-top:5px !important; line-height:1.3 !important; white-space:nowrap !important;}
+.dataTopo{width:66px !important; min-width:66px !important; display:flex !important; visibility:visible !important; opacity:1 !important; align-items:flex-end !important; text-align:right !important; padding-top:1px !important;}
+.horaTopo{font-size:14px !important; color:#B8807B !important; font-weight:500 !important; margin-bottom:2px !important;}
+.dataTopoLinha{font-size:10.6px !important; color:#6F756C !important;}
+.footerMiniAction{display:grid !important; grid-template-columns:1fr !important; gap:10px !important; margin-top:10px !important; padding-bottom:8px !important;}
+.futureBtn{
+  width:100% !important; min-height:56px !important; border-radius:18px !important;
+  background:rgba(250,248,241,.94) !important; border:1px solid rgba(216,207,191,.95) !important;
+  color:#40513B !important; font-size:13px !important; text-align:center !important; padding:12px 42px !important;
+  box-shadow:0 6px 16px rgba(76,82,62,.06) !important; position:relative !important;
+  display:flex !important; align-items:center !important; justify-content:center !important;
+}
+.futureBtn::before{content:"⚙"; margin-right:8px; color:#6D805F;}
+.futureBtn::after{content:"›"; position:absolute; right:14px; top:50%; transform:translateY(-52%); font-size:24px; color:#6F7E63;}
+@media(max-width:390px){
+  .topo{grid-template-columns:60px minmax(0,1fr) 60px !important;}
+  .dataTopo{width:60px !important; min-width:60px !important;}
+  .titleIndex{font-size:20px !important;}
+}
+</style>
+
+<style id="ajustes-edicao-exclusao">
+.modalDeleteBtn{
+  display:none;
+  width:100%;
+  min-height:42px;
+  border:none;
+  border-radius:12px;
+  background:#F8E2E2;
+  color:#963F3F;
+  font-family:var(--fonte);
+  font-size:12.5px;
+  cursor:pointer;
+}
+.modalDeleteBtn.show{display:block;}
+.objetivoMetaAcoes{display:flex;gap:6px;align-items:center;flex-shrink:0;}
+.objetivoMetaEditar{
+  border:none;border-radius:10px;background:#fff;color:var(--verde-texto);
+  font-family:var(--fonte);font-size:10.5px;padding:6px 9px;cursor:pointer;
+}
+</style>
+
+
+<style id="ajustes-acoes-objetivos-metas">
+.objetivoResumoInfoLinha{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:7px;}
+.metaDescricaoLinha{font-size:11.5px;color:rgba(63,111,79,0.75);text-align:left;line-height:1.4;margin-top:4px;margin-bottom:6px;}
+.metaResumoInfo,.metaResumoExtra{font-size:11px;color:var(--texto-secundario);line-height:1.35;text-align:left;}
+.metaResumoExtra{margin-top:6px;}
+.metaConcluidaTag{font-size:12px;color:#6B665A;font-weight:500;}
+.objetivoMetaMini{cursor:pointer;}
+.objetivoMetaMiniResumo{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1;}
+.objetivoMetaMiniDescricao{font-size:11px;color:rgba(63,111,79,0.78);line-height:1.35;}
+.objetivoMetaMiniInfo{font-size:10.8px;color:rgba(63,111,79,0.84);line-height:1.3;}
+.objetivoMetaEditarWrap{display:none;margin-top:8px;justify-content:flex-start;}
+.objetivoMetaMini.aberto .objetivoMetaEditarWrap{display:flex;}
+.objetivoMetaMini.aberto{box-shadow:inset 0 0 0 1px rgba(63,111,79,.10);}
+.editarObjetivoInline{display:none;border:none;border-radius:10px;background:#fff;color:var(--verde-texto);font-family:var(--fonte);font-size:10.5px;padding:6px 9px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.objetivoItem.aberto .editarObjetivoInline{display:inline-flex;align-items:center;justify-content:center;}
+#btnConcluirMetaModal{display:none;width:100%;min-height:46px;border:none;border-radius:16px;background:#EAF3E8;color:#3F6F4F;font-family:var(--fonte);font-size:13px;font-weight:500;cursor:pointer;box-shadow:0 5px 14px rgba(84,110,79,.06);}
+#btnConcluirMetaModal.show{display:block;}
+#btnConcluirMetaModal.reabrir{background:#F5F1E8;color:#6B665A;}
+#btnExcluirMetaModal,#btnExcluirObjetivoModal{min-height:46px;border-radius:16px !important;font-size:13px !important;box-shadow:0 5px 14px rgba(0,0,0,.04);}
+.modalBtns{display:grid !important;grid-template-columns:1fr 1fr !important;gap:10px !important;}
+.modalBtns button{min-height:46px !important;border-radius:16px !important;font-size:13px !important;font-weight:500 !important;}
+.save{box-shadow:0 6px 16px rgba(92,157,92,.18);}
+.cancel{background:#F1F1F1 !important;color:#4F4F4F !important;}
+@media(max-width:390px){
+  .createActionSub{font-size:9.8px;}
+  .modalBtns{grid-template-columns:1fr 1fr !important;}
+}
+.objetivoResumoInfoLinha .objetivoResumoInfo{margin-top:0;min-width:0;flex:1;}
+.editarObjetivoInline{display:none;border:none;border-radius:10px;background:#fff;color:var(--verde-texto);font-family:var(--fonte);font-size:10.5px;padding:6px 9px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.objetivoItem.aberto .editarObjetivoInline{display:inline-flex;align-items:center;justify-content:center;}
+#btnConcluirMetaModal{display:none;width:100%;min-height:42px;border:none;border-radius:14px;background:#EAF3E8;color:#3F6F4F;font-family:var(--fonte);font-size:12.5px;font-weight:500;cursor:pointer;}
+#btnConcluirMetaModal.show{display:block;}
+#btnConcluirMetaModal.reabrir{background:#F5F1E8;color:#6B665A;}
+</style>
+
+
+<style id="mockup-objetivos-estilo">
+body{
+  background:
+    radial-gradient(circle at 10% 8%, rgba(234,240,227,.92), transparent 28%),
+    radial-gradient(circle at 94% 12%, rgba(239,242,232,.85), transparent 24%),
+    linear-gradient(180deg,#FBFCF8 0%, #F3F6EE 100%) !important;
+  padding:18px 12px 96px !important;
+}
+.pagina{max-width:430px !important;}
+.card{
+  background:rgba(255,255,255,.72) !important;
+  border:1px solid rgba(220,228,211,.95) !important;
+  box-shadow:none !important;
+}
+.topo{margin-bottom:10px !important;}
+.titleIndex{
+  font-size:32px !important;
+  letter-spacing:-.4px;
+  font-weight:500 !important;
+  color:#41623C !important;
+}
+.subtitulo{
+  font-size:11px !important;
+  color:#7A8372 !important;
+  white-space:normal !important;
+  max-width:240px !important;
+}
+.botao-voltar{
+  background:rgba(243,246,238,.9) !important;
+  color:#6A8662 !important;
+}
+.box{
+  background:rgba(255,255,255,.58) !important;
+  border:1px solid rgba(222,228,215,.9) !important;
+  border-radius:24px !important;
+  padding:14px !important;
+}
+.actionCreateBox{
+  grid-template-columns:50px minmax(0,1fr) 34px !important;
+  min-height:84px;
+  background:rgba(255,255,255,.78) !important;
+  box-shadow:0 8px 18px rgba(92,112,84,.05);
+}
+.createActionIcon{
+  width:46px !important;height:46px !important;border-radius:50% !important;
+  background:linear-gradient(180deg,#EEF4E8,#E7F0E1) !important;
+  border:1px solid rgba(201,216,189,.85);
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.55);
+}
+.addBtn{
+  width:30px !important;height:30px !important;border-radius:50% !important;
+  background:#EEF4E8 !important;border:1px solid rgba(201,216,189,.85);color:#5E7858 !important;
+}
+.boxTitle{font-size:15px !important;font-weight:600 !important;color:#35592F !important;}
+.boxTitleLista{
+  text-align:left !important;
+  font-size:18px !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+}
+.boxTitleLista::before{
+  content:"☰";
+  width:36px;height:36px;border-radius:14px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:#EAF1E3;border:1px solid rgba(205,216,194,.88);color:#66825F;font-size:15px;
+}
+.createActionSub{color:#7A8372 !important;}
+.metaList{gap:14px !important;}
+.objetivoItem{
+  border:1px solid rgba(213,222,203,.95) !important;
+  background:rgba(255,255,255,.92) !important;
+  border-radius:28px !important;
+  box-shadow:0 10px 22px rgba(92,112,84,.06) !important;
+}
+.objetivoResumo{
+  padding:18px 16px 16px 90px !important;
+  position:relative;
+  grid-template-columns:minmax(0,1fr) 20px !important;
+}
+.objetivoResumo::before{
+  content:"";
+  position:absolute;left:16px;top:18px;width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(180deg,#EEF4E8,#E8F0E3);
+  border:1px solid rgba(205,216,194,.9);
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.55);
+}
+.objetivoResumo::after{
+  content:"🎓";
+  position:absolute;left:16px;top:18px;width:58px;height:58px;display:flex;align-items:center;justify-content:center;
+  font-size:27px;
+}
+.objetivoNome{font-size:16px !important;color:#294D24 !important;font-weight:600 !important;}
+.objetivoDescricao{font-size:12.5px !important;color:#666F62 !important;margin-top:6px !important;}
+.objetivoResumoInfoLinha{margin-top:10px !important;align-items:center !important;}
+.objetivoResumoInfo{font-size:12px !important;color:#6B7368 !important;}
+.editarObjetivoInline,
+.objetivoMetaEditar,
+.actionBtn{
+  border:1px solid rgba(166,191,146,.95) !important;
+  background:rgba(255,255,255,.94) !important;
+  color:#6A8A5C !important;
+  border-radius:999px !important;
+  min-height:36px;
+  padding:7px 14px !important;
+  font-size:11.5px !important;
+  box-shadow:0 3px 8px rgba(92,112,84,.04);
+}
+.objetivoConteudo{padding:0 16px 16px !important;}
+.objetivoMetasTitulo{
+  margin:0 !important;padding:16px 0 10px;
+  font-size:15px !important;color:#35592F !important;font-weight:600 !important;
+  border-top:1px solid rgba(213,222,203,.85);
+}
+.objetivoMetasTitulo::before{content:"◎";margin-right:8px;color:#768c68;}
+.objetivoMetas{gap:12px !important;margin-top:0 !important;}
+.objetivoMetaMini{
+  background:linear-gradient(180deg,#FBFCF8,#F8FAF5) !important;
+  border:1px solid rgba(213,222,203,.92) !important;
+  border-radius:22px !important;
+  padding:16px 16px 14px 82px !important;
+  position:relative;
+  box-shadow:0 8px 18px rgba(92,112,84,.04);
+}
+.objetivoMetaMini::before{
+  content:"";position:absolute;left:16px;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(180deg,#EEF4E8,#E8F0E3);border:1px solid rgba(205,216,194,.9);
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.55);
+}
+.objetivoMetaMini::after{
+  content:"★";position:absolute;left:16px;top:50%;transform:translateY(-50%);width:52px;height:52px;display:flex;align-items:center;justify-content:center;
+  color:#6A875B;font-size:24px;
+}
+.objetivoMetaNome{font-size:15px !important;font-weight:600 !important;color:#294D24 !important;line-height:1.25 !important;}
+.objetivoMetaDescricaoLinhaWrap,
+.metaDescricaoLinhaWrap{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-top:6px;
+}
+.objetivoMetaMiniDescricao{font-size:12px !important;color:#697064 !important;line-height:1.4 !important;flex:1;}
+.objetivoMetaEditarWrap{display:none;flex-shrink:0;align-items:flex-start;justify-content:flex-end;margin-top:-2px;}
+.objetivoMetaMini.aberto .objetivoMetaEditarWrap{display:flex !important;}
+.objetivoMetaMiniInfo{margin-top:8px;font-size:11.2px !important;color:#6B7368 !important;line-height:1.35 !important;}
+.objetivoInfo{
+  margin-top:12px;padding:14px 2px 2px !important;border-top:1px dashed rgba(190,204,178,.95) !important;
+  font-size:12px !important;color:#35592F !important;
+}
+.metaItem{
+  background:rgba(255,255,255,.94) !important;
+  border:1px solid rgba(213,222,203,.92) !important;
+  border-radius:24px !important;
+  padding:16px 16px 14px 82px !important;
+  box-shadow:0 8px 18px rgba(92,112,84,.04) !important;
+  position:relative;
+}
+.metaItem::before{
+  content:"";position:absolute;left:16px;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(180deg,#EEF4E8,#E8F0E3);border:1px solid rgba(205,216,194,.9);
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.55);
+}
+.metaItem::after{
+  content:"✦";position:absolute;left:16px;top:50%;transform:translateY(-50%);width:52px;height:52px;display:flex;align-items:center;justify-content:center;
+  color:#6A875B;font-size:23px;
+}
+.metaNome{font-size:16px !important;color:#294D24 !important;font-weight:600 !important;line-height:1.25 !important;}
+.metaDescricaoLinha{font-size:12px !important;color:#697064 !important;line-height:1.4 !important;flex:1;}
+.metaResumoInfo,.metaResumoExtra{font-size:11.2px !important;color:#6B7368 !important;line-height:1.35 !important;text-align:left !important;}
+.metaResumoInfo{margin-top:8px;}
+.metaResumoExtra{margin-top:6px;}
+.metaActions{display:none;flex-shrink:0;align-items:flex-start;justify-content:flex-end;margin-top:-2px !important;}
+.metaActions.show{display:flex !important;}
+.metaConcluidaTag{font-size:11.5px !important;color:#7B6F57 !important;}
+.boxMetasSoltas .boxTitle{font-size:16px !important;text-align:left !important;}
+.boxMetasSoltas .boxTitle::before{content:"✦ ";color:#6D855F;}
+.modal{background:#FFFDF8 !important;border:1px solid rgba(214,222,204,.95) !important;border-radius:26px !important;}
+.modalTitle{color:#35592F !important;}
+#btnConcluirMetaModal,#btnExcluirMetaModal,#btnExcluirObjetivoModal,.modalBtns button{
+  min-height:48px !important;border-radius:18px !important;font-size:13px !important;
+}
+@media(max-width:390px){
+  .titleIndex{font-size:28px !important;}
+  .objetivoResumo{padding-left:82px !important;}
+  .metaItem,.objetivoMetaMini{padding-left:76px !important;}
+  .objetivoResumo::before,.objetivoResumo::after{width:52px;height:52px;}
+  .metaItem::before,.metaItem::after,.objetivoMetaMini::before,.objetivoMetaMini::after{width:48px;height:48px;}
+  .objetivoMetaDescricaoLinhaWrap,.metaDescricaoLinhaWrap{flex-direction:column;align-items:flex-start;}
+  .metaActions.show,.objetivoMetaMini.aberto .objetivoMetaEditarWrap{width:100%;justify-content:flex-start;}
+}
+</style>
+
+
+<style id="ajustes-emoji-botoes-compactos">
+/* A lista começa diretamente pelos cards */
+.boxListaPrincipal{padding-top:14px !important;}
+.boxTitleLista{display:none !important;}
+
+.emojiSelect{
+  width:100%;
+  min-height:46px;
+  padding:10px 12px;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  background:#FFFDF8;
+  color:var(--texto-principal);
+  font-family:var(--fonte);
+  font-size:13px;
+  outline:none;
+}
+.emojiSelect:focus{border-color:var(--verde-escuro);box-shadow:0 0 0 3px rgba(127,183,126,.12);}
+
+.objetivoResumo{padding-left:90px !important;}
+.objetivoResumo::before,.objetivoResumo::after{content:none !important;display:none !important;}
+.objetivoEmojiVisual{
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(180deg,#EEF4E8,#E8F0E3);
+  border:1px solid rgba(205,216,194,.9);
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.55);
+  font-size:27px;
+}
+
+.modalFooterCompact{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:7px;
+  margin-top:6px;
+  align-items:stretch;
+}
+.modalFooterCompact button{
+  width:100% !important;
+  min-width:0 !important;
+  min-height:36px !important;
+  height:36px !important;
+  max-height:36px !important;
+  padding:5px 6px !important;
+  border:none;
+  border-radius:13px !important;
+  font-family:var(--fonte);
+  font-size:10.5px !important;
+  font-weight:500 !important;
+  line-height:1 !important;
+  letter-spacing:0 !important;
+  cursor:pointer;
+  box-shadow:none !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+  overflow:hidden;
+}
+.modalFooterCompact .modalDeleteBtn{display:none;}
+.modalFooterCompact .modalDeleteBtn.show{display:flex;}
+.modalFooterCompact #btnConcluirMetaModal{display:none;}
+.modalFooterCompact #btnConcluirMetaModal.show{display:flex;}
+.compactDanger{background:#F7E2E0 !important;color:#A05252 !important;}
+.modalFooterCompact #btnConcluirMetaModal,
+.modalFooterCompact #btnExcluirMetaModal,
+.modalFooterCompact #btnExcluirObjetivoModal,
+.modalFooterCompact .cancel,
+.modalFooterCompact .save{
+  width:100% !important;
+  min-width:0 !important;
+  min-height:36px !important;
+  height:36px !important;
+  max-height:36px !important;
+  font-size:10.5px !important;
+  font-weight:500 !important;
+  padding:5px 6px !important;
+}
+
+.metaFooterCompact{
+  grid-template-columns:repeat(4, minmax(0,1fr));
+}
+
+@media(max-width:390px){
+  .objetivoResumo{padding-left:82px !important;}
+  .objetivoEmojiVisual{width:52px;height:52px;font-size:24px;}
+  .modalFooterCompact{gap:6px;}
+  .modalFooterCompact button{font-size:9.6px !important;padding:5px 3px !important;}
+}
+</style>
+
+
+<style id="ajuste-visual-anterior-sem-alterar-janelas">
+/* Ajusta somente a tela principal. As janelas permanecem intactas. */
+body{
+  padding:16px !important;
+  background:
+    radial-gradient(circle at top left, rgba(232,243,226,.8), transparent 35%),
+    linear-gradient(180deg,#FAFBF7 0%,#F6F8F3 100%) !important;
+}
+.pagina{max-width:420px !important;}
+.card{
+  padding:22px 16px 18px !important;
+  gap:12px !important;
+  border-radius:30px !important;
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(221,232,216,.86) !important;
+  box-shadow:0 8px 24px rgba(84,110,79,.09) !important;
+}
+.topo{
+  grid-template-columns:66px minmax(0,1fr) 66px !important;
+  min-height:64px !important;
+  margin-bottom:2px !important;
+  padding-top:6px !important;
+}
+.titleIndex{
+  font-size:22px !important;
+  line-height:1.1 !important;
+  letter-spacing:0 !important;
+  color:#435F3E !important;
+  font-weight:500 !important;
+  white-space:nowrap !important;
+}
+.subtitulo{
+  font-size:10.5px !important;
+  line-height:1.3 !important;
+  color:#6F756C !important;
+  max-width:none !important;
+  white-space:nowrap !important;
+  margin-top:5px !important;
+}
+.botao-voltar{
+  width:42px !important;
+  height:42px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.92) !important;
+}
+.box{
+  border-radius:16px !important;
+  background:#F8FAF7 !important;
+  border:1px solid var(--borda) !important;
+  padding:12px !important;
+  box-shadow:none !important;
+}
+.actionCreateBox{
+  grid-template-columns:44px minmax(0,1fr) 30px !important;
+  min-height:68px !important;
+  gap:10px !important;
+}
+.createActionIcon{
+  width:42px !important;
+  height:42px !important;
+  border-radius:14px !important;
+  background:var(--verde-principal) !important;
+  border:none !important;
+  box-shadow:none !important;
+  font-size:20px !important;
+}
+.addBtn{
+  width:28px !important;
+  height:28px !important;
+  border-radius:10px !important;
+  background:#E9ECE7 !important;
+  border:none !important;
+  font-size:16px !important;
+}
+.boxTitle{
+  font-size:14px !important;
+  font-weight:500 !important;
+  color:var(--verde-texto) !important;
+}
+.actionCreateBox .boxTitle{text-align:left !important;}
+.createActionSub{
+  font-size:10.2px !important;
+  line-height:1.25 !important;
+  color:var(--texto-secundario) !important;
+  white-space:nowrap !important;
+}
+.boxListaPrincipal{padding:12px !important;}
+.boxTitleLista{
+  display:block !important;
+  text-align:center !important;
+  font-size:14px !important;
+  margin-bottom:0 !important;
+}
+.boxTitleLista::before{content:none !important;display:none !important;}
+.metaList{gap:12px !important;margin-top:12px !important;}
+.objetivoItem{
+  border:1px solid rgba(63,111,79,.12) !important;
+  background:#F4F8F2 !important;
+  border-radius:16px !important;
+  box-shadow:none !important;
+}
+.objetivoResumo{
+  padding:14px 12px 14px 66px !important;
+  grid-template-columns:minmax(0,1fr) 24px !important;
+  gap:8px !important;
+  min-height:70px;
+}
+.objetivoEmojiVisual{
+  left:12px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:42px !important;
+  height:42px !important;
+  font-size:21px !important;
+  border-radius:14px !important;
+  background:var(--verde-principal) !important;
+  border:none !important;
+  box-shadow:none !important;
+}
+.objetivoNome{
+  font-size:14px !important;
+  line-height:1.35 !important;
+  font-weight:500 !important;
+  color:var(--verde-texto) !important;
+}
+.objetivoDescricao{
+  font-size:11.5px !important;
+  line-height:1.4 !important;
+  color:var(--texto-secundario) !important;
+  margin-top:3px !important;
+}
+.objetivoResumoInfoLinha{margin-top:7px !important;gap:8px !important;}
+.objetivoResumoInfo{
+  font-size:11px !important;
+  line-height:1.45 !important;
+  color:var(--texto-secundario) !important;
+}
+.editarObjetivoInline,
+.objetivoMetaEditar,
+.actionBtn{
+  min-height:28px !important;
+  padding:6px 9px !important;
+  border:none !important;
+  border-radius:10px !important;
+  background:#fff !important;
+  color:var(--verde-texto) !important;
+  font-size:10.5px !important;
+  box-shadow:none !important;
+}
+.objetivoConteudo{padding:0 12px 12px !important;}
+.objetivoMetasTitulo{
+  margin:10px 2px 6px !important;
+  padding:0 !important;
+  border-top:none !important;
+  font-size:12.5px !important;
+  line-height:1.35 !important;
+  font-weight:500 !important;
+  color:var(--verde-texto) !important;
+}
+.objetivoMetasTitulo::before{content:none !important;}
+.objetivoMetas{gap:8px !important;margin-top:8px !important;}
+.objetivoMetaMini{
+  background:var(--verde-principal) !important;
+  border:none !important;
+  border-radius:13px !important;
+  padding:10px 10px 10px 54px !important;
+  box-shadow:none !important;
+  min-height:58px;
+}
+.objetivoMetaMini::before{
+  left:10px !important;
+  width:34px !important;
+  height:34px !important;
+  background:rgba(255,255,255,.55) !important;
+  border:none !important;
+  box-shadow:none !important;
+}
+.objetivoMetaMini::after{
+  left:10px !important;
+  width:34px !important;
+  height:34px !important;
+  font-size:17px !important;
+}
+.objetivoMetaNome{
+  font-size:12px !important;
+  line-height:1.4 !important;
+  font-weight:500 !important;
+  color:var(--verde-texto) !important;
+}
+.objetivoMetaMiniDescricao{
+  font-size:11px !important;
+  line-height:1.35 !important;
+  color:rgba(63,111,79,.78) !important;
+}
+.objetivoMetaMiniInfo{
+  margin-top:4px !important;
+  font-size:10.8px !important;
+  line-height:1.3 !important;
+  color:rgba(63,111,79,.84) !important;
+}
+.objetivoMetaDescricaoLinhaWrap{margin-top:3px !important;gap:8px !important;}
+.objetivoInfo{
+  margin-top:8px !important;
+  padding:10px 2px 0 !important;
+  border-top:1px solid rgba(63,111,79,.12) !important;
+  font-size:11px !important;
+  color:var(--texto-secundario) !important;
+}
+.metaItem{
+  background:var(--verde-principal) !important;
+  border:none !important;
+  border-radius:16px !important;
+  padding:14px 14px 14px 62px !important;
+  box-shadow:none !important;
+  min-height:66px;
+}
+.metaItem::before{
+  left:12px !important;
+  width:38px !important;
+  height:38px !important;
+  background:rgba(255,255,255,.58) !important;
+  border:none !important;
+  box-shadow:none !important;
+}
+.metaItem::after{
+  left:12px !important;
+  width:38px !important;
+  height:38px !important;
+  font-size:18px !important;
+}
+.metaNome{font-size:14px !important;font-weight:500 !important;color:var(--verde-texto) !important;}
+.metaDescricaoLinha{font-size:11.5px !important;line-height:1.4 !important;}
+.metaResumoInfo,.metaResumoExtra{font-size:11px !important;line-height:1.35 !important;}
+.metaConcluidaTag{font-size:11px !important;}
+.boxMetasSoltas .boxTitle{font-size:14px !important;text-align:center !important;}
+.boxMetasSoltas .boxTitle::before{content:none !important;}
+@media(max-width:390px){
+  body{padding:14px !important;}
+  .card{padding:20px 14px 16px !important;}
+  .topo{grid-template-columns:60px minmax(0,1fr) 60px !important;}
+  .titleIndex{font-size:20px !important;}
+  .subtitulo{font-size:9.8px !important;}
+  .objetivoResumo{padding-left:62px !important;}
+  .objetivoEmojiVisual{width:38px !important;height:38px !important;font-size:19px !important;}
+  .createActionSub{font-size:9.6px !important;}
+  .objetivoMetaDescricaoLinhaWrap,.metaDescricaoLinhaWrap{flex-direction:row !important;align-items:flex-start !important;}
+}
+</style>
+
 </head>
 
 <body>
@@ -473,38 +1193,82 @@ body{
       <button class="botao-voltar" onclick="voltarPagina()"><span>←</span></button>
 
       <div class="topCenter">
-        <h1 class="titleIndex">🎯 Metas</h1>
-        <p class="subtitulo">
-          Quando se sonha grande<br>
-          a realidade aprende
-        </p>
+        <h1 class="titleIndex">🎯 Objetivo e Metas</h1>
+        <p class="subtitulo">Quando se sonha grande a realidade aprende</p>
       </div>
 
       <div class="dataTopo" aria-label="Data e hora atuais">
-        <div id="linhaTempoHora" class="horaTopo"></div>
-        <div id="linhaTempoDia" class="dataTopoLinha"></div>
-        <div id="linhaTempoData" class="dataTopoLinha"></div>
+        <div id="linhaTempoHora" class="horaTopo">00:00</div>
+        <div id="linhaTempoDia" class="dataTopoLinha">• seg</div>
+        <div id="linhaTempoData" class="dataTopoLinha">• 00/00</div>
       </div>
     </div>
 
-    <div class="box">
-      <div class="listHeader">
-        <div class="listHeaderSpacer"></div>
-        <div class="boxTitle">💫 Metas cadastradas</div>
-        <button class="addBtn" onclick="abrirModal()">+</button>
+    <div class="box actionCreateBox" onclick="abrirModalObjetivo()">
+      <div class="createActionIcon">◎</div>
+      <div class="createActionText">
+        <div class="boxTitle">Criar objetivo</div>
+        <div class="createActionSub">Defina um propósito maior para reunir suas metas.</div>
       </div>
+      <button class="addBtn" type="button" aria-label="Adicionar objetivo">+</button>
+    </div>
+
+    <div class="box actionCreateBox" onclick="abrirModal()">
+      <div class="createActionIcon">✓</div>
+      <div class="createActionText">
+        <div class="boxTitle">Criar meta</div>
+        <div class="createActionSub">Cadastre um passo e vincule-o a um objetivo.</div>
+      </div>
+      <button class="addBtn" type="button" aria-label="Adicionar meta">+</button>
+    </div>
+
+    <div class="box boxListaPrincipal">
+      <div class="boxTitle boxTitleLista">Lista</div>
+      <div id="listaObjetivos" class="metaList"></div>
+    </div>
+
+    <div class="box boxMetasSoltas" id="boxMetasSemObjetivo">
+      <div class="boxTitle">💫 Metas sem objetivo</div>
       <div id="listaMetas" class="metaList"></div>
     </div>
-
-    <div class="box">
-      <div class="boxTitle">🌟 Metas Realizadas</div>
-      <div id="listaMetasRealizadas" class="metaList"></div>
-    </div>
-
-    <div class="footerMiniAction">
+<div class="footerMiniAction">
       <button class="futureBtn" onclick="abrirModalFuturasEdicoes()">futuras edições</button>
     </div>
 
+  </div>
+</div>
+
+<div class="modalOverlay" id="modalObjetivo">
+  <div class="modal">
+    <h2 class="modalTitle" id="tituloModalObjetivo">Novo objetivo</h2>
+    <input type="hidden" id="campoObjetivoIdEdicao">
+    <div class="field">
+      <label for="campoObjetivoEmoji">Emoji do objetivo</label>
+      <select id="campoObjetivoEmoji" class="emojiSelect">
+        <option value="🎯">🎯 Objetivo</option>
+        <option value="🎓">🎓 Estudos e formação</option>
+        <option value="💼">💼 Trabalho e carreira</option>
+        <option value="💰">💰 Finanças</option>
+        <option value="🏡">🏡 Casa</option>
+        <option value="❤️">❤️ Relacionamentos</option>
+        <option value="🌿">🌿 Bem-estar</option>
+        <option value="💪">💪 Saúde e movimento</option>
+        <option value="✈️">✈️ Viagem</option>
+        <option value="📚">📚 Aprendizado</option>
+        <option value="🎨">🎨 Criatividade</option>
+        <option value="✨">✨ Sonho pessoal</option>
+      </select>
+    </div>
+    <div class="field"><label for="campoObjetivoNome">Objetivo</label><input type="text" id="campoObjetivoNome" maxlength="100" placeholder="Ex.: Cuidar da saúde, concluir um projeto..." /></div>
+    <div class="field"><label for="campoObjetivoDescricao">Descrição</label><textarea id="campoObjetivoDescricao" placeholder="Escreva os detalhes do objetivo..."></textarea></div>
+    <div class="field"><label for="campoObjetivoLocal">Local (se tiver)</label><input type="text" id="campoObjetivoLocal" maxlength="100" placeholder="Ex.: Casa, trabalho, online..." /></div>
+    <div class="field"><label for="campoObjetivoData">Quero alcançar esse objetivo até o dia</label><input type="date" id="campoObjetivoData" /></div>
+    <div class="field"><label for="campoObjetivoValor">Investimento</label><input type="text" id="campoObjetivoValor" inputmode="numeric" placeholder="R$ 0,00" /></div>
+    <div class="modalFooterCompact">
+      <button id="btnExcluirObjetivoModal" class="modalDeleteBtn compactDanger" type="button" onclick="excluirObjetivoEmEdicao()">Excluir</button>
+      <button class="cancel" onclick="fecharModalObjetivo()">Cancelar</button>
+      <button class="save" onclick="salvarObjetivo()">Salvar</button>
+    </div>
   </div>
 </div>
 
@@ -513,6 +1277,11 @@ body{
     <h2 class="modalTitle" id="tituloModalMeta">Nova meta</h2>
 
     <input type="hidden" id="campoMetaIdEdicao">
+
+    <div class="field">
+      <label for="campoMetaObjetivo">Objetivo vinculado</label>
+      <select id="campoMetaObjetivo"><option value="">Sem objetivo</option></select>
+    </div>
 
     <div class="field">
       <label for="campoMetaNome">Meta</label>
@@ -535,13 +1304,15 @@ body{
     </div>
 
     <div class="field">
-      <label for="campoMetaValor">Valor</label>
+      <label for="campoMetaValor">Investimento</label>
       <input type="text" id="campoMetaValor" inputmode="numeric" placeholder="R$ 0,00" />
     </div>
 
-    <div class="modalBtns">
+    <div class="modalFooterCompact metaFooterCompact">
+      <button id="btnConcluirMetaModal" type="button" onclick="alternarConclusaoMetaEmEdicao()">Concluir</button>
+      <button id="btnExcluirMetaModal" class="modalDeleteBtn compactDanger" type="button" onclick="excluirMetaEmEdicao()">Excluir</button>
       <button class="cancel" onclick="fecharModal()">Cancelar</button>
-      <button class="save" onclick="salvarMeta()">Concluir</button>
+      <button class="save" onclick="salvarMeta()">Salvar</button>
     </div>
   </div>
 </div>
@@ -564,6 +1335,7 @@ body{
 
 <script>
 const CHAVE_METAS = "metasGabriela";
+const CHAVE_OBJETIVOS = "objetivosGabriela";
 const CHAVE_FUTURAS_EDICOES_METAS = "futuras_edicoes_metas";
 
 function voltarPagina(){
@@ -583,6 +1355,95 @@ function ler(){
 
 function salvar(lista){
   localStorage.setItem(CHAVE_METAS, JSON.stringify(lista));
+}
+
+function lerObjetivos(){
+  return JSON.parse(localStorage.getItem(CHAVE_OBJETIVOS)) || [];
+}
+
+function salvarObjetivos(lista){
+  localStorage.setItem(CHAVE_OBJETIVOS, JSON.stringify(lista));
+}
+
+function atualizarSelectObjetivos(valorSelecionado = ""){
+  const select = document.getElementById("campoMetaObjetivo");
+  const objetivos = lerObjetivos();
+  select.innerHTML = '<option value="">Sem objetivo</option>';
+  objetivos.forEach(obj => {
+    const option = document.createElement("option");
+    option.value = obj.id;
+    option.textContent = obj.nome;
+    select.appendChild(option);
+  });
+  select.value = valorSelecionado || "";
+}
+
+function abrirModalObjetivo(){
+  document.getElementById("campoObjetivoIdEdicao").value = "";
+  document.getElementById("tituloModalObjetivo").textContent = "Novo objetivo";
+  document.getElementById("campoObjetivoEmoji").value = "🎯";
+  document.getElementById("campoObjetivoNome").value = "";
+  document.getElementById("campoObjetivoDescricao").value = "";
+  document.getElementById("campoObjetivoLocal").value = "";
+  document.getElementById("campoObjetivoData").value = "";
+  document.getElementById("campoObjetivoValor").value = "";
+  document.getElementById("btnExcluirObjetivoModal").classList.remove("show");
+  document.getElementById("modalObjetivo").classList.add("show");
+}
+
+function abrirModalEditarObjetivo(id){
+  const obj = lerObjetivos().find(o => o.id === id);
+  if(!obj) return;
+  document.getElementById("campoObjetivoIdEdicao").value = obj.id;
+  document.getElementById("tituloModalObjetivo").textContent = "Editar objetivo";
+  document.getElementById("campoObjetivoEmoji").value = obj.emoji || "🎯";
+  document.getElementById("campoObjetivoNome").value = obj.nome || "";
+  document.getElementById("campoObjetivoDescricao").value = obj.descricao || "";
+  document.getElementById("campoObjetivoLocal").value = obj.local || "";
+  document.getElementById("campoObjetivoData").value = obj.data || "";
+  document.getElementById("campoObjetivoValor").value = obj.valor ? formatarMoeda(obj.valor) : "";
+  document.getElementById("btnExcluirObjetivoModal").classList.add("show");
+  document.getElementById("modalObjetivo").classList.add("show");
+}
+
+function fecharModalObjetivo(){ document.getElementById("modalObjetivo").classList.remove("show"); }
+
+function salvarObjetivo(){
+  const id = document.getElementById("campoObjetivoIdEdicao").value;
+  const nome = document.getElementById("campoObjetivoNome").value.trim();
+  if(!nome){ alert("Preencha o campo Objetivo."); return; }
+  const dados = {
+    emoji:document.getElementById("campoObjetivoEmoji").value || "🎯",
+    nome,
+    descricao:document.getElementById("campoObjetivoDescricao").value.trim(),
+    local:document.getElementById("campoObjetivoLocal").value.trim(),
+    data:document.getElementById("campoObjetivoData").value,
+    valor:extrairNumeroMoeda(document.getElementById("campoObjetivoValor").value.trim())
+  };
+  const lista = lerObjetivos();
+  if(id){ Object.assign(lista.find(o => o.id === id) || {}, dados); }
+  else { lista.push({id:gerarId(), ...dados}); }
+  salvarObjetivos(lista);
+  fecharModalObjetivo();
+  render();
+}
+
+function excluirObjetivo(id){
+  if(!confirm("Excluir este objetivo? As metas vinculadas ficarão sem objetivo.")) return;
+  salvarObjetivos(lerObjetivos().filter(o => o.id !== id));
+  const metas = ler().map(m => m.objetivoId === id ? {...m, objetivoId:""} : m);
+  salvar(metas);
+  render();
+}
+
+function excluirObjetivoEmEdicao(){
+  const id = document.getElementById("campoObjetivoIdEdicao").value;
+  if(!id) return;
+  if(!confirm("Excluir este objetivo? As metas vinculadas ficarão sem objetivo.")) return;
+  salvarObjetivos(lerObjetivos().filter(o => o.id !== id));
+  salvar(ler().map(m => m.objetivoId === id ? {...m, objetivoId:""} : m));
+  fecharModalObjetivo();
+  render();
 }
 
 function gerarId(){
@@ -634,6 +1495,11 @@ function abrirModal(){
   document.getElementById("campoMetaLocal").value = "";
   document.getElementById("campoMetaData").value = "";
   document.getElementById("campoMetaValor").value = "";
+  atualizarSelectObjetivos("");
+  document.getElementById("btnExcluirMetaModal").classList.remove("show");
+  const btnConcluir = document.getElementById("btnConcluirMetaModal");
+  btnConcluir.classList.remove("show", "reabrir");
+  btnConcluir.textContent = "Concluir";
   document.getElementById("modalMeta").classList.add("show");
 }
 
@@ -649,6 +1515,12 @@ function abrirModalEditar(id){
   document.getElementById("campoMetaLocal").value = meta.local || "";
   document.getElementById("campoMetaData").value = meta.data || "";
   document.getElementById("campoMetaValor").value = meta.valor ? formatarMoeda(meta.valor) : "";
+  atualizarSelectObjetivos(meta.objetivoId || "");
+  document.getElementById("btnExcluirMetaModal").classList.add("show");
+  const btnConcluir = document.getElementById("btnConcluirMetaModal");
+  btnConcluir.classList.add("show");
+  btnConcluir.classList.toggle("reabrir", !!meta.realizada);
+  btnConcluir.textContent = meta.realizada ? "Reabrir" : "Concluir";
   document.getElementById("modalMeta").classList.add("show");
 }
 
@@ -663,6 +1535,7 @@ function salvarMeta(){
   const local = document.getElementById("campoMetaLocal").value.trim();
   const data = document.getElementById("campoMetaData").value;
   const valor = extrairNumeroMoeda(document.getElementById("campoMetaValor").value.trim());
+  const objetivoId = document.getElementById("campoMetaObjetivo").value;
 
   if(!nome){
     alert("Preencha o campo Meta.");
@@ -679,6 +1552,7 @@ function salvarMeta(){
       meta.local = local;
       meta.data = data;
       meta.valor = valor;
+      meta.objetivoId = objetivoId;
     }
   } else {
     lista.push({
@@ -688,6 +1562,7 @@ function salvarMeta(){
       local,
       data,
       valor,
+      objetivoId,
       realizada:false,
       dataRealizada:""
     });
@@ -705,6 +1580,29 @@ function excluir(id){
   render();
 }
 
+function alternarConclusaoMetaEmEdicao(){
+  const id = document.getElementById("campoMetaIdEdicao").value;
+  if(!id) return;
+  const lista = ler();
+  const meta = lista.find(m => m.id === id);
+  if(!meta) return;
+  meta.realizada = !meta.realizada;
+  meta.dataRealizada = meta.realizada ? dataHojeISO() : "";
+  salvar(lista);
+  fecharModal();
+  render();
+}
+
+function excluirMetaEmEdicao(){
+  const id = document.getElementById("campoMetaIdEdicao").value;
+  if(!id) return;
+  if(!confirm("Excluir esta meta?")) return;
+  salvar(ler().filter(m => m.id !== id));
+  fecharModal();
+  render();
+}
+
+
 function realizar(id){
   const lista = ler();
   const meta = lista.find(m => m.id === id);
@@ -716,73 +1614,43 @@ function realizar(id){
   render();
 }
 
-function criarCardPendente(meta){
+function reabrirMeta(id){
+  const lista = ler();
+  const meta = lista.find(m => m.id === id);
+  if(meta){
+    meta.realizada = false;
+    meta.dataRealizada = "";
+  }
+  salvar(lista);
+  render();
+}
+
+function montarResumoMeta(meta, realizada){
   const div = document.createElement("div");
   div.className = "metaItem";
 
   const descricao = meta.descricao ? meta.descricao : "—";
+  const resumoInfo = [
+    meta.local || "",
+    meta.data ? `Até ${formatarData(meta.data)}` : ""
+  ].filter(Boolean).join(" • ");
 
   div.innerHTML = `
     <div class="metaNome" style="text-align:left;">
-      ${meta.nome}
+      ${meta.nome}${realizada ? ' <span class="metaConcluidaTag">(Concluída)</span>' : ''}
     </div>
 
-    <div style="
-      font-size:11.5px;
-      color:rgba(63,111,79,0.75);
-      text-align:left;
-      line-height:1.4;
-      margin-top:4px;
-      margin-bottom:8px;
-    ">
-      <strong>Descrição:</strong> ${descricao}
-    </div>
-
-    <div style="
-      margin-top:10px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      width:100%;
-    ">
-      <div style="
-        width:40px;
-    height:40px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-      ">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--verde-texto)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="4" width="18" height="18" rx="3"></rect>
-          <line x1="16" y1="2" x2="16" y2="6"></line>
-          <line x1="8" y1="2" x2="8" y2="6"></line>
-          <line x1="3" y1="10" x2="21" y2="10"></line>
-        </svg>
+    <div class="metaDescricaoLinhaWrap">
+      <div class="metaDescricaoLinha">
+        <strong>Descrição:</strong> ${descricao}
       </div>
-
-      <div style="text-align:left;">
-        <div style="
-          font-size:11px;
-          line-height:1.2;
-          color:rgba(63,111,79,0.78);
-        ">
-          Alcançar a meta até:
-          <span style="
-            font-size:11px;
-            font-weight:500;
-            color:var(--verde-texto);
-          ">
-            ${meta.data ? formatarData(meta.data) : "—"}
-          </span>
-        </div>
+      <div class="metaActions">
+        <button class="actionBtn">Editar</button>
       </div>
     </div>
 
-    <div class="metaActions">
-      <button class="actionBtn primary">Realizada</button>
-      <button class="actionBtn">Editar</button>
-      <button class="actionBtn danger">Excluir</button>
-    </div>
+    ${resumoInfo ? `<div class="metaResumoInfo">${resumoInfo}</div>` : ''}
+    ${realizada ? `<div class="metaResumoExtra"><strong>Concluída em:</strong> ${meta.dataRealizada ? formatarData(meta.dataRealizada) : '—'}</div>` : ''}
   `;
 
   const actions = div.querySelector(".metaActions");
@@ -796,181 +1664,119 @@ function criarCardPendente(meta){
 
   actions.children[0].onclick = (e)=>{
     e.stopPropagation();
-    realizar(meta.id);
-  };
-
-  actions.children[1].onclick = (e)=>{
-    e.stopPropagation();
     abrirModalEditar(meta.id);
-  };
-
-  actions.children[2].onclick = (e)=>{
-    e.stopPropagation();
-    excluir(meta.id);
   };
 
   return div;
 }
 
-function criarCardRealizada(meta){
-  const div = document.createElement("div");
-  div.className = "metaItem";
+function criarCardPendente(meta){
+  return montarResumoMeta(meta, false);
+}
 
-  const descricao = meta.descricao ? meta.descricao : "—";
+function criarCardRealizada(meta){
+  return montarResumoMeta(meta, true);
+}
+
+function criarCardObjetivo(objetivo, metasVinculadas){
+  const div = document.createElement("div");
+  div.className = "objetivoItem";
+
+  const pendentes = metasVinculadas.filter(m => !m.realizada);
+  const realizadas = metasVinculadas.filter(m => m.realizada);
+
+  const resumoInfo = [
+    objetivo.local || "",
+    objetivo.data ? `Até ${formatarData(objetivo.data)}` : ""
+  ].filter(Boolean).join(" • ");
+
+  const metasHtml = metasVinculadas.length
+    ? metasVinculadas.map(m => {
+        const metaResumoInfo = [
+          m.local || "",
+          m.data ? `Até ${formatarData(m.data)}` : ""
+        ].filter(Boolean).join(" • ");
+        return `
+        <div class="objetivoMetaMini" data-meta-card="${m.id}">
+          <div class="objetivoMetaMiniResumo">
+            <div class="objetivoMetaNome">${m.realizada ? '✓ ' : '○ '}${m.nome}${m.realizada ? ' <span class="metaConcluidaTag">(Concluída)</span>' : ''}</div>
+            <div class="objetivoMetaDescricaoLinhaWrap">
+              <div class="objetivoMetaMiniDescricao">${m.descricao || '—'}</div>
+              <div class="objetivoMetaEditarWrap">
+                <button class="objetivoMetaEditar" data-meta-editar="${m.id}">Editar</button>
+              </div>
+            </div>
+            ${metaResumoInfo ? `<div class="objetivoMetaMiniInfo">${metaResumoInfo}</div>` : ''}
+            ${m.realizada && m.dataRealizada ? `<div class="objetivoMetaMiniInfo"><strong>Concluída em:</strong> ${formatarData(m.dataRealizada)}</div>` : ''}
+          </div>
+        </div>`;
+      }).join("")
+    : '<div class="empty">Nenhuma meta vinculada a este objetivo.</div>';
 
   div.innerHTML = `
-    <div class="metaNome" style="text-align:left;">
-      ${meta.nome}
-    </div>
-
-    <div style="
-      font-size:11.5px;
-      color:rgba(63,111,79,0.75);
-      text-align:left;
-      line-height:1.4;
-      margin-top:4px;
-      margin-bottom:8px;
-    ">
-      <strong>Descrição:</strong> ${descricao}
-    </div>
-
-    <div style="
-      margin-top:10px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      align-items:center;
-      justify-items:center;
-      text-align:center;
-    ">
-      <div style="
-        display:flex;
-        align-items:center;
-        gap:10px;
-        justify-content:center;
-        text-align:center;
-        width:100%;
-      ">
-        <div style="
-          width:40px;
-          height:40px;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-        ">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--verde-texto)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="3"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
-        </div>
-
-        <div style="text-align:left;">
-          <div style="
-            font-size:11px;
-            line-height:1.2;
-            color:rgba(63,111,79,0.78);
-          ">
-            Alcançar a meta até:
-            <span style="
-              font-size:11px;
-              font-weight:500;
-              color:var(--verde-texto);
-            ">
-              ${meta.data ? formatarData(meta.data) : "—"}
-            </span>
-          </div>
-        </div>
+    <div class="objetivoResumo">
+      <div class="objetivoEmojiVisual">${objetivo.emoji || "🎯"}</div>
+      <div>
+        <div class="objetivoNome">${objetivo.nome}</div>
+        <div class="objetivoDescricao">${objetivo.descricao || "Toque para visualizar as metas vinculadas."}</div>
+        ${resumoInfo ? `<div class="objetivoResumoInfoLinha"><div class="objetivoResumoInfo">${resumoInfo}</div><button class="editarObjetivoInline" type="button">Editar</button></div>` : `<div class="objetivoResumoInfoLinha"><div class="objetivoResumoInfo"></div><button class="editarObjetivoInline" type="button">Editar</button></div>`}
       </div>
-
-      <div style="
-        display:flex;
-        align-items:center;
-        gap:10px;
-        justify-content:center;
-        text-align:center;
-        border-left:1px solid rgba(63,111,79,0.25);
-        padding-left:12px;
-        width:100%;
-      ">
-        <div style="
-          width:40px;
-          height:40px;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-        ">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--verde-texto)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="3"></rect>
-            <polyline points="9 13 12 16 17 11"></polyline>
-          </svg>
-        </div>
-
-        <div style="text-align:left;">
-          <div style="
-            font-size:11px;
-            line-height:1.2;
-            color:rgba(63,111,79,0.78);
-          ">
-            Alcançada em:
-            <span style="
-              font-size:11px;
-              font-weight:500;
-              color:var(--verde-texto);
-            ">
-              ${meta.dataRealizada ? formatarData(meta.dataRealizada) : "—"}
-            </span>
-          </div>
-        </div>
-      </div>
+      <div class="objetivoSeta">›</div>
     </div>
+    <div class="objetivoConteudo">
+      <div class="objetivoMetasTitulo">Metas desse objetivo</div>
+      <div class="objetivoMetas">${metasHtml}</div>
+      <div class="objetivoInfo">${pendentes.length} pendente(s) • ${realizadas.length} realizada(s)</div>
+    </div>`;
 
-    <div class="metaActions">
-      <button class="actionBtn danger">Excluir</button>
-    </div>
-  `;
+  div.querySelector(".objetivoResumo").onclick = () => div.classList.toggle("aberto");
 
-  const actions = div.querySelector(".metaActions");
+  div.querySelectorAll(".objetivoMetaMini").forEach(cardMeta => {
+    cardMeta.onclick = (e) => {
+      if(e.target.closest('.objetivoMetaEditar')) return;
+      div.querySelectorAll('.objetivoMetaMini.aberto').forEach(el => {
+        if(el !== cardMeta) el.classList.remove('aberto');
+      });
+      cardMeta.classList.toggle('aberto');
+    };
+  });
 
-  div.onclick = () => {
-    document.querySelectorAll(".metaActions.show").forEach(el => {
-      if(el !== actions) el.classList.remove("show");
-    });
-    actions.classList.toggle("show");
-  };
+  div.querySelectorAll(".objetivoMetaEditar").forEach(botao => {
+    botao.onclick = e => {
+      e.stopPropagation();
+      abrirModalEditar(botao.dataset.metaEditar);
+    };
+  });
 
-  actions.children[0].onclick = (e)=>{
+  const botaoEditarObjetivo = div.querySelector(".editarObjetivoInline");
+  botaoEditarObjetivo.onclick = e => {
     e.stopPropagation();
-    excluir(meta.id);
+    abrirModalEditarObjetivo(objetivo.id);
   };
-
   return div;
 }
 
 function render(){
   const lista = ler();
+  const objetivos = lerObjetivos();
+  const semObjetivo = lista.filter(m => !m.realizada && !m.objetivoId);
 
-  const pendentes = lista.filter(m=>!m.realizada);
-  const feitas = lista.filter(m=>m.realizada);
-
+  const listaObjetivos = document.getElementById("listaObjetivos");
   const c1 = document.getElementById("listaMetas");
-  const c2 = document.getElementById("listaMetasRealizadas");
+  const boxSemObjetivo = document.getElementById("boxMetasSemObjetivo");
 
+  listaObjetivos.innerHTML = "";
   c1.innerHTML = "";
-  c2.innerHTML = "";
 
-  if(!pendentes.length){
-    c1.innerHTML = `<div class="empty">Nenhuma meta cadastrada ainda.</div>`;
+  if(!objetivos.length){
+    listaObjetivos.innerHTML = `<div class="empty">Nenhum objetivo cadastrado ainda.</div>`;
   } else {
-    pendentes.forEach(m=>c1.appendChild(criarCardPendente(m)));
+    objetivos.forEach(obj => listaObjetivos.appendChild(criarCardObjetivo(obj, lista.filter(m => m.objetivoId === obj.id))));
   }
 
-  if(!feitas.length){
-    c2.innerHTML = `<div class="empty">Nenhuma meta realizada ainda.</div>`;
-  } else {
-    feitas.forEach(m=>c2.appendChild(criarCardRealizada(m)));
-  }
+  boxSemObjetivo.style.display = semObjetivo.length ? "block" : "none";
+  semObjetivo.forEach(m => c1.appendChild(criarCardPendente(m)));
+  atualizarSelectObjetivos(document.getElementById("campoMetaObjetivo")?.value || "");
 }
 
 function abrirModalFuturasEdicoes(){
@@ -1005,6 +1811,9 @@ function atualizarLinhaTempo(){
 }
 
 document.getElementById("campoMetaValor").addEventListener("input", function() {
+  mascaraMoeda(this);
+});
+document.getElementById("campoObjetivoValor").addEventListener("input", function() {
   mascaraMoeda(this);
 });
 
