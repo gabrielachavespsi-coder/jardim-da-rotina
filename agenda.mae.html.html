@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agenda Gabriela</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="jardim-dados.js"></script>
+<script src="jardim-agenda.js"></script>
+
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="https://accounts.google.com/gsi/client"></script>
+
+<style>
+:root{
+  --verde-principal:#E6F2E5;
+  --verde-hover:#D6EAD4;
+  --verde-texto:#3F6F4F;
+  --verde-escuro:#5C9D5C;
+  --fundo:#F6F7F5;
+  --card:#FFFFFF;
+  --texto-principal:#2F2F2F;
+  --texto-secundario:#7A8178;
+  --borda:#E3E5E1;
+  --amarelo:#F6D76B;
+  --fonte:'Poppins',sans-serif;
+  --titulo:21px;
+  --sombra-suave:0 10px 30px rgba(63,111,79,0.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:var(--fonte);
+  background:var(--fundo);
+  color:var(--texto-principal);
+  display:flex;
+  justify-content:center;
+  padding:20px 14px;
+}
+
+.pagina{width:100%;max-width:420px;}
+
+.card{
+  width:100%;
+  background:var(--card);
+  border-radius:28px;
+  padding:20px 16px 18px;
+  box-shadow:var(--sombra-suave);
+  border:1px solid rgba(227,229,225,0.8);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.topo{
+  display:grid;
+  grid-template-columns:42px 1fr 64px;
+  align-items:start;
+  gap:10px;
+}
+
+.botao-voltar{
+  border:none;
+  background:#EEF1EC;
+  border-radius:14px;
+  width:42px;
+  height:42px;
+  cursor:pointer;
+  font-size:18px;
+  font-family:var(--fonte);
+  color:var(--texto-principal);
+}
+
+.topCenter{text-align:center;padding-top:3px;}
+
+.titleIndex{
+  font-size:var(--titulo);
+  font-weight:400;
+  line-height:1.15;
+}
+
+.subtitulo{
+  font-size:12px;
+  color:var(--texto-secundario);
+  margin-top:3px;
+}
+
+.dataTopo{
+  min-height:42px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  text-align:right;
+  color:var(--texto-secundario);
+  line-height:1.1;
+  padding-top:2px;
+}
+
+.horaTopo{
+  font-size:14px;
+  color:var(--verde-texto);
+  font-weight:500;
+  margin-bottom:3px;
+}
+
+.dataTopoLinha{font-size:11px;white-space:nowrap;}
+
+.eventosBox{
+  background:#F8FAF7;
+  border:1px solid var(--borda);
+  border-radius:16px;
+  padding:14px;
+  text-align:center;
+}
+
+.eventosTitulo{
+  font-size:14px;
+  color:var(--verde-texto);
+  margin-bottom:6px;
+  font-weight:500;
+}
+
+.botoesAgenda{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.botoesAgenda .botao{
+  min-height:46px;
+  padding:10px 8px;
+  border-radius:16px;
+  font-size:12px;
+  font-weight:400;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1.25;
+}
+
+.botao{
+  width:100%;
+  border:none;
+  border-radius:20px;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  padding:15px 14px;
+  font-size:14px;
+  font-family:var(--fonte);
+  cursor:pointer;
+  transition:0.2s ease;
+  text-align:center;
+}
+
+.botao:hover{background:var(--verde-hover);}
+
+.botao.secundario{
+  background:#EEF1EC;
+  color:var(--texto-secundario);
+}
+
+.botao.pequeno{
+  padding:11px 12px;
+  border-radius:14px;
+  font-size:12px;
+}
+
+.botoesPeriodo{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+}
+
+.botaoPeriodo{
+  border:none;
+  background:#EEF1EC;
+  color:var(--texto-secundario);
+  border-radius:14px;
+  padding:10px 8px;
+  font-size:12px;
+  font-family:var(--fonte);
+  cursor:pointer;
+}
+
+.botaoPeriodo.ativo{
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+}
+
+.listaEventos{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:8px;
+}
+
+.evento{
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:10px 12px;
+  text-align:left;
+}
+
+.evento.proximoDia{
+  border-color:#F0CC58;
+  background:#FFFDF2;
+  box-shadow:inset 0 -5px 0 rgba(246,215,107,0.55);
+}
+
+.evento.rotina{
+  background:#F9FBF8;
+}
+
+.evento.agenda{
+  border-left:5px solid var(--verde-escuro);
+  background:#FFFFFF;
+}
+
+.eventoHora{
+  font-size:11px;
+  color:var(--verde-texto);
+  font-weight:500;
+  margin-bottom:4px;
+}
+
+.eventoTitulo{
+  font-size:13px;
+  color:var(--texto-principal);
+  line-height:1.35;
+}
+
+.eventoLocal{
+  font-size:11px;
+  color:var(--texto-secundario);
+  margin-top:3px;
+  line-height:1.35;
+}
+
+.rotinaTag{
+  display:inline-block;
+  margin-top:6px;
+  background:var(--verde-principal);
+  color:var(--verde-texto);
+  border-radius:999px;
+  padding:3px 8px;
+  font-size:10px;
+}
+
+.listaVazia{
+  font-size:12px;
+  color:var(--texto-secundario);
+  line-height:1.5;
+  padding:6px 0;
+}
+
+.diaMesGrupo{
+  background:#FFFFFF;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:9px 10px;
+  text-align:left;
+}
+
+.diaMesTitulo{
+  font-size:11px;
+  color:var(--verde-texto);
+  font-weight:500;
+  margin-bottom:5px;
+}
+
+.eventoMesLinha{
+  font-size:11px;
+  color:var(--texto-principal);
+  line-height:1.35;
+  margin-top:3px;
+}
+
+.eventoMesHora{
+  color:var(--verde-texto);
+  font-weight:500;
+}
+
+.footerMiniAction{
+  display:flex;
+  justify-content:center;
+  margin-top:4px;
+}
+
+.futureBtn{
+  border:none;
+  background:#E9ECE7;
+  color:var(--texto-secundario);
+  border-radius:12px;
+  padding:9px 14px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:var(--fonte);
+}
+
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:16px;
+  z-index:999;
+}
+
+.modalOverlay.show{display:flex;}
+
+.modal{
+  background:#fff;
+  padding:18px;
+  border-radius:20px;
+  width:min(360px, 100%);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.modalTitle{
+  text-align:center;
+  font-size:18px;
+  color:var(--texto-principal);
+  font-weight:500;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:13px;
+  color:var(--texto-principal);
+}
+
+textarea{
+  width:100%;
+  height:220px
